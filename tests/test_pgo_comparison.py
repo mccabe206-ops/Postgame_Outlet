@@ -128,6 +128,10 @@ class ComparisonTests(unittest.TestCase):
             "https://github.com/walshja9/Postgame_Outlet/blob/main/docs/superpowers/specs/2026-07-21-independent-forward-looking-pgo-model-design.md",
             panel,
         )
+        self.assertEqual(
+            panel.count('target="_blank" rel="noopener noreferrer"'),
+            2,
+        )
 
     def test_pgo_is_primary_and_rows_start_in_pgo_rank_order(self):
         rows = [

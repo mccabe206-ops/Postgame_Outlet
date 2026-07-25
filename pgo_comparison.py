@@ -327,9 +327,9 @@ def render_comparison_panel(rows, receipt):
     <p class="legend">Positive rank gap means PGO ranks the team lower.
       Positive rating gap means PGO rates the team higher.</p>
     <p class="comparison-links">
-      <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_v1/backtest.json">Backtest receipt</a>
+      <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_v1/backtest.json" target="_blank" rel="noopener noreferrer">Backtest receipt</a>
       &middot;
-      <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/superpowers/specs/2026-07-21-independent-forward-looking-pgo-model-design.md">Methodology and release rules</a>
+      <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/superpowers/specs/2026-07-21-independent-forward-looking-pgo-model-design.md" target="_blank" rel="noopener noreferrer">Methodology and release rules</a>
     </p>
   </section>
 """
