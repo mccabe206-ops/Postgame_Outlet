@@ -6,3 +6,7 @@ data/picks/
 
 # Private per-team working memory — never publish
 data/team_notes/
+
+# Roster/depth caches (derived from ESPN/Ourlads)
+data/roster_cache/
+data/depthcharts/

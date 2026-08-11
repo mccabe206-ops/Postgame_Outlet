@@ -108,8 +108,18 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
     <div id="threads"></div>
   </div>
   <div class="card">
+    <h2>Injuries / out (ESPN, live)</h2>
+    <div id="injuries"></div>
+  </div>
+  <div class="card">
     <h2>Live write-up (shows on the site)</h2>
     <div class="writeup" id="writeup"></div>
+  </div>
+  <div class="card">
+    <details>
+      <summary>Depth chart (Ourlads — refreshed weekly)</summary>
+      <div id="depth"></div>
+    </details>
   </div>
   <div class="card">
     <details>
@@ -165,6 +175,25 @@ async function load(name,year){{
   const rc=(s.resolved_threads||[]).length;
   if(rc){{const d=document.createElement('div');d.className='noopen';
     d.style.marginTop='8px';d.textContent=`(${{rc}} resolved item${{rc>1?'s':''}} in history)`;th.appendChild(d);}}
+  // injuries (ESPN live)
+  const inj=document.getElementById('injuries'); inj.innerHTML='';
+  const injured=(s.injured||[]);
+  if(!injured.length){{ inj.innerHTML='<div class="noopen">No injury/out designations right now (ESPN).</div>'; }}
+  else{{ inj.innerHTML='<table><thead><tr><th>Player</th><th>Pos</th><th>Status</th></tr></thead><tbody>'+
+    injured.map(p=>`<tr><td>${{p.name}}</td><td>${{p.pos||''}}</td>`+
+      `<td class="L">${{p.injury||p.group||''}}</td></tr>`).join('')+'</tbody></table>'; }}
+  // depth chart (Ourlads cached)
+  const dc=document.getElementById('depth'); dc.innerHTML='';
+  const depth=s.depth||{{}};
+  const positions=Object.keys(depth);
+  if(!positions.length){{ dc.innerHTML='<div class="noopen">No depth chart cached yet '+
+    '(the weekly refresh fills this in).</div>'; }}
+  else{{ dc.innerHTML='<table><tbody>'+positions.map(pos=>{{
+    const line=depth[pos].map(p=>{{
+      const flag=p.status==='injured/inactive'?' <span class="L">⛑</span>':'';
+      return p.name+flag;}}).join(' → ');
+    return `<tr><td style="color:var(--dim)">${{pos}}</td><td>${{line}}</td></tr>`;
+  }}).join('')+'</tbody></table>'; }}
   const tb=document.getElementById('results'); tb.innerHTML='';
   let firstFinal=true;
   s.results.forEach(g=>{{

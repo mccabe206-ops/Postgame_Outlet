@@ -17,6 +17,15 @@ import team_notes
 from espn_api import fetch_json
 from release_ratings import load_release_rows
 
+try:
+    import rosters as _rosters
+except Exception:  # noqa: BLE001
+    _rosters = None
+try:
+    import depthchart as _depthchart
+except Exception:  # noqa: BLE001
+    _depthchart = None
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 WRITEUPS = os.path.join(DATA, "writeups")
@@ -171,4 +180,27 @@ def team_snapshot(name, year):
         "year": year,
         "open_threads": team_notes.open_threads(abbr) if abbr else [],
         "resolved_threads": team_notes.list_threads(abbr, "resolved") if abbr else [],
+        "injured": _injured_list(name),
+        "depth": _depth_chart(abbr),
     }
+
+
+def _injured_list(name):
+    """ESPN injured/out list (live). Empty if module or fetch unavailable."""
+    if not _rosters:
+        return []
+    try:
+        return _rosters.fetch_roster(name).get("injured", [])
+    except Exception:  # noqa: BLE001
+        return []
+
+
+def _depth_chart(abbr):
+    """Cached Ourlads depth chart (refreshed weekly by launchd). {} if unavailable."""
+    if not _depthchart or not abbr:
+        return {}
+    try:
+        d = _depthchart.get_depth(abbr)  # no now_iso => prefer cache, don't scrape on view
+        return d.get("depth", {})
+    except Exception:  # noqa: BLE001
+        return {}
