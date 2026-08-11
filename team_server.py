@@ -74,6 +74,13 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
  .rec{{font-size:15px;color:var(--dim);margin-left:auto}}
  .hint{{padding:10px 14px;background:#12233f;border:1px solid #1c3a63;border-radius:10px;
    font-size:13px;color:#b9d2f5;margin-bottom:16px}}
+ .thread{{border-left:3px solid var(--accent);padding:6px 12px;margin:8px 0;background:#10151d}}
+ .thread .topic{{font-weight:600}} .thread .meta{{color:var(--dim);font-size:12px}}
+ .thread .entry{{font-size:13px;color:#c8d3de;margin-top:3px}}
+ .noopen{{color:var(--dim);font-size:13px}}
+ details summary{{cursor:pointer;color:var(--dim);font-size:13px;text-transform:uppercase;
+   letter-spacing:.05em;padding:4px 0}}
+ .caveat{{color:var(--dim);font-size:12px;margin:6px 0 0}}
 </style></head><body>
 <header>
   <h1>Update Ratings</h1>
@@ -97,13 +104,22 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
     <div class="notes" id="notes"></div>
   </div>
   <div class="card">
-    <h2>Season results — most recent first</h2>
-    <table><thead><tr><th>Wk</th><th>Res</th><th>Matchup</th><th class="num">Score</th></tr></thead>
-    <tbody id="results"></tbody></table>
+    <h2>Open items — memory (resurfaces until resolved)</h2>
+    <div id="threads"></div>
   </div>
   <div class="card">
     <h2>Live write-up (shows on the site)</h2>
     <div class="writeup" id="writeup"></div>
+  </div>
+  <div class="card">
+    <details>
+      <summary>Season results (reference — grain of salt)</summary>
+      <p class="caveat">Ratings are your forward-looking judgment, not computed from these.
+        Prior games may matter when a situation is similar, but the future situation is often
+        different — coaching, a player's prime, injuries, aging. Weigh, don't obey.</p>
+      <table><thead><tr><th>Wk</th><th>Res</th><th>Matchup</th><th class="num">Score</th></tr></thead>
+      <tbody id="results"></tbody></table>
+    </details>
   </div>
 </div>
 <script>
@@ -133,6 +149,22 @@ async function load(name,year){{
   document.getElementById('notes').textContent=s.notes?('Notes: '+s.notes):'';
   document.getElementById('rec').textContent=s.record?('Record '+s.record+' · '+s.year):'';
   document.getElementById('writeup').textContent=s.writeup_md||'(no write-up yet)';
+  // open items / memory
+  const th=document.getElementById('threads'); th.innerHTML='';
+  const open=(s.open_threads||[]);
+  if(!open.length){{ th.innerHTML='<div class="noopen">No open items. Tell me something to track '+
+    '(e.g. an injury to monitor) and it\\'ll stay here until you mark it resolved.</div>'; }}
+  else open.forEach(t=>{{
+    const last=(t.entries||[]).slice(-1)[0];
+    const div=document.createElement('div'); div.className='thread';
+    div.innerHTML=`<div class="topic">${{t.topic}}</div>`+
+      `<div class="meta">open · ${{(t.entries||[]).length}} update(s)${{t.opened?' · since '+t.opened:''}}</div>`+
+      (last?`<div class="entry">${{last.text}}</div>`:'');
+    th.appendChild(div);
+  }});
+  const rc=(s.resolved_threads||[]).length;
+  if(rc){{const d=document.createElement('div');d.className='noopen';
+    d.style.marginTop='8px';d.textContent=`(${{rc}} resolved item${{rc>1?'s':''}} in history)`;th.appendChild(d);}}
   const tb=document.getElementById('results'); tb.innerHTML='';
   let firstFinal=true;
   s.results.forEach(g=>{{

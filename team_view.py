@@ -13,6 +13,7 @@ reasons about a rating move from Sean's typed context.
 import csv
 import os
 
+import team_notes
 from espn_api import fetch_json
 from release_ratings import load_release_rows
 
@@ -168,4 +169,6 @@ def team_snapshot(name, year):
         "record": record,
         "results": games,
         "year": year,
+        "open_threads": team_notes.open_threads(abbr) if abbr else [],
+        "resolved_threads": team_notes.list_threads(abbr, "resolved") if abbr else [],
     }
