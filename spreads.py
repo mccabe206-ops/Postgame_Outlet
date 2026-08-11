@@ -30,6 +30,7 @@ import os
 import sys
 import urllib.request
 
+from espn_api import fetch_json
 from release_ratings import load_release_rows
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -65,10 +66,8 @@ def load_hfa():
 
 
 def fetch_week(week, year):
-    url = ENDPOINT.format(year=year, week=week)
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req, timeout=20) as resp:
-        return json.load(resp)
+    # Robust fetch: proxy-friendly UA fallback (see espn_api.fetch_json).
+    return fetch_json(ENDPOINT.format(year=year, week=week))
 
 
 def is_primetime(iso_utc):
