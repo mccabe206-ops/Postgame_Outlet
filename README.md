@@ -53,6 +53,29 @@ Generation stops if any row in `data/ratings.csv` has `needs_review=Y`. Clear
 those flags through editorial review; never bypass the gate. The default command
 writes a private preview and does not replace the GitHub Pages artifact.
 
+## Independent PGO model comparison (private preview)
+
+`python pgo_challenger.py --as-of 2026-07-21T12:00:00-04:00` rebuilds the
+locked pgo_v1 receipt. Exit `0` is validated `PASS`, exit `1` is an honest
+statistical `HOLD`, and exit `2` is `BLOCKED`. An integrity-eligible `HOLD`
+writes 32 ratings labeled `EXPERIMENTAL`; `BLOCKED` writes no ratings.
+
+`python pgo_comparison.py` compares the eligible PGO snapshot with Sean
+McCabe's reviewed ratings and writes a dated private page under
+`output/pgo-comparison-preview/`. It never changes `docs/index.html` or any
+live service. PGO v0 remains backtest evidence only.
+
+After editorial review and explicit publication approval, the fixed-destination
+release command is:
+
+```bash
+python pgo_comparison.py --publish
+```
+
+It writes only `docs/index.html`. PGO v1 remains labeled
+`Experimental model — HOLD`; the command does not modify Shopify or any rating
+input.
+
 ## Team write-ups (click-to-expand on the site)
 
 Every team row in the generated ratings artifact expands (click it) to show a QB/Off/Def bar
@@ -96,6 +119,25 @@ season's ending ratings) — injury-deflated finishers (KC/CIN/BAL, whose QBs we
 hurt) were trusted toward the roster build, hot finishers (SEA) toward the prior.
 The displayed Rating is now the straight component sum, NOT a blend; the prior is
 kept only as a reference column on the website.
+
+## PGO team model (shadow only)
+
+`python pgo_model.py` runs a pinned, chronological backtest of Postgame's
+independent team-results model and writes its receipt under `research/pgo/`.
+It does not read Sean McCabe's QB/offense/defense inputs or any market line.
+A `PASS` makes the shadow ratings eligible for human review only; it does not
+publish them or add them to the ratings site.
+
+## PGO forward-looking challenger (shadow only)
+
+Install its single dependency with `python -m pip install -r requirements-pgo.txt`.
+`python pgo_challenger.py --freeze-sources --as-of <ISO-8601>` explicitly
+freezes a research snapshot; later `python pgo_challenger.py --as-of <same value>`
+runs offline from the lock. Outputs stay in `research/pgo_v1/`.
+
+`PASS` permits private prospective shadow tracking only. `HOLD` writes diagnostics
+and no ratings. Neither result publishes or changes McCabe ratings, Shopify, or
+GitHub Pages.
 
 ## Notes & caveats
 
