@@ -99,10 +99,19 @@ def _parse_iso(iso_utc):
 # ---- week + picks ------------------------------------------------------------
 
 def current_week_year():
-    """Ask ESPN what week/season it is right now."""
+    """Ask ESPN what week/season it is right now.
+
+    Only the REGULAR season (season.type == 2) maps 1:1 to this sheet's weeks. In
+    the preseason/offseason ESPN's `week.number` is a PRESEASON week — feeding it
+    into the regular-season URL would silently skip Week 1 (e.g. preseason wk 2 ->
+    regular wk 2). So outside the regular season we default to regular Week 1.
+    """
     sb = fetch_json(SCOREBOARD_NOW)
     wk = sb.get("week", {}).get("number")
     yr = sb.get("season", {}).get("year")
+    stype = sb.get("season", {}).get("type")
+    if stype != 2:
+        wk = 1
     return wk, yr
 
 

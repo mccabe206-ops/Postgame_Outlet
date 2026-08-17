@@ -24,17 +24,27 @@ import sys
 import threading
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlparse, parse_qs
 
 import picks as P
 
 HOST = "127.0.0.1"
 PORT = 8787
+MIN_WEEK, MAX_WEEK = 1, 18  # regular-season week range for navigation
 
 _STATE = {"week": None, "year": None}
 
 
-def _sheet():
-    return P.build_sheet(week=_STATE["week"], year=_STATE["year"])
+def _sheet(week=None, year=None):
+    return P.build_sheet(week=week if week is not None else _STATE["week"],
+                         year=year if year is not None else _STATE["year"])
+
+
+def _qs_int(q, key):
+    try:
+        return int(q[key][0])
+    except (KeyError, ValueError, IndexError):
+        return None
 
 
 PAGE = """<!doctype html><html><head><meta charset="utf-8">
@@ -67,11 +77,16 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
    padding:5px 8px;border-radius:8px;font-size:14px}}
  select.conf:disabled{{opacity:.5;cursor:not-allowed}}
  .matchup{{font-weight:600}}
+ .nav{{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:8px;
+   padding:4px 11px;cursor:pointer;font-size:15px}} .nav:hover{{border-color:var(--accent)}}
  footer{{padding:14px 22px;color:var(--dim);font-size:12px;border-top:1px solid var(--line)}}
 </style></head><body>
 <header>
   <h1>McCabe Picks</h1>
-  <span class="sub">Week {week} · {season} · your line vs. ESPN market</span>
+  <button class="nav" onclick="nav(-1)" title="previous week">◀</button>
+  <span class="sub" id="sub">Week {week} · {season}</span>
+  <button class="nav" onclick="nav(1)" title="next week">▶</button>
+  <span class="sub">· your line vs. ESPN market</span>
   <span id="status">loading…</span>
   <span id="saved"></span>
 </header>
@@ -86,11 +101,15 @@ kickoff — before then you can change that pick freely. Edge = market − my li
 <script>
 const fmtSpread = (s, team) => s===null||s===undefined ? "—"
    : (s===0 ? "PK" : (s<0 ? team+" "+s : team+" +"+s));
-let SHEET=null;
-async function load(){{
-  const r = await fetch('/api/sheet'); SHEET = await r.json();
+let SHEET=null, WK=null, YR=null;
+async function load(week,year){{
+  const qs = (week!=null&&year!=null) ? ('?week='+week+'&year='+year) : '';
+  const r = await fetch('/api/sheet'+qs); SHEET = await r.json();
+  WK = SHEET.week; YR = SHEET.season;
+  document.getElementById('sub').textContent = 'Week '+WK+' · '+YR;
   render();
 }}
+function nav(d){{ const w=Math.min(18,Math.max(1,(WK||1)+d)); if(w!==WK) load(w,YR); }}
 function render(){{
   const tb=document.getElementById('rows'); tb.innerHTML='';
   const MAX=SHEET.max_picks, WEIGHTS=SHEET.conf_weights;   // [1..5]
@@ -145,6 +164,7 @@ function flagError(msg){{const s=document.getElementById('saved');
   s.textContent='⚠ '+(msg||'not saved'); s.className='show saving';}}
 async function post(body){{
   flagSaving();
+  body.week=WK; body.year=YR;
   try{{
     const r=await fetch('/api/pick',{{method:'POST',headers:{{'Content-Type':'application/json'}},
       body:JSON.stringify(body)}});
@@ -152,7 +172,7 @@ async function post(body){{
     if(!j.ok){{ flagError(j.message); alert(j.message||'could not save'); }}
     else {{ flagSaved(); }}
   }}catch(e){{ flagError('server offline'); }}
-  await load();
+  await load(WK,YR);
 }}
 function pick(id,side){{const g=SHEET.games.find(x=>x.game_id===id);
   // toggle off if clicking the already-selected side
@@ -162,7 +182,7 @@ function conf(id,v){{const g=SHEET.games.find(x=>x.game_id===id);
   if(!g.pick_side){{alert('Pick a side first');return;}}
   post({{game_id:id,side:g.pick_side,confidence:v||null}});}}
 function clr(id){{post({{game_id:id,side:null}});}}
-load(); setInterval(load, 60000);  // refresh lock states / lines each minute
+load(); setInterval(()=>load(WK,YR), 60000);  // refresh lock states / lines each minute
 </script></body></html>"""
 
 
@@ -179,16 +199,18 @@ class Handler(BaseHTTPRequestHandler):
         pass
 
     def do_GET(self):
-        if self.path == "/healthz":
+        u = urlparse(self.path)
+        q = parse_qs(u.query)
+        if u.path == "/healthz":
             return self._send(200, "ok", "text/plain")
-        if self.path.startswith("/api/sheet"):
+        if u.path == "/api/sheet":
             try:
-                return self._send(200, json.dumps(_sheet()))
+                return self._send(200, json.dumps(_sheet(_qs_int(q, "week"), _qs_int(q, "year"))))
             except Exception as e:  # noqa: BLE001
                 return self._send(502, json.dumps({"error": str(e)}))
-        if self.path == "/" or self.path.startswith("/index"):
+        if u.path == "/" or u.path.startswith("/index"):
             try:
-                s = _sheet()
+                s = _sheet(_qs_int(q, "week"), _qs_int(q, "year"))
             except Exception as e:  # noqa: BLE001
                 return self._send(502, f"<h1>ESPN fetch failed</h1><pre>{e}</pre>", "text/html")
             html = PAGE.format(week=s["week"], season=s["season"])
@@ -203,7 +225,8 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(n) or b"{}")
         except json.JSONDecodeError:
             return self._send(400, json.dumps({"ok": False, "message": "bad json"}))
-        s = _sheet()
+        # save to the week the client is viewing (defaults to current)
+        s = _sheet(body.get("week"), body.get("year"))
         idx = {g["game_id"]: g["kickoff"] for g in s["games"]}
         ok, msg = P.save_pick(s["season"], s["week"], body.get("game_id"),
                               body.get("side"), body.get("confidence"), idx)

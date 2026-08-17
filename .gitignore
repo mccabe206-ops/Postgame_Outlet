@@ -11,3 +11,12 @@ data/team_notes/
 # Roster/depth caches (derived from ESPN/Ourlads)
 data/roster_cache/
 data/depthcharts/
+
+# Sleeper player dump (derived; ~5MB, refreshed daily)
+data/sleeper_cache/
+
+# NFL knowledge base — local SQLite built from nflverse (derived; large)
+data/nfl_kb/
+
+# Runtime logs from launchd refresh jobs (derived; not source)
+logs/
