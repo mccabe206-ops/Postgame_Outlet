@@ -11,13 +11,15 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: board-update
   cancel-in-progress: false
 
 jobs:
-  regenerate:
+  build:
     runs-on: ubuntu-latest
     env:
       TZ: America/New_York
@@ -32,7 +34,12 @@ jobs:
         run: python -m unittest discover -s tests
       - name: Regenerate public board
         run: python generate_site.py --output docs/index.html
-      - name: Commit and push if changed
+
+      # --- walshja9 (canonical / LIVE site): keep the proven commit-back deploy ---
+      # Its Pages source is "Deploy from a branch" (main /docs); committing docs/index.html
+      # back to main is what refreshes postgameoutlet.com. Unchanged behavior.
+      - name: "Commit and push if changed (walshja9 only)"
+        if: github.repository == 'walshja9/Postgame_Outlet'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -44,3 +51,25 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+
+      # --- mccabe206-ops (testing mirror): publish via Pages ARTIFACT, no commit-back ---
+      # No commit is written to main, so mccabe/main stays byte-identical to walshja9/main
+      # (kills the dual-push drift). Requires: Settings > Pages > Source = "GitHub Actions".
+      - name: "Upload Pages artifact (mccabe206-ops only)"
+        if: github.repository == 'mccabe206-ops/Postgame_Outlet'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    # mccabe206-ops only: deploy the uploaded artifact to its GitHub Pages testing site.
+    needs: build
+    if: github.repository == 'mccabe206-ops/Postgame_Outlet'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
