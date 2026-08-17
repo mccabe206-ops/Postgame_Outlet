@@ -5,6 +5,10 @@ from contextlib import redirect_stderr
 from pathlib import Path
 from unittest.mock import patch
 
+try:  # pgo_challenger pulls in numpy, absent in the board-publish CI
+    import numpy  # noqa: F401
+except ImportError:
+    raise unittest.SkipTest("numpy not installed — skipping PGO comparison tests")
 import pgo_challenger
 import pgo_comparison
 

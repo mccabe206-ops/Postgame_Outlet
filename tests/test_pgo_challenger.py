@@ -12,7 +12,10 @@ from decimal import Decimal
 from pathlib import Path
 from unittest.mock import patch
 
-import numpy as np
+try:  # PGO challenger deps (numpy) aren't installed in the board-publish CI
+    import numpy as np
+except ImportError:
+    raise unittest.SkipTest("numpy not installed — skipping PGO challenger tests")
 import pgo_challenger
 import pgo_model
 import pgo_sources
