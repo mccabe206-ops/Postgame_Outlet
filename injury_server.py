@@ -97,15 +97,15 @@ PAGE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
  .field.offense,.field.defense{min-height:600px;aspect-ratio:16/10}
  .los{position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(255,255,255,.85)}
  .hash{position:absolute;top:calc(50% - 7px);width:2px;height:14px;background:rgba(255,255,255,.7)}
- .stack{position:absolute;transform:translate(-50%,-50%);width:94px;text-align:center;
+ .stack{position:absolute;transform:translate(-50%,-50%);width:106px;text-align:center;
    background:rgba(10,20,10,.42);border-radius:8px;padding:3px 4px;backdrop-filter:blur(1px)}
  .stack.off{box-shadow:inset 0 0 0 1.5px rgba(178,59,59,.85)}
  .stack.def{box-shadow:inset 0 0 0 1.5px rgba(120,150,190,.85)}
- .field.both .stack{width:80px}
+ .field.both .stack{width:92px}
  .field.both .pl{font-size:9.5px}
  .stack .lbl{font-size:10px;font-weight:800;color:#fff;letter-spacing:.04em;margin-bottom:2px}
- .pl{font-size:10.5px;line-height:1.4;color:#eef0ee;white-space:nowrap;overflow:hidden;
-   text-overflow:ellipsis;border-radius:4px;padding:0 3px;cursor:pointer}
+ .pl{font-size:10.5px;line-height:1.22;color:#eef0ee;white-space:normal;overflow:hidden;
+   word-break:break-word;border-radius:4px;padding:1px 3px;cursor:pointer}
  .pl:hover{outline:1px solid rgba(255,255,255,.5)}
  .pl.sel{outline:2px solid #fff;outline-offset:1px}
  .pl.st{font-weight:700}
@@ -263,7 +263,7 @@ function stack(item,side,maxDepth){
     const inj=p.injury; let cls='pl'+(idx===0?' st':''); let tag='';
     if(inj){const k=sevKey(inj.severity); cls+=' '+k; tag=' · '+esc(inj.status);}
     const dt=inj?(detailText(inj)||inj.status):'';
-    return `<div class="${cls}" data-i="${p._i}" title="${esc(dt)}">${esc(lastName(p.name))}${tag}</div>`;
+    return `<div class="${cls}" data-i="${p._i}" title="${esc(dt)}">${esc(p.name)}${tag}</div>`;
   }).join('');
   return `<div class="stack ${side}" style="left:${co[0]}%;top:${co[1]}%">`+
     `<div class="lbl">${esc(item.slot)}</div>${rows}</div>`;
@@ -271,6 +271,17 @@ function stack(item,side,maxDepth){
 function fmtUpdated(ms){ if(!ms)return ''; try{
   return new Date(ms).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
 }catch(e){return '';} }
+// "how long ago" from a ms-epoch Sleeper news_updated timestamp
+function relTime(ms){ if(!ms)return ''; const s=(Date.now()-ms)/1000;
+  if(s<90)return 'just now';
+  const m=Math.round(s/60); if(m<60)return m+(m===1?' minute ago':' minutes ago');
+  const h=Math.round(m/60); if(h<24)return h+(h===1?' hour ago':' hours ago');
+  const d=Math.round(h/24); if(d<14)return d+(d===1?' day ago':' days ago');
+  const w=Math.round(d/7); if(w<9)return w+(w===1?' week ago':' weeks ago');
+  const mo=Math.round(d/30.4); if(mo<18)return mo+(mo===1?' month ago':' months ago');
+  const y=Math.round(d/365); return y+(y===1?' year ago':' years ago'); }
+function updatedLine(ms){ const rel=relTime(ms); if(!rel)return ''; const abs=fmtUpdated(ms);
+  return ' · updated '+rel+(abs?' ('+abs+')':''); }
 function roleLabel(r){return r==='EFFECTIVE'?'effective starter (promoted)':r==='STARTER'?'starter':
   r==='SHELVED'?'role unclear — verify':'backup';}
 function pick(i){
@@ -286,15 +297,15 @@ function pick(i){
     bits.push(roleLabel(inj.role));
     if(inj.ourlads_agree==='differs')bits.push('⚠ Ourlads has him at '+inj.ourlads);
     else if(inj.ourlads_agree==='absent')bits.push('not on Ourlads chart');
-    const upd=fmtUpdated(inj.updated||u.updated);
+    const upd=updatedLine(inj.updated||u.updated);
     card.innerHTML=`<div class="nm">${esc(p._slot)} · ${esc(p.name)} `+
       `<span class="sev sev-${k}"><span class="g">${sevGlyph(k)}</span>${esc(inj.status)}</span></div>`+
-      `<div class="meta">${esc(bits.join(' · '))}${upd?(' · Sleeper updated '+upd):''}</div>`;
+      `<div class="meta">${esc(bits.join(' · '))}${esc(upd)}</div>`;
   } else {
-    const upd=fmtUpdated(u.updated);
+    const upd=updatedLine(u.updated);
     const note=p.ourlads_note?(' · Ourlads note: '+esc(p.ourlads_note)):'';
     card.innerHTML=`<div class="nm">${esc(p._slot)} · ${esc(p.name)}</div>`+
-      `<div class="meta">No active injury reported by Sleeper.${upd?(' · last update '+upd):''}${note}</div>`;
+      `<div class="meta">No active injury reported by Sleeper.${esc(upd)}${note}</div>`;
   }
 }
 function teamClick(e){const el=e.target.closest('.pl[data-i]'); if(el)pick(+el.getAttribute('data-i'));}

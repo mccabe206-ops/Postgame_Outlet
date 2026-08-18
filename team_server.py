@@ -28,6 +28,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
 import team_view as TV
+import team_notes
 
 HOST = "127.0.0.1"
 PORT = 8788
@@ -81,6 +82,22 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
  details summary{{cursor:pointer;color:var(--dim);font-size:13px;text-transform:uppercase;
    letter-spacing:.05em;padding:4px 0}}
  .caveat{{color:var(--dim);font-size:12px;margin:6px 0 0}}
+ .sig{{font-size:14px;padding:3px 0;color:#e6d3a8}}
+ .clus{{display:inline-block;font-size:12px;font-weight:700;color:#ffd7d7;background:rgba(229,83,75,.18);
+   border:1px solid rgba(229,83,75,.5);border-radius:8px;padding:3px 9px;margin:0 6px 8px 0}}
+ .irow{{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}}
+ .irow:last-child{{border-bottom:none}}
+ .irole{{color:var(--dim);font-size:13px}}
+ .sev{{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px}}
+ .sev-crit{{background:rgba(229,83,75,.20);border:1px solid rgba(229,83,75,.6)}}
+ .sev-serious{{background:rgba(236,131,90,.20);border:1px solid rgba(236,131,90,.6)}}
+ .sev-watch{{background:rgba(250,178,25,.18);border:1px solid rgba(250,178,25,.55)}}
+ .watch{{margin-left:auto;background:var(--card);border:1px solid var(--line);color:var(--ink);
+   padding:3px 9px;border-radius:7px;font-size:12px;cursor:pointer}}
+ .watch:hover{{border-color:var(--accent)}}
+ .resolve{{background:none;border:none;color:var(--dim);font-size:12px;cursor:pointer;
+   text-decoration:underline;margin-left:8px}}
+ .resolve:hover{{color:var(--ink)}}
 </style></head><body>
 <header>
   <h1>Update Ratings</h1>
@@ -103,6 +120,10 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
     <div class="qbname" id="qbname"></div>
     <div class="notes" id="notes"></div>
   </div>
+  <div class="card" id="signalCard" style="display:none">
+    <h2>Injury signal (evidence only — your call)</h2>
+    <div id="signal"></div>
+  </div>
   <div class="card">
     <h2>Open items — memory (resurfaces until resolved)</h2>
     <div id="threads"></div>
@@ -110,6 +131,10 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
   <div class="card">
     <h2>Injuries / out (ESPN, live)</h2>
     <div id="injuries"></div>
+  </div>
+  <div class="card" id="sleeperCard" style="display:none">
+    <h2>Injuries — Sleeper (severity + role · click “+ Watch” to track)</h2>
+    <div id="sleeper"></div>
   </div>
   <div class="card">
     <h2>Live write-up (shows on the site)</h2>
@@ -134,6 +159,28 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
 </div>
 <script>
 let YEARS=[];
+let SNAP=null, SINJ=[];
+function esc(x){{return (x==null?'':(''+x)).replace(/[&<>]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;'}}[c]));}}
+function sevClass(sv){{return sv>=5?'sev-crit':sv>=3?'sev-serious':'sev-watch';}}
+function roleLabel(r){{return r==='EFFECTIVE'?'effective starter':r==='STARTER'?'starter':r==='SHELVED'?'role unclear':'backup';}}
+function cleanDet(v){{if(!v)return '';const b=(''+v).trim().toLowerCase();
+  return (b==='undisclosed'||b==='not injury related'||b==='n/a')?'':(''+v).trim();}}
+async function watchThis(ix){{
+  const i=SINJ[ix]; if(!i||!SNAP||!SNAP.abbr)return;
+  const bp=cleanDet(i.body_part);
+  const topic=(i.name+' '+(bp||i.status||'injury')).trim();
+  const det=[cleanDet(i.body_part),cleanDet(i.notes)].filter(Boolean).join('; ');
+  const text=(i.status||'')+(det?(' — '+det):'')+' · '+roleLabel(i.role)+' ('+(i.position||i.dcp||'')+')';
+  await fetch('/api/note',{{method:'POST',headers:{{'Content-Type':'application/json'}},
+    body:JSON.stringify({{abbr:SNAP.abbr,topic:topic,text:text,now_iso:new Date().toISOString()}})}});
+  load(SNAP.name,SNAP.year);
+}}
+async function resolveThread(id){{
+  if(!SNAP||!SNAP.abbr)return;
+  await fetch('/api/note/resolve',{{method:'POST',headers:{{'Content-Type':'application/json'}},
+    body:JSON.stringify({{abbr:SNAP.abbr,thread_id:id,note:'',now_iso:new Date().toISOString()}})}});
+  load(SNAP.name,SNAP.year);
+}}
 async function loadTeams(){{
   const r=await fetch('/api/teams'); const j=await r.json();
   const sel=document.getElementById('team'); sel.innerHTML='';
@@ -150,6 +197,7 @@ async function load(name,year){{
   const r=await fetch('/api/team?q='+encodeURIComponent(name)+'&year='+year);
   const s=await r.json();
   if(s.error){{document.getElementById('rec').textContent=s.error;return;}}
+  SNAP=s;
   const f=x=>(x>0?'+':'')+x;
   document.getElementById('qb').textContent=f(s.qb);
   document.getElementById('off').textContent=f(s.off);
@@ -167,9 +215,10 @@ async function load(name,year){{
   else open.forEach(t=>{{
     const last=(t.entries||[]).slice(-1)[0];
     const div=document.createElement('div'); div.className='thread';
-    div.innerHTML=`<div class="topic">${{t.topic}}</div>`+
+    div.innerHTML=`<div class="topic">${{esc(t.topic)}}`+
+      `<button class="resolve" onclick="resolveThread('${{t.id}}')">resolve</button></div>`+
       `<div class="meta">open · ${{(t.entries||[]).length}} update(s)${{t.opened?' · since '+t.opened:''}}</div>`+
-      (last?`<div class="entry">${{last.text}}</div>`:'');
+      (last?`<div class="entry">${{esc(last.text)}}</div>`:'');
     th.appendChild(div);
   }});
   const rc=(s.resolved_threads||[]).length;
@@ -182,6 +231,29 @@ async function load(name,year){{
   else{{ inj.innerHTML='<table><thead><tr><th>Player</th><th>Pos</th><th>Status</th></tr></thead><tbody>'+
     injured.map(p=>`<tr><td>${{p.name}}</td><td>${{p.pos||''}}</td>`+
       `<td class="L">${{p.injury||p.group||''}}</td></tr>`).join('')+'</tbody></table>'; }}
+  // injury signal (evidence only — your call)
+  const sigCard=document.getElementById('signalCard'); const sigEl=document.getElementById('signal');
+  const sigs=(s.rating_signal||[]);
+  if(sigs.length){{ sigCard.style.display=''; sigEl.innerHTML=sigs.map(x=>`<div class="sig">• ${{esc(x)}}</div>`).join(''); }}
+  else{{ sigCard.style.display='none'; sigEl.innerHTML=''; }}
+  // injuries (Sleeper — severity + role); "+ Watch" opens a tracked item
+  SINJ=((s.sleeper||{{}}).injuries)||[];
+  const slCard=document.getElementById('sleeperCard'); const slEl=document.getElementById('sleeper');
+  const sclus=((s.sleeper||{{}}).clusters)||[];
+  if(!SINJ.length && !sclus.length){{ slCard.style.display='none'; slEl.innerHTML=''; }}
+  else{{
+    slCard.style.display='';
+    const clus=sclus.map(c=>`<span class="clus">⚠ ${{esc(c.group)}} cluster: ${{esc((c.players||[]).join(', '))}}</span>`).join('');
+    const rows=SINJ.map((i,ix)=>{{
+      const det=[cleanDet(i.body_part),cleanDet(i.notes)].filter(Boolean).join('; ');
+      return `<div class="irow"><span>${{esc(i.name)}}</span>`+
+        `<span class="sev ${{sevClass(i.severity)}}">${{esc(i.status)}}</span>`+
+        (det?`<span class="irole">${{esc(det)}}</span>`:'')+
+        `<span class="irole">· ${{roleLabel(i.role)}} (${{esc(i.position||i.dcp||'')}})</span>`+
+        `<button class="watch" onclick="watchThis(${{ix}})">+ Watch</button></div>`;
+    }}).join('');
+    slEl.innerHTML=(clus?('<div style="margin-bottom:8px">'+clus+'</div>'):'')+rows;
+  }}
   // depth chart (Ourlads cached)
   const dc=document.getElementById('depth'); dc.innerHTML='';
   const depth=s.depth||{{}};
@@ -248,6 +320,41 @@ class Handler(BaseHTTPRequestHandler):
         if u.path == "/" or u.path.startswith("/index"):
             return self._send(200, PAGE.format(), "text/html; charset=utf-8")
         return self._send(404, "not found", "text/plain")
+
+    def do_POST(self):
+        u = urlparse(self.path)
+        try:
+            length = int(self.headers.get("Content-Length") or 0)
+            payload = json.loads(self.rfile.read(length) or "{}")
+        except Exception as e:  # noqa: BLE001
+            return self._send(400, json.dumps({"error": f"bad request: {e}"}))
+        # Open a watch-item (per-team memory) from the workspace — one-click "+ Watch".
+        if u.path == "/api/note":
+            abbr = (payload.get("abbr") or "").upper()
+            topic = (payload.get("topic") or "").strip()
+            text = payload.get("text") or ""
+            now = payload.get("now_iso") or ""
+            if not abbr or not topic:
+                return self._send(400, json.dumps({"error": "abbr and topic required"}))
+            try:
+                th = team_notes.add_thread(abbr, topic, text, now)
+                return self._send(200, json.dumps(th))
+            except Exception as e:  # noqa: BLE001
+                return self._send(502, json.dumps({"error": str(e)}))
+        # Resolve an open watch-item.
+        if u.path == "/api/note/resolve":
+            abbr = (payload.get("abbr") or "").upper()
+            tid = payload.get("thread_id") or ""
+            now = payload.get("now_iso") or ""
+            note = payload.get("note") or ""
+            if not abbr or not tid:
+                return self._send(400, json.dumps({"error": "abbr and thread_id required"}))
+            try:
+                ok, th = team_notes.resolve_thread(abbr, tid, note, now)
+                return self._send(200, json.dumps({"ok": ok, "thread": th}))
+            except Exception as e:  # noqa: BLE001
+                return self._send(502, json.dumps({"error": str(e)}))
+        return self._send(404, json.dumps({"error": "not found"}))
 
 
 def main():

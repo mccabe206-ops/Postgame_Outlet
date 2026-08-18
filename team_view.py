@@ -25,6 +25,15 @@ try:
     import depthchart as _depthchart
 except Exception:  # noqa: BLE001
     _depthchart = None
+# Injury scanner is Lane-2 (testing branch only). Guarded so the workspace still
+# runs on main/walshja9 where these modules are absent — the Sleeper section and
+# rating signal simply don't render there.
+try:
+    import injuries as _injuries
+    import sleeper as _sleeper
+except Exception:  # noqa: BLE001
+    _injuries = None
+    _sleeper = None
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
@@ -168,6 +177,7 @@ def team_snapshot(name, year):
     off = float(row.get("off_value") or 0)
     dfn = float(row.get("def_value") or 0)
     games, record = season_results(name, year)
+    sleeper_detail = _sleeper_detail(abbr)
     return {
         "name": name, "abbr": abbr,
         "qb_name": row.get("qb_name", ""),
@@ -181,6 +191,8 @@ def team_snapshot(name, year):
         "open_threads": team_notes.open_threads(abbr) if abbr else [],
         "resolved_threads": team_notes.list_threads(abbr, "resolved") if abbr else [],
         "injured": _injured_list(name),
+        "sleeper": sleeper_detail,
+        "rating_signal": _rating_signal(sleeper_detail, row.get("qb_name", "")),
         "depth": _depth_chart(abbr),
     }
 
@@ -204,3 +216,67 @@ def _depth_chart(abbr):
         return d.get("depth", {})
     except Exception:  # noqa: BLE001
         return {}
+
+
+# injury -> rating integration (Lane-2, testing only) -------------------------
+
+_OFF_GROUPS = {"QB", "RB", "WR", "TE", "OL"}
+_SEVERE = 3  # matches injuries.SEVERE_MIN: IR/PUP/Out/Doubtful
+
+
+def _sleeper_detail(abbr):
+    """Rich Sleeper injuries for one team (severity/role/clusters). {} if the
+    injury scanner isn't present (e.g. on main/walshja9) or the fetch fails."""
+    if not (_injuries and _sleeper and abbr):
+        return {}
+    try:
+        return _injuries.team_detail(_sleeper.get_players(), abbr)
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def _side(group):
+    return "Offense" if group in _OFF_GROUPS else "Defense"
+
+
+def _rating_signal(detail, qb_name=""):
+    """Soft, qualitative injury flags for the rating card — EVIDENCE, never a delta.
+
+    Per method.md the bot must never auto-move a rating; this only prompts a look.
+    Returns a list of short strings (empty when nothing is rating-relevant).
+    """
+    if not detail or not isinstance(detail, dict):
+        return []
+    inj = detail.get("injuries", []) or []
+    clusters = detail.get("clusters", []) or []
+    flags = []
+    # QB: availability is already priced into the QB value — flag, don't double-count.
+    for i in inj:
+        if (i.get("group") == "QB" and i.get("role") in ("STARTER", "EFFECTIVE")
+                and (i.get("severity") or 0) >= _SEVERE):
+            flags.append(
+                f"QB: {i.get('name')} — {i.get('status')}. Availability is already "
+                "priced into the QB value; confirm, don't double-count.")
+    # Position-group clusters (2+ starters same group).
+    cluster_groups = set()
+    for c in clusters:
+        g = c.get("group")
+        cluster_groups.add(g)
+        players = ", ".join(c.get("players", []) or [])
+        flags.append(
+            f"{_side(g)}: {g} cluster — {c.get('count')} starters out"
+            + (f" ({players})" if players else "") + "; worth a look.")
+    # Other severe starters/effective-starters, grouped by side (skip QB + cluster groups).
+    by_side = {"Offense": [], "Defense": []}
+    for i in inj:
+        g = i.get("group")
+        if g == "QB" or g in cluster_groups:
+            continue
+        if i.get("role") in ("STARTER", "EFFECTIVE") and (i.get("severity") or 0) >= _SEVERE:
+            by_side[_side(g)].append(f"{i.get('name')} ({g}, {i.get('status')})")
+    for side, players in by_side.items():
+        if players:
+            n = len(players)
+            flags.append(f"{side}: {n} starter{'' if n == 1 else 's'} out — "
+                         + "; ".join(players) + ".")
+    return flags
