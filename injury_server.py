@@ -119,6 +119,10 @@ PAGE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
    padding:12px 16px;margin:8px 0 16px;min-height:20px}
  .selcard .nm{font-weight:700;font-size:16px}
  .selcard .meta{color:var(--ink2);font-size:13px;margin-top:2px}
+ .ret{font-size:13px;margin-top:6px;font-weight:600;color:var(--ink)}
+ .ret.season{color:var(--critical)}
+ .ret .cap{font-weight:400;color:var(--muted)}
+ .ret2{font-size:11.5px;color:var(--ink2);white-space:nowrap}
  .subhead{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 6px}
  .row{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--line)}
  .row:last-child{border-bottom:none}
@@ -298,9 +302,12 @@ function pick(i){
     if(inj.ourlads_agree==='differs')bits.push('⚠ Ourlads has him at '+inj.ourlads);
     else if(inj.ourlads_agree==='absent')bits.push('not on Ourlads chart');
     const upd=updatedLine(inj.updated||u.updated);
+    const rt=inj.return_est;
+    const retHtml=rt?`<div class="ret${rt.season_ending?' season':''}">🩺 Est. return: ${esc(rt.eta)} `+
+      `<span class="cap">· typical ${esc(rt.duration)} for ${esc(rt.label)}${rt.confidence==='rough'?' · rough (no body-part detail)':''}</span></div>`:'';
     card.innerHTML=`<div class="nm">${esc(p._slot)} · ${esc(p.name)} `+
       `<span class="sev sev-${k}"><span class="g">${sevGlyph(k)}</span>${esc(inj.status)}</span></div>`+
-      `<div class="meta">${esc(bits.join(' · '))}${esc(upd)}</div>`;
+      `<div class="meta">${esc(bits.join(' · '))}${esc(upd)}</div>`+retHtml;
   } else {
     const upd=updatedLine(u.updated);
     const note=p.ourlads_note?(' · Ourlads note: '+esc(p.ourlads_note)):'';
@@ -313,6 +320,7 @@ function injRow(i){
   const k=sevKey(i.severity);const dt=detailText(i);
   const role=i.role==='EFFECTIVE'?'effective starter (promoted)':i.role==='STARTER'?'starter':i.role==='SHELVED'?'role unclear — verify':'backup';
   const tags=[`<span class="tag">${role}</span>`];
+  if(i.return_est)tags.push(`<span class="tag">🩺 ${esc(i.return_est.eta)}</span>`);
   if(i.ourlads_agree==='differs')tags.push(`<span class="tag warn">⚠ Ourlads: ${esc(i.ourlads)}</span>`);
   else if(i.ourlads_agree==='absent')tags.push(`<span class="tag warn">not on Ourlads chart</span>`);
   return `<div class="row"><div class="pos">${esc(i.position||i.dcp||'?')}</div><div class="who">`+

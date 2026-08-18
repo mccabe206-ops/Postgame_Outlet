@@ -23,7 +23,9 @@ CLI:
     python3 injuries.py --refresh       # force a fresh Sleeper pull first
     python3 injuries.py --json          # machine-readable (for the agent / a future page)
 
-v2 (not built yet): projected return week from a curated recovery-time table.
+Return-timeline estimates (recovery.py + data/injury_recovery.csv) attach a projected
+return window per injury — typical recovery for the diagnosis, anchored to the last
+report; a planning aid (ranges, not a diagnosis), never auto-applied to a rating.
 """
 
 import json
@@ -33,6 +35,10 @@ import sys
 
 import sleeper
 
+try:
+    import recovery as _recovery
+except Exception:  # noqa: BLE001
+    _recovery = None
 try:
     import team_view as _tv
 except Exception:  # noqa: BLE001
@@ -185,6 +191,7 @@ def analyze_team(abbr, players, ourlads):
             "notes": p.get("notes"), "role": role, "severity": _sev(p.get("status")),
             "practice": p.get("practice"), "start": p.get("start"),
             "updated": p.get("updated"),
+            "return_est": _recovery.estimate(p) if _recovery else None,
             "ourlads": (f"{odepth[0]} {odepth[1]}" if odepth else None),
             "ourlads_agree": agree,
         })
@@ -368,7 +375,11 @@ def _fmt_injury(inj):
     elif inj.get("ourlads_agree") == "absent":
         tag += " · not on Ourlads chart"
     pos = inj.get("position") or inj.get("dcp") or "?"
-    return f"    {pos:<3} {inj['name']} — {detail}   [{tag}]"
+    line = f"    {pos:<3} {inj['name']} — {detail}   [{tag}]"
+    est = inj.get("return_est")
+    if est:
+        line += f"\n        ⏱ {est['text']}"
+    return line
 
 
 def print_report(report):

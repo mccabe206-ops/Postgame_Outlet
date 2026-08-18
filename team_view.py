@@ -273,7 +273,9 @@ def _rating_signal(detail, qb_name=""):
         if g == "QB" or g in cluster_groups:
             continue
         if i.get("role") in ("STARTER", "EFFECTIVE") and (i.get("severity") or 0) >= _SEVERE:
-            by_side[_side(g)].append(f"{i.get('name')} ({g}, {i.get('status')})")
+            est = i.get("return_est") or {}
+            tail = est.get("eta") or i.get("status")
+            by_side[_side(g)].append(f"{i.get('name')} ({g}, {tail})")
     for side, players in by_side.items():
         if players:
             n = len(players)

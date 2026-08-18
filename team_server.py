@@ -170,7 +170,8 @@ async function watchThis(ix){{
   const bp=cleanDet(i.body_part);
   const topic=(i.name+' '+(bp||i.status||'injury')).trim();
   const det=[cleanDet(i.body_part),cleanDet(i.notes)].filter(Boolean).join('; ');
-  const text=(i.status||'')+(det?(' — '+det):'')+' · '+roleLabel(i.role)+' ('+(i.position||i.dcp||'')+')';
+  const text=(i.status||'')+(det?(' — '+det):'')+' · '+roleLabel(i.role)+' ('+(i.position||i.dcp||'')+')'
+    +(i.return_est?(' · est. return '+i.return_est.eta+' (typ '+i.return_est.duration+')'):'');
   await fetch('/api/note',{{method:'POST',headers:{{'Content-Type':'application/json'}},
     body:JSON.stringify({{abbr:SNAP.abbr,topic:topic,text:text,now_iso:new Date().toISOString()}})}});
   load(SNAP.name,SNAP.year);
@@ -250,6 +251,7 @@ async function load(name,year){{
         `<span class="sev ${{sevClass(i.severity)}}">${{esc(i.status)}}</span>`+
         (det?`<span class="irole">${{esc(det)}}</span>`:'')+
         `<span class="irole">· ${{roleLabel(i.role)}} (${{esc(i.position||i.dcp||'')}})</span>`+
+        (i.return_est?`<span class="irole">· 🩺 ${{esc(i.return_est.eta)}}</span>`:'')+
         `<button class="watch" onclick="watchThis(${{ix}})">+ Watch</button></div>`;
     }}).join('');
     slEl.innerHTML=(clus?('<div style="margin-bottom:8px">'+clus+'</div>'):'')+rows;
