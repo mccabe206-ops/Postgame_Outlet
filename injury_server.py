@@ -71,6 +71,9 @@ PAGE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
  button{background:var(--surface);border:1px solid var(--border);color:var(--ink);
    padding:7px 11px;border-radius:8px;font-size:14px;font-family:inherit;cursor:pointer}
  button:hover{border-color:var(--muted)}
+ a.xlink{color:var(--ink2);font-size:13px;text-decoration:none;border:1px solid var(--border);
+   border-radius:8px;padding:6px 11px;margin-left:auto;white-space:nowrap}
+ a.xlink:hover{border-color:var(--muted);color:var(--ink)}
  .wrap{padding:18px 22px;max-width:1040px;margin:0 auto}
  /* grid */
  .teamgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
@@ -237,6 +240,8 @@ function renderTeam(){
         <button class="${SIDE==='offense'?'on':''}" onclick="setSide('offense')">Offense</button>
         <button class="${SIDE==='defense'?'on':''}" onclick="setSide('defense')">Defense</button>
       </div>
+      <a class="xlink" href="http://127.0.0.1:8788/?q=${esc(t.abbr)}" target="_blank"
+         title="Open this team in the ratings workspace">↗ Ratings workspace</a>
     </div>
     ${clusters?('<div style="margin-bottom:10px">'+clusters+'</div>'):''}
     <div class="field ${SIDE}">${hashes}<div class="los"></div>${stacks}</div>
@@ -303,8 +308,7 @@ function pick(i){
     else if(inj.ourlads_agree==='absent')bits.push('not on Ourlads chart');
     const upd=updatedLine(inj.updated||u.updated);
     const rt=inj.return_est;
-    const retHtml=rt?`<div class="ret${rt.season_ending?' season':''}">🩺 Est. return: ${esc(rt.eta)} `+
-      `<span class="cap">· typical ${esc(rt.duration)} for ${esc(rt.label)}${rt.confidence==='rough'?' · rough (no body-part detail)':''}</span></div>`:'';
+    const retHtml=rt?`<div class="ret${rt.season_ending?' season':''}">🩺 ${esc(rt.text)}</div>`:'';
     card.innerHTML=`<div class="nm">${esc(p._slot)} · ${esc(p.name)} `+
       `<span class="sev sev-${k}"><span class="g">${sevGlyph(k)}</span>${esc(inj.status)}</span></div>`+
       `<div class="meta">${esc(bits.join(' · '))}${esc(upd)}</div>`+retHtml;
@@ -320,7 +324,9 @@ function injRow(i){
   const k=sevKey(i.severity);const dt=detailText(i);
   const role=i.role==='EFFECTIVE'?'effective starter (promoted)':i.role==='STARTER'?'starter':i.role==='SHELVED'?'role unclear — verify':'backup';
   const tags=[`<span class="tag">${role}</span>`];
-  if(i.return_est)tags.push(`<span class="tag">🩺 ${esc(i.return_est.eta)}</span>`);
+  if(i.return_est){const r=i.return_est;
+    tags.push(`<span class="tag${r.season_ending?' warn':''}">🩺 ${esc(r.eta)}</span>`);
+    if(r.reported_ago)tags.push(`<span class="tag${r.stale?' warn':''}">${r.stale?'⚠ ':''}reported ${esc(r.reported_ago)}</span>`);}
   if(i.ourlads_agree==='differs')tags.push(`<span class="tag warn">⚠ Ourlads: ${esc(i.ourlads)}</span>`);
   else if(i.ourlads_agree==='absent')tags.push(`<span class="tag warn">not on Ourlads chart</span>`);
   return `<div class="row"><div class="pos">${esc(i.position||i.dcp||'?')}</div><div class="who">`+
@@ -332,6 +338,8 @@ function toggleTheme(){const el=document.documentElement,cur=el.getAttribute('da
   el.setAttribute('data-theme',dark?'light':'dark');}
 document.getElementById('team').addEventListener('click',teamClick);
 reloadGrid();
+// deep-link: /?team=SF opens straight to that team (used by the ratings workspace link)
+const _dl=new URLSearchParams(location.search).get('team'); if(_dl)openTeam(_dl.toUpperCase());
 </script></body></html>"""
 
 

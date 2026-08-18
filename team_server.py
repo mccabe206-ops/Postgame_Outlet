@@ -98,6 +98,10 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
  .resolve{{background:none;border:none;color:var(--dim);font-size:12px;cursor:pointer;
    text-decoration:underline;margin-left:8px}}
  .resolve:hover{{color:var(--ink)}}
+ a.xlink{{color:var(--dim);font-size:13px;text-decoration:none;border:1px solid var(--line);
+   border-radius:8px;padding:4px 10px;margin-left:10px;white-space:nowrap}}
+ a.xlink:hover{{border-color:var(--accent);color:var(--ink)}}
+ h2 .xlink{{float:right;font-weight:400}}
 </style></head><body>
 <header>
   <h1>Update Ratings</h1>
@@ -133,7 +137,8 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
     <div id="injuries"></div>
   </div>
   <div class="card" id="sleeperCard" style="display:none">
-    <h2>Injuries — Sleeper (severity + role · click “+ Watch” to track)</h2>
+    <h2>Injuries — Sleeper (severity + role · click “+ Watch” to track)
+      <a id="injLink" class="xlink" target="_blank" title="Open the full injury dashboard for this team">↗ full injury dashboard</a></h2>
     <div id="sleeper"></div>
   </div>
   <div class="card">
@@ -190,7 +195,9 @@ async function loadTeams(){{
   const ys=document.getElementById('year'); ys.innerHTML='';
   j.years.forEach(y=>{{const o=document.createElement('option');o.value=y;o.textContent=y;
     if(y===j.year)o.selected=true; ys.appendChild(o);}});
-  load(j.current, j.year);
+  // deep-link: /?q=SF opens straight to that team (used by the injury-dashboard link)
+  const _q=new URLSearchParams(location.search).get('q');
+  load(_q||j.current, j.year);
 }}
 function pick(name){{const y=document.getElementById('year').value; load(name,y);}}
 function setYear(y){{const n=document.getElementById('team').value; load(n,y);}}
@@ -199,6 +206,10 @@ async function load(name,year){{
   const s=await r.json();
   if(s.error){{document.getElementById('rec').textContent=s.error;return;}}
   SNAP=s;
+  // keep the dropdown + the injury-dashboard link in sync with the loaded team
+  const tsel=document.getElementById('team');
+  if(tsel){{for(const o of tsel.options){{if(o.value===s.name){{tsel.value=s.name;break;}}}}}}
+  const il=document.getElementById('injLink'); if(il&&s.abbr)il.href='http://127.0.0.1:8789/?team='+s.abbr;
   const f=x=>(x>0?'+':'')+x;
   document.getElementById('qb').textContent=f(s.qb);
   document.getElementById('off').textContent=f(s.off);
@@ -251,7 +262,7 @@ async function load(name,year){{
         `<span class="sev ${{sevClass(i.severity)}}">${{esc(i.status)}}</span>`+
         (det?`<span class="irole">${{esc(det)}}</span>`:'')+
         `<span class="irole">· ${{roleLabel(i.role)}} (${{esc(i.position||i.dcp||'')}})</span>`+
-        (i.return_est?`<span class="irole">· 🩺 ${{esc(i.return_est.eta)}}</span>`:'')+
+        (i.return_est?`<span class="irole">· 🩺 ${{esc(i.return_est.eta)}}${{i.return_est.reported_ago?(' · reported '+esc(i.return_est.reported_ago)+(i.return_est.stale?' ⚠':'')):''}}</span>`:'')+
         `<button class="watch" onclick="watchThis(${{ix}})">+ Watch</button></div>`;
     }}).join('');
     slEl.innerHTML=(clus?('<div style="margin-bottom:8px">'+clus+'</div>'):'')+rows;

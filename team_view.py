@@ -275,6 +275,9 @@ def _rating_signal(detail, qb_name=""):
         if i.get("role") in ("STARTER", "EFFECTIVE") and (i.get("severity") or 0) >= _SEVERE:
             est = i.get("return_est") or {}
             tail = est.get("eta") or i.get("status")
+            ago = est.get("reported_ago")
+            if ago:
+                tail += f", reported {ago}"
             by_side[_side(g)].append(f"{i.get('name')} ({g}, {tail})")
     for side, players in by_side.items():
         if players:

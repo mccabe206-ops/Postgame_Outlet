@@ -148,81 +148,101 @@ def _duration(wmin, wmax):
     return f"{lo}–{hi} wks" if hi != lo else f"~{lo} wks"
 
 
+def _ago(d, today):
+    """Human 'how long ago' for a report date."""
+    if not d:
+        return ""
+    days = (today - d).days
+    if days < 0:
+        return "upcoming"
+    if days < 1:
+        return "today"
+    if days < 14:
+        return f"{days}d ago"
+    if days < 75:
+        return f"{days // 7}w ago"
+    mo = round(days / 30.4)
+    if mo >= 12:
+        y = round(days / 365, 1)
+        return (f"{int(y)}y ago" if y == int(y) else f"{y}y ago")
+    return f"{mo}mo ago"
+
+
 def estimate(inj, today=None):
-    """Return-timeline estimate for one injury dict, or None if not estimable."""
+    """Return-timeline READ for one injury dict, or None if not estimable.
+
+    Honest by design: Sleeper gives no injury/surgery date (only a last-REPORT
+    timestamp), so we do NOT fabricate a precise return date. We LEAD with status +
+    the injury type's typical recovery (context) + WHEN it was last reported, and let
+    the roster rules drive availability:
+      - Preseason PUP/NFI is a *recovering* designation — never 'out for the season'
+        (that was the bug: a carryover injury reported recently was projected as if
+        the recovery clock started now).
+      - In-season reserve/PUP or IR = out a minimum of 4 games (earliest ~Week 5).
+      - Only an IN-SEASON IR with a season-length injury reads as likely season-ending.
+    A stale report (>45 days) is flagged so an 'out' verdict is always time-anchored.
+    """
     status = (inj.get("status") or "").strip().upper()
     if not status:
         return None
-    text = ((inj.get("body_part") or "") + " " + (inj.get("notes") or "")).lower()
-    surgery_flag = "surger" in text
+    src = ((inj.get("body_part") or "") + " " + (inj.get("notes") or "")).lower()
+    surgery_flag = "surger" in src
     today = today or datetime.now(timezone.utc).date()
-    anchor, kind = _anchor(inj)
-    anchor = anchor or today
+    report_date, kind = _anchor(inj)
+    reported = report_date.strftime("%b %-d, %Y") if report_date else ""
+    reported_ago = _ago(report_date, today) if report_date else ""
+    stale = bool(report_date and (today - report_date).days > 45)
 
-    row = _match(text, surgery_flag)
-    confidence = "est"
-    reserve = status in ("IR", "PUP", "NFI")  # reserve list = out a minimum of 4 games
-    if row and row["weeks_min"] is not None:
+    row = _match(src, surgery_flag)
+    matched = bool(row and row["weeks_min"] is not None)
+    if matched:
         wmin, wmax, label = row["weeks_min"], row["weeks_max"], row["label"]
-        matched = True
         if surgery_flag and wmax is not None and "surg" not in label.lower():
             label += " (surgery)"
+        duration = _duration(wmin, wmax)
+        typical = f"typical {label} recovery {duration}"
     else:
-        fb = _STATUS_FALLBACK.get(status)
-        if not fb:
-            return None
-        wmin, wmax, label = fb
-        matched = False
-        confidence = "rough"  # no body-part signal — status-only
+        wmin = wmax = None
+        label, duration, typical = "", "", ""
 
-    ret_low = anchor + timedelta(weeks=wmin)
-    ret_high = anchor + timedelta(weeks=wmax) if wmax is not None else None
-    # NFL reserve list is a MINIMUM of 4 games counted from Week 1 (not the injury
-    # date), so the body-part recovery can only push the return LATER, never earlier
-    # than ~Week 5. Floor the return dates accordingly.
-    if reserve:
-        floor = _week1() + timedelta(weeks=4)  # ~Week 5 kickoff
-        ret_low = max(ret_low, floor)
-        if ret_high is not None:
-            ret_high = max(ret_high, floor)
-    week_low = _to_week(ret_low)
-    week_high = _to_week(ret_high) if ret_high else None
-    season_ending = week_low is not None and week_low > _LAST_REG_WEEK
-    target = ret_high or ret_low  # the "should be back by" date
-    duration = _duration(wmin, wmax)
+    preseason = today < _week1()
+    long_injury = matched and wmax is not None and wmax >= 26  # season-length type
+    season_ending = False
 
-    if reserve and not matched:
-        # on IR/PUP with an undisclosed body part — don't fake a precise week.
-        eta = "out ≥4 games (min)"
-        duration = "≥4 games"
-        text_out = (f"On {status} — body part undisclosed; out a minimum of 4 games, "
-                    "may be season-ending · rough")
-    elif season_ending:
-        eta = "out for the season"
-        text_out = f"{eta} · typical {duration} ({label})"
-    else:
-        if target <= today:
-            eta = "likely available"        # typical recovery has already elapsed
-        elif (week_low or 1) <= 1 and (week_high is None or week_high <= 1):
-            eta = "by ~Week 1"              # heals before the season opens
-        elif wmax is None:
-            eta = f"~Week {week_low}+ ({_month_word(target)})"
-        elif week_high and week_high != week_low:
-            eta = f"~Weeks {week_low}–{week_high} ({_month_word(target)})"
+    if status in ("QUESTIONABLE", "PROBABLE"):
+        eta = "game-time decision"
+    elif status in ("OUT", "DOUBTFUL", "DNR", "NA"):
+        eta = "out (week-to-week)"
+    elif status in ("SUS", "SUSPENSION"):
+        eta = "suspended"
+    elif status in ("PUP", "NFI"):
+        eta = ("on PUP — recovering, back TBD" if preseason
+               else "reserve/PUP — out ≥4 games (earliest ~Wk 5)")
+    elif status == "IR":
+        if preseason:
+            eta = "on IR — timeline uncertain (camp)"
+        elif long_injury:
+            eta, season_ending = "likely out for the season", True
         else:
-            eta = f"~Week {week_low} ({_month_word(target)})"
-        text_out = f"{eta} · typical {duration} ({label})"
-        if reserve:
-            text_out += " · on reserve (min 4 games)"
-        if confidence == "rough":
-            text_out += " · rough"
+            eta = "on IR — out ≥4 games (earliest ~Wk 5)"
+    else:
+        eta = status.title()
+
+    parts = [eta]
+    if typical:
+        parts.append(typical)
+    if reported_ago:
+        parts.append(f"reported {reported_ago}")
+    text_out = " · ".join(parts)
+    if stale:
+        text_out += " · ⚠ may be outdated"
 
     return {
-        "label": label, "weeks_min": wmin, "weeks_max": wmax,
-        "anchor": anchor.isoformat(), "anchor_kind": kind or "assumed-today",
-        "return_low": ret_low.isoformat(),
-        "return_high": ret_high.isoformat() if ret_high else None,
-        "week_low": week_low, "week_high": week_high,
-        "season_ending": season_ending, "confidence": confidence,
-        "duration": duration, "eta": eta, "text": text_out,
+        "eta": eta, "typical": typical, "label": label, "duration": duration,
+        "weeks_min": wmin, "weeks_max": wmax,
+        "reported": reported, "reported_ago": reported_ago, "stale": stale,
+        "anchor_kind": kind or "assumed-today",
+        "season_ending": season_ending,
+        "confidence": "est" if matched else "rough",
+        "text": text_out,
     }
