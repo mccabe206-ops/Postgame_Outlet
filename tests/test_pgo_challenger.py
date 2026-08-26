@@ -1,3 +1,4 @@
+import copy
 import csv
 import gzip
 import hashlib
@@ -160,19 +161,517 @@ def _synthetic_paths(directory, *, mutate_game=None, aliases=True, offseason_cha
     return paths
 
 
-def _add_current_roster(paths, directory, *, team="SD", player="future-qb"):
+def _add_current_roster(
+    paths, directory, *, team="SD", player="future-qb", position="QB"
+):
     path = directory / "current-roster-2026.csv"
     _write_csv(path, pgo_sources.ROSTER_COLUMNS, [{
         "season": 2026,
         "week": 0,
         "team": team,
-        "position": "QB",
+        "position": position,
         "gsis_id": f"gsis-{player}",
         "pfr_id": f"pfr-{player}",
         "years_exp": 9,
         "draft_number": 1,
     }])
     paths[("current_roster", 2026)] = path
+
+
+def _add_role_player(paths, directory, *, player="future-wr"):
+    roster_path = paths[("weekly_rosters", 2013)]
+    with open(roster_path, encoding="utf-8", newline="") as handle:
+        roster_rows = list(csv.DictReader(handle))
+    for week in (1, 2):
+        roster_rows.append({
+            "season": 2013,
+            "week": week,
+            "team": "LAC",
+            "position": "WR",
+            "gsis_id": f"gsis-{player}",
+            "pfr_id": f"pfr-{player}",
+            "years_exp": 2,
+            "draft_number": 40,
+        })
+    _write_csv(roster_path, pgo_sources.ROSTER_COLUMNS, roster_rows)
+
+    snap_path = paths[("snap_counts", 2013)]
+    with open(snap_path, encoding="utf-8", newline="") as handle:
+        snap_rows = list(csv.DictReader(handle))
+    for week, offense_snaps in ((1, 20), (2, 30)):
+        snap_rows.append({
+            "season": 2013,
+            "week": week,
+            "team": "LAC",
+            "pfr_player_id": f"pfr-{player}",
+            "position": "WR",
+            "offense_snaps": offense_snaps,
+            "defense_snaps": 0,
+        })
+    _write_csv(snap_path, pgo_sources.SNAP_COLUMNS, snap_rows)
+
+
+class AvailabilityOverlayTests(unittest.TestCase):
+    AS_OF = "2026-08-18T02:09:47-07:00"
+
+    def test_role_training_rows_use_pregame_state_and_exclude_unavailable_rows(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            paths = _synthetic_paths(directory)
+            _add_role_player(paths, directory)
+
+            rows = pgo_challenger.build_role_training_rows(
+                paths, 4, as_of="2014-09-08T12:00:00-04:00"
+            )
+
+        row = next(
+            row for row in rows
+            if row.player_id == "gsis-future-wr"
+            and row.target_offense_snap_share == 0.60
+        )
+        self.assertEqual(row.features["position_skill"], 1.0)
+        self.assertAlmostEqual(row.features["prior_offense_snap_share"], 0.40)
+        self.assertAlmostEqual(row.target_offense_snap_share, 0.60)
+        self.assertTrue(all(row.availability_probability == 1.0 for row in rows))
+
+    def test_learned_role_fills_missing_overlay_role_without_touching_full_strength(self):
+        role_models = pgo_challenger.RoleModels(
+            offense=pgo_challenger.RoleModel(
+                pgo_challenger.Preprocessor(
+                    ("position_skill",), np.array([1.0]), np.array([1.0]), ()
+                ),
+                np.array([0.30, 0.0]),
+            ),
+            defense=None,
+        )
+        players = {"wr": {
+            "gsis_id": "gsis-wr", "position": "WR", "probability": 0.0,
+            "offense_snap_share": None, "defense_snap_share": 0.0,
+        }}
+        updated, _ = pgo_challenger.apply_availability_overlay(
+            "BUF", players, {("BUF", "gsis-wr"): {
+                "availability_probability": 0.0,
+                "offense_snap_share": None, "defense_snap_share": None,
+            }}, role_models=role_models,
+        )
+        self.assertEqual(updated["wr"]["role_source"], "learned")
+        self.assertAlmostEqual(updated["wr"]["offense_snap_share"], 0.30)
+
+    def test_availability_coverage_audit_requires_all_32_teams(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            overlay_path = directory / "availability.csv"
+            _write_csv(overlay_path, pgo_challenger.AVAILABILITY_COLUMNS, [{
+                "team": "LAR",
+                "gsis_id": "00-0039075",
+                "player": "Puka Nacua",
+                "availability_probability": "0.70",
+                "offense_snap_share_low": "",
+                "offense_snap_share_base": "",
+                "offense_snap_share_high": "",
+                "defense_snap_share_low": "",
+                "defense_snap_share_base": "",
+                "defense_snap_share_high": "",
+                "source_as_of": self.AS_OF,
+                "source_note": "source note",
+                "role_note": "",
+            }])
+            audit_path = directory / "coverage.json"
+            audit_path.write_text(json.dumps({
+                "source": "NFL official injury report",
+                "source_as_of": self.AS_OF,
+                "raw_source_sha256": "0" * 64,
+                "teams_processed": sorted(pgo_model.CURRENT_TEAMS),
+                "team_row_counts": {
+                    team: int(team == "LAR")
+                    for team in pgo_model.CURRENT_TEAMS
+                },
+                "player_row_count": 1,
+                "overlay_player_keys": [{
+                    "team": "LAR", "gsis_id": "00-0039075",
+                }],
+            }), encoding="utf-8")
+
+            _, receipt = pgo_challenger.load_availability_overlay(
+                overlay_path, self.AS_OF, coverage_path=audit_path
+            )
+            self.assertTrue(receipt["coverage"]["passed"])
+            self.assertEqual(
+                receipt["coverage"]["teams_processed"],
+                sorted(pgo_model.CURRENT_TEAMS),
+            )
+
+            audit_path.write_text(json.dumps({
+                "source": "NFL official injury report",
+                "source_as_of": self.AS_OF,
+                "raw_source_sha256": "0" * 64,
+                "teams_processed": ["LAR"],
+            }), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "all 32 teams"):
+                pgo_challenger.load_availability_overlay(
+                    overlay_path, self.AS_OF, coverage_path=audit_path
+                )
+
+    def test_availability_coverage_audit_reconciles_overlay(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            overlay_path = directory / "availability.csv"
+            _write_csv(overlay_path, pgo_challenger.AVAILABILITY_COLUMNS, [{
+                "team": "LAR",
+                "gsis_id": "00-0039075",
+                "player": "Puka Nacua",
+                "availability_probability": "0.70",
+                "offense_snap_share_low": "",
+                "offense_snap_share_base": "",
+                "offense_snap_share_high": "",
+                "defense_snap_share_low": "",
+                "defense_snap_share_base": "",
+                "defense_snap_share_high": "",
+                "source_as_of": self.AS_OF,
+                "source_note": "source note",
+                "role_note": "",
+            }])
+            audit_path = directory / "coverage.json"
+            valid = {
+                "source": "NFL official injury report",
+                "source_as_of": self.AS_OF,
+                "raw_source_sha256": "0" * 64,
+                "teams_processed": list(pgo_model.CURRENT_TEAMS),
+                "team_row_counts": {
+                    team: int(team == "LAR")
+                    for team in pgo_model.CURRENT_TEAMS
+                },
+                "player_row_count": 1,
+                "overlay_player_keys": [{
+                    "team": "LAR", "gsis_id": "00-0039075",
+                }],
+            }
+
+            bad_receipts = []
+            duplicate_team = copy.deepcopy(valid)
+            duplicate_team["teams_processed"].append("LAR")
+            bad_receipts.append(("duplicate team", duplicate_team, "exactly once"))
+            missing_count = copy.deepcopy(valid)
+            del missing_count["team_row_counts"]["ARI"]
+            bad_receipts.append(("missing count", missing_count, "team_row_counts"))
+            boolean_count = copy.deepcopy(valid)
+            boolean_count["team_row_counts"]["LAR"] = True
+            bad_receipts.append(("boolean count", boolean_count, "nonnegative integers"))
+            wrong_total = copy.deepcopy(valid)
+            wrong_total["player_row_count"] = 2
+            bad_receipts.append(("wrong total", wrong_total, "player_row_count"))
+            wrong_team = copy.deepcopy(valid)
+            wrong_team["team_row_counts"]["LAR"] = 0
+            wrong_team["team_row_counts"]["ARI"] = 1
+            bad_receipts.append(("wrong team", wrong_team, "do not match overlay"))
+            wrong_key = copy.deepcopy(valid)
+            wrong_key["overlay_player_keys"][0]["gsis_id"] = "wrong"
+            bad_receipts.append(("wrong key", wrong_key, "do not match overlay"))
+
+            for label, receipt, message in bad_receipts:
+                with self.subTest(label=label):
+                    audit_path.write_text(json.dumps(receipt), encoding="utf-8")
+                    with self.assertRaisesRegex(ValueError, message):
+                        pgo_challenger.load_availability_overlay(
+                            overlay_path, self.AS_OF, coverage_path=audit_path
+                        )
+
+            empty_overlay = directory / "empty.csv"
+            _write_csv(empty_overlay, pgo_challenger.AVAILABILITY_COLUMNS, [])
+            empty_receipt = copy.deepcopy(valid)
+            empty_receipt["team_row_counts"] = {
+                team: 0 for team in pgo_model.CURRENT_TEAMS
+            }
+            empty_receipt["player_row_count"] = 0
+            empty_receipt["overlay_player_keys"] = []
+            audit_path.write_text(json.dumps(empty_receipt), encoding="utf-8")
+            overlay, receipt = pgo_challenger.load_availability_overlay(
+                empty_overlay, self.AS_OF, coverage_path=audit_path
+            )
+            self.assertEqual(overlay, {})
+            self.assertTrue(receipt["coverage"]["passed"])
+
+    def test_role_training_as_of_ignores_post_boundary_snap_mutation(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            paths = _synthetic_paths(directory)
+            _add_role_player(paths, directory)
+            before = pgo_challenger.build_role_training_rows(
+                paths, 4, as_of="2013-09-08T12:00:00-04:00"
+            )
+            snap_path = paths[("snap_counts", 2013)]
+            with open(snap_path, encoding="utf-8", newline="") as handle:
+                rows = list(csv.DictReader(handle))
+            for row in rows:
+                if row["pfr_player_id"] == "pfr-future-wr" and row["week"] == "2":
+                    row["offense_snaps"] = "99"
+            _write_csv(snap_path, pgo_sources.SNAP_COLUMNS, rows)
+            after = pgo_challenger.build_role_training_rows(
+                paths, 4, as_of="2013-09-08T12:00:00-04:00"
+            )
+
+        self.assertEqual(before, after)
+
+    def test_loads_dated_player_overlay_and_rejects_future_rows(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "availability.csv"
+            _write_csv(path, pgo_challenger.AVAILABILITY_COLUMNS, [{
+                "team": "LAR",
+                "gsis_id": "00-0039075",
+                "player": "Puka Nacua",
+                "availability_probability": "0.70",
+                "offense_snap_share_low": "",
+                "offense_snap_share_base": "",
+                "offense_snap_share_high": "",
+                "defense_snap_share_low": "",
+                "defense_snap_share_base": "",
+                "defense_snap_share_high": "",
+                "source_as_of": self.AS_OF,
+                "source_note": "Sean McCabe: dinged; expected around Week 1",
+                "role_note": "",
+            }])
+
+            overlay, receipt = pgo_challenger.load_availability_overlay(
+                path, self.AS_OF
+            )
+
+        self.assertEqual(
+            overlay[("LAR", "00-0039075")]["availability_probability"], 0.70
+        )
+        self.assertEqual(receipt["row_count"], 1)
+        self.assertEqual(receipt["source_as_of"], self.AS_OF)
+
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "future.csv"
+            _write_csv(path, pgo_challenger.AVAILABILITY_COLUMNS, [{
+                "team": "LAR",
+                "gsis_id": "00-0039075",
+                "player": "Puka Nacua",
+                "availability_probability": "0.70",
+                "offense_snap_share_low": "",
+                "offense_snap_share_base": "",
+                "offense_snap_share_high": "",
+                "defense_snap_share_low": "",
+                "defense_snap_share_base": "",
+                "defense_snap_share_high": "",
+                "source_as_of": "2026-08-19T00:00:00-04:00",
+                "source_note": "future input",
+                "role_note": "",
+            }])
+
+            with self.assertRaisesRegex(ValueError, "newer than model"):
+                pgo_challenger.load_availability_overlay(path, self.AS_OF)
+
+    def test_overlay_changes_current_lineup_but_not_full_strength(self):
+        players = {
+            "puka": {
+                "gsis_id": "00-0039075",
+                "position": "WR",
+                "probability": 1.0,
+                "offense_snap_share": 0.50,
+                "defense_snap_share": 0.0,
+            },
+        }
+        overlay = {("LAR", "00-0039075"): {
+            "availability_probability": 0.70,
+            "offense_snap_share": None,
+            "defense_snap_share": None,
+        }}
+
+        updated, matched = pgo_challenger.apply_availability_overlay(
+            "LAR", players, overlay
+        )
+        full, current = pgo_challenger.lineup_views(
+            "LAR", {"LAR": updated}, {"pgo_v0": 0.0}
+        )
+
+        self.assertEqual(matched, {("LAR", "00-0039075")})
+        self.assertEqual(full["offense_availability"], 0.0)
+        self.assertAlmostEqual(current["offense_availability"], -0.15)
+
+    def test_role_scenario_supplies_missing_snap_share(self):
+        players = {
+            "tyson": {
+                "gsis_id": "00-0041029",
+                "position": "WR",
+                "probability": 1.0,
+                "offense_snap_share": None,
+                "defense_snap_share": 0.0,
+            },
+        }
+        overlay = {("NO", "00-0041029"): {
+            "availability_probability": 0.0,
+            "offense_snap_share": 0.30,
+            "defense_snap_share": None,
+        }}
+
+        updated, matched = pgo_challenger.apply_availability_overlay(
+            "NO", players, overlay
+        )
+        full, current = pgo_challenger.lineup_views(
+            "NO", {"NO": updated}, {"pgo_v0": 0.0}
+        )
+
+        self.assertEqual(matched, {("NO", "00-0041029")})
+        self.assertEqual(full["offense_availability"], 0.0)
+        self.assertAlmostEqual(current["offense_availability"], -0.30)
+
+    def test_generic_role_prior_applies_to_any_team_only_when_role_is_missing(self):
+        players = {
+            "rookie-wr": {
+                "gsis_id": "rookie-wr",
+                "position": "WR",
+                "probability": 1.0,
+                "offense_snap_share": None,
+                "defense_snap_share": None,
+            },
+            "known-wr": {
+                "gsis_id": "known-wr",
+                "position": "WR",
+                "probability": 1.0,
+                "offense_snap_share": 0.80,
+                "defense_snap_share": 0.0,
+            },
+        }
+        overlay = {
+            ("BUF", "rookie-wr"): {
+                "availability_probability": 0.0,
+                "offense_snap_share": None,
+                "defense_snap_share": None,
+            },
+            ("BUF", "known-wr"): {
+                "availability_probability": 0.0,
+                "offense_snap_share": None,
+                "defense_snap_share": None,
+            },
+        }
+
+        updated, matched = pgo_challenger.apply_availability_overlay(
+            "BUF", players, overlay, role_scenario="base"
+        )
+
+        self.assertEqual(matched, set(overlay))
+        self.assertEqual(updated["rookie-wr"]["offense_snap_share"], 0.30)
+        self.assertEqual(updated["rookie-wr"]["defense_snap_share"], 0.0)
+        self.assertEqual(updated["known-wr"]["offense_snap_share"], 0.80)
+        self.assertEqual(updated["known-wr"]["defense_snap_share"], 0.0)
+
+    def test_generic_role_prior_is_position_aware_and_scenario_aware(self):
+        self.assertEqual(
+            pgo_challenger.role_prior_for_position("WR", "low"),
+            {"offense_snap_share": 0.15, "defense_snap_share": 0.0},
+        )
+        self.assertEqual(
+            pgo_challenger.role_prior_for_position("QB", "high"),
+            {"offense_snap_share": 1.0, "defense_snap_share": 0.0},
+        )
+        self.assertEqual(
+            pgo_challenger.role_prior_for_position("CB", "base"),
+            {"offense_snap_share": 0.0, "defense_snap_share": 0.30},
+        )
+        self.assertIsNone(pgo_challenger.role_prior_for_position("K", "base"))
+
+    def test_role_scenario_selects_low_base_or_high_prior(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "availability.csv"
+            _write_csv(path, pgo_challenger.AVAILABILITY_COLUMNS, [{
+                "team": "NO",
+                "gsis_id": "00-0041029",
+                "player": "Jordyn Tyson",
+                "availability_probability": "0.00",
+                "offense_snap_share_low": "0.15",
+                "offense_snap_share_base": "0.30",
+                "offense_snap_share_high": "0.45",
+                "defense_snap_share_low": "",
+                "defense_snap_share_base": "",
+                "defense_snap_share_high": "",
+                "source_as_of": self.AS_OF,
+                "source_note": "Sean McCabe note: out about two months",
+                "role_note": "Provisional rookie-WR role prior; research-only",
+            }])
+
+            low, _ = pgo_challenger.load_availability_overlay(
+                path, self.AS_OF, role_scenario="low"
+            )
+            base, _ = pgo_challenger.load_availability_overlay(
+                path, self.AS_OF, role_scenario="base"
+            )
+            high, _ = pgo_challenger.load_availability_overlay(
+                path, self.AS_OF, role_scenario="high"
+            )
+
+        key = ("NO", "00-0041029")
+        self.assertEqual(low[key]["offense_snap_share"], 0.15)
+        self.assertEqual(base[key]["offense_snap_share"], 0.30)
+        self.assertEqual(high[key]["offense_snap_share"], 0.45)
+
+    def test_snapshot_rejects_overlay_without_snap_share(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            paths = _synthetic_paths(directory)
+            _add_current_roster(
+                paths, directory, team="SD", player="future-k", position="K"
+            )
+
+            with self.assertRaisesRegex(ValueError, "cannot be scored"):
+                pgo_challenger.build_snapshot_states(
+                    paths,
+                    "2026-07-21T12:00:00-04:00",
+                    4,
+                    {("LAC", "gsis-future-k"): {
+                        "availability_probability": 0.0,
+                        "offense_snap_share": None,
+                        "defense_snap_share": None,
+                    }},
+                )
+
+
+    def test_snapshot_applies_generic_role_prior_to_current_lineup(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            paths = _synthetic_paths(directory)
+            _add_current_roster(
+                paths, directory, team="SD", player="future-wr", position="WR"
+            )
+
+            states = pgo_challenger.build_snapshot_states(
+                paths,
+                "2026-07-21T12:00:00-04:00",
+                4,
+                {("LAC", "gsis-future-wr"): {
+                    "availability_probability": 0.0,
+                    "offense_snap_share": None,
+                    "defense_snap_share": None,
+                }},
+                role_scenario="low",
+            )
+
+        self.assertAlmostEqual(states["LAC"][0]["offense_availability"], 0.0)
+        self.assertAlmostEqual(states["LAC"][1]["offense_availability"], -0.15)
+
+    def test_generic_role_prior_does_not_change_full_strength_features(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            paths = _synthetic_paths(directory)
+            _add_current_roster(
+                paths, directory, team="SD", player="future-wr", position="WR"
+            )
+            baseline = pgo_challenger.build_snapshot_states(
+                paths, "2026-07-21T12:00:00-04:00", 4
+            )
+            overlay = pgo_challenger.build_snapshot_states(
+                paths,
+                "2026-07-21T12:00:00-04:00",
+                4,
+                {("LAC", "gsis-future-wr"): {
+                    "availability_probability": 0.0,
+                    "offense_snap_share": None,
+                    "defense_snap_share": None,
+                }},
+                role_scenario="base",
+            )
+
+        self.assertEqual(baseline["LAC"][0], overlay["LAC"][0])
 
 
 def _pregame_bytes(row):
@@ -581,6 +1080,7 @@ class SourceTests(unittest.TestCase):
             "OAK": "LV",
             "SD": "LAC",
             "ARZ": "ARI",
+            "AZ": "ARI",
             "BLT": "BAL",
             "CLV": "CLE",
             "HST": "HOU",
@@ -618,6 +1118,41 @@ class SourceTests(unittest.TestCase):
 
 
 class FeatureTests(unittest.TestCase):
+    def test_source_inputs_are_cached_until_file_signature_changes(self):
+        row = {
+            "season": "2013", "week": "1", "team": "OAK",
+            "game_id": "2013_01_OAK_SD",
+        }
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp, "team.csv")
+            path.write_text("first", encoding="utf-8")
+            paths = {("team_weekly_stats", 2013): path}
+            with patch.object(
+                pgo_challenger, "open_csv", side_effect=lambda _: [row]
+            ) as reader:
+                first = pgo_challenger._load_inputs(paths)
+                second = pgo_challenger._load_inputs(paths)
+                path.write_text("second version", encoding="utf-8")
+                third = pgo_challenger._load_inputs(paths)
+
+        self.assertIs(first, second)
+        self.assertIsNot(first, third)
+        self.assertEqual(reader.call_count, 2)
+
+    def test_historical_walk_is_reused_for_an_unchanged_half_life(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp, "schedule.csv")
+            path.write_text("source", encoding="utf-8")
+            paths = {("schedule_results", None): path}
+            with patch.object(
+                pgo_challenger, "_walk", return_value=([], {}, {})
+            ) as walk:
+                first = pgo_challenger.build_feature_rows(paths, 4)
+                second = pgo_challenger.build_feature_rows(paths, 4)
+
+        self.assertEqual(first, second)
+        self.assertEqual(walk.call_count, 1)
+
     def test_full_locked_paths_cannot_leak_current_roster_into_history(self):
         with tempfile.TemporaryDirectory() as temp:
             directory = Path(temp)
@@ -931,6 +1466,9 @@ class FeatureTests(unittest.TestCase):
     def test_snapshot_as_of_week_two_ignores_later_roster_and_injury(self):
         with tempfile.TemporaryDirectory() as temp:
             paths = _synthetic_paths(Path(temp))
+            historical = pgo_challenger.build_snapshot_states(
+                paths, "2013-09-08T14:00:00-04:00", 4
+            )
             roster_path = paths[("weekly_rosters", 2013)]
             with open(roster_path, encoding="utf-8", newline="") as handle:
                 rosters = list(csv.DictReader(handle))
@@ -946,7 +1484,9 @@ class FeatureTests(unittest.TestCase):
             })
             _write_csv(roster_path, pgo_sources.ROSTER_COLUMNS, rosters)
             injury_path = paths[("injury_reports", 2013)]
-            _write_csv(injury_path, pgo_sources.INJURY_COLUMNS, [{
+            with open(injury_path, encoding="utf-8", newline="") as handle:
+                injuries = list(csv.DictReader(handle))
+            injuries.append({
                 "season": 2013,
                 "week": 3,
                 "team": "SD",
@@ -954,13 +1494,28 @@ class FeatureTests(unittest.TestCase):
                 "position": "QB",
                 "report_status": "Out",
                 "practice_status": "Did Not Participate",
-            }])
+            })
+            _write_csv(injury_path, pgo_sources.INJURY_COLUMNS, injuries)
+            snap_path = paths[("snap_counts", 2013)]
+            with open(snap_path, encoding="utf-8", newline="") as handle:
+                snaps = list(csv.DictReader(handle))
+            snaps.append({
+                "season": 2013,
+                "week": 3,
+                "team": "SD",
+                "pfr_player_id": "pfr-lac-qb",
+                "position": "QB",
+                "offense_snaps": 99,
+                "defense_snaps": 0,
+            })
+            _write_csv(snap_path, pgo_sources.SNAP_COLUMNS, snaps)
 
-            states = pgo_challenger.build_snapshot_states(
+            with_current_source = pgo_challenger.build_snapshot_states(
                 paths, "2013-09-08T14:00:00-04:00", 4
             )
 
-        full, current = states["LAC"]
+        self.assertEqual(historical, with_current_source)
+        full, current = historical["LAC"]
         self.assertEqual(full, current)
 
     def test_current_game_stats_cannot_change_its_own_features(self):
@@ -1302,6 +1857,15 @@ class ModelTests(unittest.TestCase):
             second = pgo_challenger.select_parameters({}, (2016, 2017))
 
         self.assertEqual(first, second)
+
+    def test_parameter_grid_matches_validation_design(self):
+        self.assertEqual(pgo_challenger.HALF_LIFE_GRID, (4, 8, 16))
+        self.assertEqual(
+            pgo_challenger.ALPHA_GRID, (1.0, 10.0, 100.0)
+        )
+        self.assertEqual(
+            pgo_challenger.DELTA_GRID, (1.0, 1.5)
+        )
 
     def test_unnamed_future_schema_cannot_change_selection(self):
         history = [
@@ -1966,7 +2530,7 @@ class OutputTests(unittest.TestCase):
         return checks
 
     @staticmethod
-    def _ratings():
+    def _ratings(headline_view="full_strength"):
         feature_names = (
             "pgo_v0",
             "qb_epa_per_dropback",
@@ -1993,8 +2557,18 @@ class OutputTests(unittest.TestCase):
                 current["offense_availability"] = -0.25
             states[team] = (full, current)
         return pgo_challenger.build_ratings(
-            states, model, preprocessor, OutputTests.AS_OF
+            states, model, preprocessor, OutputTests.AS_OF, headline_view
         )
+
+    def test_current_lineup_can_be_selected_as_explicit_headline(self):
+        row = next(
+            row for row in self._ratings("current_lineup")
+            if row["availability_adjustment"] != 0.0
+        )
+
+        self.assertEqual(row["headline_view"], "current_lineup")
+        self.assertEqual(row["headline_rating"], row["current_lineup_rating"])
+        self.assertNotEqual(row["headline_rating"], row["full_strength_rating"])
 
     @staticmethod
     def _passing_audit():
@@ -2093,13 +2667,15 @@ class OutputTests(unittest.TestCase):
         ):
             pgo_challenger._source_preflight(paths, manifest, self.AS_OF)
 
-    def test_manifest_freeze_time_must_match_as_of_instant(self):
+    def test_manifest_freeze_time_cannot_be_after_as_of(self):
         paths = {
             (spec.name, spec.season): Path("unused")
             for spec in pgo_sources.source_specs()
         }
         with (
-            patch.object(pgo_sources, "validate_source_audit", return_value={}),
+            patch.object(
+                pgo_sources, "validate_source_audit", side_effect=lambda _paths: {}
+            ),
             patch.object(pgo_challenger, "_historical_coverage", return_value={}),
             patch.object(
                 pgo_challenger, "_load_inputs",
@@ -2110,19 +2686,29 @@ class OutputTests(unittest.TestCase):
                 return_value={"post_kickoff_rows_ignored": 0, "rows": []},
             ),
         ):
-            with self.assertRaisesRegex(ValueError, "frozen_at"):
-                pgo_challenger._source_preflight(
-                    paths,
-                    self._locked_manifest("2026-07-21T15:59:59+00:00"),
-                    self.AS_OF,
-                )
-            audit = pgo_challenger._source_preflight(
+            earlier_audit = pgo_challenger._source_preflight(
+                paths,
+                self._locked_manifest("2026-07-21T15:59:59+00:00"),
+                self.AS_OF,
+            )
+            equal_audit = pgo_challenger._source_preflight(
                 paths,
                 self._locked_manifest("2026-07-21T16:00:00+00:00"),
                 self.AS_OF,
             )
+            with self.assertRaisesRegex(ValueError, "later than --as-of"):
+                pgo_challenger._source_preflight(
+                    paths,
+                    self._locked_manifest("2026-07-21T16:00:01+00:00"),
+                    self.AS_OF,
+                )
 
-        self.assertEqual(len(audit["source_hashes"]), len(paths))
+        self.assertEqual(len(earlier_audit["source_hashes"]), len(paths))
+        self.assertEqual(len(equal_audit["source_hashes"]), len(paths))
+        self.assertEqual(
+            earlier_audit["source_frozen_at"],
+            ["2026-07-21T15:59:59+00:00"],
+        )
 
     def test_release_classification_separates_integrity_from_statistics(self):
         self.assertEqual(
@@ -2515,6 +3101,16 @@ class OutputTests(unittest.TestCase):
         offline_freeze.assert_not_called()
         self.assertEqual(first_hashes, second_hashes)
         self.assertEqual(backtest["status"], "HOLD")
+        features = set(backtest["feature_manifest"]["features"])
+        canonical = json.loads(
+            (pgo_challenger.DEFAULT_OUTPUT_DIR / "backtest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(
+            features,
+            set(canonical["feature_manifest"]["features"]),
+        )
         self.assertEqual(
             audit["coverage"]["schedule_team_games"],
             {
@@ -2559,6 +3155,35 @@ class OutputTests(unittest.TestCase):
         freeze.assert_not_called()
         self.assertTrue(error.getvalue().startswith("ERROR: "))
 
+    def test_freeze_refuses_to_replace_existing_source_lock(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            lock_path = root / "sources.lock.json"
+            lock_path.write_bytes(b"prior successful lock\n")
+            error = io.StringIO()
+            with (
+                patch.object(pgo_sources, "freeze_sources") as freeze,
+                patch.object(pgo_challenger, "_run_research_analysis") as analyze,
+                redirect_stderr(error),
+            ):
+                code = pgo_challenger.main([
+                    "--freeze-sources",
+                    "--as-of", self.AS_OF,
+                    "--lock-path", str(lock_path),
+                    "--cache-dir", str(root / "cache"),
+                    "--output-dir", str(root / "output"),
+                ])
+
+            self.assertEqual(code, 2)
+            self.assertEqual(lock_path.read_bytes(), b"prior successful lock\n")
+            freeze.assert_not_called()
+            analyze.assert_not_called()
+            self.assertEqual(
+                error.getvalue(),
+                "ERROR: Refusing to replace existing source lock; use a new "
+                "--lock-path\n",
+            )
+
     def test_current_team_audit_requires_2026_roster_rows(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp, "current-roster.csv")
@@ -2581,11 +3206,10 @@ class OutputTests(unittest.TestCase):
         self.assertEqual(coverage["denominator"], 32)
         self.assertFalse(coverage["passed"])
 
-    def test_failed_post_download_validation_preserves_prior_lock(self):
+    def test_failed_post_download_validation_does_not_create_lock(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             lock_path = root / "sources.lock.json"
-            lock_path.write_bytes(b"prior successful lock\n")
 
             def freeze(specs, cache_dir, target, frozen_at):
                 Path(target).write_text('{"sources": []}\n', encoding="utf-8")
@@ -2609,7 +3233,7 @@ class OutputTests(unittest.TestCase):
                 ])
 
             self.assertEqual(code, 2)
-            self.assertEqual(lock_path.read_bytes(), b"prior successful lock\n")
+            self.assertFalse(lock_path.exists())
             self.assertEqual(error.getvalue(), "ERROR: post-download schema failure\n")
 
     def test_malformed_lock_exits_two_without_replacing_receipts(self):
@@ -2782,6 +3406,19 @@ class LineupTests(unittest.TestCase):
                 },
             }
         }
+
+    def test_unpromoted_fragility_features_are_absent_from_default_model(self):
+        full, current = pgo_challenger.lineup_views(
+            "LV", self._snapshot(starter_probability=1.0), {}
+        )
+
+        for name in (
+            "offense_availability_concentration",
+            "defense_availability_concentration",
+            "qb_depth_uncertainty",
+        ):
+            self.assertNotIn(name, full)
+            self.assertNotIn(name, current)
 
     def test_active_player_has_zero_availability_adjustment(self):
         full, current = pgo_challenger.lineup_views(

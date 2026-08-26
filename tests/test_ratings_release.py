@@ -1,8 +1,10 @@
 import copy
 import csv
+import gc
 import json
 import tempfile
 import unittest
+import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
@@ -96,6 +98,48 @@ class ReleaseGateTests(unittest.TestCase):
             with patch.object(spreads, "DATA", str(data)):
                 with self.assertRaisesRegex(ValueError, "Alpha"):
                     spreads.load_ratings()
+
+    def test_site_csv_loaders_close_files(self):
+        with tempfile.TemporaryDirectory() as temp:
+            data = Path(temp)
+            write_ratings(data / "ratings.csv")
+            with (data / "prior_2025.csv").open(
+                "w", encoding="utf-8", newline=""
+            ) as handle:
+                writer = csv.DictWriter(
+                    handle, fieldnames=("team", "end_2025_rating")
+                )
+                writer.writeheader()
+                writer.writerow({"team": "Alpha", "end_2025_rating": "1.0"})
+            with (data / "qb_depth.csv").open(
+                "w", encoding="utf-8", newline=""
+            ) as handle:
+                writer = csv.DictWriter(
+                    handle,
+                    fieldnames=(
+                        "qb_name", "team", "string", "value", "notes",
+                        "age", "exp",
+                    ),
+                )
+                writer.writeheader()
+                writer.writerow({
+                    "qb_name": "Backup QB", "team": "Alpha", "string": "2",
+                    "value": "0", "notes": "", "age": "25", "exp": "2",
+                })
+
+            with patch.object(generate_site, "DATA", str(data)):
+                with warnings.catch_warnings(record=True) as caught:
+                    warnings.simplefilter("always", ResourceWarning)
+                    generate_site.load_prior()
+                    generate_site.load_qbs()
+                    gc.collect()
+
+        unclosed = [
+            warning for warning in caught
+            if issubclass(warning.category, ResourceWarning)
+            and "unclosed file" in str(warning.message)
+        ]
+        self.assertEqual(unclosed, [])
 
 
 class SnapshotTests(unittest.TestCase):
@@ -273,6 +317,42 @@ class GeneratedDocumentTests(unittest.TestCase):
             "author": "Sean McCabe",
         }
         generate_site.build_html.qb_data = ([], [])
+
+    def test_qb_drawer_uses_prose_for_the_selected_player_role(self):
+        with tempfile.TemporaryDirectory() as temp:
+            writeups = Path(temp, "writeups")
+            qb_writeups = Path(temp, "qb_writeups")
+            writeups.mkdir()
+            qb_writeups.mkdir()
+            (writeups / "MIN.md").write_text(
+                "## Quarterback\n\nStarter-only analysis.", encoding="utf-8"
+            )
+            backup = {
+                "name": "J.J. McCarthy", "team": "Minnesota Vikings",
+                "val": -2.5, "string": 2,
+                "notes": "Near-startable; former 1st-rounder",
+            }
+            starter = {
+                "name": "Kyler Murray", "team": "Minnesota Vikings", "val": -0.5,
+            }
+            with (
+                patch.object(generate_site, "WRITEUPS", str(writeups)),
+                patch.object(generate_site, "QB_WRITEUPS", str(qb_writeups)),
+            ):
+                backup_html = generate_site.build_qb_detail(backup, "backup", 1)
+                starter_html = generate_site.build_qb_detail(starter, "starter", 1)
+                (qb_writeups / f"{generate_site.qb_slug(backup['name'])}.md").write_text(
+                    "Backup-specific analysis.", encoding="utf-8"
+                )
+                overridden_html = generate_site.build_qb_detail(
+                    backup, "backup", 1
+                )
+
+        self.assertIn("Near-startable; former 1st-rounder", backup_html)
+        self.assertNotIn("Starter-only analysis.", backup_html)
+        self.assertIn("Starter-only analysis.", starter_html)
+        self.assertIn("Backup-specific analysis.", overridden_html)
+        self.assertNotIn("Near-startable; former 1st-rounder", overridden_html)
 
     def test_metadata_names_author_edition_and_canonical_page(self):
         generated_at = datetime(2026, 7, 15, 22, 0, tzinfo=timezone.utc)

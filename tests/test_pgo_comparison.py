@@ -5,10 +5,6 @@ from contextlib import redirect_stderr
 from pathlib import Path
 from unittest.mock import patch
 
-try:  # pgo_challenger pulls in numpy, absent in the board-publish CI
-    import numpy  # noqa: F401
-except ImportError:
-    raise unittest.SkipTest("numpy not installed — skipping PGO comparison tests")
 import pgo_challenger
 import pgo_comparison
 
@@ -57,6 +53,7 @@ class ComparisonTests(unittest.TestCase):
                 "lower": -0.024395,
                 "upper": 0.144917,
             },
+            "receipt_ref": "test-receipt-ref",
         }
 
     def test_mccabe_review_flag_blocks_comparison(self):
@@ -69,6 +66,12 @@ class ComparisonTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(ValueError, "needs_review=Y"):
                 pgo_comparison.load_mccabe_rows(path)
+
+    def test_mccabe_source_timestamp_rejects_shallow_checkout(self):
+        result = type("Result", (), {"stdout": "true\n"})()
+        with patch.object(pgo_comparison.subprocess, "run", return_value=result):
+            with self.assertRaisesRegex(ValueError, "full Git history"):
+                pgo_comparison.mccabe_source_timestamp(pgo_comparison.MCCABE_PATH)
 
     def test_comparison_calculates_both_model_ranks_and_disagreements(self):
         mccabe = [
@@ -125,7 +128,7 @@ class ComparisonTests(unittest.TestCase):
         self.assertNotIn(">PGO v0<", panel)
         self.assertNotIn(">Market<", panel)
         self.assertIn(
-            "https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_v1/backtest.json",
+            "https://github.com/walshja9/Postgame_Outlet/blob/test-receipt-ref/research/pgo_v1/backtest.json",
             panel,
         )
         self.assertIn(
@@ -136,6 +139,41 @@ class ComparisonTests(unittest.TestCase):
             panel.count('target="_blank" rel="noopener noreferrer"'),
             2,
         )
+
+    def test_receipt_link_does_not_fall_back_to_main(self):
+        receipt = self._held_receipt()
+        receipt.pop("receipt_ref")
+        panel = pgo_comparison.render_comparison_panel([], receipt)
+        self.assertIn("Backtest receipt available on publish", panel)
+        self.assertNotIn("/blob/main/research/pgo_v1/backtest.json", panel)
+
+    def test_publish_requires_receipt_and_ratings_at_same_commit(self):
+        with patch.object(
+            pgo_comparison,
+            "immutable_git_ref",
+            side_effect=["a" * 40, "b" * 40],
+        ):
+            with self.assertRaisesRegex(ValueError, "same Git commit"):
+                pgo_comparison.require_immutable_artifacts(
+                    pgo_comparison.BACKTEST_PATH,
+                    pgo_comparison.MODEL_PATH,
+                )
+
+    def test_preview_does_not_require_immutable_receipt(self):
+        receipt = self._held_receipt()
+        receipt.pop("receipt_ref")
+        with (
+            patch.object(
+                pgo_comparison,
+                "load_comparison_rows",
+                return_value=([], receipt),
+            ) as load,
+            patch.object(pgo_comparison, "atomic_write_text"),
+        ):
+            code = pgo_comparison.main(["--output", "output/preview.html"])
+
+        self.assertEqual(code, 0)
+        self.assertFalse(load.call_args.kwargs["require_immutable"])
 
     def test_pgo_is_primary_and_rows_start_in_pgo_rank_order(self):
         rows = [
@@ -233,6 +271,84 @@ class ComparisonTests(unittest.TestCase):
         )
         self.assertEqual(output.count('<link rel="icon" href="data:,">'), 1)
 
+    def test_refresh_mccabe_updates_only_current_mccabe_fields(self):
+        stale_rows = [
+            {
+                "team": "Los Angeles Rams", "mccabe_rank": 1,
+                "mccabe_rating": 7.5, "full_strength_rank": 2,
+                "full_strength_rating": 6.653245,
+                "availability_adjustment": 0.0,
+                "current_lineup_rank": 2, "current_lineup_rating": 6.653245,
+                "rank_disagreement": 1,
+                "rating_disagreement": -0.846755,
+            },
+            {
+                "team": "San Francisco 49ers", "mccabe_rank": 7,
+                "mccabe_rating": 4.5, "full_strength_rank": 7,
+                "full_strength_rating": 4.134241,
+                "availability_adjustment": 0.0,
+                "current_lineup_rank": 7, "current_lineup_rating": 4.134241,
+                "rank_disagreement": 0,
+                "rating_disagreement": -0.365759,
+            },
+            {
+                "team": "New Orleans Saints", "mccabe_rank": 25,
+                "mccabe_rating": -0.5, "full_strength_rank": 23,
+                "full_strength_rating": -2.638712,
+                "availability_adjustment": 0.0,
+                "current_lineup_rank": 23, "current_lineup_rating": -2.638712,
+                "rank_disagreement": -2,
+                "rating_disagreement": -2.138712,
+            },
+        ]
+        current_rows = [
+            {"team": "Los Angeles Rams", "abbr": "LAR", "rank": 1, "rating": 7.3},
+            {"team": "San Francisco 49ers", "abbr": "SF", "rank": 9, "rating": 3.2},
+            {"team": "New Orleans Saints", "abbr": "NO", "rank": 25, "rating": -0.8},
+        ]
+        published = pgo_comparison.inject_comparison(
+            self._base_html(),
+            pgo_comparison.render_comparison_panel(stale_rows, self._held_receipt()),
+        )
+        current_base = self._base_html().replace(
+            'id="panel-ratings" role="tabpanel">McCabe</section>',
+            'id="panel-ratings" role="tabpanel">Updated McCabe</section>',
+        )
+
+        with (
+            patch.object(pgo_comparison, "load_mccabe_rows", return_value=current_rows),
+            patch.object(
+                pgo_comparison,
+                "mccabe_source_timestamp",
+                return_value="2026-08-18T02:09:47-07:00",
+            ),
+        ):
+            output = pgo_comparison.refresh_mccabe_page(current_base, published)
+            rerun = pgo_comparison.refresh_mccabe_page(current_base, output)
+
+        self.assertEqual(output, rerun)
+        self.assertIn('data-sort="1">1</td><td data-sort="7.3">+7.3', output)
+        self.assertIn('data-sort="9">9</td><td data-sort="3.2">+3.2', output)
+        self.assertIn('data-sort="25">25</td><td data-sort="-0.8">-0.8', output)
+        self.assertIn('>+1</td><td data-sort="-0.6467549999999997">-0.6', output)
+        self.assertIn('>-2</td><td data-sort="0.9342410000000001">+0.9', output)
+        self.assertIn('>-2</td><td data-sort="-1.838712">-1.8', output)
+        self.assertNotIn('data-sort="7.5">+7.5', output)
+        self.assertNotIn('data-sort="4.5">+4.5', output)
+        self.assertNotIn('data-sort="-0.5">-0.5', output)
+        self.assertIn('data-sort="6.653245">+6.7', output)
+        self.assertIn('data-sort="4.134241">+4.1', output)
+        self.assertIn('data-sort="-2.638712">-2.6', output)
+        self.assertIn("Experimental model", output)
+        self.assertIn("HOLD", output)
+        self.assertIn("test-receipt-ref", output)
+        self.assertIn("PGO pgo_v1 as of", output)
+        self.assertIn("2026-07-21T12:00:00-04:00", output)
+        self.assertIn("Current McCabe ratings from data/ratings.csv as of", output)
+        self.assertIn("2026-08-18T02:09:47-07:00", output)
+        self.assertIn("Historical Preseason 2026 snapshot locked", output)
+        self.assertIn("2026-07-16T11:22:52-04:00", output)
+
     def test_comparison_team_labels_have_contrasting_backgrounds(self):
         self.assertIn(
             "#panel-comparison .comparison-table thead th:first-child {\n"
@@ -251,7 +367,14 @@ class ComparisonTests(unittest.TestCase):
         self.assertEqual(code, 1)
 
     def test_cli_publish_targets_only_docs_index(self):
-        with patch.object(pgo_comparison, "atomic_write_text") as write:
+        with (
+            patch.object(
+                pgo_comparison,
+                "load_comparison_rows",
+                return_value=([], self._held_receipt()),
+            ),
+            patch.object(pgo_comparison, "atomic_write_text") as write,
+        ):
             code = pgo_comparison.main(["--publish"])
 
         self.assertEqual(code, 0)

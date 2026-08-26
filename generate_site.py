@@ -98,8 +98,9 @@ def load_prior():
     path = os.path.join(DATA, "prior_2025.csv")
     if not os.path.exists(path):
         return {}
-    return {r["team"]: float(r["end_2025_rating"])
-            for r in csv.DictReader(open(path, newline=""))}
+    with open(path, encoding="utf-8", newline="") as handle:
+        return {r["team"]: float(r["end_2025_rating"])
+                for r in csv.DictReader(handle)}
 
 
 def load_teams(prior):
@@ -253,22 +254,26 @@ def load_qbs(team_ratings=None):
     (from the CSVs, may be blank) and — for starters — the team's overall rating."""
     team_ratings = team_ratings or {}
     starters = []
-    for r in csv.DictReader(open(os.path.join(DATA, "ratings.csv"), newline="")):
-        starters.append({"name": r["qb_name"], "team": r["team"],
-                         "val": float(r["qb_value"] or 0),
-                         "age": r.get("age", "").strip(), "exp": r.get("exp", "").strip(),
-                         "team_rating": team_ratings.get(r["team"])})
+    with open(
+        os.path.join(DATA, "ratings.csv"), encoding="utf-8", newline=""
+    ) as handle:
+        for r in csv.DictReader(handle):
+            starters.append({"name": r["qb_name"], "team": r["team"],
+                             "val": float(r["qb_value"] or 0),
+                             "age": r.get("age", "").strip(), "exp": r.get("exp", "").strip(),
+                             "team_rating": team_ratings.get(r["team"])})
     starters.sort(key=lambda x: -x["val"])
 
     backups = []
     path = os.path.join(DATA, "qb_depth.csv")
     if os.path.exists(path):
-        for r in csv.DictReader(open(path, newline="")):
-            backups.append({"name": r["qb_name"], "team": r["team"],
-                            "string": int(r["string"]), "val": float(r["value"] or 0),
-                            "notes": r.get("notes", ""),
-                            "age": r.get("age", "").strip(), "exp": r.get("exp", "").strip(),
-                            "team_rating": team_ratings.get(r["team"])})
+        with open(path, encoding="utf-8", newline="") as handle:
+            for r in csv.DictReader(handle):
+                backups.append({"name": r["qb_name"], "team": r["team"],
+                                "string": int(r["string"]), "val": float(r["value"] or 0),
+                                "notes": r.get("notes", ""),
+                                "age": r.get("age", "").strip(), "exp": r.get("exp", "").strip(),
+                                "team_rating": team_ratings.get(r["team"])})
         backups.sort(key=lambda x: (-x["val"], x["string"]))
         backups = backups[:18]
     return starters, backups
@@ -387,8 +392,7 @@ def build_details(rows):
 
 def build_qb_detail(q, kind, rank):
     """Drawer-inner HTML for one QB row: value/tier/rank header, a value bar on
-    the same scale as the team drawer, and the write-up (per-QB override, else
-    the team's Quarterback section, else a graceful stub)."""
+    the same scale as the team drawer, and role-appropriate write-up fallback."""
     abbr, c1, c2 = TEAM.get(q["team"], ("?", "#444", "#888"))
     name = q["name"]
     nm = html.escape(name)
@@ -404,7 +408,7 @@ def build_qb_detail(q, kind, rank):
         rank_line = f'QB #{rank} of 32'
     subtitle = f'{team_full} &middot; {role} &middot; {rank_line}'
 
-    writeup = load_qb_writeup(name, abbr)
+    writeup = load_qb_writeup(name, abbr if kind == "starter" else None)
     if not writeup:  # backups usually have only a one-line note; starters a section
         note = (q.get("notes") or "").strip()
         if note:

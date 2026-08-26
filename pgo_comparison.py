@@ -6,6 +6,8 @@ import csv
 import html
 import json
 import math
+import re
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -14,7 +16,7 @@ import generate_site
 import pgo_challenger
 import pgo_model
 import snapshot
-from release_ratings import atomic_write_text, load_release_rows
+from release_ratings import atomic_write_text, load_release_rows, rating_total
 
 
 HERE = Path(__file__).resolve().parent
@@ -53,10 +55,11 @@ def load_mccabe_rows(path):
         team = row.get("team", "")
         if team not in generate_site.TEAM:
             raise ValueError(f"Unknown McCabe team: {team!r}")
-        rating = round(sum(
-            _finite(row.get(name), f"{team} {name}")
+        components = {
+            name: _finite(row.get(name), f"{team} {name}")
             for name in ("qb_value", "off_value", "def_value")
-        ), 1)
+        }
+        rating = round(rating_total(components), 1)
         parsed.append({
             "team": team,
             "abbr": generate_site.TEAM[team][0],
@@ -206,6 +209,7 @@ def load_comparison_rows(
     model_path,
     backtest_path,
     snapshots_path=SNAPSHOTS_PATH,
+    require_immutable=False,
 ):
     receipt = validate_receipt(
         json.loads(Path(backtest_path).read_text(encoding="utf-8"))
@@ -215,10 +219,53 @@ def load_comparison_rows(
         **receipt,
         **load_mccabe_snapshot(snapshots_path, mccabe_rows),
     }
+    if require_immutable:
+        receipt["receipt_ref"] = require_immutable_artifacts(
+            backtest_path, model_path
+        )
     return build_comparison_rows(
         mccabe_rows,
         load_model_rows(model_path, receipt),
     ), receipt
+
+
+def immutable_git_ref(path):
+    try:
+        relative = Path(path).resolve().relative_to(HERE.resolve()).as_posix()
+        subprocess.run(
+            ["git", "diff", "--quiet", "HEAD", "--", relative],
+            cwd=HERE,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%H", "--", relative],
+            cwd=HERE,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError, ValueError) as error:
+        raise ValueError(
+            "PGO publication artifact must be committed and unmodified"
+        ) from error
+    receipt_ref = result.stdout.strip()
+    if len(receipt_ref) != 40 or any(
+        character not in "0123456789abcdef" for character in receipt_ref.lower()
+    ):
+        raise ValueError("PGO receipt has no immutable Git commit reference")
+    return receipt_ref
+
+
+def require_immutable_artifacts(backtest_path, model_path):
+    receipt_ref = immutable_git_ref(backtest_path)
+    ratings_ref = immutable_git_ref(model_path)
+    if receipt_ref != ratings_ref:
+        raise ValueError(
+            "PGO receipt and ratings artifact must be from the same Git commit"
+        )
+    return receipt_ref
 
 
 MODEL_CSS = """
@@ -257,6 +304,15 @@ def render_comparison_panel(rows, receipt):
     rows = sorted(
         rows,
         key=lambda row: (row["full_strength_rank"], row["team"]),
+    )
+    receipt_ref = receipt.get("receipt_ref")
+    receipt_link = (
+        f'<a href="https://github.com/walshja9/Postgame_Outlet/blob/'
+        f'{html.escape(str(receipt_ref), quote=True)}'
+        '/research/pgo_v1/backtest.json" target="_blank" '
+        'rel="noopener noreferrer">Backtest receipt</a>'
+        if receipt_ref
+        else "<span>Backtest receipt available on publish</span>"
     )
     interval = receipt["aggregate_interval"]
     metrics = receipt["metrics"]
@@ -327,7 +383,7 @@ def render_comparison_panel(rows, receipt):
     <p class="legend">Positive rank gap means PGO ranks the team lower.
       Positive rating gap means PGO rates the team higher.</p>
     <p class="comparison-links">
-      <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_v1/backtest.json" target="_blank" rel="noopener noreferrer">Backtest receipt</a>
+      {receipt_link}
       &middot;
       <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/superpowers/specs/2026-07-21-independent-forward-looking-pgo-model-design.md" target="_blank" rel="noopener noreferrer">Methodology and release rules</a>
     </p>
@@ -448,6 +504,172 @@ def inject_comparison(base_html, panel_html):
     return output
 
 
+def extract_comparison_panel(existing_html):
+    start_marker = '<section class="panel active" id="panel-comparison"'
+    start = existing_html.find(start_marker)
+    if start < 0:
+        raise ValueError(
+            "Existing public board has no PGO comparison panel; publish an approved PGO release first"
+        )
+    end_marker = "</section>"
+    end = existing_html.find(end_marker, start)
+    if end < 0:
+        raise ValueError("Existing PGO comparison panel is incomplete")
+    return existing_html[start:end + len(end_marker)]
+
+
+def mccabe_source_timestamp(path):
+    try:
+        relative = Path(path).resolve().relative_to(HERE.resolve()).as_posix()
+        history = subprocess.run(
+            ["git", "rev-parse", "--is-shallow-repository"],
+            cwd=HERE,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        if history.stdout.strip().lower() == "true":
+            raise ValueError(
+                "Current McCabe source timestamp requires full Git history"
+            )
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%cI", "--", relative],
+            cwd=HERE,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except ValueError:
+        raise
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise ValueError("Could not determine the current McCabe source timestamp") from error
+    timestamp = result.stdout.strip()
+    if not timestamp:
+        raise ValueError("Current McCabe source has no Git timestamp")
+    return timestamp
+
+
+def _cell_sort_value(cell, label):
+    match = re.search(r'data-sort="([^"]+)"', cell)
+    if not match:
+        raise ValueError(f"Existing PGO comparison cell has no sort value: {label}")
+    try:
+        return float(match.group(1))
+    except ValueError as error:
+        raise ValueError(
+            f"Existing PGO comparison cell has an invalid sort value: {label}"
+        ) from error
+
+
+def _replace_comparison_cell(cell, sort_value, display):
+    cell = re.sub(
+        r'data-sort="[^"]+"',
+        f'data-sort="{html.escape(str(sort_value), quote=True)}"',
+        cell,
+        count=1,
+    )
+    return re.sub(r">[^<>]*</td>\Z", f">{display}</td>", cell, count=1)
+
+
+def _refresh_comparison_metadata(panel_html, source_timestamp):
+    old_pattern = re.compile(
+        r"McCabe (?P<edition>[^<\r\n]+?) locked\s+"
+        r"(?P<published>\d{4}-\d{2}-\d{2}T[^\s<]+)\.<br>"
+    )
+    current_pattern = re.compile(
+        r"Current McCabe ratings from data/ratings\.csv as of\s+"
+        r"(?P<source>\d{4}-\d{2}-\d{2}T[^\s<]+)\.\s+"
+        r"Historical (?P<edition>[^<\r\n]+?) snapshot locked\s+"
+        r"(?P<published>\d{4}-\d{2}-\d{2}T[^\s<]+)\.<br>"
+    )
+    match = old_pattern.search(panel_html) or current_pattern.search(panel_html)
+    if not match:
+        raise ValueError("Existing PGO comparison panel has no McCabe metadata")
+    edition = match.group("edition")
+    published = match.group("published")
+    replacement = (
+        "Current McCabe ratings from data/ratings.csv as of\n"
+        f"      {html.escape(source_timestamp)}. Historical {html.escape(edition)} "
+        "snapshot locked\n"
+        f"      {html.escape(published)}.<br>"
+    )
+    return panel_html[:match.start()] + replacement + panel_html[match.end():]
+
+
+def _refresh_comparison_panel(panel_html, mccabe_rows, source_timestamp):
+    mccabe_by_team = {row["team"].casefold(): row for row in mccabe_rows}
+    seen = set()
+    row_pattern = re.compile(r"<tr\b[^>]*>.*?</tr>", re.DOTALL)
+    cell_pattern = re.compile(r"<td\b[^>]*>.*?</td>", re.DOTALL)
+    team_pattern = re.compile(r'<th\b[^>]*data-sort="([^"]+)"', re.DOTALL)
+
+    def refresh_row(match):
+        row_html = match.group(0)
+        team_match = team_pattern.search(row_html)
+        if not team_match:
+            return row_html
+        team_key = html.unescape(team_match.group(1)).casefold()
+        if team_key not in mccabe_by_team:
+            raise ValueError(f"Existing PGO comparison has unknown team: {team_key}")
+        cells = cell_pattern.findall(row_html)
+        if len(cells) != 9:
+            raise ValueError(f"Existing PGO comparison row is incomplete: {team_key}")
+
+        old_rank = int(_cell_sort_value(cells[5], f"{team_key} McCabe rank"))
+        old_rating = _cell_sort_value(cells[6], f"{team_key} McCabe rating")
+        headline_rank = old_rank + int(
+            _cell_sort_value(cells[7], f"{team_key} rank gap")
+        )
+        headline_rating = old_rating + _cell_sort_value(
+            cells[8], f"{team_key} rating gap"
+        )
+        current = mccabe_by_team[team_key]
+        updates = {
+            5: (current["rank"], str(current["rank"])),
+            6: (current["rating"], _signed(current["rating"])),
+            7: (
+                headline_rank - current["rank"],
+                f"{headline_rank - current['rank']:+d}",
+            ),
+            8: (
+                headline_rating - current["rating"],
+                _signed(headline_rating - current["rating"]),
+            ),
+        }
+
+        cell_index = 0
+
+        def replace_cell(cell_match):
+            nonlocal cell_index
+            current_index = cell_index
+            cell_index += 1
+            if current_index not in updates:
+                return cell_match.group(0)
+            sort_value, display = updates[current_index]
+            return _replace_comparison_cell(
+                cell_match.group(0), sort_value, display
+            )
+
+        seen.add(team_key)
+        return cell_pattern.sub(replace_cell, row_html)
+
+    refreshed = row_pattern.sub(refresh_row, panel_html)
+    if seen != set(mccabe_by_team):
+        missing = sorted(set(mccabe_by_team) - seen)
+        raise ValueError(f"Existing PGO comparison is missing teams: {missing}")
+    return _refresh_comparison_metadata(refreshed, source_timestamp)
+
+
+def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
+    mccabe_rows = load_mccabe_rows(mccabe_path)
+    panel = _refresh_comparison_panel(
+        extract_comparison_panel(existing_html),
+        mccabe_rows,
+        mccabe_source_timestamp(mccabe_path),
+    )
+    return inject_comparison(base_html, panel)
+
+
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     destination = parser.add_mutually_exclusive_group()
@@ -459,6 +681,11 @@ def parse_args(argv=None):
         action="store_true",
         help="write the reviewed combined page to docs/index.html",
     )
+    destination.add_argument(
+        "--refresh-mccabe",
+        action="store_true",
+        help="update the McCabe board while preserving the approved PGO panel",
+    )
     return parser.parse_args(argv)
 
 
@@ -466,29 +693,41 @@ def main(argv=None):
     args = parse_args(argv)
     try:
         output = (
-            PUBLIC_OUTPUT if args.publish else args.output
+            PUBLIC_OUTPUT if (args.publish or args.refresh_mccabe) else args.output
         ).resolve()
         preview_root = (HERE / "output").resolve()
-        if not args.publish and preview_root not in output.parents:
+        if not (args.publish or args.refresh_mccabe) and preview_root not in output.parents:
             raise ValueError("Comparison output must stay under output/")
-        comparison_rows, receipt = load_comparison_rows(
-            MCCABE_PATH, MODEL_PATH, BACKTEST_PATH
-        )
         config = generate_site.load_config()
         site_rows = generate_site.load_teams(generate_site.load_prior())
         team_ratings = {row["team"]: row["rating"] for row in site_rows}
         generate_site.build_html.qb_data = generate_site.load_qbs(team_ratings)
         base_html = generate_site.build_html(site_rows, config)
-        preview = inject_comparison(
-            base_html,
-            render_comparison_panel(comparison_rows, receipt),
-        )
+        if args.refresh_mccabe:
+            preview = refresh_mccabe_page(
+                base_html, PUBLIC_OUTPUT.read_text(encoding="utf-8")
+            )
+            comparison_rows = receipt = None
+        else:
+            comparison_rows, receipt = load_comparison_rows(
+                MCCABE_PATH,
+                MODEL_PATH,
+                BACKTEST_PATH,
+                require_immutable=args.publish,
+            )
+            preview = inject_comparison(
+                base_html,
+                render_comparison_panel(comparison_rows, receipt),
+            )
         atomic_write_text(output, preview)
     except (csv.Error, KeyError, OSError, TypeError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
     print(f"Wrote {output}")
-    print(f"  {len(comparison_rows)} teams | {receipt['publication_status']}")
+    if receipt:
+        print(f"  {len(comparison_rows)} teams | {receipt['publication_status']}")
+    else:
+        print("  Preserved the existing approved PGO panel")
     return 0
 
 
