@@ -20,3 +20,6 @@ data/nfl_kb/
 
 # Runtime logs from launchd refresh jobs (derived; not source)
 logs/
+
+# Anthropic API key for the hub KB chat — SECRET, never commit
+data/.anthropic_key
