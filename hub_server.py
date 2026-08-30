@@ -491,17 +491,27 @@ def _kb_rows(sql):
         return None
 
 
-def _trend_sql(tid, season, week):
-    s, w = int(season), int(week)
+TREND_TITLE = {
+    "slate": "This week's slate",
+    "bigfav_fade": "Fade favorites of 7+ (dogs cover)",
+    "home_dog": "Home underdogs ATS",
+    "div_under": "Division-game unders",
+    "under_all": "Unders (all games)",
+    "fav_su": "Favorites straight-up",
+}
+
+
+def _trend_hist_sql(tid, week):
+    """Aggregate history for the situation, keyed to this week number since 2007.
+    None for 'slate' (that button is just the game list, no history)."""
+    w = int(week)
     dog_cover = ("SUM(CASE WHEN NOT(ABS(result)>ABS(spread_line) AND "
                  "SIGN(result)=SIGN(spread_line)) AND result<>spread_line THEN 1 ELSE 0 END)")
     fav_cover = ("SUM(CASE WHEN ABS(result)>ABS(spread_line) AND "
                  "SIGN(result)=SIGN(spread_line) THEN 1 ELSE 0 END)")
     base = f"game_type='REG' AND week={w} AND season>={TREND_SINCE} AND result IS NOT NULL"
     if tid == "slate":
-        return (f"SELECT away_team, home_team, spread_line, total_line, div_game, gameday "
-                f"FROM games WHERE season={s} AND week={w} AND game_type='REG' "
-                f"ORDER BY gameday, gametime")
+        return None
     if tid == "bigfav_fade":
         return (f"SELECT COUNT(*) games, {fav_cover} fav_cover, {dog_cover} dog_cover, "
                 f"ROUND(100.0*{dog_cover}/COUNT(*),1) dog_cover_pct "
@@ -531,6 +541,36 @@ def _trend_sql(tid, season, week):
     return None
 
 
+def _trend_applies_sql(tid, season, week):
+    """The UPCOMING week's games that fit the situation, each with the suggested
+    bet in a 'take' column so it's obvious what the trend says to play."""
+    s, w = int(season), int(week)
+    slate = f"season={s} AND week={w} AND game_type='REG'"
+    if tid == "slate":
+        return (f"SELECT away_team, home_team, spread_line, total_line, div_game, gameday "
+                f"FROM games WHERE {slate} ORDER BY gameday, gametime")
+    if tid == "bigfav_fade":
+        # dog gets the points; dog = away when home favored (spread>0), else home
+        return (f"SELECT away_team, home_team, spread_line, "
+                f"CASE WHEN spread_line>0 THEN away_team ELSE home_team END || ' +' || ABS(spread_line) AS take "
+                f"FROM games WHERE {slate} AND ABS(spread_line)>=7 ORDER BY ABS(spread_line) DESC")
+    if tid == "home_dog":
+        return (f"SELECT away_team, home_team, spread_line, "
+                f"home_team || ' +' || ABS(spread_line) AS take "
+                f"FROM games WHERE {slate} AND spread_line<0 ORDER BY spread_line")
+    if tid == "div_under":
+        return (f"SELECT away_team, home_team, total_line, 'Under ' || total_line AS take "
+                f"FROM games WHERE {slate} AND div_game=1 ORDER BY total_line DESC")
+    if tid == "under_all":
+        return (f"SELECT away_team, home_team, total_line, 'Under ' || total_line AS take "
+                f"FROM games WHERE {slate} ORDER BY total_line DESC")
+    if tid == "fav_su":
+        return (f"SELECT away_team, home_team, spread_line, "
+                f"CASE WHEN spread_line>0 THEN home_team ELSE away_team END || ' ML' AS take "
+                f"FROM games WHERE {slate} AND spread_line<>0 ORDER BY ABS(spread_line) DESC")
+    return None
+
+
 def act_trends_catalog():
     season, week = _current_wk()
     return {"season": season, "week": week, "since": TREND_SINCE, "trends": TRENDS}
@@ -541,13 +581,31 @@ def act_run_trend(body):
     if tid not in {t["id"] for t in TRENDS}:
         return {"ok": False, "message": f"unknown trend {tid}"}
     season, week = _current_wk()
-    sql = _trend_sql(tid, season, week)
-    if not sql:
-        return {"ok": False, "message": f"no query for {tid}"}
-    res = _sh(["python3", "kb_query.py", sql], timeout=90)
-    res["ok"] = True
-    res["cmd"] = f"trend: {tid} · Week {week} {season} (history since {TREND_SINCE})"
-    return res
+    title = TREND_TITLE.get(tid, tid)
+    parts = []
+
+    hist = _trend_hist_sql(tid, week)
+    if hist:
+        h = _sh(["python3", "kb_query.py", hist], timeout=90)
+        parts.append(f"=== HISTORY — {title} · Week {week}, since {TREND_SINCE} ===\n"
+                     + (h["stdout"] or h["stderr"] or "(no data)"))
+
+    applies = _trend_applies_sql(tid, season, week)
+    if applies:
+        a = _sh(["python3", "kb_query.py", applies], timeout=90)
+        out = (a["stdout"] or "").rstrip()
+        if tid == "slate":
+            head = f"=== THIS WEEK'S SLATE — Week {week} {season} ==="
+        elif not out or out.startswith("0 row") or "0 row(s)" in out:
+            head = f"=== APPLIES THIS WEEK (Week {week} {season}) ==="
+            out = "No games on this week's slate fit this situation."
+        else:
+            head = (f"=== APPLIES THIS WEEK — Week {week} {season} "
+                    f"('take' = the side/total this trend plays) ===")
+        parts.append(head + "\n" + (out or a["stderr"] or "(no data)"))
+
+    return {"ok": True, "rc": 0, "stdout": "\n\n".join(parts) or "(no output)",
+            "stderr": "", "cmd": f"trend: {tid} · Week {week} {season}"}
 
 
 # ---------------------------------------------------------------- page
