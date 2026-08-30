@@ -212,6 +212,8 @@ def act_run(body):
         res = _sh(["python3", "kb_query.py", sql], timeout=120)
         res["ok"] = True
         return res
+    if action == "trend":
+        return act_run_trend(body)
     return {"ok": False, "message": f"unknown action {action}"}
 
 
@@ -430,6 +432,124 @@ def act_kbstatus():
             "key_file": "data/.anthropic_key"}
 
 
+# ---------------------------------------------------------------- canned trends
+# One-click, no-API-key bettable-trend buttons for card 11. Each runs a prebuilt
+# read-only query through kb_query.py; the week-relative ones auto-target the
+# UPCOMING week so the angle stays relevant every load. Betting math per
+# reference/kb_schema.md: result = home_score - away_score; spread_line>0 = home
+# favored; home covers when result>spread_line; a favorite (either side) covers
+# when ABS(result)>ABS(spread_line) AND SIGN(result)=SIGN(spread_line); over when
+# home_score+away_score>total_line.
+TREND_SINCE = 2007   # modern-era sample floor for the historical angles
+
+TRENDS = [
+    {"id": "slate",
+     "label": "📋 This week's slate",
+     "desc": "The upcoming week's games with spread + total (unplayed)."},
+    {"id": "bigfav_fade",
+     "label": "Fade big favs (7+)",
+     "desc": "This week #: favorites laying 7+ — do the underdogs cover? (since 2007)"},
+    {"id": "home_dog",
+     "label": "Home underdogs ATS",
+     "desc": "This week #: home underdogs ATS + straight-up upsets (since 2007)"},
+    {"id": "div_under",
+     "label": "Division unders",
+     "desc": "This week #: division games going UNDER the total (since 2007)"},
+    {"id": "under_all",
+     "label": "UNDER rate (all)",
+     "desc": "This week #: all games going UNDER the total (since 2007)"},
+    {"id": "fav_su",
+     "label": "Do favorites win SU?",
+     "desc": "This week #: how often the favorite just wins outright (since 2007)"},
+]
+
+
+def _current_wk():
+    """Upcoming (season, week): earliest unplayed REG week in the latest season
+    present, falling back to that season's last week. Fully local — no ESPN."""
+    rows = _kb_rows(
+        "SELECT (SELECT MAX(season) FROM games WHERE game_type='REG') AS s, "
+        "COALESCE("
+        "(SELECT MIN(week) FROM games WHERE game_type='REG' AND result IS NULL "
+        " AND season=(SELECT MAX(season) FROM games WHERE game_type='REG')), "
+        "(SELECT MAX(week) FROM games WHERE game_type='REG' "
+        " AND season=(SELECT MAX(season) FROM games WHERE game_type='REG'))) AS w")
+    try:
+        return int(rows[0]["s"]), int(rows[0]["w"])
+    except (TypeError, IndexError, KeyError, ValueError):
+        return 2026, 1
+
+
+def _kb_rows(sql):
+    """Run a read-only query via kb_query.py --json; return list of dict rows or None."""
+    res = _sh(["python3", "kb_query.py", sql, "--json"], timeout=60)
+    if res["rc"] != 0 or not res["stdout"].strip():
+        return None
+    try:
+        return json.loads(res["stdout"])
+    except json.JSONDecodeError:
+        return None
+
+
+def _trend_sql(tid, season, week):
+    s, w = int(season), int(week)
+    dog_cover = ("SUM(CASE WHEN NOT(ABS(result)>ABS(spread_line) AND "
+                 "SIGN(result)=SIGN(spread_line)) AND result<>spread_line THEN 1 ELSE 0 END)")
+    fav_cover = ("SUM(CASE WHEN ABS(result)>ABS(spread_line) AND "
+                 "SIGN(result)=SIGN(spread_line) THEN 1 ELSE 0 END)")
+    base = f"game_type='REG' AND week={w} AND season>={TREND_SINCE} AND result IS NOT NULL"
+    if tid == "slate":
+        return (f"SELECT away_team, home_team, spread_line, total_line, div_game, gameday "
+                f"FROM games WHERE season={s} AND week={w} AND game_type='REG' "
+                f"ORDER BY gameday, gametime")
+    if tid == "bigfav_fade":
+        return (f"SELECT COUNT(*) games, {fav_cover} fav_cover, {dog_cover} dog_cover, "
+                f"ROUND(100.0*{dog_cover}/COUNT(*),1) dog_cover_pct "
+                f"FROM games WHERE {base} AND ABS(spread_line)>=7")
+    if tid == "home_dog":
+        return (f"SELECT COUNT(*) games, "
+                f"SUM(CASE WHEN result>spread_line THEN 1 ELSE 0 END) dog_cover, "
+                f"ROUND(100.0*SUM(CASE WHEN result>spread_line THEN 1 ELSE 0 END)/COUNT(*),1) ats_pct, "
+                f"SUM(CASE WHEN result>0 THEN 1 ELSE 0 END) dog_win_su "
+                f"FROM games WHERE {base} AND spread_line<0")
+    if tid == "div_under":
+        return (f"SELECT COUNT(*) games, "
+                f"SUM(CASE WHEN home_score+away_score<total_line THEN 1 ELSE 0 END) unders, "
+                f"ROUND(100.0*SUM(CASE WHEN home_score+away_score<total_line THEN 1 ELSE 0 END)/COUNT(*),1) under_pct "
+                f"FROM games WHERE {base} AND div_game=1 AND total_line IS NOT NULL")
+    if tid == "under_all":
+        return (f"SELECT COUNT(*) games, "
+                f"SUM(CASE WHEN home_score+away_score<total_line THEN 1 ELSE 0 END) unders, "
+                f"SUM(CASE WHEN home_score+away_score>total_line THEN 1 ELSE 0 END) overs, "
+                f"ROUND(100.0*SUM(CASE WHEN home_score+away_score<total_line THEN 1 ELSE 0 END)/COUNT(*),1) under_pct "
+                f"FROM games WHERE {base} AND total_line IS NOT NULL")
+    if tid == "fav_su":
+        return (f"SELECT COUNT(*) games, "
+                f"SUM(CASE WHEN (spread_line>0 AND result>0) OR (spread_line<0 AND result<0) THEN 1 ELSE 0 END) fav_win, "
+                f"ROUND(100.0*SUM(CASE WHEN (spread_line>0 AND result>0) OR (spread_line<0 AND result<0) THEN 1 ELSE 0 END)/COUNT(*),1) fav_win_pct "
+                f"FROM games WHERE {base} AND spread_line<>0")
+    return None
+
+
+def act_trends_catalog():
+    season, week = _current_wk()
+    return {"season": season, "week": week, "since": TREND_SINCE, "trends": TRENDS}
+
+
+def act_run_trend(body):
+    tid = body.get("trend")
+    if tid not in {t["id"] for t in TRENDS}:
+        return {"ok": False, "message": f"unknown trend {tid}"}
+    season, week = _current_wk()
+    sql = _trend_sql(tid, season, week)
+    if not sql:
+        return {"ok": False, "message": f"no query for {tid}"}
+    res = _sh(["python3", "kb_query.py", sql], timeout=90)
+    res["ok"] = True
+    res["cmd"] = f"trend: {tid} · Week {week} {season} (history since {TREND_SINCE})"
+    return res
+
+
 # ---------------------------------------------------------------- page
 PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
 <title>Power Ratings — Hub</title>
@@ -586,9 +706,26 @@ function kbCard(c){
   const chat=el('button','go','💬 Chat with KB'); chat.onclick=openKbChat;
   const b1=el('button','go alt','Open guru'); b1.onclick=()=>launch('guru');
   r.appendChild(chat); r.appendChild(b1); c.appendChild(r);
+  // one-click canned trends — no API key needed, auto-target the upcoming week
+  const tl=el('div','note','One-click bettable trends (no key needed):'); tl.style.marginTop='4px';
+  c.appendChild(tl);
+  const trow=el('div','row'); trow.id='trend-btns'; trow.textContent='loading trends…'; c.appendChild(trow);
+  loadTrends(trow);
   const ta=el('textarea'); ta.placeholder='…or raw SQL: SELECT … (blank = schema)'; ta.style.minHeight='52px';
   const b2=el('button','go alt','Run raw SQL'); b2.onclick=()=>run({action:'kb',sql:ta.value},"KB query");
   const r2=el('div','row'); r2.appendChild(b2); c.appendChild(ta); c.appendChild(r2);
+}
+async function loadTrends(row){
+  try{
+    const j=await api('/api/trends');
+    row.innerHTML='';
+    const wk = j.week!=null ? ` · Wk${j.week} ${j.season}` : '';
+    (j.trends||[]).forEach(t=>{
+      const b=el('button','go alt',t.label); b.title=t.desc;
+      b.onclick=()=>run({action:'trend',trend:t.id}, t.label+wk);
+      row.appendChild(b);
+    });
+  }catch(e){ row.textContent='(trends unavailable)'; }
 }
 
 // ---- KB chat (Claude API backed)
@@ -836,6 +973,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(200, json.dumps(act_writeup_get((q.get("abbr") or [""])[0])))
         if u.path == "/api/kbstatus":
             return self._send(200, json.dumps(act_kbstatus()))
+        if u.path == "/api/trends":
+            return self._send(200, json.dumps(act_trends_catalog()))
         return self._send(404, "not found", "text/plain")
 
     def do_POST(self):
