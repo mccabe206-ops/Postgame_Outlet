@@ -7,6 +7,8 @@ import hashlib
 import io
 import json
 import math
+import os
+import tempfile
 from copy import deepcopy
 from dataclasses import asdict
 from datetime import datetime, timezone
@@ -26,6 +28,20 @@ PREDICTION_COLUMNS = (
     "location", "home_rest", "away_rest", "pgo_v0_prediction",
     "challenger_prediction", "challenger_full_strength_prediction",
     "subgroup_flags",
+)
+BLEND_KIND = "fixed_convex_stability_blend"
+BLEND_FORMULA = "0.75*pgo_v0_prediction+0.25*challenger_prediction"
+BLEND_WEIGHT = 0.25
+BLEND_GRID = tuple(index / 20 for index in range(21))
+DEVELOPMENT_SOURCE_SHA256 = "b697b6f8f5eee9ae1efe607272458964a681f99f440a94f86d8edce2ad5a19b7"
+DEVELOPMENT_ARTIFACT_SHA256 = "83815b10e621ab97ff664ed3d8006aa53da6107dacaaac5040fc1e447808ae5a"
+DEVELOPMENT_GAME_COUNT = 2_127
+DEVELOPMENT_SEASONS = tuple(range(2018, 2026))
+DEVELOPMENT_COLUMNS = (
+    "game_id", "season", "week", "kickoff", "actual_margin",
+    "pgo_v0_prediction", "challenger_prediction", "changed_or_backup_qb",
+    "major_availability_loss", "head_coach_change", "high_roster_turnover",
+    "weeks_1_4", "weeks_5_18", "half_life_games", "alpha", "delta",
 )
 
 
@@ -142,6 +158,49 @@ def load_schedule_snapshot(path):
         if row["game_id"] in seen:
             raise ValueError(f"Duplicate game ID: {row['game_id']}")
         seen.add(row["game_id"])
+    return {"rows": rows, "sha256": hashlib.sha256(raw).hexdigest()}
+
+
+def load_development_predictions(path):
+    """Load the fixed historical blend-development source without changing it."""
+    raw = Path(path).read_bytes()
+    try:
+        reader = csv.DictReader(io.StringIO(raw.decode("utf-8-sig"), newline=""))
+    except UnicodeDecodeError as error:
+        raise ValueError("Development predictions are not UTF-8 CSV") from error
+    if reader.fieldnames != list(DEVELOPMENT_COLUMNS):
+        raise ValueError("Development predictions header mismatch")
+    rows, seen = [], set()
+    boolean_names = {
+        "changed_or_backup_qb", "major_availability_loss", "head_coach_change",
+        "high_roster_turnover", "weeks_1_4", "weeks_5_18",
+    }
+    integer_names = {"season", "week", "half_life_games"}
+    numeric_names = {
+        "actual_margin", "pgo_v0_prediction", "challenger_prediction", "alpha", "delta",
+    }
+    for raw_row in reader:
+        if None in raw_row:
+            raise ValueError("Development predictions row has extra columns")
+        game_id = str(raw_row.get("game_id", "")).strip()
+        if not game_id:
+            raise ValueError("Development prediction game ID is missing")
+        if game_id in seen:
+            raise ValueError(f"Duplicate development game ID: {game_id}")
+        seen.add(game_id)
+        row = {"game_id": game_id, "kickoff": _timestamp(raw_row.get("kickoff", ""))}
+        try:
+            row.update({name: int(raw_row[name]) for name in integer_names})
+        except (KeyError, TypeError, ValueError) as error:
+            raise ValueError(f"Invalid development integer: {game_id}") from error
+        row.update({name: _finite(raw_row.get(name), name) for name in numeric_names})
+        for name in boolean_names:
+            if raw_row.get(name) not in {"true", "false"}:
+                raise ValueError(f"Invalid development boolean: {game_id}")
+            row[name] = raw_row[name] == "true"
+        rows.append(row)
+    if not rows:
+        raise ValueError("Development predictions have no rows")
     return {"rows": rows, "sha256": hashlib.sha256(raw).hexdigest()}
 
 
@@ -276,15 +335,15 @@ def _artifact_hash(lock):
     return hashlib.sha256(_canonical(payload).encode("utf-8")).hexdigest()
 
 
-def _prediction_integrity_hash(games):
+def _prediction_integrity_hash(games, include_candidate=False):
+    keys = (
+        "game_id", "pgo_v0_prediction", "challenger_prediction",
+        "challenger_full_strength_prediction", "subgroup_flags",
+    )
+    if include_candidate:
+        keys += ("candidate_prediction",)
     return hashlib.sha256(_canonical([
-        {
-            key: game[key]
-            for key in (
-                "game_id", "pgo_v0_prediction", "challenger_prediction",
-                "challenger_full_strength_prediction", "subgroup_flags",
-            )
-        }
+        {key: game[key] for key in keys}
         for game in games
     ]).encode("utf-8")).hexdigest()
 
@@ -294,15 +353,22 @@ def serialize_lock(lock):
 
 
 def _prediction_csv(lock):
+    columns = PREDICTION_COLUMNS
+    if (
+        lock.get("schema_version") == 2
+        and isinstance(lock.get("candidate"), dict)
+        and lock["candidate"].get("kind") == BLEND_KIND
+    ):
+        columns += ("candidate_prediction",)
     output = io.StringIO(newline="")
-    writer = csv.DictWriter(output, fieldnames=PREDICTION_COLUMNS, lineterminator="\n")
+    writer = csv.DictWriter(output, fieldnames=columns, lineterminator="\n")
     writer.writeheader()
     for game in lock["games"]:
         row = dict(game)
         row["subgroup_flags"] = json.dumps(
             row["subgroup_flags"], sort_keys=True, separators=(",", ":")
         )
-        writer.writerow({name: row.get(name, "") for name in PREDICTION_COLUMNS})
+        writer.writerow({name: row.get(name, "") for name in columns})
     return output.getvalue()
 
 
@@ -324,7 +390,7 @@ GRADE_RESULT_COLUMNS = (
 )
 
 
-def _verify_lock(lock):
+def _verify_schema_one_lock(lock):
     if not isinstance(lock, dict) or lock.get("status") != LOCK_STATUS:
         raise ValueError("Lock status is not LOCKED:")
     games = lock.get("games")
@@ -354,6 +420,245 @@ def _verify_lock(lock):
     if not artifact_hash or _artifact_hash(lock) != artifact_hash:
         raise ValueError("Lock artifact hash mismatch:")
     return games
+
+
+def _base_lock_from_derived(derived_lock):
+    base = deepcopy(derived_lock)
+    for name in (
+        "candidate", "base_lock_artifact_sha256",
+        "base_prediction_integrity_sha256",
+    ):
+        base.pop(name, None)
+    base["schema_version"] = SCHEMA_VERSION
+    for game in base.get("games", []):
+        if isinstance(game, dict):
+            game.pop("candidate_prediction", None)
+    base["prediction_integrity_sha256"] = derived_lock.get(
+        "base_prediction_integrity_sha256", ""
+    )
+    base["artifact_sha256"] = derived_lock.get("base_lock_artifact_sha256", "")
+    return base
+
+
+def _verify_lock(lock):
+    if not isinstance(lock, dict):
+        raise ValueError("Lock status is not LOCKED:")
+    schema_version = lock.get("schema_version")
+    if schema_version == SCHEMA_VERSION:
+        if (
+            any(name in lock for name in (
+                "candidate", "base_lock_artifact_sha256",
+                "base_prediction_integrity_sha256",
+            ))
+            or any("candidate_prediction" in game for game in lock.get("games", []) if isinstance(game, dict))
+        ):
+            raise ValueError("Schema-1 lock has candidate fields:")
+        return _verify_schema_one_lock(lock)
+    if schema_version != 2:
+        raise ValueError("Lock schema mismatch:")
+    candidate = lock.get("candidate")
+    expected_candidate = {
+        "kind": BLEND_KIND,
+        "pgo_v0_weight": 0.75,
+        "pgo_v1_weight": BLEND_WEIGHT,
+        "formula": BLEND_FORMULA,
+    }
+    if not isinstance(candidate, dict) or set(candidate) != {
+        *expected_candidate, "as_of", "development_receipt_sha256",
+    } or any(candidate.get(name) != value for name, value in expected_candidate.items()):
+        raise ValueError("Derived candidate mismatch:")
+    try:
+        candidate_as_of = _timestamp(candidate["as_of"])
+    except (KeyError, ValueError) as error:
+        raise ValueError("Derived candidate timestamp:") from error
+    receipt_hash = candidate.get("development_receipt_sha256", "")
+    if not _is_sha256(receipt_hash):
+        raise ValueError("Derived development receipt hash:")
+    base = _base_lock_from_derived(lock)
+    _verify_lock(base)
+    if lock.get("base_lock_artifact_sha256") != base["artifact_sha256"]:
+        raise ValueError("Derived base artifact hash:")
+    if lock.get("base_prediction_integrity_sha256") != base["prediction_integrity_sha256"]:
+        raise ValueError("Derived base prediction hash:")
+    games = lock["games"]
+    for game in games:
+        if _parse_datetime(candidate_as_of) >= _parse_datetime(game["kickoff"]):
+            raise ValueError("Candidate timestamp is not before kickoff:")
+        try:
+            prediction = _finite(game["candidate_prediction"], "candidate prediction")
+        except (KeyError, ValueError) as error:
+            raise ValueError("Derived candidate prediction:") from error
+        if prediction != _blend_prediction(
+            game["pgo_v0_prediction"], game["challenger_prediction"]
+        ):
+            raise ValueError("Derived candidate prediction:")
+    if lock.get("prediction_integrity_sha256") != _prediction_integrity_hash(
+        games, include_candidate=True
+    ):
+        raise ValueError("Derived prediction integrity:")
+    if not _is_sha256(lock.get("artifact_sha256", "")) or _artifact_hash(lock) != lock["artifact_sha256"]:
+        raise ValueError("Lock artifact hash mismatch:")
+    return games
+
+
+def derive_stability_blend(base_lock, development_receipt, development_file_sha256, as_of):
+    _verify_lock(base_lock)
+    _verify_development_receipt(development_receipt)
+    receipt_bytes = (_canonical(development_receipt) + "\n").encode("utf-8")
+    if development_file_sha256 != hashlib.sha256(receipt_bytes).hexdigest():
+        raise ValueError("Development receipt file hash mismatch")
+    candidate_as_of = _timestamp(as_of)
+    derived = deepcopy(base_lock)
+    derived["schema_version"] = 2
+    derived["base_lock_artifact_sha256"] = base_lock["artifact_sha256"]
+    derived["base_prediction_integrity_sha256"] = base_lock["prediction_integrity_sha256"]
+    derived["candidate"] = {
+        "kind": BLEND_KIND,
+        "as_of": candidate_as_of,
+        "pgo_v0_weight": 0.75,
+        "pgo_v1_weight": BLEND_WEIGHT,
+        "formula": BLEND_FORMULA,
+        "development_receipt_sha256": development_file_sha256,
+    }
+    for game in derived["games"]:
+        game["candidate_prediction"] = _blend_prediction(
+            game["pgo_v0_prediction"], game["challenger_prediction"]
+        )
+    derived["prediction_integrity_sha256"] = _prediction_integrity_hash(
+        derived["games"], include_candidate=True
+    )
+    derived["artifact_sha256"] = _artifact_hash(derived)
+    _verify_lock(derived)
+    return derived
+
+
+def _is_sha256(value):
+    return isinstance(value, str) and len(value) == 64 and all(
+        character in "0123456789abcdef" for character in value
+    )
+
+
+def build_prospective_attestation(
+    base_lock, base_lock_bytes, base_prediction_bytes, derived_lock,
+    derived_lock_bytes, derived_prediction_bytes, development_receipt_bytes,
+):
+    _verify_lock(base_lock)
+    _verify_lock(derived_lock)
+    if (
+        base_lock_bytes != serialize_lock(base_lock).encode("utf-8")
+        or hashlib.sha256(development_receipt_bytes).hexdigest()
+        != derived_lock["candidate"]["development_receipt_sha256"]
+        or _base_lock_from_derived(derived_lock) != base_lock
+        or base_prediction_bytes != _prediction_csv(base_lock).encode("utf-8")
+        or derived_lock_bytes != serialize_lock(derived_lock).encode("utf-8")
+        or derived_prediction_bytes != _prediction_csv(derived_lock).encode("utf-8")
+    ):
+        raise ValueError("Attestation input bytes mismatch")
+    attestation = {
+        "schema_version": SCHEMA_VERSION,
+        "status": LOCK_STATUS,
+        "candidate": {
+            "kind": BLEND_KIND,
+            "as_of": derived_lock["candidate"]["as_of"],
+        },
+        "earliest_kickoff": min(
+            base_lock["games"], key=lambda game: _parse_datetime(game["kickoff"])
+        )["kickoff"],
+        "development_receipt_file_sha256": hashlib.sha256(
+            development_receipt_bytes
+        ).hexdigest(),
+        "base": {
+            "lock_artifact_sha256": base_lock["artifact_sha256"],
+            "lock_file_sha256": hashlib.sha256(base_lock_bytes).hexdigest(),
+            "prediction_integrity_sha256": base_lock["prediction_integrity_sha256"],
+            "predictions_file_sha256": hashlib.sha256(base_prediction_bytes).hexdigest(),
+        },
+        "derived": {
+            "lock_artifact_sha256": derived_lock["artifact_sha256"],
+            "lock_file_sha256": hashlib.sha256(derived_lock_bytes).hexdigest(),
+            "prediction_integrity_sha256": derived_lock["prediction_integrity_sha256"],
+            "predictions_file_sha256": hashlib.sha256(derived_prediction_bytes).hexdigest(),
+        },
+    }
+    attestation["artifact_sha256"] = _artifact_hash(attestation)
+    return _verify_prospective_attestation(attestation)
+
+
+def _verify_prospective_attestation(attestation):
+    expected_keys = {
+        "schema_version", "status", "candidate", "earliest_kickoff",
+        "development_receipt_file_sha256", "base", "derived", "artifact_sha256",
+    }
+    if not isinstance(attestation, dict) or set(attestation) != expected_keys:
+        raise ValueError("Attestation schema mismatch")
+    candidate = attestation["candidate"]
+    if (
+        attestation["schema_version"] != SCHEMA_VERSION
+        or attestation["status"] != LOCK_STATUS
+        or not isinstance(candidate, dict)
+        or set(candidate) != {"kind", "as_of"}
+        or candidate["kind"] != BLEND_KIND
+    ):
+        raise ValueError("Attestation status mismatch")
+    try:
+        candidate_as_of = _parse_datetime(candidate["as_of"])
+        earliest_kickoff = _parse_datetime(attestation["earliest_kickoff"])
+    except ValueError as error:
+        raise ValueError("Attestation timestamp mismatch") from error
+    if candidate_as_of >= earliest_kickoff:
+        raise ValueError("Attestation candidate timestamp:")
+    for name in ("development_receipt_file_sha256", "artifact_sha256"):
+        if not _is_sha256(attestation[name]):
+            raise ValueError("Attestation hash mismatch")
+    for name in ("base", "derived"):
+        section = attestation[name]
+        if not isinstance(section, dict) or set(section) != {
+            "lock_artifact_sha256", "lock_file_sha256",
+            "prediction_integrity_sha256", "predictions_file_sha256",
+        } or not all(_is_sha256(value) for value in section.values()):
+            raise ValueError("Attestation hash mismatch")
+    if _artifact_hash(attestation) != attestation["artifact_sha256"]:
+        raise ValueError("Attestation artifact hash mismatch")
+    return attestation
+
+
+def _verify_grade_attestation(lock, lock_bytes, attestation):
+    _verify_prospective_attestation(attestation)
+    if not isinstance(lock_bytes, bytes):
+        raise ValueError("Grade attestation lock bytes mismatch")
+    base = _base_lock_from_derived(lock)
+    base_lock_bytes = serialize_lock(base).encode("utf-8")
+    base_prediction_bytes = _prediction_csv(base).encode("utf-8")
+    derived_lock_bytes = serialize_lock(lock).encode("utf-8")
+    derived_prediction_bytes = _prediction_csv(lock).encode("utf-8")
+    expected_base = {
+        "lock_artifact_sha256": base["artifact_sha256"],
+        "lock_file_sha256": hashlib.sha256(base_lock_bytes).hexdigest(),
+        "prediction_integrity_sha256": base["prediction_integrity_sha256"],
+        "predictions_file_sha256": hashlib.sha256(base_prediction_bytes).hexdigest(),
+    }
+    expected_derived = {
+        "lock_artifact_sha256": lock["artifact_sha256"],
+        "lock_file_sha256": hashlib.sha256(lock_bytes).hexdigest(),
+        "prediction_integrity_sha256": lock["prediction_integrity_sha256"],
+        "predictions_file_sha256": hashlib.sha256(derived_prediction_bytes).hexdigest(),
+    }
+    if (
+        lock_bytes != derived_lock_bytes
+        or attestation["candidate"] != {
+            "kind": lock["candidate"]["kind"],
+            "as_of": lock["candidate"]["as_of"],
+        }
+        or attestation["development_receipt_file_sha256"]
+        != lock["candidate"]["development_receipt_sha256"]
+        or attestation["earliest_kickoff"] != min(
+            lock["games"], key=lambda game: _parse_datetime(game["kickoff"])
+        )["kickoff"]
+        or attestation["base"] != expected_base
+        or attestation["derived"] != expected_derived
+    ):
+        raise ValueError("Grade attestation mismatch")
+    return attestation
 
 
 def _normalize_result(result):
@@ -415,15 +720,26 @@ def _result_hash(rows):
     return hashlib.sha256(_canonical(rows).encode("utf-8")).hexdigest()
 
 
-def grade_locked_games(lock, results):
+def grade_locked_games(lock, results, *, attestation=None, lock_bytes=None):
     """Validate finalized results and grade the immutable prospective lock."""
     games = _verify_lock(lock)
+    candidate_grade = (
+        lock.get("schema_version") == 2
+        and isinstance(lock.get("candidate"), dict)
+        and lock["candidate"].get("kind") == BLEND_KIND
+    )
+    if candidate_grade:
+        _verify_grade_attestation(lock, lock_bytes, attestation)
     if not isinstance(results, list):
         raise ValueError("Results must be a list:")
     locked_by_id = {game["game_id"]: game for game in games}
     result_by_id = {}
     normalized_results = []
     for raw in results:
+        if isinstance(raw, dict) and candidate_grade and str(raw.get("status", "")).strip().upper() in {
+            "CANCELLED", "CANCELED", "FORFEIT", "FORFEITED", "POSTPONED",
+        }:
+            raise ValueError(f"Candidate result status: {raw.get('game_id', '')}")
         result = _normalize_result(raw)
         game_id = result["game_id"]
         if game_id in result_by_id:
@@ -463,8 +779,73 @@ def grade_locked_games(lock, results):
         row["pgo_v0_absolute_error"] = abs(actual - row["pgo_v0_prediction"])
         row["challenger_absolute_error"] = abs(actual - row["challenger_prediction"])
         row["improvement"] = row["pgo_v0_absolute_error"] - row["challenger_absolute_error"]
+        if candidate_grade:
+            row["candidate_absolute_error"] = abs(actual - row["candidate_prediction"])
+            row["candidate_improvement_vs_pgo_v0"] = (
+                row["pgo_v0_absolute_error"] - row["candidate_absolute_error"]
+            )
+            row["candidate_improvement_vs_challenger"] = (
+                row["challenger_absolute_error"] - row["candidate_absolute_error"]
+            )
         row.update(row["subgroup_flags"])
         rows.append(row)
+
+    if candidate_grade:
+        pgo_v0 = pgo_challenger.metric_summary(rows, "pgo_v0_prediction")
+        challenger = pgo_challenger.metric_summary(rows, "challenger_prediction")
+        candidate = pgo_challenger.metric_summary(rows, "candidate_prediction")
+        comparison = _comparison_rows(rows, "pgo_v0_prediction", "candidate_prediction")
+        improvement = pgo_challenger.paired_block_bootstrap(
+            comparison, samples=10_000, seed=20260721
+        )
+        subgroups = pgo_challenger.subgroup_results(comparison)
+        candidate_vs_challenger = pgo_challenger.paired_block_bootstrap(
+            _comparison_rows(rows, "challenger_prediction", "candidate_prediction"),
+            samples=10_000, seed=20260721,
+        )
+        checks = {
+            "lock_artifact_integrity": True,
+            "result_integrity": True,
+            "counts_match": len(rows) == len(games),
+            "candidate_mae_lower": candidate["mae"] < pgo_v0["mae"],
+            "aggregate_improvement_ci_positive": improvement["lower"] > 0.0,
+            "no_sufficient_subgroup_regression": pgo_challenger._subgroup_gate_passes(subgroups),
+        }
+        integrity = ("lock_artifact_integrity", "result_integrity", "counts_match")
+        status = (
+            "BLOCKED" if not all(checks[name] for name in integrity)
+            else "PASS" if all(checks.values()) else "HOLD"
+        )
+        feature_state = lock.get("model_state", {}).get("challenger", {})
+        return {
+            "schema_version": 2,
+            "candidate": deepcopy(lock["candidate"]),
+            "status": status,
+            "publication_status": {"PASS": "VALIDATED", "HOLD": "EXPERIMENTAL", "BLOCKED": "BLOCKED"}[status],
+            "as_of": lock.get("as_of"),
+            "lock_sha256": lock["artifact_sha256"],
+            "results_sha256": _result_hash(normalized_results),
+            "schedule_snapshot_sha256": lock.get("schedule_snapshot_sha256"),
+            "source_lock_sha256": lock.get("source_lock_sha256"),
+            "source_hashes": deepcopy(lock.get("source_hashes", {})),
+            "feature_manifest": {
+                "features": list(feature_state.get("feature_names", [])),
+                "missingness_flags": list(feature_state.get("missing_features", [])),
+            },
+            "counts": {"locked_games": len(games), "graded_games": len(rows)},
+            "metrics": {
+                "pgo_v0": pgo_v0, "challenger": challenger, "candidate": candidate,
+                "pgo_v0_mae": pgo_v0["mae"], "challenger_mae": challenger["mae"],
+                "candidate_mae": candidate["mae"],
+            },
+            "bootstrap": improvement,
+            "aggregate_interval": improvement,
+            "candidate_vs_challenger_interval": candidate_vs_challenger,
+            "subgroup_results": subgroups,
+            "checks": checks,
+            "failed_checks": sorted(name for name, passed in checks.items() if not passed),
+            "rows": rows,
+        }
 
     pgo_v0 = pgo_challenger.metric_summary(rows, "pgo_v0_prediction")
     challenger = pgo_challenger.metric_summary(rows, "challenger_prediction")
@@ -518,7 +899,17 @@ def grade_locked_games(lock, results):
 def serialize_grade(receipt, rows):
     receipt_text = _canonical(receipt) + "\n"
     output = io.StringIO(newline="")
-    writer = csv.DictWriter(output, fieldnames=GRADE_RESULT_COLUMNS, lineterminator="\n")
+    columns = GRADE_RESULT_COLUMNS
+    if (
+        receipt.get("schema_version") == 2
+        and isinstance(receipt.get("candidate"), dict)
+        and receipt["candidate"].get("kind") == BLEND_KIND
+    ):
+        columns += (
+            "candidate_absolute_error", "candidate_improvement_vs_pgo_v0",
+            "candidate_improvement_vs_challenger",
+        )
+    writer = csv.DictWriter(output, fieldnames=columns, lineterminator="\n")
     writer.writeheader()
     for row in rows:
         item = dict(row)
@@ -526,7 +917,7 @@ def serialize_grade(receipt, rows):
             {name: bool(row.get(name)) for name in pgo_challenger.SUBGROUPS},
             sort_keys=True, separators=(",", ":"),
         )
-        writer.writerow({name: item.get(name, "") for name in GRADE_RESULT_COLUMNS})
+        writer.writerow({name: item.get(name, "") for name in columns})
     return receipt_text, output.getvalue()
 
 
@@ -537,6 +928,172 @@ def write_grade(output_dir, receipt, rows):
     atomic_write_text(receipt_path, receipt_text)
     atomic_write_text(output_dir / "prospective_results.csv", results_text)
     return receipt_path
+
+
+def _blend_prediction(pgo_v0, challenger, weight=BLEND_WEIGHT):
+    return (1.0 - weight) * float(pgo_v0) + weight * float(challenger)
+
+
+def _comparison_rows(rows, incumbent_key, candidate_key):
+    return [
+        {
+            **row,
+            "pgo_v0_prediction": row[incumbent_key],
+            "challenger_prediction": row[candidate_key],
+        }
+        for row in rows
+    ]
+
+
+def _season_results(incumbent, candidate):
+    incumbent_by_season = {row["season"]: row for row in incumbent["seasons"]}
+    return [
+        {
+            "season": row["season"],
+            "pgo_v0_mae": incumbent_by_season[row["season"]]["mae"],
+            "candidate_mae": row["mae"],
+            "improvement": incumbent_by_season[row["season"]]["mae"] - row["mae"],
+        }
+        for row in candidate["seasons"]
+    ]
+
+
+def _grid_result(rows, incumbent, weight):
+    candidate_rows = [
+        {**row, "candidate_prediction": _blend_prediction(
+            row["pgo_v0_prediction"], row["challenger_prediction"], weight
+        )}
+        for row in rows
+    ]
+    candidate = pgo_challenger.metric_summary(candidate_rows, "candidate_prediction")
+    return {
+        "pgo_v1_weight": weight,
+        "metrics": {
+            "pgo_v0_mae": incumbent["mae"],
+            "candidate_mae": candidate["mae"],
+            "improvement": incumbent["mae"] - candidate["mae"],
+        },
+        "season_results": _season_results(incumbent, candidate),
+        "rows": candidate_rows,
+    }
+
+
+def _selection_from_grid(grid_results):
+    eligible = [
+        row for row in grid_results
+        if row["pgo_v1_weight"] > 0.0
+        and all(item["improvement"] > 0.0 for item in row["season_results"])
+    ]
+    if not eligible:
+        raise ValueError("No development blend improves every season")
+    selected = max(eligible, key=lambda row: row["pgo_v1_weight"])
+    regressing = next((
+        row["pgo_v1_weight"] for row in grid_results
+        if row["pgo_v1_weight"] > selected["pgo_v1_weight"]
+        and any(item["improvement"] <= 0.0 for item in row["season_results"])
+    ), None)
+    if regressing is None:
+        raise ValueError("Development grid has no regressing weight")
+    return selected, regressing
+
+
+def develop_stability_blend(source):
+    if not isinstance(source, dict) or source.get("sha256") != DEVELOPMENT_SOURCE_SHA256:
+        raise ValueError("Development source hash mismatch")
+    rows = source.get("rows")
+    if not isinstance(rows, list) or len(rows) != DEVELOPMENT_GAME_COUNT:
+        raise ValueError("Development source game count mismatch")
+    if tuple(sorted({row.get("season") for row in rows})) != DEVELOPMENT_SEASONS:
+        raise ValueError("Development source seasons mismatch")
+    incumbent = pgo_challenger.metric_summary(rows, "pgo_v0_prediction")
+    grid = [_grid_result(rows, incumbent, weight) for weight in BLEND_GRID]
+    selected, first_regressing = _selection_from_grid(grid)
+    comparison = _comparison_rows(
+        selected.pop("rows"), "pgo_v0_prediction", "candidate_prediction"
+    )
+    receipt = {
+        "schema_version": SCHEMA_VERSION,
+        "status": "DEVELOPMENT_ONLY",
+        "candidate": {
+            "kind": BLEND_KIND,
+            "formula": BLEND_FORMULA,
+            "pgo_v1_weight": BLEND_WEIGHT,
+        },
+        "source_sha256": source["sha256"],
+        "counts": {"games": len(rows), "seasons": len(DEVELOPMENT_SEASONS)},
+        "seasons": list(DEVELOPMENT_SEASONS),
+        "selection": {
+            "selected_pgo_v1_weight": selected["pgo_v1_weight"],
+            "first_regressing_weight": first_regressing,
+        },
+        "metrics": deepcopy(selected["metrics"]),
+        "aggregate_interval": pgo_challenger.paired_block_bootstrap(
+            comparison, samples=10_000, seed=20260721
+        ),
+        "season_results": deepcopy(selected["season_results"]),
+        "grid_results": [{key: value for key, value in row.items() if key != "rows"} for row in grid],
+    }
+    receipt["artifact_sha256"] = _artifact_hash(receipt)
+    return receipt
+
+
+def _verify_development_receipt(receipt):
+    expected_keys = {
+        "schema_version", "status", "candidate", "source_sha256", "counts", "seasons",
+        "selection", "metrics", "aggregate_interval", "season_results", "grid_results",
+        "artifact_sha256",
+    }
+    if not isinstance(receipt, dict) or set(receipt) != expected_keys:
+        raise ValueError("Development receipt schema mismatch")
+    if receipt["schema_version"] != SCHEMA_VERSION or receipt["status"] != "DEVELOPMENT_ONLY":
+        raise ValueError("Development receipt status mismatch")
+    if receipt["candidate"] != {
+        "kind": BLEND_KIND, "formula": BLEND_FORMULA, "pgo_v1_weight": BLEND_WEIGHT,
+    }:
+        raise ValueError("Development receipt candidate mismatch")
+    if receipt["source_sha256"] != DEVELOPMENT_SOURCE_SHA256:
+        raise ValueError("Development receipt source mismatch")
+    if receipt["counts"] != {"games": DEVELOPMENT_GAME_COUNT, "seasons": len(DEVELOPMENT_SEASONS)}:
+        raise ValueError("Development receipt counts mismatch")
+    if receipt["seasons"] != list(DEVELOPMENT_SEASONS):
+        raise ValueError("Development receipt seasons mismatch")
+    grid = receipt["grid_results"]
+    if not isinstance(grid, list) or [row.get("pgo_v1_weight") for row in grid] != list(BLEND_GRID):
+        raise ValueError("Development receipt grid mismatch")
+    try:
+        selected, first_regressing = _selection_from_grid(grid)
+        finite_values = [
+            *receipt["metrics"].values(), *receipt["aggregate_interval"].values(),
+            *(value for row in receipt["season_results"] for value in row.values() if row is not None),
+            *(item for row in grid for item in row["metrics"].values()),
+            *(value for row in grid for item in row["season_results"] for value in item.values()),
+        ]
+    except (AttributeError, KeyError, TypeError, ValueError) as error:
+        raise ValueError("Development receipt metrics mismatch") from error
+    if not all(math.isfinite(float(value)) for value in finite_values):
+        raise ValueError("Development receipt metrics must be finite")
+    if receipt["selection"] != {
+        "selected_pgo_v1_weight": selected["pgo_v1_weight"],
+        "first_regressing_weight": first_regressing,
+    }:
+        raise ValueError("Development receipt selection mismatch")
+    if receipt["metrics"] != selected["metrics"] or receipt["season_results"] != selected["season_results"]:
+        raise ValueError("Development receipt selected metrics mismatch")
+    if receipt["selection"]["selected_pgo_v1_weight"] != BLEND_WEIGHT:
+        raise ValueError("Development receipt blend weight mismatch")
+    if (
+        receipt.get("artifact_sha256") != DEVELOPMENT_ARTIFACT_SHA256
+        or _artifact_hash(receipt) != receipt["artifact_sha256"]
+    ):
+        raise ValueError("Development receipt artifact hash mismatch")
+    return receipt
+
+
+def write_development_receipt(path, receipt):
+    _verify_development_receipt(receipt)
+    path = Path(path)
+    atomic_write_text(path, _canonical(receipt) + "\n")
+    return path
 
 
 def _load_results(path):
@@ -564,6 +1121,36 @@ def _blocked_receipt(lock, results_path, error):
         "aggregate_improvement_ci_positive": False,
         "no_sufficient_subgroup_regression": False,
     }
+    if (
+        lock.get("schema_version") == 2
+        and isinstance(lock.get("candidate"), dict)
+        and lock["candidate"].get("kind") == BLEND_KIND
+    ):
+        checks.pop("challenger_mae_lower")
+        checks["candidate_mae_lower"] = False
+        return {
+            "schema_version": 2,
+            "candidate": deepcopy(lock["candidate"]),
+            "status": "BLOCKED",
+            "publication_status": "BLOCKED",
+            "as_of": lock.get("as_of"),
+            "lock_sha256": lock.get("artifact_sha256", ""),
+            "results_sha256": results_hash,
+            "schedule_snapshot_sha256": lock.get("schedule_snapshot_sha256"),
+            "source_lock_sha256": lock.get("source_lock_sha256"),
+            "source_hashes": deepcopy(lock.get("source_hashes", {})),
+            "feature_manifest": {},
+            "counts": {"locked_games": len(lock.get("games", [])) if isinstance(lock.get("games"), list) else 0, "graded_games": 0},
+            "metrics": {},
+            "bootstrap": {},
+            "aggregate_interval": {},
+            "candidate_vs_challenger_interval": {},
+            "subgroup_results": {},
+            "checks": checks,
+            "failed_checks": sorted(checks),
+            "error": str(error),
+            "rows": [],
+        }
     return {
         "schema_version": SCHEMA_VERSION,
         "status": "BLOCKED",
@@ -836,12 +1423,169 @@ def _cli_lock(args):
 def _cli_grade(args):
     lock = {}
     try:
-        lock = json.loads(Path(args.lock_file).read_text(encoding="utf-8"))
-        receipt = grade_locked_games(lock, _load_results(args.results_path))
+        lock_bytes = Path(args.lock_file).read_bytes()
+        parsed_lock = json.loads(lock_bytes)
+        if not isinstance(parsed_lock, dict):
+            raise ValueError("Lock must be a JSON object")
+        _canonical(parsed_lock)
+        lock = parsed_lock
+        attestation = None
+        if lock.get("schema_version") == 2:
+            attestation_file = getattr(args, "attestation_file", None)
+            if attestation_file is None:
+                raise ValueError("Grade attestation required")
+            attestation = json.loads(Path(attestation_file).read_bytes())
+        receipt = grade_locked_games(
+            lock,
+            _load_results(args.results_path),
+            attestation=attestation,
+            lock_bytes=lock_bytes,
+        )
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
         receipt = _blocked_receipt(lock, args.results_path, error)
     write_grade(args.output_dir, receipt, receipt["rows"])
     return 0 if receipt["status"] == "PASS" else 1
+
+
+def _cli_develop_blend(args):
+    write_development_receipt(
+        args.output, develop_stability_blend(load_development_predictions(args.predictions))
+    )
+    return 0
+
+
+def _detach_output(target, expected_state):
+    quarantine = None
+    try:
+        descriptor, name = tempfile.mkstemp(
+            dir=target.parent,
+            prefix=f".{target.name}.",
+            suffix=".rollback",
+        )
+        os.close(descriptor)
+        quarantine = Path(name)
+        os.replace(target, quarantine)
+    except BaseException:
+        if quarantine is not None:
+            try:
+                quarantine.unlink()
+            except BaseException:
+                pass
+        return
+    try:
+        is_owned = os.path.samestat(
+            quarantine.stat(follow_symlinks=False), expected_state
+        )
+    except BaseException:
+        return
+    if not is_owned:
+        try:
+            os.link(quarantine, target)
+        except BaseException:
+            return
+    try:
+        quarantine.unlink()
+    except BaseException:
+        pass
+
+
+def _write_new_outputs(output_dir, outputs):
+    staged = []
+    owned = {}
+    owns_output_dir = False
+    success = False
+    failure = None
+    try:
+        output_dir.mkdir(parents=True)
+        owns_output_dir = True
+        outputs[-1][0].parent.mkdir(parents=True, exist_ok=True)
+        for target, content in outputs:
+            descriptor, name = tempfile.mkstemp(
+                dir=target.parent,
+                prefix=f".{target.name}.",
+                suffix=".pending",
+            )
+            os.close(descriptor)
+            staged_path = Path(name)
+            staged.append(staged_path)
+            atomic_write_text(staged_path, content)
+        for (target, _), staged_path in zip(outputs, staged):
+            state = staged_path.stat(follow_symlinks=False)
+            owned[target] = state
+            os.link(staged_path, target)
+        if any(
+            not os.path.samestat(target.stat(follow_symlinks=False), state)
+            for target, state in owned.items()
+        ):
+            raise OSError("Output reservation ownership changed")
+        success = True
+    except BaseException as error:
+        failure = error
+        for target, state in owned.items():
+            _detach_output(target, state)
+    finally:
+        for staged_path in staged:
+            try:
+                staged_path.unlink(missing_ok=True)
+            except BaseException:
+                pass
+        if owns_output_dir and not success:
+            try:
+                output_dir.rmdir()
+            except BaseException:
+                pass
+    if isinstance(failure, (KeyboardInterrupt, SystemExit)):
+        raise failure
+    return success
+
+
+def _cli_derive_blend(args):
+    output_paths = (
+        args.output_dir / "prospective_lock.json",
+        args.output_dir / "prospective_predictions.csv",
+        args.attestation_output,
+    )
+    try:
+        resolved_output_dir = args.output_dir.resolve()
+        resolved_outputs = tuple(path.resolve() for path in output_paths)
+    except OSError:
+        return 1
+    if (
+        args.output_dir.exists()
+        or args.output_dir.is_symlink()
+        or any(path.exists() or path.is_symlink() for path in output_paths)
+        or len(set(resolved_outputs)) != len(resolved_outputs)
+        or resolved_outputs[-1].is_relative_to(resolved_output_dir)
+        or resolved_output_dir.is_relative_to(resolved_outputs[-1])
+    ):
+        return 1
+    try:
+        base_lock_bytes = args.base_lock.read_bytes()
+        base_prediction_bytes = args.base_predictions.read_bytes()
+        development_receipt_bytes = args.development_receipt.read_bytes()
+        base_lock = json.loads(base_lock_bytes)
+        development_receipt = json.loads(development_receipt_bytes)
+        _verify_lock(base_lock)
+        if base_prediction_bytes != _prediction_csv(base_lock).encode("utf-8"):
+            raise ValueError("Base prediction bytes mismatch")
+        derived = derive_stability_blend(
+            base_lock, development_receipt,
+            hashlib.sha256(development_receipt_bytes).hexdigest(), args.as_of,
+        )
+        derived_lock_bytes = serialize_lock(derived).encode("utf-8")
+        derived_prediction_bytes = _prediction_csv(derived).encode("utf-8")
+        attestation = build_prospective_attestation(
+            base_lock, base_lock_bytes, base_prediction_bytes, derived,
+            derived_lock_bytes, derived_prediction_bytes, development_receipt_bytes,
+        )
+    except (OSError, TypeError, ValueError, json.JSONDecodeError):
+        return 1
+    outputs = (
+        (output_paths[0], derived_lock_bytes.decode("utf-8")),
+        (output_paths[1], derived_prediction_bytes.decode("utf-8")),
+        (output_paths[2], _canonical(attestation) + "\n"),
+    )
+    return 0 if _write_new_outputs(args.output_dir, outputs) else 1
 
 
 def main(argv=None):
@@ -856,13 +1600,28 @@ def main(argv=None):
     grade = subparsers.add_parser("grade")
     grade.add_argument("--lock-file", type=Path, required=True)
     grade.add_argument("--results-path", type=Path, required=True)
+    grade.add_argument("--attestation-file", type=Path)
     grade.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    develop = subparsers.add_parser("develop-blend")
+    develop.add_argument("--predictions", type=Path, required=True)
+    develop.add_argument("--output", type=Path, required=True)
+    derive = subparsers.add_parser("derive-blend")
+    derive.add_argument("--base-lock", type=Path, required=True)
+    derive.add_argument("--base-predictions", type=Path, required=True)
+    derive.add_argument("--development-receipt", type=Path, required=True)
+    derive.add_argument("--as-of", required=True)
+    derive.add_argument("--output-dir", type=Path, required=True)
+    derive.add_argument("--attestation-output", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command == "lock":
         return _cli_lock(args)
     elif args.command == "grade":
         return _cli_grade(args)
+    elif args.command == "develop-blend":
+        return _cli_develop_blend(args)
+    elif args.command == "derive-blend":
+        return _cli_derive_blend(args)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
