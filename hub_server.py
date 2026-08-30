@@ -574,6 +574,10 @@ PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
  .n{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;
    border-radius:6px;background:#12233f;color:#9dc1ff;font-size:12px;font-weight:700;flex:0 0 auto}
  .cardbox p{margin:0;color:var(--dim);font-size:12.5px;min-height:32px}
+ .cardbox.wide{grid-column:1/-1}
+ .trendgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;width:100%}
+ .trendgrid button{width:100%;text-align:center}
+ .kbtools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
  button.go{background:#12233f;border:1px solid var(--accent);color:#dbe9ff;padding:7px 12px;
    border-radius:8px;cursor:pointer;font-size:13.5px}
@@ -652,7 +656,7 @@ const CARDS = [
    render:c=>btn(c,"Show diff",()=>run({action:'whatchanged'},"What changed"))},
  {n:10, t:"Injury report", d:"Every team's rating-relevant injuries (Sleeper). Open the dashboard, or run the CLI scan.",
    render:c=>injuryCard(c)},
- {n:11, t:"NFL knowledge base", d:"Chat in plain English — “turnover differential per team last year”, “spot the trends this week”. Model writes read-only SQL, cites the numbers. Raw SQL box still available.",
+ {n:11, t:"NFL knowledge base", wide:true, d:"Chat in plain English — “turnover differential per team last year”, “spot the trends this week”. Model writes read-only SQL, cites the numbers. One-click trends + a raw SQL box work with no key.",
    render:c=>kbCard(c)},
 ];
 
@@ -663,7 +667,7 @@ function btn(c,label,fn,cls){const b=el('button',(cls?'go '+cls:'go'),label);b.o
 function buildCards(){
   const g=document.getElementById('cards'); g.innerHTML='';
   for(const cd of CARDS){
-    const box=el('div','cardbox');
+    const box=el('div','cardbox'+(cd.wide?' wide':''));
     const h=el('h3'); h.appendChild(el('span','n',cd.n)); h.appendChild(document.createTextNode(cd.t));
     box.appendChild(h); box.appendChild(el('p',null,cd.d));
     cd.render(box); g.appendChild(box);
@@ -702,24 +706,28 @@ function injuryCard(c){
   [b1,i,b2].forEach(x=>r.appendChild(x)); c.appendChild(r);
 }
 function kbCard(c){
-  const r=el('div','row');
+  const r=el('div','kbtools');
   const chat=el('button','go','💬 Chat with KB'); chat.onclick=openKbChat;
   const b1=el('button','go alt','Open guru'); b1.onclick=()=>launch('guru');
   r.appendChild(chat); r.appendChild(b1); c.appendChild(r);
   // one-click canned trends — no API key needed, auto-target the upcoming week
-  const tl=el('div','note','One-click bettable trends (no key needed):'); tl.style.marginTop='4px';
-  c.appendChild(tl);
-  const trow=el('div','row'); trow.id='trend-btns'; trow.textContent='loading trends…'; c.appendChild(trow);
+  const tl=el('div','note'); tl.id='trend-label'; tl.textContent='One-click bettable trends (no key needed):';
+  tl.style.marginTop='6px'; c.appendChild(tl);
+  const trow=el('div','trendgrid'); trow.id='trend-btns'; trow.textContent='loading trends…'; c.appendChild(trow);
   loadTrends(trow);
-  const ta=el('textarea'); ta.placeholder='…or raw SQL: SELECT … (blank = schema)'; ta.style.minHeight='52px';
-  const b2=el('button','go alt','Run raw SQL'); b2.onclick=()=>run({action:'kb',sql:ta.value},"KB query");
-  const r2=el('div','row'); r2.appendChild(b2); c.appendChild(ta); c.appendChild(r2);
+  const sqlLbl=el('div','note','Or write raw SQL:'); sqlLbl.style.marginTop='8px'; c.appendChild(sqlLbl);
+  const ta=el('textarea'); ta.placeholder='SELECT … (blank = show schema)'; ta.style.minHeight='140px'; c.appendChild(ta);
+  const r2=el('div','row'); r2.style.marginTop='2px';
+  const b2=el('button','go','Run raw SQL'); b2.onclick=()=>run({action:'kb',sql:ta.value},"KB query");
+  r2.appendChild(b2); c.appendChild(r2);
 }
 async function loadTrends(row){
   try{
     const j=await api('/api/trends');
     row.innerHTML='';
     const wk = j.week!=null ? ` · Wk${j.week} ${j.season}` : '';
+    const lbl=document.getElementById('trend-label');
+    if(lbl && j.week!=null) lbl.textContent=`One-click bettable trends for Week ${j.week} ${j.season} (no key needed):`;
     (j.trends||[]).forEach(t=>{
       const b=el('button','go alt',t.label); b.title=t.desc;
       b.onclick=()=>run({action:'trend',trend:t.id}, t.label+wk);
