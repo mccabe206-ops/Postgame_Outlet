@@ -83,9 +83,10 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
 </style></head><body>
 <header>
   <h1>McCabe Picks</h1>
-  <button class="nav" onclick="nav(-1)" title="previous week">◀</button>
+  <button class="nav" onclick="nav(-1)" title="previous week (wraps to prior season)">◀</button>
   <span class="sub" id="sub">Week {week} · {season}</span>
-  <button class="nav" onclick="nav(1)" title="next week">▶</button>
+  <button class="nav" onclick="nav(1)" title="next week (wraps to next season)">▶</button>
+  <button class="nav" onclick="goCurrent()" title="jump to the current week">⟲ now</button>
   <span class="sub">· your line vs. ESPN market</span>
   <span id="status">loading…</span>
   <span id="saved"></span>
@@ -109,7 +110,16 @@ async function load(week,year){{
   document.getElementById('sub').textContent = 'Week '+WK+' · '+YR;
   render();
 }}
-function nav(d){{ const w=Math.min(18,Math.max(1,(WK||1)+d)); if(w!==WK) load(w,YR); }}
+function nav(d){{
+  // Step by week, wrapping across season boundaries so you can page back into
+  // completed seasons (e.g. ◀ from Week 1 2026 -> Week 18 2025).
+  let w=(WK||1)+d, y=YR;
+  if(w<1){{ y-=1; w=18; }}
+  else if(w>18){{ y+=1; w=1; }}
+  if(y<2015){{ y=2015; w=1; }}   // soft floor — nflverse/ESPN coverage
+  load(w,y);
+}}
+function goCurrent(){{ load(); }}  // no args -> server resolves the live week
 function render(){{
   const tb=document.getElementById('rows'); tb.innerHTML='';
   const MAX=SHEET.max_picks, WEIGHTS=SHEET.conf_weights;   // [1..5]
