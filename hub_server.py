@@ -34,6 +34,11 @@ import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
+try:
+    import team_view as TV  # abbr <-> full team-name resolution (Lane-2 core file)
+except Exception:  # noqa: BLE001
+    TV = None
+
 HOST = "127.0.0.1"
 PORT = 8786
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -264,6 +269,113 @@ def act_writeup_save(body):
         f.write(content)
     return {"ok": True, "message": f"saved data/writeups/{abbr}.md ({len(content)} chars)",
             "path": f"data/writeups/{abbr}.md"}
+
+
+# ---------------------------------------------------------------- team editor
+def _resolve_team(q):
+    """Map an abbr or name to (full_team_name, abbr). Returns (None, None) if unresolved."""
+    q = (q or "").strip()
+    if not q or TV is None:
+        return (None, None)
+    name = TV.resolve_team(q)
+    idx = TV.espn_team_index()
+    if not name:
+        ql = q.lower()
+        name = next((tn for tn, m in idx.items() if (m.get("abbr") or "").lower() == ql), None)
+    if not name:
+        return (None, None)
+    return (name, (idx.get(name) or {}).get("abbr"))
+
+
+def _median(xs):
+    xs = sorted(xs)
+    n = len(xs)
+    if not n:
+        return 0.0
+    return xs[n // 2] if n % 2 else round((xs[n // 2 - 1] + xs[n // 2]) / 2, 2)
+
+
+def _league_context():
+    """Per-component min/median/max across the 32 teams — honest, data-grounded
+    reference (there is no method.md band file to load)."""
+    rows = _read_ratings()
+    out = {}
+    for k in ("qb", "off", "def", "rating"):
+        vals = [r[k] for r in rows]
+        out[k] = {"min": min(vals), "med": _median(vals), "max": max(vals)}
+    return out
+
+
+def act_team_get(q):
+    """Everything the merged editor needs for one team: current rating components,
+    the write-up markdown, and league context."""
+    name, abbr = _resolve_team(q)
+    if not name:
+        return {"ok": False, "message": f"could not resolve team '{q}'"}
+    row = None
+    with open(RATINGS, newline="") as f:
+        for r in csv.DictReader(f):
+            if r.get("team") == name:
+                row = r
+                break
+    if row is None:
+        return {"ok": False, "message": f"'{name}' not found in ratings.csv"}
+    wu = act_writeup_get(abbr) if abbr else {"content": "", "exists": False}
+
+    def fnum(v):
+        try:
+            return float(v or 0)
+        except ValueError:
+            return 0.0
+    qb, off, dfn = fnum(row.get("qb_value")), fnum(row.get("off_value")), fnum(row.get("def_value"))
+    return {
+        "ok": True, "team": name, "abbr": abbr,
+        "qb_name": row.get("qb_name", ""),
+        "qb": qb, "off": off, "def": dfn, "rating": round(qb + off + dfn, 2),
+        "needs_review": (row.get("needs_review") or "").strip().upper(),
+        "notes": row.get("notes", ""),
+        "writeup": wu.get("content", ""), "writeup_exists": wu.get("exists", False),
+        "league": _league_context(),
+    }
+
+
+def act_rating_save(body):
+    """Direct, GATED rating edit: writes qb/off/def to ratings.csv, forces
+    needs_review=Y (can't publish until cleared), and requires a reason -> notes.
+    Preserves column order + minimal quoting."""
+    name, abbr = _resolve_team(body.get("team") or body.get("abbr") or "")
+    if not name:
+        return {"ok": False, "message": "team required / unresolved"}
+    reason = (body.get("reason") or "").strip()
+    if not reason:
+        return {"ok": False, "message": "a one-line reason is required (it becomes the notes)"}
+    vals = {}
+    for k, col in (("qb", "qb_value"), ("off", "off_value"), ("def", "def_value")):
+        try:
+            vals[col] = f"{float(body.get(k)):g}"
+        except (TypeError, ValueError):
+            return {"ok": False, "message": f"{k} must be a number"}
+
+    with open(RATINGS, newline="") as f:
+        reader = csv.DictReader(f)
+        fields = reader.fieldnames
+        rows = list(reader)
+    hit = next((r for r in rows if r.get("team") == name), None)
+    if hit is None:
+        return {"ok": False, "message": f"'{name}' not found in ratings.csv"}
+    old = f"QB {hit.get('qb_value')} / Off {hit.get('off_value')} / Def {hit.get('def_value')}"
+    hit.update(vals)
+    hit["needs_review"] = "Y"
+    hit["notes"] = reason
+    with open(RATINGS, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=fields, quoting=csv.QUOTE_MINIMAL)
+        w.writeheader()
+        w.writerows(rows)
+    total = round(sum(float(vals[c]) for c in ("qb_value", "off_value", "def_value")), 2)
+    return {"ok": True, "team": name, "abbr": abbr, "total": total,
+            "old": old, "new": f"QB {vals['qb_value']} / Off {vals['off_value']} / Def {vals['def_value']}",
+            "message": f"{name}: {old} -> new total {total}. needs_review=Y (won't publish until you clear it; "
+                       f"tell Claude Code to finalize after review)."}
 
 
 # ---------------------------------------------------------------- KB chat
@@ -671,7 +783,28 @@ PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
  .rc-ok{color:var(--good)} .rc-bad{color:var(--bad)}
  dialog{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;
    padding:18px;max-width:560px;width:92%}
+ dialog.wide{max-width:1000px}
  dialog::backdrop{background:rgba(0,0,0,.6)}
+ .wu-split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+ @media(max-width:720px){.wu-split{grid-template-columns:1fr}}
+ .wu-pane{display:flex;flex-direction:column;min-width:0}
+ .wu-hd{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-bottom:5px}
+ .wu-ta{width:100%;min-height:360px;resize:vertical;background:#0e131b;color:#cdd9e5;border:1px solid var(--line);
+   border-radius:8px;padding:10px;font:12.5px/1.55 ui-monospace,Menlo,monospace}
+ .wu-prev{min-height:360px;max-height:60vh;overflow:auto;background:#0e131b;border:1px solid var(--line);
+   border-radius:8px;padding:12px 14px}
+ .wu-prev h2{font-size:17px;margin:.2em 0 .3em} .wu-prev h3{font-size:15px;margin:.6em 0 .3em}
+ .wu-prev h4{font-size:13px;margin:.6em 0 .2em;color:var(--dim)}
+ .wu-prev p{margin:.4em 0} .wu-prev ul{margin:.3em 0 .5em;padding-left:1.2em} .wu-prev li{margin:.15em 0}
+ .wu-prev .empty{color:var(--dim);font-style:italic}
+ .te-sec{border:1px solid var(--line);border-radius:10px;padding:12px}
+ .te-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+ @media(max-width:640px){.te-nums{grid-template-columns:1fr}}
+ .te-cell{display:flex;flex-direction:column;gap:3px}
+ .te-cell label{font-size:11px;color:var(--dim)}
+ .te-num{background:#0e131b;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:15px ui-monospace,Menlo,monospace}
+ .te-ctx{font-size:10.5px;color:var(--dim)}
+ .te-tot{margin-top:8px} .te-totv{font-weight:700;font-size:15px}
 </style></head><body>
 <header>
   <h1>⚡ Power Ratings Hub</h1>
@@ -703,12 +836,10 @@ PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
 const CARDS = [
  {n:1, t:"Open pick sheet", d:"Your editable weekly pick sheet (matchups, market vs. your line, edge; pick 5 with confidence).",
    render:c=>btn(c,"Open pick sheet",()=>launch('pick'))},
- {n:2, t:"Update ratings", d:"Open a team workspace, then bring your take to Claude Code — I suggest a move & draft the write-up. Quick manual tweak below.",
-   render:c=>{teamOpen(c); manualRating(c);}},
+ {n:2, t:"Update ratings & write-up", d:"One view: edit QB/Off/Def (gated save, or hand to Claude Code) AND the write-up with live preview. See current numbers + league context before you change anything.",
+   render:c=>teamEditorCard(c)},
  {n:3, t:"Show current ratings", d:"The full 32-team board from your ratings, best to worst.",
    render:c=>btn(c,"Show board",()=>run({action:'ratings'},"Current ratings"))},
- {n:4, t:"Edit a write-up", d:"Load a team blurb to edit here (manual save), or bring your take to Claude Code for a drafted rewrite.",
-   render:c=>writeupCard(c)},
  {n:5, t:"Results & grading", d:"ESPN final scores + stats, picks graded vs. market, luck/quality read, rating signals.",
    render:c=>weekRun(c,'results',"Results & grading")},
  {n:6, t:"Preview locally", d:"Regenerate the site to a private local file — no publish.",
@@ -983,20 +1114,132 @@ function ratingsTable(rows){
 }
 
 // ---- write-up editor dialog
+// minimal markdown -> HTML for the write-up preview (files use ##, ###, **, *, -)
+function renderMd(src){
+  const esc=s=>(s==null?'':(''+s)).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const inline=s=>esc(s)
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*]+)\*/g,'$1<em>$2</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+  const lines=(src||'').split(/\r?\n/); let html='', inList=false;
+  const closeList=()=>{ if(inList){html+='</ul>';inList=false;} };
+  for(const raw of lines){
+    const line=raw.replace(/\s+$/,'');
+    if(/^###\s+/.test(line)){closeList();html+='<h4>'+inline(line.replace(/^###\s+/,''))+'</h4>';}
+    else if(/^##\s+/.test(line)){closeList();html+='<h3>'+inline(line.replace(/^##\s+/,''))+'</h3>';}
+    else if(/^#\s+/.test(line)){closeList();html+='<h2>'+inline(line.replace(/^#\s+/,''))+'</h2>';}
+    else if(/^\s*[-*]\s+/.test(line)){ if(!inList){html+='<ul>';inList=true;} html+='<li>'+inline(line.replace(/^\s*[-*]\s+/,''))+'</li>'; }
+    else if(line.trim()===''){closeList();}
+    else {closeList();html+='<p>'+inline(line)+'</p>';}
+  }
+  closeList();
+  return html || '<p class="empty">— empty —</p>';
+}
+function teamEditorCard(c){
+  const r=el('div','row'); const i=el('input'); i.placeholder='team (e.g. Bills / BUF)'; i.style.flex='1';
+  const b=el('button','go','Open editor'); const go=async()=>{ const q=i.value.trim(); if(!q)return alert('enter a team');
+    const j=await api('/api/team?q='+encodeURIComponent(q)); if(!j.ok)return alert(j.message||'load failed'); openTeamEditor(j); };
+  b.onclick=go; i.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+  const wk=el('button','go alt','Full workspace'); wk.onclick=()=>{ if(!i.value.trim())return alert('enter a team'); launch('team',{team:i.value.trim()}); };
+  r.appendChild(i); r.appendChild(b); r.appendChild(wk); c.appendChild(r);
+}
+function ctxLine(lg,k){ const x=lg&&lg[k]; if(!x)return ''; return 'league '+x.min+' / '+x.med+' / '+x.max; }
+function openTeamEditor(j){
+  const dlg=document.getElementById('dlg'); const b=document.getElementById('dlg-body'); b.innerHTML=''; dlg.classList.add('wide');
+  b.appendChild(el('h3',null,'Team editor — '+(j.abbr||'')+' · '+(j.team||'')));
+  const flag=el('p','note', (j.needs_review==='Y'?'⚠ this row is already needs_review=Y. ':'')+
+    'Numbers save to ratings.csv (gated: sets needs_review=Y, reason → notes). Or hand the change to Claude Code for the method check. Write-up saves directly.');
+  b.appendChild(flag);
+
+  // ---- ratings block
+  const rs=el('div','te-sec'); rs.appendChild(el('div','wu-hd','Ratings — QB / Off / Def'));
+  const grid=el('div','te-nums');
+  function numcell(key,label){ const w=el('div','te-cell');
+    const lab=el('label',null,label); const inp=el('input','te-num'); inp.type='number'; inp.step='0.1';
+    inp.value=(j[key]!=null?j[key]:0); inp.id='te-'+key;
+    const ctx=el('div','te-ctx',ctxLine(j.league,key));
+    w.appendChild(lab); w.appendChild(inp); w.appendChild(ctx); return {w,inp}; }
+  const cQb=numcell('qb','QB'+(j.qb_name?' ('+j.qb_name+')':'')), cOff=numcell('off','Offense'), cDef=numcell('def','Defense');
+  [cQb,cOff,cDef].forEach(x=>grid.appendChild(x.w));
+  rs.appendChild(grid);
+  const totRow=el('div','te-tot'); const cur='Current on file: QB '+j.qb+' · Off '+j.off+' · Def '+j.def+' = '+j.rating;
+  const totEl=el('span','te-totv'); const refEl=el('span','note',cur);
+  function recompute(){ const t=(parseFloat(cQb.inp.value)||0)+(parseFloat(cOff.inp.value)||0)+(parseFloat(cDef.inp.value)||0);
+    totEl.textContent='New total: '+(Math.round(t*100)/100); }
+  [cQb,cOff,cDef].forEach(x=>x.inp.addEventListener('input',recompute)); recompute();
+  totRow.appendChild(totEl); rs.appendChild(totRow); rs.appendChild(refEl);
+  const reason=el('input'); reason.placeholder='reason (required for a numbers save → becomes notes)'; reason.style.width='100%'; reason.style.marginTop='8px';
+  rs.appendChild(reason);
+  const rbtns=el('div','row'); rbtns.style.marginTop='8px';
+  const saveNum=el('button','go','Save numbers (gated)'); saveNum.onclick=async()=>{
+    const res=await api('/api/rating',{team:j.team,qb:cQb.inp.value,off:cOff.inp.value,def:cDef.inp.value,reason:reason.value.trim()});
+    if(res.ok){ refEl.textContent='Current on file: '+res.new+' = '+res.total+'  (needs_review=Y)'; j.qb=parseFloat(cQb.inp.value);j.off=parseFloat(cOff.inp.value);j.def=parseFloat(cDef.inp.value);j.rating=res.total;
+      showOut('Rating saved',res.new,res.message,0,{type:'text'}); refresh(); }
+    else alert(res.message||'save failed'); };
+  const toCC=el('button','go alt','Send to Claude Code'); toCC.onclick=()=>{
+    const p='update ratings mode: '+j.team+' — set QB '+cQb.inp.value+', Off '+cOff.inp.value+', Def '+cDef.inp.value+
+      (reason.value.trim()?('. Reason: '+reason.value.trim()):'')+'. Check it against the method, then draft/update the write-up.';
+    if(navigator.clipboard)navigator.clipboard.writeText(p);
+    showOut('Send to Claude Code','copied to clipboard — paste into the Claude Code chat:',p,0,{type:'text'}); };
+  rbtns.appendChild(saveNum); rbtns.appendChild(toCC); rs.appendChild(rbtns);
+  b.appendChild(rs);
+
+  // ---- write-up block (markdown + live preview)
+  const ws=el('div','te-sec'); ws.style.marginTop='14px';
+  ws.appendChild(el('div','wu-hd','Write-up — data/writeups/'+(j.abbr||'')+'.md'+(j.writeup_exists?'':' (new)')));
+  const split=el('div','wu-split');
+  const lw=el('div','wu-pane'); lw.appendChild(el('div','wu-hd','Markdown (editable)'));
+  const ta=el('textarea','wu-ta'); ta.value=j.writeup||''; lw.appendChild(ta);
+  const rw=el('div','wu-pane'); const rhd=el('div','wu-hd', j.writeup_exists?'Preview — current on file':'Preview'); rw.appendChild(rhd);
+  const prev=el('div','wu-prev'); prev.innerHTML=renderMd(j.writeup||''); rw.appendChild(prev);
+  split.appendChild(lw); split.appendChild(rw); ws.appendChild(split);
+  let dirty=false; ta.addEventListener('input',()=>{ prev.innerHTML=renderMd(ta.value); if(!dirty){dirty=true;rhd.textContent='Preview — your edits (unsaved)';} });
+  const wbtns=el('div','row'); wbtns.style.marginTop='8px';
+  const saveWu=el('button','go','Save write-up'); saveWu.onclick=async()=>{
+    if(!j.abbr)return alert('no team abbr'); const res=await api('/api/writeup',{abbr:j.abbr,content:ta.value});
+    if(res.ok){ j.writeup=ta.value; j.writeup_exists=true; dirty=false; rhd.textContent='Preview — current on file';
+      showOut('Write-up saved',res.path,res.message,0,{type:'text'}); refresh(); } else alert(res.message||'save failed'); };
+  const revWu=el('button','go alt','Revert write-up'); revWu.onclick=()=>{ ta.value=j.writeup||''; prev.innerHTML=renderMd(j.writeup||''); dirty=false; rhd.textContent=j.writeup_exists?'Preview — current on file':'Preview'; };
+  wbtns.appendChild(saveWu); wbtns.appendChild(revWu); ws.appendChild(wbtns);
+  b.appendChild(ws);
+
+  const foot=el('div','row'); foot.style.marginTop='12px';
+  const close=el('button','go alt','Close'); close.onclick=()=>{ dlg.classList.remove('wide'); dlg.close(); };
+  foot.appendChild(close); b.appendChild(foot);
+  dlg.showModal();
+}
 function openWriteupEditor(j){
   const dlg=document.getElementById('dlg'); const b=document.getElementById('dlg-body'); b.innerHTML='';
-  b.appendChild(el('h3',null,'Write-up — data/writeups/'+j.abbr+'.md'+(j.exists?'':' (new)')));
-  const note=el('p','note','Manual save writes the file directly. For a drafted rewrite from your take, use Claude Code.');
+  dlg.classList.add('wide');
+  b.appendChild(el('h3',null,'Write-up — data/writeups/'+j.abbr+'.md'+(j.exists?'':' (new — file will be created)')));
+  const note=el('p','note', j.exists
+    ? 'Left = raw markdown you edit · Right = live preview (starts showing what’s currently on the site, so you see what you’re changing). Save writes the file directly; for a drafted rewrite from your take, use Claude Code.'
+    : 'No write-up on file yet — the right pane previews what you type. Save creates the file.');
   b.appendChild(note);
-  const ta=el('textarea'); ta.value=j.content; ta.style.minHeight='240px'; b.appendChild(ta);
+
+  const split=el('div','wu-split');
+  const leftWrap=el('div','wu-pane'); leftWrap.appendChild(el('div','wu-hd','Markdown (editable)'));
+  const ta=el('textarea','wu-ta'); ta.value=j.content; leftWrap.appendChild(ta);
+  const rightWrap=el('div','wu-pane');
+  const rhd=el('div','wu-hd'); rhd.textContent = j.exists ? 'Preview — current on file' : 'Preview';
+  rightWrap.appendChild(rhd);
+  const prev=el('div','wu-prev'); prev.innerHTML=renderMd(j.content); rightWrap.appendChild(prev);
+  split.appendChild(leftWrap); split.appendChild(rightWrap); b.appendChild(split);
+
+  let dirty=false;
+  ta.addEventListener('input',()=>{ prev.innerHTML=renderMd(ta.value);
+    if(!dirty){dirty=true; rhd.textContent='Preview — your edits (unsaved)';} });
+
   const r=el('div','row'); r.style.marginTop='10px';
   const save=el('button','go','Save'); save.onclick=async()=>{
     const res=await api('/api/writeup',{abbr:j.abbr,content:ta.value});
-    if(res.ok){ dlg.close(); showOut("Write-up saved",res.path,res.message,0,{type:'text'}); refresh(); }
+    if(res.ok){ dlg.classList.remove('wide'); dlg.close(); showOut("Write-up saved",res.path,res.message,0,{type:'text'}); refresh(); }
     else alert(res.message||'save failed');
   };
-  const cancel=el('button','go alt','Cancel'); cancel.onclick=()=>dlg.close();
-  r.appendChild(save); r.appendChild(cancel); b.appendChild(r);
+  const revert=el('button','go alt','Revert'); revert.onclick=()=>{ ta.value=j.content; prev.innerHTML=renderMd(j.content);
+    dirty=false; rhd.textContent = j.exists ? 'Preview — current on file' : 'Preview'; };
+  const cancel=el('button','go alt','Close'); cancel.onclick=()=>{ dlg.classList.remove('wide'); dlg.close(); };
+  r.appendChild(save); r.appendChild(revert); r.appendChild(cancel); b.appendChild(r);
   dlg.showModal();
 }
 
@@ -1053,6 +1296,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(502, json.dumps({"error": str(e)}))
         if u.path == "/api/writeup":
             return self._send(200, json.dumps(act_writeup_get((q.get("abbr") or [""])[0])))
+        if u.path == "/api/team":
+            return self._send(200, json.dumps(act_team_get((q.get("q") or q.get("abbr") or [""])[0])))
         if u.path == "/api/kbstatus":
             return self._send(200, json.dumps(act_kbstatus()))
         if u.path == "/api/trends":
@@ -1071,6 +1316,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, json.dumps(act_publish_check(body)))
             if u.path == "/api/writeup":
                 return self._send(200, json.dumps(act_writeup_save(body)))
+            if u.path == "/api/rating":
+                return self._send(200, json.dumps(act_rating_save(body)))
             if u.path == "/api/kbchat":
                 return self._send(200, json.dumps(act_kbchat(body)))
         except Exception as e:  # noqa: BLE001
