@@ -56,6 +56,7 @@ TOOLS = {
     "team": ("team_server.py", 8788),
     "injury": ("injury_server.py", 8789),
     "guru": ("guru_server.py", 8790),
+    "depth": ("depth_server.py", 8791),
 }
 
 
@@ -160,6 +161,12 @@ def act_launch(body):
         if _port_up(port):
             break
         threading.Event().wait(0.15)
+    # depth chart: optional team deep-link (the page reads ?q= on load)
+    if tool == "depth":
+        team = (body.get("team") or "").strip()
+        if team:
+            from urllib.parse import quote
+            url = url + "?q=" + quote(team)
     return {"ok": _port_up(port), "url": url, "started": started,
             "message": "" if _port_up(port) else "server did not come up — check /tmp log"}
 
@@ -714,6 +721,8 @@ const CARDS = [
    render:c=>btn(c,"Show diff",()=>run({action:'whatchanged'},"What changed"))},
  {n:10, t:"Injury report", d:"Every team's rating-relevant injuries (Sleeper). Open the dashboard, or run the CLI scan.",
    render:c=>injuryCard(c)},
+ {n:12, t:"Depth charts", d:"Starter → backup order (Ourlads) with player photos + jersey numbers. List or field-diagram view; pick a team.",
+   render:c=>depthCard(c)},
  {n:11, t:"NFL knowledge base", wide:true, d:"Chat in plain English — “turnover differential per team last year”, “spot the trends this week”. Model writes read-only SQL, cites the numbers. One-click trends + a raw SQL box work with no key.",
    render:c=>kbCard(c)},
 ];
@@ -761,6 +770,13 @@ function injuryCard(c){
   const b1=el('button','go','Open dashboard'); b1.onclick=()=>launch('injury');
   const i=el('input'); i.placeholder='team (blank = all)'; i.style.width='120px';
   const b2=el('button','go alt','Run scan'); b2.onclick=()=>run({action:'injuries',team:i.value.trim()},"Injury scan");
+  [b1,i,b2].forEach(x=>r.appendChild(x)); c.appendChild(r);
+}
+function depthCard(c){
+  const r=el('div','row');
+  const b1=el('button','go','Open depth charts'); b1.onclick=()=>launch('depth');
+  const i=el('input'); i.placeholder='team (optional)'; i.style.width='130px';
+  const b2=el('button','go alt','Open team'); b2.onclick=()=>launch('depth',{team:i.value.trim()});
   [b1,i,b2].forEach(x=>r.appendChild(x)); c.appendChild(r);
 }
 function kbCard(c){
