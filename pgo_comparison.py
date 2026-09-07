@@ -370,6 +370,35 @@ FANTASY_CSS = """
 """
 
 
+FANTASY_AVAILABILITY_CSS = """
+#panel-fantasy .fantasy-availability {
+  display:flex; flex-wrap:wrap; gap:4px 6px; align-items:center;
+  max-width:100%; margin-top:4px; color:var(--mut); font-size:11px;
+  font-weight:600; line-height:1.35;
+}
+#panel-fantasy .fantasy-source-badge,
+#panel-fantasy .fantasy-game-state {
+  display:inline-block; max-width:100%; padding:2px 6px;
+  border:1px solid var(--border); border-radius:999px;
+  overflow-wrap:anywhere;
+}
+#panel-fantasy .fantasy-source-badge { color:var(--ink); }
+#panel-fantasy .fantasy-source-badge:focus-visible,
+#panel-fantasy .fantasy-details summary:focus-visible {
+  outline:3px solid var(--orange); outline-offset:2px;
+}
+#panel-fantasy .fantasy-availability-note,
+#panel-fantasy .fantasy-source-time,
+#panel-fantasy .fantasy-inactives li { overflow-wrap:anywhere; }
+#panel-fantasy .fantasy-inactives { padding-left:20px; }
+@media (max-width:480px) {
+  #panel-fantasy .fantasy-availability { align-items:flex-start; }
+  #panel-fantasy .fantasy-source-badge,
+  #panel-fantasy .fantasy-game-state { border-radius:6px; }
+}
+"""
+
+
 def _signed(value):
     return f"{value:+.1f}"
 
@@ -926,6 +955,7 @@ def inject_fantasy_preview(existing_html, panel_html):
     markers = ("</style>", "</body>", COMPARISON_TAB, comparison_panel)
     if (
         any(existing_html.count(marker) != 1 for marker in markers)
+        or existing_html.count(FANTASY_AVAILABILITY_CSS) != 0
         or comparison_panel.count(panel_class) != 1
         or comparison_panel.count(panel_label) != 1
         or panel_html.count('id="panel-fantasy"') != 1
@@ -943,7 +973,10 @@ def inject_fantasy_preview(existing_html, panel_html):
         .replace(panel_class, '<section class="panel" id="panel-comparison"', 1)
         .replace(panel_label, 'aria-labelledby="tab-comparison" hidden>', 1)
     )
-    output = existing_html.replace("</style>", FANTASY_CSS + "\n</style>", 1)
+    fantasy_css = FANTASY_CSS
+    if 'class="fantasy-availability"' in panel_html:
+        fantasy_css += "\n" + FANTASY_AVAILABILITY_CSS
+    output = existing_html.replace("</style>", fantasy_css + "\n</style>", 1)
     output = output.replace(COMPARISON_TAB, inactive_tab + FANTASY_TAB, 1)
     output = output.replace(
         comparison_panel, inactive_panel + "\n" + panel_html, 1
@@ -977,8 +1010,12 @@ def _extract_published_fantasy_panel(existing_html):
     tab_count = existing_html.count('id="tab-fantasy"')
     panel_count = existing_html.count('id="panel-fantasy"')
     css_count = existing_html.count(FANTASY_CSS)
+    availability_css_count = existing_html.count(FANTASY_AVAILABILITY_CSS)
     script_count = existing_html.count(FANTASY_SCRIPT)
-    if tab_count == panel_count == css_count == script_count == 0:
+    if (
+        tab_count == panel_count == css_count == availability_css_count
+        == script_count == 0
+    ):
         return None
     if (
         tab_count != 1
@@ -996,7 +1033,14 @@ def _extract_published_fantasy_panel(existing_html):
         raise ValueError("Existing fantasy preview markers are incomplete or duplicated")
     if start >= 2 and existing_html[start - 2:start] == "  ":
         start -= 2
-    return existing_html[start:end + len(end_marker)]
+    panel = existing_html[start:end + len(end_marker)]
+    if availability_css_count != int(
+        'class="fantasy-availability"' in panel
+    ):
+        raise ValueError(
+            "Existing fantasy availability CSS is missing, duplicated, or orphaned"
+        )
+    return panel
 
 
 def mccabe_source_timestamp(path):

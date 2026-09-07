@@ -846,6 +846,85 @@ class ComparisonTests(unittest.TestCase):
         self.assertNotIn('<section class="panel active" id="panel-comparison"', output)
         self.assertIn('data-sort="3">3</td><td data-sort="5.5">+5.5', output)
 
+    def test_refresh_mccabe_preserves_availability_panel_and_assets(self):
+        availability_css = getattr(
+            pgo_comparison, "FANTASY_AVAILABILITY_CSS", None
+        )
+        self.assertIsNotNone(availability_css)
+        fantasy_panel = pgo_comparison.render_fantasy_panel(
+            self._fantasy_preview()
+        ).replace(
+            "Buffalo QB</th>",
+            'Buffalo QB<span class="fantasy-availability">'
+            '<span class="fantasy-game-state">PREVIEW</span></span></th>',
+            1,
+        )
+
+        with tempfile.TemporaryDirectory() as temp:
+            mccabe_path = Path(temp) / "ratings.csv"
+            mccabe_path.write_bytes(pgo_comparison.MCCABE_PATH.read_bytes())
+            current_rows = pgo_comparison.load_mccabe_rows(mccabe_path)
+            comparison_rows = [
+                {
+                    "team": row["team"],
+                    "mccabe_rank": row["rank"],
+                    "mccabe_rating": row["rating"],
+                    "full_strength_rank": row["rank"],
+                    "full_strength_rating": row["rating"],
+                    "availability_adjustment": 0.0,
+                    "current_lineup_rank": row["rank"],
+                    "current_lineup_rating": row["rating"],
+                    "rank_disagreement": 0,
+                    "rating_disagreement": 0.0,
+                }
+                for row in current_rows
+            ]
+            comparison = pgo_comparison.inject_comparison(
+                self._base_html(),
+                pgo_comparison.render_comparison_panel(
+                    comparison_rows, self._held_receipt()
+                ),
+            )
+            published = pgo_comparison.inject_fantasy_preview(
+                comparison, fantasy_panel
+            )
+            invalid_pages = {
+                "missing": published.replace(availability_css, "", 1),
+                "duplicate": published.replace(
+                    "</style>", availability_css + "\n</style>", 1
+                ),
+                "orphaned": pgo_comparison.inject_fantasy_preview(
+                    comparison,
+                    pgo_comparison.render_fantasy_panel(
+                        self._fantasy_preview()
+                    ),
+                ).replace(
+                    "</style>", availability_css + "\n</style>", 1
+                ),
+            }
+            with patch.object(
+                pgo_comparison,
+                "mccabe_source_timestamp",
+                return_value="2026-09-06T12:00:00-04:00",
+            ):
+                output = pgo_comparison.refresh_mccabe_page(
+                    self._base_html(), published, mccabe_path
+                )
+                for case, page in invalid_pages.items():
+                    with self.subTest(case=case):
+                        with self.assertRaisesRegex(
+                            ValueError, "availability CSS"
+                        ):
+                            pgo_comparison.refresh_mccabe_page(
+                                self._base_html(), page, mccabe_path
+                            )
+
+        self.assertIn(fantasy_panel, output)
+        self.assertEqual(output.count(pgo_comparison.FANTASY_TAB), 1)
+        self.assertEqual(output.count(pgo_comparison.FANTASY_CSS), 1)
+        self.assertEqual(output.count(availability_css), 1)
+        self.assertEqual(output.count(pgo_comparison.FANTASY_SCRIPT), 1)
+
     def test_refresh_mccabe_rejects_invalid_fantasy_markers(self):
         comparison_rows = [{
             "team": "Los Angeles Rams", "mccabe_rank": 1, "mccabe_rating": 7.5,
