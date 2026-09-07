@@ -363,6 +363,14 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn("prospective_predictions.csv", html)
         self.assertIn("July 21, 2026 at 12:00 PM EDT", html)
         self.assertIn("August 26, 2026 at 4:07 PM EDT", html)
+        self.assertIn(
+            '<time datetime="2026-09-10T00:20:00+00:00">'
+            "September 10, 2026 at 12:20 AM UTC</time>",
+            html,
+        )
+        self.assertIn(
+            '<link href="https://fonts.googleapis.com/css2?family=Oswald', html
+        )
 
         escaped = pgo_forecast_lab.render_lab(
             self.synthetic_lock(), [], [{"source_url": "https://example.com/?x=<tag>"}]

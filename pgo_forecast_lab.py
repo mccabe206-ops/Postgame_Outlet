@@ -307,14 +307,35 @@ def _shared_css():
     return template.split("<style>", 1)[1].split("</style>", 1)[0]
 
 
+def _shared_font_links():
+    template = generate_site.TEMPLATE
+    marker = '<link rel="preconnect" href="https://fonts.googleapis.com">'
+    if template.count(marker) != 1:
+        raise ValueError("Shared board font markers are missing or ambiguous")
+    start = template.index(marker)
+    end = template.index("<style>", start)
+    links = template[start:end].strip()
+    if links.count("<link") != 2 or "{{" in links:
+        raise ValueError("Shared board font links are invalid")
+    return links
+
+
 def _signed(value):
     return f"{float(value):+.1f}"
 
 
 def _display_time(value, zone_label):
-    moment = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    moment = value if isinstance(value, datetime) else datetime.fromisoformat(
+        str(value).replace("Z", "+00:00")
+    )
     clock = moment.strftime("%I:%M %p").lstrip("0")
     return f"{moment.strftime('%B')} {moment.day}, {moment.year} at {clock} {zone_label}"
+
+
+def _kickoff_time(value):
+    source = str(value)
+    display = _display_time(_utc(source), "UTC")
+    return f'<time datetime="{html.escape(source, quote=True)}">{display}</time>'
 
 
 def _metric_cards(metrics):
@@ -349,6 +370,7 @@ def _metric_cards(metrics):
 def render_lab(lock, results, provenance):
     """Render a standalone, escaped, no-fetch Forecast Lab page."""
     css = _shared_css()
+    font_links = _shared_font_links()
     result_by_id = {row["game_id"]: row for row in results}
     metrics = interim_metrics(lock, results)
     weeks = []
@@ -369,7 +391,7 @@ def render_lab(lock, results, provenance):
                 f'<th scope="row">{html.escape(game["away"])} @ {html.escape(game["home"])}</th>'
                 f'<td>{_signed(game["candidate_prediction"])}</td>'
                 f'<td>{_signed(game["pgo_v0_prediction"])}</td>'
-                f'<td>{html.escape(game["kickoff"])}</td>'
+                f'<td>{_kickoff_time(game["kickoff"])}</td>'
                 f'<td>{actual}</td><td>{error}</td></tr>'
             )
         weeks.append(
@@ -398,7 +420,7 @@ def render_lab(lock, results, provenance):
     recorded = len(results)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PGO Forecast Lab</title><style>{css}
+<title>PGO Forecast Lab</title>{font_links}<style>{css}
 .lab-wrap{{max-width:1180px;margin:0 auto;padding:24px 18px 60px}}.lab-hero{{padding:26px;border:1px solid var(--border);border-radius:14px;background:var(--panel)}}
 .status{{display:inline-block;padding:6px 10px;border:1px solid var(--orange);border-radius:999px;font-weight:800}}.metric-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}}.metric{{padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}}.metric h3{{margin-top:0}}.forecast-week{{margin:12px 0;border:1px solid var(--border);border-radius:10px;padding:12px}}.forecast-week summary{{cursor:pointer;font-weight:800}}.forecast-week summary span{{color:var(--mut);font-weight:500}}table{{width:100%;border-collapse:collapse}}th,td{{padding:9px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}}th:first-child{{text-align:left}}.notice{{padding:14px;border-left:4px solid var(--orange);background:var(--panel)}}code{{overflow-wrap:anywhere}}
 </style></head><body><main class="lab-wrap">
