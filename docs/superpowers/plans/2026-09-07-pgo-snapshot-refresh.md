@@ -41,3 +41,13 @@ Use the existing isolated league-profiles worktree; preserve old evidence.
 
 No new dependencies, speculative model tuning, probability claims, or
 automatic promotion. Fantasy payloads and McCabe inputs are unchanged.
+
+5. Apply the user's subsequent weekly T-60 requirement in a separate series.
+   Add a small append-only recorder for verified snapshot projections, actual
+   registration timestamps, per-game kickoff-minus-60-minute cutoffs, source
+   hashes, and preserved revision history. Reject equality/late writes and
+   schedule identity changes. Seed only Week 1 from the reviewed September
+   source; keep later weeks as preseason forecasts. Put weekly drafts/locks
+   first in the Lab, with separate results and the original preseason archive.
+   Verify before/exact/after cutoff, independently timed matchups, immutable
+   history, source integrity, results routing, and mobile presentation.

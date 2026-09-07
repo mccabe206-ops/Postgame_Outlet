@@ -109,3 +109,33 @@ numerics, or reproducibility cannot be established. Preserve the failed
 attempt and explain its concrete limitation. Do not tune a team toward McCabe
 or consensus. Do not change fantasy projections, McCabe's numbers, Shopify
 theme styling, or the old historical/scientific gates during this refresh.
+
+## Weekly cutoff requested during implementation
+
+Alex subsequently requested that weekly predictions lock one hour before
+each team's game. The grain is one matchup, so both teams' projected scores,
+the spread, and the total share one cutoff: scheduled kickoff minus 60 minutes.
+The September preseason artifact stays frozen under its original contract.
+
+Weekly forecasts are a separate append-only series of reviewed revisions.
+Each revision records its actual registration time and the verified source
+snapshot. A revision must be registered strictly before that game's cutoff;
+at the cutoff, the latest eligible saved revision is the locked forecast.
+This rule does not depend on a scheduled job starting at an exact minute.
+There is no caller-supplied backdating option or later replacement of history.
+An earlier game's deadline must not close updates for later games.
+Registration is not proof of public availability: predeadline publication
+claims require the corresponding external repository/deployment evidence.
+
+Start Week 1 with the verified September projections, labeled with their
+actual input date. These are drafts until each game's cutoff. Later revisions
+require a separately reviewed source snapshot; this change adds no unattended
+roster or injury refresh. Future weeks remain available as preseason forecasts
+until a weekly edition is recorded. Missing weekly forecasts remain missing.
+The current source verifier accepts the reviewed September edition; a later
+in-season inference format needs its own review before this recorder accepts
+it. The cutoff recorder does not qualify a new source format by itself.
+The UI displays each game's cutoff and distinguishes draft, locked, and
+preseason records. Results and accuracy are recorded separately for each series.
+Schedule changes cannot silently extend a previously recorded cutoff; hold the
+affected game for explicit schedule adjudication while preserving its history.

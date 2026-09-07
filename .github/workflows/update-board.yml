@@ -8,6 +8,8 @@ on:
       - "generate_site.py"
       - "pgo_comparison.py"
       - "pgo_forecast_lab.py"
+      - "pgo_forecast_snapshot.py"
+      - "pgo_forecast_weekly.py"
       - "docs/evidence/forecast-lab-2026/**"
       - "research/pgo_stability_blend/prospective_attestation.json"
       - "!data/snapshots.json"

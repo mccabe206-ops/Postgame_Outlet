@@ -4,6 +4,7 @@
 import argparse
 import csv
 from datetime import UTC, datetime
+from decimal import Decimal, ROUND_HALF_UP
 import hashlib
 import html
 import io
@@ -13,8 +14,11 @@ from pathlib import Path
 import re
 import sys
 from urllib.parse import urlparse
+from zoneinfo import ZoneInfo
 
 import generate_site
+import pgo_forecast_snapshot
+import pgo_forecast_weekly
 import pgo_prospective
 from release_ratings import atomic_write_text
 
@@ -25,10 +29,13 @@ LOCK_PATH = ARCHIVE_DIR / "prospective_lock.json"
 PREDICTIONS_PATH = ARCHIVE_DIR / "prospective_predictions.csv"
 ATTESTATION_PATH = HERE / "research" / "pgo_stability_blend" / "prospective_attestation.json"
 CAPTURE_ROOT = ARCHIVE_DIR / "results"
+SNAPSHOT_DIR = ARCHIVE_DIR / "september-07"
+WEEKLY_DIR = ARCHIVE_DIR / "weekly"
 OUTPUT_PATH = HERE / "docs" / "forecast-lab.html"
 ATTESTATION_COMMIT = "8aae9438d251c645509d3df15a31bb86d50059b9"
 ATTESTED_AT = "2026-08-26T16:07:24-04:00"
 EXPECTED_ATTESTATION_SHA256 = "b89fe9c50f6c9d351aecc1820c573625ef11dd17bca1650ce3327abc8e3fadcd"
+EXPECTED_SNAPSHOT_MANIFEST_SHA256 = "43bdeee73a2d3301eedbcecc7d291dc9ebe68cf196860e7217326570e4fe2f42"
 RESULT_COLUMNS = (
     "game_id", "season", "week", "kickoff", "game_type", "home_team",
     "away_team", "home_score", "away_score", "finalized_at",
@@ -89,6 +96,23 @@ def load_archive(lock_path, csv_path, attestation_path):
     if len(lock["games"]) != 272:
         raise ValueError("Forecast archive must contain exactly 272 games")
     return lock
+
+
+def _load_snapshot(directory):
+    directory = Path(directory)
+    is_default = directory.absolute() == SNAPSHOT_DIR.absolute()
+    if not directory.exists() and not directory.is_symlink():
+        if is_default and EXPECTED_SNAPSHOT_MANIFEST_SHA256:
+            raise ValueError("The pinned default snapshot is missing")
+        return None
+    if is_default and EXPECTED_SNAPSHOT_MANIFEST_SHA256:
+        try:
+            manifest = (directory / "manifest.json").read_bytes()
+        except OSError as error:
+            raise ValueError("The pinned default snapshot manifest is missing") from error
+        if _sha256(manifest) != EXPECTED_SNAPSHOT_MANIFEST_SHA256:
+            raise ValueError("The pinned default snapshot manifest hash changed")
+    return pgo_forecast_snapshot.load_snapshot(directory)
 
 
 def _parse_results(raw, label):
@@ -300,6 +324,87 @@ def interim_metrics(lock, results):
     }
 
 
+def _target_summary(predicted, actual):
+    errors = [observed - estimate for observed, estimate in zip(actual, predicted)]
+    return {
+        "count": len(errors),
+        "mae": math.fsum(abs(error) for error in errors) / len(errors) if errors else None,
+        "rmse": math.sqrt(math.fsum(error * error for error in errors) / len(errors)) if errors else None,
+        "bias": math.fsum(errors) / len(errors) if errors else None,
+    }
+
+
+def snapshot_interim_metrics(snapshot, results):
+    """Describe finalized results for the separately issued September snapshot."""
+    games = {game["game_id"]: game for game in snapshot.get("games", ())}
+    selected = []
+    for result in results:
+        game = games.get(result["game_id"])
+        if game is None:
+            raise ValueError(f'Unexpected September snapshot result: {result["game_id"]}')
+        selected.append((game, result))
+    predicted_margins = [float(game["margin"]) for game, _result in selected]
+    actual_margins = [float(result["actual_margin"]) for _game, result in selected]
+    predicted_totals = [float(game["total"]) for game, _result in selected]
+    actual_totals = [
+        float(result["home_score"] + result["away_score"])
+        for _game, result in selected
+    ]
+    predicted_scores = [
+        score for game, _result in selected
+        for score in (float(game["home_points"]), float(game["away_points"]))
+    ]
+    actual_scores = [
+        float(score) for _game, result in selected
+        for score in (result["home_score"], result["away_score"])
+    ]
+    venue_margins = [
+        2.5 if game["location"] == "Home" else 0.0
+        for game, _result in selected
+    ]
+    league_total = float(snapshot["league_mean_total"])
+    league_totals = [league_total for _item in selected]
+    league_scores = [
+        score for venue in venue_margins
+        for score in ((league_total + venue) / 2, (league_total - venue) / 2)
+    ]
+    unavailable = {"total": None, "score": None}
+    return {
+        "count": len(selected),
+        "margin": _target_summary(predicted_margins, actual_margins),
+        "total": _target_summary(predicted_totals, actual_totals),
+        "score": _target_summary(predicted_scores, actual_scores),
+        "winner": _summary(predicted_margins, actual_margins, winner=True)["winner"],
+        "ties": {
+            "actual": actual_margins.count(0.0),
+            "forecast": predicted_margins.count(0.0),
+        },
+        "baselines": {
+            "pgo_v0": {
+                "margin": _target_summary(
+                    [float(game["pgo_v0_margin"]) for game, _result in selected],
+                    actual_margins,
+                ), **unavailable,
+            },
+            "legacy": {
+                "margin": _target_summary(
+                    [float(game["legacy_margin"]) for game, _result in selected],
+                    actual_margins,
+                ), **unavailable,
+            },
+            "zero": {
+                "margin": _target_summary([0.0 for _item in selected], actual_margins),
+                **unavailable,
+            },
+            "league_mean_venue": {
+                "margin": _target_summary(venue_margins, actual_margins),
+                "total": _target_summary(league_totals, actual_totals),
+                "score": _target_summary(league_scores, actual_scores),
+            },
+        },
+    }
+
+
 def _shared_css():
     template = generate_site.TEMPLATE
     if template.count("<style>") != 1 or template.count("</style>") != 1:
@@ -338,6 +443,218 @@ def _kickoff_time(value):
     return f'<time datetime="{html.escape(source, quote=True)}">{display}</time>'
 
 
+def _snapshot_kickoff_time(value):
+    source = str(value)
+    moment = _utc(source).astimezone(ZoneInfo("America/New_York"))
+    display = _display_time(moment, moment.tzname())
+    return f'<time datetime="{html.escape(source, quote=True)}">{display}</time>'
+
+
+def _whole_point(value):
+    return str(int(Decimal(str(value)).quantize(Decimal("1"), rounding=ROUND_HALF_UP)))
+
+
+def _spread(game):
+    margin = float(game["margin"])
+    if f"{abs(margin):.1f}" == "0.0":
+        return "Pick'em"
+    if margin > 0:
+        return f'{html.escape(game["home"])} -{margin:.1f}'
+    if margin < 0:
+        return f'{html.escape(game["away"])} -{abs(margin):.1f}'
+
+
+def _snapshot_metric_cards(metrics, label="September snapshot"):
+    if metrics["count"] == 0:
+        return f'<p class="empty">No finalized {html.escape(label)} results recorded yet.</p>'
+    cards = []
+    for name, label in (
+        ("margin", "Margin error"),
+        ("total", "Total-points error"),
+        ("score", "Team-score error"),
+    ):
+        item = metrics[name]
+        cards.append(
+            f'<article class="metric"><h3>{label}</h3>'
+            f'<div>Values <strong>{item["count"]}</strong></div>'
+            f'<div>MAE <strong>{item["mae"]:.3f}</strong></div>'
+            f'<div>RMSE <strong>{item["rmse"]:.3f}</strong></div>'
+            f'<div>Bias <strong>{item["bias"]:+.3f}</strong></div></article>'
+        )
+    winner = metrics["winner"]
+    accuracy = "Unavailable" if winner["accuracy"] is None else f'{winner["accuracy"]:.1%}'
+    cards.append(
+        '<article class="metric"><h3>Winner accuracy</h3>'
+        f'<div><strong>{accuracy}</strong></div>'
+        f'<small>{winner["correct"]}/{winner["denominator"]}; '
+        f'{metrics["ties"]["actual"]} actual ties and '
+        f'{metrics["ties"]["forecast"]} zero-margin forecasts excluded</small></article>'
+    )
+    baselines = metrics["baselines"]
+    baseline_rows = []
+    for key, label in (
+        ("pgo_v0", "PGO v0 margin"),
+        ("legacy", "Original archive margin"),
+        ("zero", "Zero margin"),
+        ("league_mean_venue", "League mean + venue"),
+    ):
+        item = baselines[key]
+        values = [
+            "Unavailable" if item[target] is None else f'{item[target]["mae"]:.3f}'
+            for target in ("margin", "total", "score")
+        ]
+        baseline_rows.append(
+            f'<tr><th scope="row">{label}</th>'
+            + "".join(f"<td>{value}</td>" for value in values) + "</tr>"
+        )
+    return (
+        '<div class="metric-grid">' + "".join(cards) + "</div>"
+        '<h3>Same-game diagnostic baselines</h3>'
+        f'<p>Every row uses the same {metrics["count"]} finalized games. '
+        'PGO v0 and the original archive have no frozen total or score forecasts.</p>'
+        '<div class="table-shell"><table><thead><tr><th>Baseline</th>'
+        '<th>Margin MAE</th><th>Total MAE</th><th>Team-score MAE</th></tr></thead>'
+        f'<tbody>{"".join(baseline_rows)}</tbody></table></div>'
+    )
+
+
+def _forecast_weeks(games, results, *, weekly=False):
+    result_by_id = {row["game_id"]: row for row in results}
+    weeks = []
+    for week in sorted({game["week"] for game in games}):
+        rows = []
+        for game in (item for item in games if item["week"] == week):
+            result = result_by_id.get(game["game_id"])
+            actual = "&mdash;"
+            if result:
+                actual = (
+                    f'{html.escape(game["away"])} {result["away_score"]}, '
+                    f'{html.escape(game["home"])} {result["home_score"]}'
+                )
+            score = (
+                f'{html.escape(game["away"])} {_whole_point(game["away_points"])}, '
+                f'{html.escape(game["home"])} {_whole_point(game["home_points"])}'
+            )
+            timing = ""
+            if weekly:
+                cutoff = html.escape(game["lock_at"], quote=True)
+                status = "Locked" if _current_utc() >= _utc(game["lock_at"]) else "Draft"
+                timing = (
+                    f'<td><span class="weekly-status" data-weekly-cutoff="{cutoff}">{status}</span>'
+                    f'<br>{_snapshot_kickoff_time(game["lock_at"])}</td>'
+                )
+            kind = "weekly" if weekly else "snapshot"
+            rows.append(
+                f'<tr data-{kind}-game-id="{html.escape(game["game_id"], quote=True)}">'
+                f'<th scope="row">{html.escape(game["away"])} @ {html.escape(game["home"])}</th>'
+                f'<td>{_spread(game)}</td><td>{score}</td><td>{float(game["total"]):.1f}</td>'
+                f'{timing}'
+                f'<td>{_snapshot_kickoff_time(game["kickoff"])}</td>'
+                f'<td>{actual}</td></tr>'
+            )
+        weeks.append(
+            f'<details class="forecast-week {kind}-week"{" open" if week == min(game["week"] for game in games) else ""}>'
+            f'<summary>Week {week} <span>{len(rows)} games</span></summary>'
+            '<div class="table-shell"><table><thead><tr><th>Matchup</th><th>PGO spread</th>'
+            '<th>Projected score</th><th>Projected total</th>'
+            f'{"<th>Weekly lock (Eastern)</th>" if weekly else ""}'
+            f'<th>Frozen kickoff</th><th>Actual</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div></details>'
+        )
+    return "".join(weeks)
+
+
+def _weekly_section(weekly, snapshot, results, provenance):
+    games = weekly["games"]
+    metrics = snapshot_interim_metrics({**snapshot, "games": games}, results)
+    source_dates = sorted({game["source_generated_at"] for game in games})
+    source_text = ", ".join(_snapshot_kickoff_time(value) for value in source_dates)
+    sources = (
+        f'<p>Source snapshot generated: {source_text}. '
+        'The initial Week 1 draft uses the September 7 active-roster snapshot; '
+        'it does not include a comprehensive game-day injury adjustment.</p>'
+        if games else '<p>No weekly edition has been recorded yet.</p>'
+    )
+    revisions = "".join(
+        f'<li>Saved {_snapshot_kickoff_time(item["registered_at"])}; '
+        f'<a href="evidence/forecast-lab-2026/weekly/{html.escape(item["revision"], quote=True)}">'
+        f'forecast revision</a></li>' for item in weekly.get("revisions", [])
+    )
+    result_sources = "".join(
+        f'<li>{html.escape(str(item["captured_at"]))}: '
+        f'<a href="{html.escape(_https_url(item["source_url"]), quote=True)}">'
+        f'reviewed result source</a> ({item["rows"]} rows; CSV SHA-256 '
+        f'<code>{html.escape(str(item["results_file_sha256"]))}</code>)</li>'
+        for item in provenance
+    ) or "<li>No weekly results recorded.</li>"
+    return f'''
+<header class="lab-hero hero"><div class="status">EXPERIMENTAL &mdash; HOLD</div>
+<h1>PGO Forecast Lab</h1><h2>Weekly game forecasts</h2>
+<p>Each matchup locks <strong>60 minutes before kickoff</strong>. Both teams' projected scores, the spread, and the total freeze together.</p>
+<p>Drafts can change until their own cutoff. The last saved revision before that deadline becomes the locked forecast; earlier games do not lock the rest of the week.</p>
+<p><a href="index.html">Back to McCabe Ratings</a> &middot; <a href="#preseason-baseline">Full-season preseason forecast</a></p></header>
+<section><h2>Weekly predictions</h2>{sources}
+<p>The PGO spread shows the favorite with a minus sign. Scores are rounded to whole points; spreads and totals to one decimal. Evaluation uses unrounded values.</p>
+{_forecast_weeks(games, results, weekly=True)}</section>
+<section><h2>Weekly forecast record</h2><p>{len(results)} of {len(games)} recorded weekly forecasts have finalized results. Interim tracking &mdash; not a validation result.</p>{_snapshot_metric_cards(metrics, "weekly")}</section>
+<details class="lab-detail"><summary>Weekly revision history and rules</summary><ul>{revisions or "<li>No revisions yet.</li>"}</ul>
+<p>Revisions are saved separately and cannot be submitted at or after the cutoff. A saved timestamp records local registration; the repository history records publication. A schedule change requires review and cannot silently extend an existing deadline.</p>
+<p>Fresh weekly inputs require a separately reviewed source snapshot. Source refresh is not automated. Future weeks without a weekly edition remain available in the preseason baseline below.</p>
+<h3>Weekly results provenance</h3><ul>{result_sources}</ul></details>'''
+
+
+def _snapshot_section(snapshot, results, provenance):
+    generated = _utc(snapshot["generated_at"])
+    games = list(snapshot["games"])
+    if any(generated >= _utc(game["kickoff"]) for game in games):
+        raise ValueError("September snapshot must be generated before every kickoff")
+    metrics = snapshot_interim_metrics(snapshot, results)
+    ratings = "".join(
+        f'<tr class="snapshot-team"><td>{team["rank"]}</td>'
+        f'<th scope="row">{html.escape(team["team"])}</th><td>{_signed(team["rating"])}</td>'
+        f'<td>{html.escape(team["qb_name"])}</td>'
+        f'<td>{html.escape(team["old_selector_qb_name"])} ({_signed(team["old_selector_rating"])})</td></tr>'
+        for team in sorted(snapshot["teams"], key=lambda item: item["rank"])
+    )
+    method = snapshot.get("method", {})
+    method_items = "".join(
+        f'<li><strong>{html.escape(label)}:</strong> {html.escape(str(method[key]))}</li>'
+        for key, label in (
+            ("roster_policy", "Roster policy"),
+            ("injury_coverage", "Injury coverage"),
+            ("history", "History"),
+            ("totals", "Projected totals"),
+            ("fit_recovery", "Fit recovery"),
+            ("evaluation", "Evaluation boundary"),
+            ("schedule", "Schedule"),
+        ) if method.get(key)
+    )
+    source_items = "".join(
+        f'<li>{html.escape(str(source["name"]))}: '
+        f'<a href="{html.escape(_https_url(source["url"]), quote=True)}">source</a>; '
+        f'captured {html.escape(str(source["captured_at"]))}; SHA-256 '
+        f'<code>{html.escape(str(source["sha256"]))}</code></li>'
+        for source in snapshot.get("sources", ())
+    ) or "<li>See the verified snapshot manifest.</li>"
+    result_sources = "".join(
+        f'<li>{html.escape(str(item["captured_at"]))}: '
+        f'<a href="{html.escape(_https_url(item["source_url"]), quote=True)}">'
+        f'reviewed transcription source</a> ({item["rows"]} rows; CSV SHA-256 '
+        f'<code>{html.escape(str(item["results_file_sha256"]))}</code>)</li>'
+        for item in provenance
+    ) or "<li>No September result transcriptions recorded.</li>"
+    return f'''
+<header class="lab-hero hero"><div class="status">{html.escape(str(method.get("status", "EXPERIMENTAL — HOLD")))}</div>
+<h1>PGO Forecast Lab</h1><h2>September 7 preseason snapshot</h2>
+<p><strong>{html.escape(str(method.get("name", "Active-roster preseason scenario")))}</strong>. Positive home margin means the home team is ahead; the PGO spread shows the favorite with a minus sign.</p>
+<p>ACT is an administrative roster status, not proof of health or game-day availability. Week 1 and the full schedule use the same September 7 state; later weeks are not weekly lineup updates.</p>
+<p><strong>{len(results)} of {len(games)} finalized results recorded.</strong> Interim tracking &mdash; not a validation result.</p>
+<p><a href="index.html">Back to McCabe Ratings</a></p></header>
+<section><h2>September snapshot record</h2>{_snapshot_metric_cards(metrics)}</section>
+<section><h2>Week 1 and full-season forecasts</h2><p>Scores are rounded to whole points; spreads and totals to one decimal. Evaluation uses the original unrounded projections.</p>{_forecast_weeks(games, results)}</section>
+<details class="lab-detail" open><summary>32-team active-roster ratings and QB assumptions</summary><div class="table-shell"><table><thead><tr><th>Rank</th><th>Team</th><th>PGO rating</th><th>Expected QB1</th><th>Old QB-selector comparison</th></tr></thead><tbody>{ratings}</tbody></table></div></details>
+<details class="lab-detail"><summary>September method, sources, and downloads</summary><p>Generated {_display_time(generated, "UTC")}. This inference-policy change and the simple projected-score method remain experimental; through-2025 performance does not validate them.</p><ul>{method_items}</ul><p><a href="evidence/forecast-lab-2026/september-07/snapshot.json">Snapshot JSON</a> &middot; <a href="evidence/forecast-lab-2026/september-07/forecasts.csv">Forecast CSV</a> &middot; <a href="evidence/forecast-lab-2026/september-07/ratings.csv">Ratings CSV</a> &middot; <a href="evidence/forecast-lab-2026/september-07/manifest.json">Verification manifest</a></p><ul>{source_items}</ul><p>No calibrated probabilities, market claims, or retrospective promotion are attached to this snapshot.</p><h3>September results provenance</h3><ul>{result_sources}</ul></details>'''
+
+
 def _metric_cards(metrics):
     if metrics["blend"]["count"] == 0:
         return '<p class="empty">No finalized results recorded yet.</p>'
@@ -367,10 +684,31 @@ def _metric_cards(metrics):
     return '<div class="metric-grid">' + "".join(cards) + "</div>"
 
 
-def render_lab(lock, results, provenance):
+def render_lab(lock, results, provenance, *, snapshot=None,
+               snapshot_results=(), snapshot_provenance=(), weekly=None,
+               weekly_results=(), weekly_provenance=()):
     """Render a standalone, escaped, no-fetch Forecast Lab page."""
     css = _shared_css()
     font_links = _shared_font_links()
+    if snapshot is None:
+        lead = f'''<header class="lab-hero hero"><div class="status">Experimental &middot; frozen archive</div>
+<h1>PGO Forecast Lab</h1><h2>Can PGO predict football?</h2>
+<p>This page tracks one frozen 2026 experiment. Each forecast is an estimated scoring margin: positive favors the home team; negative favors the away team.</p>
+<p><strong>{len(results)} of {len(lock["games"])} finalized results recorded.</strong> Interim tracking &mdash; not a validation result.</p>
+<p><a href="index.html">Back to McCabe Ratings</a></p></header>'''
+        archive_open = archive_close = archive_heading = ""
+    else:
+        lead = _snapshot_section(snapshot, snapshot_results, snapshot_provenance)
+        if weekly is not None:
+            lead = (
+                _weekly_section(weekly, snapshot, weekly_results, weekly_provenance)
+                + '<details class="preseason-archive" id="preseason-baseline">'
+                '<summary>September 7 preseason baseline &middot; All 272 games and 32 team ratings</summary>'
+                + lead.replace('<h1>PGO Forecast Lab</h1>', '') + '</details>'
+            )
+        archive_open = '<details class="original-archive"><summary>Original July/August archive &middot; Frozen 25% stability blend</summary>'
+        archive_heading = '<section><h2>Original frozen forecast record</h2><p>This separate 272-game archive and its HOLD gate remain unchanged.</p></section>'
+        archive_close = "</details>"
     result_by_id = {row["game_id"]: row for row in results}
     metrics = interim_metrics(lock, results)
     weeks = []
@@ -417,18 +755,13 @@ def render_lab(lock, results, provenance):
         f'<td>{_signed(game["challenger_full_strength_prediction"])}</td></tr>'
         for game in lock["games"]
     )
-    recorded = len(results)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PGO Forecast Lab</title>{font_links}<style>{css}
 .lab-wrap{{max-width:1180px;margin:0 auto;padding:24px 18px 60px}}.lab-wrap a{{color:var(--accent)}}.lab-hero{{max-width:none;padding:26px;border-radius:14px;color:#fff;text-align:left}}.lab-hero a{{color:var(--highlight)}}.lab-hero a:focus-visible{{outline-color:var(--highlight)}}.lab-hero .status{{border-color:var(--highlight);margin-bottom:22px}}
-.status{{display:inline-block;padding:6px 10px;border:1px solid var(--orange);border-radius:999px;font-weight:800}}.metric-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}}.metric{{padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}}.metric h3{{margin-top:0}}.forecast-week{{margin:12px 0;border:1px solid var(--border);border-radius:10px;padding:12px}}.forecast-week summary{{cursor:pointer;font-weight:800}}.forecast-week summary span{{color:var(--mut);font-weight:500}}table{{width:100%;border-collapse:collapse}}th,td{{padding:9px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}}th:first-child{{text-align:left}}.notice{{padding:14px;border-left:4px solid var(--orange);background:var(--panel)}}code{{overflow-wrap:anywhere}}
+.status{{display:inline-block;padding:6px 10px;border:1px solid var(--orange);border-radius:999px;font-weight:800}}.metric-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}}.metric{{padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}}.metric h3{{margin-top:0}}.forecast-week,.lab-detail,.original-archive,.preseason-archive{{margin:12px 0;border:1px solid var(--border);border-radius:10px;padding:12px}}.forecast-week summary,.lab-detail summary,.original-archive>summary,.preseason-archive>summary{{cursor:pointer;font-weight:800}}.forecast-week summary span{{color:var(--mut);font-weight:500}}table{{width:100%;border-collapse:collapse}}th,td{{padding:9px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}}th:first-child{{text-align:left}}.notice{{padding:14px;border-left:4px solid var(--orange);background:var(--panel)}}code{{overflow-wrap:anywhere}}.weekly-status{{font-weight:800}}
 </style></head><body><main class="lab-wrap">
-<header class="lab-hero hero"><div class="status">Experimental &middot; frozen archive</div>
-<h1>PGO Forecast Lab</h1><h2>Can PGO predict football?</h2>
-<p>This page tracks one frozen 2026 experiment. Each forecast is an estimated scoring margin: positive favors the home team; negative favors the away team.</p>
-<p><strong>{recorded} of {len(lock["games"])} finalized results recorded.</strong> Interim tracking &mdash; not a validation result.</p>
-<p><a href="index.html">Back to McCabe Ratings</a></p></header>
+{lead}{archive_open}{archive_heading}
 <section><h2>Record so far</h2>{_metric_cards(metrics)}
 <p>The theoretical 50% winner benchmark is a reference only.</p></section>
 <section class="notice"><h2>What was frozen</h2>
@@ -445,7 +778,23 @@ def render_lab(lock, results, provenance):
 <details><summary>Archived challenger diagnostic</summary><p>These are outputs from the archived July-cutoff fit (delta 0.75 with QB-depth uncertainty), kept separate from the public ratings-table fit.</p><div class="table-shell"><table><thead><tr><th>Matchup</th><th>Current-lineup home margin</th><th>Full-strength home margin</th></tr></thead><tbody>{diagnostic_rows}</tbody></table></div></details>
 <section><h2>Results provenance</h2><p>Each entry is a reviewed transcription. Its digest verifies the archived CSV, not the remote source contents.</p><ul>{sources}</ul></section>
 <section><h2>Staff Picks</h2><p>No editorial picks are published in this model archive. Staff Picks remain a separate human product.</p></section>
-</main></body></html>'''
+{archive_close}
+</main><script>
+function updateWeeklyLocks() {{
+  const now = Date.now();
+  let next = now + 60000;
+  document.querySelectorAll('[data-weekly-cutoff]').forEach(node => {{
+    const cutoff = Date.parse(node.dataset.weeklyCutoff);
+    node.textContent = now >= cutoff ? 'Locked' : 'Draft';
+    if (cutoff > now) next = Math.min(next, cutoff);
+  }});
+  if (document.querySelector('[data-weekly-cutoff]')) setTimeout(updateWeeklyLocks, Math.max(1, next - now));
+}}
+updateWeeklyLocks();
+document.querySelector('a[href="#preseason-baseline"]')?.addEventListener('click', () => {{
+  document.getElementById('preseason-baseline').open = true;
+}});
+</script></body></html>'''
 
 
 def main(argv=None):
@@ -454,27 +803,64 @@ def main(argv=None):
     parser.add_argument("--predictions", type=Path, default=PREDICTIONS_PATH)
     parser.add_argument("--attestation", type=Path, default=ATTESTATION_PATH)
     parser.add_argument("--captures", type=Path, default=CAPTURE_ROOT)
+    parser.add_argument("--snapshot", type=Path, default=SNAPSHOT_DIR)
+    parser.add_argument("--weekly", type=Path, default=WEEKLY_DIR)
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
-    parser.add_argument("--record-results", type=Path)
+    records = parser.add_mutually_exclusive_group()
+    records.add_argument("--record-results", type=Path)
+    records.add_argument("--record-snapshot-results", type=Path)
+    records.add_argument("--record-weekly-results", type=Path)
     parser.add_argument("--source-url")
     args = parser.parse_args(argv)
     try:
         args.output = _validate_output_path(
             args.output,
-            (args.lock, args.predictions, args.attestation, args.record_results),
-            (ARCHIVE_DIR, args.captures),
+            (args.lock, args.predictions, args.attestation, args.record_results,
+             args.record_snapshot_results, args.record_weekly_results),
+            (ARCHIVE_DIR, args.captures, args.snapshot, args.weekly),
         )
         lock = load_archive(args.lock, args.predictions, args.attestation)
-        if args.record_results:
+        snapshot = _load_snapshot(args.snapshot)
+        weekly = pgo_forecast_weekly.load_weekly(args.weekly)
+        weekly_lock = {"games": weekly["games"]}
+        if args.record_results or args.record_snapshot_results or args.record_weekly_results:
             if not args.source_url:
-                raise ValueError("--source-url is required with --record-results")
-            record_results(
-                args.record_results, args.source_url, args.captures, lock,
-            )
+                raise ValueError("--source-url is required when recording results")
+            if args.record_weekly_results:
+                if not weekly["games"]:
+                    raise ValueError("Cannot record results without verified weekly forecasts")
+                record_results(
+                    args.record_weekly_results, args.source_url,
+                    args.weekly / "results", weekly_lock,
+                )
+            elif args.record_snapshot_results:
+                if snapshot is None:
+                    raise ValueError("Cannot record results without a verified snapshot")
+                record_results(
+                    args.record_snapshot_results, args.source_url,
+                    args.snapshot / "results", snapshot["lock"],
+                )
+            else:
+                record_results(
+                    args.record_results, args.source_url, args.captures, lock,
+                )
         elif args.source_url:
-            raise ValueError("capture metadata requires --record-results")
+            raise ValueError("capture metadata requires a result-recording option")
         results, provenance = load_results(args.captures, lock)
-        atomic_write_text(args.output, render_lab(lock, results, provenance))
+        snapshot_results, snapshot_provenance = [], []
+        if snapshot is not None:
+            snapshot_results, snapshot_provenance = load_results(
+                args.snapshot / "results", snapshot["lock"]
+            )
+        weekly_results, weekly_provenance = load_results(args.weekly / "results", weekly_lock)
+        atomic_write_text(args.output, render_lab(
+            lock, results, provenance, snapshot=snapshot,
+            snapshot_results=snapshot_results,
+            snapshot_provenance=snapshot_provenance,
+            weekly=weekly if snapshot is not None else None,
+            weekly_results=weekly_results,
+            weekly_provenance=weekly_provenance,
+        ))
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
         print(f"Forecast Lab failed: {error}", file=sys.stderr)
         return 1

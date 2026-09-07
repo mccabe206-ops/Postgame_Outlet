@@ -51,6 +51,78 @@ class ForecastLabTests(unittest.TestCase):
             ],
         }
 
+    def synthetic_snapshot(self):
+        teams = []
+        for rank, team in enumerate(
+                sorted(pgo_forecast_lab.pgo_prospective.pgo_model.CURRENT_TEAMS), 1):
+            teams.append({
+                "rank": rank,
+                "team": team,
+                "rating": 10.0 - rank,
+                "qb_name": f"{team} QB1",
+                "qb_gsis_id": f"{team}-QB1",
+                "old_selector_qb_name": f"{team} old QB",
+                "old_selector_rating": 9.5 - rank,
+                "features": {},
+                "contributions": {},
+            })
+        return {
+            "generated_at": "2026-09-07T22:00:00Z",
+            "league_mean_total": 46.0,
+            "teams": teams,
+            "games": [
+                {
+                    "game_id": "s1", "season": 2026, "week": 1,
+                    "kickoff": "2026-09-10T00:20:00+00:00",
+                    "home": "SEA", "away": "NE", "game_type": "REG",
+                    "location": "Home", "home_rest": 7.0, "away_rest": 7.0,
+                    "margin": 2.5, "total": 45.0,
+                    "home_points": 23.75, "away_points": 21.25,
+                    "pgo_v0_margin": 1.0, "legacy_margin": 0.5,
+                    "old_selector_margin": 2.0,
+                },
+                {
+                    "game_id": "s2", "season": 2026, "week": 18,
+                    "kickoff": "2027-01-04T01:20:00+00:00",
+                    "home": "LAR", "away": "SF", "game_type": "REG",
+                    "location": "Home", "home_rest": 7.0, "away_rest": 7.0,
+                    "margin": -3.0, "total": 44.0,
+                    "home_points": 20.5, "away_points": 23.5,
+                    "pgo_v0_margin": -1.0, "legacy_margin": -2.0,
+                    "old_selector_margin": -2.5,
+                },
+            ],
+            "lock": {
+                "as_of": "2026-09-07T22:00:00+00:00",
+                "games": [
+                    {
+                        "game_id": "s1", "season": 2026, "week": 1,
+                        "kickoff": "2026-09-10T00:20:00+00:00",
+                        "home": "SEA", "away": "NE", "game_type": "REG",
+                        "location": "Home", "candidate_prediction": 2.5,
+                    },
+                    {
+                        "game_id": "s2", "season": 2026, "week": 18,
+                        "kickoff": "2027-01-04T01:20:00+00:00",
+                        "home": "LAR", "away": "SF", "game_type": "REG",
+                        "location": "Home", "candidate_prediction": -3.0,
+                    },
+                ],
+            },
+            "method": {
+                "name": "Active-roster preseason scenario",
+                "status": "EXPERIMENTAL — HOLD",
+                "roster_policy": "ACT-only roster captured September 7.",
+                "injury_coverage": "No comprehensive injury or inactive adjustment.",
+                "history": "Performance features use games through 2025.",
+                "totals": "Prior-season PF/PA mean.",
+                "fit_recovery": "Public fit reproduced exactly.",
+                "evaluation": "New inference policy is not historically validated.",
+                "schedule": "Week 18 times are provisional.",
+            },
+            "sources": [],
+        }
+
     def result_rows(self):
         return [
             {
@@ -387,6 +459,278 @@ class ForecastLabTests(unittest.TestCase):
         with patch.object(generate_site, "TEMPLATE", "<html></html>"), \
                 self.assertRaisesRegex(ValueError, "style"):
             pgo_forecast_lab.render_lab(self.synthetic_lock(), [], [])
+
+    def test_snapshot_interim_metrics_use_separate_margin_total_and_score_targets(self):
+        snapshot = self.synthetic_snapshot()
+        results = [{
+            "game_id": "s1", "home_score": 24, "away_score": 21,
+            "actual_margin": 3,
+        }]
+
+        metrics = pgo_forecast_lab.snapshot_interim_metrics(snapshot, results)
+
+        self.assertEqual(metrics["count"], 1)
+        self.assertEqual(metrics["margin"]["mae"], 0.5)
+        self.assertEqual(metrics["total"]["mae"], 0.0)
+        self.assertEqual(metrics["score"]["count"], 2)
+        self.assertEqual(metrics["score"]["mae"], 0.25)
+        self.assertEqual(metrics["winner"], {
+            "correct": 1, "denominator": 1, "accuracy": 1.0,
+        })
+        self.assertEqual(metrics["baselines"]["pgo_v0"]["margin"]["mae"], 2.0)
+        self.assertEqual(metrics["baselines"]["legacy"]["margin"]["mae"], 2.5)
+        self.assertEqual(metrics["baselines"]["zero"]["margin"]["mae"], 3.0)
+        combined = metrics["baselines"]["league_mean_venue"]
+        self.assertEqual(combined["margin"]["mae"], 0.5)
+        self.assertEqual(combined["total"]["mae"], 1.0)
+        self.assertEqual(combined["score"]["mae"], 0.5)
+        cards = pgo_forecast_lab._snapshot_metric_cards(metrics)
+        self.assertIn("Original archive margin", cards)
+        self.assertIn("League mean + venue", cards)
+        self.assertIn("Unavailable", cards)
+        self.assertEqual(metrics["ties"], {"actual": 0, "forecast": 0})
+        snapshot["games"][0]["margin"] = 0.0
+        tied = pgo_forecast_lab.snapshot_interim_metrics(snapshot, results)
+        self.assertEqual(tied["ties"], {"actual": 0, "forecast": 1})
+        self.assertIsNone(tied["winner"]["accuracy"])
+
+    def test_render_snapshot_is_primary_and_preserves_the_original_archive(self):
+        archive = self.synthetic_lock()
+        snapshot = self.synthetic_snapshot()
+
+        page = pgo_forecast_lab.render_lab(
+            archive, [], [], snapshot=snapshot,
+            snapshot_results=[], snapshot_provenance=[{
+                "captured_at": "2026-09-11T05:00:00Z",
+                "source_url": "https://example.com/results.csv",
+                "rows": 1,
+                "results_file_sha256": "a" * 64,
+            }],
+        )
+
+        self.assertLess(page.index("September 7 preseason snapshot"),
+                        page.index("Original July/August archive"))
+        self.assertIn("Active-roster preseason scenario", page)
+        self.assertIn("ACT is an administrative roster status", page)
+        self.assertIn("same September 7 state", page)
+        self.assertIn("SEA -2.5", page)
+        self.assertIn("SF -3.0", page)
+        self.assertIn("NE 21, SEA 24", page)
+        self.assertIn("SF 24, LAR 21", page)
+        self.assertIn("45.0", page)
+        self.assertIn("44.0", page)
+        self.assertIn(
+            '<time datetime="2026-09-10T00:20:00+00:00">'
+            "September 9, 2026 at 8:20 PM EDT</time>", page,
+        )
+        self.assertIn(
+            "Scores are rounded to whole points; spreads and totals to one decimal. "
+            "Evaluation uses the original unrounded projections.", page,
+        )
+        self.assertIn(
+            "<th>Projected total</th><th>Frozen kickoff</th><th>Actual</th>", page,
+        )
+        self.assertIn("Week 18", page)
+        self.assertIn("Week 18 times are provisional", page)
+        self.assertIn("September results provenance", page)
+        self.assertIn("https://example.com/results.csv", page)
+        self.assertEqual(page.count('class="snapshot-team"'), 32)
+        self.assertIn("prospective_lock.json", page)
+        self.assertIn("Frozen 25% stability blend", page)
+        self.assertNotIn("win probability", page.lower())
+        self.assertNotIn("League mean + venue", page)
+        for margin in (0.0, 0.0009, -0.0179):
+            self.assertEqual(
+                pgo_forecast_lab._spread({**snapshot["games"][0], "margin": margin}),
+                "Pick'em",
+            )
+
+    def test_render_snapshot_rejects_a_post_kickoff_generation_time(self):
+        snapshot = self.synthetic_snapshot()
+        snapshot["generated_at"] = snapshot["games"][0]["kickoff"]
+
+        with self.assertRaisesRegex(ValueError, "before every kickoff"):
+            pgo_forecast_lab.render_lab(
+                self.synthetic_lock(), [], [], snapshot=snapshot,
+                snapshot_results=[], snapshot_provenance=[],
+            )
+
+    def test_cli_loads_a_present_snapshot_and_renders_it_as_primary(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            snapshot_dir = root / "snapshot"
+            snapshot_dir.mkdir()
+            output = root / "lab.html"
+            with patch.object(pgo_forecast_lab, "load_archive",
+                              return_value=self.synthetic_lock()), \
+                    patch.object(pgo_forecast_lab.pgo_forecast_snapshot,
+                                 "load_snapshot",
+                                 return_value=self.synthetic_snapshot()) as load, \
+                    patch.object(pgo_forecast_lab, "load_results",
+                                 side_effect=[([], []), ([], []), ([], [])]), \
+                    patch.object(pgo_forecast_lab, "atomic_write_text") as write:
+                status = pgo_forecast_lab.main([
+                    "--snapshot", str(snapshot_dir),
+                    "--weekly", str(root / "weekly"),
+                    "--output", str(output),
+                ])
+
+            self.assertEqual(status, 0)
+            load.assert_called_once_with(snapshot_dir)
+            self.assertIn("September 7 preseason snapshot", write.call_args.args[1])
+
+    def test_cli_fails_closed_when_a_present_snapshot_is_damaged(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            snapshot_dir = root / "snapshot"
+            snapshot_dir.mkdir()
+            output = root / "lab.html"
+            with patch.object(pgo_forecast_lab, "load_archive",
+                              return_value=self.synthetic_lock()), \
+                    patch.object(pgo_forecast_lab.pgo_forecast_snapshot,
+                                 "load_snapshot", side_effect=ValueError("damaged")), \
+                    patch.object(pgo_forecast_lab, "atomic_write_text") as write, \
+                    redirect_stderr(io.StringIO()):
+                status = pgo_forecast_lab.main([
+                    "--snapshot", str(snapshot_dir),
+                    "--output", str(output),
+                ])
+
+            self.assertEqual(status, 1)
+            write.assert_not_called()
+
+    def test_default_snapshot_requires_the_pinned_manifest_and_presence(self):
+        with tempfile.TemporaryDirectory() as temp:
+            default = Path(temp) / "missing"
+            with patch.object(pgo_forecast_lab, "SNAPSHOT_DIR", default), \
+                    patch.object(pgo_forecast_lab,
+                                 "EXPECTED_SNAPSHOT_MANIFEST_SHA256", "a" * 64):
+                with self.assertRaisesRegex(ValueError, "default snapshot is missing"):
+                    pgo_forecast_lab._load_snapshot(default)
+
+            default.mkdir()
+            (default / "manifest.json").write_bytes(b"changed\n")
+            with patch.object(pgo_forecast_lab, "SNAPSHOT_DIR", default), \
+                    patch.object(pgo_forecast_lab,
+                                 "EXPECTED_SNAPSHOT_MANIFEST_SHA256", "a" * 64), \
+                    patch.object(pgo_forecast_lab.pgo_forecast_snapshot,
+                                 "load_snapshot") as load:
+                with self.assertRaisesRegex(ValueError, "manifest hash"):
+                    pgo_forecast_lab._load_snapshot(default)
+                load.assert_not_called()
+
+    def test_cli_records_results_against_the_verified_snapshot_series(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            snapshot_dir = root / "snapshot"
+            snapshot_dir.mkdir()
+            reviewed = root / "reviewed.csv"
+            reviewed.write_bytes(self.csv_bytes([{
+                "game_id": "s1", "season": "2026", "week": "1",
+                "kickoff": "2026-09-10T00:20:00+00:00", "game_type": "REG",
+                "home_team": "SEA", "away_team": "NE",
+                "home_score": "24", "away_score": "21",
+                "finalized_at": "2026-09-10T03:30:00+00:00",
+            }]))
+            output = root / "lab.html"
+            captured = datetime(2026, 9, 10, 4, tzinfo=UTC)
+            with patch.object(pgo_forecast_lab, "load_archive",
+                              return_value=self.synthetic_lock()), \
+                    patch.object(pgo_forecast_lab.pgo_forecast_snapshot,
+                                 "load_snapshot",
+                                 return_value=self.synthetic_snapshot()), \
+                    patch.object(pgo_forecast_lab, "_current_utc",
+                                 return_value=captured):
+                status = pgo_forecast_lab.main([
+                    "--snapshot", str(snapshot_dir),
+                    "--weekly", str(root / "weekly"),
+                    "--captures", str(root / "old-results"),
+                    "--record-snapshot-results", str(reviewed),
+                    "--source-url", "https://example.com/results.csv",
+                    "--output", str(output),
+                ])
+
+            self.assertEqual(status, 0)
+            capture = snapshot_dir / "results/20260910T040000Z"
+            self.assertTrue((capture / "results.csv").is_file())
+            self.assertIn("1 of 2 finalized results recorded", output.read_text(encoding="utf-8"))
+
+    def test_cli_result_recording_targets_are_mutually_exclusive(self):
+        stderr = io.StringIO()
+        with redirect_stderr(stderr), self.assertRaises(SystemExit):
+            pgo_forecast_lab.main([
+                "--record-results", "old.csv",
+                "--record-snapshot-results", "new.csv",
+            ])
+        self.assertIn("not allowed with argument", stderr.getvalue())
+
+    def test_weekly_cutoff_is_per_matchup_and_preseason_stays_separate(self):
+        snapshot = self.synthetic_snapshot()
+        weekly = {"games": [
+            {**snapshot["games"][0], "lock_at": "2026-09-09T23:20:00Z",
+             "registered_at": "2026-09-07T22:10:00Z",
+             "source_generated_at": snapshot["generated_at"]},
+            {**snapshot["games"][1], "lock_at": "2027-01-04T00:20:00Z",
+             "registered_at": "2026-09-07T22:10:00Z",
+             "source_generated_at": snapshot["generated_at"]},
+        ], "revisions": []}
+        with patch.object(pgo_forecast_lab, "_current_utc",
+                          return_value=datetime(2026, 9, 9, 23, 20, tzinfo=UTC)):
+            page = pgo_forecast_lab.render_lab(
+                self.synthetic_lock(), [], [], snapshot=snapshot, weekly=weekly,
+            )
+        self.assertEqual(page.count('data-weekly-game-id="'), 2)
+        self.assertIn('data-weekly-cutoff="2026-09-09T23:20:00Z">Locked</span>', page)
+        self.assertIn('data-weekly-cutoff="2027-01-04T00:20:00Z">Draft</span>', page)
+        self.assertIn("September 9, 2026 at 7:20 PM EDT", page)
+        self.assertIn("60 minutes before kickoff", page)
+        self.assertIn("SEA -2.5", page)
+        self.assertLess(page.index("Weekly game forecasts"),
+                        page.index("September 7 preseason baseline"))
+        self.assertIn('<details class="preseason-archive" id="preseason-baseline">', page)
+        self.assertIn('data-snapshot-game-id="s1"', page)
+        self.assertIn("Original July/August archive", page)
+
+    def test_weekly_results_use_their_own_verified_forecast_series(self):
+        snapshot = self.synthetic_snapshot()
+        weekly = {"games": [{**snapshot["games"][0],
+            "lock_at": "2026-09-09T23:20:00Z",
+            "registered_at": "2026-09-07T22:10:00Z",
+            "source_generated_at": snapshot["generated_at"],
+        }], "revisions": []}
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            reviewed = root / "reviewed.csv"
+            reviewed.write_bytes(self.csv_bytes([{
+                "game_id": "s1", "season": "2026", "week": "1",
+                "kickoff": "2026-09-10T00:20:00+00:00", "game_type": "REG",
+                "home_team": "SEA", "away_team": "NE",
+                "home_score": "24", "away_score": "21",
+                "finalized_at": "2026-09-10T03:30:00+00:00",
+            }]))
+            weekly_root = root / "weekly"
+            with patch.object(pgo_forecast_lab, "load_archive",
+                              return_value=self.synthetic_lock()), \
+                    patch.object(pgo_forecast_lab, "_load_snapshot",
+                                 return_value=snapshot), \
+                    patch.object(pgo_forecast_lab.pgo_forecast_weekly, "load_weekly",
+                                 return_value=weekly), \
+                    patch.object(pgo_forecast_lab, "_current_utc",
+                                 return_value=datetime(2026, 9, 10, 4, tzinfo=UTC)):
+                self.assertEqual(pgo_forecast_lab.main([
+                    "--snapshot", str(root / "preseason"),
+                    "--weekly", str(weekly_root),
+                    "--captures", str(root / "legacy"),
+                    "--record-weekly-results", str(reviewed),
+                    "--source-url", "https://example.com/results.csv",
+                    "--output", str(root / "lab.html"),
+                ]), 0)
+            self.assertTrue((weekly_root / "results/20260910T040000Z/results.csv").is_file())
+            self.assertFalse((root / "preseason/results").exists())
+            self.assertFalse((root / "legacy").exists())
+            page = (root / "lab.html").read_text(encoding="utf-8")
+            self.assertIn("1 of 1 recorded weekly forecasts have finalized results", page)
+            self.assertIn("0 of 2 finalized results recorded", page)
 
 
 if __name__ == "__main__":
