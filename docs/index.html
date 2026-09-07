@@ -415,7 +415,7 @@
   <header>
     <h1>NFL Power Ratings <span class="accent">2026</span></h1>
     <div class="sub">Preseason &middot; roster-based, points vs. a league-average team (0.0)</div>
-    <div class="updated">By Sean McCabe &middot; 2026 Preseason &middot; Updated <time datetime="2026-09-07T16:32:09-04:00">September 7, 2026</time></div>
+    <div class="updated">By Sean McCabe &middot; 2026 Preseason &middot; Updated <time datetime="2026-09-07T16:42:05-04:00">September 7, 2026</time></div>
   </header>
 </div>
 <div class="wrap">
@@ -566,8 +566,8 @@
           </select></label>
         </div>
         <fieldset><legend>Starting lineup per team</legend><div class="fantasy-league-grid"><label class="fantasy-field">QB starters<input type="number" name="slot_QB" min="0" max="2" step="1" required></label><label class="fantasy-field">RB starters<input type="number" name="slot_RB" min="0" max="4" step="1" required></label><label class="fantasy-field">WR starters<input type="number" name="slot_WR" min="0" max="4" step="1" required></label><label class="fantasy-field">TE starters<input type="number" name="slot_TE" min="0" max="4" step="1" required></label><label class="fantasy-field">FLEX starters<input type="number" name="slot_FLEX" min="0" max="4" step="1" required></label><label class="fantasy-field">Superflex starters<input type="number" name="slot_SUPERFLEX" min="0" max="2" step="1" required></label></div></fieldset>
-        <details><summary>Scoring points and TE premium</summary>
-          <fieldset><legend>Points awarded or deducted</legend><div class="fantasy-league-grid"><label class="fantasy-field">Per passing yard<input type="number" name="score_passing_yards" min="0" max="1" step="any" required></label><label class="fantasy-field">Passing touchdown<input type="number" name="score_passing_tds" min="0" max="12" step="any" required></label><label class="fantasy-field">Interception thrown<input type="number" name="score_passing_interceptions" min="-10" max="0" step="any" required></label><label class="fantasy-field">Per rushing yard<input type="number" name="score_rushing_yards" min="0" max="1" step="any" required></label><label class="fantasy-field">Rushing touchdown<input type="number" name="score_rushing_tds" min="0" max="12" step="any" required></label><label class="fantasy-field">Reception<input type="number" name="score_receptions" min="0" max="3" step="any" required></label><label class="fantasy-field">Per receiving yard<input type="number" name="score_receiving_yards" min="0" max="1" step="any" required></label><label class="fantasy-field">Receiving touchdown<input type="number" name="score_receiving_tds" min="0" max="12" step="any" required></label><label class="fantasy-field">Fumble lost<input type="number" name="score_fumbles_lost_total" min="-10" max="0" step="any" required></label><label class="fantasy-field">Passing two-point conversion<input type="number" name="score_passing_2pt_conversions" min="0" max="6" step="any" required></label><label class="fantasy-field">Rushing two-point conversion<input type="number" name="score_rushing_2pt_conversions" min="0" max="6" step="any" required></label><label class="fantasy-field">Receiving two-point conversion<input type="number" name="score_receiving_2pt_conversions" min="0" max="6" step="any" required></label><label class="fantasy-field">Return touchdown<input type="number" name="score_special_teams_tds" min="0" max="12" step="any" required></label><label class="fantasy-field">Extra points per TE reception<input type="number" name="score_te_reception_bonus" min="0" max="3" step="any" required></label></div></fieldset>
+        <details><summary>Scoring points and reception bonuses</summary>
+          <fieldset><legend>Points awarded or deducted</legend><div class="fantasy-league-grid"><label class="fantasy-field">Per passing yard<input type="number" name="score_passing_yards" min="0" max="1" step="any" required></label><label class="fantasy-field">Passing touchdown<input type="number" name="score_passing_tds" min="0" max="12" step="any" required></label><label class="fantasy-field">Interception thrown<input type="number" name="score_passing_interceptions" min="-10" max="0" step="any" required></label><label class="fantasy-field">Per rushing yard<input type="number" name="score_rushing_yards" min="0" max="1" step="any" required></label><label class="fantasy-field">Rushing touchdown<input type="number" name="score_rushing_tds" min="0" max="12" step="any" required></label><label class="fantasy-field">Reception<input type="number" name="score_receptions" min="0" max="3" step="any" required></label><label class="fantasy-field">Per receiving yard<input type="number" name="score_receiving_yards" min="0" max="1" step="any" required></label><label class="fantasy-field">Receiving touchdown<input type="number" name="score_receiving_tds" min="0" max="12" step="any" required></label><label class="fantasy-field">Fumble lost<input type="number" name="score_fumbles_lost_total" min="-10" max="0" step="any" required></label><label class="fantasy-field">Passing two-point conversion<input type="number" name="score_passing_2pt_conversions" min="0" max="6" step="any" required></label><label class="fantasy-field">Rushing two-point conversion<input type="number" name="score_rushing_2pt_conversions" min="0" max="6" step="any" required></label><label class="fantasy-field">Receiving two-point conversion<input type="number" name="score_receiving_2pt_conversions" min="0" max="6" step="any" required></label><label class="fantasy-field">Return touchdown<input type="number" name="score_special_teams_tds" min="0" max="12" step="any" required></label><label class="fantasy-field">Extra points per TE reception<input type="number" name="score_te_reception_bonus" min="0" max="3" step="any" required></label><label class="fantasy-field">Extra points per WR reception<input type="number" name="score_wr_reception_bonus" min="0" max="3" step="any" required></label></div></fieldset>
           <p>Supports the listed scoring categories. Threshold bonuses, first downs, kickers and team defenses are not included.</p>
         </details>
         <div class="fantasy-league-actions">
@@ -1560,7 +1560,8 @@ const PGOLeague = (() => {
     receiving_2pt_conversions: 2,
     special_teams_tds: 6,
     fumbles_lost_total: -2,
-    te_reception_bonus: 0
+    te_reception_bonus: 0,
+    wr_reception_bonus: 0
   });
   const PRESETS = Object.freeze({
     STANDARD: Object.freeze({...HALF_PPR, receptions: 0}),
@@ -1592,7 +1593,8 @@ const PGOLeague = (() => {
     passing_2pt_conversions: [0, 6],
     rushing_2pt_conversions: [0, 6],
     receiving_2pt_conversions: [0, 6],
-    te_reception_bonus: [0, 3]
+    te_reception_bonus: [0, 3],
+    wr_reception_bonus: [0, 3]
   };
   const SCORING_KEYS = Object.keys(SCORING_RANGES);
 
@@ -1639,16 +1641,18 @@ const PGOLeague = (() => {
     if (!SLOT_NAMES.some(slot => profile.slots[slot] > 0)) {
       throw new RangeError('Profile must have at least one lineup slot');
     }
-    requireKeys(profile.scoring, SCORING_KEYS, 'Profile scoring');
+    if (!isObject(profile.scoring)) throw new TypeError('Profile scoring must be an object');
+    const scoring = {wr_reception_bonus: 0, ...profile.scoring};
+    requireKeys(scoring, SCORING_KEYS, 'Profile scoring');
     for (const [field, [minimum, maximum]] of Object.entries(SCORING_RANGES)) {
-      requireNumber(profile.scoring[field], minimum, maximum, field);
+      requireNumber(scoring[field], minimum, maximum, field);
     }
     return {
       version: 1,
       name,
       teams: profile.teams,
       slots: {...profile.slots},
-      scoring: {...profile.scoring}
+      scoring
     };
   }
 
@@ -1686,7 +1690,9 @@ const PGOLeague = (() => {
       }
       const weight = profile.scoring[field]
         + (field === 'receptions' && player.position === 'TE'
-          ? profile.scoring.te_reception_bonus : 0);
+          ? profile.scoring.te_reception_bonus : 0)
+        + (field === 'receptions' && player.position === 'WR'
+          ? profile.scoring.wr_reception_bonus : 0);
       score += (weight - HALF_PPR[field]) * value;
     }
     if (!Number.isFinite(score)) throw new RangeError('Player score must be finite');
@@ -1817,7 +1823,8 @@ if (typeof module !== 'undefined' && module.exports) module.exports = PGOLeague;
   const clone = value => JSON.parse(JSON.stringify(value));
   const positionNames = {QB: 'QB', RB: 'RB', WR: 'WR', TE: 'TE', FLEX: 'FLEX', SUPERFLEX: 'Superflex'};
   const presetNames = {STANDARD: 'Standard', HALF_PPR: 'Half-PPR', PPR: 'Full PPR', CUSTOM: 'Custom scoring'};
-  const componentNames = Object.keys(PGOLeague.HALF_PPR).filter(name => name !== 'te_reception_bonus').sort();
+  const componentNames = Object.keys(PGOLeague.HALF_PPR)
+    .filter(name => !['te_reception_bonus', 'wr_reception_bonus'].includes(name)).sort();
   const rowIds = rows.map(row => row.dataset.playerId);
   if (new Set(rowIds).size !== rows.length || rows.some(row =>
     !row.dataset.playerId || !['QB', 'RB', 'WR', 'TE'].includes(row.dataset.position)
@@ -2012,6 +2019,9 @@ if (typeof module !== 'undefined' && module.exports) module.exports = PGOLeague;
     summary.replaceChildren(document.createTextNode(preset === 'HALF_PPR'
       ? 'Original half-PPR projections. League value adjusts for your starting lineup.'
       : 'Experimental scoring adjustment to the half-PPR forecast. Custom scoring weights are scenarios; model status remains HOLD.'));
+    summary.append(document.createTextNode(' Reception points: ' + profile.scoring.receptions
+      + ' base; WR ' + Number((profile.scoring.receptions + profile.scoring.wr_reception_bonus).toFixed(3))
+      + '; TE ' + Number((profile.scoring.receptions + profile.scoring.te_reception_bonus).toFixed(3)) + '.'));
     if (scoring.available && scoring.receipt_url) {
       const link = document.createElement('a');
       link.href = scoring.receipt_url;

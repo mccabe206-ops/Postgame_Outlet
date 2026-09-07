@@ -466,6 +466,7 @@ def _league_controls():
             ("receiving_2pt_conversions", "Receiving two-point conversion", 0, 6),
             ("special_teams_tds", "Return touchdown", 0, 12),
             ("te_reception_bonus", "Extra points per TE reception", 0, 3),
+            ("wr_reception_bonus", "Extra points per WR reception", 0, 3),
         )
     )
     return f'''<details class="fantasy-league" id="fantasy-league-settings">
@@ -482,7 +483,7 @@ def _league_controls():
           </select></label>
         </div>
         <fieldset><legend>Starting lineup per team</legend><div class="fantasy-league-grid">{slots}</div></fieldset>
-        <details><summary>Scoring points and TE premium</summary>
+        <details><summary>Scoring points and reception bonuses</summary>
           <fieldset><legend>Points awarded or deducted</legend><div class="fantasy-league-grid">{scoring}</div></fieldset>
           <p>Supports the listed scoring categories. Threshold bonuses, first downs, kickers and team defenses are not included.</p>
         </details>
@@ -566,6 +567,21 @@ def add_fantasy_leagues(panel, players, scoring=None):
         'title="Projected points above the estimated replacement player">Value</button></th></tr></thead>', 1)
     return panel.replace('</section>', f'<script type="application/json" id="fantasy-scoring-data" '
         f'data-sha256="{digest}">{data}</script>\n</section>', 1)
+
+
+def _upgrade_fantasy_league_controls(panel):
+    """Add the WR control to the published v1 form, preserving source markup."""
+    count = panel.count('name="score_wr_reception_bonus"')
+    if count > 1:
+        raise ValueError("Duplicate fantasy WR reception bonus controls")
+    if count == 0:
+        field = re.search(r'<label class="fantasy-field">Extra points per WR reception<input[^>]+></label>',
+                          _league_controls())[0]
+        panel, count = re.subn(r'(<label class="fantasy-field">Extra points per TE reception<input[^>]+></label>)',
+                              lambda match: match[0] + field, panel)
+        if count != 1:
+            raise ValueError("Existing fantasy reception bonus control is missing or duplicated")
+    return panel.replace('Scoring points and TE premium', 'Scoring points and reception bonuses')
 
 
 def render_fantasy_panel(preview):
@@ -1108,6 +1124,8 @@ FANTASY_SCRIPT = "\n<script>\n" + "\n".join(
     (HERE / name).read_text(encoding="utf-8")
     for name in ("fantasy_league.js", "fantasy_league_ui.js")
 ) + "\n</script>\n"
+# The published v1 script before the WR bonus; admit only these exact legacy bytes.
+LEGACY_FANTASY_SCRIPT_SHA256 = "0a5648db26f63922a632413a0b0cb528ac56d0a9a6342909b4581a5529fb2fe7"
 
 
 def inject_comparison(base_html, panel_html):
@@ -1242,7 +1260,11 @@ def _extract_published_fantasy_panel(existing_html):
     panel_count = existing_html.count('id="panel-fantasy"')
     css_count = existing_html.count(FANTASY_CSS)
     availability_css_count = existing_html.count(FANTASY_AVAILABILITY_CSS)
-    script_count = existing_html.count(FANTASY_SCRIPT)
+    scripts = re.findall(r"\n<script>\n'use strict';\s+const PGOLeague =.*?</script>\n", existing_html, re.S)
+    script_count = sum(script == FANTASY_SCRIPT or hashlib.sha256(script.encode("utf-8")).hexdigest()
+                       == LEGACY_FANTASY_SCRIPT_SHA256 for script in scripts)
+    if script_count != len(scripts):
+        raise ValueError("Existing fantasy script is not a recognized current or legacy version")
     if (
         tab_count == panel_count == css_count == availability_css_count
         == script_count == 0
@@ -1596,7 +1618,7 @@ def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
     )
     output = inject_comparison(base_html, panel)
     if fantasy_panel is not None:
-        output = inject_fantasy_preview(output, fantasy_panel)
+        output = inject_fantasy_preview(output, _upgrade_fantasy_league_controls(fantasy_panel))
     return output
 
 

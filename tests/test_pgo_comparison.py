@@ -810,6 +810,34 @@ class ComparisonTests(unittest.TestCase):
                     with self.assertRaisesRegex(ValueError, "league|scoring"):
                         pgo_comparison.refresh_mccabe_page(self._base_html(), broken)
 
+    def test_refresh_upgrades_wr_bonus_controls_and_pinned_legacy_script(self):
+        panel = pgo_comparison.render_fantasy_panel(self._fantasy_preview())
+        field = re.search(r'<label class="fantasy-field">Extra points per WR reception<input[^>]+></label>', panel)
+        self.assertIsNotNone(field)
+        legacy_panel = panel.replace(field[0], '').replace('Scoring points and reception bonuses',
+                                                         'Scoring points and TE premium')
+        published = pgo_comparison.inject_fantasy_preview(
+            pgo_comparison.inject_comparison(self._base_html(),
+                pgo_comparison.render_comparison_panel([], self._held_receipt())), legacy_panel)
+        legacy_script = "\n<script>\n'use strict';\nconst PGOLeague = {};\n</script>\n"
+        old_page = published.replace(pgo_comparison.FANTASY_SCRIPT, legacy_script)
+        with (
+            patch.object(pgo_comparison, "LEGACY_FANTASY_SCRIPT_SHA256",
+                         hashlib.sha256(legacy_script.encode()).hexdigest()),
+            patch.object(pgo_comparison, "load_mccabe_rows", return_value=[]),
+            patch.object(pgo_comparison, "mccabe_source_timestamp", return_value="2026-09-07T01:00:00+00:00"),
+        ):
+            refreshed = pgo_comparison.refresh_mccabe_page(self._base_html(), old_page)
+            self.assertEqual(refreshed.count('name="score_wr_reception_bonus"'), 1)
+            self.assertEqual(refreshed.count(pgo_comparison.FANTASY_SCRIPT), 1)
+            self.assertEqual(pgo_comparison.refresh_mccabe_page(self._base_html(), refreshed), refreshed)
+            self.assertEqual(re.findall(r'<tr class="fantasy-row".*?</tr>', old_page, re.S),
+                             re.findall(r'<tr class="fantasy-row".*?</tr>', refreshed, re.S))
+            pattern = r'<script type="application/json" id="fantasy-scoring-data".*?</script>'
+            self.assertEqual(re.search(pattern, old_page, re.S)[0], re.search(pattern, refreshed, re.S)[0])
+            with self.assertRaises(ValueError):
+                pgo_comparison.refresh_mccabe_page(self._base_html(), old_page.replace('PGOLeague = {};', 'PGOLeague = {bad: 1};'))
+
     def test_refresh_rejects_scoring_payload_and_dom_population_drift(self):
         panel = pgo_comparison.render_fantasy_panel(self._fantasy_preview())
         panel = self._replace_scoring_payload(
