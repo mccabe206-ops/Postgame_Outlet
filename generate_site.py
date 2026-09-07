@@ -702,6 +702,7 @@ TEMPLATE = """<!DOCTYPE html>
     display:flex; flex-direction:column;
   }
   .drawer.open { transform:translateX(0); }
+  .drawer[aria-hidden="true"] { display:none; }
   /* Embedded in an iframe: position:fixed anchors to the iframe, not the parent
      viewport, so the parent posts its visible slice and we pin the drawer to it
      via --vp-top / --vp-h (set from JS). Falls back sanely if no message. */
