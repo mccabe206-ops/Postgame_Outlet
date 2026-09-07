@@ -1,4 +1,9 @@
+import hashlib
 import io
+import json
+import math
+import re
+import shutil
 import tempfile
 import unittest
 from contextlib import redirect_stderr
@@ -7,6 +12,7 @@ from unittest.mock import patch
 
 import pgo_challenger
 import pgo_comparison
+from tests.test_pgo_fantasy_prospective import ProspectiveFantasyFixture
 
 
 class ComparisonTests(unittest.TestCase):
@@ -54,6 +60,135 @@ class ComparisonTests(unittest.TestCase):
                 "upper": 0.144917,
             },
             "receipt_ref": "test-receipt-ref",
+        }
+
+    @staticmethod
+    def _fantasy_preview():
+        config_sha256 = "a" * 64
+
+        def row(
+            gsis_id,
+            player_name,
+            position,
+            team,
+            opponent,
+            strong_prediction,
+            position_rank,
+            flex_rank,
+            superflex_rank,
+            *,
+            qb_depth_rank=None,
+            ranking_eligible=True,
+            history_count=1,
+        ):
+            return {
+                "season": 2026,
+                "week": 1,
+                "game_id": "2026_01_BUF_LAR",
+                "gsis_id": gsis_id,
+                "player_name": player_name,
+                "team": team,
+                "opponent": opponent,
+                "position": position,
+                "null_prediction": strong_prediction - 1.0,
+                "strong_prediction": strong_prediction,
+                "history_count": history_count,
+                "initialization_reason": (
+                    "HISTORY" if history_count else "TRUE_COLD_START"
+                ),
+                "availability_status": "UNVERIFIED",
+                "qb_depth_rank": qb_depth_rank,
+                "ranking_eligible": ranking_eligible,
+                "config_sha256": config_sha256,
+                "position_rank": position_rank,
+                "flex_rank": flex_rank,
+                "superflex_rank": superflex_rank,
+            }
+
+        return {
+            "schema_version": 1,
+            "artifact_kind": "PGO_FANTASY_WEEKLY_PREVIEW",
+            "artifact_sha256": "b" * 64,
+            "config_sha256": config_sha256,
+            "evidence_mode": "PREVIEW",
+            "generated_at": "2026-09-03T13:52:56-04:00",
+            "gradeable": False,
+            "model_version": "pgo_fantasy_2026_baseline_v2",
+            "publication_status": "EXPERIMENTAL",
+            "season": 2026,
+            "source_coverage": {
+                "roster": {"processed": ["BUF", "LAR"], "missing": []},
+                "availability": {
+                    "processed": [],
+                    "missing": ["BUF", "LAR"],
+                },
+                "depth": {"processed": ["BUF", "LAR"], "missing": []},
+            },
+            "status": "HOLD",
+            "teams_missing": [],
+            "teams_processed": ["BUF", "LAR"],
+            "week": 1,
+            "rows": [
+                row(
+                    "qb-buf",
+                    "Buffalo QB",
+                    "QB",
+                    "BUF",
+                    "LAR",
+                    20.0,
+                    1,
+                    None,
+                    1,
+                    qb_depth_rank=1,
+                ),
+                row(
+                    "qb-buf-backup",
+                    "Buffalo Backup",
+                    "QB",
+                    "BUF",
+                    "LAR",
+                    19.0,
+                    None,
+                    None,
+                    None,
+                    qb_depth_rank=2,
+                    ranking_eligible=False,
+                ),
+                row(
+                    "rb-lar",
+                    "Los Angeles RB",
+                    "RB",
+                    "LAR",
+                    "BUF",
+                    15.0,
+                    1,
+                    1,
+                    2,
+                ),
+                row(
+                    "wr-buf",
+                    "Rookie <script>alert(1)</script>",
+                    "WR",
+                    "BUF",
+                    "LAR",
+                    14.0,
+                    1,
+                    2,
+                    3,
+                    history_count=0,
+                ),
+                row(
+                    "te-lar",
+                    "Los Angeles TE",
+                    "TE",
+                    "LAR",
+                    "BUF",
+                    10.0,
+                    1,
+                    3,
+                    4,
+                ),
+            ],
         }
 
     def test_mccabe_review_flag_blocks_comparison(self):
@@ -175,6 +310,143 @@ class ComparisonTests(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertFalse(load.call_args.kwargs["require_immutable"])
 
+    def test_fantasy_cli_rejects_public_modes_before_loading(self):
+        for public_flag in ("--publish", "--refresh-mccabe"):
+            with (
+                self.subTest(public_flag=public_flag),
+                patch.object(
+                    pgo_comparison.fantasy_prospective,
+                    "load_week1_preview",
+                ) as load,
+                patch.object(
+                    pgo_comparison.generate_site,
+                    "load_config",
+                ) as load_config,
+                patch.object(pgo_comparison, "atomic_write_text") as write,
+            ):
+                errors = io.StringIO()
+                with redirect_stderr(errors):
+                    code = pgo_comparison.main([
+                        "--fantasy-preview",
+                        "frozen.json",
+                        public_flag,
+                    ])
+
+                self.assertEqual(code, 1)
+                self.assertIn("private-only", errors.getvalue())
+                load.assert_not_called()
+                load_config.assert_not_called()
+                write.assert_not_called()
+
+    def test_fantasy_cli_rejects_input_output_alias_before_loading(self):
+        same = Path("output") / "same.json"
+        with (
+            patch.object(
+                pgo_comparison.fantasy_prospective,
+                "load_week1_preview",
+            ) as load,
+            patch.object(
+                pgo_comparison.generate_site,
+                "load_config",
+            ) as load_config,
+            patch.object(pgo_comparison, "atomic_write_text") as write,
+        ):
+            errors = io.StringIO()
+            with redirect_stderr(errors):
+                code = pgo_comparison.main([
+                    "--fantasy-preview",
+                    str(same),
+                    "--output",
+                    str(same),
+                ])
+
+        self.assertEqual(code, 1)
+        self.assertIn("different files", errors.getvalue())
+        load.assert_not_called()
+        load_config.assert_not_called()
+        write.assert_not_called()
+
+    def test_fantasy_cli_validates_before_reading_site_shell(self):
+        with (
+            patch.object(
+                pgo_comparison.fantasy_prospective,
+                "load_week1_preview",
+                side_effect=ValueError("invalid frozen preview"),
+            ) as load,
+            patch.object(Path, "read_text") as read,
+            patch.object(
+                pgo_comparison.generate_site,
+                "load_config",
+            ) as load_config,
+            patch.object(pgo_comparison, "atomic_write_text") as write,
+        ):
+            errors = io.StringIO()
+            with redirect_stderr(errors):
+                code = pgo_comparison.main([
+                    "--fantasy-preview",
+                    "frozen.json",
+                    "--output",
+                    "output/fantasy/index.html",
+                ])
+
+        self.assertEqual(code, 1)
+        self.assertIn("invalid frozen preview", errors.getvalue())
+        load.assert_called_once()
+        read.assert_not_called()
+        load_config.assert_not_called()
+        write.assert_not_called()
+
+    def test_fantasy_cli_writes_only_private_output(self):
+        fantasy = self._fantasy_preview()
+        comparison = pgo_comparison.render_comparison_panel(
+            [], self._held_receipt()
+        )
+        existing = pgo_comparison.inject_comparison(
+            self._base_html(), comparison
+        )
+
+        with tempfile.TemporaryDirectory() as temp:
+            public = Path(temp) / "index.html"
+            public.write_text(existing, encoding="utf-8")
+            with (
+                patch.object(
+                    pgo_comparison.fantasy_prospective,
+                    "load_week1_preview",
+                    return_value=fantasy,
+                ) as load,
+                patch.object(pgo_comparison, "PUBLIC_OUTPUT", public),
+                patch.object(
+                    pgo_comparison.generate_site,
+                    "load_config",
+                ) as load_config,
+                patch.object(
+                    pgo_comparison,
+                    "load_comparison_rows",
+                ) as load_comparison,
+                patch.object(pgo_comparison, "atomic_write_text") as write,
+            ):
+                code = pgo_comparison.main([
+                    "--fantasy-preview",
+                    "frozen.json",
+                    "--output",
+                    "output/fantasy/index.html",
+                ])
+
+        self.assertEqual(code, 0)
+        load.assert_called_once_with(Path("frozen.json").resolve())
+        load_config.assert_not_called()
+        load_comparison.assert_not_called()
+        write.assert_called_once()
+        target, rendered = write.call_args.args
+        self.assertEqual(
+            target,
+            Path("output/fantasy/index.html").resolve(),
+        )
+        self.assertIn('id="tab-fantasy"', rendered)
+        self.assertIn('id="panel-fantasy"', rendered)
+        self.assertIn("Rookie &lt;script&gt;", rendered)
+        self.assertIn("McCabe Ratings</button>", rendered)
+
     def test_pgo_is_primary_and_rows_start_in_pgo_rank_order(self):
         rows = [
             {
@@ -253,6 +525,381 @@ class ComparisonTests(unittest.TestCase):
         self.assertIn(
             "a.children[0].dataset.sort.localeCompare(",
             output,
+        )
+
+    def test_fantasy_panel_is_reader_first_and_excludes_ineligible_rows(self):
+        panel = pgo_comparison.render_fantasy_panel(
+            self._fantasy_preview()
+        )
+
+        self.assertEqual(panel.count('class="fantasy-row"'), 4)
+        self.assertNotIn("Buffalo Backup", panel)
+        self.assertEqual(panel.count('class="fantasy-view-button"'), 7)
+        self.assertIn(
+            'data-view="SUPERFLEX" aria-pressed="true"',
+            panel,
+        )
+        self.assertIn('id="fantasy-player-search"', panel)
+        self.assertIn('id="fantasy-team"', panel)
+        self.assertIn('id="fantasy-columns"', panel)
+        for label in ("SF#", "Player", "Pos", "Team", "Opp.", "Proj."):
+            self.assertIn(f">{label}</button>", panel)
+        for label in (
+            "Original half-PPR Pos #",
+            "Original half-PPR FLEX #",
+            "Original half-PPR SF #",
+            "Original half-PPR Baseline",
+            "Original half-PPR Delta",
+            "History",
+            "Init",
+            "Availability",
+        ):
+            self.assertIn(f">{label}</button>", panel)
+        self.assertIn("PREVIEW / HOLD", panel)
+        self.assertIn("pre-lock half-PPR", panel)
+        self.assertIn("not gradeable", panel)
+        self.assertIn("Player availability is unverified", panel)
+        self.assertIn('role="status" aria-live="polite"', panel)
+        self.assertIn("2026-09-03T13:52:56-04:00", panel)
+        self.assertIn("pgo_fantasy_2026_baseline_v2", panel)
+        self.assertIn("b" * 64, panel)
+        self.assertIn("a" * 64, panel)
+        self.assertIn('data-player-id="qb-buf"', panel)
+        self.assertNotIn('data-player-id="qb-buf-backup"', panel)
+        self.assertIn('step="any" required', panel)
+        self.assertIn('id="fantasy-table-caption"', panel)
+        self.assertIn("half-PPR base forecasts", panel)
+        self.assertIn("score-adjust the displayed Proj. column", panel)
+
+    def test_league_upgrade_adds_runtime_caption_and_source_labels_to_legacy_panel(self):
+        preview = self._fantasy_preview()
+        with patch.object(pgo_comparison, "add_fantasy_leagues", side_effect=lambda panel, rows: panel):
+            legacy = pgo_comparison.render_fantasy_panel(preview)
+        legacy = legacy.replace(' id="fantasy-table-caption"', '').replace("Original half-PPR ", "")
+        legacy = legacy.replace("half-PPR base forecasts", "half-PPR projections")
+        legacy = legacy.replace("League profiles can score-adjust the displayed Proj. column.", "")
+        upgraded = pgo_comparison.add_fantasy_leagues(legacy, preview["rows"])
+        self.assertEqual(upgraded.count('id="fantasy-table-caption"'), 1)
+        for label in ("Pos #", "FLEX #", "SF #", "Baseline", "Delta"):
+            self.assertIn(f">Original half-PPR {label}</button>", upgraded)
+        self.assertIn("half-PPR base forecasts", upgraded)
+        self.assertIn("score-adjust the displayed Proj. column", upgraded)
+        pgo_comparison._validate_fantasy_leagues(upgraded, upgraded)
+        with self.assertRaises(ValueError):
+            missing = upgraded.replace('id="fantasy-table-caption"', 'id="missing-caption"')
+            pgo_comparison._validate_fantasy_leagues(missing, missing)
+
+    @staticmethod
+    def _replace_scoring_payload(page, payload):
+        match = re.search(
+            r'(<script type="application/json" id="fantasy-scoring-data" )'
+            r'data-sha256="[0-9a-f]{64}">(.*?)</script>',
+            page,
+            re.S,
+        )
+        if match is None:
+            raise AssertionError("Fantasy scoring payload was not found")
+        data = json.dumps(
+            payload, sort_keys=True, separators=(",", ":"), allow_nan=True
+        ).replace("<", "\\u003c")
+        digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+        return page[:match.start()] + (
+            f'{match[1]}data-sha256="{digest}">{data}</script>'
+        ) + page[match.end():]
+
+    def _available_scoring_payload(self):
+        components = {
+            name: 0.0 for name in (
+                "passing_yards", "passing_tds", "passing_interceptions",
+                "passing_2pt_conversions", "rushing_yards", "rushing_tds",
+                "rushing_2pt_conversions", "receptions", "receiving_yards",
+                "receiving_tds", "receiving_2pt_conversions",
+                "special_teams_tds", "fumbles_lost_total",
+            )
+        }
+        players = {
+            row["gsis_id"]: {
+                "position": row["position"],
+                "points": row["strong_prediction"],
+                "components": dict(components),
+            }
+            for row in self._fantasy_preview()["rows"]
+            if row["ranking_eligible"]
+        }
+        return {"schema_version": 1, "available": True, "players": players}
+
+    def test_league_profile_form_and_source_data_survive_real_refresh(self):
+        panel = pgo_comparison.render_fantasy_panel(self._fantasy_preview())
+        self.assertIn('id="fantasy-league-form"', panel)
+        self.assertIn('data-base-points="20.0"', panel)
+        self.assertIn('data-view="LEAGUE"', panel)
+        self.assertIn('id="fantasy-scoring-data"', panel)
+        with (
+            patch.object(pgo_comparison, "load_mccabe_rows", return_value=[]),
+            patch.object(pgo_comparison, "mccabe_source_timestamp", return_value="2026-09-07T01:00:00+00:00"),
+        ):
+            published = pgo_comparison.inject_fantasy_preview(
+                pgo_comparison.inject_comparison(self._base_html(),
+                    pgo_comparison.render_comparison_panel([], self._held_receipt())), panel)
+            refreshed = pgo_comparison.refresh_mccabe_page(self._base_html(), published)
+            self.assertIn(panel, refreshed)
+            for broken in (
+                published.replace('id="fantasy-league-form"', 'id="missing-form"'),
+                published.replace('id="fantasy-scoring-data"', 'id="missing-data"'),
+                published.replace('"available":false', '"available":true'),
+            ):
+                with self.subTest(broken=broken[-60:]):
+                    with self.assertRaisesRegex(ValueError, "league|scoring"):
+                        pgo_comparison.refresh_mccabe_page(self._base_html(), broken)
+
+    def test_refresh_rejects_scoring_payload_and_dom_population_drift(self):
+        panel = pgo_comparison.render_fantasy_panel(self._fantasy_preview())
+        panel = self._replace_scoring_payload(
+            panel, self._available_scoring_payload()
+        )
+        published = pgo_comparison.inject_fantasy_preview(
+            pgo_comparison.inject_comparison(
+                self._base_html(),
+                pgo_comparison.render_comparison_panel([], self._held_receipt()),
+            ),
+            panel,
+        )
+        payload_mutations = {
+            "missing player": lambda data: data["players"].pop("qb-buf"),
+            "wrong position": lambda data: data["players"]["qb-buf"].update(position="RB"),
+            "wrong points": lambda data: data["players"]["qb-buf"].update(points=999),
+            "missing component": lambda data: data["players"]["qb-buf"]["components"].pop("receptions"),
+            "extra component": lambda data: data["players"]["qb-buf"]["components"].update(extra=0),
+            "boolean component": lambda data: data["players"]["qb-buf"]["components"].update(receptions=True),
+            "nonfinite component": lambda data: data["players"]["qb-buf"]["components"].update(receptions=math.nan),
+            "malformed player": lambda data: data["players"].update({"qb-buf": None}),
+            "wrong schema": lambda data: data.update(schema_version=2),
+        }
+        broken_pages = {
+            "base points": published.replace(
+                'data-player-id="qb-buf" data-base-points="20.0"',
+                'data-player-id="qb-buf" data-base-points="999"',
+                1,
+            ),
+            "duplicate id": published.replace(
+                'data-player-id="rb-lar"', 'data-player-id="qb-buf"', 1
+            ),
+            "missing id": published.replace(
+                ' data-player-id="qb-buf"', '', 1
+            ),
+            "changed inactive flag": published.replace('data-inactive="false"', 'data-inactive="true"', 1),
+            "missing inactive flag": published.replace(' data-inactive="false"', '', 1),
+            "invalid inactive flag": published.replace('data-inactive="false"', 'data-inactive="0"', 1),
+            "missing cell": published.replace(
+                '<td class="fantasy-league-value" data-sort="">&mdash;</td>',
+                '',
+                1,
+            ),
+        }
+        for name, mutate in payload_mutations.items():
+            data = self._available_scoring_payload()
+            mutate(data)
+            broken_pages[name] = self._replace_scoring_payload(published, data)
+        with (
+            patch.object(pgo_comparison, "load_mccabe_rows", return_value=[]),
+            patch.object(
+                pgo_comparison,
+                "mccabe_source_timestamp",
+                return_value="2026-09-07T01:00:00+00:00",
+            ),
+        ):
+            for name, broken in broken_pages.items():
+                with self.subTest(name=name):
+                    with self.assertRaisesRegex(ValueError, "league|scoring"):
+                        pgo_comparison.refresh_mccabe_page(
+                            self._base_html(), broken
+                        )
+
+    def test_orphaned_league_version_marker_is_rejected(self):
+        orphaned = self._base_html().replace(
+            "</body>", '<div data-league-version="1"></div></body>'
+        )
+        with self.assertRaisesRegex(ValueError, "orphaned"):
+            pgo_comparison._extract_published_fantasy_panel(orphaned)
+
+    def test_ui_source_guards_payload_and_activates_saved_fallback_atomically(self):
+        source = (pgo_comparison.HERE / "fantasy_league_ui.js").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("Scoring adjustment data could not be validated", source)
+        self.assertIn("scoring.schema_version !== 1", source)
+        self.assertIn("function activateStoredProfile", source)
+        self.assertIn("scoring: {...PGOLeague.HALF_PPR}", source)
+        self.assertIn("the saved league remains unchanged", source)
+        self.assertLess(
+            source.index("activateStoredProfile(0, remaining)"),
+            source.index("profiles = remaining"),
+        )
+
+    @unittest.skipUnless(shutil.which("node"), "Node is required for the browser scoring-engine checks")
+    def test_league_javascript_behavior(self):
+        result = pgo_comparison.subprocess.run(
+            [shutil.which("node"), str(pgo_comparison.HERE / "tests/test_fantasy_league.js")],
+            capture_output=True, text=True, check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_fantasy_panel_escapes_source_text(self):
+        preview = self._fantasy_preview()
+        preview["rows"][0]["player_name"] = 'D\'Andre "Quoted" & Sons'
+        panel = pgo_comparison.render_fantasy_panel(preview)
+
+        self.assertIn(
+            "Rookie &lt;script&gt;alert(1)&lt;/script&gt;",
+            panel,
+        )
+        self.assertNotIn("<script>alert(1)</script>", panel)
+        self.assertIn("D&#x27;Andre &quot;Quoted&quot; &amp; Sons", panel)
+        self.assertIn(
+            'data-player="d&#x27;andre &quot;quoted&quot; &amp; sons"',
+            panel,
+        )
+        self.assertNotIn('data-player="d\'andre "quoted" & sons"', panel)
+
+    def test_fantasy_player_row_header_resets_shell_header_presentation(self):
+        self.assertIn(
+            """#panel-fantasy .fantasy-table tbody .fantasy-player {
+  background:transparent; border-bottom:0; color:inherit; font:inherit;
+  letter-spacing:normal; text-transform:none; user-select:text;
+  text-align:left; white-space:normal; overflow-wrap:anywhere;
+}
+#panel-fantasy .fantasy-table tbody .fantasy-player:hover {
+  background:transparent; color:inherit;
+}""",
+            pgo_comparison.FANTASY_CSS,
+        )
+
+    def test_canonical_week1_preview_loads_into_real_renderer(self):
+        fixture = ProspectiveFantasyFixture()
+        preview = fixture.week1_site_preview()
+        with tempfile.TemporaryDirectory() as directory:
+            path = fixture.write_json(
+                Path(directory) / "preview.json",
+                preview,
+                canonical=True,
+            )
+            loaded = pgo_comparison.fantasy_prospective.load_week1_preview(path)
+
+        panel = pgo_comparison.render_fantasy_panel(loaded)
+        self.assertIn('id="panel-fantasy"', panel)
+        self.assertEqual(panel.count('class="fantasy-row"'), 35)
+        self.assertIn(preview["artifact_sha256"], panel)
+
+    def test_fantasy_plan_uses_replayable_playwright_commands(self):
+        plan = (
+            Path(__file__).parents[1]
+            / "docs"
+            / "superpowers"
+            / "plans"
+            / "2026-09-03-pgo-fantasy-week-1-site-preview.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn('panel.count(\'class="fantasy-view-button"\')', plan)
+        self.assertIn('self.assertIn("dataset.view", pgo_comparison.FANTASY_SCRIPT)', plan)
+        self.assertIn(
+            "& $gitBash -lc '\"$1\" --session pgo-fantasy-week1 eval \"$PGO_EVAL\"' _ $playwrightCli",
+            plan,
+        )
+        self.assertNotIn(
+            "& $gitBash $playwrightCli --session pgo-fantasy-week1 eval",
+            plan,
+        )
+        self.assertNotIn(r'querySelector(\"', plan)
+        self.assertNotIn(r'querySelectorAll(\"', plan)
+        self.assertIn(
+            """$env:PGO_EVAL = 'document.querySelector(".fantasy-sort[data-column=''5'']").click()'""",
+            plan,
+        )
+        self.assertNotIn("[data-column=5]", plan)
+        self.assertIn("requests --static", plan)
+        self.assertNotIn("pgo-fantasy-week1 network", plan)
+
+    def test_fantasy_assets_cover_filters_sorting_columns_and_mobile(self):
+        self.assertIn("dataset.view", pgo_comparison.FANTASY_SCRIPT)
+        self.assertIn("fantasy-player-search", pgo_comparison.FANTASY_SCRIPT)
+        self.assertIn("fantasy-team", pgo_comparison.FANTASY_SCRIPT)
+        self.assertIn("fantasy-columns", pgo_comparison.FANTASY_SCRIPT)
+        self.assertIn("aria-sort", pgo_comparison.FANTASY_SCRIPT)
+        self.assertNotIn("fetch(", pgo_comparison.FANTASY_SCRIPT)
+        self.assertIn("@media (max-width:480px)", pgo_comparison.FANTASY_CSS)
+        self.assertIn(
+            "#panel-fantasy.show-technical .fantasy-technical",
+            pgo_comparison.FANTASY_CSS,
+        )
+
+    def test_fantasy_injection_selects_new_tab_and_preserves_other_panels(self):
+        comparison = pgo_comparison.render_comparison_panel(
+            [], self._held_receipt()
+        )
+        fantasy = pgo_comparison.render_fantasy_panel(
+            self._fantasy_preview()
+        )
+
+        existing = pgo_comparison.inject_comparison(
+            self._base_html(), comparison
+        )
+        output = pgo_comparison.inject_fantasy_preview(
+            existing, fantasy
+        )
+
+        self.assertLess(
+            output.index('id="tab-comparison"'),
+            output.index('id="tab-fantasy"'),
+        )
+        self.assertLess(
+            output.index('id="tab-fantasy"'),
+            output.index('id="tab-ratings"'),
+        )
+        self.assertIn(
+            'class="tab active" id="tab-fantasy"',
+            output,
+        )
+        self.assertIn(
+            'aria-selected="true" aria-controls="panel-fantasy"',
+            output,
+        )
+        self.assertIn(
+            'class="tab" id="tab-comparison"',
+            output,
+        )
+        self.assertIn(
+            'aria-selected="false" aria-controls="panel-comparison"',
+            output,
+        )
+        self.assertIn(
+            'class="panel" id="panel-comparison"',
+            output,
+        )
+        self.assertIn(
+            'aria-labelledby="tab-comparison" hidden>',
+            output,
+        )
+        self.assertIn(
+            'class="panel active" id="panel-fantasy"',
+            output,
+        )
+        self.assertIn('id="panel-ratings" hidden', output)
+        self.assertIn("McCabe Ratings</button>", output)
+        self.assertIn("McCabe QBs</button>", output)
+        self.assertIn("McCabe Method</button>", output)
+        self.assertEqual(output.count(pgo_comparison.FANTASY_SCRIPT), 1)
+        with self.assertRaisesRegex(ValueError, "already has"):
+            pgo_comparison.inject_fantasy_preview(output, fantasy)
+
+    def test_injection_without_fantasy_remains_byte_identical(self):
+        output = pgo_comparison.inject_comparison(
+            self._base_html(),
+            '<section id="panel-comparison">Rows</section>',
+        )
+        digest = hashlib.sha256(output.encode("utf-8")).hexdigest()
+        self.assertEqual(
+            digest,
+            "6da6eac6d26cf88ecd3679f0706f430c4352d128af7d2eb039fd3c920f8bc50f",
         )
 
     def test_injection_adds_one_accessible_tab_and_preserves_base_page(self):
@@ -348,6 +995,167 @@ class ComparisonTests(unittest.TestCase):
         self.assertIn("2026-08-18T02:09:47-07:00", output)
         self.assertIn("Historical Preseason 2026 snapshot locked", output)
         self.assertIn("2026-07-16T11:22:52-04:00", output)
+
+    def test_refresh_mccabe_preserves_published_fantasy_panel(self):
+        comparison_rows = [{
+            "team": "Los Angeles Rams", "mccabe_rank": 1, "mccabe_rating": 7.5,
+            "full_strength_rank": 2, "full_strength_rating": 6.653245,
+            "availability_adjustment": 0.0, "current_lineup_rank": 2,
+            "current_lineup_rating": 6.653245, "rank_disagreement": 1,
+            "rating_disagreement": -0.846755,
+        }]
+        current_rows = [{"team": "Los Angeles Rams", "abbr": "LAR", "rank": 3, "rating": 5.5}]
+        fantasy_panel = pgo_comparison.render_fantasy_panel(self._fantasy_preview())
+        published = pgo_comparison.inject_fantasy_preview(
+            pgo_comparison.inject_comparison(
+                self._base_html(),
+                pgo_comparison.render_comparison_panel(comparison_rows, self._held_receipt()),
+            ),
+            fantasy_panel,
+        )
+        with (
+            patch.object(pgo_comparison, "load_mccabe_rows", return_value=current_rows),
+            patch.object(pgo_comparison, "mccabe_source_timestamp", return_value="2026-09-04T12:00:00-04:00"),
+        ):
+            output = pgo_comparison.refresh_mccabe_page(self._base_html(), published)
+        self.assertIn(fantasy_panel, output)
+        self.assertEqual(output.count('id="tab-fantasy"'), 1)
+        self.assertEqual(output.count('id="panel-fantasy"'), 1)
+        self.assertEqual(output.count(pgo_comparison.FANTASY_CSS), 1)
+        self.assertEqual(output.count(pgo_comparison.FANTASY_SCRIPT), 1)
+        self.assertIn(pgo_comparison.FANTASY_TAB, output)
+        self.assertIn('<section class="panel active" id="panel-fantasy"', output)
+        self.assertNotIn('<section class="panel active" id="panel-comparison"', output)
+        self.assertIn('data-sort="3">3</td><td data-sort="5.5">+5.5', output)
+
+    def test_refresh_mccabe_preserves_availability_panel_and_assets(self):
+        availability_css = getattr(
+            pgo_comparison, "FANTASY_AVAILABILITY_CSS", None
+        )
+        self.assertIsNotNone(availability_css)
+        fantasy_panel = pgo_comparison.render_fantasy_panel(
+            self._fantasy_preview()
+        ).replace(
+            "Buffalo QB</th>",
+            'Buffalo QB<span class="fantasy-availability">'
+            '<span class="fantasy-game-state">PREVIEW</span></span></th>',
+            1,
+        )
+
+        with tempfile.TemporaryDirectory() as temp:
+            mccabe_path = Path(temp) / "ratings.csv"
+            mccabe_path.write_bytes(pgo_comparison.MCCABE_PATH.read_bytes())
+            current_rows = pgo_comparison.load_mccabe_rows(mccabe_path)
+            comparison_rows = [
+                {
+                    "team": row["team"],
+                    "mccabe_rank": row["rank"],
+                    "mccabe_rating": row["rating"],
+                    "full_strength_rank": row["rank"],
+                    "full_strength_rating": row["rating"],
+                    "availability_adjustment": 0.0,
+                    "current_lineup_rank": row["rank"],
+                    "current_lineup_rating": row["rating"],
+                    "rank_disagreement": 0,
+                    "rating_disagreement": 0.0,
+                }
+                for row in current_rows
+            ]
+            comparison = pgo_comparison.inject_comparison(
+                self._base_html(),
+                pgo_comparison.render_comparison_panel(
+                    comparison_rows, self._held_receipt()
+                ),
+            )
+            published = pgo_comparison.inject_fantasy_preview(
+                comparison, fantasy_panel
+            )
+            invalid_pages = {
+                "missing": published.replace(availability_css, "", 1),
+                "duplicate": published.replace(
+                    "</style>", availability_css + "\n</style>", 1
+                ),
+                "orphaned": pgo_comparison.inject_fantasy_preview(
+                    comparison,
+                    pgo_comparison.render_fantasy_panel(
+                        self._fantasy_preview()
+                    ),
+                ).replace(
+                    "</style>", availability_css + "\n</style>", 1
+                ),
+            }
+            with patch.object(
+                pgo_comparison,
+                "mccabe_source_timestamp",
+                return_value="2026-09-06T12:00:00-04:00",
+            ):
+                output = pgo_comparison.refresh_mccabe_page(
+                    self._base_html(), published, mccabe_path
+                )
+                for case, page in invalid_pages.items():
+                    with self.subTest(case=case):
+                        with self.assertRaisesRegex(
+                            ValueError, "availability CSS"
+                        ):
+                            pgo_comparison.refresh_mccabe_page(
+                                self._base_html(), page, mccabe_path
+                            )
+
+        self.assertIn(fantasy_panel, output)
+        self.assertEqual(output.count(pgo_comparison.FANTASY_TAB), 1)
+        self.assertEqual(output.count(pgo_comparison.FANTASY_CSS), 1)
+        self.assertEqual(output.count(availability_css), 1)
+        self.assertEqual(output.count(pgo_comparison.FANTASY_SCRIPT), 1)
+
+    def test_refresh_mccabe_rejects_invalid_fantasy_markers(self):
+        comparison_rows = [{
+            "team": "Los Angeles Rams", "mccabe_rank": 1, "mccabe_rating": 7.5,
+            "full_strength_rank": 2, "full_strength_rating": 6.653245,
+            "availability_adjustment": 0.0, "current_lineup_rank": 2,
+            "current_lineup_rating": 6.653245, "rank_disagreement": 1,
+            "rating_disagreement": -0.846755,
+        }]
+        current_rows = [{"team": "Los Angeles Rams", "abbr": "LAR", "rank": 3, "rating": 5.5}]
+        comparison = pgo_comparison.inject_comparison(
+            self._base_html(),
+            pgo_comparison.render_comparison_panel(comparison_rows, self._held_receipt()),
+        )
+        complete = pgo_comparison.inject_fantasy_preview(
+            comparison, pgo_comparison.render_fantasy_panel(self._fantasy_preview())
+        )
+        invalid_pages = (
+            comparison.replace(pgo_comparison.COMPARISON_TAB, pgo_comparison.COMPARISON_TAB + pgo_comparison.FANTASY_TAB, 1),
+            complete.replace(pgo_comparison.FANTASY_TAB, pgo_comparison.FANTASY_TAB + pgo_comparison.FANTASY_TAB, 1),
+            comparison.replace("</style>", pgo_comparison.FANTASY_CSS + "\n</style>", 1),
+            comparison.replace("</body>", pgo_comparison.FANTASY_SCRIPT + "\n</body>", 1),
+        )
+        with (
+            patch.object(pgo_comparison, "load_mccabe_rows", return_value=current_rows),
+            patch.object(pgo_comparison, "mccabe_source_timestamp", return_value="2026-09-04T12:00:00-04:00"),
+        ):
+            for page in invalid_pages:
+                with self.subTest(page=page[:80]):
+                    with self.assertRaisesRegex(ValueError, "fantasy preview markers are incomplete or duplicated"):
+                        pgo_comparison.refresh_mccabe_page(self._base_html(), page)
+
+    def test_refresh_mccabe_rejects_inactive_comparison_without_fantasy(self):
+        comparison = pgo_comparison.inject_comparison(
+            self._base_html(),
+            pgo_comparison.render_comparison_panel([], self._held_receipt()),
+        )
+        inactive = comparison.replace(
+            '<section class="panel active" id="panel-comparison"',
+            '<section class="panel" id="panel-comparison"',
+            1,
+        ).replace(
+            'aria-labelledby="tab-comparison">',
+            'aria-labelledby="tab-comparison" hidden>',
+            1,
+        )
+        with self.assertRaisesRegex(
+            ValueError, "Existing PGO comparison panel must be active"
+        ):
+            pgo_comparison.refresh_mccabe_page(self._base_html(), inactive)
 
     def test_comparison_team_labels_have_contrasting_backgrounds(self):
         self.assertIn(
