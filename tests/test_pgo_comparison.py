@@ -8,6 +8,7 @@ import shutil
 import tempfile
 import unittest
 from contextlib import redirect_stderr
+from decimal import Decimal
 from pathlib import Path
 from unittest.mock import patch
 
@@ -54,7 +55,33 @@ class RatingExplanationTests(unittest.TestCase):
         self.assertNotIn("PGO today", pgo_comparison.extract_comparison_panel(result))
         self.assertNotIn("Rating gap", pgo_comparison.extract_comparison_panel(result))
         self.assertIn("openDrawer(template.innerHTML, trigger)", result)
-        self.assertEqual(result.count('class="pgo-rating-trigger team-trigger"'), 32)
+        self.assertEqual(result.count('class="pgo-rating-trigger row-trigger team-trigger"'), 32)
+
+    def test_every_drawer_has_its_dialog_name_and_consistent_displayed_sum(self):
+        result = pgo_comparison.add_rating_explanations(self.page)
+        dialog_label = re.search(r'id="drawer"[^>]*aria-labelledby="([^"]+)"', result).group(1)
+        templates = re.findall(r'<template id="pgo-explanation-([A-Z]+)">(.*?)</template>', result, re.S)
+        self.assertEqual(len(templates), 32)
+        for team, detail in templates:
+            with self.subTest(team=team, check="accessible name"):
+                self.assertEqual(len(re.findall(rf'<h2 id="{dialog_label}">[^<]+</h2>', detail)), 1)
+            with self.subTest(team=team, check="displayed sum"):
+                shown = {key: Decimal(value) for key, value in re.findall(
+                    r'<dd data-component="([^"]+)" data-value="[^"]+">([^<]+)</dd>', detail)}
+                self.assertEqual(shown["performance"] + shown["roster"], shown["full_strength"])
+
+    def test_long_explanations_are_collapsed_and_metadata_wrapper_is_idempotent(self):
+        result = pgo_comparison.add_rating_explanations(self.page)
+        panel = pgo_comparison.extract_comparison_panel(result)
+        self.assertEqual(panel.count('<details class="pgo-rank-disclosure">'), 1)
+        self.assertIn('<summary>Where PGO and McCabe agree and disagree</summary>', panel)
+        self.assertEqual(panel.count('<details class="pgo-comparison-metadata">'), 1)
+        metadata = re.search(r'<p class="comparison-summary">.*?</p>', self.page, re.S).group(0)
+        self.assertIn('<summary>Snapshot dates and backtest</summary>' + metadata + '</details>', panel)
+        primer = re.search(r'<p class="pgo-rating-meaning">(.*?)</p>', panel, re.S).group(1)
+        self.assertLess(len(primer), 650)
+        self.assertNotIn('CSV', primer)
+        self.assertEqual(pgo_comparison.add_rating_explanations(result), result)
 
     def test_idempotent_preserves_numeric_cells_fantasy_and_refresh(self):
         result = pgo_comparison.add_rating_explanations(self.page)

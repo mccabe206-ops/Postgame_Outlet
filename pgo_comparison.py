@@ -818,7 +818,7 @@ def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_
         if len(cells) == 9:
             markup = markup[:markup.rfind(cells[8])] + markup[markup.rfind(cells[8]) + len(cells[8]):]
         seen.add(name)
-        button = (f'<button type="button" class="pgo-rating-trigger team-trigger" '
+        button = (f'<button type="button" class="pgo-rating-trigger row-trigger team-trigger" '
                   f'data-pgo-team="{row["team"]}" aria-haspopup="dialog" '
                   f'aria-controls="drawer">{html.escape(names[row["team"]])}</button>')
         new_header = header.group(0).split('>', 1)[0] + '>' + button + '</th>'
@@ -831,6 +831,12 @@ def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_
         raise ValueError("PGO explanations require unique McCabe ranks 1 through 32")
     as_of = html.escape(str(receipt["as_of"]))
     date = datetime.fromisoformat(str(receipt["as_of"])).strftime("%B %d, %Y")
+    metadata = re.search(r'<p class="comparison-summary">.*?</p>', panel, re.S)
+    mccabe_date = re.search(
+        r'(?:Current McCabe ratings from data/ratings\.csv as of|McCabe [^<\n]+? locked)'
+        r'\s+(\d{4}-\d{2}-\d{2})T', metadata.group(0) if metadata else '')
+    if not mccabe_date:
+        raise ValueError("PGO explanations require dated McCabe metadata")
     label = "Experimental model — HOLD" if receipt["status"] == "HOLD" else "Validated model — PASS"
     meaning = ("PGO values are independent model outputs fitted to game margins and centered "
                "across 32 teams. Their intended interpretation is neutral-field point strength "
@@ -849,17 +855,19 @@ def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_
     for row in rows:
         roster = row["roster_coaching_points"] - roster_mean
         performance = row["full_strength_rating"] - roster
+        displayed_performance = round(row["full_strength_rating"], 3) - round(roster, 3)
         values = (("full_strength", "Full-strength model output", row["full_strength_rating"]),
                   ("performance", "Performance contribution", performance),
                   ("roster", "Roster/coaching contribution", roster),
                   ("availability", "Availability adjustment at snapshot", row["availability_adjustment"]),
                   ("lineup", "PGO lineup output at snapshot", row["current_lineup_rating"]))
         details = ''.join(f'<dt>{title}</dt><dd data-component="{key}" data-value="{value}">'
-                          f'{value:+.3f}</dd>' for key, title, value in values)
+                          f'{(displayed_performance if key == "performance" else value):+.3f}</dd>'
+                          for key, title, value in values)
         team_name, pgo_rank, mccabe_rank = comparisons[row["team"]]
         templates.append(
             f'<template id="pgo-explanation-{row["team"]}">'
-            f'<h2>{html.escape(names[row["team"]])}</h2><p>{label}</p>'
+            f'<h2 id="drawerTitle">{html.escape(names[row["team"]])}</h2><p>{label}</p>'
             f'<p>Saved snapshot: <time datetime="{as_of}">{as_of}</time>.</p>'
             f'<p>{html.escape(team_name)}: PGO #{pgo_rank}, McCabe #{mccabe_rank}. '
             'Rank comparison across the dated snapshots shown on the board.</p>'
@@ -881,23 +889,31 @@ def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_
         entries = '; '.join(f'{html.escape(name)}: PGO #{pgo_rank}, McCabe #{mccabe_rank}'
                             for name, pgo_rank, mccabe_rank in selected[:3])
         highlights.append(f'<li><strong>{title}:</strong> {entries or "None in this snapshot"}.</li>')
-    block = (f'{start}\n<p>McCabe is a human-set roster rating in neutral-field points: '
-             'QB + non-QB offense + defense sum to the total. PGO is a separate statistical '
-             'model; the two products are never blended.</p>\n'
-             f'<p class="pgo-rating-meaning">{html.escape(meaning)} '
-             f'Saved snapshot: {html.escape(date)}. PGO lineup and availability also refer '
-             'to that date. Select a team for its saved contribution groups.</p>\n'
+    block = (f'{start}\n<p class="pgo-rating-meaning">McCabe&#x27;s human-set neutral-field '
+             'point total is QB + non-QB offense + defense. PGO is independent, fitted to game '
+             'margins; its point interpretation remains experimental. '
+             f'PGO snapshot: {html.escape(date)} (including lineup and availability). '
+             f'McCabe snapshot: {mccabe_date.group(1)}. Select a team for its saved contributions.</p>\n'
              f'<details><summary>Snapshot limits and open audit</summary><p>{html.escape(limits)}</p>'
              '<p>July availability is not a current injury report; a zero adjustment does not '
              'establish September health.</p></details>\n'
+             '<details class="pgo-rank-disclosure"><summary>Where PGO and McCabe agree and disagree</summary>'
              '<div class="pgo-rank-highlights"><p>Rank comparisons across the dated snapshots '
-             'shown below. Their dates differ; these are not point-price disagreements.</p><ul>'
-             + ''.join(highlights) + '</ul></div>\n' + '\n'.join(templates) + f'\n{end}\n')
+             'shown above, not point-price disagreements.</p><ul>'
+             + ''.join(highlights) + '</ul></div></details>\n' + '\n'.join(templates) + f'\n{end}\n')
     panel = panel.replace('<h2>PGO v1 Power Ratings</h2>', '<h2>PGO vs McCabe</h2>', 1)
     panel = panel.replace('    <h2>PGO vs McCabe</h2>\n',
                           '    <h2>PGO vs McCabe</h2>\n' + block, 1)
     if panel.count(start) != 1:
         raise ValueError("PGO explanation heading is missing")
+    wrapper = '<details class="pgo-comparison-metadata">'
+    if panel.count(wrapper) > 1:
+        raise ValueError("Duplicated PGO comparison metadata disclosure")
+    if wrapper not in panel:
+        panel = panel.replace(metadata.group(0), wrapper + '<summary>Snapshot dates and backtest</summary>'
+                              + metadata.group(0) + '</details>', 1)
+    panel = panel.replace("    <p>Postgame Outlet's independent statistical rating, compared "
+                          "with McCabe's human rating and never blended.</p>\n", '')
     panel = panel.replace("PGO today", "PGO lineup")
     panel = re.sub(r'\s*<th scope="col"[^>]*><button[^>]*data-column="9">Rating gap</button></th>', '', panel)
     panel = panel.replace('\n      Positive rating gap means PGO rates the team higher.', '')
