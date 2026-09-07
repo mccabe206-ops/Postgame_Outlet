@@ -2,6 +2,7 @@ import copy
 import csv
 import gc
 import json
+import re
 import tempfile
 import unittest
 import warnings
@@ -469,11 +470,20 @@ class GeneratedDocumentTests(unittest.TestCase):
             with patch.object(generate_site, "DATA", temp):
                 document = generate_site.build_html(self.rows, self.config)
 
-        self.assertIn("--mut:#5b6c84; --dim:#5b6c84;", document)
-        self.assertIn(
-            "header .updated { color:rgba(255,255,255,.75);",
-            document,
-        )
+        colors = dict(re.findall(r"--([a-z0-9-]+):(#[0-9a-f]{6})", document))
+
+        def luminance(color):
+            rgb = [int(color[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+            linear = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
+            return sum(c * weight for c, weight in zip(linear, (0.2126, 0.7152, 0.0722)))
+
+        for foreground, background in (
+            ("mut", "panel"), ("mut", "row-alt"), ("dim", "row-alt"),
+            ("dim", "hover"), ("ink", "orange"),
+        ):
+            light, dark = sorted((luminance(colors[foreground]), luminance(colors[background])), reverse=True)
+            self.assertGreaterEqual((light + 0.05) / (dark + 0.05), 4.5, (foreground, background))
+        self.assertIn("header .updated { color:var(--ink);", document)
 
 
 if __name__ == "__main__":

@@ -537,14 +537,13 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Postgame Outlet (Shopify Spotlight) palette: white canvas, slate-blue ink
-     (#384f6f), orange accent (#fd962f family), Oswald display + Montserrat body. */
+  /* Shared PGO palette: warm white, deep navy and bold orange. */
   :root {
-    --bg:#ffffff; --bg2:#ffffff; --panel:#ffffff; --panel2:#f0f3f8;
-    --row-alt:#f7f9fc; --hover:#edf1f7; --border:#dfe6ef; --border2:#c9d3e2;
-    --ink:#384f6f; --mut:#5b6c84; --dim:#5b6c84;
-    --teal:#e0821c; --teal2:#8a4a05; --violet:#384f6f; --violet2:#384f6f;
-    --pos:#08734f; --neg:#a73525; --accent:#e0821c; --orange:#fd962f;
+    --bg:#fff9f0; --bg2:#fff9f0; --panel:#ffffff; --panel2:#fff4e4;
+    --row-alt:#fff9f0; --hover:#ffecd2; --border:#e4d9c9; --border2:#b7a895;
+    --ink:#101f3c; --mut:#334766; --dim:#526078;
+    --teal:#ff7a1a; --teal2:#8a3c00; --violet:#101f3c; --violet2:#334766;
+    --pos:#08734f; --neg:#a73525; --accent:#a94300; --orange:#ff7a1a;
     --disp:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     --body:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
@@ -555,6 +554,7 @@ TEMPLATE = """<!DOCTYPE html>
     overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
   }
   :focus-visible { outline:3px solid #005fcc; outline-offset:3px; }
+  #panel-fantasy a.fantasy-source-badge:focus-visible { outline-color:var(--ink); }
   .tab, .sort-button, .row-trigger, .drawer-close { font:inherit; }
   .sort-button, .row-trigger {
     border:0; background:transparent; color:inherit; padding:0; cursor:pointer;
@@ -566,22 +566,23 @@ TEMPLATE = """<!DOCTYPE html>
   }
   .wrap { max-width:1040px; margin:0 auto; padding:0 16px 72px; }
 
-  /* Full-bleed slate banner, same family as the store's hero boxes */
-  .hero { background:linear-gradient(120deg,#324763 0%,#384f6f 55%,#3f5878 100%);
+  /* Full-bleed banner matches the storefront's orange feature. */
+  .hero { background:linear-gradient(115deg,transparent 73%,#ffffff30 73%,#ffffff30 80%,transparent 80%),
+                    linear-gradient(110deg,var(--orange),#ffb350);
           padding:38px 16px 34px; margin-bottom:26px;
-          border-bottom:3px solid var(--orange); }
+          border-bottom:5px solid var(--ink); }
   header { text-align:center; max-width:1040px; margin:0 auto; }
   header h1 {
     margin:0; font-family:var(--disp); font-weight:700; line-height:.95;
-    font-size:clamp(34px,6.5vw,60px); letter-spacing:.5px; color:#fff;
+    font-size:clamp(34px,6.5vw,60px); letter-spacing:.5px; color:var(--ink);
     text-transform:uppercase;
   }
-  header h1 .accent { color:var(--orange); }
-  header .sub { color:rgba(255,255,255,.72); font-size:13px; margin-top:9px;
+  header h1 .accent { color:var(--ink); }
+  header .sub { color:var(--ink); font-size:13px; margin-top:9px;
                 letter-spacing:.04em; }
-  header .updated { color:rgba(255,255,255,.75); font-size:11px; margin-top:6px;
+  header .updated { color:var(--ink); font-size:11px; margin-top:6px;
                     letter-spacing:.06em; text-transform:uppercase; }
-  header .updated::before { content:"● "; color:var(--orange); }
+  header .updated::before { content:"● "; color:var(--ink); }
 
   .panel.active { background:var(--panel);
     border:1px solid var(--border); border-radius:14px; padding:18px 16px 20px;
@@ -613,7 +614,7 @@ TEMPLATE = """<!DOCTYPE html>
           box-shadow:0 1px 3px rgba(0,0,0,.4); }
   .tname { font-weight:600; color:var(--ink); }
   .div { color:var(--dim); font-size:11px; margin-left:8px; text-transform:uppercase; letter-spacing:.04em; }
-  .qbn { color:var(--mut); font-weight:500; }
+  td.qbn { color:var(--mut); font-weight:500; }
   .inj { color:var(--neg); font-size:11px; font-weight:700; }
   .movement { text-align:center; width:64px; }
   .move { font-weight:700; white-space:nowrap; }

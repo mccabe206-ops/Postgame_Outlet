@@ -32,10 +32,24 @@ class ComparisonTests(unittest.TestCase):
             'aria-selected="false" aria-controls="panel-method" tabindex="-1" '
             'data-panel="method">Methodology</button>'
             '  <section class="panel active" id="panel-ratings" '
-            'role="tabpanel">McCabe</section>'
-            '<section class="panel" id="panel-method">Method</section>'
+            'role="tabpanel" aria-labelledby="tab-ratings">McCabe</section>'
+            '<section class="panel" id="panel-qbs" role="tabpanel" '
+            'aria-labelledby="tab-qbs" hidden>QBs</section>'
+            '<section class="panel" id="panel-method" role="tabpanel" '
+            'aria-labelledby="tab-method" hidden>Method</section>'
             "</body></html>"
         )
+
+    @staticmethod
+    def _panel_inner(document, panel_id):
+        match = re.search(
+            rf'<section\b[^>]* id="{panel_id}"[^>]*>(.*?)</section>',
+            document,
+            re.S,
+        )
+        if match is None:
+            raise AssertionError(f"Missing panel: {panel_id}")
+        return match.group(1)
 
     @staticmethod
     def _held_receipt():
@@ -447,7 +461,7 @@ class ComparisonTests(unittest.TestCase):
         self.assertIn("Rookie &lt;script&gt;", rendered)
         self.assertIn("McCabe Ratings</button>", rendered)
 
-    def test_pgo_is_primary_and_rows_start_in_pgo_rank_order(self):
+    def test_mccabe_is_primary_and_pgo_rows_start_in_pgo_rank_order(self):
         rows = [
             {
                 "team": "Buffalo Bills", "mccabe_rank": 1,
@@ -470,29 +484,28 @@ class ComparisonTests(unittest.TestCase):
 
         output = pgo_comparison.inject_comparison(self._base_html(), panel)
 
-        self.assertLess(
-            output.index('id="tab-comparison"'),
-            output.index('id="tab-ratings"'),
+        tab_ids = ["tab-ratings", "tab-qbs", "tab-method", "tab-comparison"]
+        self.assertEqual(
+            sorted(tab_ids, key=lambda tab_id: output.index(f'id="{tab_id}"')),
+            tab_ids,
         )
+        self.assertIn('class="tab active" id="tab-ratings"', output)
         self.assertIn(
-            'class="tab active" id="tab-comparison"', output
+            'aria-selected="true" aria-controls="panel-ratings"', output
         )
+        self.assertIn('class="panel active" id="panel-ratings"', output)
+        self.assertIn('class="tab" id="tab-comparison"', output)
         self.assertIn(
-            'aria-selected="true" aria-controls="panel-comparison"', output
+            'aria-selected="false" aria-controls="panel-comparison"', output
         )
-        self.assertIn(
-            'class="panel active" id="panel-comparison"', output
-        )
-        self.assertIn(
-            'class="panel" id="panel-ratings" hidden', output
-        )
+        self.assertIn('class="panel" id="panel-comparison"', output)
+        self.assertIn('aria-labelledby="tab-comparison" hidden>', output)
         self.assertIn(">McCabe Ratings</button>", output)
         self.assertIn(">McCabe QBs</button>", output)
         self.assertIn(">McCabe Method</button>", output)
-        self.assertIn("By Postgame Outlet Model", output)
-        self.assertIn(
-            "Postgame Outlet’s independent PGO v1", output
-        )
+        self.assertIn("By Sean McCabe", output)
+        self.assertIn('content="Sean McCabe’s board"', output)
+        self.assertNotIn("By Postgame Outlet Model", output)
         self.assertLess(panel.index("Miami Dolphins"), panel.index("Buffalo Bills"))
         self.assertEqual(panel.count('aria-sort="ascending"'), 1)
         self.assertEqual(panel.count('aria-sort="none"'), 9)
@@ -642,7 +655,10 @@ class ComparisonTests(unittest.TestCase):
                 pgo_comparison.inject_comparison(self._base_html(),
                     pgo_comparison.render_comparison_panel([], self._held_receipt())), panel)
             refreshed = pgo_comparison.refresh_mccabe_page(self._base_html(), published)
-            self.assertIn(panel, refreshed)
+            self.assertEqual(
+                self._panel_inner(refreshed, "panel-fantasy"),
+                self._panel_inner(panel, "panel-fantasy"),
+            )
             for broken in (
                 published.replace('id="fantasy-league-form"', 'id="missing-form"'),
                 published.replace('id="fantasy-scoring-data"', 'id="missing-data"'),
@@ -832,7 +848,7 @@ class ComparisonTests(unittest.TestCase):
             pgo_comparison.FANTASY_CSS,
         )
 
-    def test_fantasy_injection_selects_new_tab_and_preserves_other_panels(self):
+    def test_fantasy_injection_keeps_mccabe_active_and_preserves_other_panels(self):
         comparison = pgo_comparison.render_comparison_panel(
             [], self._held_receipt()
         )
@@ -847,43 +863,28 @@ class ComparisonTests(unittest.TestCase):
             existing, fantasy
         )
 
-        self.assertLess(
-            output.index('id="tab-comparison"'),
-            output.index('id="tab-fantasy"'),
+        tab_ids = [
+            "tab-ratings", "tab-qbs", "tab-method", "tab-comparison",
+            "tab-fantasy",
+        ]
+        self.assertEqual(
+            sorted(tab_ids, key=lambda tab_id: output.index(f'id="{tab_id}"')),
+            tab_ids,
         )
-        self.assertLess(
-            output.index('id="tab-fantasy"'),
-            output.index('id="tab-ratings"'),
-        )
+        self.assertEqual(output.count('class="tab active"'), 1)
+        self.assertEqual(output.count('aria-selected="true"'), 1)
+        self.assertIn('class="tab active" id="tab-ratings"', output)
         self.assertIn(
-            'class="tab active" id="tab-fantasy"',
-            output,
+            'aria-selected="true" aria-controls="panel-ratings"', output
         )
-        self.assertIn(
-            'aria-selected="true" aria-controls="panel-fantasy"',
-            output,
-        )
-        self.assertIn(
-            'class="tab" id="tab-comparison"',
-            output,
-        )
-        self.assertIn(
-            'aria-selected="false" aria-controls="panel-comparison"',
-            output,
-        )
-        self.assertIn(
-            'class="panel" id="panel-comparison"',
-            output,
-        )
-        self.assertIn(
-            'aria-labelledby="tab-comparison" hidden>',
-            output,
-        )
-        self.assertIn(
-            'class="panel active" id="panel-fantasy"',
-            output,
-        )
-        self.assertIn('id="panel-ratings" hidden', output)
+        for panel in ("comparison", "fantasy"):
+            self.assertIn(f'class="tab" id="tab-{panel}"', output)
+            self.assertIn(
+                f'aria-selected="false" aria-controls="panel-{panel}"', output
+            )
+            self.assertIn(f'class="panel" id="panel-{panel}"', output)
+            self.assertIn(f'aria-labelledby="tab-{panel}" hidden>', output)
+        self.assertIn('class="panel active" id="panel-ratings"', output)
         self.assertIn("McCabe Ratings</button>", output)
         self.assertIn("McCabe QBs</button>", output)
         self.assertIn("McCabe Method</button>", output)
@@ -894,17 +895,21 @@ class ComparisonTests(unittest.TestCase):
     def test_injection_without_fantasy_remains_byte_identical(self):
         output = pgo_comparison.inject_comparison(
             self._base_html(),
-            '<section id="panel-comparison">Rows</section>',
+            '<section class="panel active" id="panel-comparison" '
+            'aria-labelledby="tab-comparison">Rows</section>',
         )
         digest = hashlib.sha256(output.encode("utf-8")).hexdigest()
         self.assertEqual(
             digest,
-            "6da6eac6d26cf88ecd3679f0706f430c4352d128af7d2eb039fd3c920f8bc50f",
+            "d482e1faa979cb4d5dbc6cfd09062d6ce7c619132e0e071e83747e91677921fc",
         )
 
     def test_injection_adds_one_accessible_tab_and_preserves_base_page(self):
         base = self._base_html()
-        panel = '<section id="panel-comparison">Rows</section>'
+        panel = (
+            '<section class="panel active" id="panel-comparison" '
+            'aria-labelledby="tab-comparison">Rows</section>'
+        )
         output = pgo_comparison.inject_comparison(base, panel)
         self.assertEqual(output.count('id="tab-comparison"'), 1)
         self.assertEqual(output.count('id="panel-comparison"'), 1)
@@ -914,7 +919,9 @@ class ComparisonTests(unittest.TestCase):
     def test_injection_suppresses_browser_favicon_request(self):
         base = self._base_html()
         output = pgo_comparison.inject_comparison(
-            base, '<section id="panel-comparison">Rows</section>'
+            base,
+            '<section class="panel active" id="panel-comparison" '
+            'aria-labelledby="tab-comparison">Rows</section>',
         )
         self.assertEqual(output.count('<link rel="icon" href="data:,">'), 1)
 
@@ -956,6 +963,35 @@ class ComparisonTests(unittest.TestCase):
         published = pgo_comparison.inject_comparison(
             self._base_html(),
             pgo_comparison.render_comparison_panel(stale_rows, self._held_receipt()),
+        )
+        published = published.replace(
+            pgo_comparison.COMPARISON_TAB,
+            pgo_comparison.ACTIVE_COMPARISON_TAB,
+            1,
+        ).replace(
+            'class="tab active" id="tab-ratings"',
+            'class="tab" id="tab-ratings"',
+            1,
+        ).replace(
+            'aria-selected="true" aria-controls="panel-ratings" tabindex="0"',
+            'aria-selected="false" aria-controls="panel-ratings" tabindex="-1"',
+            1,
+        ).replace(
+            '<section class="panel active" id="panel-ratings"',
+            '<section class="panel" id="panel-ratings"',
+            1,
+        ).replace(
+            'aria-labelledby="tab-ratings">',
+            'aria-labelledby="tab-ratings" hidden>',
+            1,
+        ).replace(
+            '<section class="panel" id="panel-comparison"',
+            '<section class="panel active" id="panel-comparison"',
+            1,
+        ).replace(
+            'aria-labelledby="tab-comparison" hidden>',
+            'aria-labelledby="tab-comparison">',
+            1,
         )
         current_base = self._base_html().replace(
             'id="panel-ratings" role="tabpanel">McCabe</section>',
@@ -1013,18 +1049,52 @@ class ComparisonTests(unittest.TestCase):
             ),
             fantasy_panel,
         )
+        published = published.replace(
+            pgo_comparison.FANTASY_TAB,
+            pgo_comparison.ACTIVE_FANTASY_TAB,
+            1,
+        ).replace(
+            'class="tab active" id="tab-ratings"',
+            'class="tab" id="tab-ratings"',
+            1,
+        ).replace(
+            'aria-selected="true" aria-controls="panel-ratings" tabindex="0"',
+            'aria-selected="false" aria-controls="panel-ratings" tabindex="-1"',
+            1,
+        ).replace(
+            '<section class="panel active" id="panel-ratings"',
+            '<section class="panel" id="panel-ratings"',
+            1,
+        ).replace(
+            'aria-labelledby="tab-ratings">',
+            'aria-labelledby="tab-ratings" hidden>',
+            1,
+        ).replace(
+            '<section class="panel" id="panel-fantasy"',
+            '<section class="panel active" id="panel-fantasy"',
+            1,
+        ).replace(
+            'aria-labelledby="tab-fantasy" hidden>',
+            'aria-labelledby="tab-fantasy">',
+            1,
+        )
         with (
             patch.object(pgo_comparison, "load_mccabe_rows", return_value=current_rows),
             patch.object(pgo_comparison, "mccabe_source_timestamp", return_value="2026-09-04T12:00:00-04:00"),
         ):
             output = pgo_comparison.refresh_mccabe_page(self._base_html(), published)
-        self.assertIn(fantasy_panel, output)
+        self.assertEqual(
+            self._panel_inner(output, "panel-fantasy"),
+            self._panel_inner(fantasy_panel, "panel-fantasy"),
+        )
         self.assertEqual(output.count('id="tab-fantasy"'), 1)
         self.assertEqual(output.count('id="panel-fantasy"'), 1)
         self.assertEqual(output.count(pgo_comparison.FANTASY_CSS), 1)
         self.assertEqual(output.count(pgo_comparison.FANTASY_SCRIPT), 1)
         self.assertIn(pgo_comparison.FANTASY_TAB, output)
-        self.assertIn('<section class="panel active" id="panel-fantasy"', output)
+        self.assertIn('<section class="panel active" id="panel-ratings"', output)
+        self.assertIn('<section class="panel" id="panel-fantasy"', output)
+        self.assertIn('aria-labelledby="tab-fantasy" hidden>', output)
         self.assertNotIn('<section class="panel active" id="panel-comparison"', output)
         self.assertIn('data-sort="3">3</td><td data-sort="5.5">+5.5', output)
 
@@ -1101,7 +1171,10 @@ class ComparisonTests(unittest.TestCase):
                                 self._base_html(), page, mccabe_path
                             )
 
-        self.assertIn(fantasy_panel, output)
+        self.assertEqual(
+            self._panel_inner(output, "panel-fantasy"),
+            self._panel_inner(fantasy_panel, "panel-fantasy"),
+        )
         self.assertEqual(output.count(pgo_comparison.FANTASY_TAB), 1)
         self.assertEqual(output.count(pgo_comparison.FANTASY_CSS), 1)
         self.assertEqual(output.count(availability_css), 1)
@@ -1138,24 +1211,99 @@ class ComparisonTests(unittest.TestCase):
                     with self.assertRaisesRegex(ValueError, "fantasy preview markers are incomplete or duplicated"):
                         pgo_comparison.refresh_mccabe_page(self._base_html(), page)
 
-    def test_refresh_mccabe_rejects_inactive_comparison_without_fantasy(self):
+    def test_refresh_mccabe_rejects_ambiguous_active_panels(self):
         comparison = pgo_comparison.inject_comparison(
             self._base_html(),
             pgo_comparison.render_comparison_panel([], self._held_receipt()),
         )
-        inactive = comparison.replace(
-            '<section class="panel active" id="panel-comparison"',
-            '<section class="panel" id="panel-comparison"',
+        ambiguous = comparison.replace(
+            pgo_comparison.COMPARISON_TAB,
+            pgo_comparison.ACTIVE_COMPARISON_TAB,
             1,
         ).replace(
-            'aria-labelledby="tab-comparison">',
+            '<section class="panel" id="panel-comparison"',
+            '<section class="panel active" id="panel-comparison"',
+            1,
+        ).replace(
             'aria-labelledby="tab-comparison" hidden>',
+            'aria-labelledby="tab-comparison">',
             1,
         )
         with self.assertRaisesRegex(
-            ValueError, "Existing PGO comparison panel must be active"
+            ValueError, "active tab or panel state"
         ):
-            pgo_comparison.refresh_mccabe_page(self._base_html(), inactive)
+            pgo_comparison.refresh_mccabe_page(self._base_html(), ambiguous)
+
+    def test_refresh_mccabe_rejects_malformed_inactive_tabs_and_panels(self):
+        comparison = pgo_comparison.inject_comparison(
+            self._base_html(),
+            pgo_comparison.render_comparison_panel([], self._held_receipt()),
+        )
+        qbs_tab = re.search(
+            r'<button\b[^>]*id="tab-qbs".*?</button>', comparison, re.S
+        ).group(0)
+        qbs_panel = re.search(
+            r'<section\b[^>]*id="panel-qbs".*?</section>', comparison, re.S
+        ).group(0)
+        method_panel = re.search(
+            r'<section\b[^>]*id="panel-method".*?</section>', comparison, re.S
+        ).group(0)
+        malformed = {
+            "missing PGO tab": comparison.replace(
+                pgo_comparison.COMPARISON_TAB, "", 1
+            ),
+            "duplicate PGO tab": comparison.replace(
+                pgo_comparison.COMPARISON_TAB,
+                pgo_comparison.COMPARISON_TAB * 2,
+                1,
+            ),
+            "duplicate QB tab": comparison.replace(qbs_tab, qbs_tab * 2, 1),
+            "missing QB panel": comparison.replace(qbs_panel, "", 1),
+            "duplicate method panel": comparison.replace(
+                method_panel, method_panel * 2, 1
+            ),
+            "active ratings panel hidden": comparison.replace(
+                'aria-labelledby="tab-ratings">',
+                'aria-labelledby="tab-ratings" hidden>',
+                1,
+            ),
+            "active ratings panel empty hidden": comparison.replace(
+                'aria-labelledby="tab-ratings">',
+                'aria-labelledby="tab-ratings" hidden="">',
+                1,
+            ),
+            "active ratings panel named hidden": comparison.replace(
+                'aria-labelledby="tab-ratings">',
+                'aria-labelledby="tab-ratings" hidden="hidden">',
+                1,
+            ),
+            "inactive QB tab in tab order": comparison.replace(
+                'aria-selected="false" aria-controls="panel-qbs" tabindex="-1"',
+                'aria-selected="false" aria-controls="panel-qbs" tabindex="0"',
+                1,
+            ),
+            "inactive QB panel visible": comparison.replace(
+                'aria-labelledby="tab-qbs" hidden>',
+                'aria-labelledby="tab-qbs">',
+                1,
+            ),
+        }
+        with (
+            patch.object(pgo_comparison, "load_mccabe_rows", return_value=[]),
+            patch.object(
+                pgo_comparison,
+                "mccabe_source_timestamp",
+                return_value="2026-09-07T01:00:00+00:00",
+            ),
+        ):
+            for name, page in malformed.items():
+                with self.subTest(name=name):
+                    with self.assertRaisesRegex(
+                        ValueError, "active tab or panel state"
+                    ):
+                        pgo_comparison.refresh_mccabe_page(
+                            self._base_html(), page
+                        )
 
     def test_comparison_team_labels_have_contrasting_backgrounds(self):
         self.assertIn(

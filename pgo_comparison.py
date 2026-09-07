@@ -857,16 +857,30 @@ def render_comparison_panel(rows, receipt):
 """
 
 
-COMPARISON_TAB = """
+ACTIVE_COMPARISON_TAB = """
     <button type="button" class="tab active" id="tab-comparison" role="tab"
       aria-selected="true" aria-controls="panel-comparison" tabindex="0"
       data-panel="comparison">PGO Model</button>
 """
 
 
-FANTASY_TAB = """
+COMPARISON_TAB = """
+    <button type="button" class="tab" id="tab-comparison" role="tab"
+      aria-selected="false" aria-controls="panel-comparison" tabindex="-1"
+      data-panel="comparison">PGO Model</button>
+"""
+
+
+ACTIVE_FANTASY_TAB = """
     <button type="button" class="tab active" id="tab-fantasy" role="tab"
       aria-selected="true" aria-controls="panel-fantasy" tabindex="0"
+      data-panel="fantasy">Fantasy Week 1</button>
+"""
+
+
+FANTASY_TAB = """
+    <button type="button" class="tab" id="tab-fantasy" role="tab"
+      aria-selected="false" aria-controls="panel-fantasy" tabindex="-1"
       data-panel="fantasy">Fantasy Week 1</button>
 """
 
@@ -935,29 +949,23 @@ def inject_comparison(base_html, panel_html):
     )
     fixed_replacements = (
         (
-            '<meta name="description" content="Sean McCabe’s',
-            '<meta name="description" content="Postgame Outlet’s independent PGO v1',
-        ),
-        (
-            '<div class="updated">By Sean McCabe &middot;',
-            '<div class="updated">By Postgame Outlet Model &middot;',
-        ),
-        (
-            'aria-selected="true" aria-controls="panel-ratings" tabindex="0"',
-            'aria-selected="false" aria-controls="panel-ratings" tabindex="-1"',
-        ),
-        (
             'data-panel="ratings">Power Ratings</button>',
             'data-panel="ratings">McCabe Ratings</button>',
         ),
         (">QB Ratings</button>", ">McCabe QBs</button>"),
-        (">Methodology</button>", ">McCabe Method</button>"),
+        (
+            ">Methodology</button>",
+            ">McCabe Method</button>" + COMPARISON_TAB,
+        ),
     )
     markers = (
         "</style>",
         "</body>",
         rating_tab,
         rating_panel,
+        '<meta name="description" content="Sean McCabe’s',
+        '<div class="updated">By Sean McCabe &middot;',
+        'aria-selected="true" aria-controls="panel-ratings" tabindex="0"',
         *(old for old, _new in fixed_replacements),
     )
     if any(base_html.count(marker) != 1 for marker in markers):
@@ -967,16 +975,25 @@ def inject_comparison(base_html, panel_html):
     )
     for old, new in fixed_replacements:
         output = output.replace(old, new, 1)
-    output = output.replace(
-        rating_tab,
-        COMPARISON_TAB
-        + '    <button type="button" class="tab" id="tab-ratings"',
-        1,
+    active_panel = '<section class="panel active" id="panel-comparison"'
+    inactive_panel = '<section class="panel" id="panel-comparison"'
+    active_label = 'aria-labelledby="tab-comparison">'
+    inactive_label = 'aria-labelledby="tab-comparison" hidden>'
+    active = panel_html.count(active_panel) == panel_html.count(active_label) == 1
+    inactive = (
+        panel_html.count(inactive_panel) == panel_html.count(inactive_label) == 1
     )
+    if panel_html.count('id="panel-comparison"') == 1:
+        if active == inactive:
+            raise ValueError("PGO comparison panel active state changed")
+        if active:
+            panel_html = panel_html.replace(
+                active_panel, inactive_panel, 1
+            ).replace(active_label, inactive_label, 1)
     output = output.replace(
         rating_panel,
         panel_html
-        + '\n  <section class="panel" id="panel-ratings" hidden',
+        + '\n  <section class="panel active" id="panel-ratings"',
         1,
     )
     output = output.replace("</body>", COMPARISON_SCRIPT + "\n</body>", 1)
@@ -991,8 +1008,8 @@ def inject_fantasy_preview(existing_html, panel_html):
         raise ValueError("Existing ratings page already has a fantasy preview")
 
     comparison_panel = extract_comparison_panel(existing_html)
-    panel_class = '<section class="panel active" id="panel-comparison"'
-    panel_label = 'aria-labelledby="tab-comparison">'
+    panel_class = '<section class="panel" id="panel-comparison"'
+    panel_label = 'aria-labelledby="tab-comparison" hidden>'
     markers = ("</style>", "</body>", COMPARISON_TAB, comparison_panel)
     if (
         any(existing_html.count(marker) != 1 for marker in markers)
@@ -1003,24 +1020,27 @@ def inject_fantasy_preview(existing_html, panel_html):
     ):
         raise ValueError("Fantasy preview page markers changed")
 
-    inactive_tab = (
-        COMPARISON_TAB
-        .replace('class="tab active"', 'class="tab"', 1)
-        .replace('aria-selected="true"', 'aria-selected="false"', 1)
-        .replace('tabindex="0"', 'tabindex="-1"', 1)
+    active_fantasy = '<section class="panel active" id="panel-fantasy"'
+    inactive_fantasy = '<section class="panel" id="panel-fantasy"'
+    active_label = 'aria-labelledby="tab-fantasy">'
+    inactive_label = 'aria-labelledby="tab-fantasy" hidden>'
+    active = panel_html.count(active_fantasy) == panel_html.count(active_label) == 1
+    inactive = (
+        panel_html.count(inactive_fantasy) == panel_html.count(inactive_label) == 1
     )
-    inactive_panel = (
-        comparison_panel
-        .replace(panel_class, '<section class="panel" id="panel-comparison"', 1)
-        .replace(panel_label, 'aria-labelledby="tab-comparison" hidden>', 1)
-    )
+    if active == inactive:
+        raise ValueError("Fantasy preview panel active state changed")
+    if active:
+        panel_html = panel_html.replace(
+            active_fantasy, inactive_fantasy, 1
+        ).replace(active_label, inactive_label, 1)
     fantasy_css = FANTASY_CSS
     if 'class="fantasy-availability"' in panel_html:
         fantasy_css += "\n" + FANTASY_AVAILABILITY_CSS
     output = existing_html.replace("</style>", fantasy_css + "\n</style>", 1)
-    output = output.replace(COMPARISON_TAB, inactive_tab + FANTASY_TAB, 1)
+    output = output.replace(COMPARISON_TAB, COMPARISON_TAB + FANTASY_TAB, 1)
     output = output.replace(
-        comparison_panel, inactive_panel + "\n" + panel_html, 1
+        comparison_panel, comparison_panel + "\n" + panel_html, 1
     )
     output = output.replace("</body>", FANTASY_SCRIPT + "\n</body>", 1)
     return output
@@ -1065,12 +1085,24 @@ def _extract_published_fantasy_panel(existing_html):
     if (
         tab_count != 1
         or panel_count != 1
-        or existing_html.count(FANTASY_TAB) != 1
+        or sum(existing_html.count(tab) for tab in (
+            FANTASY_TAB, ACTIVE_FANTASY_TAB
+        )) != 1
         or css_count != 1
         or script_count != 1
     ):
         raise ValueError("Existing fantasy preview markers are incomplete or duplicated")
-    start_marker = '<section class="panel active" id="panel-fantasy"'
+    active_tab = existing_html.count(ACTIVE_FANTASY_TAB) == 1
+    start_markers = (
+        '<section class="panel active" id="panel-fantasy"',
+        '<section class="panel" id="panel-fantasy"',
+    )
+    matches = [
+        marker for marker in start_markers if existing_html.count(marker) == 1
+    ]
+    if len(matches) != 1 or active_tab != (matches[0] == start_markers[0]):
+        raise ValueError("Existing fantasy preview active state changed")
+    start_marker = matches[0]
     start = existing_html.find(start_marker)
     end_marker = "</section>"
     end = existing_html.find(end_marker, start)
@@ -1087,6 +1119,60 @@ def _extract_published_fantasy_panel(existing_html):
             "Existing fantasy availability CSS is missing, duplicated, or orphaned"
         )
     return panel
+
+
+def _validate_active_board_state(existing_html, allowed):
+    expected = ["ratings", "qbs", "method", "comparison"]
+    if "fantasy" in allowed:
+        expected.append("fantasy")
+    tabs = []
+    for tag in re.findall(r'<button\b[^>]*>', existing_html):
+        match = re.search(r'\bid="tab-([^" ]+)"', tag)
+        if match:
+            tabs.append((match[1], tag))
+    panels = []
+    for tag in re.findall(r'<section\b[^>]*>', existing_html):
+        match = re.search(r'\bid="panel-([^" ]+)"', tag)
+        if match:
+            panels.append((match[1], tag))
+    if sorted(name for name, _tag in tabs) != sorted(expected) or sorted(
+        name for name, _tag in panels
+    ) != sorted(expected):
+        raise ValueError("Existing public board active tab or panel state changed")
+
+    active = []
+    panel_by_name = dict(panels)
+    for name, tab in tabs:
+        panel = panel_by_name[name]
+        tab_active = 'class="tab active"' in tab
+        panel_active = 'class="panel active"' in panel
+        hidden = re.search(r'\shidden(?:\s|=|>)', panel) is not None
+        selected = "true" if tab_active else "false"
+        tabindex = "0" if tab_active else "-1"
+        if (
+            tab_active == ('class="tab"' in tab)
+            or panel_active == ('class="panel"' in panel)
+            or tab.count('class="') != 1
+            or tab.count('role="tab"') != 1
+            or tab.count('aria-selected="') != 1
+            or tab.count(f'aria-selected="{selected}"') != 1
+            or tab.count('aria-controls="') != 1
+            or tab.count(f'aria-controls="panel-{name}"') != 1
+            or tab.count('tabindex="') != 1
+            or tab.count(f'tabindex="{tabindex}"') != 1
+            or panel.count('class="') != 1
+            or panel.count('role="tabpanel"') != 1
+            or panel.count('aria-labelledby="') != 1
+            or panel.count(f'aria-labelledby="tab-{name}"') != 1
+            or panel_active != tab_active
+            or hidden == tab_active
+        ):
+            raise ValueError("Existing public board active tab or panel state changed")
+        if tab_active:
+            active.append(name)
+    if len(active) != 1 or active[0] not in allowed:
+        raise ValueError("Existing public board active tab or panel state changed")
+    return active[0]
 
 
 def _validate_fantasy_leagues(panel, page):
@@ -1308,23 +1394,32 @@ def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
     mccabe_rows = load_mccabe_rows(mccabe_path)
     fantasy_panel = _extract_published_fantasy_panel(existing_html)
     comparison_panel = extract_comparison_panel(existing_html)
+    active_panel = _validate_active_board_state(
+        existing_html,
+        {"ratings", "fantasy"} if fantasy_panel is not None
+        else {"ratings", "comparison"},
+    )
+    active_comparison = '<section class="panel active" id="panel-comparison"'
+    inactive_comparison = '<section class="panel" id="panel-comparison"'
+    visible_label = 'aria-labelledby="tab-comparison">'
+    hidden_label = 'aria-labelledby="tab-comparison" hidden>'
     if fantasy_panel is not None:
-        inactive_start = '<section class="panel" id="panel-comparison"'
-        hidden_label = 'aria-labelledby="tab-comparison" hidden>'
-        if comparison_panel.count(inactive_start) != 1 or comparison_panel.count(hidden_label) != 1:
+        if (
+            comparison_panel.count(inactive_comparison) != 1
+            or comparison_panel.count(hidden_label) != 1
+        ):
             raise ValueError("Existing fantasy preview comparison state changed")
-        comparison_panel = (
-            comparison_panel.replace(
-                inactive_start,
-                '<section class="panel active" id="panel-comparison"',
-                1,
-            ).replace(hidden_label, 'aria-labelledby="tab-comparison">', 1)
-        )
+    elif active_panel == "comparison":
+        if (
+            comparison_panel.count(active_comparison) != 1
+            or comparison_panel.count(visible_label) != 1
+        ):
+            raise ValueError("Existing PGO comparison panel active state changed")
     elif (
-        comparison_panel.count('<section class="panel active" id="panel-comparison"') != 1
-        or comparison_panel.count('aria-labelledby="tab-comparison">') != 1
+        comparison_panel.count(inactive_comparison) != 1
+        or comparison_panel.count(hidden_label) != 1
     ):
-        raise ValueError("Existing PGO comparison panel must be active")
+        raise ValueError("Existing PGO comparison panel active state changed")
     panel = _refresh_comparison_panel(
         comparison_panel,
         mccabe_rows,
