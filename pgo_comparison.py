@@ -766,6 +766,150 @@ def render_fantasy_panel(preview):
     return add_fantasy_leagues(panel, eligible)
 
 
+def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_PATH):
+    """Explain saved contribution groups without changing published ratings."""
+    receipt = validate_receipt(json.loads(Path(backtest_path).read_text(encoding="utf-8")))
+    rows = load_model_rows(model_path, receipt)
+    for row in rows:
+        for name in ("performance_points", "roster_coaching_points"):
+            row[name] = _finite(row[name], f"{row['team']} {name}")
+        if not math.isclose(row["performance_points"] + row["roster_coaching_points"],
+                            row["full_strength_rating"], rel_tol=0, abs_tol=1e-6):
+            raise ValueError(f"PGO component algebra failed for {row['team']}")
+    roster_mean = math.fsum(row["roster_coaching_points"] for row in rows) / len(rows)
+    names = {meta[0]: name for name, meta in generate_site.TEAM.items()}
+    by_name = {names[row["team"]].casefold(): row for row in rows}
+    lineup_ranks = {row["team"]: rank for rank, row in enumerate(
+        sorted(rows, key=lambda row: (-row["current_lineup_rating"], row["team"])), 1)}
+    original = extract_comparison_panel(page)
+    start, end = "<!-- PGO EXPLANATIONS START -->", "<!-- PGO EXPLANATIONS END -->"
+    if original.count(start) != original.count(end) or original.count(start) > 1:
+        raise ValueError("Invalid PGO explanation markers")
+    panel = re.sub(re.escape(start) + r".*?" + re.escape(end) + r"\n?", "", original, flags=re.S)
+    seen = set()
+    comparisons = {}
+
+    def explain_row(match):
+        markup = match.group(0)
+        header = re.search(r'<th\b[^>]*data-sort="([^"]+)"[^>]*>.*?</th>', markup, re.S)
+        if header is None:
+            return markup
+        name = html.unescape(header.group(1)).casefold()
+        if name not in by_name or name in seen:
+            raise ValueError(f"Invalid PGO explanation team: {name}")
+        row = by_name[name]
+        cells = re.findall(r'<td\b[^>]*>.*?</td>', markup, re.S)
+        expected = (row["rank"], row["full_strength_rating"], row["availability_adjustment"],
+                    lineup_ranks[row["team"]], row["current_lineup_rating"])
+        if len(cells) not in {8, 9}:
+            raise ValueError(f"Incomplete PGO explanation row: {name}")
+        for cell, value in zip(cells, expected):
+            displayed = html.unescape(re.sub(r'<[^>]*>', '', cell)).strip()
+            if (not math.isclose(_cell_sort_value(cell, name), value, rel_tol=0, abs_tol=1e-6)
+                    or not math.isclose(_finite(displayed, name), float(f"{value:.1f}"),
+                                        rel_tol=0, abs_tol=1e-6)):
+                raise ValueError(f"PGO explanation snapshot mismatch: {name}")
+        mccabe_rank = _cell_sort_value(cells[5], name)
+        pgo_rank = row["rank"] if row["headline_view"] == "full_strength" else lineup_ranks[row["team"]]
+        if (not mccabe_rank.is_integer() or not 1 <= mccabe_rank <= 32
+                or _cell_sort_value(cells[7], name) != pgo_rank - mccabe_rank):
+            raise ValueError(f"PGO rank comparison mismatch: {name}")
+        comparisons[row["team"]] = (names[row["team"]], pgo_rank, int(mccabe_rank))
+        if len(cells) == 9:
+            markup = markup[:markup.rfind(cells[8])] + markup[markup.rfind(cells[8]) + len(cells[8]):]
+        seen.add(name)
+        button = (f'<button type="button" class="pgo-rating-trigger team-trigger" '
+                  f'data-pgo-team="{row["team"]}" aria-haspopup="dialog" '
+                  f'aria-controls="drawer">{html.escape(names[row["team"]])}</button>')
+        new_header = header.group(0).split('>', 1)[0] + '>' + button + '</th>'
+        return markup[:header.start()] + new_header + markup[header.end():]
+
+    panel = re.sub(r'<tr\b[^>]*>.*?</tr>', explain_row, panel, flags=re.S)
+    if seen != set(by_name):
+        raise ValueError("PGO explanations require all 32 saved teams")
+    if {comparison[2] for comparison in comparisons.values()} != set(range(1, 33)):
+        raise ValueError("PGO explanations require unique McCabe ranks 1 through 32")
+    as_of = html.escape(str(receipt["as_of"]))
+    date = datetime.fromisoformat(str(receipt["as_of"])).strftime("%B %d, %Y")
+    label = "Experimental model — HOLD" if receipt["status"] == "HOLD" else "Validated model — PASS"
+    meaning = ("PGO values are independent model outputs fitted to game margins and centered "
+               "across 32 teams. Their intended interpretation is neutral-field point strength "
+               "relative to a league-average team under this snapshot's full-strength assumptions, "
+               "but that point scale remains experimental, not an established game price. "
+               "Positive values mean stronger than average; negative values mean weaker. "
+               "This is not a Super Bowl probability.")
+    limits = ("These are model contribution groups, not independent football grades. "
+              "Both use a common league-average baseline; inputs can be correlated. "
+              "The roster/coaching group is centered across all 32 teams, with CSV rounding "
+              "residual retained in performance. The frozen forecast fit differs from the "
+              "public rating fit, so it cannot supply a feature-level attribution receipt "
+              "for this table. The starting-QB/depth assumptions need review; group "
+              "contributions do not establish predictive quality.")
+    templates = []
+    for row in rows:
+        roster = row["roster_coaching_points"] - roster_mean
+        performance = row["full_strength_rating"] - roster
+        values = (("full_strength", "Full-strength model output", row["full_strength_rating"]),
+                  ("performance", "Performance contribution", performance),
+                  ("roster", "Roster/coaching contribution", roster),
+                  ("availability", "Availability adjustment at snapshot", row["availability_adjustment"]),
+                  ("lineup", "PGO lineup output at snapshot", row["current_lineup_rating"]))
+        details = ''.join(f'<dt>{title}</dt><dd data-component="{key}" data-value="{value}">'
+                          f'{value:+.3f}</dd>' for key, title, value in values)
+        team_name, pgo_rank, mccabe_rank = comparisons[row["team"]]
+        templates.append(
+            f'<template id="pgo-explanation-{row["team"]}">'
+            f'<h2>{html.escape(names[row["team"]])}</h2><p>{label}</p>'
+            f'<p>Saved snapshot: <time datetime="{as_of}">{as_of}</time>.</p>'
+            f'<p>{html.escape(team_name)}: PGO #{pgo_rank}, McCabe #{mccabe_rank}. '
+            'Rank comparison across the dated snapshots shown on the board.</p>'
+            f'<p>{html.escape(meaning)}</p><dl>{details}</dl>'
+            f'<p>{html.escape(limits)}</p><p>Availability and lineup values belong to this '
+            'snapshot, not a current injury report. A July zero adjustment does not '
+            'establish September health.</p></template>')
+    ranked = list(comparisons.values())
+    highlights = []
+    groups = (
+        ("Closest agreements", sorted(ranked, key=lambda item: (abs(item[1] - item[2]), item[0]))),
+        ("Biggest disagreements", sorted(ranked, key=lambda item: (-abs(item[1] - item[2]), item[0]))),
+        ("PGO higher", sorted((item for item in ranked if item[1] < item[2]),
+                              key=lambda item: (item[1] - item[2], item[0]))),
+        ("McCabe higher", sorted((item for item in ranked if item[1] > item[2]),
+                                 key=lambda item: (item[2] - item[1], item[0]))),
+    )
+    for title, selected in groups:
+        entries = '; '.join(f'{html.escape(name)}: PGO #{pgo_rank}, McCabe #{mccabe_rank}'
+                            for name, pgo_rank, mccabe_rank in selected[:3])
+        highlights.append(f'<li><strong>{title}:</strong> {entries or "None in this snapshot"}.</li>')
+    block = (f'{start}\n<p>McCabe is a human-set roster rating in neutral-field points: '
+             'QB + non-QB offense + defense sum to the total. PGO is a separate statistical '
+             'model; the two products are never blended.</p>\n'
+             f'<p class="pgo-rating-meaning">{html.escape(meaning)} '
+             f'Saved snapshot: {html.escape(date)}. PGO lineup and availability also refer '
+             'to that date. Select a team for its saved contribution groups.</p>\n'
+             f'<details><summary>Snapshot limits and open audit</summary><p>{html.escape(limits)}</p>'
+             '<p>July availability is not a current injury report; a zero adjustment does not '
+             'establish September health.</p></details>\n'
+             '<div class="pgo-rank-highlights"><p>Rank comparisons across the dated snapshots '
+             'shown below. Their dates differ; these are not point-price disagreements.</p><ul>'
+             + ''.join(highlights) + '</ul></div>\n' + '\n'.join(templates) + f'\n{end}\n')
+    panel = panel.replace('<h2>PGO v1 Power Ratings</h2>', '<h2>PGO vs McCabe</h2>', 1)
+    panel = panel.replace('    <h2>PGO vs McCabe</h2>\n',
+                          '    <h2>PGO vs McCabe</h2>\n' + block, 1)
+    if panel.count(start) != 1:
+        raise ValueError("PGO explanation heading is missing")
+    panel = panel.replace("PGO today", "PGO lineup")
+    panel = re.sub(r'\s*<th scope="col"[^>]*><button[^>]*data-column="9">Rating gap</button></th>', '', panel)
+    panel = panel.replace('\n      Positive rating gap means PGO rates the team higher.', '')
+    page = page.replace(original, panel, 1)
+    # Upgrade the existing comparison script too when enriching an older saved page.
+    script = re.compile(r"<script>\s*\(\(\) => \{\s*const panel = document\.querySelector\('#panel-comparison'\);.*?</script>", re.S)
+    page, count = script.subn(lambda _: COMPARISON_SCRIPT.strip(), page)
+    if count != 1:
+        raise ValueError("PGO explanation comparison script is missing or duplicated")
+    return page
+
+
 def render_comparison_panel(rows, receipt):
     rows = sorted(
         rows,
@@ -836,8 +980,8 @@ def render_comparison_panel(rows, receipt):
           <th scope="col" aria-sort="ascending"><button type="button" class="sort-button" data-column="1">PGO full #</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="2">PGO full</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="3">Avail.</button></th>
-          <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="4">PGO today #</button></th>
-          <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="5">PGO today</button></th>
+          <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="4">PGO lineup #</button></th>
+          <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="5">PGO lineup</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="6">McCabe #</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="7">McCabe</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="8">Rank gap</button></th>
@@ -889,6 +1033,12 @@ COMPARISON_SCRIPT = """
 <script>
   (() => {
     const panel = document.querySelector('#panel-comparison');
+    if (panel) panel.querySelectorAll('.pgo-rating-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const template = document.getElementById('pgo-explanation-' + trigger.dataset.pgoTeam);
+        if (template && typeof openDrawer === 'function') openDrawer(template.innerHTML, trigger);
+      });
+    });
     const body = panel && panel.querySelector('.comparison-table tbody');
     const status = panel && panel.querySelector('.comparison-sort-status');
     const buttons = panel ? [...panel.querySelectorAll('.comparison-table .sort-button')] : [];
@@ -1342,16 +1492,12 @@ def _refresh_comparison_panel(panel_html, mccabe_rows, source_timestamp):
         if team_key not in mccabe_by_team:
             raise ValueError(f"Existing PGO comparison has unknown team: {team_key}")
         cells = cell_pattern.findall(row_html)
-        if len(cells) != 9:
+        if len(cells) not in {8, 9}:
             raise ValueError(f"Existing PGO comparison row is incomplete: {team_key}")
 
         old_rank = int(_cell_sort_value(cells[5], f"{team_key} McCabe rank"))
-        old_rating = _cell_sort_value(cells[6], f"{team_key} McCabe rating")
         headline_rank = old_rank + int(
             _cell_sort_value(cells[7], f"{team_key} rank gap")
-        )
-        headline_rating = old_rating + _cell_sort_value(
-            cells[8], f"{team_key} rating gap"
         )
         current = mccabe_by_team[team_key]
         updates = {
@@ -1361,11 +1507,14 @@ def _refresh_comparison_panel(panel_html, mccabe_rows, source_timestamp):
                 headline_rank - current["rank"],
                 f"{headline_rank - current['rank']:+d}",
             ),
-            8: (
+        }
+        if len(cells) == 9:
+            old_rating = _cell_sort_value(cells[6], f"{team_key} McCabe rating")
+            headline_rating = old_rating + _cell_sort_value(cells[8], f"{team_key} rating gap")
+            updates[8] = (
                 headline_rating - current["rating"],
                 _signed(headline_rating - current["rating"]),
-            ),
-        }
+            )
 
         cell_index = 0
 
@@ -1511,6 +1660,7 @@ def main(argv=None):
                     base_html,
                     render_comparison_panel(comparison_rows, receipt),
                 )
+        preview = add_rating_explanations(preview)
         atomic_write_text(output, preview)
     except (csv.Error, KeyError, OSError, TypeError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)

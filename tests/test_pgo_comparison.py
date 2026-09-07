@@ -1,4 +1,5 @@
 import hashlib
+import csv
 import io
 import json
 import math
@@ -15,7 +16,120 @@ import pgo_comparison
 from tests.test_pgo_fantasy_prospective import ProspectiveFantasyFixture
 
 
+class RatingExplanationTests(unittest.TestCase):
+    def setUp(self):
+        self.page = pgo_comparison.PUBLIC_OUTPUT.read_text(encoding="utf-8")
+        self.receipt = pgo_comparison.validate_receipt(json.loads(
+            pgo_comparison.BACKTEST_PATH.read_text(encoding="utf-8")))
+        self.rows = pgo_comparison.load_model_rows(
+            pgo_comparison.MODEL_PATH, self.receipt)
+
+    def test_all_saved_groups_are_centered_and_source_backed(self):
+        self.assertTrue(callable(getattr(pgo_comparison, "add_rating_explanations", None)))
+        result = pgo_comparison.add_rating_explanations(self.page)
+        roster_mean = sum(float(row["roster_coaching_points"]) for row in self.rows) / 32
+        templates = dict(re.findall(
+            r'<template id="pgo-explanation-([A-Z]+)">(.*?)</template>', result, re.S))
+        self.assertEqual(set(templates), {row["team"] for row in self.rows})
+        centered = []
+        for row in self.rows:
+            detail = templates[row["team"]]
+            values = {key: float(value) for key, value in re.findall(
+                r'<dd data-component="([^"]+)" data-value="([^"]+)">', detail)}
+            roster = float(row["roster_coaching_points"]) - roster_mean
+            self.assertAlmostEqual(values["roster"], roster, places=10)
+            self.assertAlmostEqual(values["performance"] + values["roster"],
+                                   row["full_strength_rating"], places=10)
+            centered.append(values["roster"])
+            self.assertIn("2026-07-21T12:00:00-04:00", detail)
+            self.assertIn("Experimental model", detail)
+            self.assertIn("HOLD", detail)
+        self.assertAlmostEqual(sum(centered), 0, places=10)
+        for text in ("neutral-field", "league-average", "July 21, 2026", "PGO lineup",
+                     "Performance contribution", "Roster/coaching contribution",
+                     "starting-QB/depth", "feature-level", "correlated", "fitted to game margins",
+                     "QB + non-QB offense + defense", "PGO vs McCabe", "Closest agreements",
+                     "Biggest disagreements", "PGO higher", "McCabe higher"):
+            self.assertIn(text, result)
+        self.assertNotIn("PGO today", pgo_comparison.extract_comparison_panel(result))
+        self.assertNotIn("Rating gap", pgo_comparison.extract_comparison_panel(result))
+        self.assertIn("openDrawer(template.innerHTML, trigger)", result)
+        self.assertEqual(result.count('class="pgo-rating-trigger team-trigger"'), 32)
+
+    def test_idempotent_preserves_numeric_cells_fantasy_and_refresh(self):
+        result = pgo_comparison.add_rating_explanations(self.page)
+        self.assertEqual(pgo_comparison.add_rating_explanations(result), result)
+        before = pgo_comparison.extract_comparison_panel(self.page)
+        after = pgo_comparison.extract_comparison_panel(result)
+        old_cells = re.findall(r'<td\b.*?</td>', before)
+        self.assertEqual([cell for index, cell in enumerate(old_cells) if index % 9 != 8],
+                         re.findall(r'<td\b.*?</td>', after))
+        self.assertEqual(pgo_comparison._extract_published_fantasy_panel(self.page),
+                         pgo_comparison._extract_published_fantasy_panel(result))
+        refreshed = pgo_comparison.refresh_mccabe_page(ComparisonTests._base_html(), result)
+        self.assertEqual(pgo_comparison.add_rating_explanations(refreshed), refreshed)
+        self.assertEqual(re.findall(r'<template.*?</template>', result, re.S),
+                         re.findall(r'<template.*?</template>', refreshed, re.S))
+
+    def test_legacy_and_current_refresh_recompute_rank_highlights(self):
+        current = pgo_comparison.load_mccabe_rows(pgo_comparison.MCCABE_PATH)
+        current[0]["rank"], current[-1]["rank"] = current[-1]["rank"], current[0]["rank"]
+        current[0]["rating"] = -20.0
+        for page in (self.page, pgo_comparison.add_rating_explanations(self.page)):
+            with self.subTest(enriched='PGO EXPLANATIONS START' in page), patch.object(
+                    pgo_comparison, "load_mccabe_rows", return_value=current):
+                refreshed = pgo_comparison.refresh_mccabe_page(ComparisonTests._base_html(), page)
+            result = pgo_comparison.add_rating_explanations(refreshed)
+            panel = pgo_comparison.extract_comparison_panel(result)
+            self.assertNotIn("Rating gap", panel)
+            self.assertEqual(len(re.findall(r'<td\b', panel)), 32 * 8)
+            self.assertIn('data-sort="-20.0">-20.0</td>', panel)
+            highlights = re.search(r'<div class="pgo-rank-highlights">.*?</div>', panel, re.S).group(0)
+            before = re.search(r'<div class="pgo-rank-highlights">.*?</div>',
+                               pgo_comparison.add_rating_explanations(self.page), re.S).group(0)
+            self.assertNotEqual(highlights, before)
+            source = {row["team"]: row for row in self.rows}
+            for row in current:
+                self.assertIn(f'{row["team"]}: PGO #{source[row["abbr"]]["rank"]}, McCabe #{row["rank"]}',
+                              result)
+            self.assertEqual(pgo_comparison._extract_published_fantasy_panel(self.page),
+                             pgo_comparison._extract_published_fantasy_panel(result))
+
+    def test_rejects_invalid_components_and_source_algebra(self):
+        with pgo_comparison.MODEL_PATH.open(encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle)
+            fields, rows = reader.fieldnames, list(reader)
+        for field, value in (("performance_points", "nan"),
+                             ("roster_coaching_points", "inf"),
+                             ("performance_points", "123.0")):
+            with self.subTest(field=field, value=value), tempfile.TemporaryDirectory() as temp:
+                changed = [dict(row) for row in rows]
+                changed[0][field] = value
+                path = Path(temp) / "ratings.csv"
+                with path.open("w", encoding="utf-8", newline="") as handle:
+                    writer = csv.DictWriter(handle, fieldnames=fields)
+                    writer.writeheader()
+                    writer.writerows(changed)
+                with self.assertRaises(ValueError):
+                    pgo_comparison.add_rating_explanations(self.page, model_path=path)
+
+    def test_rejects_mismatched_and_duplicate_public_rows(self):
+        panel = pgo_comparison.extract_comparison_panel(self.page)
+        row = re.search(r'<tr><th scope="row".*?</tr>', panel, re.S).group(0)
+        for changed in (re.sub(r'<td data-sort="[^"]+">', '<td data-sort="999">', row, count=1),
+                        row + row):
+            with self.subTest(changed=changed[:70]), self.assertRaises(ValueError):
+                pgo_comparison.add_rating_explanations(self.page.replace(row, changed, 1))
+
+
 class ComparisonTests(unittest.TestCase):
+    @staticmethod
+    def _saved_comparison_rows():
+        receipt = json.loads(pgo_comparison.BACKTEST_PATH.read_text(encoding="utf-8"))
+        return pgo_comparison.build_comparison_rows(
+            pgo_comparison.load_mccabe_rows(pgo_comparison.MCCABE_PATH),
+            pgo_comparison.load_model_rows(pgo_comparison.MODEL_PATH, receipt))
+
     @staticmethod
     def _base_html():
         return (
@@ -315,7 +429,7 @@ class ComparisonTests(unittest.TestCase):
             patch.object(
                 pgo_comparison,
                 "load_comparison_rows",
-                return_value=([], receipt),
+                return_value=(self._saved_comparison_rows(), receipt),
             ) as load,
             patch.object(pgo_comparison, "atomic_write_text"),
         ):
@@ -413,7 +527,7 @@ class ComparisonTests(unittest.TestCase):
     def test_fantasy_cli_writes_only_private_output(self):
         fantasy = self._fantasy_preview()
         comparison = pgo_comparison.render_comparison_panel(
-            [], self._held_receipt()
+            self._saved_comparison_rows(), self._held_receipt()
         )
         existing = pgo_comparison.inject_comparison(
             self._base_html(), comparison
@@ -901,7 +1015,8 @@ class ComparisonTests(unittest.TestCase):
         digest = hashlib.sha256(output.encode("utf-8")).hexdigest()
         self.assertEqual(
             digest,
-            "d482e1faa979cb4d5dbc6cfd09062d6ce7c619132e0e071e83747e91677921fc",
+            # Comparison script now also binds saved-rating drawer triggers.
+            "d8e9ce5f6f1328d654e39e677a33b64f44db5b200565268cdc09f23a4055acd4",
         )
 
     def test_injection_adds_one_accessible_tab_and_preserves_base_page(self):
@@ -1327,7 +1442,7 @@ class ComparisonTests(unittest.TestCase):
             patch.object(
                 pgo_comparison,
                 "load_comparison_rows",
-                return_value=([], self._held_receipt()),
+                return_value=(self._saved_comparison_rows(), self._held_receipt()),
             ),
             patch.object(pgo_comparison, "atomic_write_text") as write,
         ):
