@@ -3,6 +3,7 @@
 
 import argparse
 import csv
+import hashlib
 import html
 import json
 import math
@@ -352,6 +353,33 @@ FANTASY_CSS = """
   color:var(--ink); cursor:pointer; font-weight:700;
 }
 #panel-fantasy .fantasy-details code { overflow-wrap:anywhere; }
+#panel-fantasy .fantasy-league {
+  margin:16px 0; padding:14px; border:1px solid var(--border);
+  border-radius:10px; background:var(--panel);
+}
+#panel-fantasy .fantasy-league summary { cursor:pointer; font-weight:700; color:var(--ink); }
+#panel-fantasy .fantasy-league p { font-size:13px; line-height:1.5; }
+#panel-fantasy .fantasy-league-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px;
+}
+#panel-fantasy .fantasy-league fieldset { border:0; margin:14px 0; padding:0; min-width:0; }
+#panel-fantasy .fantasy-league legend { font-weight:700; margin-bottom:8px; }
+#panel-fantasy .fantasy-league input,
+#panel-fantasy .fantasy-league select {
+  box-sizing:border-box; min-width:0; width:100%; min-height:40px;
+  border:1px solid var(--border); border-radius:7px; padding:8px;
+  background:var(--panel); color:var(--ink); font:inherit;
+}
+#panel-fantasy .fantasy-league-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+#panel-fantasy .fantasy-league-actions button {
+  min-height:40px; padding:8px 12px; border:1px solid var(--ink); border-radius:7px;
+  color:var(--ink); background:var(--panel); cursor:pointer; font:inherit; font-weight:600;
+}
+#panel-fantasy .fantasy-league-actions button[type="submit"] { background:var(--ink); color:white; }
+#panel-fantasy .fantasy-league-status { min-height:1.5em; color:var(--ink); }
+#panel-fantasy .fantasy-league-summary { font-size:13px; line-height:1.5; margin:8px 0; }
+#panel-fantasy .fantasy-league-explanation { font-size:12px; color:var(--mut); line-height:1.5; }
+#panel-fantasy .fantasy-league-value { font-weight:700; white-space:nowrap; }
 @media (max-width:480px) {
   #panel-fantasy .fantasy-controls { display:grid; grid-template-columns:1fr 1fr; }
   #panel-fantasy .fantasy-field:first-child { grid-column:1 / -1; }
@@ -361,11 +389,14 @@ FANTASY_CSS = """
   #panel-fantasy:not(.show-technical) .fantasy-table th,
   #panel-fantasy:not(.show-technical) .fantasy-table td { padding:6px 3px; }
   #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(1) { width:9%; }
-  #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(2) { width:34%; }
+  #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(2) { width:36%; }
   #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(3) { width:10%; }
-  #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(4) { width:12%; }
-  #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(5) { width:12%; }
-  #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(6) { width:23%; }
+  #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(4),
+  #panel-fantasy:not(.show-technical) .fantasy-table td:nth-child(4),
+  #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(5),
+  #panel-fantasy:not(.show-technical) .fantasy-table td:nth-child(5) { display:none; }
+  #panel-fantasy:not(.show-technical) .fantasy-table th:nth-child(6) { width:21%; }
+  #panel-fantasy:not(.show-technical) .fantasy-table th:last-child { width:24%; }
 }
 """
 
@@ -405,6 +436,136 @@ def _signed(value):
 
 def _optional_rank(value):
     return ("", "&mdash;") if value is None else (str(value), str(value))
+
+
+def _league_controls():
+    slots = "".join(
+        f'<label class="fantasy-field">{label}<input type="number" '
+        f'name="slot_{position}" min="0" max="{maximum}" step="1" required></label>'
+        for position, label, maximum in (
+            ("QB", "QB starters", 2), ("RB", "RB starters", 4),
+            ("WR", "WR starters", 4), ("TE", "TE starters", 4),
+            ("FLEX", "FLEX starters", 4), ("SUPERFLEX", "Superflex starters", 2),
+        )
+    )
+    scoring = "".join(
+        f'<label class="fantasy-field">{label}<input type="number" '
+        f'name="score_{key}" min="{minimum}" max="{maximum}" step="any" required></label>'
+        for key, label, minimum, maximum in (
+            ("passing_yards", "Per passing yard", 0, 1),
+            ("passing_tds", "Passing touchdown", 0, 12),
+            ("passing_interceptions", "Interception thrown", -10, 0),
+            ("rushing_yards", "Per rushing yard", 0, 1),
+            ("rushing_tds", "Rushing touchdown", 0, 12),
+            ("receptions", "Reception", 0, 3),
+            ("receiving_yards", "Per receiving yard", 0, 1),
+            ("receiving_tds", "Receiving touchdown", 0, 12),
+            ("fumbles_lost_total", "Fumble lost", -10, 0),
+            ("passing_2pt_conversions", "Passing two-point conversion", 0, 6),
+            ("rushing_2pt_conversions", "Rushing two-point conversion", 0, 6),
+            ("receiving_2pt_conversions", "Receiving two-point conversion", 0, 6),
+            ("special_teams_tds", "Return touchdown", 0, 12),
+            ("te_reception_bonus", "Extra points per TE reception", 0, 3),
+        )
+    )
+    return f'''<details class="fantasy-league" id="fantasy-league-settings">
+      <summary>League settings <span id="fantasy-profile-label">12 teams · Half-PPR</span></summary>
+      <p>Set your scoring and starting lineup. Profiles are saved only in this browser.</p>
+      <form id="fantasy-league-form">
+        <div class="fantasy-league-grid">
+          <label class="fantasy-field">Saved league<select id="fantasy-profile-select"></select></label>
+          <label class="fantasy-field">League name<input name="league_name" maxlength="60" required></label>
+          <label class="fantasy-field">Number of teams<input name="teams" type="number" min="2" max="32" step="1" required></label>
+          <label class="fantasy-field">Scoring preset<select id="fantasy-scoring-preset">
+            <option value="STANDARD">Standard (no PPR)</option><option value="HALF_PPR" selected>Half-PPR</option>
+            <option value="PPR">Full PPR</option><option value="CUSTOM">Custom scoring</option>
+          </select></label>
+        </div>
+        <fieldset><legend>Starting lineup per team</legend><div class="fantasy-league-grid">{slots}</div></fieldset>
+        <details><summary>Scoring points and TE premium</summary>
+          <fieldset><legend>Points awarded or deducted</legend><div class="fantasy-league-grid">{scoring}</div></fieldset>
+          <p>Supports the listed scoring categories. Threshold bonuses, first downs, kickers and team defenses are not included.</p>
+        </details>
+        <div class="fantasy-league-actions">
+          <button type="submit">Apply &amp; save</button><button type="button" id="fantasy-profile-new">Save as new league</button>
+          <button type="button" id="fantasy-profile-reset">Reset settings</button><button type="button" id="fantasy-profile-delete">Delete league</button>
+        </div>
+      </form>
+      <p id="fantasy-league-status" class="fantasy-league-status" role="status" aria-live="polite"></p>
+    </details>
+    <p id="fantasy-league-summary" class="fantasy-league-summary"></p>
+    <p id="fantasy-scoring-summary" class="fantasy-league-explanation"></p>
+    <details class="fantasy-details"><summary>How league value works</summary>
+      <p>Value is projected points above an estimated replacement at the same position. We fill every team's starting positions, then FLEX, then Superflex. The best player left at each position sets its baseline. This starting-lineup estimate does not include benches or identify actual free agents. Search and team filters do not change the baseline.</p>
+      <p id="fantasy-replacement-summary"></p>
+    </details>
+    <noscript><p>JavaScript is needed for league settings. The table below shows the original half-PPR projections, ordered by points across all positions.</p></noscript>
+    '''
+
+
+def add_fantasy_leagues(panel, players, scoring=None):
+    """Add league controls to a reviewed panel without rebuilding its source cells."""
+    if 'id="fantasy-league-form"' in panel:
+        raise ValueError("Fantasy league controls already exist")
+    eligible = [row for row in players if row["ranking_eligible"]]
+    identities = {(row["team"], row["player_name"].lower(), row["position"]): row for row in eligible}
+    if len(identities) != len(eligible):
+        raise ValueError("Fantasy league player identities are ambiguous")
+    seen = set()
+
+    def enrich(match):
+        attrs = dict(re.findall(r'([\w-]+)="([^"]*)"', match[1]))
+        key = tuple(html.unescape(attrs[name]) for name in ("data-team", "data-player", "data-position"))
+        row = identities.get(key)
+        cells = re.findall(r'<(?:td|th)\b[^>]*data-sort="([^"]*)"[^>]*>', match[2])
+        if row is None or key in seen or len(cells) != 14 or float(cells[5]) != row["strong_prediction"]:
+            raise ValueError("Fantasy league source projection or identity changed")
+        seen.add(key)
+        identifier = html.escape(row["gsis_id"], quote=True)
+        inactive = str(row["availability_status"] == "INACTIVE").lower()
+        return (f'<tr class="fantasy-row"{match[1]} data-player-id="{identifier}" '
+                f'data-base-points="{cells[5]}" data-inactive="{inactive}">{match[2]}'
+                '<td class="fantasy-league-value" data-sort="">&mdash;</td></tr>')
+
+    panel = re.sub(r'<tr class="fantasy-row"([^>]*)>(.*?)</tr>', enrich, panel, flags=re.S)
+    if len(seen) != len(eligible):
+        raise ValueError("Fantasy league source population changed")
+    payload = scoring or {"schema_version": 1, "available": False, "players": {}}
+    if payload.get("available"):
+        if set(payload["players"]) != {row["gsis_id"] for row in eligible}:
+            raise ValueError("Fantasy scoring component population changed")
+        for row in eligible:
+            projected = payload["players"][row["gsis_id"]]
+            if projected["position"] != row["position"] or projected["points"] != row["strong_prediction"]:
+                raise ValueError("Fantasy scoring source projection changed")
+    data = json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False).replace("<", "\\u003c")
+    digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+    panel = panel.replace('id="panel-fantasy"', 'id="panel-fantasy" data-league-version="1"', 1)
+    marker = '<div class="fantasy-view-buttons"'
+    if panel.count(marker) != 1 or panel.count('</tr></thead>') != 1:
+        raise ValueError("Fantasy league panel structure changed")
+    panel, captions = re.subn(r'<caption\b[^>]*>',
+        '<caption class="visually-hidden" id="fantasy-table-caption">', panel)
+    if captions != 1:
+        raise ValueError("Fantasy league table caption changed")
+    for column, label in enumerate(("Pos #", "FLEX #", "SF #", "Baseline", "Delta"), 6):
+        panel, labels = re.subn(rf'(data-column="{column}" data-kind="number">)[^<]+',
+            rf'\g<1>Original half-PPR {label}', panel)
+        if labels != 1:
+            raise ValueError("Fantasy league source columns changed")
+    panel = re.sub(r'(<p class="fantasy-warning">)(.*?)</p>',
+        lambda match: match[1] + match[2].replace("half-PPR projections", "half-PPR base forecasts")
+            + ' League profiles can score-adjust the displayed Proj. column.</p>', panel, count=1, flags=re.S)
+    panel = panel.replace(marker, _league_controls() + marker, 1)
+    panel = panel.replace('aria-label="Fantasy ranking view">', 'aria-label="Fantasy ranking view">'
+        '<button type="button" class="fantasy-view-button" data-view="LEAGUE" '
+        'aria-pressed="false" aria-controls="fantasy-table">League value</button>', 1)
+    panel = panel.replace('>SUPERFLEX</button>', '>All positions</button>', 1)
+    panel = panel.replace('</tr></thead>', '<th scope="col" aria-sort="none" class="fantasy-league-value">'
+        '<button type="button" class="sort-button fantasy-sort" data-column="14" data-kind="number" '
+        'title="Projected points above the estimated replacement player">Value</button></th></tr></thead>', 1)
+    return panel.replace('</section>', f'<script type="application/json" id="fantasy-scoring-data" '
+        f'data-sha256="{digest}">{data}</script>\n</section>', 1)
 
 
 def render_fantasy_panel(preview):
@@ -482,7 +643,7 @@ def render_fantasy_panel(preview):
     coverage = preview["source_coverage"]
     total = len(preview["rows"])
     visible = len(eligible)
-    return f"""
+    panel = f"""
   <section class="panel active" id="panel-fantasy" role="tabpanel"
     aria-labelledby="tab-fantasy">
     <div class="fantasy-status">PREVIEW / HOLD</div>
@@ -602,6 +763,7 @@ def render_fantasy_panel(preview):
     </details>
   </section>
 """
+    return add_fantasy_leagues(panel, eligible)
 
 
 def render_comparison_panel(rows, receipt):
@@ -758,131 +920,10 @@ COMPARISON_SCRIPT = """
 """
 
 
-FANTASY_SCRIPT = """
-<script>
-  (() => {
-    const panel = document.querySelector('#panel-fantasy');
-    const body = panel && panel.querySelector('#fantasy-rows');
-    const viewButtons = panel
-      ? [...panel.querySelectorAll('.fantasy-view-button')]
-      : [];
-    const sortButtons = panel
-      ? [...panel.querySelectorAll('.fantasy-sort')]
-      : [];
-    const search = panel && panel.querySelector('#fantasy-player-search');
-    const team = panel && panel.querySelector('#fantasy-team');
-    const columns = panel && panel.querySelector('#fantasy-columns');
-    const count = panel && panel.querySelector('#fantasy-result-count');
-    const sortStatus = panel && panel.querySelector('.fantasy-sort-status');
-    const rankButton = panel
-      && panel.querySelector('.fantasy-sort[data-column="0"]');
-    if (
-      !body || viewButtons.length !== 6 || sortButtons.length !== 14
-      || !search || !team || !columns || !count || !sortStatus || !rankButton
-    ) return;
-
-    const rows = [...body.rows];
-    const views = {
-      SUPERFLEX: {rank: 'superflexRank', label: 'SF#'},
-      QB: {rank: 'positionRank', label: 'QB#'},
-      RB: {rank: 'positionRank', label: 'RB#'},
-      WR: {rank: 'positionRank', label: 'WR#'},
-      TE: {rank: 'positionRank', label: 'TE#'},
-      FLEX: {rank: 'flexRank', label: 'FLEX#'}
-    };
-    let activeView = 'SUPERFLEX';
-    let activeColumn = 0;
-    let ascending = true;
-
-    function sortValue(row, column, numeric) {
-      const raw = row.children[column].dataset.sort;
-      if (numeric) return raw === '' ? null : Number(raw);
-      return raw;
-    }
-
-    function sortRows(column, nextAscending, announce) {
-      const button = sortButtons.find(
-        candidate => Number(candidate.dataset.column) === column
-      );
-      const numeric = button.dataset.kind === 'number';
-      activeColumn = column;
-      ascending = nextAscending;
-      rows.sort((leftRow, rightRow) => {
-        const left = sortValue(leftRow, column, numeric);
-        const right = sortValue(rightRow, column, numeric);
-        if (left === null && right !== null) return 1;
-        if (right === null && left !== null) return -1;
-        let order = 0;
-        if (left !== null && right !== null) {
-          order = numeric
-            ? left - right
-            : left.localeCompare(right);
-        }
-        const directed = ascending ? order : -order;
-        return directed || leftRow.dataset.player.localeCompare(
-          rightRow.dataset.player
-        );
-      }).forEach(row => body.appendChild(row));
-      sortButtons.forEach(candidate => {
-        candidate.closest('th').setAttribute('aria-sort', 'none');
-      });
-      button.closest('th').setAttribute(
-        'aria-sort', ascending ? 'ascending' : 'descending'
-      );
-      if (announce) {
-        sortStatus.textContent = button.textContent.trim() + ' sorted '
-          + (ascending ? 'ascending' : 'descending');
-      }
-    }
-
-    function applyFilters(resetRank) {
-      const view = views[activeView];
-      rankButton.textContent = view.label;
-      const query = search.value.trim().toLowerCase();
-      let visible = 0;
-      rows.forEach(row => {
-        const rank = row.dataset[view.rank];
-        row.children[0].textContent = rank;
-        row.children[0].dataset.sort = rank;
-        const positionMatch = activeView === 'SUPERFLEX'
-          || (activeView === 'FLEX' && row.dataset.position !== 'QB')
-          || row.dataset.position === activeView;
-        const playerMatch = !query || row.dataset.player.includes(query);
-        const teamMatch = !team.value || row.dataset.team === team.value;
-        row.hidden = !(positionMatch && playerMatch && teamMatch);
-        if (!row.hidden) visible += 1;
-      });
-      if (resetRank) sortRows(0, true, false);
-      count.textContent = visible + (visible === 1 ? ' player shown' : ' players shown');
-    }
-
-    viewButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        activeView = button.dataset.view;
-        viewButtons.forEach(candidate => {
-          candidate.setAttribute(
-            'aria-pressed', String(candidate === button)
-          );
-        });
-        applyFilters(true);
-      });
-    });
-    sortButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const column = Number(button.dataset.column);
-        const nextAscending = column === activeColumn ? !ascending : true;
-        sortRows(column, nextAscending, true);
-      });
-    });
-    search.addEventListener('input', () => applyFilters(false));
-    team.addEventListener('change', () => applyFilters(false));
-    columns.addEventListener('change', () => {
-      panel.classList.toggle('show-technical', columns.checked);
-    });
-    applyFilters(true);
-  })();
-</script>
-"""
+FANTASY_SCRIPT = "\n<script>\n" + "\n".join(
+    (HERE / name).read_text(encoding="utf-8")
+    for name in ("fantasy_league.js", "fantasy_league_ui.js")
+) + "\n</script>\n"
 
 
 def inject_comparison(base_html, panel_html):
@@ -1016,6 +1057,10 @@ def _extract_published_fantasy_panel(existing_html):
         tab_count == panel_count == css_count == availability_css_count
         == script_count == 0
     ):
+        if any(marker in existing_html for marker in (
+                'id="fantasy-league-form"', 'id="fantasy-scoring-data"',
+                'data-league-version="1"')):
+            raise ValueError("Existing fantasy league assets are orphaned")
         return None
     if (
         tab_count != 1
@@ -1034,6 +1079,7 @@ def _extract_published_fantasy_panel(existing_html):
     if start >= 2 and existing_html[start - 2:start] == "  ":
         start -= 2
     panel = existing_html[start:end + len(end_marker)]
+    _validate_fantasy_leagues(panel, existing_html)
     if availability_css_count != int(
         'class="fantasy-availability"' in panel
     ):
@@ -1041,6 +1087,79 @@ def _extract_published_fantasy_panel(existing_html):
             "Existing fantasy availability CSS is missing, duplicated, or orphaned"
         )
     return panel
+
+
+def _validate_fantasy_leagues(panel, page):
+    for marker in ('id="fantasy-league-form"', 'id="fantasy-scoring-data"',
+                   'id="fantasy-table-caption"', 'data-league-version="1"'):
+        if page.count(marker) != 1 or panel.count(marker) != 1:
+            raise ValueError("Existing fantasy league controls or scoring data are incomplete or duplicated")
+    match = re.search(r'<script type="application/json" id="fantasy-scoring-data" '
+                      r'data-sha256="([0-9a-f]{64})">(.*?)</script>', panel, re.S)
+    if match is None or hashlib.sha256(match[2].encode("utf-8")).hexdigest() != match[1]:
+        raise ValueError("Existing fantasy scoring data integrity changed")
+    try:
+        data = json.loads(match[2])
+        if (type(data["schema_version"]) is not int or data["schema_version"] != 1
+                or type(data["available"]) is not bool or not isinstance(data["players"], dict)):
+            raise ValueError("Invalid fantasy scoring data")
+        if not data["available"] and data["players"]:
+            raise ValueError("Unavailable fantasy scoring data has player projections")
+    except (KeyError, TypeError, json.JSONDecodeError) as error:
+        raise ValueError("Invalid fantasy scoring data") from error
+
+    rows = re.findall(r'<tr class="fantasy-row"([^>]*)>(.*?)</tr>', panel, re.S)
+    if not rows or len(rows) != panel.count('class="fantasy-row"'):
+        raise ValueError("Fantasy league row population is incomplete")
+    dom_players = {}
+    for attributes, cells_html in rows:
+        pairs = re.findall(r'([\w-]+)="([^"]*)"', attributes)
+        attrs = dict(pairs)
+        if any(sum(name == key for name, _ in pairs) != 1 for key in (
+                "data-player-id", "data-position", "data-base-points", "data-inactive")):
+            raise ValueError("Fantasy league player fields are malformed")
+        identifier = html.unescape(attrs["data-player-id"])
+        position = html.unescape(attrs["data-position"])
+        if not identifier or identifier in dom_players or position not in {"QB", "RB", "WR", "TE"}:
+            raise ValueError("Fantasy league player population is duplicated or malformed")
+        cells = re.findall(r'<(?:td|th)\b[^>]*data-sort="([^"]*)"[^>]*>', cells_html)
+        try:
+            points = float(html.unescape(attrs["data-base-points"]))
+            source_points = float(html.unescape(cells[5]))
+        except (IndexError, TypeError, ValueError) as error:
+            raise ValueError("Fantasy league source projection is malformed") from error
+        if len(cells) != 15 or not math.isfinite(points) or source_points != points:
+            raise ValueError("Fantasy league source projection changed")
+        if attrs["data-inactive"] != str(html.unescape(cells[13]).lower() == "inactive").lower():
+            raise ValueError("Fantasy league source availability changed")
+        dom_players[identifier] = (position, points)
+
+    if not data["available"]:
+        return
+    if set(data["players"]) != set(dom_players):
+        raise ValueError("Fantasy scoring player population changed")
+    component_names = {
+        "passing_yards", "passing_tds", "passing_interceptions",
+        "passing_2pt_conversions", "rushing_yards", "rushing_tds",
+        "rushing_2pt_conversions", "receptions", "receiving_yards",
+        "receiving_tds", "receiving_2pt_conversions", "special_teams_tds",
+        "fumbles_lost_total",
+    }
+    for identifier, projected in data["players"].items():
+        if not isinstance(projected, dict) or set(projected) != {"position", "points", "components"}:
+            raise ValueError("Fantasy scoring player fields are malformed")
+        position, points = dom_players[identifier]
+        projected_points = projected["points"]
+        components = projected["components"]
+        if (projected["position"] != position
+                or type(projected_points) not in (int, float)
+                or not math.isfinite(projected_points)
+                or projected_points != points
+                or not isinstance(components, dict)
+                or set(components) != component_names
+                or any(type(value) not in (int, float) or not math.isfinite(value)
+                       for value in components.values())):
+            raise ValueError("Fantasy scoring player projection is malformed")
 
 
 def mccabe_source_timestamp(path):

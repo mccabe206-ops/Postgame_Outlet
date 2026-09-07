@@ -1,5 +1,9 @@
 import hashlib
 import io
+import json
+import math
+import re
+import shutil
 import tempfile
 import unittest
 from contextlib import redirect_stderr
@@ -530,7 +534,7 @@ class ComparisonTests(unittest.TestCase):
 
         self.assertEqual(panel.count('class="fantasy-row"'), 4)
         self.assertNotIn("Buffalo Backup", panel)
-        self.assertEqual(panel.count('class="fantasy-view-button"'), 6)
+        self.assertEqual(panel.count('class="fantasy-view-button"'), 7)
         self.assertIn(
             'data-view="SUPERFLEX" aria-pressed="true"',
             panel,
@@ -541,11 +545,11 @@ class ComparisonTests(unittest.TestCase):
         for label in ("SF#", "Player", "Pos", "Team", "Opp.", "Proj."):
             self.assertIn(f">{label}</button>", panel)
         for label in (
-            "Pos #",
-            "FLEX #",
-            "SF #",
-            "Baseline",
-            "Delta",
+            "Original half-PPR Pos #",
+            "Original half-PPR FLEX #",
+            "Original half-PPR SF #",
+            "Original half-PPR Baseline",
+            "Original half-PPR Delta",
             "History",
             "Init",
             "Availability",
@@ -560,7 +564,185 @@ class ComparisonTests(unittest.TestCase):
         self.assertIn("pgo_fantasy_2026_baseline_v2", panel)
         self.assertIn("b" * 64, panel)
         self.assertIn("a" * 64, panel)
-        self.assertNotIn("qb-buf", panel)
+        self.assertIn('data-player-id="qb-buf"', panel)
+        self.assertNotIn('data-player-id="qb-buf-backup"', panel)
+        self.assertIn('step="any" required', panel)
+        self.assertIn('id="fantasy-table-caption"', panel)
+        self.assertIn("half-PPR base forecasts", panel)
+        self.assertIn("score-adjust the displayed Proj. column", panel)
+
+    def test_league_upgrade_adds_runtime_caption_and_source_labels_to_legacy_panel(self):
+        preview = self._fantasy_preview()
+        with patch.object(pgo_comparison, "add_fantasy_leagues", side_effect=lambda panel, rows: panel):
+            legacy = pgo_comparison.render_fantasy_panel(preview)
+        legacy = legacy.replace(' id="fantasy-table-caption"', '').replace("Original half-PPR ", "")
+        legacy = legacy.replace("half-PPR base forecasts", "half-PPR projections")
+        legacy = legacy.replace("League profiles can score-adjust the displayed Proj. column.", "")
+        upgraded = pgo_comparison.add_fantasy_leagues(legacy, preview["rows"])
+        self.assertEqual(upgraded.count('id="fantasy-table-caption"'), 1)
+        for label in ("Pos #", "FLEX #", "SF #", "Baseline", "Delta"):
+            self.assertIn(f">Original half-PPR {label}</button>", upgraded)
+        self.assertIn("half-PPR base forecasts", upgraded)
+        self.assertIn("score-adjust the displayed Proj. column", upgraded)
+        pgo_comparison._validate_fantasy_leagues(upgraded, upgraded)
+        with self.assertRaises(ValueError):
+            missing = upgraded.replace('id="fantasy-table-caption"', 'id="missing-caption"')
+            pgo_comparison._validate_fantasy_leagues(missing, missing)
+
+    @staticmethod
+    def _replace_scoring_payload(page, payload):
+        match = re.search(
+            r'(<script type="application/json" id="fantasy-scoring-data" )'
+            r'data-sha256="[0-9a-f]{64}">(.*?)</script>',
+            page,
+            re.S,
+        )
+        if match is None:
+            raise AssertionError("Fantasy scoring payload was not found")
+        data = json.dumps(
+            payload, sort_keys=True, separators=(",", ":"), allow_nan=True
+        ).replace("<", "\\u003c")
+        digest = hashlib.sha256(data.encode("utf-8")).hexdigest()
+        return page[:match.start()] + (
+            f'{match[1]}data-sha256="{digest}">{data}</script>'
+        ) + page[match.end():]
+
+    def _available_scoring_payload(self):
+        components = {
+            name: 0.0 for name in (
+                "passing_yards", "passing_tds", "passing_interceptions",
+                "passing_2pt_conversions", "rushing_yards", "rushing_tds",
+                "rushing_2pt_conversions", "receptions", "receiving_yards",
+                "receiving_tds", "receiving_2pt_conversions",
+                "special_teams_tds", "fumbles_lost_total",
+            )
+        }
+        players = {
+            row["gsis_id"]: {
+                "position": row["position"],
+                "points": row["strong_prediction"],
+                "components": dict(components),
+            }
+            for row in self._fantasy_preview()["rows"]
+            if row["ranking_eligible"]
+        }
+        return {"schema_version": 1, "available": True, "players": players}
+
+    def test_league_profile_form_and_source_data_survive_real_refresh(self):
+        panel = pgo_comparison.render_fantasy_panel(self._fantasy_preview())
+        self.assertIn('id="fantasy-league-form"', panel)
+        self.assertIn('data-base-points="20.0"', panel)
+        self.assertIn('data-view="LEAGUE"', panel)
+        self.assertIn('id="fantasy-scoring-data"', panel)
+        with (
+            patch.object(pgo_comparison, "load_mccabe_rows", return_value=[]),
+            patch.object(pgo_comparison, "mccabe_source_timestamp", return_value="2026-09-07T01:00:00+00:00"),
+        ):
+            published = pgo_comparison.inject_fantasy_preview(
+                pgo_comparison.inject_comparison(self._base_html(),
+                    pgo_comparison.render_comparison_panel([], self._held_receipt())), panel)
+            refreshed = pgo_comparison.refresh_mccabe_page(self._base_html(), published)
+            self.assertIn(panel, refreshed)
+            for broken in (
+                published.replace('id="fantasy-league-form"', 'id="missing-form"'),
+                published.replace('id="fantasy-scoring-data"', 'id="missing-data"'),
+                published.replace('"available":false', '"available":true'),
+            ):
+                with self.subTest(broken=broken[-60:]):
+                    with self.assertRaisesRegex(ValueError, "league|scoring"):
+                        pgo_comparison.refresh_mccabe_page(self._base_html(), broken)
+
+    def test_refresh_rejects_scoring_payload_and_dom_population_drift(self):
+        panel = pgo_comparison.render_fantasy_panel(self._fantasy_preview())
+        panel = self._replace_scoring_payload(
+            panel, self._available_scoring_payload()
+        )
+        published = pgo_comparison.inject_fantasy_preview(
+            pgo_comparison.inject_comparison(
+                self._base_html(),
+                pgo_comparison.render_comparison_panel([], self._held_receipt()),
+            ),
+            panel,
+        )
+        payload_mutations = {
+            "missing player": lambda data: data["players"].pop("qb-buf"),
+            "wrong position": lambda data: data["players"]["qb-buf"].update(position="RB"),
+            "wrong points": lambda data: data["players"]["qb-buf"].update(points=999),
+            "missing component": lambda data: data["players"]["qb-buf"]["components"].pop("receptions"),
+            "extra component": lambda data: data["players"]["qb-buf"]["components"].update(extra=0),
+            "boolean component": lambda data: data["players"]["qb-buf"]["components"].update(receptions=True),
+            "nonfinite component": lambda data: data["players"]["qb-buf"]["components"].update(receptions=math.nan),
+            "malformed player": lambda data: data["players"].update({"qb-buf": None}),
+            "wrong schema": lambda data: data.update(schema_version=2),
+        }
+        broken_pages = {
+            "base points": published.replace(
+                'data-player-id="qb-buf" data-base-points="20.0"',
+                'data-player-id="qb-buf" data-base-points="999"',
+                1,
+            ),
+            "duplicate id": published.replace(
+                'data-player-id="rb-lar"', 'data-player-id="qb-buf"', 1
+            ),
+            "missing id": published.replace(
+                ' data-player-id="qb-buf"', '', 1
+            ),
+            "changed inactive flag": published.replace('data-inactive="false"', 'data-inactive="true"', 1),
+            "missing inactive flag": published.replace(' data-inactive="false"', '', 1),
+            "invalid inactive flag": published.replace('data-inactive="false"', 'data-inactive="0"', 1),
+            "missing cell": published.replace(
+                '<td class="fantasy-league-value" data-sort="">&mdash;</td>',
+                '',
+                1,
+            ),
+        }
+        for name, mutate in payload_mutations.items():
+            data = self._available_scoring_payload()
+            mutate(data)
+            broken_pages[name] = self._replace_scoring_payload(published, data)
+        with (
+            patch.object(pgo_comparison, "load_mccabe_rows", return_value=[]),
+            patch.object(
+                pgo_comparison,
+                "mccabe_source_timestamp",
+                return_value="2026-09-07T01:00:00+00:00",
+            ),
+        ):
+            for name, broken in broken_pages.items():
+                with self.subTest(name=name):
+                    with self.assertRaisesRegex(ValueError, "league|scoring"):
+                        pgo_comparison.refresh_mccabe_page(
+                            self._base_html(), broken
+                        )
+
+    def test_orphaned_league_version_marker_is_rejected(self):
+        orphaned = self._base_html().replace(
+            "</body>", '<div data-league-version="1"></div></body>'
+        )
+        with self.assertRaisesRegex(ValueError, "orphaned"):
+            pgo_comparison._extract_published_fantasy_panel(orphaned)
+
+    def test_ui_source_guards_payload_and_activates_saved_fallback_atomically(self):
+        source = (pgo_comparison.HERE / "fantasy_league_ui.js").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("Scoring adjustment data could not be validated", source)
+        self.assertIn("scoring.schema_version !== 1", source)
+        self.assertIn("function activateStoredProfile", source)
+        self.assertIn("scoring: {...PGOLeague.HALF_PPR}", source)
+        self.assertIn("the saved league remains unchanged", source)
+        self.assertLess(
+            source.index("activateStoredProfile(0, remaining)"),
+            source.index("profiles = remaining"),
+        )
+
+    @unittest.skipUnless(shutil.which("node"), "Node is required for the browser scoring-engine checks")
+    def test_league_javascript_behavior(self):
+        result = pgo_comparison.subprocess.run(
+            [shutil.which("node"), str(pgo_comparison.HERE / "tests/test_fantasy_league.js")],
+            capture_output=True, text=True, check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_fantasy_panel_escapes_source_text(self):
         preview = self._fantasy_preview()
