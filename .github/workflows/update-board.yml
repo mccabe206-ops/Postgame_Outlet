@@ -7,6 +7,9 @@ on:
       - "data/**"
       - "generate_site.py"
       - "pgo_comparison.py"
+      - "pgo_forecast_lab.py"
+      - "docs/evidence/forecast-lab-2026/**"
+      - "research/pgo_stability_blend/prospective_attestation.json"
       - "!data/snapshots.json"
   workflow_dispatch:
 
@@ -38,6 +41,8 @@ jobs:
         run: python -m unittest discover -s tests
       - name: Refresh public board without replacing approved PGO panel
         run: python pgo_comparison.py --refresh-mccabe
+      - name: Render verified Forecast Lab archive
+        run: python pgo_forecast_lab.py
 
       # --- walshja9 (canonical / LIVE site): keep the proven commit-back deploy ---
       # Its Pages source is "Deploy from a branch" (main /docs); committing docs/index.html
@@ -47,7 +52,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/index.html
+          git add docs/index.html docs/forecast-lab.html
           if git diff --cached --quiet; then
             echo "Board unchanged - nothing to commit."
           else

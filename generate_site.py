@@ -537,13 +537,13 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Shared PGO palette: warm white, deep navy and bold orange. */
+  /* Shared PGO palette: burgundy, navy and warm white. */
   :root {
-    --bg:#fff9f0; --bg2:#fff9f0; --panel:#ffffff; --panel2:#fff4e4;
-    --row-alt:#fff9f0; --hover:#ffecd2; --border:#e4d9c9; --border2:#b7a895;
-    --ink:#101f3c; --mut:#334766; --dim:#526078;
-    --teal:#ff7a1a; --teal2:#8a3c00; --violet:#101f3c; --violet2:#334766;
-    --pos:#08734f; --neg:#a73525; --accent:#a94300; --orange:#ff7a1a;
+    --bg:#faf7f2; --bg2:#faf7f2; --panel:#ffffff; --panel2:#f3ece6;
+    --row-alt:#faf7f2; --hover:#f7e3e8; --border:#ded5cf; --border2:#afa09b;
+    --ink:#142640; --mut:#40516a; --dim:#526078;
+    --teal:#a42c50; --teal2:#76223e; --violet:#142640; --violet2:#40516a;
+    --pos:#08734f; --neg:#a73525; --accent:#a42c50; --orange:#a42c50; --highlight:#ffb1bd;
     --disp:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     --body:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
@@ -566,23 +566,22 @@ TEMPLATE = """<!DOCTYPE html>
   }
   .wrap { max-width:1040px; margin:0 auto; padding:0 16px 72px; }
 
-  /* Full-bleed banner matches the storefront's orange feature. */
-  .hero { background:linear-gradient(115deg,transparent 73%,#ffffff30 73%,#ffffff30 80%,transparent 80%),
-                    linear-gradient(110deg,var(--orange),#ffb350);
+  /* Full-bleed banner matches the storefront feature. */
+  .hero { background:#76223e;
           padding:38px 16px 34px; margin-bottom:26px;
-          border-bottom:5px solid var(--ink); }
+          border-bottom:5px solid var(--highlight); }
   header { text-align:center; max-width:1040px; margin:0 auto; }
   header h1 {
     margin:0; font-family:var(--disp); font-weight:700; line-height:.95;
-    font-size:clamp(34px,6.5vw,60px); letter-spacing:.5px; color:var(--ink);
+    font-size:clamp(34px,6.5vw,60px); letter-spacing:.5px; color:#fff;
     text-transform:uppercase;
   }
-  header h1 .accent { color:var(--ink); }
-  header .sub { color:var(--ink); font-size:13px; margin-top:9px;
+  header h1 .accent { color:var(--highlight); }
+  header .sub { color:#fff; font-size:13px; margin-top:9px;
                 letter-spacing:.04em; }
-  header .updated { color:var(--ink); font-size:11px; margin-top:6px;
+  header .updated { color:#fff; font-size:11px; margin-top:6px;
                     letter-spacing:.06em; text-transform:uppercase; }
-  header .updated::before { content:"● "; color:var(--ink); }
+  header .updated::before { content:"● "; color:var(--highlight); }
 
   .panel.active { background:var(--panel);
     border:1px solid var(--border); border-radius:14px; padding:18px 16px 20px;
@@ -597,8 +596,8 @@ TEMPLATE = """<!DOCTYPE html>
     user-select:none; border-bottom:2px solid var(--orange);
   }
   th:first-child { border-top-left-radius:9px; } th:last-child { border-top-right-radius:9px; }
-  th:hover { color:#ffc07a; background:#2e415c; }
-  th.up { color:var(--orange); } th.down { color:var(--orange); }
+  th:hover { color:var(--highlight); background:#2e415c; }
+  th.up { color:var(--highlight); } th.down { color:var(--highlight); }
   th.up::after { content:" \\2191"; } th.down::after { content:" \\2193"; }
   tbody tr { border-bottom:1px solid var(--border); }
   tbody tr:nth-child(even) { background:var(--row-alt); }
@@ -637,7 +636,8 @@ TEMPLATE = """<!DOCTYPE html>
     font-size:14px; font-weight:600; letter-spacing:.01em; transition:all .12s;
   }
   .tab:hover { color:var(--ink); border-color:var(--border2); }
-  .tab.active { color:#18283a; background:var(--orange); border-color:var(--orange); }
+  .tab.active { color:#fff; background:var(--orange); border-color:var(--orange); }
+  #panel-fantasy .fantasy-view-buttons .fantasy-view-button[aria-pressed="true"] { color:#fff; }
   .panel { display:none; } .panel.active { display:block; }
   .sort-button { width:100%; text-align:inherit; text-transform:inherit; letter-spacing:inherit; }
   .row-trigger { display:inline-flex; align-items:center; text-align:left; }

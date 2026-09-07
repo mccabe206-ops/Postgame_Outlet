@@ -89,8 +89,9 @@ class RatingExplanationTests(unittest.TestCase):
         before = pgo_comparison.extract_comparison_panel(self.page)
         after = pgo_comparison.extract_comparison_panel(result)
         old_cells = re.findall(r'<td\b.*?</td>', before)
-        self.assertEqual([cell for index, cell in enumerate(old_cells) if index % 9 != 8],
-                         re.findall(r'<td\b.*?</td>', after))
+        if "Rating gap" in before:
+            old_cells = [cell for index, cell in enumerate(old_cells) if index % 9 != 8]
+        self.assertEqual(old_cells, re.findall(r'<td\b.*?</td>', after))
         self.assertEqual(pgo_comparison._extract_published_fantasy_panel(self.page),
                          pgo_comparison._extract_published_fantasy_panel(result))
         refreshed = pgo_comparison.refresh_mccabe_page(ComparisonTests._base_html(), result)
