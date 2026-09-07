@@ -7,6 +7,7 @@ import io
 import json
 import math
 from pathlib import Path
+import re
 import subprocess
 import tempfile
 import unittest
@@ -64,7 +65,7 @@ class ForecastLabTests(unittest.TestCase):
                 "old_selector_qb_name": f"{team} old QB",
                 "old_selector_rating": 9.5 - rank,
                 "features": {},
-                "contributions": {},
+                "contributions": {"pgo_v0": 10.0 - rank},
             })
         return {
             "generated_at": "2026-09-07T22:00:00Z",
@@ -459,6 +460,29 @@ class ForecastLabTests(unittest.TestCase):
         with patch.object(generate_site, "TEMPLATE", "<html></html>"), \
                 self.assertRaisesRegex(ValueError, "style"):
             pgo_forecast_lab.render_lab(self.synthetic_lock(), [], [])
+
+    def test_rating_explanations_reconcile_all_32_saved_outputs_and_show_close_gaps(self):
+        snapshot = json.loads((ARCHIVE / "september-07/snapshot.json").read_text(encoding="utf-8"))
+        rendered = pgo_forecast_lab._rating_explanations(snapshot)
+        self.assertEqual(rendered.count('class="lab-detail rating-explanation"'), 32)
+        self.assertIn("0.287 below", rendered)  # LAR trails NE, despite rounded headline ratings.
+        self.assertIn("0.062 below #4 BAL", rendered)
+        self.assertIn("0.684 above #6 BUF", rendered)
+        self.assertIn("not independent football grades", rendered)
+        self.assertIn("Remaining inputs (net)", rendered)
+        self.assertIn("Returning offensive snap share", rendered)
+        for team in snapshot["teams"]:
+            detail = rendered.split(f'id="rating-{team["team"]}"', 1)[1].split("</details>", 1)[0]
+            values = [float(value) for value in re.findall(r"<td>([+-]\d+\.\d{3})</td>", detail)]
+            self.assertAlmostEqual(values[-1], team["rating"], delta=0.00051)
+            self.assertAlmostEqual(sum(values[:-1]), values[-1], delta=0.0051)
+        ne = rendered.split('id="rating-NE"', 1)[1].split("</details>", 1)[0]
+        self.assertIn("+3.864", ne)
+        self.assertIn("+2.084", ne)
+        self.assertIn("+0.635", ne)
+        snapshot["teams"][0]["contributions"]["pgo_v0"] += 1
+        with self.assertRaisesRegex(ValueError, "contributions"):
+            pgo_forecast_lab._rating_explanations(snapshot)
 
     def test_snapshot_interim_metrics_use_separate_margin_total_and_score_targets(self):
         snapshot = self.synthetic_snapshot()

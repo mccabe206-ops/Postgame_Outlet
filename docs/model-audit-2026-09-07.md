@@ -4,6 +4,33 @@ PGO's preserved July 21, 2026 snapshot ranks New England first and Jacksonville 
 
 McCabe's ratings are human-set neutral-field point estimates: QB + non-QB offense + defense. PGO is independently fitted to game margins, then centered across 32 teams. Its intended point interpretation is still experimental; subtracting its output from McCabe's number is not an established point-price disagreement.
 
+## Why NE remains first and JAX is fifth on September 7
+
+The saved contributions reproduce all 32 ratings. New England's lead is small: **+0.287 over the Rams and +0.545 over Seattle**. Jacksonville is **0.062 below Baltimore and 0.684 above Buffalo**. These are differences in experimental model output, not established betting-price edges or measures of uncertainty.
+
+| Rank / team | Results-history input | Team passing efficiency | QB passing efficiency | All other inputs, net | Total |
+|---|---:|---:|---:|---:|---:|
+| 1. New England | +3.864 | +2.084 | +0.692 | +0.580 | +7.219 |
+| 2. Rams | +4.610 | +1.582 | +0.284 | +0.456 | +6.932 |
+| 3. Seattle | +5.589 | +0.217 | -0.764 | +1.632 | +6.674 |
+| 4. Baltimore | +2.428 | +0.371 | +0.830 | +1.824 | +5.453 |
+| 5. Jacksonville | +4.134 | +1.128 | -0.406 | +0.535 | +5.392 |
+| 6. Buffalo | +3.201 | +1.110 | +0.706 | -0.309 | +4.708 |
+
+Columns are centered contributions relative to the 32-team average. They sum before rounding; they are not separate football grades. The results-history input, team passing efficiency, and QB efficiency partly reflect the same games, so they are not three independent confirmations.
+
+**New England:** its passing contributions help offset the Rams' and Seahawks' larger results-history contributions. But its narrow lead over the Rams also depends on a counterintuitive fitted relationship: the model rewards a *lower* returning-offense snap-share input. NE's recorded share is 0.664 versus the Rams' 1.000, giving NE a **+1.326 relative contribution** from that term alone. Better explosive-play prevention contributes another +0.856 relative to the Rams; team sack avoidance (-0.775), results history (-0.747), and coach tenure (-0.701) pull the other way. The remaining terms net +0.329, producing the +0.287 lead. These are an arithmetic comparison, not an intervention test.
+
+The returning-share input measures tracked historical snap weight among currently eligible players, using their last recorded team. A value of 1.000 does **not** establish that every player or all offensive snaps from last season returned. Nor does the negative fitted coefficient establish that turnover helps a team. This relationship deserves testing before defending it as predictive.
+
+**Jacksonville:** its results-history input is the main reason it stays near the top; team passing efficiency adds another +1.128. Its QB passing-efficiency contribution is negative (-0.406), so this is not a claim that Trevor Lawrence grades as a top-five quarterback. Jacksonville's lead over Buffalo includes +0.989 from the returning-defense term and +0.934 from results history, offset partly by weaker QB passing efficiency (-1.112), rushing efficiency (-0.746), and coach tenure (-0.699).
+
+The tiny Baltimore/Jacksonville gap also hides a large questionable adjustment. Baltimore's recorded coach-continuity input is 0 and Jacksonville's is 1; the negative coefficient gives Baltimore a **+2.802 relative contribution**, with coach tenure offsetting 0.956 of it. That is a learned association, not evidence that changing coaches improves a team.
+
+**Why the fresh snapshot did not reset these rankings:** it updated eligible rosters and QB selection while keeping the fitted model and performance history through 2025. Team efficiency has a four-game half-life; QB history is shrunk toward the population with a 200-dropback prior. The embedded results-history input retains the end-of-2025 value without a new 2026 offseason shrink. The separate PGO v0 game-forecast baseline does apply 0.5 offseason retention. That inherited difference is a preseason inference limitation to test, not something an explanation update silently repairs.
+
+The [Forecast Lab now exposes the largest positive and negative contributions for every team](forecast-lab.html#rating-explanations), with the remaining inputs reconciled to the total and exact gaps to neighboring ranks. The saved ratings and game forecasts have not changed. The arithmetic is explainable; the unusual fitted relationships and historical HOLD result still prevent a confident predictive endorsement.
+
 ## Why the July ratings are high
 
 The saved rating file contains two contribution groups. We put both on the same league-average baseline before displaying them. The original groups had large, canceling offsets; those offsets were not evidence of a terrible roster or a dominant individual feature.
