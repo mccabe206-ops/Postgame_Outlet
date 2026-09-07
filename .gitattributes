@@ -2,3 +2,7 @@ research/pgo_stability_blend/*.json text eol=lf
 research/pgo_fantasy/*.json text eol=lf
 research/pgo_v1/validation_predictions.csv text eol=crlf
 docs/evidence/fantasy-scoring-20260907-031950.json -text whitespace=cr-at-eol
+docs/evidence/forecast-lab-2026/prospective_lock.json -text
+docs/evidence/forecast-lab-2026/prospective_predictions.csv -text
+docs/evidence/forecast-lab-2026/results/*/results.csv -text
+docs/evidence/forecast-lab-2026/results/*/capture.json -text
