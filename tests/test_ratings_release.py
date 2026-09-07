@@ -471,19 +471,23 @@ class GeneratedDocumentTests(unittest.TestCase):
                 document = generate_site.build_html(self.rows, self.config)
 
         colors = dict(re.findall(r"--([a-z0-9-]+):(#[0-9a-f]{6})", document))
+        colors["active-text"] = re.search(r"\.tab\.active \{ color:(#[0-9a-f]+);", document).group(1)
+        colors["hero-text"] = re.search(r"header \.updated \{ color:(#[0-9a-f]+);", document).group(1)
+        colors["hero"] = re.search(r"\.hero \{ background:(#[0-9a-f]+);", document).group(1)
 
         def luminance(color):
+            if len(color) == 4:
+                color = "#" + "".join(channel * 2 for channel in color[1:])
             rgb = [int(color[i:i + 2], 16) / 255 for i in (1, 3, 5)]
             linear = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
             return sum(c * weight for c, weight in zip(linear, (0.2126, 0.7152, 0.0722)))
 
         for foreground, background in (
             ("mut", "panel"), ("mut", "row-alt"), ("dim", "row-alt"),
-            ("dim", "hover"), ("ink", "orange"),
+            ("dim", "hover"), ("active-text", "orange"), ("hero-text", "hero"),
         ):
             light, dark = sorted((luminance(colors[foreground]), luminance(colors[background])), reverse=True)
             self.assertGreaterEqual((light + 0.05) / (dark + 0.05), 4.5, (foreground, background))
-        self.assertIn("header .updated { color:var(--ink);", document)
 
 
 if __name__ == "__main__":
