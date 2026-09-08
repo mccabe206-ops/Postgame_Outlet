@@ -19,7 +19,8 @@ from tests.test_pgo_fantasy_prospective import ProspectiveFantasyFixture
 
 class RatingExplanationTests(unittest.TestCase):
     def setUp(self):
-        self.page = pgo_comparison.PUBLIC_OUTPUT.read_text(encoding="utf-8")
+        self.page = pgo_comparison.pgo_current_board.strip_current_board(
+            pgo_comparison.PUBLIC_OUTPUT.read_text(encoding="utf-8"))
         self.receipt = pgo_comparison.validate_receipt(json.loads(
             pgo_comparison.BACKTEST_PATH.read_text(encoding="utf-8")))
         self.rows = pgo_comparison.load_model_rows(

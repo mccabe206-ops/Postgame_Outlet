@@ -17,6 +17,7 @@ import generate_site
 import pgo_challenger
 import pgo_fantasy_prospective as fantasy_prospective
 import pgo_model
+import pgo_current_board
 import snapshot
 from release_ratings import atomic_write_text, load_release_rows, rating_total
 
@@ -784,6 +785,7 @@ def render_fantasy_panel(preview):
 
 def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_PATH):
     """Explain saved contribution groups without changing published ratings."""
+    page = pgo_current_board.strip_current_board(page)
     receipt = validate_receipt(json.loads(Path(backtest_path).read_text(encoding="utf-8")))
     rows = load_model_rows(model_path, receipt)
     for row in rows:
@@ -1595,6 +1597,7 @@ def _refresh_comparison_panel(panel_html, mccabe_rows, source_timestamp):
 
 
 def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
+    existing_html = pgo_current_board.strip_current_board(existing_html)
     mccabe_rows = load_mccabe_rows(mccabe_path)
     fantasy_panel = _extract_published_fantasy_panel(existing_html)
     comparison_panel = extract_comparison_panel(existing_html)
@@ -1716,6 +1719,7 @@ def main(argv=None):
                     render_comparison_panel(comparison_rows, receipt),
                 )
         preview = add_rating_explanations(preview)
+        preview = pgo_current_board.add_current_board(preview)
         atomic_write_text(output, preview)
     except (csv.Error, KeyError, OSError, TypeError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
@@ -1725,7 +1729,7 @@ def main(argv=None):
     if receipt:
         print(f"  {len(comparison_rows)} teams | {receipt['publication_status']}")
     else:
-        print("  Preserved the existing approved PGO panel")
+        print("  Displayed the latest verified corrected edition; preserved the July archive")
     if fantasy_preview is not None:
         eligible = sum(
             row["ranking_eligible"] for row in fantasy_preview["rows"]

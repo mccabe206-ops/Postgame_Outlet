@@ -47,7 +47,9 @@ class ForecastLabTests(unittest.TestCase):
         panel = pgo_forecast_lab._corrected_section(corrected)
         for text in ('corrected-rating-NE', '&lt;Maye&gt;', '&lt;review&gt;',
                      'Non-QB injuries are not priced', 'model units', 'Raw input',
-                     'Fitted contribution', 'HOLD', '+2.000'):
+                     'Fitted contribution', 'HOLD', '+2.000', 'PGO Corrected',
+                     'Model construction', 'Snapshot generated', '2025 regular season',
+                     'id="model-editions"', 'July 21', 'September 7'):
             self.assertIn(text, panel)
         self.assertNotIn('<Maye>', panel)
         self.assertEqual(panel.count('Ben Brown (OL): Out'), 1)

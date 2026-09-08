@@ -480,7 +480,7 @@ def _spread(game):
 
 
 def _edition_name(edition):
-    return {'pgo-corrected-week1-2026-09-08': 'September 8 corrected',
+    return {'pgo-corrected-week1-2026-09-08': 'PGO Corrected — Sep 8',
             'pgo-active-roster-2026-09-07': 'September 7 preseason'}.get(edition, edition)
 
 
@@ -784,9 +784,21 @@ def _corrected_section(snapshot):
     skipped = ''.join(f'<li>{html.escape(row["game_id"])}: {html.escape(row["reason"])}</li>'
                       for row in snapshot.get('skipped_games', []))
     skipped = f'<p>Not reissued in this source package:</p><ul>{skipped}</ul>' if skipped else ''
-    return f'''<section id="corrected-ratings"><h2>September 8 corrected opening-week inputs</h2>
-<p><strong>EXPERIMENTAL / HOLD.</strong> Generated {_snapshot_kickoff_time(snapshot['generated_at'])}.
+    return f'''<section id="corrected-ratings"><h2>PGO Corrected — September 8, 2026</h2>
+<p><strong>EXPERIMENTAL / HOLD.</strong> Model construction: September 8, 2026.
+Snapshot generated {_snapshot_kickoff_time(snapshot['generated_at'])}.
 Inputs as of {_snapshot_kickoff_time(snapshot['inputs_as_of'])}. Higher model units rank higher; these are not established neutral-field point prices or rank-confidence intervals.</p>
+<p>Performance history runs through the 2025 regular season. Current roster and expected-quarterback inputs have their own dates above.
+An older performance cutoff and a fresh roster snapshot describe different inputs.</p>
+<details id="model-editions"><summary>Model versions and snapshot dates</summary>
+<p><strong>July 21 — archived PGO v1 ratings:</strong> the original saved preseason board.
+<strong>September 7 — refreshed v1 construction:</strong> active expected starters with the recovered original fit.
+<strong>September 8 — PGO Corrected:</strong> the separately fitted construction described below, used by this opening-week experiment.</p>
+<p>The July/August frozen 272-game season forecast is a separate 75% v0 / 25% challenger blend.
+It is preserved as its own forecast record, not identified as the July v1 ratings board.</p>
+<p>The earlier research name <strong>PGO v2</strong> identifies a separate roster-age and draft-pedigree experiment that remained HOLD.
+It is not the name of this corrected edition. A model version describes the calculation; a snapshot date records a particular set of inputs and outputs.
+Every saved edition remains available. A newer date does not establish greater predictive accuracy.</p></details>
 <p>This version matches historical and current ACT eligibility, removes six roster/coaching transition inputs,
 uses statistic-specific QB exposure and enforces symmetric neutral-field predictions. It keeps four-game team history and a one-year QB half-life.
 Those construction repairs do not establish superior forecasting accuracy. The same historical seasons have already been examined.</p>

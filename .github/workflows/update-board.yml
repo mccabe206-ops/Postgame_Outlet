@@ -7,6 +7,7 @@ on:
       - "data/**"
       - "generate_site.py"
       - "pgo_comparison.py"
+      - "pgo_current_board.py"
       - "pgo_forecast_lab.py"
       - "pgo_forecast_snapshot.py"
       - "pgo_forecast_weekly.py"
