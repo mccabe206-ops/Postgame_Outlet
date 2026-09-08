@@ -1,0 +1,38 @@
+{
+  "files": {
+    "fold-fits.json": {
+      "bytes": 7719787,
+      "sha256": "05a7faceba9589c7b9cfef76664a391fee3c6593d0b3bc1adec76abfda8192a6"
+    },
+    "matched-predictions.csv": {
+      "bytes": 665976,
+      "sha256": "fa06a91ad503ba7dd246068dcff356afa6200087b5422c041ada6b4956082847"
+    },
+    "metrics.json": {
+      "bytes": 61244,
+      "sha256": "1d7fcc0c106a64e8d193a2b7be868aee6f666f51b38b055936a6128122e9483b"
+    },
+    "rating-details.json": {
+      "bytes": 545238,
+      "sha256": "5125ca8c34e3f75fce5792b56ba525dde932db9c1cbf5e2722d642ad1f93f9cd"
+    },
+    "ratings.csv": {
+      "bytes": 3479,
+      "sha256": "0599bb5fd424c6eeb7dbee8c97b1c9d69f305791c75f2895cee448ed40ae4a6f"
+    },
+    "report.md": {
+      "bytes": 1905,
+      "sha256": "5222335ce59f351ef88ac565d2d1583277913bc0f38b3e0006ac87bf3c5d4cfe"
+    },
+    "run-receipt.json": {
+      "bytes": 149733,
+      "sha256": "c4431b8e391c4db30e0f63fcc4957bde2bafd25426a53dc3be86c3fa305352c9"
+    },
+    "run-start.json": {
+      "bytes": 1088,
+      "sha256": "b1c48285f569eb6870e047521542ec724cfae0e09e0ffe47060dd84c1278ae10"
+    }
+  },
+  "identity": "pgo-current-strength-research-20260908",
+  "schema_version": 1
+}

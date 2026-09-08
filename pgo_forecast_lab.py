@@ -17,6 +17,7 @@ from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 import generate_site
+import pgo_comparison
 from pgo_challenger import PERFORMANCE_FEATURES, QB_FEATURES
 import pgo_forecast_snapshot
 import pgo_forecast_weekly
@@ -33,6 +34,13 @@ CAPTURE_ROOT = ARCHIVE_DIR / "results"
 SNAPSHOT_DIR = ARCHIVE_DIR / "september-07"
 WEEKLY_DIR = ARCHIVE_DIR / "weekly"
 OUTPUT_PATH = HERE / "docs" / "forecast-lab.html"
+SENSITIVITY_DIR = HERE / "research" / "pgo_opponent_adjustment" / "run-20260907"
+SENSITIVITY_MANIFEST_SHA256 = "0e2fd095579fdd33a6ab1c728eeeb07c373779cdb32da6c8d14ce48b08de5998"
+SENSITIVITY_ARMS = tuple(f"{arm}__offseason_{carry}"
+    for arm in ("raw", "team_epa", "team_qb_epa") for carry in ("unchanged", "0.5"))
+STRENGTH_STUDY_DIR = HERE / "research" / "pgo_current_strength" / "run-20260908"
+STRENGTH_STUDY_MANIFEST_SHA256 = "6682197b16fcc0974fef19e6c704ef238d4d2a30ba0db066e3e86a6bad35ee4a"
+STRENGTH_STUDY_ARMS = ("raw", "starter", "starter_recency", "starter_recency_roster")
 ATTESTATION_COMMIT = "8aae9438d251c645509d3df15a31bb86d50059b9"
 ATTESTED_AT = "2026-08-26T16:07:24-04:00"
 EXPECTED_ATTESTATION_SHA256 = "b89fe9c50f6c9d351aecc1820c573625ef11dd17bca1650ce3327abc8e3fadcd"
@@ -787,7 +795,142 @@ def _metric_cards(metrics):
     return '<div class="metric-grid">' + "".join(cards) + "</div>"
 
 
-def render_lab(lock, results, provenance, *, snapshot=None,
+def load_model_sensitivity(directory, snapshot):
+    """Read descriptive research only; never fit or alter issued predictions."""
+    directory = Path(directory)
+    manifest_raw = (directory / "manifest.json").read_bytes()
+    if directory.resolve() == SENSITIVITY_DIR.resolve() and _sha256(manifest_raw) != SENSITIVITY_MANIFEST_SHA256:
+        raise ValueError("Sensitivity manifest hash mismatch")
+    manifest = json.loads(manifest_raw)
+    if manifest.get("identity") != "pgo-opponent-epa-retrospective-20260907":
+        raise ValueError("Unexpected sensitivity research identity")
+    verified = {}
+    for name in ("ratings.csv", "run-receipt.json", "metrics.json"):
+        raw = (directory / name).read_bytes()
+        entry = manifest.get("files", {}).get(name, {})
+        if len(raw) != entry.get("bytes") or _sha256(raw) != entry.get("sha256"):
+            raise ValueError(f"Sensitivity bytes/hash mismatch: {name}")
+        verified[name] = raw.decode("utf-8")
+    receipt = json.loads(verified["run-receipt.json"])
+    metrics = json.loads(verified["metrics.json"])
+    if (receipt.get("status") != "EXPLORATORY_RETROSPECTIVE_RESEARCH"
+            or metrics.get("leakage_verdict") != "REVIEW REQUIRED"
+            or any(metrics.get("screening", {}).get(arm, {}).get("merits_further_prospective_study") is not False
+                   for arm in ("team_epa", "team_qb_epa"))):
+        raise ValueError("Sensitivity research status changed; review presentation")
+    completed = receipt.get("completed_at", "")
+    _utc(completed)
+    rows = list(csv.DictReader(io.StringIO(verified["ratings.csv"])))
+    teams = pgo_prospective.pgo_model.CURRENT_TEAMS
+    if len(rows) != 32 or {row.get("team") for row in rows} != set(teams):
+        raise ValueError("Sensitivity requires exactly 32 unique teams")
+    baseline = {row["team"]: row for row in snapshot["teams"]}
+    if len(snapshot["teams"]) != 32 or set(baseline) != set(teams):
+        raise ValueError("Sensitivity baseline requires exactly 32 unique teams")
+    for row in rows:
+        for arm in SENSITIVITY_ARMS:
+            for kind in ("rank", "rating"):
+                key = arm + "_" + kind
+                row[key] = pgo_comparison._finite(row.get(key), f"Sensitivity {key}")
+        old = baseline[row["team"]]
+        if (row["raw__offseason_unchanged_rank"] != old["rank"]
+                or not math.isclose(row["raw__offseason_unchanged_rating"], old["rating"], rel_tol=0, abs_tol=1e-10)):
+            raise ValueError("Sensitivity raw arm differs from issued September baseline")
+    for arm in SENSITIVITY_ARMS:
+        if {row[arm + "_rank"] for row in rows} != set(range(1, 33)):
+            raise ValueError("Sensitivity arm requires unique ranks 1 through 32")
+    mccabe = {row["abbr"]: row for row in pgo_comparison.load_mccabe_rows(pgo_comparison.MCCABE_PATH)}
+    compared = []
+    for row in sorted(rows, key=lambda item: item["raw__offseason_unchanged_rank"]):
+        team = row["team"]
+        ranks = [int(row[arm + "_rank"]) for arm in SENSITIVITY_ARMS]
+        ratings = [row[arm + "_rating"] for arm in SENSITIVITY_ARMS]
+        rank = int(row["raw__offseason_unchanged_rank"])
+        compared.append({"team": team, "pgo_rank": rank, "mccabe_rank": mccabe[team]["rank"],
+            "rank_gap": rank - mccabe[team]["rank"], "rank_span": [min(ranks), max(ranks)],
+            "rating_span": [min(ratings), max(ratings)]})
+    return {"teams": compared, "completed_at": completed,
+        "mccabe_as_of": pgo_comparison.mccabe_source_timestamp(pgo_comparison.MCCABE_PATH),
+        "snapshot_generated_at": snapshot["generated_at"],
+        "depth_as_of": snapshot.get("depth_as_of", "Unavailable"),
+        "source_captures": sorted({source["captured_at"] for source in snapshot.get("sources", [])}),
+        "manifest_sha256": _sha256(manifest_raw)}
+
+
+def load_strength_study(directory):
+    """Load the fixed retrospective study summary, independently of forecasts."""
+    directory = Path(directory)
+    raw = (directory / 'manifest.json').read_bytes()
+    if directory.resolve() == STRENGTH_STUDY_DIR.resolve() and _sha256(raw) != STRENGTH_STUDY_MANIFEST_SHA256:
+        raise ValueError('Current-strength manifest hash mismatch')
+    manifest = json.loads(raw)
+    if manifest.get('identity') != 'pgo-current-strength-research-20260908':
+        raise ValueError('Unexpected current-strength study identity')
+    loaded = {}
+    for name in ('metrics.json', 'run-receipt.json'):
+        raw = (directory / name).read_bytes()
+        entry = manifest.get('files', {}).get(name, {})
+        if len(raw) != entry.get('bytes') or _sha256(raw) != entry.get('sha256'):
+            raise ValueError(f'Current-strength bytes/hash mismatch: {name}')
+        loaded[name] = json.loads(raw)
+    receipt, metrics = loaded['run-receipt.json'], loaded['metrics.json']
+    if (receipt.get('status') != 'EXPLORATORY_RETROSPECTIVE_RESEARCH'
+            or receipt.get('promotion_status') != 'HOLD'
+            or receipt.get('leakage_verdict') != 'REVIEW REQUIRED'
+            or receipt.get('raw_final_fit_reproduction', {}).get('passed') is not True):
+        raise ValueError('Current-strength study status requires review')
+    for arm in STRENGTH_STUDY_ARMS:
+        row = metrics['metrics'][arm]['overall']
+        for name in ('mae', 'rmse'):
+            if pgo_comparison._finite(row[name], f'{arm} {name}') < 0:
+                raise ValueError('Current-strength error metric must be nonnegative')
+        if row['count'] != 2127 or not 0 <= row['winner']['accuracy'] <= 1:
+            raise ValueError('Current-strength evaluation coverage differs')
+    _utc(receipt['completed_at'])
+    return {'metrics': metrics['metrics'], 'completed_at': receipt['completed_at']}
+
+
+def _strength_study_summary(study):
+    if study is None:
+        return ''
+    labels = ('Raw control', 'Recorded starter', 'Starter + QB recency', 'Starter + recency + skill efficiency')
+    rows = []
+    for arm, label in zip(STRENGTH_STUDY_ARMS, labels):
+        metric = study['metrics'][arm]['overall']
+        winner = metric['winner']
+        rows.append(f'<tr><th scope="row">{label}</th><td>{metric["mae"]:.4f}</td>'
+                    f'<td>{winner["accuracy"]:.2%} ({winner["correct"]}/{winner["denominator"]})</td></tr>')
+    ablation_mae = study['metrics']['without_roster_continuity']['overall']['mae']
+    return f'''<h3>Current-strength study — separate retrospective experiment</h3>
+<p><strong>All four arms remain HOLD.</strong> On 2,127 matched 2018–2025 games, the three starter-based candidates meet the screen for further prospective study against raw. That is not model promotion. Winner accuracy excludes eight actual ties; these arms have no zero-margin abstentions.</p>
+<div class="table-shell"><table class="study-table"><thead><tr><th>Study arm</th><th>Margin MAE</th><th>Winner accuracy</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
+<p>The starter change lowers MAE versus raw; adding recency and then skill efficiency does not lower MAE further. Historical selections use recorded actual starters, not verified pregame/T-60 expectations. Seasons were already inspected and historical publication vintage remains REVIEW REQUIRED. Offensive-line and defensive player quality remain unavailable; the added skill features are efficiency proxies.</p>
+<p>Refitting without roster-continuity inputs reached margin MAE {ablation_mae:.4f}: an exploratory simplification to test prospectively, not an adopted model change.</p>
+<p><a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_current_strength/availability-20260908/scenario-report.md">Separate availability scenario</a>, captured September 8 at 02:24 UTC: 11 formal player-report rows for New England and Seattle; the other 30 teams remain unknown. This later capture does not change the frozen September baseline.</p>
+<p>This study is separate from the six-variant opponent-adjustment experiment above; those sensitivity spans do not include these four arms. Completed {html.escape(study['completed_at'])}. <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_current_strength/README.md">Study method and findings</a> &middot; <a href="https://github.com/walshja9/Postgame_Outlet/tree/main/research/pgo_current_strength/run-20260908">Verified results and receipts</a>.</p>'''
+
+
+def _model_sensitivity(sensitivity, strength_study=None):
+    if sensitivity is None:
+        return ""
+    rows = "".join(
+        f'<tr class="sensitivity-team"><th scope="row">{html.escape(row["team"])}</th>'
+        f'<td>{row["mccabe_rank"]}</td><td>{row["pgo_rank"]}</td><td>{row["rank_gap"]:+d}</td>'
+        f'<td>{row["rank_span"][0]}–{row["rank_span"][1]}</td>'
+        f'<td>{row["rating_span"][0]:+.3f} to {row["rating_span"][1]:+.3f}</td></tr>'
+        for row in sensitivity["teams"])
+    captures = ", ".join(sensitivity["source_captures"]) or "Unavailable"
+    return f'''<details class="lab-detail" id="model-sensitivity"><summary>Rank gaps, source freshness, and model sensitivity</summary>
+<p><strong>EXPERIMENTAL — HOLD. Calibrated uncertainty: unavailable.</strong> The ranges below show how six specified model variants change each team's output. This is model sensitivity, not a confidence or prediction interval; it does not measure the chance that a rating or game result falls inside the range.</p>
+<p>McCabe's human ranks are compared with the September 7 preseason PGO baseline here. The main board retains its July PGO edition. Rank gap = PGO rank minus McCabe rank: positive means PGO ranks the team lower. No point-price gap is calculated.</p>
+<p>Source freshness: McCabe source revision {html.escape(sensitivity['mccabe_as_of'])}; September baseline generated {html.escape(sensitivity['snapshot_generated_at'])}; depth snapshot {html.escape(sensitivity['depth_as_of'])}. Roster/source captures: {html.escape(captures)}. Performance history ends with the 2025 regular season; these are not current injury updates.</p>
+<div class="table-shell"><table><thead><tr><th>Team</th><th>McCabe rank</th><th>September PGO rank</th><th>Rank gap</th><th>Sensitivity: rank span</th><th>Sensitivity: model-output span</th></tr></thead><tbody>{rows}</tbody></table></div>
+<p>The six variants cross raw, opponent-adjusted team EPA, and opponent-adjusted team plus QB EPA with either the unchanged earlier results-based PGO input or 50% offseason retention of that input. Ranges are descriptive, centered model-scale outputs. Both opponent-adjustment arms remain HOLD; this retrospective study does not replace issued forecasts or validate the September inference policy.</p>
+<p>Historical publication vintage: REVIEW REQUIRED. Final/backfilled historical releases lack complete row-publication receipts; all evaluation seasons were previously inspected. Research completed {html.escape(sensitivity['completed_at'])}.</p>
+<p><a href="https://github.com/walshja9/Postgame_Outlet/tree/main/research/pgo_opponent_adjustment/run-20260907">Research ratings, method, and receipts</a>. Verified research manifest SHA-256: <code>{html.escape(sensitivity['manifest_sha256'])}</code>.</p>{_strength_study_summary(strength_study)}</details>'''
+
+
+def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, strength_study=None,
                snapshot_results=(), snapshot_provenance=(), weekly=None,
                weekly_results=(), weekly_provenance=()):
     """Render a standalone, escaped, no-fetch Forecast Lab page."""
@@ -815,6 +958,7 @@ def render_lab(lock, results, provenance, *, snapshot=None,
         archive_open = '<details class="original-archive"><summary>Original July/August archive &middot; Frozen 25% stability blend</summary>'
         archive_heading = '<section><h2>Original frozen forecast record</h2><p>This separate 272-game archive and its HOLD gate remain unchanged.</p></section>'
         archive_close = "</details>"
+    lead += _model_sensitivity(sensitivity, strength_study)
     result_by_id = {row["game_id"]: row for row in results}
     metrics = interim_metrics(lock, results)
     weeks = []
@@ -867,6 +1011,7 @@ def render_lab(lock, results, provenance, *, snapshot=None,
 .lab-wrap{{max-width:1180px;margin:0 auto;padding:24px 18px 60px}}.lab-wrap a{{color:var(--accent)}}.lab-hero{{max-width:none;padding:26px;border-radius:14px;color:#fff;text-align:left}}.lab-hero a{{color:var(--highlight)}}.lab-hero a:focus-visible{{outline-color:var(--highlight)}}.lab-hero .status{{border-color:var(--highlight);margin-bottom:22px}}
 .status{{display:inline-block;padding:6px 10px;border:1px solid var(--orange);border-radius:999px;font-weight:800}}.metric-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}}.metric{{padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}}.metric h3{{margin-top:0}}.forecast-week,.lab-detail,.original-archive,.preseason-archive{{margin:12px 0;border:1px solid var(--border);border-radius:10px;padding:12px}}.forecast-week summary,.lab-detail summary,.original-archive>summary,.preseason-archive>summary{{cursor:pointer;font-weight:800}}.forecast-week summary span{{color:var(--mut);font-weight:500}}table{{width:100%;border-collapse:collapse}}th,td{{padding:9px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}}th:first-child{{text-align:left}}.notice{{padding:14px;border-left:4px solid var(--orange);background:var(--panel)}}code{{overflow-wrap:anywhere}}.weekly-status{{font-weight:800}}
 .rating-explanation table{{table-layout:fixed}}.rating-explanation th{{white-space:normal;user-select:text}}.rating-explanation tbody th{{background:transparent;color:inherit;font-size:inherit;letter-spacing:normal;text-transform:none}}.rating-explanation thead th:last-child{{width:110px}}.rating-summary tr:last-child{{font-weight:800}}
+.study-table{{table-layout:fixed}}.study-table th,.study-table td{{white-space:normal;overflow-wrap:anywhere}}.study-table th:first-child{{width:42%}}
 </style></head><body><main class="lab-wrap">
 {lead}{archive_open}{archive_heading}
 <section><h2>Record so far</h2>{_metric_cards(metrics)}
@@ -935,10 +1080,12 @@ def main(argv=None):
             args.output,
             (args.lock, args.predictions, args.attestation, args.record_results,
              args.record_snapshot_results, args.record_weekly_results),
-            (ARCHIVE_DIR, args.captures, args.snapshot, args.weekly),
+            (ARCHIVE_DIR, args.captures, args.snapshot, args.weekly, SENSITIVITY_DIR, STRENGTH_STUDY_DIR),
         )
         lock = load_archive(args.lock, args.predictions, args.attestation)
         snapshot = _load_snapshot(args.snapshot)
+        sensitivity = load_model_sensitivity(SENSITIVITY_DIR, snapshot) if snapshot is not None else None
+        strength_study = load_strength_study(STRENGTH_STUDY_DIR) if sensitivity is not None else None
         weekly = pgo_forecast_weekly.load_weekly(args.weekly)
         weekly_lock = {"games": weekly["games"]}
         if args.record_results or args.record_snapshot_results or args.record_weekly_results:
@@ -972,7 +1119,7 @@ def main(argv=None):
             )
         weekly_results, weekly_provenance = load_results(args.weekly / "results", weekly_lock)
         atomic_write_text(args.output, render_lab(
-            lock, results, provenance, snapshot=snapshot,
+            lock, results, provenance, snapshot=snapshot, sensitivity=sensitivity, strength_study=strength_study,
             snapshot_results=snapshot_results,
             snapshot_provenance=snapshot_provenance,
             weekly=weekly if snapshot is not None else None,

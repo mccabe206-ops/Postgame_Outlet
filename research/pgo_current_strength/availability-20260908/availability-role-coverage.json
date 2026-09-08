@@ -1,0 +1,225 @@
+{
+  "overlay_receipt": {
+    "coverage": {
+      "overlay_player_keys": [
+        {
+          "gsis_id": "00-0036981",
+          "team": "NE"
+        },
+        {
+          "gsis_id": "00-0037413",
+          "team": "NE"
+        },
+        {
+          "gsis_id": "00-0040734",
+          "team": "NE"
+        },
+        {
+          "gsis_id": "00-0036363",
+          "team": "SEA"
+        },
+        {
+          "gsis_id": "00-0038765",
+          "team": "SEA"
+        },
+        {
+          "gsis_id": "00-0038797",
+          "team": "SEA"
+        },
+        {
+          "gsis_id": "00-0039020",
+          "team": "SEA"
+        },
+        {
+          "gsis_id": "00-0039793",
+          "team": "SEA"
+        },
+        {
+          "gsis_id": "00-0040648",
+          "team": "SEA"
+        },
+        {
+          "gsis_id": "00-0040733",
+          "team": "SEA"
+        },
+        {
+          "gsis_id": "00-0040873",
+          "team": "SEA"
+        }
+      ],
+      "passed": true,
+      "path": "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\output\\pgo-current-strength-20260908\\availability-coverage.json",
+      "player_row_count": 11,
+      "raw_source_sha256": "7bd4a23d22e90898f4f30d5614f8127c69dc134174e61fedc9de5941760096bc",
+      "sha256": "7c089db2cf056773d006074b2e9c916939715e69d1c271d07ca9d70156513238",
+      "source": "NFL.com official Week 1 injury report",
+      "source_as_of": "2026-09-08T02:24:19.275711+00:00",
+      "team_row_counts": {
+        "ARI": 0,
+        "ATL": 0,
+        "BAL": 0,
+        "BUF": 0,
+        "CAR": 0,
+        "CHI": 0,
+        "CIN": 0,
+        "CLE": 0,
+        "DAL": 0,
+        "DEN": 0,
+        "DET": 0,
+        "GB": 0,
+        "HOU": 0,
+        "IND": 0,
+        "JAX": 0,
+        "KC": 0,
+        "LAC": 0,
+        "LAR": 0,
+        "LV": 0,
+        "MIA": 0,
+        "MIN": 0,
+        "NE": 3,
+        "NO": 0,
+        "NYG": 0,
+        "NYJ": 0,
+        "PHI": 0,
+        "PIT": 0,
+        "SEA": 8,
+        "SF": 0,
+        "TB": 0,
+        "TEN": 0,
+        "WAS": 0
+      },
+      "teams_processed": [
+        "ARI",
+        "ATL",
+        "BAL",
+        "BUF",
+        "CAR",
+        "CHI",
+        "CIN",
+        "CLE",
+        "DAL",
+        "DEN",
+        "DET",
+        "GB",
+        "HOU",
+        "IND",
+        "JAX",
+        "KC",
+        "LAC",
+        "LAR",
+        "LV",
+        "MIA",
+        "MIN",
+        "NE",
+        "NO",
+        "NYG",
+        "NYJ",
+        "PHI",
+        "PIT",
+        "SEA",
+        "SF",
+        "TB",
+        "TEN",
+        "WAS"
+      ]
+    },
+    "path": "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\output\\pgo-current-strength-20260908\\availability.csv",
+    "role_scenario": "base",
+    "row_count": 11,
+    "sha256": "7b686e52c287c9b35d7d70a2a4e6ae6b531d14c5c737c33fb71113da06b1d8fb",
+    "source_as_of": "2026-09-08T02:24:19.275711+00:00"
+  },
+  "players": [
+    {
+      "availability_probability": 1.0,
+      "defense_snap_share": 0.7489010989010989,
+      "gsis_id": "00-0036981",
+      "offense_snap_share": 0.0,
+      "position": "DL",
+      "team": "NE"
+    },
+    {
+      "availability_probability": 0.7,
+      "defense_snap_share": 0.0,
+      "gsis_id": "00-0037413",
+      "offense_snap_share": 0.5405405405405406,
+      "position": "OL",
+      "team": "NE"
+    },
+    {
+      "availability_probability": 0.7,
+      "defense_snap_share": 0.0,
+      "gsis_id": "00-0040734",
+      "offense_snap_share": 0.44377444589309,
+      "position": "RB",
+      "team": "NE"
+    },
+    {
+      "availability_probability": 0.9,
+      "defense_snap_share": 0.0,
+      "gsis_id": "00-0036363",
+      "offense_snap_share": 0.9927536231884058,
+      "position": "OL",
+      "team": "SEA"
+    },
+    {
+      "availability_probability": 0.7,
+      "defense_snap_share": 0.6173092698933552,
+      "gsis_id": "00-0038765",
+      "offense_snap_share": 0.0,
+      "position": "DB",
+      "team": "SEA"
+    },
+    {
+      "availability_probability": 1.0,
+      "defense_snap_share": 0.0,
+      "gsis_id": "00-0038797",
+      "offense_snap_share": 0.4100177304964539,
+      "position": "RB",
+      "team": "SEA"
+    },
+    {
+      "availability_probability": 1.0,
+      "defense_snap_share": 0.0,
+      "gsis_id": "00-0039020",
+      "offense_snap_share": 1.0,
+      "position": "OL",
+      "team": "SEA"
+    },
+    {
+      "availability_probability": 1.0,
+      "defense_snap_share": 0.0,
+      "gsis_id": "00-0039793",
+      "offense_snap_share": 0.8106060606060606,
+      "position": "TE",
+      "team": "SEA"
+    },
+    {
+      "availability_probability": 0.9,
+      "defense_snap_share": 0.0,
+      "gsis_id": "00-0040648",
+      "offense_snap_share": 0.0,
+      "position": "WR",
+      "team": "SEA"
+    },
+    {
+      "availability_probability": 0.9,
+      "defense_snap_share": 0.9528301886792453,
+      "gsis_id": "00-0040733",
+      "offense_snap_share": 0.0,
+      "position": "DB",
+      "team": "SEA"
+    },
+    {
+      "availability_probability": 1.0,
+      "defense_snap_share": null,
+      "gsis_id": "00-0040873",
+      "offense_snap_share": null,
+      "position": "DB",
+      "team": "SEA"
+    }
+  ],
+  "scenario": "separate current availability candidate",
+  "schema_version": 1,
+  "snapshot_edition": "pgo-active-roster-2026-09-07"
+}

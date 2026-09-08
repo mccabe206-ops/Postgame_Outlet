@@ -11,3 +11,8 @@ docs/evidence/forecast-lab-2026/weekly/** -text
 research/pgo_opponent_adjustment/** -text
 pgo_opponent_*.py text eol=lf
 tests/test_pgo_opponent_*.py text eol=lf
+research/pgo_current_strength/** -text
+pgo_current_strength.py text eol=lf
+pgo_roster_strength.py text eol=lf
+pgo_strength_evaluation.py text eol=lf
+tests/test_pgo_*strength*.py text eol=lf

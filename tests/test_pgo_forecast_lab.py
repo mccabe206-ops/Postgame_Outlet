@@ -25,6 +25,139 @@ ATTESTATION = ROOT / "research/pgo_stability_blend/prospective_attestation.json"
 
 
 class ForecastLabTests(unittest.TestCase):
+    def test_current_strength_summary_uses_verified_results_and_stays_hold(self):
+        study = pgo_forecast_lab.load_strength_study(pgo_forecast_lab.STRENGTH_STUDY_DIR)
+        sensitivity = {'teams': [], 'completed_at': 'old run', 'mccabe_as_of': 'McCabe',
+            'snapshot_generated_at': 'September', 'depth_as_of': 'depth',
+            'source_captures': [], 'manifest_sha256': 'old manifest'}
+        panel = pgo_forecast_lab._model_sensitivity(sensitivity, study)
+        for expected in ('10.1937', '10.1193', '10.1198', '10.1318', '1377/2119',
+                         'Current-strength study', 'All four arms remain HOLD',
+                         'recorded actual starters', 'not verified pregame/T-60',
+                         'Offensive-line and defensive player quality remain unavailable'):
+            self.assertIn(expected, panel)
+        self.assertEqual(panel.count('id="model-sensitivity"'), 1)
+        self.assertIn('six-variant opponent-adjustment experiment above', panel)
+        self.assertIn('availability-20260908/scenario-report.md', panel)
+        self.assertIn('11 formal player-report rows', panel)
+        self.assertIn('other 30 teams remain unknown', panel)
+        self.assertIn('<table class="study-table">', panel)
+        page = pgo_forecast_lab.render_lab(self.synthetic_lock(), [], [])
+        self.assertIn('.study-table{table-layout:fixed}', page)
+        self.assertIn('.study-table th,.study-table td{white-space:normal;overflow-wrap:anywhere}', page)
+        self.assertIn('.study-table th:first-child{width:42%}', page)
+
+    def test_current_strength_summary_fails_closed_on_changed_receipts(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for name in ('manifest.json', 'metrics.json', 'run-receipt.json'):
+                (root / name).write_bytes((pgo_forecast_lab.STRENGTH_STUDY_DIR / name).read_bytes())
+            pgo_forecast_lab.load_strength_study(root)
+            (root / 'metrics.json').write_bytes(b'{}')
+            with self.assertRaisesRegex(ValueError, 'hash|bytes'):
+                pgo_forecast_lab.load_strength_study(root)
+            (root / 'manifest.json').unlink()
+            with self.assertRaises(OSError):
+                pgo_forecast_lab.load_strength_study(root)
+        with patch.object(pgo_forecast_lab, 'STRENGTH_STUDY_MANIFEST_SHA256', '0' * 64):
+            with self.assertRaisesRegex(ValueError, 'manifest hash'):
+                pgo_forecast_lab.load_strength_study(pgo_forecast_lab.STRENGTH_STUDY_DIR)
+
+    def sensitivity_fixture(self, root, mutation=None):
+        snapshot = self.synthetic_snapshot()
+        rows = []
+        for team in snapshot['teams']:
+            row = {'team': team['team']}
+            for arm in ('raw', 'team_epa', 'team_qb_epa'):
+                for carry in ('unchanged', '0.5'):
+                    key = f'{arm}__offseason_{carry}'
+                    row[key + '_rank'] = team['rank'] if carry == 'unchanged' else 33 - team['rank']
+                    row[key + '_rating'] = team['rating'] if carry == 'unchanged' else team['rating'] - 2
+            rows.append(row)
+        if mutation:
+            mutation(rows)
+        raw = io.StringIO(newline='')
+        writer = csv.DictWriter(raw, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+        files = {
+            'ratings.csv': raw.getvalue().encode(),
+            'run-receipt.json': json.dumps({'status': 'EXPLORATORY_RETROSPECTIVE_RESEARCH',
+                'completed_at': '2026-09-08T01:39:57Z'}).encode(),
+            'metrics.json': json.dumps({'leakage_verdict': 'REVIEW REQUIRED', 'screening': {
+                arm: {'merits_further_prospective_study': False}
+                for arm in ('team_epa', 'team_qb_epa')}}).encode(),
+        }
+        manifest = {'identity': 'pgo-opponent-epa-retrospective-20260907', 'files': {}}
+        for name, value in files.items():
+            (root / name).write_bytes(value)
+            manifest['files'][name] = {'sha256': hashlib.sha256(value).hexdigest(), 'bytes': len(value)}
+        (root / 'manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
+        return snapshot
+
+    def test_model_sensitivity_has_signed_rank_gap_and_no_calibrated_interval(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            snapshot = self.sensitivity_fixture(root)
+            with patch('pgo_forecast_lab.pgo_comparison.mccabe_source_timestamp', return_value='2026-09-07T12:00:00Z'):
+                sensitivity = pgo_forecast_lab.load_model_sensitivity(root, snapshot)
+            page = pgo_forecast_lab.render_lab(self.synthetic_lock(), [], [],
+                snapshot=snapshot, sensitivity=sensitivity)
+        self.assertIn('<details class="lab-detail" id="model-sensitivity">', page)
+        self.assertIn('Calibrated uncertainty: unavailable', page)
+        self.assertIn('not a confidence or prediction interval', page)
+        self.assertIn('Historical publication vintage: REVIEW REQUIRED', page)
+        self.assertEqual(page.count('class="sensitivity-team"'), 32)
+        first = sensitivity['teams'][0]
+        self.assertEqual(first['rank_gap'], first['pgo_rank'] - first['mccabe_rank'])
+        self.assertEqual(first['rating_span'], [7.0, 9.0])
+        self.assertEqual(first['rank_span'], [1, 32])
+        self.assertIn('2026-09-08T01:39:57Z', page)
+        self.assertEqual(page, pgo_forecast_lab.render_lab(self.synthetic_lock(), [], [],
+            snapshot=snapshot, sensitivity=sensitivity))
+        sensitivity['depth_as_of'] = '<script>alert(1)</script>'
+        escaped = pgo_forecast_lab._model_sensitivity(sensitivity)
+        self.assertIn('&lt;script&gt;alert(1)&lt;/script&gt;', escaped)
+        self.assertNotIn('<script>', escaped)
+
+    def test_model_sensitivity_rejects_bad_rows_hashes_and_baseline_drift(self):
+        changes = (
+            lambda rows: rows.pop(),
+            lambda rows: rows.__setitem__(1, dict(rows[0])),
+            lambda rows: rows[0].__setitem__('team_epa__offseason_0.5_rating', 'nan'),
+            lambda rows: rows[0].__setitem__('team_qb_epa__offseason_unchanged_rank', 2),
+            lambda rows: rows[0].__setitem__('raw__offseason_unchanged_rating', 999),
+        )
+        for change in changes:
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                snapshot = self.sensitivity_fixture(root, change)
+                with self.assertRaises(ValueError):
+                    pgo_forecast_lab.load_model_sensitivity(root, snapshot)
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            snapshot = self.sensitivity_fixture(root)
+            (root / 'ratings.csv').write_bytes(b'corrupt')
+            with self.assertRaisesRegex(ValueError, 'hash|bytes'):
+                pgo_forecast_lab.load_model_sensitivity(root, snapshot)
+            (root / 'manifest.json').unlink()
+            with self.assertRaises(OSError):
+                pgo_forecast_lab.load_model_sensitivity(root, snapshot)
+
+    def test_real_sensitivity_verifies_pinned_research_and_preserves_snapshot(self):
+        path = ARCHIVE / 'september-07/snapshot.json'
+        raw = path.read_bytes()
+        snapshot = json.loads(raw)
+        before = copy.deepcopy(snapshot)
+        sensitivity = pgo_forecast_lab.load_model_sensitivity(pgo_forecast_lab.SENSITIVITY_DIR, snapshot)
+        self.assertEqual(len(sensitivity['teams']), 32)
+        self.assertEqual(sensitivity['manifest_sha256'], pgo_forecast_lab.SENSITIVITY_MANIFEST_SHA256)
+        self.assertEqual(snapshot, before)
+        self.assertEqual(path.read_bytes(), raw)
+        with patch.object(pgo_forecast_lab, 'SENSITIVITY_MANIFEST_SHA256', '0' * 64):
+            with self.assertRaisesRegex(ValueError, 'manifest hash'):
+                pgo_forecast_lab.load_model_sensitivity(pgo_forecast_lab.SENSITIVITY_DIR, snapshot)
+
     def synthetic_lock(self):
         return {
             "as_of": "2026-07-21T12:00:00-04:00",
@@ -600,7 +733,8 @@ class ForecastLabTests(unittest.TestCase):
                 snapshot_results=[], snapshot_provenance=[],
             )
 
-    def test_cli_loads_a_present_snapshot_and_renders_it_as_primary(self):
+    @patch('pgo_forecast_lab.load_model_sensitivity', return_value=None)
+    def test_cli_loads_a_present_snapshot_and_renders_it_as_primary(self, _sensitivity):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             snapshot_dir = root / "snapshot"
@@ -664,7 +798,8 @@ class ForecastLabTests(unittest.TestCase):
                     pgo_forecast_lab._load_snapshot(default)
                 load.assert_not_called()
 
-    def test_cli_records_results_against_the_verified_snapshot_series(self):
+    @patch('pgo_forecast_lab.load_model_sensitivity', return_value=None)
+    def test_cli_records_results_against_the_verified_snapshot_series(self, _sensitivity):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             snapshot_dir = root / "snapshot"
@@ -736,7 +871,8 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn('data-snapshot-game-id="s1"', page)
         self.assertIn("Original July/August archive", page)
 
-    def test_weekly_results_use_their_own_verified_forecast_series(self):
+    @patch('pgo_forecast_lab.load_model_sensitivity', return_value=None)
+    def test_weekly_results_use_their_own_verified_forecast_series(self, _sensitivity):
         snapshot = self.synthetic_snapshot()
         weekly = {"games": [{**snapshot["games"][0],
             "lock_at": "2026-09-09T23:20:00Z",

@@ -72,6 +72,9 @@ class RatingExplanationTests(unittest.TestCase):
 
     def test_long_explanations_are_collapsed_and_metadata_wrapper_is_idempotent(self):
         result = pgo_comparison.add_rating_explanations(self.page)
+        self.assertIn('forecast-lab.html#model-sensitivity', result)
+        self.assertIn('Calibrated uncertainty: unavailable', result)
+        self.assertIn('Source freshness', result)
         panel = pgo_comparison.extract_comparison_panel(result)
         self.assertEqual(panel.count('<details class="pgo-rank-disclosure">'), 1)
         self.assertIn('<summary>Where PGO and McCabe agree and disagree</summary>', panel)
