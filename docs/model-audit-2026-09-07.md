@@ -1,5 +1,20 @@
 # Why are New England and Jacksonville so high?
 
+**September 8 update:** the original arithmetic
+audit below is preserved. The [new input and valuation audit](../research/pgo_input_audit/README.md)
+found a historical/current roster-eligibility mismatch, preseason transition
+effects in roster/coaching inputs, QB shrinkage weights that use passing
+volume for rushing reliability, and a nonzero neutral-field regression offset
+even for identical teams. The earlier statement that these relationships
+"deserve testing" now has follow-up evidence: roster-continuity removal improved
+the prior research candidate, and a separately declared seven-arm experiment
+has now completed. None of its six new candidates passes the improvement screen;
+NE remains first in five constructions, including versions without the transition
+fields. The neutral offset affects game margins, not centered team ranks.
+The original model's HOLD status and
+issued forecasts remain unchanged. Read the dated update before interpreting
+the saved contributions below as a defense of NE's exact first-place position.
+
 PGO's preserved July 21, 2026 snapshot ranks New England first and Jacksonville fourth. The separate September 7 active-roster snapshot ranks them first (+7.219) and fifth (+5.392). **Both remain experimental; the new snapshot is HOLD.**
 
 McCabe's ratings are human-set neutral-field point estimates: QB + non-QB offense + defense. PGO is independently fitted to game margins, then centered across 32 teams. Its intended point interpretation is still experimental; subtracting its output from McCabe's number is not an established point-price disagreement.

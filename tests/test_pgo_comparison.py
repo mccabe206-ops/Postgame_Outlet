@@ -86,6 +86,18 @@ class RatingExplanationTests(unittest.TestCase):
         self.assertNotIn('CSV', primer)
         self.assertEqual(pgo_comparison.add_rating_explanations(result), result)
 
+    def test_archived_team_takeaways_precede_values_and_link_issued_edition(self):
+        page = pgo_comparison.add_rating_explanations(self.page)
+        for team, performance, roster in [('NE', '+6.417', '+0.583'), ('JAX', '+6.018', '+0.263')]:
+            template = page.split(f'<template id="pgo-explanation-{team}">', 1)[1].split('</template>', 1)[0]
+            intro = template.split('<dl>', 1)[0]
+            self.assertIn('Archived July 21, 2026', intro)
+            self.assertIn(performance, intro)
+            self.assertIn(roster, intro)
+            self.assertIn(f'forecast-lab.html#rating-{team}', template)
+            self.assertIn('<details><summary>How these saved contributions are calculated</summary>', template)
+        self.assertIn('Unadopted research', page)
+
     def test_idempotent_preserves_numeric_cells_fantasy_and_refresh(self):
         result = pgo_comparison.add_rating_explanations(self.page)
         self.assertEqual(pgo_comparison.add_rating_explanations(result), result)

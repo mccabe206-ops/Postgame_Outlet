@@ -1,0 +1,115 @@
+{
+  "boundaries": [
+    {
+      "cutoff": "2018-09-07T00:20:00+00:00",
+      "later_week1_identity_teams": 30,
+      "latest_identity_hours_after_freeze": 98.0,
+      "season": 2018,
+      "teams": 32
+    },
+    {
+      "cutoff": "2019-09-06T00:20:00+00:00",
+      "later_week1_identity_teams": 30,
+      "latest_identity_hours_after_freeze": 98.0,
+      "season": 2019,
+      "teams": 32
+    },
+    {
+      "cutoff": "2020-09-11T00:20:00+00:00",
+      "later_week1_identity_teams": 30,
+      "latest_identity_hours_after_freeze": 97.83333333333333,
+      "season": 2020,
+      "teams": 32
+    },
+    {
+      "cutoff": "2021-09-10T00:20:00+00:00",
+      "later_week1_identity_teams": 30,
+      "latest_identity_hours_after_freeze": 95.91666666666667,
+      "season": 2021,
+      "teams": 32
+    },
+    {
+      "cutoff": "2022-09-09T00:20:00+00:00",
+      "later_week1_identity_teams": 30,
+      "latest_identity_hours_after_freeze": 95.91666666666667,
+      "season": 2022,
+      "teams": 32
+    },
+    {
+      "cutoff": "2023-09-08T00:20:00+00:00",
+      "later_week1_identity_teams": 30,
+      "latest_identity_hours_after_freeze": 95.91666666666667,
+      "season": 2023,
+      "teams": 32
+    },
+    {
+      "cutoff": "2024-09-06T00:20:00+00:00",
+      "later_week1_identity_teams": 30,
+      "latest_identity_hours_after_freeze": 95.91666666666667,
+      "season": 2024,
+      "teams": 32
+    },
+    {
+      "cutoff": "2025-09-05T00:20:00+00:00",
+      "later_week1_identity_teams": 30,
+      "latest_identity_hours_after_freeze": 95.91666666666667,
+      "season": 2025,
+      "teams": 32
+    }
+  ],
+  "construction_review": "Capture hook runs during first team view before evaluation_metadata/update; all32 views use common earliest kickoff; current/future season observations rejected before and after capture; saved dictionaries are copies. All later predictions reuse these fixed states.",
+  "finding": "Receipt/report/comments incorrectly call v0 history 2002-start. parse_games defaults to 1999; independent 1999 replay reproduces all 256 frozen team states and all 2127 rolling-v0 predictions. 2002 is TRAIN_START, not warm-up start. No numeric artifact repair needed.",
+  "limitations": [
+    "All256 team-season identities use retrospective actual Week1 QB, roster and coach information, not certified preseason or T-60 sources.",
+    "240/256 team-season first-game identities occur after the common freeze kickoff; individual delays are recorded above.",
+    "Full-strength Week1 roster/QB held fixed for every season game; later injuries, roster changes and QB substitutions are not simulated.",
+    "All2127 games retain eventual recorded venue; recency additionally retains recorded rest. Those schedule vintages are not verified preseason. v0 has no rest term.",
+    "Historical roster/source vintages and saved recency states were not independently reconstructed here. No clean-leakage, calibrated score, interval, playoff or promotion claim."
+  ],
+  "manifest_sha256": "b972ba9f8ecc05b6ab023046c8b3afad5f91d44df38c741a1190c9bf7c5f9c0f",
+  "matched_games": 2127,
+  "maximum_prediction_difference": {
+    "frozen_recency": 3.552713678800501e-15,
+    "frozen_v0": 0.0,
+    "rolling_recency": 0.0,
+    "rolling_v0": 0.0
+  },
+  "metric_interpretation": "Frozen-recency MAE10.9191 exceeds frozen-v0 10.7404; rolling-recency10.1198 does not validate a fixed-season forecast.",
+  "no_fit_performed": true,
+  "overall_metrics": {
+    "frozen_recency": {
+      "bias_home_minus_away": 0.23048586798565424,
+      "count": 2127,
+      "mae": 10.91910685376238,
+      "rmse": 14.03993506712785
+    },
+    "frozen_v0": {
+      "bias_home_minus_away": 0.8791577288129345,
+      "count": 2127,
+      "mae": 10.740423632477386,
+      "rmse": 13.823534704646606
+    },
+    "rolling_recency": {
+      "bias_home_minus_away": 0.3073792272452333,
+      "count": 2127,
+      "mae": 10.11977535825325,
+      "rmse": 13.069497347241652
+    },
+    "rolling_v0": {
+      "bias_home_minus_away": 0.9729074060311309,
+      "count": 2127,
+      "mae": 10.266150234488956,
+      "rmse": 13.229771660093688
+    }
+  },
+  "scope": "Independently reconstructed every frozen-recency prediction from saved states and prior-fold fits; original rolling-recency values checked against immutable prior predictions, not rebuilt player histories. Freeze construction was source-reviewed and saved boundaries/identities independently checked.",
+  "starter_identity_status_counts": {
+    "matched": 256
+  },
+  "status": "PASS_WITH_DOCUMENTATION_FINDING_AND_RETROSPECTIVE_LIMITATIONS",
+  "v0_warmup_actual_first_season": 1999,
+  "v0_week1_matches": 128,
+  "verified_metric_values": 192,
+  "verified_source_files": 67,
+  "verifier_sha256": "c8757d6eedb905c8dc4877d8f0151db22abb098e7761444a08d9d29998506ea2"
+}

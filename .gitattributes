@@ -12,6 +12,8 @@ research/pgo_opponent_adjustment/** -text
 pgo_opponent_*.py text eol=lf
 tests/test_pgo_opponent_*.py text eol=lf
 research/pgo_current_strength/** -text
+research/pgo_input_audit/** -text whitespace=cr-at-eol
+tests/test_pgo_input_audit.py text eol=lf
 pgo_current_strength.py text eol=lf
 pgo_roster_strength.py text eol=lf
 pgo_strength_evaluation.py text eol=lf

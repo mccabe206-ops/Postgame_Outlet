@@ -1,0 +1,135 @@
+"""Evaluate the issued PF/PA total rule using prior-season information only."""
+
+import argparse
+from collections import defaultdict
+import csv
+from datetime import datetime, timezone
+import hashlib
+import io
+import json
+import math
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+import pgo_opponent_evaluation as base
+import pgo_sources
+
+CHARTER = Path(__file__).with_name('charter.md')
+CHARTER_SHA256 = '4be3031146e6f7f58347a7139a8c249b5bbb40a69876b86547ddaca4b45f52fd'
+
+
+def predictions(games, seasons=range(2018, 2026)):
+    """No fitted parameters; each forecast reads only the preceding season."""
+    records = defaultdict(list)
+    seen = set()
+    for row in games:
+        if row['game_type'] != 'REG' or not row['home_score'] or not row['away_score']:
+            continue
+        identity = row['game_id']
+        if identity in seen:
+            raise ValueError('Duplicate completed game')
+        seen.add(identity)
+        home, away = (pgo_sources.normalize_team(row[k]) for k in ('home_team', 'away_team'))
+        hs, aws = (float(row[k]) for k in ('home_score', 'away_score'))
+        if home == away or not all(math.isfinite(v) and v >= 0 for v in (hs, aws)):
+            raise ValueError('Invalid completed game')
+        records[int(row['season'])].append((row, home, away, hs, aws))
+    output = []
+    for season in seasons:
+        prior = records[season - 1]
+        if not prior:
+            raise ValueError('Prior-season scoring history missing')
+        points, allowed, counts = defaultdict(float), defaultdict(float), defaultdict(int)
+        for _, home, away, hs, aws in prior:
+            points[home] += hs
+            points[away] += aws
+            allowed[home] += aws
+            allowed[away] += hs
+            counts[home] += 1
+            counts[away] += 1
+        league = sum(hs + aws for _, _, _, hs, aws in prior) / len(prior)
+        for row, home, away, hs, aws in records[season]:
+            if home not in counts or away not in counts:
+                raise ValueError('Team has no prior-season scoring history')
+            total = sum((points[t] + allowed[t]) / counts[t] for t in (home, away)) / 2
+            output.append(dict(game_id=row['game_id'], season=season, week=int(row['week']),
+                               home=home, away=away, actual_total=hs + aws,
+                               pf_pa_total=total, league_total=league))
+    return sorted(output, key=lambda row: (row['season'], row['week'], row['game_id']))
+
+
+def metrics(rows, name):
+    if not rows:
+        raise ValueError('No total forecasts to evaluate')
+    errors = [row[name] - row['actual_total'] for row in rows]
+    n = len(errors)
+    return dict(count=n, mae=sum(map(abs, errors)) / n,
+                rmse=math.sqrt(sum(v * v for v in errors) / n), bias=sum(errors) / n)
+
+
+def run(output):
+    output = Path(output)
+    if output.exists():
+        raise ValueError('Output directory must be new')
+    charter_raw = CHARTER.read_bytes()
+    if hashlib.sha256(charter_raw).hexdigest() != CHARTER_SHA256:
+        raise ValueError('Charter hash differs')
+    paths = pgo_sources.load_locked_sources(base.SOURCE_LOCK_PATH, base.CACHE_DIR)
+    schedule = paths['schedule_results', None]
+    games = list(pgo_sources.open_csv(schedule))
+    rows = predictions(games)
+    with (ROOT / 'research/pgo_current_strength/run-20260908/matched-predictions.csv').open(newline='') as stream:
+        old = list(csv.DictReader(stream))
+    if {r['game_id'] for r in rows} != {r['game_id'] for r in old}:
+        raise ValueError('Total evaluation games differ from matched research population')
+    # Falsification: changing 2025 outcomes cannot change forecasts through 2025.
+    changed = [dict(row, home_score='99', away_score='0')
+               if row['season'] == '2025' else dict(row) for row in games]
+    altered = predictions(changed)
+    assert [(r['game_id'], r['pf_pa_total'], r['league_total']) for r in rows] == [
+        (r['game_id'], r['pf_pa_total'], r['league_total']) for r in altered]
+    try:
+        predictions([*games, next(row for row in games if row['game_type'] == 'REG' and row['home_score'])])
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('Duplicate game guard failed')
+    views = {'overall': rows, 'week_1': [r for r in rows if r['week'] == 1],
+             'weeks_1_4': [r for r in rows if r['week'] <= 4],
+             'weeks_5_18': [r for r in rows if r['week'] >= 5]}
+    views.update({str(s): [r for r in rows if r['season'] == s] for s in range(2018, 2026)})
+    summary = {label: {name: metrics(sample, name) for name in ('pf_pa_total', 'league_total')}
+               for label, sample in views.items()}
+    bootstrap = base.season_block_bootstrap(
+        [dict(r, actual_margin=r['actual_total']) for r in rows], 'pf_pa_total', 'league_total',
+        samples=10000, seed=20260908)
+    assert math.isclose(bootstrap['mean'], summary['overall']['league_total']['mae']
+                        - summary['overall']['pf_pa_total']['mae'], abs_tol=1e-10)
+    result = dict(status='EXPERIMENTAL / HOLD', target='game total points',
+                  generated_at=datetime.now(timezone.utc).isoformat(),
+                  charter_sha256=CHARTER_SHA256,
+                  code_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                  schedule_sha256=hashlib.sha256(schedule.read_bytes()).hexdigest(),
+                  metrics=summary, improvement_vs_league_total=bootstrap,
+                  checks=dict(identical_game_population=True, future_perturbation_passed=True,
+                              duplicate_rejected=True),
+                  limits=['Final/backfilled schedule source; no publication-vintage certification.',
+                          'Totals only; this does not validate margins, exact scores or season odds.'])
+    output.mkdir(parents=True, exist_ok=False)
+    stream = io.StringIO(newline='')
+    writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n')
+    writer.writeheader()
+    writer.writerows(rows)
+    (output / 'predictions.csv').write_bytes(stream.getvalue().encode())
+    (output / 'metrics.json').write_bytes((json.dumps(result, indent=2, allow_nan=False) + '\n').encode())
+    manifest = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.iterdir()}
+    (output / 'manifest.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode())
+    print(json.dumps({'overall': summary['overall'], 'improvement': bootstrap}))
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, required=True)
+    run(parser.parse_args().output)

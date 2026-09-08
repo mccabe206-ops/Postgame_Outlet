@@ -1,0 +1,15 @@
+{
+  "charter_sha256": "4be3031146e6f7f58347a7139a8c249b5bbb40a69876b86547ddaca4b45f52fd",
+  "code_sha256": {
+    "pgo_challenger.py": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+    "pgo_current_strength.py": "10372fa6afe5a81e1b2db7cb7c78d46726f24ca4c40c3daacde119bd214c3bbd",
+    "pgo_model.py": "174f165c3343a1a045707bb1c4731bbbcae0958fe07618dd0ddd7ae25ae56ac5",
+    "pgo_opponent_evaluation.py": "318072774cc25140c1f36aeae8f6f4edfa87091fc04964f1301a9f7ad773fe62",
+    "pgo_sources.py": "97bd522580eadc87719757a8c3d1adb20601fa75bbb9e315308dc15d28cd3fb8",
+    "research\\pgo_input_audit\\check_preseason.py": "9877f9da2a70396aeef05baf74037d92f804413d5f588b9f6205fe7e13ea07b0"
+  },
+  "identity": "pgo-season-frozen-strength-20260908",
+  "saved_run_manifest_sha256": "6682197b16fcc0974fef19e6c704ef238d4d2a30ba0db066e3e86a6bad35ee4a",
+  "started_at": "2026-09-08T03:57:35.973295+00:00",
+  "status": "INCOMPLETE_UNTIL_MANIFEST"
+}

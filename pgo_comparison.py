@@ -855,18 +855,19 @@ def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_
         raise ValueError("PGO explanations require dated McCabe metadata")
     label = "Experimental model — HOLD" if receipt["status"] == "HOLD" else "Validated model — PASS"
     meaning = ("PGO values are independent model outputs fitted to game margins and centered "
-               "across 32 teams. Their intended interpretation is neutral-field point strength "
-               "relative to a league-average team under this snapshot's full-strength assumptions, "
-               "but that point scale remains experimental, not an established game price. "
-               "Positive values mean stronger than average; negative values mean weaker. "
+               "across 32 teams under this snapshot's full-strength assumptions. Positive values "
+               "mean a higher model estimate than the league-average team; negative values mean lower. "
+               "These scores are not established neutral-field prices: the issued regression's "
+               "neutral game margin also includes an offset that cancels from centered ratings. "
                "This is not a Super Bowl probability.")
     limits = ("These are model contribution groups, not independent football grades. "
               "Both use a common league-average baseline; inputs can be correlated. "
               "The roster/coaching group is centered across all 32 teams, with CSV rounding "
-              "residual retained in performance. The frozen forecast fit differs from the "
-              "public rating fit, so it cannot supply a feature-level attribution receipt "
-              "for this table. The starting-QB/depth assumptions need review; group "
-              "contributions do not establish predictive quality.")
+              "residual retained in performance. The public fit has been reconstructed; "
+              "its feature-level audit is linked separately. July starting-QB/depth assumptions "
+              "used historical efficiency selection. The issued September edition uses active "
+              "expected starters; later research changes remain unadopted. Group contributions "
+              "do not establish predictive quality.")
     templates = []
     for row in rows:
         roster = row["roster_coaching_points"] - roster_mean
@@ -884,13 +885,20 @@ def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_
         templates.append(
             f'<template id="pgo-explanation-{row["team"]}">'
             f'<h2 id="drawerTitle">{html.escape(names[row["team"]])}</h2><p>{label}</p>'
-            f'<p>Saved snapshot: <time datetime="{as_of}">{as_of}</time>.</p>'
+            f'<p>Archived {html.escape(date)} snapshot: <time datetime="{as_of}">{as_of}</time>.</p>'
             f'<p>{html.escape(team_name)}: PGO #{pgo_rank}, McCabe #{mccabe_rank}. '
             'Rank comparison across the dated snapshots shown on the board.</p>'
-            f'<p>{html.escape(meaning)}</p><dl>{details}</dl>'
-            f'<p>{html.escape(limits)}</p><p>Availability and lineup values belong to this '
+            f'<p class="rating-takeaway">The saved performance group contributes {displayed_performance:+.3f}; '
+            f'roster/coaching contributes {roster:+.3f}. Together they explain the '
+            f'{row["full_strength_rating"]:+.3f} full-strength output on this archived edition. '
+            'These are fitted contributions, not separate football grades.</p>'
+            f'<p><a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#rating-{row["team"]}" '
+            'target="_blank" rel="noopener noreferrer">See the issued September 7 explanation</a>. '
+            'Unadopted research does not replace either saved edition.</p><dl>' + details + '</dl>'
+            '<details><summary>How these saved contributions are calculated</summary>'
+            f'<p>{html.escape(meaning)}</p><p>{html.escape(limits)}</p><p>Availability and lineup values belong to this '
             'snapshot, not a current injury report. A July zero adjustment does not '
-            'establish September health.</p></template>')
+            'establish September health.</p></details></template>')
     ranked = list(comparisons.values())
     highlights = []
     groups = (
@@ -908,7 +916,7 @@ def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_
     block = (f'{start}\n<p class="pgo-rating-meaning">McCabe&#x27;s human-set neutral-field '
              'point total is QB + non-QB offense + defense. PGO is independent, fitted to game '
              'margins; its point interpretation remains experimental. '
-             f'Source freshness — PGO snapshot: {html.escape(date)} (including lineup and availability). '
+             f'Source freshness — archived PGO snapshot: {html.escape(date)} (including lineup and availability). '
              f'McCabe snapshot: {mccabe_date.group(1)}. Select a team for its saved contributions.</p>\n'
              '<p><a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html" '
              'target="_blank" rel="noopener noreferrer">Forecast Lab: the frozen 2026 record</a></p>\n'

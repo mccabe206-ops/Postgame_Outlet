@@ -635,9 +635,33 @@ def _rating_explanations(snapshot):
                 or not math.isclose(math.fsum(contributions.values()), team["rating"],
                                     abs_tol=1e-8, rel_tol=0)):
             raise ValueError("Saved contributions must reconcile to the team rating")
-        rows = [contribution_row(label, math.fsum(contributions.get(name, 0.0) for name in members))
-                for label, members in groups]
+        group_values = [(label, math.fsum(contributions.get(name, 0.0) for name in members))
+                        for label, members in groups]
+        rows = [contribution_row(label, value) for label, value in group_values]
         rows.append(contribution_row("Total model rating", team["rating"]))
+        upward = sorted((item for item in group_values if item[1] > 1e-12), key=lambda item: -item[1])[:2]
+        downward = min(group_values, key=lambda item: item[1])
+        takeaway = ('Largest upward groups: ' + ', '.join(f'{name} ({value:+.3f})' for name, value in upward)
+                    + '.') if upward else 'No input group contributes positively relative to the league average.'
+        if downward[1] < -1e-12:
+            takeaway += f' Largest downward group: {downward[0]} ({downward[1]:+.3f}).'
+        qb_note = ''
+        if team['team'] in ('NE', 'JAX') and 'qb_epa_per_dropback' in contributions:
+            qb_note = (f'<p>{html.escape(team["qb_name"])} is the saved QB1; his QB passing term contributes '
+                       f'{contributions["qb_epa_per_dropback"]:+.3f} within the QB-history group.</p>')
+            if team['team'] == 'NE':
+                qb_note += ('<p><strong>Why first place is uncertain:</strong> recent results and passing drive NE high, '
+                            'but these inputs overlap. Its narrow lead also includes a counterintuitive roster-continuity '
+                            'benefit. The <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md">'
+                            'new input audit</a> tests roster eligibility, preseason transition effects, and QB valuations. '
+                            'NE ranks first through fourth across seven specified constructions and stays first after '
+                            'removing the transition fields; none of the six new candidates clears the improvement screen. '
+                            'This saved rank does not establish that New England is clearly the best team in football.</p>')
+            if (team['team'] == 'JAX' and team.get('old_selector_qb_name') == 'Trevor Lawrence'
+                    and team.get('qb_policy_effect') == 0):
+                qb_note += ('<p>The active-only roster already selects Lawrence under either selector, so the isolated '
+                            'starter-policy effect is zero. The July-to-September change also includes roster inputs '
+                            'and league centering.</p>')
         terms = []
         for name in names:
             label = labels.get(name.removesuffix("_missing"), name.replace("_", " "))
@@ -653,9 +677,11 @@ def _rating_explanations(snapshot):
         cards.append(
             f'<details class="lab-detail rating-explanation" id="rating-{html.escape(team["team"], quote=True)}">'
             f'<summary>#{team["rank"]} {html.escape(team["team"])} &middot; {team["rating"]:+.3f}</summary>'
-            f'<p>{"; ".join(gaps)}. Expected QB1: {html.escape(team["qb_name"])}.</p>'
+            f'<p class="rating-takeaway"><strong>Issued September 7 snapshot.</strong> {html.escape(takeaway)}</p>{qb_note}'
+            f'<p>{"; ".join(gaps)}.'
+            + ('' if qb_note else f' Expected QB1: {html.escape(team["qb_name"])}.') + '</p>'
             '<p>These are model contributions, not independent team grades. '
-            '<a href="#rating-explanations">How to read them</a>.</p>'
+            '<a href="#rating-glossary">How to read them</a>.</p>'
             '<table class="rating-summary"><thead><tr><th>Input group</th><th>Contribution</th></tr></thead>'
             f'<tbody>{"".join(rows)}</tbody></table>'
             f'<details class="lab-detail"><summary>All {len(names)} fitted terms</summary>'
@@ -666,11 +692,14 @@ def _rating_explanations(snapshot):
     return '''<details class="lab-detail" id="rating-explanations">
 <summary>Why teams rank here &middot; All 32 September ratings</summary>
 <p>Open a team to see what raises and lowers its saved September 7 output. Higher totals rank higher; the gaps show how close neighboring teams are.</p>
+<p><strong>Archived July comparison</strong>: the board preserves its July ratings. <strong>Issued September 7 snapshot</strong>: the explanations below describe that saved preseason edition. <strong>Unadopted research</strong>: later candidate studies remain separate and do not replace either edition.</p>
 <p><a href="#rating-NE">New England</a> &middot; <a href="#rating-JAX">Jacksonville</a> &middot; <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/model-audit-2026-09-07.md">Read the outlier audit</a></p>
+<details class="lab-detail" id="rating-glossary"><summary>How the contribution tables are calculated &middot; Glossary and limits</summary>
 <p>Every summary shows the same seven input groups in the same order, so you can compare teams row by row. All are centered against the 32-team average and sum to the rating before rounding. These are fitted adjustments, <strong>not independent football grades</strong>, player values, or calibrated point-spread prices.</p>
 <p>Team passing efficiency is shown separately from the other nine team-efficiency inputs. QB history combines eight QB inputs; roster composition combines returning offensive and defensive snap shares, incoming snap share, and rookie draft capital; coaching combines continuity and tenure. Other adjustments include availability, the QB lineup adjustment, venue, rest, and missing-data indicators. A zero here does not establish comprehensive injury coverage. Open the full breakdown to see every term.</p>
 <p>EPA means expected points added. Team efficiency uses games through 2025 with a four-game half-life; QB efficiency uses shrunk player history. The PGO v0 input carries the earlier results rating forward without a new offseason shrink, unlike the separate v0 game-forecast baseline.</p>
-<p><strong>Audit concern:</strong> some learned directions run against football intuition. Lower returning offensive snap share raises this model's output, and head-coach continuity lowers it. Correlated inputs and these fitted relationships need testing; the arithmetic does not establish that roster turnover or coaching changes help a team. Returning snap share measures historical snap weight among currently eligible players, not the percentage of last season's roster retained.</p>
+<p><strong>Audit finding:</strong> lower returning offensive snap share raises this saved model's output, and head-coach continuity lowers it. Later research improved when roster-continuity inputs were removed. The <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md">new input audit</a> also identified different historical/current roster eligibility and preseason transition effects. These findings weaken a football interpretation of those contributions. Returning snap share tracks historical snap weight and a player's last recorded team, not the percentage of last season's team snaps retained. Issued values remain archived; research corrections are separate.</p>
+</details>
 ''' + "".join(cards) + '''<p>Full precision and all inputs: <a href="evidence/forecast-lab-2026/september-07/snapshot.json">saved snapshot JSON</a>. Ratings remain EXPERIMENTAL / HOLD.</p></details>'''
 
 
@@ -702,12 +731,20 @@ def _weekly_section(weekly, snapshot, results, provenance):
 <h1>PGO Forecast Lab</h1><h2>Weekly game forecasts</h2>
 <p>Each matchup locks <strong>60 minutes before kickoff</strong>. Both teams' projected scores, the spread, and the total freeze together.</p>
 <p>Drafts can change until their own cutoff. The last saved revision before that deadline becomes the locked forecast; earlier games do not lock the rest of the week.</p>
-<p><a href="index.html">Back to McCabe Ratings</a> &middot; <a href="#rating-explanations">Why teams rank here</a> &middot; <a href="#preseason-baseline">Full-season preseason forecast</a></p></header>
+<p><a href="index.html">Back to McCabe Ratings</a> &middot; <a href="#rating-explanations">Why teams rank here</a> &middot; <a href="#preseason-baseline">Full-season preseason forecast</a> &middot; <a href="#forecast-process">Sources to results</a></p></header>
 <section><h2>Weekly predictions</h2>{sources}
 <p>The PGO spread shows the favorite with a minus sign. Scores are rounded to whole points; spreads and totals to one decimal. Evaluation uses unrounded values.</p>
+<p><strong>Score-method check:</strong> the projected-total rule missed combined scores by about 11 points on average in 2018&ndash;2025, with no convincing improvement over a simple league-average total. Exact scores remain experimental. <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md#game-totals-need-their-own-evidence">Read the separate totals test</a>.</p>
 {_forecast_weeks(games, results, weekly=True)}</section>
 <section><h2>Weekly forecast record</h2><p>{len(results)} of {len(games)} recorded weekly forecasts have finalized results. Interim tracking &mdash; not a validation result.</p>{_snapshot_metric_cards(metrics, "weekly")}</section>
-<details class="lab-detail"><summary>Weekly revision history and rules</summary><ul>{revisions or "<li>No revisions yet.</li>"}</ul>
+<details class="lab-detail" id="forecast-process"><summary>Sources to results &middot; Weekly revision history and rules</summary>
+<ol><li><strong>Review sources</strong>: verify roster, expected starters, injury coverage, and source dates. Missing formal reports remain unknown; refreshes require review.</li>
+<li><strong>Save a revision</strong>: record a dated forecast revision before the relevant game's deadline. Keep every earlier revision.</li>
+<li><strong>Lock each matchup</strong>: at T-60, freeze that game's scores, spread, and total together from its last eligible saved revision.</li>
+<li><strong>Grade every issued matchup</strong>: add verified final results, including losses and misses. Report the number graded and every outstanding game.</li>
+<li><strong>Compare benchmarks</strong>: evaluate the same games against the stated baselines. Interim results do not satisfy a full-season acceptance gate.</li>
+<li><strong>Test future versions</strong>: freeze a separate evaluation before future games. Research findings can propose a new version; they never rewrite issued predictions.</li></ol>
+<h3>Saved revisions</h3><ul>{revisions or "<li>No revisions yet.</li>"}</ul>
 <p>Revisions are saved separately and cannot be submitted at or after the cutoff. A saved timestamp records local registration; the repository history records publication. A schedule change requires review and cannot silently extend an existing deadline.</p>
 <p>Fresh weekly inputs require a separately reviewed source snapshot. Source refresh is not automated. Future weeks without a weekly edition remain available in the preseason baseline below.</p>
 <h3>Weekly results provenance</h3><ul>{result_sources}</ul></details>'''
@@ -758,6 +795,7 @@ def _snapshot_section(snapshot, results, provenance):
 <h1>PGO Forecast Lab</h1><h2>September 7 preseason snapshot</h2>
 <p><strong>{html.escape(str(method.get("name", "Active-roster preseason scenario")))}</strong>. Positive home margin means the home team is ahead; the PGO spread shows the favorite with a minus sign.</p>
 <p>ACT is an administrative roster status, not proof of health or game-day availability. Week 1 and the full schedule use the same September 7 state; later weeks are not weekly lineup updates.</p>
+<p><strong>Season-method check:</strong> a separate historical replay found that freezing preseason model strength all year performed worse than both weekly updates and a simpler frozen rating. That replay also uses retrospective Week 1 identities, so it cannot certify what was knowable before the season. <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md#freezing-strength-for-an-entire-season-performs-worse">Read the season test and its limits</a>.</p>
 <p><strong>{len(results)} of {len(games)} finalized results recorded.</strong> Interim tracking &mdash; not a validation result.</p>
 <p><a href="index.html">Back to McCabe Ratings</a></p></header>
 <section><h2>September snapshot record</h2>{_snapshot_metric_cards(metrics)}</section>
@@ -903,6 +941,7 @@ def _strength_study_summary(study):
     ablation_mae = study['metrics']['without_roster_continuity']['overall']['mae']
     return f'''<h3>Current-strength study — separate retrospective experiment</h3>
 <p><strong>All four arms remain HOLD.</strong> On 2,127 matched 2018–2025 games, the three starter-based candidates meet the screen for further prospective study against raw. That is not model promotion. Winner accuracy excludes eight actual ties; these arms have no zero-margin abstentions.</p>
+<p><strong>Later audit:</strong> these historical arms used a broader roster population than the active-only September forecast. Their fitted neutral-field margins also retain an offset for identical teams. The <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md">input and valuation audit</a> tests those issues separately; the earlier numerical screen does not establish current-model readiness.</p>
 <div class="table-shell"><table class="study-table"><thead><tr><th>Study arm</th><th>Margin MAE</th><th>Winner accuracy</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
 <p>The starter change lowers MAE versus raw; adding recency and then skill efficiency does not lower MAE further. Historical selections use recorded actual starters, not verified pregame/T-60 expectations. Seasons were already inspected and historical publication vintage remains REVIEW REQUIRED. Offensive-line and defensive player quality remain unavailable; the added skill features are efficiency proxies.</p>
 <p>Refitting without roster-continuity inputs reached margin MAE {ablation_mae:.4f}: an exploratory simplification to test prospectively, not an adopted model change.</p>
@@ -921,6 +960,8 @@ def _model_sensitivity(sensitivity, strength_study=None):
         for row in sensitivity["teams"])
     captures = ", ".join(sensitivity["source_captures"]) or "Unavailable"
     return f'''<details class="lab-detail" id="model-sensitivity"><summary>Rank gaps, source freshness, and model sensitivity</summary>
+<p><strong>Latest review:</strong> <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md">Input definitions, roster eligibility, neutral-field consistency, and separate weekly/season tests</a>. The earlier experiments below remain available as dated evidence.</p>
+<p>The completed input audit compares seven constructions on 2,127 matched games. NE ranks 1&ndash;4 and JAX 5&ndash;7 across those specific choices; these are sensitivity ranges, not confidence intervals. The symmetric arm fixes neutral-field reversal and has the lowest margin MAE (10.0982 versus 10.1198 for its reference), but none of the six new candidates passes the predeclared improvement screen. All remain HOLD.</p>
 <p><strong>EXPERIMENTAL — HOLD. Calibrated uncertainty: unavailable.</strong> The ranges below show how six specified model variants change each team's output. This is model sensitivity, not a confidence or prediction interval; it does not measure the chance that a rating or game result falls inside the range.</p>
 <p>McCabe's human ranks are compared with the September 7 preseason PGO baseline here. The main board retains its July PGO edition. Rank gap = PGO rank minus McCabe rank: positive means PGO ranks the team lower. No point-price gap is calculated.</p>
 <p>Source freshness: McCabe source revision {html.escape(sensitivity['mccabe_as_of'])}; September baseline generated {html.escape(sensitivity['snapshot_generated_at'])}; depth snapshot {html.escape(sensitivity['depth_as_of'])}. Roster/source captures: {html.escape(captures)}. Performance history ends with the 2025 regular season; these are not current injury updates.</p>

@@ -1,0 +1,30 @@
+{
+  "files": {
+    "metrics.json": {
+      "bytes": 8161,
+      "sha256": "d8c5c4bcf08f7faf005fa25bae7f75d57817f0f36c549c186d6a02424a4c0e95"
+    },
+    "predictions.csv": {
+      "bytes": 268280,
+      "sha256": "d2b37a571d36a0600971ff0cc4399bec4e7635c5077200849a3aa7001f405ca0"
+    },
+    "preseason-states.json": {
+      "bytes": 424093,
+      "sha256": "8041944aea44b7c8a1d83782087b0aa4924c88ea53bc105e1fd1b86c1d4e3c6e"
+    },
+    "receipt.json": {
+      "bytes": 22936,
+      "sha256": "acaf621edf116c3dab576bc19ff87c859f2bb05b9f789fdd81ebc2f5d0a54405"
+    },
+    "report.md": {
+      "bytes": 1041,
+      "sha256": "9281c0436272c5f906b13e352a6aacdfb386215a1317da82b984db1580e2f112"
+    },
+    "start.json": {
+      "bytes": 952,
+      "sha256": "9ed73bd08cd73e65cf8d4045e0143893ad96cb4c2a53c4ed077f918e818567ef"
+    }
+  },
+  "identity": "pgo-season-frozen-strength-20260908",
+  "schema_version": 1
+}

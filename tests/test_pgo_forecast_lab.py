@@ -638,6 +638,32 @@ class ForecastLabTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "contributions"):
             pgo_forecast_lab._rating_explanations(snapshot)
 
+    def test_team_takeaways_precede_tables_and_separate_editions(self):
+        snapshot = json.loads((ARCHIVE / 'september-07/snapshot.json').read_text(encoding='utf-8'))
+        before = copy.deepcopy(snapshot)
+        page = pgo_forecast_lab._rating_explanations(snapshot)
+        self.assertEqual(page.count('class="rating-takeaway"'), 32)
+        self.assertIn('<details class="lab-detail" id="rating-glossary">', page)
+        self.assertIn('Archived July comparison', page)
+        self.assertIn('Unadopted research', page)
+        for team, expected in {'NE': ('+3.864', '+2.084', 'Drake Maye', '+0.692'),
+                               'JAX': ('+4.134', '+1.128', 'Trevor Lawrence', '-0.406')}.items():
+            card = page.split(f'id="rating-{team}"', 1)[1].split('<table', 1)[0]
+            self.assertIn('Issued September 7 snapshot', card)
+            for text in expected:
+                self.assertIn(text, card)
+        self.assertIn('already selects Lawrence', page)
+        self.assertEqual(snapshot, before)
+
+    def test_weekly_process_covers_every_matchup_and_future_version_boundary(self):
+        weekly = {'games': [], 'revisions': []}
+        page = pgo_forecast_lab._weekly_section(weekly, self.synthetic_snapshot(), [], [])
+        self.assertIn('href="#forecast-process"', page)
+        self.assertIn('<details class="lab-detail" id="forecast-process">', page)
+        for label in ('Review sources', 'Save a revision', 'Lock each matchup',
+                      'Grade every issued matchup', 'Compare benchmarks', 'Test future versions'):
+            self.assertIn(f'<strong>{label}</strong>', page)
+
     def test_snapshot_interim_metrics_use_separate_margin_total_and_score_targets(self):
         snapshot = self.synthetic_snapshot()
         results = [{

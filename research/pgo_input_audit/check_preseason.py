@@ -1,0 +1,297 @@
+"""Separate fixed-preseason strength diagnostic using saved fold fits; no fitting.
+
+All team states are captured at one exclusive first-kickoff boundary, before
+any observation from that season. Week-1 roster/starter identity is retrospective
+oracle information, not verified T-60 knowledge. Full-strength states, including
+the initial QB, remain fixed for every later game in that season.
+"""
+import argparse
+import csv
+from datetime import datetime, timezone
+import hashlib
+import io
+import json
+import math
+from pathlib import Path
+import sys
+import unittest
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+import pgo_challenger as ch
+import pgo_current_strength as adapter
+import pgo_opponent_evaluation as base
+import pgo_sources
+
+CHARTER = Path(__file__).with_name('charter.md')
+CHARTER_SHA256 = '4be3031146e6f7f58347a7139a8c249b5bbb40a69876b86547ddaca4b45f52fd'
+RUN = ROOT / 'research/pgo_current_strength/run-20260908'
+RUN_SHA256 = '6682197b16fcc0974fef19e6c704ef238d4d2a30ba0db066e3e86a6bad35ee4a'
+DEFAULT_OUTPUT = Path(__file__).with_name('preseason-20260908-corrected')
+SEASONS = tuple(range(2018, 2026))
+ARMS = ('rolling_recency', 'frozen_recency', 'rolling_v0', 'frozen_v0')
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def _json(value):
+    return (json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + '\n').encode()
+
+
+def _write(path, raw):
+    with Path(path).open('xb') as stream:
+        stream.write(raw)
+
+
+def assert_unobserved(context, season):
+    """The walk records game metadata before updating it: none may exist yet."""
+    if context['season'] != season:
+        raise ValueError('Freeze context season differs')
+    if any(int(game_id.split('_')[0]) >= season
+           for game_id in context['evaluation_metadata']):
+        raise ValueError('Season freeze would include current/future-season observations')
+
+
+def capture_preseason(paths):
+    games = ch._load_games(paths)
+    first = {}
+    for game in games:
+        if game['season'] not in SEASONS:
+            continue
+        season = first.setdefault(game['season'], {})
+        for team in (game['home'], game['away']):
+            season.setdefault(team, game)
+    for season, team_games in first.items():
+        if set(team_games) != set(ch.pgo_model.CURRENT_TEAMS):
+            raise ValueError(f'First-game identity coverage differs: {season}')
+        if any(game['week'] != 1 for game in team_games.values()):
+            raise ValueError('This fixed diagnostic requires Week-1 identity for all teams')
+    if set(first) != set(SEASONS):
+        raise ValueError('Preseason coverage differs')
+    starters = adapter._recorded_starters(paths)
+    original_views = ch._team_views
+    freezes = {}
+
+    def capture(_full, _current, _metadata, **kwargs):
+        season, context = kwargs['season'], kwargs['context']
+        if season not in SEASONS or season in freezes:
+            return
+        assert_unobserved(context, season)
+        cutoff = min(game['kickoff_dt'] for game in first[season].values())
+        if kwargs['kickoff'] != cutoff:
+            raise ValueError('First capture is not at the league first-kickoff boundary')
+        # The adapter advanced QB decay to this boundary; no game at it has
+        # entered any accumulator. Queries below are read-only team views.
+        if adapter._utc(context['current_strength']['last_kickoff']) != cutoff:
+            raise ValueError('Preseason QB clock differs from the exclusive boundary')
+        prior_games = [g for g in games if g['season'] < season]
+        states, identities = {}, {}
+        for team, game in sorted(first[season].items()):
+            coach = game['home_coach'] if team == game['home'] else game['away_coach']
+            raw = original_views(team, season, 1, coach, cutoff, context, kwargs['inputs'])
+            identity = starters[season, 1, team]
+            full, _, metadata = adapter._selected_views(
+                raw, identity['gsis_id'], context, 'starter_recency', team=team)
+            states[team] = dict(full)
+            identities[team] = {
+                'recorded_week1_qb_gsis': identity['gsis_id'],
+                'starter_match': metadata['current_strength_starter_status'],
+                'source_game_id': game['game_id'],
+                'source_week1_kickoff': game['kickoff'],
+            }
+        assert_unobserved(context, season)
+        freezes[season] = {
+            'exclusive_performance_cutoff': cutoff.isoformat(),
+            'current_season_observed_games': 0,
+            'prior_observed_games': len(prior_games),
+            'latest_prior_kickoff': max(g['kickoff_dt'] for g in prior_games).isoformat(),
+            'offseason_retention_already_applied_by_walk': 0.5,
+            'strength_policy': 'full strength; fixed actual Week-1 QB for entire season',
+            'identity_policy': 'retrospective Week-1 roster/starter oracle; NOT verified T-60',
+            'teams': states, 'identities': identities,
+        }
+
+    rows, _, _ = adapter.build_rows(paths, 'starter_recency', roster_hook=capture)
+    if set(freezes) != set(SEASONS):
+        raise ValueError('Not all preseason states were captured')
+    return rows, games, freezes
+
+
+def metrics(rows, arm):
+    errors = np.array([r[arm] - r['actual_margin'] for r in rows])
+    return {'count': len(rows), 'mae': float(np.abs(errors).mean()),
+            'rmse': float(np.sqrt(np.square(errors).mean())),
+            'bias_home_minus_away': float(errors.mean())}
+
+
+def v0_preseason_states(paths):
+    # The published v0 baseline starts in2002, unlike the challenger embedded
+    # results feature, which starts in2013. Preserve that exact baseline lineage.
+    text = io.StringIO(newline='')
+    schedule = list(pgo_sources.open_csv(paths['schedule_results', None]))
+    writer = csv.DictWriter(text, fieldnames=list(schedule[0]), lineterminator='\n')
+    writer.writeheader(); writer.writerows(schedule)
+    games = ch.pgo_model.parse_games(text.getvalue())
+    states = {}
+    for season in SEASONS:
+        prior = [g for g in games if g.season < season]
+        _, ratings = ch.pgo_model.walk_forward(prior, ch.V0_PARAMETERS)
+        retention = ch.V0_PARAMETERS.offseason_retention ** (season - max(g.season for g in prior))
+        states[season] = {team: ratings.get(team, 0.0) * retention for team in ch.pgo_model.CURRENT_TEAMS}
+    return states
+
+
+def run(output=DEFAULT_OUTPUT):
+    output = Path(output)
+    if output.exists():
+        raise ValueError('Preseason diagnostic output must be a new directory')
+    if sha(CHARTER) != CHARTER_SHA256 or sha(RUN / 'manifest.json') != RUN_SHA256:
+        raise ValueError('Frozen charter/run identity differs')
+    manifest = json.loads((RUN / 'manifest.json').read_bytes())
+    protected = {CHARTER: CHARTER_SHA256, RUN / 'manifest.json': RUN_SHA256}
+    for name, item in manifest['files'].items():
+        path = RUN / name
+        if path.stat().st_size != item['bytes'] or sha(path) != item['sha256']:
+            raise ValueError(f'Saved research artifact differs: {name}')
+        protected[path] = item['sha256']
+    for name in ('pgo_challenger.py', 'pgo_model.py', 'pgo_current_strength.py',
+                 'pgo_sources.py', 'pgo_opponent_evaluation.py'):
+        protected[ROOT / name] = sha(ROOT / name)
+    protected[Path(__file__)] = sha(Path(__file__))
+    paths = pgo_sources.load_locked_sources(base.SOURCE_LOCK_PATH, base.CACHE_DIR)
+    source_inventory = base.loaded_source_inventory(paths)
+    start = {'identity': 'pgo-season-frozen-strength-20260908',
+             'started_at': datetime.now(timezone.utc).isoformat(),
+             'charter_sha256': CHARTER_SHA256, 'saved_run_manifest_sha256': RUN_SHA256,
+             'code_sha256': {str(p.relative_to(ROOT)): digest for p, digest in protected.items()
+                             if p.suffix == '.py'},
+             'status': 'INCOMPLETE_UNTIL_MANIFEST'}
+    output.mkdir(parents=True, exist_ok=False)
+    _write(output / 'start.json', _json(start))
+    print('Capturing all-32 preseason states before each season first observation', flush=True)
+    rows, games, freezes = capture_preseason(paths)
+    frozen_v0_states = v0_preseason_states(paths)
+    with (RUN / 'matched-predictions.csv').open(newline='', encoding='utf-8') as stream:
+        saved = {row['game_id']: row for row in csv.DictReader(stream)}
+    historical = {row.game_id: row for row in rows}
+    games = {game['game_id']: game for game in games}
+    folds = json.loads((RUN / 'fold-fits.json').read_bytes())['starter_recency'][:-1]
+    predictions = []
+    for fold in folds:
+        p = fold['preprocessor']
+        prep = ch.Preprocessor(tuple(p['feature_names']), np.array(p['medians']),
+                               np.array(p['scales']), tuple(p['missing_features']))
+        observed = [historical[g] for g in fold['validation']['game_ids']]
+        if len({r.season for r in observed}) != 1:
+            raise ValueError('Validation fold season differs')
+        season = observed[0].season
+        if fold['training']['season_max'] >= season:
+            raise ValueError('Training includes target season')
+        rolling = ch.predict(prep.transform(observed), fold['coefficients'])
+        fixed_rows = []
+        for row in observed:
+            game = games[row.game_id]
+            states = freezes[season]['teams']
+            features = ch._matchup_features(states[game['home']], states[game['away']], game)
+            # The strength state freezes; each scheduled game's venue/rest uses
+            # the same inherited controls as the matched rolling reference.
+            assert features['home_field'] == row.features['home_field']
+            assert features['rest_difference'] == row.features['rest_difference']
+            fixed_rows.append(ch.FeatureRow(row.game_id, season, row.week, row.kickoff,
+                                            row.actual_margin, features, {}))
+        fixed = ch.predict(prep.transform(fixed_rows), fold['coefficients'])
+        for row, rolling_value, fixed_value in zip(observed, rolling, fixed):
+            original = saved[row.game_id]
+            if not math.isclose(float(original['starter_recency']), rolling_value, abs_tol=1e-10, rel_tol=0):
+                raise ValueError('Saved rolling reference did not reproduce')
+            if float(original['actual_margin']) != row.actual_margin:
+                raise ValueError('Actual margin differs')
+            game = games[row.game_id]
+            states = freezes[season]['teams']
+            v0 = frozen_v0_states[season][game['home']] - frozen_v0_states[season][game['away']]
+            v0 += 0 if game['neutral'] else ch.V0_PARAMETERS.home_field
+            if row.week == 1 and not math.isclose(v0, float(original['pgo_v0']), abs_tol=1e-12, rel_tol=0):
+                raise ValueError('Frozen v0 Week1 does not reproduce original baseline')
+            predictions.append({'game_id': row.game_id, 'season': season, 'week': row.week,
+                                'kickoff': row.kickoff, 'actual_margin': row.actual_margin,
+                                'rolling_recency': float(rolling_value), 'frozen_recency': float(fixed_value),
+                                'rolling_v0': float(original['pgo_v0']), 'frozen_v0': v0})
+    if len(predictions) != 2127 or {r['game_id'] for r in predictions} != set(saved):
+        raise ValueError('Matched prediction game set differs')
+    summaries = {}
+    for arm in ARMS:
+        summaries[arm] = {
+            'overall': metrics(predictions, arm),
+            'week1': metrics([r for r in predictions if r['week'] == 1], arm),
+            'weeks1_4': metrics([r for r in predictions if r['week'] <= 4], arm),
+            'weeks5_18': metrics([r for r in predictions if r['week'] >= 5], arm),
+            'seasons': {str(s): metrics([r for r in predictions if r['season'] == s], arm) for s in SEASONS},
+        }
+    for path, digest in protected.items():
+        if sha(path) != digest:
+            raise ValueError(f'Protected artifact changed: {path}')
+    base.verify_loaded_sources(source_inventory, paths)
+    receipt = {**start, 'status': 'EXPLORATORY_DIAGNOSTIC_HOLD',
+               'completed_at': datetime.now(timezone.utc).isoformat(),
+               'source_inventory': source_inventory,
+               'protected_sha256': {str(p): digest for p, digest in protected.items()},
+               'leakage_verdict': 'REVIEW REQUIRED: retrospective Week-1 identities and source vintages',
+               'no_fit_performed': True, 'saved_rolling_prediction_reproduction': True,
+               'frozen_strength_policy': 'all teams frozen at one exclusive first-kickoff boundary; full strength',
+               'v0_policy': 'original2002-history baseline frozen after one0.5offseason retention;2.5home/no-rest',
+               'supersedes': 'preseason-20260908 used embedded2013-start v0 for frozen comparator; recency results unchanged',
+               'schedule_controls': 'per-game inherited venue/rest; not verified preseason schedule vintages'}
+    text = io.StringIO(newline='')
+    writer = csv.DictWriter(text, fieldnames=list(predictions[0]), lineterminator='\n')
+    writer.writeheader(); writer.writerows(predictions)
+    lines = ['# Separate season-frozen strength diagnostic', '',
+             'EXPLORATORY / HOLD. No model was fitted. Retrospective Week-1 roster/starter oracle; not verified T-60.',
+             'All32 strengths freeze before any season observation; full-strength Week-1 QB remains fixed all season.',
+             'Saved recency fits train only on earlier seasons. Per-game venue/rest remain inherited controls.',
+             'The frozen v0 comparator uses original history from2002, existing2.5home/no-rest and one0.5offseason retention.',
+             'This corrects the original diagnostic frozen-v0 history start; that directory and its script remain preserved.', '',
+             '| Arm | Games | MAE | RMSE | Home-minus-away bias |', '|---|---:|---:|---:|---:|']
+    for arm in ARMS:
+        v=summaries[arm]['overall'];lines.append(f"| {arm} | {v['count']} | {v['mae']:.4f} | {v['rmse']:.4f} | {v['bias_home_minus_away']:+.4f} |")
+    lines += ['', 'This diagnostic checks the fixed-season strength policy separately from next-game updating.',
+              'It does not validate exact scores, playoff probabilities, prediction intervals, or source-vintage availability.',
+              'All seasons and early/late slices are retained in metrics.json; no arm is promoted.', '']
+    artifacts = {'predictions.csv': text.getvalue().encode(), 'metrics.json': _json(summaries),
+                 'preseason-states.json': _json(freezes), 'v0-preseason-states.json': _json(frozen_v0_states), 'receipt.json': _json(receipt),
+                 'report.md': '\n'.join(lines).encode()}
+    for name, raw in artifacts.items():
+        _write(output / name, raw)
+    members = {'start.json': (output / 'start.json').read_bytes(), **artifacts}
+    _write(output / 'manifest.json', _json({'identity': start['identity'], 'schema_version': 1,
+        'files': {name: {'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()} for name, raw in members.items()}}))
+    return summaries
+
+
+class BoundaryChecks(unittest.TestCase):
+    def test_first_season_boundary_is_allowed(self):
+        assert_unobserved({'season': 2020, 'evaluation_metadata': {'2019_17_NE_MIA': {}}}, 2020)
+
+    def test_even_one_earlier_week1_game_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, 'current/future'):
+            assert_unobserved({'season': 2020, 'evaluation_metadata': {'2020_01_HOU_KC': {}}}, 2020)
+
+    def test_future_season_and_wrong_season_fail_closed(self):
+        for context in ({'season': 2020, 'evaluation_metadata': {'2021_01_DAL_TB': {}}},
+                        {'season': 2019, 'evaluation_metadata': {}}):
+            with self.assertRaises(ValueError):
+                assert_unobserved(context, 2020)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument('--self-test', action='store_true')
+    args = parser.parse_args()
+    if args.self_test:
+        result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(BoundaryChecks))
+        raise SystemExit(not result.wasSuccessful())
+    print(json.dumps(run(args.output), indent=2))

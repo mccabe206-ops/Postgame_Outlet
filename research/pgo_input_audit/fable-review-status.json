@@ -1,0 +1,11 @@
+{
+  "requested_model": "fable",
+  "requested_role": "independent read-only input and valuation review",
+  "persona_sha256": "162b2e6cc66b3ac212dc491cd252a539bb7116076cdcd6d76b8f125265552db8",
+  "status": "SERVICE_QUOTA_REJECTION_NO_REVIEW",
+  "api_error_status": 429,
+  "result": "You've hit your session limit \u00b7 resets 12:40am (America/New_York)",
+  "model_output_returned": false,
+  "review_verdict": null,
+  "response_sha256": "4ee51b97ffcf99288db830705562eb6e6f8e16912c7bcaa06a3ec1e85e851de9"
+}

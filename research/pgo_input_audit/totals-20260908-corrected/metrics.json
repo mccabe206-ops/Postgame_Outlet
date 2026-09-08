@@ -1,0 +1,195 @@
+{
+  "status": "EXPERIMENTAL / HOLD",
+  "target": "game total points",
+  "generated_at": "2026-09-08T03:47:43.040335+00:00",
+  "charter_sha256": "4be3031146e6f7f58347a7139a8c249b5bbb40a69876b86547ddaca4b45f52fd",
+  "code_sha256": "c9adfe86268a9eda0b1e65b29cb7bae8d00b5f5c20d0587987f25393f03abc71",
+  "schedule_sha256": "cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39",
+  "metrics": {
+    "overall": {
+      "pf_pa_total": {
+        "count": 2127,
+        "mae": 11.041684815675211,
+        "rmse": 13.94145485602107,
+        "bias": -0.28526698055809063
+      },
+      "league_total": {
+        "count": 2127,
+        "mae": 11.079992904825131,
+        "rmse": 14.001549306645158,
+        "bias": -0.28582482259320224
+      }
+    },
+    "week_1": {
+      "pf_pa_total": {
+        "count": 128,
+        "mae": 10.50458122702206,
+        "rmse": 12.873091064810627,
+        "bias": 0.3187184053308823
+      },
+      "league_total": {
+        "count": 128,
+        "mae": 10.798730776111759,
+        "rmse": 13.364711704589839,
+        "bias": 0.31756150626763624
+      }
+    },
+    "weeks_1_4": {
+      "pf_pa_total": {
+        "count": 509,
+        "mae": 10.836444007858546,
+        "rmse": 13.57221651743964,
+        "bias": -0.5482636079972265
+      },
+      "league_total": {
+        "count": 509,
+        "mae": 11.1028444665225,
+        "rmse": 13.881921122157197,
+        "bias": -0.552374280532358
+      }
+    },
+    "weeks_5_18": {
+      "pf_pa_total": {
+        "count": 1618,
+        "mae": 11.106250681669453,
+        "rmse": 14.05560649460964,
+        "bias": -0.2025319475750745
+      },
+      "league_total": {
+        "count": 1618,
+        "mae": 11.072804125527258,
+        "rmse": 14.03897186905769,
+        "bias": -0.2019721191994876
+      }
+    },
+    "2018": {
+      "pf_pa_total": {
+        "count": 256,
+        "mae": 11.470703125,
+        "rmse": 14.856215725780169,
+        "bias": -3.25
+      },
+      "league_total": {
+        "count": 256,
+        "mae": 11.470703125,
+        "rmse": 15.034725429817467,
+        "bias": -3.25
+      }
+    },
+    "2019": {
+      "pf_pa_total": {
+        "count": 256,
+        "mae": 11.240478515625,
+        "rmse": 13.883507946758803,
+        "bias": 1.0625
+      },
+      "league_total": {
+        "count": 256,
+        "mae": 11.18896484375,
+        "rmse": 13.912252917841883,
+        "bias": 1.0625
+      }
+    },
+    "2020": {
+      "pf_pa_total": {
+        "count": 256,
+        "mae": 11.504150390625,
+        "rmse": 14.41603692651014,
+        "bias": -3.953125
+      },
+      "league_total": {
+        "count": 256,
+        "mae": 11.2607421875,
+        "rmse": 14.201259847281156,
+        "bias": -3.953125
+      }
+    },
+    "2021": {
+      "pf_pa_total": {
+        "count": 272,
+        "mae": 11.544347426470589,
+        "rmse": 14.173703490414606,
+        "bias": 3.614889705882353
+      },
+      "league_total": {
+        "count": 272,
+        "mae": 11.647633272058824,
+        "rmse": 14.171996602695101,
+        "bias": 3.614889705882353
+      }
+    },
+    "2022": {
+      "pf_pa_total": {
+        "count": 271,
+        "mae": 11.222270457998697,
+        "rmse": 13.856233913801471,
+        "bias": 2.19448665074886
+      },
+      "league_total": {
+        "count": 271,
+        "mae": 11.291702843499023,
+        "rmse": 13.961704010007061,
+        "bias": 2.199397655741261
+      }
+    },
+    "2023": {
+      "pf_pa_total": {
+        "count": 272,
+        "mae": 10.496560067041523,
+        "rmse": 13.556203081815626,
+        "bias": 0.236328125
+      },
+      "league_total": {
+        "count": 272,
+        "mae": 10.694540915997395,
+        "rmse": 13.657800137310543,
+        "bias": 0.227072932494034
+      }
+    },
+    "2024": {
+      "pf_pa_total": {
+        "count": 272,
+        "mae": 10.149653979238753,
+        "rmse": 13.282520031528293,
+        "bias": -2.2867647058823533
+      },
+      "league_total": {
+        "count": 272,
+        "mae": 10.153492647058824,
+        "rmse": 13.28697629962706,
+        "bias": -2.286764705882351
+      }
+    },
+    "2025": {
+      "pf_pa_total": {
+        "count": 272,
+        "mae": 10.770112456747405,
+        "rmse": 13.51979498746763,
+        "bias": -0.20220588235294062
+      },
+      "league_total": {
+        "count": 272,
+        "mae": 10.972967128027681,
+        "rmse": 13.790174088244246,
+        "bias": -0.2022058823529441
+      }
+    }
+  },
+  "improvement_vs_league_total": {
+    "mean": 0.03830808914991996,
+    "lower": -0.06091382052960676,
+    "upper": 0.12459533294787892,
+    "blocks": 8,
+    "samples": 10000,
+    "seed": 20260908
+  },
+  "checks": {
+    "identical_game_population": true,
+    "future_perturbation_passed": true,
+    "duplicate_rejected": true
+  },
+  "limits": [
+    "Final/backfilled schedule source; no publication-vintage certification.",
+    "Totals only; this does not validate margins, exact scores or season odds."
+  ]
+}
