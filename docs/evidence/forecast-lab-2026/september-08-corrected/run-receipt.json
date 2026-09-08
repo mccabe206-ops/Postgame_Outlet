@@ -1,0 +1,1211 @@
+{
+  "audit_manifest_sha256": "440734823c333f3f47229ba3edc2e43d50d84be62aa318c4c59395744d15899c",
+  "charter_sha256": "643cdc172fc3ad15393989d8e9b021b3975833d6ae51f7ee162a837c39a25c12",
+  "code_sha256": {
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_week1_corrected\\charter.md": "643cdc172fc3ad15393989d8e9b021b3975833d6ae51f7ee162a837c39a25c12",
+    "pgo_challenger.py": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+    "pgo_current_strength.py": "10372fa6afe5a81e1b2db7cb7c78d46726f24ca4c40c3daacde119bd214c3bbd",
+    "pgo_forecast_snapshot.py": "d8d13986805efec7b2ca400d0550e5d413e8136760c53ee69ffd53406b1ed120",
+    "pgo_model.py": "174f165c3343a1a045707bb1c4731bbbcae0958fe07618dd0ddd7ae25ae56ac5",
+    "pgo_opponent_evaluation.py": "318072774cc25140c1f36aeae8f6f4edfa87091fc04964f1301a9f7ad773fe62",
+    "pgo_sources.py": "97bd522580eadc87719757a8c3d1adb20601fa75bbb9e315308dc15d28cd3fb8",
+    "pgo_strength_evaluation.py": "243b347883e295b00d7db08ddcad4292f86a0ff100e65b7a3cc196eef4132666",
+    "research/pgo_input_audit/audit_model.py": "fd98006d688497a1460be37375b77ed755c3e2a6a6e07cc18aa43ba1ba6fb40f",
+    "research/pgo_week1_corrected/train.py": "4691328c63049031147419f0960f3a51ea48c4bd0f381ea27988f0092e511074",
+    "tests/test_pgo_input_audit.py": "22755578d5309a9fe1ed57d68c9d6a7d97df7d27be46518a710da032797a331c",
+    "tests/test_pgo_week1_corrected.py": "b20fcdbdbc8dfeb8da15cb3cbcd48a15814d0297915eb2276b7620fb0e904a07"
+  },
+  "completed_at": "2026-09-08T15:07:47.058938+00:00",
+  "construction": {
+    "active_only": true,
+    "exposure_fix": true,
+    "half_life_games": 4,
+    "removed_features": [
+      "head_coach_continuity",
+      "head_coach_tenure",
+      "incoming_prior_snap_share",
+      "returning_defense_snap_share",
+      "returning_offense_snap_share",
+      "rookie_draft_capital"
+    ],
+    "starter_coverage": {
+      "ambiguous_roster": 0,
+      "by_season": {
+        "2013": {
+          "ambiguous_roster": 0,
+          "matched": 494,
+          "missing_id": 0,
+          "missing_roster": 18,
+          "team_games": 512
+        },
+        "2014": {
+          "ambiguous_roster": 0,
+          "matched": 478,
+          "missing_id": 0,
+          "missing_roster": 34,
+          "team_games": 512
+        },
+        "2015": {
+          "ambiguous_roster": 0,
+          "matched": 479,
+          "missing_id": 0,
+          "missing_roster": 33,
+          "team_games": 512
+        },
+        "2016": {
+          "ambiguous_roster": 0,
+          "matched": 512,
+          "missing_id": 0,
+          "missing_roster": 0,
+          "team_games": 512
+        },
+        "2017": {
+          "ambiguous_roster": 0,
+          "matched": 512,
+          "missing_id": 0,
+          "missing_roster": 0,
+          "team_games": 512
+        },
+        "2018": {
+          "ambiguous_roster": 0,
+          "matched": 512,
+          "missing_id": 0,
+          "missing_roster": 0,
+          "team_games": 512
+        },
+        "2019": {
+          "ambiguous_roster": 0,
+          "matched": 512,
+          "missing_id": 0,
+          "missing_roster": 0,
+          "team_games": 512
+        },
+        "2020": {
+          "ambiguous_roster": 0,
+          "matched": 512,
+          "missing_id": 0,
+          "missing_roster": 0,
+          "team_games": 512
+        },
+        "2021": {
+          "ambiguous_roster": 0,
+          "matched": 544,
+          "missing_id": 0,
+          "missing_roster": 0,
+          "team_games": 544
+        },
+        "2022": {
+          "ambiguous_roster": 0,
+          "matched": 540,
+          "missing_id": 0,
+          "missing_roster": 2,
+          "team_games": 542
+        },
+        "2023": {
+          "ambiguous_roster": 0,
+          "matched": 544,
+          "missing_id": 0,
+          "missing_roster": 0,
+          "team_games": 544
+        },
+        "2024": {
+          "ambiguous_roster": 0,
+          "matched": 536,
+          "missing_id": 0,
+          "missing_roster": 8,
+          "team_games": 544
+        },
+        "2025": {
+          "ambiguous_roster": 0,
+          "matched": 540,
+          "missing_id": 0,
+          "missing_roster": 4,
+          "team_games": 544
+        }
+      },
+      "matched": 6715,
+      "missing_id": 0,
+      "missing_roster": 99,
+      "team_games": 6814,
+      "unavailable": [
+        {
+          "game_id": "2013_01_TEN_PIT",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "TEN",
+          "week": 1
+        },
+        {
+          "game_id": "2013_01_ARI_STL",
+          "gsis_id": "00-0027854",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "LAR",
+          "week": 1
+        },
+        {
+          "game_id": "2013_02_STL_ATL",
+          "gsis_id": "00-0027854",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "LAR",
+          "week": 2
+        },
+        {
+          "game_id": "2013_02_TEN_HOU",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "TEN",
+          "week": 2
+        },
+        {
+          "game_id": "2013_03_CLE_MIN",
+          "gsis_id": "00-0026625",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "CLE",
+          "week": 3
+        },
+        {
+          "game_id": "2013_03_SD_TEN",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "TEN",
+          "week": 3
+        },
+        {
+          "game_id": "2013_03_STL_DAL",
+          "gsis_id": "00-0027854",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "LAR",
+          "week": 3
+        },
+        {
+          "game_id": "2013_04_SF_STL",
+          "gsis_id": "00-0027854",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "LAR",
+          "week": 4
+        },
+        {
+          "game_id": "2013_04_CIN_CLE",
+          "gsis_id": "00-0026625",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "CLE",
+          "week": 4
+        },
+        {
+          "game_id": "2013_04_NYJ_TEN",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "TEN",
+          "week": 4
+        },
+        {
+          "game_id": "2013_05_BUF_CLE",
+          "gsis_id": "00-0026625",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "CLE",
+          "week": 5
+        },
+        {
+          "game_id": "2013_05_JAX_STL",
+          "gsis_id": "00-0027854",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "LAR",
+          "week": 5
+        },
+        {
+          "game_id": "2013_06_STL_HOU",
+          "gsis_id": "00-0027854",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "LAR",
+          "week": 6
+        },
+        {
+          "game_id": "2013_07_STL_CAR",
+          "gsis_id": "00-0027854",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "LAR",
+          "week": 7
+        },
+        {
+          "game_id": "2013_07_SF_TEN",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "TEN",
+          "week": 7
+        },
+        {
+          "game_id": "2013_09_TEN_STL",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "TEN",
+          "week": 9
+        },
+        {
+          "game_id": "2013_10_JAX_TEN",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "TEN",
+          "week": 10
+        },
+        {
+          "game_id": "2013_10_PHI_GB",
+          "gsis_id": "00-0022055",
+          "reason": "missing_roster",
+          "season": 2013,
+          "team": "GB",
+          "week": 10
+        },
+        {
+          "game_id": "2014_01_MIN_STL",
+          "gsis_id": "00-0023662",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "MIN",
+          "week": 1
+        },
+        {
+          "game_id": "2014_01_TEN_KC",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "TEN",
+          "week": 1
+        },
+        {
+          "game_id": "2014_01_WAS_HOU",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 1
+        },
+        {
+          "game_id": "2014_01_SD_ARI",
+          "gsis_id": "00-0021429",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "ARI",
+          "week": 1
+        },
+        {
+          "game_id": "2014_02_DAL_TEN",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "TEN",
+          "week": 2
+        },
+        {
+          "game_id": "2014_02_NE_MIN",
+          "gsis_id": "00-0023662",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "MIN",
+          "week": 2
+        },
+        {
+          "game_id": "2014_02_HOU_OAK",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 2
+        },
+        {
+          "game_id": "2014_03_HOU_NYG",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 3
+        },
+        {
+          "game_id": "2014_03_MIN_NO",
+          "gsis_id": "00-0023662",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "MIN",
+          "week": 3
+        },
+        {
+          "game_id": "2014_03_TEN_CIN",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "TEN",
+          "week": 3
+        },
+        {
+          "game_id": "2014_04_BUF_HOU",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 4
+        },
+        {
+          "game_id": "2014_05_CLE_TEN",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "TEN",
+          "week": 5
+        },
+        {
+          "game_id": "2014_05_HOU_DAL",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 5
+        },
+        {
+          "game_id": "2014_06_IND_HOU",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 6
+        },
+        {
+          "game_id": "2014_06_WAS_ARI",
+          "gsis_id": "00-0021429",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "ARI",
+          "week": 6
+        },
+        {
+          "game_id": "2014_07_ARI_OAK",
+          "gsis_id": "00-0021429",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "ARI",
+          "week": 7
+        },
+        {
+          "game_id": "2014_07_HOU_PIT",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 7
+        },
+        {
+          "game_id": "2014_08_HOU_TEN",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 8
+        },
+        {
+          "game_id": "2014_08_PHI_ARI",
+          "gsis_id": "00-0021429",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "ARI",
+          "week": 8
+        },
+        {
+          "game_id": "2014_08_WAS_DAL",
+          "gsis_id": "00-0027688",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "WAS",
+          "week": 8
+        },
+        {
+          "game_id": "2014_09_ARI_DAL",
+          "gsis_id": "00-0021429",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "ARI",
+          "week": 9
+        },
+        {
+          "game_id": "2014_09_PHI_HOU",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 9
+        },
+        {
+          "game_id": "2014_10_STL_ARI",
+          "gsis_id": "00-0021429",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "ARI",
+          "week": 10
+        },
+        {
+          "game_id": "2014_11_HOU_CLE",
+          "gsis_id": "00-0028012",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 11
+        },
+        {
+          "game_id": "2014_12_CIN_HOU",
+          "gsis_id": "00-0028012",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 12
+        },
+        {
+          "game_id": "2014_13_TEN_HOU",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 13
+        },
+        {
+          "game_id": "2014_13_WAS_IND",
+          "gsis_id": "00-0027688",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "WAS",
+          "week": 13
+        },
+        {
+          "game_id": "2014_14_HOU_JAX",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 14
+        },
+        {
+          "game_id": "2014_14_STL_WAS",
+          "gsis_id": "00-0027688",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "WAS",
+          "week": 14
+        },
+        {
+          "game_id": "2014_15_CIN_CLE",
+          "gsis_id": "00-0031409",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "CLE",
+          "week": 15
+        },
+        {
+          "game_id": "2014_15_HOU_IND",
+          "gsis_id": "00-0023682",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "HOU",
+          "week": 15
+        },
+        {
+          "game_id": "2014_15_WAS_NYG",
+          "gsis_id": "00-0027688",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "WAS",
+          "week": 15
+        },
+        {
+          "game_id": "2014_15_NYJ_TEN",
+          "gsis_id": "00-0027946",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "TEN",
+          "week": 15
+        },
+        {
+          "game_id": "2014_16_CLE_CAR",
+          "gsis_id": "00-0031409",
+          "reason": "missing_roster",
+          "season": 2014,
+          "team": "CLE",
+          "week": 16
+        },
+        {
+          "game_id": "2015_01_CLE_NYJ",
+          "gsis_id": "00-0021206",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "CLE",
+          "week": 1
+        },
+        {
+          "game_id": "2015_01_BAL_DEN",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 1
+        },
+        {
+          "game_id": "2015_01_NYG_DAL",
+          "gsis_id": "00-0021678",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "DAL",
+          "week": 1
+        },
+        {
+          "game_id": "2015_01_MIN_SF",
+          "gsis_id": "00-0027974",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "SF",
+          "week": 1
+        },
+        {
+          "game_id": "2015_02_SF_PIT",
+          "gsis_id": "00-0027974",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "SF",
+          "week": 2
+        },
+        {
+          "game_id": "2015_02_BAL_OAK",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 2
+        },
+        {
+          "game_id": "2015_02_DAL_PHI",
+          "gsis_id": "00-0021678",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "DAL",
+          "week": 2
+        },
+        {
+          "game_id": "2015_03_CIN_BAL",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 3
+        },
+        {
+          "game_id": "2015_03_NO_CAR",
+          "gsis_id": "00-0022864",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "NO",
+          "week": 3
+        },
+        {
+          "game_id": "2015_03_OAK_CLE",
+          "gsis_id": "00-0021206",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "CLE",
+          "week": 3
+        },
+        {
+          "game_id": "2015_03_SF_ARI",
+          "gsis_id": "00-0027974",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "SF",
+          "week": 3
+        },
+        {
+          "game_id": "2015_04_BAL_PIT",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 4
+        },
+        {
+          "game_id": "2015_04_CLE_SD",
+          "gsis_id": "00-0021206",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "CLE",
+          "week": 4
+        },
+        {
+          "game_id": "2015_04_GB_SF",
+          "gsis_id": "00-0027974",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "SF",
+          "week": 4
+        },
+        {
+          "game_id": "2015_05_CLE_BAL",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 5
+        },
+        {
+          "game_id": "2015_05_CLE_BAL",
+          "gsis_id": "00-0021206",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "CLE",
+          "week": 5
+        },
+        {
+          "game_id": "2015_05_SF_NYG",
+          "gsis_id": "00-0027974",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "SF",
+          "week": 5
+        },
+        {
+          "game_id": "2015_06_DEN_CLE",
+          "gsis_id": "00-0021206",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "CLE",
+          "week": 6
+        },
+        {
+          "game_id": "2015_06_BAL_SF",
+          "gsis_id": "00-0027974",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "SF",
+          "week": 6
+        },
+        {
+          "game_id": "2015_06_BAL_SF",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 6
+        },
+        {
+          "game_id": "2015_07_SEA_SF",
+          "gsis_id": "00-0027974",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "SF",
+          "week": 7
+        },
+        {
+          "game_id": "2015_07_CLE_STL",
+          "gsis_id": "00-0021206",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "CLE",
+          "week": 7
+        },
+        {
+          "game_id": "2015_07_BAL_ARI",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 7
+        },
+        {
+          "game_id": "2015_08_ARI_CLE",
+          "gsis_id": "00-0021206",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "CLE",
+          "week": 8
+        },
+        {
+          "game_id": "2015_08_SD_BAL",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 8
+        },
+        {
+          "game_id": "2015_08_SF_STL",
+          "gsis_id": "00-0027974",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "SF",
+          "week": 8
+        },
+        {
+          "game_id": "2015_10_JAX_BAL",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 10
+        },
+        {
+          "game_id": "2015_11_DAL_MIA",
+          "gsis_id": "00-0021678",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "DAL",
+          "week": 11
+        },
+        {
+          "game_id": "2015_11_NYJ_HOU",
+          "gsis_id": "00-0028090",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "HOU",
+          "week": 11
+        },
+        {
+          "game_id": "2015_11_STL_BAL",
+          "gsis_id": "00-0026158",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "BAL",
+          "week": 11
+        },
+        {
+          "game_id": "2015_12_CAR_DAL",
+          "gsis_id": "00-0021678",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "DAL",
+          "week": 12
+        },
+        {
+          "game_id": "2015_12_BAL_CLE",
+          "gsis_id": "00-0021206",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "CLE",
+          "week": 12
+        },
+        {
+          "game_id": "2015_15_HOU_IND",
+          "gsis_id": "00-0028090",
+          "reason": "missing_roster",
+          "season": 2015,
+          "team": "HOU",
+          "week": 15
+        },
+        {
+          "game_id": "2022_11_CAR_BAL",
+          "gsis_id": "00-0033275",
+          "reason": "missing_roster",
+          "season": 2022,
+          "team": "CAR",
+          "week": 11
+        },
+        {
+          "game_id": "2022_15_PIT_CAR",
+          "gsis_id": "00-0038102",
+          "reason": "missing_roster",
+          "season": 2022,
+          "team": "PIT",
+          "week": 15
+        },
+        {
+          "game_id": "2024_08_KC_LV",
+          "gsis_id": "00-0038579",
+          "reason": "missing_roster",
+          "season": 2024,
+          "team": "LV",
+          "week": 8
+        },
+        {
+          "game_id": "2024_13_LV_KC",
+          "gsis_id": "00-0035289",
+          "reason": "missing_roster",
+          "season": 2024,
+          "team": "LV",
+          "week": 13
+        },
+        {
+          "game_id": "2024_14_LV_TB",
+          "gsis_id": "00-0035289",
+          "reason": "missing_roster",
+          "season": 2024,
+          "team": "LV",
+          "week": 14
+        },
+        {
+          "game_id": "2024_15_ATL_LV",
+          "gsis_id": "00-0038579",
+          "reason": "missing_roster",
+          "season": 2024,
+          "team": "LV",
+          "week": 15
+        },
+        {
+          "game_id": "2024_16_CLE_CIN",
+          "gsis_id": "00-0031503",
+          "reason": "missing_roster",
+          "season": 2024,
+          "team": "CLE",
+          "week": 16
+        },
+        {
+          "game_id": "2024_17_DAL_PHI",
+          "gsis_id": "00-0036389",
+          "reason": "missing_roster",
+          "season": 2024,
+          "team": "PHI",
+          "week": 17
+        },
+        {
+          "game_id": "2024_17_MIA_CLE",
+          "gsis_id": "00-0031503",
+          "reason": "missing_roster",
+          "season": 2024,
+          "team": "CLE",
+          "week": 17
+        },
+        {
+          "game_id": "2024_18_MIA_NYJ",
+          "gsis_id": "00-0036212",
+          "reason": "missing_roster",
+          "season": 2024,
+          "team": "MIA",
+          "week": 18
+        },
+        {
+          "game_id": "2025_04_WAS_ATL",
+          "gsis_id": "00-0039910",
+          "reason": "missing_roster",
+          "season": 2025,
+          "team": "WAS",
+          "week": 4
+        },
+        {
+          "game_id": "2025_08_BUF_CAR",
+          "gsis_id": "00-0039150",
+          "reason": "missing_roster",
+          "season": 2025,
+          "team": "CAR",
+          "week": 8
+        },
+        {
+          "game_id": "2025_08_WAS_KC",
+          "gsis_id": "00-0039910",
+          "reason": "missing_roster",
+          "season": 2025,
+          "team": "WAS",
+          "week": 8
+        },
+        {
+          "game_id": "2025_17_NE_NYJ",
+          "gsis_id": "00-0028118",
+          "reason": "missing_roster",
+          "season": 2025,
+          "team": "NYJ",
+          "week": 17
+        }
+      ]
+    }
+  },
+  "environment": {
+    "numpy": "2.4.2",
+    "python": "3.14.3"
+  },
+  "evaluation_games": 2127,
+  "fresh_current_features_generated": false,
+  "historical_source_vintage": "REVIEW REQUIRED",
+  "identity": "pgo-week1-corrected-2026-09-08",
+  "maximum_serialized_replay_error": 7.105427357601002e-15,
+  "protected_sources_and_members_before_after": "PASS",
+  "schema_version": 1,
+  "source_inventory": {
+    "current_roster:2026": {
+      "bytes": 306258,
+      "sha256": "6bd436cd5029af07f1761ef368c88318d392c20ada6fba0f5bc8b88128d05a3d"
+    },
+    "injury_reports:2013": {
+      "bytes": 689228,
+      "sha256": "b84c71cf23be81375bbca62f7d2c51d53fa75330fbcf9f598ec4ac17fea7d8be"
+    },
+    "injury_reports:2014": {
+      "bytes": 692574,
+      "sha256": "e675fd5d86c3451d76e7c5d530095db1641347eb3f9796c9a30dd7a75e3ba634"
+    },
+    "injury_reports:2015": {
+      "bytes": 715948,
+      "sha256": "fbca54ef42594cc52facc0d8c8dd74802b812771b9e33032e44ae8c7e21b0360"
+    },
+    "injury_reports:2016": {
+      "bytes": 674980,
+      "sha256": "504e05968cb9c54ddc730fd9b6e7d1dd16a62db8029cc784d3d7bafcea7ff7cb"
+    },
+    "injury_reports:2017": {
+      "bytes": 665280,
+      "sha256": "0d5139fbf41b0866517bd2bd5fd85bb20dbd4dd9bc36a706fed030a88731de6f"
+    },
+    "injury_reports:2018": {
+      "bytes": 665119,
+      "sha256": "4724e1f37cc3076f564e997fbf269190e7dbe795a39315b903788e0a9c40065e"
+    },
+    "injury_reports:2019": {
+      "bytes": 700757,
+      "sha256": "daddfe8e04ddc3a29bce14f362e774fbadfb274c807f1f0fde7b5bf32aaf6cdf"
+    },
+    "injury_reports:2020": {
+      "bytes": 737474,
+      "sha256": "706cca82824214f6b73ba0c6e537d3ee39766a50c644b8974b9fc28d7518de90"
+    },
+    "injury_reports:2021": {
+      "bytes": 737083,
+      "sha256": "1049fb9ff0fe7cfcf3ba8bfe1f5a35d3aba985c461c8fb7bf5201735b6d34254"
+    },
+    "injury_reports:2022": {
+      "bytes": 752433,
+      "sha256": "5f0d60324e597edd1a2ced8540b04e40b51dd440591dd1df11b8d96343387c9e"
+    },
+    "injury_reports:2023": {
+      "bytes": 738501,
+      "sha256": "16b04e21da5aa3944cfa9c22cafcc84ed7e6d9866eaddf0344e9b8cbf2f63afe"
+    },
+    "injury_reports:2024": {
+      "bytes": 816989,
+      "sha256": "498bce8e13cb64b2ab9bb0ad6cb81d0a63c2ddb24016c9fc90c2de2126fae449"
+    },
+    "injury_reports:2025": {
+      "bytes": 695623,
+      "sha256": "15ee790fef634caea988e7b6562fc393a63739dd7ee38229d1b42161427709df"
+    },
+    "player_weekly_stats:2013": {
+      "bytes": 1134278,
+      "sha256": "2cbbc0fed52a203c9d5c95ed6c500bdc949f3088058dc03c28c38d9a46827b1a"
+    },
+    "player_weekly_stats:2014": {
+      "bytes": 1156548,
+      "sha256": "24f687e3f63911bac32e5733088dab5fd558b0da08b9a3047fbfad6ad8b21a10"
+    },
+    "player_weekly_stats:2015": {
+      "bytes": 1161213,
+      "sha256": "af95af6b3ef4dcc89c2b30c60d5fcbf885c89f7eb9cb2f7248899d515a360919"
+    },
+    "player_weekly_stats:2016": {
+      "bytes": 1158077,
+      "sha256": "36a60ff93fd4737ff73d22c0f7dea444f304050c524802bd85705222fbc47e1c"
+    },
+    "player_weekly_stats:2017": {
+      "bytes": 1153068,
+      "sha256": "e11696bbe46b409235a774a3ad2a73743fe2c8c175836ac522440e4504fb02c9"
+    },
+    "player_weekly_stats:2018": {
+      "bytes": 1152493,
+      "sha256": "25c7a4cd4b036704594c533a11d9f402db977d5b9d05568247fb4a01315b2d3a"
+    },
+    "player_weekly_stats:2019": {
+      "bytes": 1151599,
+      "sha256": "cdcd329b258d63088fb2e3d9ed9def4f3267ac2271b6974437f6be8207fb581b"
+    },
+    "player_weekly_stats:2020": {
+      "bytes": 1172772,
+      "sha256": "01b8a5104cbd6249fd0afde2b20b2628be8047b42047f1c1a777b8f2799058d9"
+    },
+    "player_weekly_stats:2021": {
+      "bytes": 1250705,
+      "sha256": "d63df896c8ecdf83b8ad41e0de3681cc1afea67b45440f005c0890bd2bef1bb5"
+    },
+    "player_weekly_stats:2022": {
+      "bytes": 1236818,
+      "sha256": "2c0d172b75d6241c0d9fae4e6375103d84049fa4d1fb2e5e81673528bc619cd9"
+    },
+    "player_weekly_stats:2023": {
+      "bytes": 1232988,
+      "sha256": "57c1cc7fc687aed7f0db45ae239eefb0a0c1206244ede2455ac4fc39cfbebb06"
+    },
+    "player_weekly_stats:2024": {
+      "bytes": 1239692,
+      "sha256": "4a517b8b66200ddc5cb00bc8b42706436ad09208dbea1cb3b5bd3e6928c0d52c"
+    },
+    "player_weekly_stats:2025": {
+      "bytes": 1258615,
+      "sha256": "4d540f34138528c917b957ed3d84e4854eee082a0d4b30af57f225f7d75fe2ef"
+    },
+    "schedule_results": {
+      "bytes": 2173367,
+      "sha256": "cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39"
+    },
+    "snap_counts:2013": {
+      "bytes": 2148056,
+      "sha256": "9d1fdd557875b9a2c71d88e583da24a739dfca671edf8223d6171e39a421000e"
+    },
+    "snap_counts:2014": {
+      "bytes": 2156558,
+      "sha256": "84540709d9483552185c8ca3ef30b2f66fb94b30c3e6c21e7a27205f337f21d3"
+    },
+    "snap_counts:2015": {
+      "bytes": 2155797,
+      "sha256": "841496252ada825c3c50d3ba9b4b26d3f4fabd0fedc5fb44f286ddaaa5bdb7e0"
+    },
+    "snap_counts:2016": {
+      "bytes": 2157110,
+      "sha256": "a778e24e9eb665ffe8f16093b03c5a263dca0250b3aa92bd6002f61f534bea59"
+    },
+    "snap_counts:2017": {
+      "bytes": 2157818,
+      "sha256": "eab2fad2df99249d4061ed9c5c34d312cdba07cf3159d027d255bdc9b6526917"
+    },
+    "snap_counts:2018": {
+      "bytes": 2157555,
+      "sha256": "9a408b78a55f799110aed70de3564e157faf089ce9bed780d0368bf49ae13e0b"
+    },
+    "snap_counts:2019": {
+      "bytes": 2156311,
+      "sha256": "0cd52be8fa57f18503b670cb8263246c4f548375b768cbcad1c7a7462c98970d"
+    },
+    "snap_counts:2020": {
+      "bytes": 2257664,
+      "sha256": "c3b2a9aa472aca23332c030e574cfb134f885608ddf74fe0a659c38584d14358"
+    },
+    "snap_counts:2021": {
+      "bytes": 2388493,
+      "sha256": "8e4dae054a4749cf2d4919508d9161a6068fd67509979aefa385bfb3803d0ee5"
+    },
+    "snap_counts:2022": {
+      "bytes": 2379719,
+      "sha256": "0018a4833fbf0f825286c1c27450c6254391b548d6c55bcde728e93e4816815a"
+    },
+    "snap_counts:2023": {
+      "bytes": 2394875,
+      "sha256": "303b61aa5c33ffda863f93a750fc14483f397f9187ad502b1ce71e9b516a64c0"
+    },
+    "snap_counts:2024": {
+      "bytes": 2402841,
+      "sha256": "a2aa58efe093f8aa0ad5aadf09f81d8ec690a1183bd2dde68d20e7f109a9c335"
+    },
+    "snap_counts:2025": {
+      "bytes": 2401193,
+      "sha256": "80b02a6e511aa20283551cae622b29ba4d0a6f006c489a2d91591fcad33792e7"
+    },
+    "team_weekly_stats:2013": {
+      "bytes": 71452,
+      "sha256": "920bde147689f0c73bec8e4c94faef7532005152879b92451c269273ed8062da"
+    },
+    "team_weekly_stats:2014": {
+      "bytes": 70990,
+      "sha256": "dc941b098e086e4a93f193ed49c5a2205f2f9b4b2617cd8e25ed66761ebd54c5"
+    },
+    "team_weekly_stats:2015": {
+      "bytes": 71211,
+      "sha256": "595292ef09bb23fd8bc892fa2a6741322fa6e9608c54f7327c57cefe1cc393ad"
+    },
+    "team_weekly_stats:2016": {
+      "bytes": 71081,
+      "sha256": "baf74c9dc216a709a7207a6d4e06aa5ccb7dc6574c154f27c3c4e4d689b366cc"
+    },
+    "team_weekly_stats:2017": {
+      "bytes": 71194,
+      "sha256": "f2b70cb27bdb7acc6d48bcda29818f44268fe544cfae31cd037ca09d6961a2f3"
+    },
+    "team_weekly_stats:2018": {
+      "bytes": 71342,
+      "sha256": "62d07da27c364634698ec11e17f4111d28c738f1b15ff3281fadce1ace045dea"
+    },
+    "team_weekly_stats:2019": {
+      "bytes": 71563,
+      "sha256": "b82e3dd7f9e234c8ff5460c89dfe04337599c1d963443a090c9bab5a79b08631"
+    },
+    "team_weekly_stats:2020": {
+      "bytes": 71539,
+      "sha256": "e4dde2d912654a429e3b76fde7bb0e75e320cd801c033c7c80a0d7df18ce2c54"
+    },
+    "team_weekly_stats:2021": {
+      "bytes": 75920,
+      "sha256": "b5b65fdf141695c04000fe8a0ab182be00b3bfe8345dc84e76dd0627199a8815"
+    },
+    "team_weekly_stats:2022": {
+      "bytes": 76157,
+      "sha256": "3462c9d16ecc28a019e3deab7361f1331f062d26c4cf4fb09a2aa38f857c23b2"
+    },
+    "team_weekly_stats:2023": {
+      "bytes": 76087,
+      "sha256": "7b42d3b699d2ea55e77e3abe897289c12a858c573107829250d5e1b177b57415"
+    },
+    "team_weekly_stats:2024": {
+      "bytes": 76189,
+      "sha256": "3dde26ba6a2beecaf65d172823b6e3a6303cca05a07c346d2725d7d9ba86e13c"
+    },
+    "team_weekly_stats:2025": {
+      "bytes": 76176,
+      "sha256": "54a223acb26c33c706aa1b509f56323e2889110b5bbe0c2f2c1163c325bd8f80"
+    },
+    "weekly_rosters:2013": {
+      "bytes": 9377446,
+      "sha256": "76c47a629075ffd75f9c4ee49fadb6dad45396be486af897078fee5722969781"
+    },
+    "weekly_rosters:2014": {
+      "bytes": 9638161,
+      "sha256": "331022cd3b0c69d99c581f02b6fde6853e87ac431739c4b49841ee6e02893d6c"
+    },
+    "weekly_rosters:2015": {
+      "bytes": 9955118,
+      "sha256": "198904f48eeebafc1f34028a00c1b8c0fc135aba04fc4b276e636ef87709751a"
+    },
+    "weekly_rosters:2016": {
+      "bytes": 10803214,
+      "sha256": "ab05dfeffe6f9a1d969133cd6740f1625d135bfad672aaa916adb609ab662883"
+    },
+    "weekly_rosters:2017": {
+      "bytes": 15945119,
+      "sha256": "fd3fe005b676fe0ad8d88c50701d71adef4287501397c33f479c9765cd8c45d4"
+    },
+    "weekly_rosters:2018": {
+      "bytes": 16566753,
+      "sha256": "c3bca1ee53e63e21b964f1bb42c251e25b7b4b8c55210730dd4ded2f9d4a709a"
+    },
+    "weekly_rosters:2019": {
+      "bytes": 16588230,
+      "sha256": "af6aa7b8aa7850c47fe307d548d66fa7c1cac88fe11e5951c781974cb6909e03"
+    },
+    "weekly_rosters:2020": {
+      "bytes": 14333971,
+      "sha256": "0b948cca8735a2417cbda14464f4532aeee58d871e2fcd8464a23e969e45789e"
+    },
+    "weekly_rosters:2021": {
+      "bytes": 15242660,
+      "sha256": "88adfe0fba5cbedd260d7928ad373476d4fb168d0213cb52ef1163ed5d3056b7"
+    },
+    "weekly_rosters:2022": {
+      "bytes": 14790824,
+      "sha256": "bd6a50de334473c10f8058afa948fd0c6adc8a8b081da41c500cc0aa069c5312"
+    },
+    "weekly_rosters:2023": {
+      "bytes": 14612235,
+      "sha256": "1433f1f239784dde7fcb35349d211a9b83abfc0156337b72ec4f923abf715bd3"
+    },
+    "weekly_rosters:2024": {
+      "bytes": 14926918,
+      "sha256": "074ecaeb9325de943c11f7bbc941425626985090ef8386f90cd837fa5cb5d4b3"
+    },
+    "weekly_rosters:2025": {
+      "bytes": 15385661,
+      "sha256": "c2f7a1ffebe06058400af1989d1cd2900cc5c9659f084623708a06d4e28de35b"
+    }
+  },
+  "started_at": "2026-09-08T15:01:29.853976+00:00",
+  "status": "EXPERIMENTAL / HOLD",
+  "training_games": 3407,
+  "validation_scope": "Reused historical seasons; diagnostic only, no promotion"
+}

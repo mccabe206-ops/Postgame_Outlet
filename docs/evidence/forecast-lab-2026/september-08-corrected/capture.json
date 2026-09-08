@@ -1,0 +1,162 @@
+{
+  "captured_at": "2026-09-08T15:01:38.803969+00:00",
+  "schema_version": 1,
+  "sources": [
+    {
+      "bytes": 360272,
+      "captured_at": "2026-09-08T15:01:37.974270+00:00",
+      "etag": "\"0x8DF0DA042794983\"",
+      "file": "roster.csv.gz",
+      "final_url": "https://release-assets.githubusercontent.com/github-production-release-asset/452908115/21dc923d-0c0a-4921-a354-f79243f8578d?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-08T15%3A49%3A19Z&rscd=attachment%3B+filename%3Droster_2026.csv.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-08T14%3A48%3A39Z&ske=2026-09-08T15%3A49%3A19Z&sks=b&skv=2018-11-09&sig=%2B5deqgqk3XqmCMjYnQqDjrPQ5TqpUH7e2LJbxJxCWsc%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODg3OTk5NywibmJmIjoxNzg4ODc5Njk3LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.kMTAgpQAxFpdKIOqY9ayavyw95p8mNBCWtEHas2UDgs&response-content-disposition=attachment%3B%20filename%3Droster_2026.csv.gz&response-content-type=application%2Foctet-stream",
+      "last_modified": "Tue, 08 Sep 2026 11:56:47 GMT",
+      "sha256": "2b2c39db80f1c9d9bf68b956a475cfba9ca19d4b456eefd2b4fa045f3a757965",
+      "started_at": "2026-09-08T15:01:37.431712+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_2026.csv.gz"
+    },
+    {
+      "bytes": 9866229,
+      "captured_at": "2026-09-08T15:01:37.917339+00:00",
+      "etag": "\"0x8DF0DA04D3569D4\"",
+      "file": "depth.csv.gz",
+      "final_url": "https://release-assets.githubusercontent.com/github-production-release-asset/452908115/ea8efe86-281a-4020-b9e3-f8f5c60778c2?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-08T15%3A42%3A17Z&rscd=attachment%3B+filename%3Ddepth_charts_2026.csv.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-08T14%3A42%3A05Z&ske=2026-09-08T15%3A42%3A17Z&sks=b&skv=2018-11-09&sig=TOkG9xNoLA%2BEm6V0DEayom4wcfmioFs%2FrrfB7bzS95k%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODg3OTk5NywibmJmIjoxNzg4ODc5Njk3LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.kMTAgpQAxFpdKIOqY9ayavyw95p8mNBCWtEHas2UDgs&response-content-disposition=attachment%3B%20filename%3Ddepth_charts_2026.csv.gz&response-content-type=application%2Foctet-stream",
+      "last_modified": "Tue, 08 Sep 2026 11:57:05 GMT",
+      "sha256": "a2bcbdd515d45fc20c9fcdbba795fb10069849a8475290f58bc2965193968549",
+      "started_at": "2026-09-08T15:01:37.432357+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2026.csv.gz"
+    },
+    {
+      "bytes": 512103,
+      "captured_at": "2026-09-08T15:01:37.807831+00:00",
+      "etag": "\"0x8DF0DB80E769292\"",
+      "file": "schedule.csv.gz",
+      "final_url": "https://release-assets.githubusercontent.com/github-production-release-asset/452908115/0df826f3-7161-4d45-b83e-827848625123?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-08T15%3A34%3A40Z&rscd=attachment%3B+filename%3Dgames.csv.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-08T14%3A33%3A51Z&ske=2026-09-08T15%3A34%3A40Z&sks=b&skv=2018-11-09&sig=SUWEm56be1MwmfqUugungyXQQ0iQuKk7lnh04t3RM2g%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODg3OTk5NywibmJmIjoxNzg4ODc5Njk3LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.kMTAgpQAxFpdKIOqY9ayavyw95p8mNBCWtEHas2UDgs&response-content-disposition=attachment%3B%20filename%3Dgames.csv.gz&response-content-type=application%2Foctet-stream",
+      "last_modified": "Tue, 08 Sep 2026 14:47:07 GMT",
+      "sha256": "da833d174e5791ccb9ae697aa13c48534b66c198c9ac5ca3d6c47e240a6f94cf",
+      "started_at": "2026-09-08T15:01:37.432792+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv.gz"
+    },
+    {
+      "bytes": 1771177,
+      "captured_at": "2026-09-08T15:01:38.374671+00:00",
+      "etag": null,
+      "file": "nfl-week-1.html",
+      "final_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "last_modified": null,
+      "sha256": "8431c787ca70b41876a80bb6ae85bf9e74a5ed63a14c651aadf3188668acb34b",
+      "started_at": "2026-09-08T15:01:37.808897+00:00",
+      "status": 200,
+      "url": "https://www.nfl.com/schedules/2026/by-week/reg-1"
+    },
+    {
+      "bytes": 328646,
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "etag": null,
+      "file": "nfl-injuries.html",
+      "final_url": "https://www.nfl.com/injuries/",
+      "last_modified": null,
+      "sha256": "9985cba4a5a8c3a81eb32feba980406063420af001f5b371f204b02dd04be4bd",
+      "started_at": "2026-09-08T15:01:37.925400+00:00",
+      "status": 200,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 428499,
+      "captured_at": "2026-09-08T15:01:38.080270+00:00",
+      "etag": null,
+      "file": "patriots-week1-injury.html",
+      "final_url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks",
+      "last_modified": null,
+      "sha256": "88e366a561c2634c35321f41ef8e41009458c5e9c0be4459513e654fae0ed51e",
+      "started_at": "2026-09-08T15:01:37.975072+00:00",
+      "status": 200,
+      "url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks"
+    },
+    {
+      "bytes": 637156,
+      "captured_at": "2026-09-08T15:01:38.140411+00:00",
+      "etag": null,
+      "file": "seahawks-week1-injury.html",
+      "final_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots",
+      "last_modified": null,
+      "sha256": "7dcf24072665f11e77816b6b426bcd072be36f575808e796332172938ba977a7",
+      "started_at": "2026-09-08T15:01:37.998652+00:00",
+      "status": 200,
+      "url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+    },
+    {
+      "bytes": 641219,
+      "captured_at": "2026-09-08T15:01:38.294057+00:00",
+      "etag": "W/\"2cb3a1efdb13190bcef6ba3a1ad639a5b6e042842e89740cc035fd3185a5be82\"",
+      "file": "rosters-release.json",
+      "final_url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/rosters",
+      "last_modified": "Tue, 08 Sep 2026 11:56:48 GMT",
+      "sha256": "2cb3a1efdb13190bcef6ba3a1ad639a5b6e042842e89740cc035fd3185a5be82",
+      "started_at": "2026-09-08T15:01:38.081174+00:00",
+      "status": 200,
+      "url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/rosters"
+    },
+    {
+      "bytes": 43,
+      "captured_at": "2026-09-08T15:01:38.420225+00:00",
+      "etag": "\"0x8DF0DA042F30DE2\"",
+      "file": "rosters-timestamp.json",
+      "final_url": "https://release-assets.githubusercontent.com/github-production-release-asset/452908115/88852560-303d-4e62-8630-cd801fe4f13c?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-08T15%3A45%3A18Z&rscd=attachment%3B+filename%3Dtimestamp.json&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-08T14%3A44%3A21Z&ske=2026-09-08T15%3A45%3A18Z&sks=b&skv=2018-11-09&sig=t3J%2FeJJmMMHV7Zv3AZyTOj85OUvUF25R6GRIct7iO%2BA%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODg3OTk5OCwibmJmIjoxNzg4ODc5Njk4LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.kzQtYV3ny7GiNtpIRgOYKh-lbikU4FliJ1vs6dtVlnI&response-content-disposition=attachment%3B%20filename%3Dtimestamp.json&response-content-type=application%2Foctet-stream",
+      "last_modified": "Tue, 08 Sep 2026 11:56:47 GMT",
+      "sha256": "688b1b0494de6b478acf15159efb7b44560fb30a9c11e0d93980f751362dce13",
+      "started_at": "2026-09-08T15:01:38.141839+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/timestamp.json"
+    },
+    {
+      "bytes": 163952,
+      "captured_at": "2026-09-08T15:01:38.632439+00:00",
+      "etag": "W/\"3a0ffc60faee2bcc8fc02dda54526db9f13239c8455b8b8f57ba6df20cbb359b\"",
+      "file": "depth_charts-release.json",
+      "final_url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/depth_charts",
+      "last_modified": "Tue, 08 Sep 2026 11:57:06 GMT",
+      "sha256": "3a0ffc60faee2bcc8fc02dda54526db9f13239c8455b8b8f57ba6df20cbb359b",
+      "started_at": "2026-09-08T15:01:38.295050+00:00",
+      "status": 200,
+      "url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/depth_charts"
+    },
+    {
+      "bytes": 43,
+      "captured_at": "2026-09-08T15:01:38.590885+00:00",
+      "etag": "\"0x8DF0DA04D6FE71A\"",
+      "file": "depth_charts-timestamp.json",
+      "final_url": "https://release-assets.githubusercontent.com/github-production-release-asset/452908115/49871f14-e202-4230-a875-353c0b9c3836?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-08T15%3A40%3A27Z&rscd=attachment%3B+filename%3Dtimestamp.json&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-08T14%3A40%3A10Z&ske=2026-09-08T15%3A40%3A27Z&sks=b&skv=2018-11-09&sig=9svafsxPH3cmGXD8gTltl3Suk%2FPvvHRQk2v2bx%2BQI4I%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODg3OTk5OCwibmJmIjoxNzg4ODc5Njk4LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.kzQtYV3ny7GiNtpIRgOYKh-lbikU4FliJ1vs6dtVlnI&response-content-disposition=attachment%3B%20filename%3Dtimestamp.json&response-content-type=application%2Foctet-stream",
+      "last_modified": "Tue, 08 Sep 2026 11:57:05 GMT",
+      "sha256": "c8459d0841aff47b83649e215b32702eb0025a697e045bdbd5dbc11d80560b38",
+      "started_at": "2026-09-08T15:01:38.376913+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/timestamp.json"
+    },
+    {
+      "bytes": 12386,
+      "captured_at": "2026-09-08T15:01:38.590968+00:00",
+      "etag": "W/\"fff90659ab96ca1da1d488d773686876614792b165ee9c029a9c4efe298b48ea\"",
+      "file": "schedules-release.json",
+      "final_url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/schedules",
+      "last_modified": "Tue, 08 Sep 2026 14:47:08 GMT",
+      "sha256": "fff90659ab96ca1da1d488d773686876614792b165ee9c029a9c4efe298b48ea",
+      "started_at": "2026-09-08T15:01:38.420699+00:00",
+      "status": 200,
+      "url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/schedules"
+    },
+    {
+      "bytes": 43,
+      "captured_at": "2026-09-08T15:01:38.802823+00:00",
+      "etag": "\"0x8DF0DB80EE15D38\"",
+      "file": "schedules-timestamp.json",
+      "final_url": "https://release-assets.githubusercontent.com/github-production-release-asset/452908115/09f88d99-b9bd-4da4-ae3c-6ae50d07c76e?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-08T15%3A44%3A01Z&rscd=attachment%3B+filename%3Dtimestamp.json&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-08T14%3A43%3A32Z&ske=2026-09-08T15%3A44%3A01Z&sks=b&skv=2018-11-09&sig=SpJ8uwFYNMryuRgWNJHYShZIxWfkknnef18f5p92zG4%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4ODg3OTk5OCwibmJmIjoxNzg4ODc5Njk4LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.kzQtYV3ny7GiNtpIRgOYKh-lbikU4FliJ1vs6dtVlnI&response-content-disposition=attachment%3B%20filename%3Dtimestamp.json&response-content-type=application%2Foctet-stream",
+      "last_modified": "Tue, 08 Sep 2026 14:47:08 GMT",
+      "sha256": "37e8ea5b65b408b74926880e4c12de07c1132b507145bbf627d65843728d53ba",
+      "started_at": "2026-09-08T15:01:38.591355+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/timestamp.json"
+    }
+  ]
+}

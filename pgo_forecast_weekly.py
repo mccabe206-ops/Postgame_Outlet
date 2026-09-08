@@ -1,8 +1,7 @@
 """Record verified per-game forecast revisions before kickoff minus 60 minutes.
 
-The current snapshot verifier accepts only its September preseason edition.
-Any later weekly source format needs its own reviewed verifier before this
-recorder can consume it.
+Sources use their separately reviewed September7 or corrected Week1 verifier.
+Each edition retains its own model, source and arithmetic contract.
 """
 
 import argparse
@@ -14,9 +13,9 @@ from pathlib import Path, PurePosixPath
 import re
 
 import pgo_forecast_snapshot
+import pgo_forecast_corrected
 
-# ponytail: this intentionally reuses only the reviewed September snapshot
-# verifier; add a separately reviewed adapter before accepting later sources.
+# Only the two explicitly reviewed source editions are accepted below.
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_SNAPSHOT = HERE / "docs" / "evidence" / "forecast-lab-2026" / "september-07"
@@ -92,7 +91,14 @@ def _verified_source(directory, expected_manifest_sha256=None):
     manifest_sha256 = _sha256(before)
     if expected_manifest_sha256 is not None and manifest_sha256 != expected_manifest_sha256:
         raise ValueError("Snapshot source manifest hash changed")
-    snapshot = pgo_forecast_snapshot.load_snapshot(directory)
+    edition = json.loads(before).get('edition')
+    if edition == pgo_forecast_corrected.EDITION:
+        snapshot = pgo_forecast_corrected.load_snapshot(directory)
+    elif edition in (None, pgo_forecast_snapshot.EDITION):
+        # Missing edition reaches the strict legacy verifier, which rejects it.
+        snapshot = pgo_forecast_snapshot.load_snapshot(directory)
+    else:
+        raise ValueError('Unknown weekly source edition')
     if _manifest_bytes(directory) != before:
         raise ValueError("Snapshot source manifest changed during verification")
     return snapshot, manifest_sha256
@@ -257,13 +263,17 @@ def load_weekly(weekly_root):
                 "source_generated_at": revision["source_generated_at"],
                 "revision": revision["revision"],
                 "source_manifest_sha256": revision["source_manifest_sha256"],
+                "source_edition": snapshot["edition"],
+                **({"league_mean_total": snapshot["league_mean_total"]}
+                   if "league_mean_total" in snapshot else {}),
             }
         if revision["games"] != sorted(expected_rows, key=lambda row: (row["kickoff"], row["game_id"])):
             raise ValueError(f"Weekly revision games are not canonically ordered: {revision['revision']}")
         metadata.append({key: revision[key] for key in (
             "revision", "week", "registered_at", "source_directory",
             "source_manifest_sha256", "source_generated_at", "artifact_sha256",
-        )} | {"game_ids": [row["game_id"] for row in revision["games"]]})
+        )} | {"game_ids": [row["game_id"] for row in revision["games"]],
+              "source_edition": snapshot["edition"]})
     games = sorted(latest.values(), key=lambda row: (row["kickoff"], row["game_id"]))
     return {"schema_version": 1, "games": games, "revisions": metadata, "count": len(games)}
 

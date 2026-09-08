@@ -32,6 +32,7 @@ PREDICTIONS_PATH = ARCHIVE_DIR / "prospective_predictions.csv"
 ATTESTATION_PATH = HERE / "research" / "pgo_stability_blend" / "prospective_attestation.json"
 CAPTURE_ROOT = ARCHIVE_DIR / "results"
 SNAPSHOT_DIR = ARCHIVE_DIR / "september-07"
+CORRECTED_DIR = ARCHIVE_DIR / "september-08-corrected"
 WEEKLY_DIR = ARCHIVE_DIR / "weekly"
 OUTPUT_PATH = HERE / "docs" / "forecast-lab.html"
 SENSITIVITY_DIR = HERE / "research" / "pgo_opponent_adjustment" / "run-20260907"
@@ -371,14 +372,12 @@ def snapshot_interim_metrics(snapshot, results):
         2.5 if game["location"] == "Home" else 0.0
         for game, _result in selected
     ]
-    league_total = float(snapshot["league_mean_total"])
-    league_totals = [league_total for _item in selected]
-    league_scores = [
-        score for venue in venue_margins
-        for score in ((league_total + venue) / 2, (league_total - venue) / 2)
-    ]
+    league_totals = [float(game.get("league_mean_total", snapshot["league_mean_total"]))
+                     for game, _result in selected]
+    league_scores = [score for venue, total in zip(venue_margins, league_totals)
+                     for score in ((total + venue) / 2, (total - venue) / 2)]
     unavailable = {"total": None, "score": None}
-    return {
+    metrics = {
         "count": len(selected),
         "margin": _target_summary(predicted_margins, actual_margins),
         "total": _target_summary(predicted_totals, actual_totals),
@@ -412,6 +411,13 @@ def snapshot_interim_metrics(snapshot, results):
             },
         },
     }
+    if selected and all("incumbent_margin" in game for game, _result in selected):
+        metrics["baselines"]["incumbent"] = {
+            "margin": _target_summary(
+                [float(game["incumbent_margin"]) for game, _result in selected], actual_margins),
+            **unavailable,
+        }
+    return metrics
 
 
 def _shared_css():
@@ -473,6 +479,11 @@ def _spread(game):
         return f'{html.escape(game["away"])} -{abs(margin):.1f}'
 
 
+def _edition_name(edition):
+    return {'pgo-corrected-week1-2026-09-08': 'September 8 corrected',
+            'pgo-active-roster-2026-09-07': 'September 7 preseason'}.get(edition, edition)
+
+
 def _snapshot_metric_cards(metrics, label="September snapshot"):
     if metrics["count"] == 0:
         return f'<p class="empty">No finalized {html.escape(label)} results recorded yet.</p>'
@@ -504,9 +515,12 @@ def _snapshot_metric_cards(metrics, label="September snapshot"):
     for key, label in (
         ("pgo_v0", "PGO v0 margin"),
         ("legacy", "Original archive margin"),
+        ("incumbent", "September 7 incumbent margin"),
         ("zero", "Zero margin"),
         ("league_mean_venue", "League mean + venue"),
     ):
+        if key not in baselines:
+            continue
         item = baselines[key]
         values = [
             "Unavailable" if item[target] is None else f'{item[target]["mae"]:.3f}'
@@ -553,9 +567,17 @@ def _forecast_weeks(games, results, *, weekly=False):
                     f'<br>{_snapshot_kickoff_time(game["lock_at"])}</td>'
                 )
             kind = "weekly" if weekly else "snapshot"
+            comparison = ""
+            if weekly and "incumbent_margin" in game:
+                controls = (("September 7", "incumbent_margin"), ("PGO v0", "pgo_v0_margin"))
+                comparison = '<details><summary>Compare forecasts</summary>' + "".join(
+                    f'<p>{label}: {_spread({**game, "margin": game[key]})}</p>'
+                    for label, key in controls) + '</details>'
+            edition = (f'<br><small>{html.escape(_edition_name(game["source_edition"]))}</small>'
+                       if weekly and game.get('source_edition') else '')
             rows.append(
                 f'<tr data-{kind}-game-id="{html.escape(game["game_id"], quote=True)}">'
-                f'<th scope="row">{html.escape(game["away"])} @ {html.escape(game["home"])}</th>'
+                f'<th scope="row">{html.escape(game["away"])} @ {html.escape(game["home"])}{edition}{comparison}</th>'
                 f'<td>{_spread(game)}</td><td>{score}</td><td>{float(game["total"]):.1f}</td>'
                 f'{timing}'
                 f'<td>{_snapshot_kickoff_time(game["kickoff"])}</td>'
@@ -572,9 +594,8 @@ def _forecast_weeks(games, results, *, weekly=False):
     return "".join(weeks)
 
 
-def _rating_explanations(snapshot):
-    """Explain saved centered contributions without recomputing ratings."""
-    labels = {
+def _rating_labels():
+    return {
         "pgo_v0": "PGO v0 results-history input",
         "passing_epa_per_play_for": "Team passing efficiency (EPA per dropback)",
         "passing_epa_per_play_against": "Pass defense (opponent EPA prevented)",
@@ -606,6 +627,9 @@ def _rating_explanations(snapshot):
         "home_field": "Home-field adjustment",
         "rest_difference": "Rest adjustment",
     }
+def _rating_explanations(snapshot):
+    """Explain saved centered contributions without recomputing ratings."""
+    labels = _rating_labels()
     teams = sorted(snapshot["teams"], key=lambda team: team["rank"])
     preprocessor = snapshot["fit"]["preprocessor"]
     names = [*preprocessor["feature_names"],
@@ -703,19 +727,110 @@ def _rating_explanations(snapshot):
 ''' + "".join(cards) + '''<p>Full precision and all inputs: <a href="evidence/forecast-lab-2026/september-07/snapshot.json">saved snapshot JSON</a>. Ratings remain EXPERIMENTAL / HOLD.</p></details>'''
 
 
+def _corrected_section(snapshot):
+    if snapshot is None:
+        return ''
+    labels = _rating_labels()
+    cards = []
+    for team in sorted(snapshot['teams'], key=lambda row: row['rank']):
+        terms = team['contributions']
+        if not terms or not all(math.isfinite(value) for value in terms.values()) or not math.isclose(
+                math.fsum(terms.values()), team['rating'], abs_tol=1e-8, rel_tol=0):
+            raise ValueError('Corrected contributions must reconcile to the team rating')
+        coverage = team['coverage']
+        notes = coverage.get('notes', [])
+        if isinstance(notes, str):
+            notes = [notes]
+        absences = coverage.get('known_unavailable', [])
+        note_list = ''.join(f'<li>{html.escape(str(note))}</li>' for note in notes)
+        def observation(item):
+            if not isinstance(item, dict):
+                return html.escape(str(item))
+            name = item.get('player_name') or item.get('name') or item.get('full_name') or 'Player'
+            status = item.get('game_status') or item.get('status') or item.get('practice_status') or 'Status unavailable'
+            position = item.get('report_position') or item.get('position') or item.get('roster_position')
+            return html.escape(f'{name}' + (f' ({position})' if position else '') + f': {status}')
+        absence_list = ''.join(f'<li>{observation(item)} — unpriced absence</li>' for item in absences)
+        absent_ids = {item.get('gsis_id') for item in absences if isinstance(item, dict) and item.get('gsis_id')}
+        observations = ''.join(f'<li>{observation(item)}</li>' for item in coverage.get('observations', [])
+                               if not isinstance(item, dict) or item.get('gsis_id') not in absent_ids)
+        report_status = ('No formal report captured' if coverage['source_kind'] == 'no_formal_report'
+                         else 'Dated report captured; availability remains unadjusted')
+        if coverage.get('status') == 'BLOCKED_EXPECTED_QB_UNAVAILABLE':
+            report_status = 'Listed QB unavailable: conditional rating only; matchup omitted from this revision'
+        source_link = (f'<a href="{html.escape(_https_url(coverage["source_url"]), quote=True)}">Official report source</a>.'
+                       if coverage.get('source_url') else '')
+        rows = []
+        for name, value in sorted(terms.items(), key=lambda item: -abs(item[1])):
+            missing = name.endswith('_missing')
+            base_name = name.removesuffix('_missing') if missing else name
+            label = labels.get(base_name, base_name.replace('_', ' ')) + (' (missing flag)' if missing else '')
+            raw = team['features'].get(base_name)
+            shown = str(int(raw is None)) if missing else ('Unavailable' if raw is None else f'{raw:.4g}')
+            rows.append(f'<tr><th scope="row">{html.escape(label)}</th><td>{shown}</td><td>{value:+.3f}</td></tr>')
+        upward = sorted(((name, value) for name, value in terms.items() if value > 1e-8),
+                        key=lambda item: -item[1])[:3]
+        drivers = ', '.join(f'{labels.get(name, name.replace("_", " "))} ({value:+.3f})'
+                            for name, value in upward) or 'None above the league average'
+        cards.append(f'''<details class="lab-detail rating-explanation corrected-team" id="corrected-rating-{html.escape(team['team'], quote=True)}">
+<summary>#{team['rank']} {html.escape(team['team'])} &middot; {team['rating']:+.3f} model units</summary>
+<p>Expected QB: {html.escape(team['qb_name'])}. Largest upward fitted terms: {html.escape(drivers)}.</p>
+<p><strong>Input coverage:</strong> {report_status}.
+{html.escape(str(coverage.get('report_date') or 'Final report date unavailable'))}. {source_link}</p>
+<ul>{note_list}{absence_list}{observations}</ul>
+<p>These terms sum to the output relative to the league average. Related performance signals overlap; they are conditional model contributions, not independent player or team grades.</p>
+<div class="table-shell"><table class="study-table"><thead><tr><th>Input</th><th>Raw input</th><th>Fitted contribution</th></tr></thead><tbody>{''.join(rows)}
+<tr><th>Total model output</th><td>&mdash;</td><td>{team['rating']:+.3f}</td></tr></tbody></table></div></details>''')
+    skipped = ''.join(f'<li>{html.escape(row["game_id"])}: {html.escape(row["reason"])}</li>'
+                      for row in snapshot.get('skipped_games', []))
+    skipped = f'<p>Not reissued in this source package:</p><ul>{skipped}</ul>' if skipped else ''
+    return f'''<section id="corrected-ratings"><h2>September 8 corrected opening-week inputs</h2>
+<p><strong>EXPERIMENTAL / HOLD.</strong> Generated {_snapshot_kickoff_time(snapshot['generated_at'])}.
+Inputs as of {_snapshot_kickoff_time(snapshot['inputs_as_of'])}. Higher model units rank higher; these are not established neutral-field point prices or rank-confidence intervals.</p>
+<p>This version matches historical and current ACT eligibility, removes six roster/coaching transition inputs,
+uses statistic-specific QB exposure and enforces symmetric neutral-field predictions. It keeps four-game team history and a one-year QB half-life.
+Those construction repairs do not establish superior forecasting accuracy. The same historical seasons have already been examined.</p>
+<p class="notice"><strong>Non-QB injuries are not priced.</strong> These are conditional forecasts with the listed expected quarterback.
+An ACT listing does not mean healthy. Known absences and pending reports below are unmodeled limitations; a later source review is needed before each T-60 cutoff.</p>
+<p><strong>Why can New England remain high?</strong> The results input rises when a team beats the model's own expected margin;
+it does not read public expectations. Recent team and QB passing performance also contribute, and those signals overlap.
+No team-specific adjustment was made. Open NE or JAX to inspect this edition's actual terms.</p>
+<p><a href="#corrected-rating-NE">New England</a> &middot; <a href="#corrected-rating-JAX">Jacksonville</a> &middot;
+<a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_week1_corrected/charter.md">Fixed construction and evaluation contract</a> &middot;
+<a href="{html.escape(snapshot.get('_download_url', 'evidence/forecast-lab-2026/september-08-corrected/snapshot.json'), quote=True)}">All inputs and source evidence</a></p>
+{skipped}{''.join(cards)}</section>'''
+
+
+def _load_corrected(directory, weekly, weekly_root):
+    import pgo_forecast_corrected
+    if directory is None:
+        revisions = [row for row in weekly.get('revisions', [])
+                     if row.get('source_edition') == pgo_forecast_corrected.EDITION]
+        directory = ((Path(weekly_root) / revisions[-1]['source_directory']).resolve()
+                     if revisions else CORRECTED_DIR)
+    directory = Path(directory).resolve()
+    snapshot = pgo_forecast_corrected.load_snapshot(directory)
+    snapshot['_download_url'] = f'evidence/forecast-lab-2026/{directory.name}/snapshot.json'
+    return snapshot, directory
+
+
 def _weekly_section(weekly, snapshot, results, provenance):
-    games = weekly["games"]
+    incumbent = {game["game_id"]: game for game in snapshot["games"]}
+    games = [{**game, "incumbent_margin": game.get(
+        "incumbent_margin", incumbent[game["game_id"]]["margin"])} for game in weekly["games"]]
     metrics = snapshot_interim_metrics({**snapshot, "games": games}, results)
     source_dates = sorted({game["source_generated_at"] for game in games})
     source_text = ", ".join(_snapshot_kickoff_time(value) for value in source_dates)
     sources = (
         f'<p>Source snapshot generated: {source_text}. '
-        'The initial Week 1 draft uses the September 7 active-roster snapshot; '
-        'it does not include a comprehensive game-day injury adjustment.</p>'
+        'The edition attached to each saved revision identifies its model and inputs. '
+        '<strong>Non-QB injuries are not priced in these conditional forecasts.</strong> '
+        'An ACT roster listing does not establish health. Review the source coverage below.</p>'
         if games else '<p>No weekly edition has been recorded yet.</p>'
     )
     revisions = "".join(
         f'<li>Saved {_snapshot_kickoff_time(item["registered_at"])}; '
+        f'{html.escape(_edition_name(item.get("source_edition", item["source_directory"])))}; '
         f'<a href="evidence/forecast-lab-2026/weekly/{html.escape(item["revision"], quote=True)}">'
         f'forecast revision</a></li>' for item in weekly.get("revisions", [])
     )
@@ -731,7 +846,7 @@ def _weekly_section(weekly, snapshot, results, provenance):
 <h1>PGO Forecast Lab</h1><h2>Weekly game forecasts</h2>
 <p>Each matchup locks <strong>60 minutes before kickoff</strong>. Both teams' projected scores, the spread, and the total freeze together.</p>
 <p>Drafts can change until their own cutoff. The last saved revision before that deadline becomes the locked forecast; earlier games do not lock the rest of the week.</p>
-<p><a href="index.html">Back to McCabe Ratings</a> &middot; <a href="#rating-explanations">Why teams rank here</a> &middot; <a href="#preseason-baseline">Full-season preseason forecast</a> &middot; <a href="#forecast-process">Sources to results</a></p></header>
+<p><a href="index.html">Back to McCabe Ratings</a> &middot; <a href="#corrected-ratings">Current draft inputs</a> &middot; <a href="#rating-explanations">September 7 explanations</a> &middot; <a href="#preseason-baseline">Full-season archive</a> &middot; <a href="#forecast-process">Sources to results</a></p></header>
 <section><h2>Weekly predictions</h2>{sources}
 <p>The PGO spread shows the favorite with a minus sign. Scores are rounded to whole points; spreads and totals to one decimal. Evaluation uses unrounded values.</p>
 <p><strong>Score-method check:</strong> the projected-total rule missed combined scores by about 11 points on average in 2018&ndash;2025, with no convincing improvement over a simple league-average total. Exact scores remain experimental. <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md#game-totals-need-their-own-evidence">Read the separate totals test</a>.</p>
@@ -973,7 +1088,7 @@ def _model_sensitivity(sensitivity, strength_study=None):
 
 def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, strength_study=None,
                snapshot_results=(), snapshot_provenance=(), weekly=None,
-               weekly_results=(), weekly_provenance=()):
+               weekly_results=(), weekly_provenance=(), corrected=None):
     """Render a standalone, escaped, no-fetch Forecast Lab page."""
     css = _shared_css()
     font_links = _shared_font_links()
@@ -989,6 +1104,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
         if weekly is not None:
             lead = (
                 _weekly_section(weekly, snapshot, weekly_results, weekly_provenance)
+                + _corrected_section(corrected)
                 + _rating_explanations(snapshot)
                 + '<details class="preseason-archive" id="preseason-baseline">'
                 '<summary>September 7 preseason baseline &middot; All 272 games and 32 team ratings</summary>'
@@ -1053,6 +1169,9 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
 .status{{display:inline-block;padding:6px 10px;border:1px solid var(--orange);border-radius:999px;font-weight:800}}.metric-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}}.metric{{padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}}.metric h3{{margin-top:0}}.forecast-week,.lab-detail,.original-archive,.preseason-archive{{margin:12px 0;border:1px solid var(--border);border-radius:10px;padding:12px}}.forecast-week summary,.lab-detail summary,.original-archive>summary,.preseason-archive>summary{{cursor:pointer;font-weight:800}}.forecast-week summary span{{color:var(--mut);font-weight:500}}table{{width:100%;border-collapse:collapse}}th,td{{padding:9px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}}th:first-child{{text-align:left}}.notice{{padding:14px;border-left:4px solid var(--orange);background:var(--panel)}}code{{overflow-wrap:anywhere}}.weekly-status{{font-weight:800}}
 .rating-explanation table{{table-layout:fixed}}.rating-explanation th{{white-space:normal;user-select:text}}.rating-explanation tbody th{{background:transparent;color:inherit;font-size:inherit;letter-spacing:normal;text-transform:none}}.rating-explanation thead th:last-child{{width:110px}}.rating-summary tr:last-child{{font-weight:800}}
 .study-table{{table-layout:fixed}}.study-table th,.study-table td{{white-space:normal;overflow-wrap:anywhere}}.study-table th:first-child{{width:42%}}
+.forecast-week tbody th{{text-transform:none;letter-spacing:normal}}
+.corrected-team thead th{{font-size:11px;letter-spacing:normal;text-transform:none}}
+.corrected-team td{{white-space:nowrap;overflow-wrap:normal;font-size:12px}}
 </style></head><body><main class="lab-wrap">
 {lead}{archive_open}{archive_heading}
 <section><h2>Record so far</h2>{_metric_cards(metrics)}
@@ -1108,6 +1227,7 @@ def main(argv=None):
     parser.add_argument("--attestation", type=Path, default=ATTESTATION_PATH)
     parser.add_argument("--captures", type=Path, default=CAPTURE_ROOT)
     parser.add_argument("--snapshot", type=Path, default=SNAPSHOT_DIR)
+    parser.add_argument("--corrected", type=Path, help="Defaults to the latest verified corrected weekly source")
     parser.add_argument("--weekly", type=Path, default=WEEKLY_DIR)
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     records = parser.add_mutually_exclusive_group()
@@ -1121,13 +1241,15 @@ def main(argv=None):
             args.output,
             (args.lock, args.predictions, args.attestation, args.record_results,
              args.record_snapshot_results, args.record_weekly_results),
-            (ARCHIVE_DIR, args.captures, args.snapshot, args.weekly, SENSITIVITY_DIR, STRENGTH_STUDY_DIR),
+            (ARCHIVE_DIR, args.captures, args.snapshot, args.corrected or CORRECTED_DIR, args.weekly, SENSITIVITY_DIR, STRENGTH_STUDY_DIR),
         )
         lock = load_archive(args.lock, args.predictions, args.attestation)
         snapshot = _load_snapshot(args.snapshot)
         sensitivity = load_model_sensitivity(SENSITIVITY_DIR, snapshot) if snapshot is not None else None
         strength_study = load_strength_study(STRENGTH_STUDY_DIR) if sensitivity is not None else None
         weekly = pgo_forecast_weekly.load_weekly(args.weekly)
+        corrected, corrected_directory = _load_corrected(args.corrected, weekly, args.weekly)
+        _validate_output_path(args.output, (), (corrected_directory,))
         weekly_lock = {"games": weekly["games"]}
         if args.record_results or args.record_snapshot_results or args.record_weekly_results:
             if not args.source_url:
@@ -1166,6 +1288,7 @@ def main(argv=None):
             weekly=weekly if snapshot is not None else None,
             weekly_results=weekly_results,
             weekly_provenance=weekly_provenance,
+            corrected=corrected,
         ))
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
         print(f"Forecast Lab failed: {error}", file=sys.stderr)

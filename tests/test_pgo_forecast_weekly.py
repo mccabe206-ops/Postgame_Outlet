@@ -79,6 +79,26 @@ class ForecastWeeklyTests(unittest.TestCase):
         self.assertEqual(revision["registered_at"], "2026-09-09T23:19:59.000000Z")
         self.assertEqual(revision["games"][0]["lock_at"], "2026-09-09T23:20:00.000000Z")
 
+    def test_corrected_source_dispatch_preserves_revision_and_derives_edition(self):
+        self.snapshot['edition'] = weekly.pgo_forecast_corrected.EDITION
+        self.snapshot['league_mean_total'] = 44.5
+        (self.source / 'manifest.json').write_text(json.dumps({'edition': self.snapshot['edition']}))
+        with mock.patch.object(weekly.pgo_forecast_corrected, 'load_snapshot', return_value=self.snapshot) as loader:
+            revision = self.record_at(datetime(2026, 9, 8, 12, tzinfo=UTC))
+            path = self.weekly_root / revision['revision']
+            before = path.read_bytes()
+            series = weekly.load_weekly(self.weekly_root)
+            self.assertTrue(loader.called)
+            self.assertEqual(series['games'][0]['source_edition'], self.snapshot['edition'])
+            self.assertEqual(series['games'][0]['league_mean_total'], 44.5)
+            self.assertNotIn('source_edition', revision['games'][0])
+            self.assertEqual(path.read_bytes(), before)
+
+    def test_unknown_source_edition_is_rejected(self):
+        (self.source / 'manifest.json').write_text('{"edition":"unreviewed"}')
+        with self.assertRaisesRegex(ValueError, 'Unknown weekly source edition'):
+            self.record_at(datetime(2026, 9, 8, 12, tzinfo=UTC))
+
     def test_refuses_exactly_at_and_after_cutoff(self):
         for when in (
             datetime(2026, 9, 9, 23, 20, tzinfo=UTC),

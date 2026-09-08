@@ -10,6 +10,7 @@ on:
       - "pgo_forecast_lab.py"
       - "pgo_forecast_snapshot.py"
       - "pgo_forecast_weekly.py"
+      - "pgo_forecast_corrected.py"
       - "docs/evidence/forecast-lab-2026/**"
       - "research/pgo_stability_blend/prospective_attestation.json"
       - "!data/snapshots.json"

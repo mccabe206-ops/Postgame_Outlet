@@ -25,6 +25,48 @@ ATTESTATION = ROOT / "research/pgo_stability_blend/prospective_attestation.json"
 
 
 class ForecastLabTests(unittest.TestCase):
+    def test_latest_corrected_revision_drives_the_input_panel_after_refresh(self):
+        weekly_root = Path('docs/evidence/forecast-lab-2026/weekly').resolve()
+        weekly = {'revisions': [dict(source_edition='pgo-corrected-week1-2026-09-08',
+            source_directory='../september-08-corrected'),
+            dict(source_edition='pgo-corrected-week1-2026-09-08', source_directory='../september-09-refresh')]}
+        with patch('pgo_forecast_corrected.load_snapshot', return_value={}) as load:
+            data, directory = pgo_forecast_lab._load_corrected(None, weekly, weekly_root)
+        self.assertEqual(directory, weekly_root.parent / 'september-09-refresh')
+        load.assert_called_once_with(directory)
+        self.assertIn('september-09-refresh/snapshot.json', data['_download_url'])
+
+    def test_corrected_panel_distinguishes_scale_and_unpriced_absences(self):
+        corrected = {'generated_at': '2026-09-08T16:00:00Z', 'inputs_as_of': '2026-09-08T15:00:00Z',
+            'teams': [{'team': 'NE', 'rank': 1, 'rating': 2.0, 'qb_name': '<Maye>',
+                'features': {'pgo_v0': 4.0}, 'contributions': {'pgo_v0': 2.0},
+                'coverage': {'status': 'UNKNOWN', 'source_kind': 'no_formal_report',
+                    'notes': ['Final report pending <review>'],
+                    'known_unavailable': [{'gsis_id': 'brown', 'player_name': 'Ben Brown', 'report_position': 'OL', 'game_status': 'Out'}],
+                    'observations': [{'gsis_id': 'brown', 'player_name': 'Ben Brown', 'report_position': 'OL', 'game_status': 'Out'}]}}]}
+        panel = pgo_forecast_lab._corrected_section(corrected)
+        for text in ('corrected-rating-NE', '&lt;Maye&gt;', '&lt;review&gt;',
+                     'Non-QB injuries are not priced', 'model units', 'Raw input',
+                     'Fitted contribution', 'HOLD', '+2.000'):
+            self.assertIn(text, panel)
+        self.assertNotIn('<Maye>', panel)
+        self.assertEqual(panel.count('Ben Brown (OL): Out'), 1)
+        corrected['teams'][0]['contributions']['pgo_v0'] = 3.0
+        with self.assertRaises(ValueError):
+            pgo_forecast_lab._corrected_section(corrected)
+
+    def test_mixed_weekly_sources_keep_their_own_total_and_incumbent_baselines(self):
+        snapshot = self.synthetic_snapshot()
+        games = [dict(game) for game in snapshot['games'][:2]]
+        games[0].update(league_mean_total=40, incumbent_margin=3)
+        games[1].update(league_mean_total=60, incumbent_margin=-3)
+        snapshot['games'] = games
+        results = [dict(game_id=game['game_id'], actual_margin=0, home_score=25, away_score=25)
+                   for game in games]
+        metrics = pgo_forecast_lab.snapshot_interim_metrics(snapshot, results)
+        self.assertEqual(metrics['baselines']['league_mean_venue']['total']['mae'], 10)
+        self.assertEqual(metrics['baselines']['incumbent']['margin']['mae'], 3)
+
     def test_current_strength_summary_uses_verified_results_and_stays_hold(self):
         study = pgo_forecast_lab.load_strength_study(pgo_forecast_lab.STRENGTH_STUDY_DIR)
         sensitivity = {'teams': [], 'completed_at': 'old run', 'mccabe_as_of': 'McCabe',
@@ -768,9 +810,9 @@ class ForecastLabTests(unittest.TestCase):
             output = root / "lab.html"
             with patch.object(pgo_forecast_lab, "load_archive",
                               return_value=self.synthetic_lock()), \
-                    patch.object(pgo_forecast_lab.pgo_forecast_snapshot,
-                                 "load_snapshot",
+                    patch.object(pgo_forecast_lab, "_load_snapshot",
                                  return_value=self.synthetic_snapshot()) as load, \
+                    patch.object(pgo_forecast_lab, "_load_corrected", return_value=(None, root / "corrected")), \
                     patch.object(pgo_forecast_lab, "load_results",
                                  side_effect=[([], []), ([], []), ([], [])]), \
                     patch.object(pgo_forecast_lab, "atomic_write_text") as write:
@@ -842,9 +884,9 @@ class ForecastLabTests(unittest.TestCase):
             captured = datetime(2026, 9, 10, 4, tzinfo=UTC)
             with patch.object(pgo_forecast_lab, "load_archive",
                               return_value=self.synthetic_lock()), \
-                    patch.object(pgo_forecast_lab.pgo_forecast_snapshot,
-                                 "load_snapshot",
+                    patch.object(pgo_forecast_lab, "_load_snapshot",
                                  return_value=self.synthetic_snapshot()), \
+                    patch.object(pgo_forecast_lab, "_load_corrected", return_value=(None, root / "corrected")), \
                     patch.object(pgo_forecast_lab, "_current_utc",
                                  return_value=captured):
                 status = pgo_forecast_lab.main([
@@ -920,6 +962,7 @@ class ForecastLabTests(unittest.TestCase):
                               return_value=self.synthetic_lock()), \
                     patch.object(pgo_forecast_lab, "_load_snapshot",
                                  return_value=snapshot), \
+                    patch.object(pgo_forecast_lab, "_load_corrected", return_value=(None, root / "corrected")), \
                     patch.object(pgo_forecast_lab.pgo_forecast_weekly, "load_weekly",
                                  return_value=weekly), \
                     patch.object(pgo_forecast_lab, "_current_utc",
