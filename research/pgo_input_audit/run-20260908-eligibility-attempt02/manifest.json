@@ -1,0 +1,38 @@
+{
+  "files": {
+    "fold-fits.json": {
+      "bytes": 4924627,
+      "sha256": "49ada0cdc3dd4b9b52e3b7046ec8ae9f8897a07acc1b8ba7bdd1cba54b752cf0"
+    },
+    "matched-predictions.csv": {
+      "bytes": 574396,
+      "sha256": "c490803b885ce3b1cb99030a97c0afa97d8b967de5ba27080b150698e0eb84eb"
+    },
+    "metrics.json": {
+      "bytes": 208103,
+      "sha256": "e8763110cc224f96908f77a6ef889b386fc68e8a5b7c9e070a51af3485354dea"
+    },
+    "rating-details.json": {
+      "bytes": 764010,
+      "sha256": "5d42deec90d6e51ae51f21e2202499d684f3be620d96fe90c0c3dcf04c0bec3e"
+    },
+    "ratings.csv": {
+      "bytes": 5283,
+      "sha256": "bfbb91149a2e7bfee7bcf966dd2749e447a52b028ca2a08e3346381dc37f49b4"
+    },
+    "report.md": {
+      "bytes": 837,
+      "sha256": "e2938b6bfa5df92338fad840f02832604ff606f18ced80b2cd21fb4455a6c1c5"
+    },
+    "run-receipt.json": {
+      "bytes": 167782,
+      "sha256": "ccb03bf99b8224a5ec6b8d4dda02f701e49eb7026a96186aa3f8a4d2b7e30214"
+    },
+    "run-start.json": {
+      "bytes": 1325,
+      "sha256": "bdffe1c2307a64af8804590915bfef3cbc5e90ba730bf24aa074f80303cea635"
+    }
+  },
+  "identity": "pgo-input-audit-eligibility-20260908",
+  "schema_version": 1
+}

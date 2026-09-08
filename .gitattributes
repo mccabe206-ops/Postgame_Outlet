@@ -2,3 +2,25 @@ research/pgo_stability_blend/*.json text eol=lf
 research/pgo_fantasy/*.json text eol=lf
 research/pgo_v1/validation_predictions.csv text eol=crlf
 docs/evidence/fantasy-scoring-20260907-031950.json -text whitespace=cr-at-eol
+docs/evidence/forecast-lab-2026/prospective_lock.json -text
+docs/evidence/forecast-lab-2026/prospective_predictions.csv -text
+docs/evidence/forecast-lab-2026/results/*/results.csv -text
+docs/evidence/forecast-lab-2026/results/*/capture.json -text
+docs/evidence/forecast-lab-2026/september-07/** -text
+docs/evidence/forecast-lab-2026/weekly/** -text
+research/pgo_opponent_adjustment/** -text
+pgo_opponent_*.py text eol=lf
+tests/test_pgo_opponent_*.py text eol=lf
+research/pgo_current_strength/** -text
+research/pgo_input_audit/** -text whitespace=cr-at-eol
+tests/test_pgo_input_audit.py text eol=lf
+pgo_current_strength.py text eol=lf
+pgo_roster_strength.py text eol=lf
+pgo_strength_evaluation.py text eol=lf
+tests/test_pgo_*strength*.py text eol=lf
+research/pgo_week1_corrected/** -text whitespace=cr-at-eol
+docs/evidence/forecast-lab-2026/september-08-corrected/** -text whitespace=cr-at-eol
+pgo_forecast_corrected.py text eol=lf
+tests/test_pgo_forecast_corrected.py text eol=lf
+tests/test_pgo_week1_corrected.py text eol=lf
+research/pgo_corrected_roster_candidate/** -text whitespace=cr-at-eol

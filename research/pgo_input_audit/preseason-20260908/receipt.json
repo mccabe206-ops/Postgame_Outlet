@@ -1,0 +1,377 @@
+{
+  "charter_sha256": "4be3031146e6f7f58347a7139a8c249b5bbb40a69876b86547ddaca4b45f52fd",
+  "code_sha256": {
+    "pgo_challenger.py": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+    "pgo_current_strength.py": "10372fa6afe5a81e1b2db7cb7c78d46726f24ca4c40c3daacde119bd214c3bbd",
+    "pgo_model.py": "174f165c3343a1a045707bb1c4731bbbcae0958fe07618dd0ddd7ae25ae56ac5",
+    "pgo_opponent_evaluation.py": "318072774cc25140c1f36aeae8f6f4edfa87091fc04964f1301a9f7ad773fe62",
+    "pgo_sources.py": "97bd522580eadc87719757a8c3d1adb20601fa75bbb9e315308dc15d28cd3fb8",
+    "research\\pgo_input_audit\\check_preseason.py": "b7f9844bf992a76e3a5b9313d80e230a7b91b4d2bd6e1944640c7f8ab4b08ff4"
+  },
+  "completed_at": "2026-09-08T03:54:59.072228+00:00",
+  "frozen_strength_policy": "all teams frozen at one exclusive first-kickoff boundary; full strength",
+  "identity": "pgo-season-frozen-strength-20260908",
+  "leakage_verdict": "REVIEW REQUIRED: retrospective Week-1 identities and source vintages",
+  "no_fit_performed": true,
+  "protected_sha256": {
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_challenger.py": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_current_strength.py": "10372fa6afe5a81e1b2db7cb7c78d46726f24ca4c40c3daacde119bd214c3bbd",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_model.py": "174f165c3343a1a045707bb1c4731bbbcae0958fe07618dd0ddd7ae25ae56ac5",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_opponent_evaluation.py": "318072774cc25140c1f36aeae8f6f4edfa87091fc04964f1301a9f7ad773fe62",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_sources.py": "97bd522580eadc87719757a8c3d1adb20601fa75bbb9e315308dc15d28cd3fb8",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\run-20260908\\fold-fits.json": "05a7faceba9589c7b9cfef76664a391fee3c6593d0b3bc1adec76abfda8192a6",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\run-20260908\\manifest.json": "6682197b16fcc0974fef19e6c704ef238d4d2a30ba0db066e3e86a6bad35ee4a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\run-20260908\\matched-predictions.csv": "fa06a91ad503ba7dd246068dcff356afa6200087b5422c041ada6b4956082847",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\run-20260908\\metrics.json": "1d7fcc0c106a64e8d193a2b7be868aee6f666f51b38b055936a6128122e9483b",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\run-20260908\\rating-details.json": "5125ca8c34e3f75fce5792b56ba525dde932db9c1cbf5e2722d642ad1f93f9cd",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\run-20260908\\ratings.csv": "0599bb5fd424c6eeb7dbee8c97b1c9d69f305791c75f2895cee448ed40ae4a6f",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\run-20260908\\report.md": "5222335ce59f351ef88ac565d2d1583277913bc0f38b3e0006ac87bf3c5d4cfe",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\run-20260908\\run-receipt.json": "c4431b8e391c4db30e0f63fcc4957bde2bafd25426a53dc3be86c3fa305352c9",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\run-20260908\\run-start.json": "b1c48285f569eb6870e047521542ec724cfae0e09e0ffe47060dd84c1278ae10",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_input_audit\\charter.md": "4be3031146e6f7f58347a7139a8c249b5bbb40a69876b86547ddaca4b45f52fd",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_input_audit\\check_preseason.py": "b7f9844bf992a76e3a5b9313d80e230a7b91b4d2bd6e1944640c7f8ab4b08ff4"
+  },
+  "saved_rolling_prediction_reproduction": true,
+  "saved_run_manifest_sha256": "6682197b16fcc0974fef19e6c704ef238d4d2a30ba0db066e3e86a6bad35ee4a",
+  "schedule_controls": "per-game inherited venue/rest; not verified preseason schedule vintages",
+  "source_inventory": {
+    "current_roster:2026": {
+      "bytes": 306258,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\6bd436cd5029af07f1761ef368c88318d392c20ada6fba0f5bc8b88128d05a3d.csv.gz",
+      "sha256": "6bd436cd5029af07f1761ef368c88318d392c20ada6fba0f5bc8b88128d05a3d"
+    },
+    "injury_reports:2013": {
+      "bytes": 689228,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\b84c71cf23be81375bbca62f7d2c51d53fa75330fbcf9f598ec4ac17fea7d8be.csv",
+      "sha256": "b84c71cf23be81375bbca62f7d2c51d53fa75330fbcf9f598ec4ac17fea7d8be"
+    },
+    "injury_reports:2014": {
+      "bytes": 692574,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e675fd5d86c3451d76e7c5d530095db1641347eb3f9796c9a30dd7a75e3ba634.csv",
+      "sha256": "e675fd5d86c3451d76e7c5d530095db1641347eb3f9796c9a30dd7a75e3ba634"
+    },
+    "injury_reports:2015": {
+      "bytes": 715948,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\fbca54ef42594cc52facc0d8c8dd74802b812771b9e33032e44ae8c7e21b0360.csv",
+      "sha256": "fbca54ef42594cc52facc0d8c8dd74802b812771b9e33032e44ae8c7e21b0360"
+    },
+    "injury_reports:2016": {
+      "bytes": 674980,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\504e05968cb9c54ddc730fd9b6e7d1dd16a62db8029cc784d3d7bafcea7ff7cb.csv",
+      "sha256": "504e05968cb9c54ddc730fd9b6e7d1dd16a62db8029cc784d3d7bafcea7ff7cb"
+    },
+    "injury_reports:2017": {
+      "bytes": 665280,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0d5139fbf41b0866517bd2bd5fd85bb20dbd4dd9bc36a706fed030a88731de6f.csv",
+      "sha256": "0d5139fbf41b0866517bd2bd5fd85bb20dbd4dd9bc36a706fed030a88731de6f"
+    },
+    "injury_reports:2018": {
+      "bytes": 665119,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4724e1f37cc3076f564e997fbf269190e7dbe795a39315b903788e0a9c40065e.csv",
+      "sha256": "4724e1f37cc3076f564e997fbf269190e7dbe795a39315b903788e0a9c40065e"
+    },
+    "injury_reports:2019": {
+      "bytes": 700757,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\daddfe8e04ddc3a29bce14f362e774fbadfb274c807f1f0fde7b5bf32aaf6cdf.csv",
+      "sha256": "daddfe8e04ddc3a29bce14f362e774fbadfb274c807f1f0fde7b5bf32aaf6cdf"
+    },
+    "injury_reports:2020": {
+      "bytes": 737474,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\706cca82824214f6b73ba0c6e537d3ee39766a50c644b8974b9fc28d7518de90.csv",
+      "sha256": "706cca82824214f6b73ba0c6e537d3ee39766a50c644b8974b9fc28d7518de90"
+    },
+    "injury_reports:2021": {
+      "bytes": 737083,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\1049fb9ff0fe7cfcf3ba8bfe1f5a35d3aba985c461c8fb7bf5201735b6d34254.csv",
+      "sha256": "1049fb9ff0fe7cfcf3ba8bfe1f5a35d3aba985c461c8fb7bf5201735b6d34254"
+    },
+    "injury_reports:2022": {
+      "bytes": 752433,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\5f0d60324e597edd1a2ced8540b04e40b51dd440591dd1df11b8d96343387c9e.csv",
+      "sha256": "5f0d60324e597edd1a2ced8540b04e40b51dd440591dd1df11b8d96343387c9e"
+    },
+    "injury_reports:2023": {
+      "bytes": 738501,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\16b04e21da5aa3944cfa9c22cafcc84ed7e6d9866eaddf0344e9b8cbf2f63afe.csv",
+      "sha256": "16b04e21da5aa3944cfa9c22cafcc84ed7e6d9866eaddf0344e9b8cbf2f63afe"
+    },
+    "injury_reports:2024": {
+      "bytes": 816989,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\498bce8e13cb64b2ab9bb0ad6cb81d0a63c2ddb24016c9fc90c2de2126fae449.csv",
+      "sha256": "498bce8e13cb64b2ab9bb0ad6cb81d0a63c2ddb24016c9fc90c2de2126fae449"
+    },
+    "injury_reports:2025": {
+      "bytes": 695623,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\15ee790fef634caea988e7b6562fc393a63739dd7ee38229d1b42161427709df.csv",
+      "sha256": "15ee790fef634caea988e7b6562fc393a63739dd7ee38229d1b42161427709df"
+    },
+    "player_weekly_stats:2013": {
+      "bytes": 1134278,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\2cbbc0fed52a203c9d5c95ed6c500bdc949f3088058dc03c28c38d9a46827b1a.csv.gz",
+      "sha256": "2cbbc0fed52a203c9d5c95ed6c500bdc949f3088058dc03c28c38d9a46827b1a"
+    },
+    "player_weekly_stats:2014": {
+      "bytes": 1156548,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\24f687e3f63911bac32e5733088dab5fd558b0da08b9a3047fbfad6ad8b21a10.csv.gz",
+      "sha256": "24f687e3f63911bac32e5733088dab5fd558b0da08b9a3047fbfad6ad8b21a10"
+    },
+    "player_weekly_stats:2015": {
+      "bytes": 1161213,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\af95af6b3ef4dcc89c2b30c60d5fcbf885c89f7eb9cb2f7248899d515a360919.csv.gz",
+      "sha256": "af95af6b3ef4dcc89c2b30c60d5fcbf885c89f7eb9cb2f7248899d515a360919"
+    },
+    "player_weekly_stats:2016": {
+      "bytes": 1158077,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\36a60ff93fd4737ff73d22c0f7dea444f304050c524802bd85705222fbc47e1c.csv.gz",
+      "sha256": "36a60ff93fd4737ff73d22c0f7dea444f304050c524802bd85705222fbc47e1c"
+    },
+    "player_weekly_stats:2017": {
+      "bytes": 1153068,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e11696bbe46b409235a774a3ad2a73743fe2c8c175836ac522440e4504fb02c9.csv.gz",
+      "sha256": "e11696bbe46b409235a774a3ad2a73743fe2c8c175836ac522440e4504fb02c9"
+    },
+    "player_weekly_stats:2018": {
+      "bytes": 1152493,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\25c7a4cd4b036704594c533a11d9f402db977d5b9d05568247fb4a01315b2d3a.csv.gz",
+      "sha256": "25c7a4cd4b036704594c533a11d9f402db977d5b9d05568247fb4a01315b2d3a"
+    },
+    "player_weekly_stats:2019": {
+      "bytes": 1151599,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\cdcd329b258d63088fb2e3d9ed9def4f3267ac2271b6974437f6be8207fb581b.csv.gz",
+      "sha256": "cdcd329b258d63088fb2e3d9ed9def4f3267ac2271b6974437f6be8207fb581b"
+    },
+    "player_weekly_stats:2020": {
+      "bytes": 1172772,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\01b8a5104cbd6249fd0afde2b20b2628be8047b42047f1c1a777b8f2799058d9.csv.gz",
+      "sha256": "01b8a5104cbd6249fd0afde2b20b2628be8047b42047f1c1a777b8f2799058d9"
+    },
+    "player_weekly_stats:2021": {
+      "bytes": 1250705,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\d63df896c8ecdf83b8ad41e0de3681cc1afea67b45440f005c0890bd2bef1bb5.csv.gz",
+      "sha256": "d63df896c8ecdf83b8ad41e0de3681cc1afea67b45440f005c0890bd2bef1bb5"
+    },
+    "player_weekly_stats:2022": {
+      "bytes": 1236818,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\2c0d172b75d6241c0d9fae4e6375103d84049fa4d1fb2e5e81673528bc619cd9.csv.gz",
+      "sha256": "2c0d172b75d6241c0d9fae4e6375103d84049fa4d1fb2e5e81673528bc619cd9"
+    },
+    "player_weekly_stats:2023": {
+      "bytes": 1232988,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\57c1cc7fc687aed7f0db45ae239eefb0a0c1206244ede2455ac4fc39cfbebb06.csv.gz",
+      "sha256": "57c1cc7fc687aed7f0db45ae239eefb0a0c1206244ede2455ac4fc39cfbebb06"
+    },
+    "player_weekly_stats:2024": {
+      "bytes": 1239692,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4a517b8b66200ddc5cb00bc8b42706436ad09208dbea1cb3b5bd3e6928c0d52c.csv.gz",
+      "sha256": "4a517b8b66200ddc5cb00bc8b42706436ad09208dbea1cb3b5bd3e6928c0d52c"
+    },
+    "player_weekly_stats:2025": {
+      "bytes": 1258615,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4d540f34138528c917b957ed3d84e4854eee082a0d4b30af57f225f7d75fe2ef.csv.gz",
+      "sha256": "4d540f34138528c917b957ed3d84e4854eee082a0d4b30af57f225f7d75fe2ef"
+    },
+    "schedule_results": {
+      "bytes": 2173367,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39.csv",
+      "sha256": "cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39"
+    },
+    "snap_counts:2013": {
+      "bytes": 2148056,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\9d1fdd557875b9a2c71d88e583da24a739dfca671edf8223d6171e39a421000e.csv",
+      "sha256": "9d1fdd557875b9a2c71d88e583da24a739dfca671edf8223d6171e39a421000e"
+    },
+    "snap_counts:2014": {
+      "bytes": 2156558,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\84540709d9483552185c8ca3ef30b2f66fb94b30c3e6c21e7a27205f337f21d3.csv",
+      "sha256": "84540709d9483552185c8ca3ef30b2f66fb94b30c3e6c21e7a27205f337f21d3"
+    },
+    "snap_counts:2015": {
+      "bytes": 2155797,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\841496252ada825c3c50d3ba9b4b26d3f4fabd0fedc5fb44f286ddaaa5bdb7e0.csv",
+      "sha256": "841496252ada825c3c50d3ba9b4b26d3f4fabd0fedc5fb44f286ddaaa5bdb7e0"
+    },
+    "snap_counts:2016": {
+      "bytes": 2157110,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\a778e24e9eb665ffe8f16093b03c5a263dca0250b3aa92bd6002f61f534bea59.csv",
+      "sha256": "a778e24e9eb665ffe8f16093b03c5a263dca0250b3aa92bd6002f61f534bea59"
+    },
+    "snap_counts:2017": {
+      "bytes": 2157818,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\eab2fad2df99249d4061ed9c5c34d312cdba07cf3159d027d255bdc9b6526917.csv",
+      "sha256": "eab2fad2df99249d4061ed9c5c34d312cdba07cf3159d027d255bdc9b6526917"
+    },
+    "snap_counts:2018": {
+      "bytes": 2157555,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\9a408b78a55f799110aed70de3564e157faf089ce9bed780d0368bf49ae13e0b.csv",
+      "sha256": "9a408b78a55f799110aed70de3564e157faf089ce9bed780d0368bf49ae13e0b"
+    },
+    "snap_counts:2019": {
+      "bytes": 2156311,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0cd52be8fa57f18503b670cb8263246c4f548375b768cbcad1c7a7462c98970d.csv",
+      "sha256": "0cd52be8fa57f18503b670cb8263246c4f548375b768cbcad1c7a7462c98970d"
+    },
+    "snap_counts:2020": {
+      "bytes": 2257664,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\c3b2a9aa472aca23332c030e574cfb134f885608ddf74fe0a659c38584d14358.csv",
+      "sha256": "c3b2a9aa472aca23332c030e574cfb134f885608ddf74fe0a659c38584d14358"
+    },
+    "snap_counts:2021": {
+      "bytes": 2388493,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\8e4dae054a4749cf2d4919508d9161a6068fd67509979aefa385bfb3803d0ee5.csv",
+      "sha256": "8e4dae054a4749cf2d4919508d9161a6068fd67509979aefa385bfb3803d0ee5"
+    },
+    "snap_counts:2022": {
+      "bytes": 2379719,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0018a4833fbf0f825286c1c27450c6254391b548d6c55bcde728e93e4816815a.csv",
+      "sha256": "0018a4833fbf0f825286c1c27450c6254391b548d6c55bcde728e93e4816815a"
+    },
+    "snap_counts:2023": {
+      "bytes": 2394875,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\303b61aa5c33ffda863f93a750fc14483f397f9187ad502b1ce71e9b516a64c0.csv",
+      "sha256": "303b61aa5c33ffda863f93a750fc14483f397f9187ad502b1ce71e9b516a64c0"
+    },
+    "snap_counts:2024": {
+      "bytes": 2402841,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\a2aa58efe093f8aa0ad5aadf09f81d8ec690a1183bd2dde68d20e7f109a9c335.csv",
+      "sha256": "a2aa58efe093f8aa0ad5aadf09f81d8ec690a1183bd2dde68d20e7f109a9c335"
+    },
+    "snap_counts:2025": {
+      "bytes": 2401193,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\80b02a6e511aa20283551cae622b29ba4d0a6f006c489a2d91591fcad33792e7.csv",
+      "sha256": "80b02a6e511aa20283551cae622b29ba4d0a6f006c489a2d91591fcad33792e7"
+    },
+    "team_weekly_stats:2013": {
+      "bytes": 71452,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\920bde147689f0c73bec8e4c94faef7532005152879b92451c269273ed8062da.csv.gz",
+      "sha256": "920bde147689f0c73bec8e4c94faef7532005152879b92451c269273ed8062da"
+    },
+    "team_weekly_stats:2014": {
+      "bytes": 70990,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\dc941b098e086e4a93f193ed49c5a2205f2f9b4b2617cd8e25ed66761ebd54c5.csv.gz",
+      "sha256": "dc941b098e086e4a93f193ed49c5a2205f2f9b4b2617cd8e25ed66761ebd54c5"
+    },
+    "team_weekly_stats:2015": {
+      "bytes": 71211,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\595292ef09bb23fd8bc892fa2a6741322fa6e9608c54f7327c57cefe1cc393ad.csv.gz",
+      "sha256": "595292ef09bb23fd8bc892fa2a6741322fa6e9608c54f7327c57cefe1cc393ad"
+    },
+    "team_weekly_stats:2016": {
+      "bytes": 71081,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\baf74c9dc216a709a7207a6d4e06aa5ccb7dc6574c154f27c3c4e4d689b366cc.csv.gz",
+      "sha256": "baf74c9dc216a709a7207a6d4e06aa5ccb7dc6574c154f27c3c4e4d689b366cc"
+    },
+    "team_weekly_stats:2017": {
+      "bytes": 71194,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\f2b70cb27bdb7acc6d48bcda29818f44268fe544cfae31cd037ca09d6961a2f3.csv.gz",
+      "sha256": "f2b70cb27bdb7acc6d48bcda29818f44268fe544cfae31cd037ca09d6961a2f3"
+    },
+    "team_weekly_stats:2018": {
+      "bytes": 71342,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\62d07da27c364634698ec11e17f4111d28c738f1b15ff3281fadce1ace045dea.csv.gz",
+      "sha256": "62d07da27c364634698ec11e17f4111d28c738f1b15ff3281fadce1ace045dea"
+    },
+    "team_weekly_stats:2019": {
+      "bytes": 71563,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\b82e3dd7f9e234c8ff5460c89dfe04337599c1d963443a090c9bab5a79b08631.csv.gz",
+      "sha256": "b82e3dd7f9e234c8ff5460c89dfe04337599c1d963443a090c9bab5a79b08631"
+    },
+    "team_weekly_stats:2020": {
+      "bytes": 71539,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e4dde2d912654a429e3b76fde7bb0e75e320cd801c033c7c80a0d7df18ce2c54.csv.gz",
+      "sha256": "e4dde2d912654a429e3b76fde7bb0e75e320cd801c033c7c80a0d7df18ce2c54"
+    },
+    "team_weekly_stats:2021": {
+      "bytes": 75920,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\b5b65fdf141695c04000fe8a0ab182be00b3bfe8345dc84e76dd0627199a8815.csv.gz",
+      "sha256": "b5b65fdf141695c04000fe8a0ab182be00b3bfe8345dc84e76dd0627199a8815"
+    },
+    "team_weekly_stats:2022": {
+      "bytes": 76157,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\3462c9d16ecc28a019e3deab7361f1331f062d26c4cf4fb09a2aa38f857c23b2.csv.gz",
+      "sha256": "3462c9d16ecc28a019e3deab7361f1331f062d26c4cf4fb09a2aa38f857c23b2"
+    },
+    "team_weekly_stats:2023": {
+      "bytes": 76087,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\7b42d3b699d2ea55e77e3abe897289c12a858c573107829250d5e1b177b57415.csv.gz",
+      "sha256": "7b42d3b699d2ea55e77e3abe897289c12a858c573107829250d5e1b177b57415"
+    },
+    "team_weekly_stats:2024": {
+      "bytes": 76189,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\3dde26ba6a2beecaf65d172823b6e3a6303cca05a07c346d2725d7d9ba86e13c.csv.gz",
+      "sha256": "3dde26ba6a2beecaf65d172823b6e3a6303cca05a07c346d2725d7d9ba86e13c"
+    },
+    "team_weekly_stats:2025": {
+      "bytes": 76176,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\54a223acb26c33c706aa1b509f56323e2889110b5bbe0c2f2c1163c325bd8f80.csv.gz",
+      "sha256": "54a223acb26c33c706aa1b509f56323e2889110b5bbe0c2f2c1163c325bd8f80"
+    },
+    "weekly_rosters:2013": {
+      "bytes": 9377446,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\76c47a629075ffd75f9c4ee49fadb6dad45396be486af897078fee5722969781.csv",
+      "sha256": "76c47a629075ffd75f9c4ee49fadb6dad45396be486af897078fee5722969781"
+    },
+    "weekly_rosters:2014": {
+      "bytes": 9638161,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\331022cd3b0c69d99c581f02b6fde6853e87ac431739c4b49841ee6e02893d6c.csv",
+      "sha256": "331022cd3b0c69d99c581f02b6fde6853e87ac431739c4b49841ee6e02893d6c"
+    },
+    "weekly_rosters:2015": {
+      "bytes": 9955118,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\198904f48eeebafc1f34028a00c1b8c0fc135aba04fc4b276e636ef87709751a.csv",
+      "sha256": "198904f48eeebafc1f34028a00c1b8c0fc135aba04fc4b276e636ef87709751a"
+    },
+    "weekly_rosters:2016": {
+      "bytes": 10803214,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\ab05dfeffe6f9a1d969133cd6740f1625d135bfad672aaa916adb609ab662883.csv",
+      "sha256": "ab05dfeffe6f9a1d969133cd6740f1625d135bfad672aaa916adb609ab662883"
+    },
+    "weekly_rosters:2017": {
+      "bytes": 15945119,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\fd3fe005b676fe0ad8d88c50701d71adef4287501397c33f479c9765cd8c45d4.csv",
+      "sha256": "fd3fe005b676fe0ad8d88c50701d71adef4287501397c33f479c9765cd8c45d4"
+    },
+    "weekly_rosters:2018": {
+      "bytes": 16566753,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\c3bca1ee53e63e21b964f1bb42c251e25b7b4b8c55210730dd4ded2f9d4a709a.csv",
+      "sha256": "c3bca1ee53e63e21b964f1bb42c251e25b7b4b8c55210730dd4ded2f9d4a709a"
+    },
+    "weekly_rosters:2019": {
+      "bytes": 16588230,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\af6aa7b8aa7850c47fe307d548d66fa7c1cac88fe11e5951c781974cb6909e03.csv",
+      "sha256": "af6aa7b8aa7850c47fe307d548d66fa7c1cac88fe11e5951c781974cb6909e03"
+    },
+    "weekly_rosters:2020": {
+      "bytes": 14333971,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0b948cca8735a2417cbda14464f4532aeee58d871e2fcd8464a23e969e45789e.csv",
+      "sha256": "0b948cca8735a2417cbda14464f4532aeee58d871e2fcd8464a23e969e45789e"
+    },
+    "weekly_rosters:2021": {
+      "bytes": 15242660,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\88adfe0fba5cbedd260d7928ad373476d4fb168d0213cb52ef1163ed5d3056b7.csv",
+      "sha256": "88adfe0fba5cbedd260d7928ad373476d4fb168d0213cb52ef1163ed5d3056b7"
+    },
+    "weekly_rosters:2022": {
+      "bytes": 14790824,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\bd6a50de334473c10f8058afa948fd0c6adc8a8b081da41c500cc0aa069c5312.csv",
+      "sha256": "bd6a50de334473c10f8058afa948fd0c6adc8a8b081da41c500cc0aa069c5312"
+    },
+    "weekly_rosters:2023": {
+      "bytes": 14612235,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\1433f1f239784dde7fcb35349d211a9b83abfc0156337b72ec4f923abf715bd3.csv",
+      "sha256": "1433f1f239784dde7fcb35349d211a9b83abfc0156337b72ec4f923abf715bd3"
+    },
+    "weekly_rosters:2024": {
+      "bytes": 14926918,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\074ecaeb9325de943c11f7bbc941425626985090ef8386f90cd837fa5cb5d4b3.csv",
+      "sha256": "074ecaeb9325de943c11f7bbc941425626985090ef8386f90cd837fa5cb5d4b3"
+    },
+    "weekly_rosters:2025": {
+      "bytes": 15385661,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\c2f7a1ffebe06058400af1989d1cd2900cc5c9659f084623708a06d4e28de35b.csv",
+      "sha256": "c2f7a1ffebe06058400af1989d1cd2900cc5c9659f084623708a06d4e28de35b"
+    }
+  },
+  "started_at": "2026-09-08T03:54:29.742637+00:00",
+  "status": "EXPLORATORY_DIAGNOSTIC_HOLD",
+  "v0_policy": "same frozen results rating after one 0.5 offseason retention; original2.5home/no-rest baseline"
+}

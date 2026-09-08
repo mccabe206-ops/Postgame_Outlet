@@ -1,0 +1,3851 @@
+{
+  "artifact_kind": "PGO_WEEK1_CORRECTED_SOURCE_QUALIFICATION",
+  "capture_manifest_sha256": "122ef5740e94ba2e8b4464d7ea9e6e8fe953d0e0ac49527fee5a6050039672f2",
+  "capture_status_field": "status",
+  "charter_sha256": "643cdc172fc3ad15393989d8e9b021b3975833d6ae51f7ee162a837c39a25c12",
+  "checks": {
+    "all_cutoffs_after_qualification": true,
+    "capture_chronology:depth.csv.gz": true,
+    "capture_chronology:depth_charts-release.json": true,
+    "capture_chronology:depth_charts-timestamp.json": true,
+    "capture_chronology:nfl-injuries.html": true,
+    "capture_chronology:nfl-week-1.html": true,
+    "capture_chronology:patriots-week1-injury.html": true,
+    "capture_chronology:roster.csv.gz": true,
+    "capture_chronology:rosters-release.json": true,
+    "capture_chronology:rosters-timestamp.json": true,
+    "capture_chronology:schedule.csv.gz": true,
+    "capture_chronology:schedules-release.json": true,
+    "capture_chronology:schedules-timestamp.json": true,
+    "capture_chronology:seahawks-week1-injury.html": true,
+    "coherent_depth_all_32": true,
+    "contiguous_qb_depth:ARI": true,
+    "contiguous_qb_depth:ATL": true,
+    "contiguous_qb_depth:BAL": true,
+    "contiguous_qb_depth:BUF": true,
+    "contiguous_qb_depth:CAR": true,
+    "contiguous_qb_depth:CHI": true,
+    "contiguous_qb_depth:CIN": true,
+    "contiguous_qb_depth:CLE": true,
+    "contiguous_qb_depth:DAL": true,
+    "contiguous_qb_depth:DEN": true,
+    "contiguous_qb_depth:DET": true,
+    "contiguous_qb_depth:GB": true,
+    "contiguous_qb_depth:HOU": true,
+    "contiguous_qb_depth:IND": true,
+    "contiguous_qb_depth:JAX": true,
+    "contiguous_qb_depth:KC": true,
+    "contiguous_qb_depth:LAC": true,
+    "contiguous_qb_depth:LAR": true,
+    "contiguous_qb_depth:LV": true,
+    "contiguous_qb_depth:MIA": true,
+    "contiguous_qb_depth:MIN": true,
+    "contiguous_qb_depth:NE": true,
+    "contiguous_qb_depth:NO": true,
+    "contiguous_qb_depth:NYG": true,
+    "contiguous_qb_depth:NYJ": true,
+    "contiguous_qb_depth:PHI": true,
+    "contiguous_qb_depth:PIT": true,
+    "contiguous_qb_depth:SEA": true,
+    "contiguous_qb_depth:SF": true,
+    "contiguous_qb_depth:TB": true,
+    "contiguous_qb_depth:TEN": true,
+    "contiguous_qb_depth:WAS": true,
+    "exactly_32_unique_expected_qbs": true,
+    "formal_two_unknown_thirty": true,
+    "hash_size_status:depth.csv.gz": true,
+    "hash_size_status:depth_charts-release.json": true,
+    "hash_size_status:depth_charts-timestamp.json": true,
+    "hash_size_status:nfl-injuries.html": true,
+    "hash_size_status:nfl-week-1.html": true,
+    "hash_size_status:patriots-week1-injury.html": true,
+    "hash_size_status:roster.csv.gz": true,
+    "hash_size_status:rosters-release.json": true,
+    "hash_size_status:rosters-timestamp.json": true,
+    "hash_size_status:schedule.csv.gz": true,
+    "hash_size_status:schedules-release.json": true,
+    "hash_size_status:schedules-timestamp.json": true,
+    "hash_size_status:seahawks-week1-injury.html": true,
+    "https_source:depth.csv.gz": true,
+    "https_source:depth_charts-release.json": true,
+    "https_source:depth_charts-timestamp.json": true,
+    "https_source:nfl-injuries.html": true,
+    "https_source:nfl-week-1.html": true,
+    "https_source:patriots-week1-injury.html": true,
+    "https_source:roster.csv.gz": true,
+    "https_source:rosters-release.json": true,
+    "https_source:rosters-timestamp.json": true,
+    "https_source:schedule.csv.gz": true,
+    "https_source:schedules-release.json": true,
+    "https_source:schedules-timestamp.json": true,
+    "https_source:seahawks-week1-injury.html": true,
+    "injury_page_name:00-0036363": true,
+    "injury_page_name:00-0036981": true,
+    "injury_page_name:00-0037413": true,
+    "injury_page_name:00-0038765": true,
+    "injury_page_name:00-0038797": true,
+    "injury_page_name:00-0039020": true,
+    "injury_page_name:00-0039793": true,
+    "injury_page_name:00-0040648": true,
+    "injury_page_name:00-0040733": true,
+    "injury_page_name:00-0040734": true,
+    "injury_page_name:00-0040873": true,
+    "injury_roster_identity:00-0036363": false,
+    "injury_roster_identity:00-0036981": false,
+    "injury_roster_identity:00-0037413": true,
+    "injury_roster_identity:00-0038765": false,
+    "injury_roster_identity:00-0038797": true,
+    "injury_roster_identity:00-0039020": false,
+    "injury_roster_identity:00-0039793": true,
+    "injury_roster_identity:00-0040648": true,
+    "injury_roster_identity:00-0040733": false,
+    "injury_roster_identity:00-0040734": true,
+    "injury_roster_identity:00-0040873": false,
+    "last_modified_before_capture:depth.csv.gz": true,
+    "last_modified_before_capture:depth_charts-release.json": true,
+    "last_modified_before_capture:depth_charts-timestamp.json": true,
+    "last_modified_before_capture:roster.csv.gz": true,
+    "last_modified_before_capture:rosters-release.json": true,
+    "last_modified_before_capture:rosters-timestamp.json": true,
+    "last_modified_before_capture:schedule.csv.gz": true,
+    "last_modified_before_capture:schedules-release.json": true,
+    "last_modified_before_capture:schedules-timestamp.json": true,
+    "no_expected_qb_confirmed_unavailable": true,
+    "no_roster_team_gsis_duplicates": true,
+    "official_html_no_conflicting_games": true,
+    "official_week1_exact": true,
+    "one_confirmed_unavailable": true,
+    "one_release_asset:depth_charts:depth_charts_2026.csv.gz": true,
+    "one_release_asset:depth_charts:timestamp.json": true,
+    "one_release_asset:rosters:roster_2026.csv.gz": true,
+    "one_release_asset:rosters:timestamp.json": true,
+    "one_release_asset:schedules:games.csv.gz": true,
+    "one_release_asset:schedules:timestamp.json": true,
+    "provider_timestamp:depth_charts": true,
+    "provider_timestamp:rosters": true,
+    "provider_timestamp:schedules": true,
+    "registered_week1_identity_unchanged": true,
+    "release_digest_size:depth_charts:depth_charts_2026.csv.gz": true,
+    "release_digest_size:depth_charts:timestamp.json": true,
+    "release_digest_size:rosters:roster_2026.csv.gz": true,
+    "release_digest_size:rosters:timestamp.json": true,
+    "release_digest_size:schedules:games.csv.gz": true,
+    "release_digest_size:schedules:timestamp.json": true,
+    "release_metadata:depth_charts": true,
+    "release_metadata:rosters": true,
+    "release_metadata:schedules": true,
+    "roster_2026_week1_regular": true,
+    "roster_32_teams": true,
+    "sixteen_unique_week1_games": true,
+    "starter_unique_active:ARI": true,
+    "starter_unique_active:ATL": true,
+    "starter_unique_active:BAL": true,
+    "starter_unique_active:BUF": true,
+    "starter_unique_active:CAR": true,
+    "starter_unique_active:CHI": true,
+    "starter_unique_active:CIN": true,
+    "starter_unique_active:CLE": true,
+    "starter_unique_active:DAL": true,
+    "starter_unique_active:DEN": true,
+    "starter_unique_active:DET": true,
+    "starter_unique_active:GB": true,
+    "starter_unique_active:HOU": true,
+    "starter_unique_active:IND": true,
+    "starter_unique_active:JAX": true,
+    "starter_unique_active:KC": true,
+    "starter_unique_active:LAC": true,
+    "starter_unique_active:LAR": true,
+    "starter_unique_active:LV": true,
+    "starter_unique_active:MIA": true,
+    "starter_unique_active:MIN": true,
+    "starter_unique_active:NE": true,
+    "starter_unique_active:NO": true,
+    "starter_unique_active:NYG": true,
+    "starter_unique_active:NYJ": true,
+    "starter_unique_active:PHI": true,
+    "starter_unique_active:PIT": true,
+    "starter_unique_active:SEA": true,
+    "starter_unique_active:SF": true,
+    "starter_unique_active:TB": true,
+    "starter_unique_active:TEN": true,
+    "starter_unique_active:WAS": true,
+    "thirteen_unique_capture_entries": true
+  },
+  "chosen_qbs": [
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0033119",
+      "player_name": "Jacoby Brissett",
+      "roster_status": "ACT",
+      "team": "ARI"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0036212",
+      "player_name": "Tua Tagovailoa",
+      "roster_status": "ACT",
+      "team": "ATL"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0034796",
+      "player_name": "Lamar Jackson",
+      "roster_status": "ACT",
+      "team": "BAL"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0034857",
+      "player_name": "Josh Allen",
+      "roster_status": "ACT",
+      "team": "BUF"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0039150",
+      "player_name": "Bryce Young",
+      "roster_status": "ACT",
+      "team": "CAR"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0039918",
+      "player_name": "Caleb Williams",
+      "roster_status": "ACT",
+      "team": "CHI"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0036442",
+      "player_name": "Joe Burrow",
+      "roster_status": "ACT",
+      "team": "CIN"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0033537",
+      "player_name": "Deshaun Watson",
+      "roster_status": "ACT",
+      "team": "CLE"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0033077",
+      "player_name": "Dak Prescott",
+      "roster_status": "ACT",
+      "team": "DAL"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0039732",
+      "player_name": "Bo Nix",
+      "roster_status": "ACT",
+      "team": "DEN"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0033106",
+      "player_name": "Jared Goff",
+      "roster_status": "ACT",
+      "team": "DET"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0036264",
+      "player_name": "Jordan Love",
+      "roster_status": "ACT",
+      "team": "GB"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0039163",
+      "player_name": "C.J. Stroud",
+      "roster_status": "ACT",
+      "team": "HOU"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0035710",
+      "player_name": "Daniel Jones",
+      "roster_status": "ACT",
+      "team": "IND"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0036971",
+      "player_name": "Trevor Lawrence",
+      "roster_status": "ACT",
+      "team": "JAX"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0033873",
+      "player_name": "Patrick Mahomes",
+      "roster_status": "ACT",
+      "team": "KC"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0036355",
+      "player_name": "Justin Herbert",
+      "roster_status": "ACT",
+      "team": "LAC"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0026498",
+      "player_name": "Matthew Stafford",
+      "roster_status": "ACT",
+      "team": "LAR"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0029604",
+      "player_name": "Kirk Cousins",
+      "roster_status": "ACT",
+      "team": "LV"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0038128",
+      "player_name": "Malik Willis",
+      "roster_status": "ACT",
+      "team": "MIA"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0035228",
+      "player_name": "Kyler Murray",
+      "roster_status": "ACT",
+      "team": "MIN"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0039851",
+      "player_name": "Drake Maye",
+      "roster_status": "ACT",
+      "team": "NE"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0040743",
+      "player_name": "Tyler Shough",
+      "roster_status": "ACT",
+      "team": "NO"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0040691",
+      "player_name": "Jaxson Dart",
+      "roster_status": "ACT",
+      "team": "NYG"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0030565",
+      "player_name": "Geno Smith",
+      "roster_status": "ACT",
+      "team": "NYJ"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0036389",
+      "player_name": "Jalen Hurts",
+      "roster_status": "ACT",
+      "team": "PHI"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0023459",
+      "player_name": "Aaron Rodgers",
+      "roster_status": "ACT",
+      "team": "PIT"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0034869",
+      "player_name": "Sam Darnold",
+      "roster_status": "ACT",
+      "team": "SEA"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0037834",
+      "player_name": "Brock Purdy",
+      "roster_status": "ACT",
+      "team": "SF"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0034855",
+      "player_name": "Baker Mayfield",
+      "roster_status": "ACT",
+      "team": "TB"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0040676",
+      "player_name": "Cam Ward",
+      "roster_status": "ACT",
+      "team": "TEN"
+    },
+    {
+      "depth_rank": 1,
+      "gsis_id": "00-0039910",
+      "player_name": "Jayden Daniels",
+      "roster_status": "ACT",
+      "team": "WAS"
+    }
+  ],
+  "coverage": {
+    "ARI": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "ATL": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "BAL": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "BUF": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "CAR": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "CHI": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "CIN": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "CLE": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "DAL": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "DEN": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "DET": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "GB": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "HOU": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "IND": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "JAX": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "KC": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "LAC": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "LAR": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "LV": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "MIA": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "MIN": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "NE": {
+      "captured_at": "2026-09-08T15:01:38.080270+00:00",
+      "known_unavailable": [
+        {
+          "game_status": "Out",
+          "gsis_id": "00-0037413",
+          "injury": "Knee",
+          "model_treatment": "known_unavailable_unpriced",
+          "player_name": "Ben Brown",
+          "position": "OL",
+          "practice_status": "Did Not Participate",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks"
+        }
+      ],
+      "notes": [
+        "Monday practice report; later final game designations were not yet available at capture.",
+        "The corrected base forecast does not numerically adjust non-QB availability."
+      ],
+      "observations": [
+        {
+          "game_status": null,
+          "gsis_id": "00-0036981",
+          "injury": "Knee",
+          "model_treatment": "unadjusted",
+          "player_name": "Christian Barmore",
+          "position": "DT",
+          "practice_status": "Full Participation",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks"
+        },
+        {
+          "game_status": "Out",
+          "gsis_id": "00-0037413",
+          "injury": "Knee",
+          "model_treatment": "known_unavailable_unpriced",
+          "player_name": "Ben Brown",
+          "position": "OL",
+          "practice_status": "Did Not Participate",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks"
+        },
+        {
+          "game_status": null,
+          "gsis_id": "00-0040734",
+          "injury": "Ankle",
+          "model_treatment": "unadjusted",
+          "player_name": "TreVeyon Henderson",
+          "position": "RB",
+          "practice_status": "Did Not Participate",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks"
+        }
+      ],
+      "report_date": "2026-09-07",
+      "source_file": "patriots-week1-injury.html",
+      "source_kind": "formal_injury_report",
+      "source_url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks"
+    },
+    "NO": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "NYG": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "NYJ": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "PHI": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "PIT": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "SEA": {
+      "captured_at": "2026-09-08T15:01:38.140411+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "Monday practice report; later final game designations were not yet available at capture.",
+        "The corrected base forecast does not numerically adjust non-QB availability."
+      ],
+      "observations": [
+        {
+          "game_status": null,
+          "gsis_id": "00-0039793",
+          "injury": "Oblique",
+          "model_treatment": "unadjusted",
+          "player_name": "AJ Barner",
+          "position": "TE",
+          "practice_status": "Full Participation",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+        },
+        {
+          "game_status": null,
+          "gsis_id": "00-0039020",
+          "injury": "Knee",
+          "model_treatment": "unadjusted",
+          "player_name": "Anthony Bradford",
+          "position": "G",
+          "practice_status": "Full Participation",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+        },
+        {
+          "game_status": null,
+          "gsis_id": "00-0040733",
+          "injury": "Ankle",
+          "model_treatment": "unadjusted",
+          "player_name": "Nick Emmanwori",
+          "position": "S",
+          "practice_status": "Limited Participation",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+        },
+        {
+          "game_status": null,
+          "gsis_id": "00-0040648",
+          "injury": "Hamstring",
+          "model_treatment": "unadjusted",
+          "player_name": "Tory Horton",
+          "position": "WR",
+          "practice_status": "Limited Participation",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+        },
+        {
+          "game_status": null,
+          "gsis_id": "00-0036363",
+          "injury": "Knee",
+          "model_treatment": "unadjusted",
+          "player_name": "Josh Jones",
+          "position": "T",
+          "practice_status": "Limited Participation",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+        },
+        {
+          "game_status": null,
+          "gsis_id": "00-0040873",
+          "injury": "Quadricep",
+          "model_treatment": "unadjusted",
+          "player_name": "Julian Neal",
+          "position": "CB",
+          "practice_status": "Full Participation",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+        },
+        {
+          "game_status": null,
+          "gsis_id": "00-0038765",
+          "injury": "Hamstring",
+          "model_treatment": "unadjusted",
+          "player_name": "Ty Okada",
+          "position": "S",
+          "practice_status": "Did Not Participate",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+        },
+        {
+          "game_status": null,
+          "gsis_id": "00-0038797",
+          "injury": "Hamstring",
+          "model_treatment": "unadjusted",
+          "player_name": "Emanuel Wilson",
+          "position": "RB",
+          "practice_status": "Full Participation",
+          "report_date": "2026-09-07",
+          "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+        }
+      ],
+      "report_date": "2026-09-07",
+      "source_file": "seahawks-week1-injury.html",
+      "source_kind": "formal_injury_report",
+      "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+    },
+    "SF": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "TB": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "TEN": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    "WAS": {
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "known_unavailable": [],
+      "notes": [
+        "No formal team report appeared in the captured NFL injury overview at this point in the Week 1 reporting cycle.",
+        "Unknown coverage is not evidence that the roster is healthy."
+      ],
+      "observations": [],
+      "report_date": null,
+      "source_file": "nfl-injuries.html",
+      "source_kind": "no_formal_report",
+      "source_url": "https://www.nfl.com/injuries/"
+    }
+  },
+  "depth_snapshot": "2026-09-08T11:56:57Z",
+  "failed_checks": [
+    "injury_roster_identity:00-0036981",
+    "injury_roster_identity:00-0039020",
+    "injury_roster_identity:00-0040733",
+    "injury_roster_identity:00-0036363",
+    "injury_roster_identity:00-0040873",
+    "injury_roster_identity:00-0038765"
+  ],
+  "injury_coverage_summary": {
+    "expected_qb_blocks": 0,
+    "formal_reports": 2,
+    "known_unavailable": 1,
+    "no_formal_report": 30,
+    "observations": 11
+  },
+  "issued_at": "2026-09-08T15:11:27.069684+00:00",
+  "limitations": [
+    "Engineering source qualification only; all predictions remain experimental HOLD.",
+    "ACT is roster eligibility, not a claim of health or final game-day availability.",
+    "The corrected base forecast is explicitly unadjusted for non-QB injury and availability.",
+    "Thirty teams had no formal report in the captured NFL overview and remain unknown pending later pre-cutoff refresh.",
+    "No questionable/doubtful practice-status probability or numerical availability mapping is admitted."
+  ],
+  "provider_metadata": [
+    {
+      "provider_timestamp": "2026-09-08T07:56:45-04:00",
+      "release_sha256": "2cb3a1efdb13190bcef6ba3a1ad639a5b6e042842e89740cc035fd3185a5be82",
+      "tag": "rosters"
+    },
+    {
+      "provider_timestamp": "2026-09-08T07:57:03-04:00",
+      "release_sha256": "3a0ffc60faee2bcc8fc02dda54526db9f13239c8455b8b8f57ba6df20cbb359b",
+      "tag": "depth_charts"
+    },
+    {
+      "provider_timestamp": "2026-09-08T10:47:03-04:00",
+      "release_sha256": "fff90659ab96ca1da1d488d773686876614792b165ee9c029a9c4efe298b48ea",
+      "tag": "schedules"
+    }
+  ],
+  "raw_injury_sources": [
+    {
+      "bytes": 328646,
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "file": "nfl-injuries.html",
+      "sha256": "9985cba4a5a8c3a81eb32feba980406063420af001f5b371f204b02dd04be4bd",
+      "status": 200,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 428499,
+      "captured_at": "2026-09-08T15:01:38.080270+00:00",
+      "file": "patriots-week1-injury.html",
+      "sha256": "88e366a561c2634c35321f41ef8e41009458c5e9c0be4459513e654fae0ed51e",
+      "status": 200,
+      "url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks"
+    },
+    {
+      "bytes": 637156,
+      "captured_at": "2026-09-08T15:01:38.140411+00:00",
+      "file": "seahawks-week1-injury.html",
+      "sha256": "7dcf24072665f11e77816b6b426bcd072be36f575808e796332172938ba977a7",
+      "status": 200,
+      "url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+    }
+  ],
+  "raw_sources": [
+    {
+      "bytes": 360272,
+      "captured_at": "2026-09-08T15:01:37.974270+00:00",
+      "file": "roster.csv.gz",
+      "last_modified": "Tue, 08 Sep 2026 11:56:47 GMT",
+      "sha256": "2b2c39db80f1c9d9bf68b956a475cfba9ca19d4b456eefd2b4fa045f3a757965",
+      "started_at": "2026-09-08T15:01:37.431712+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_2026.csv.gz"
+    },
+    {
+      "bytes": 9866229,
+      "captured_at": "2026-09-08T15:01:37.917339+00:00",
+      "file": "depth.csv.gz",
+      "last_modified": "Tue, 08 Sep 2026 11:57:05 GMT",
+      "sha256": "a2bcbdd515d45fc20c9fcdbba795fb10069849a8475290f58bc2965193968549",
+      "started_at": "2026-09-08T15:01:37.432357+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2026.csv.gz"
+    },
+    {
+      "bytes": 512103,
+      "captured_at": "2026-09-08T15:01:37.807831+00:00",
+      "file": "schedule.csv.gz",
+      "last_modified": "Tue, 08 Sep 2026 14:47:07 GMT",
+      "sha256": "da833d174e5791ccb9ae697aa13c48534b66c198c9ac5ca3d6c47e240a6f94cf",
+      "started_at": "2026-09-08T15:01:37.432792+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv.gz"
+    },
+    {
+      "bytes": 1771177,
+      "captured_at": "2026-09-08T15:01:38.374671+00:00",
+      "file": "nfl-week-1.html",
+      "last_modified": null,
+      "sha256": "8431c787ca70b41876a80bb6ae85bf9e74a5ed63a14c651aadf3188668acb34b",
+      "started_at": "2026-09-08T15:01:37.808897+00:00",
+      "status": 200,
+      "url": "https://www.nfl.com/schedules/2026/by-week/reg-1"
+    },
+    {
+      "bytes": 328646,
+      "captured_at": "2026-09-08T15:01:37.997812+00:00",
+      "file": "nfl-injuries.html",
+      "last_modified": null,
+      "sha256": "9985cba4a5a8c3a81eb32feba980406063420af001f5b371f204b02dd04be4bd",
+      "started_at": "2026-09-08T15:01:37.925400+00:00",
+      "status": 200,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 428499,
+      "captured_at": "2026-09-08T15:01:38.080270+00:00",
+      "file": "patriots-week1-injury.html",
+      "last_modified": null,
+      "sha256": "88e366a561c2634c35321f41ef8e41009458c5e9c0be4459513e654fae0ed51e",
+      "started_at": "2026-09-08T15:01:37.975072+00:00",
+      "status": 200,
+      "url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks"
+    },
+    {
+      "bytes": 637156,
+      "captured_at": "2026-09-08T15:01:38.140411+00:00",
+      "file": "seahawks-week1-injury.html",
+      "last_modified": null,
+      "sha256": "7dcf24072665f11e77816b6b426bcd072be36f575808e796332172938ba977a7",
+      "started_at": "2026-09-08T15:01:37.998652+00:00",
+      "status": 200,
+      "url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+    },
+    {
+      "bytes": 641219,
+      "captured_at": "2026-09-08T15:01:38.294057+00:00",
+      "file": "rosters-release.json",
+      "last_modified": "Tue, 08 Sep 2026 11:56:48 GMT",
+      "sha256": "2cb3a1efdb13190bcef6ba3a1ad639a5b6e042842e89740cc035fd3185a5be82",
+      "started_at": "2026-09-08T15:01:38.081174+00:00",
+      "status": 200,
+      "url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/rosters"
+    },
+    {
+      "bytes": 43,
+      "captured_at": "2026-09-08T15:01:38.420225+00:00",
+      "file": "rosters-timestamp.json",
+      "last_modified": "Tue, 08 Sep 2026 11:56:47 GMT",
+      "sha256": "688b1b0494de6b478acf15159efb7b44560fb30a9c11e0d93980f751362dce13",
+      "started_at": "2026-09-08T15:01:38.141839+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/timestamp.json"
+    },
+    {
+      "bytes": 163952,
+      "captured_at": "2026-09-08T15:01:38.632439+00:00",
+      "file": "depth_charts-release.json",
+      "last_modified": "Tue, 08 Sep 2026 11:57:06 GMT",
+      "sha256": "3a0ffc60faee2bcc8fc02dda54526db9f13239c8455b8b8f57ba6df20cbb359b",
+      "started_at": "2026-09-08T15:01:38.295050+00:00",
+      "status": 200,
+      "url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/depth_charts"
+    },
+    {
+      "bytes": 43,
+      "captured_at": "2026-09-08T15:01:38.590885+00:00",
+      "file": "depth_charts-timestamp.json",
+      "last_modified": "Tue, 08 Sep 2026 11:57:05 GMT",
+      "sha256": "c8459d0841aff47b83649e215b32702eb0025a697e045bdbd5dbc11d80560b38",
+      "started_at": "2026-09-08T15:01:38.376913+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/timestamp.json"
+    },
+    {
+      "bytes": 12386,
+      "captured_at": "2026-09-08T15:01:38.590968+00:00",
+      "file": "schedules-release.json",
+      "last_modified": "Tue, 08 Sep 2026 14:47:08 GMT",
+      "sha256": "fff90659ab96ca1da1d488d773686876614792b165ee9c029a9c4efe298b48ea",
+      "started_at": "2026-09-08T15:01:38.420699+00:00",
+      "status": 200,
+      "url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/schedules"
+    },
+    {
+      "bytes": 43,
+      "captured_at": "2026-09-08T15:01:38.802823+00:00",
+      "file": "schedules-timestamp.json",
+      "last_modified": "Tue, 08 Sep 2026 14:47:08 GMT",
+      "sha256": "37e8ea5b65b408b74926880e4c12de07c1132b507145bbf627d65843728d53ba",
+      "started_at": "2026-09-08T15:01:38.591355+00:00",
+      "status": 200,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/timestamp.json"
+    }
+  ],
+  "registered_schedule_changes": [],
+  "registered_weekly_revision_sha256": "52062e66dbd18cc963b75f9441edfbc1efa8f92a5d26053d40eb0a79b8d6740a",
+  "reserve_exempt_note": "Raw RES/EXE codes establish non-ACT eligibility only; they are not decoded here as injury, PUP, suspension, or health claims and they receive no numerical availability adjustment.",
+  "reserve_exempt_roster_exclusions": [
+    {
+      "gsis_id": "00-0031388",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Aaron Donald",
+      "position": "DL",
+      "raw_status": "EXE",
+      "raw_status_description": "E02",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0032103",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Denzel Perryman",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAC"
+    },
+    {
+      "gsis_id": "00-0032380",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Laremy Tunsil",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0032667",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Roy Robertson-Harris",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYG"
+    },
+    {
+      "gsis_id": "00-0033284",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Taylor Moton",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R27",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0033553",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "James Conner",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "ARI"
+    },
+    {
+      "gsis_id": "00-0033752",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Storm Norton",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0033872",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jamal Adams",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0033902",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tanoh Kpassagnon",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0033947",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Deatrich Wise",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0033955",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jeremy McNichols",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0034277",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "DeShon Elliott",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "PIT"
+    },
+    {
+      "gsis_id": "00-0034355",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "M.J. Stewart",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0034373",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dorance Armstrong",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R40",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0034407",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ray-Ray McCloud",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0034775",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Christian Kirk",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0034828",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Harold Landry III",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "NE"
+    },
+    {
+      "gsis_id": "00-0034836",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Braden Smith",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0034987",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "E.J. Speed",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0035020",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Demetrius Flannigan-Fowles",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "BUF"
+    },
+    {
+      "gsis_id": "00-0035045",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "D.J. Montgomery",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "IND"
+    },
+    {
+      "gsis_id": "00-0035062",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Sam Mustipher",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0035112",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Patrick Mekari",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0035359",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "David Sills",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "TB"
+    },
+    {
+      "gsis_id": "00-0035645",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Gunner Olszewski",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYG"
+    },
+    {
+      "gsis_id": "00-0035665",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "David Long",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0035686",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Michael Deiter",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DEN"
+    },
+    {
+      "gsis_id": "00-0035700",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Josh Jacobs",
+      "position": "RB",
+      "raw_status": "EXE",
+      "raw_status_description": "E02",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0035743",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Brett Toth",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0035829",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Austen Pleasants",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0035890",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tershawn Wharton",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0036215",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Danny Pinter",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "BAL"
+    },
+    {
+      "gsis_id": "00-0036239",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jonathan Garvin",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0036295",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Matt Hennessy",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DAL"
+    },
+    {
+      "gsis_id": "00-0036300",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Mykal Walker",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0036376",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tyler Biadasz",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAC"
+    },
+    {
+      "gsis_id": "00-0036396",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jack Driscoll",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "PIT"
+    },
+    {
+      "gsis_id": "00-0036511",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Milo Eifler",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0036619",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dillon Radunz",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0036634",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tony Fields II",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0036638",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Darrick Forrest",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0036670",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jermar Jefferson",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0036871",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Nate Hobbs",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0036885",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tre Brown",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0036896",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Victor Dimukeje",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0036915",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jeremiah Owusu-Koramoah",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0036917",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Zech McPhearson",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0036926",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Payton Turner",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0036932",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Micah Parsons",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0036952",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jonathon Cooper",
+      "position": "LB",
+      "raw_status": "EXE",
+      "raw_status_description": "E02",
+      "team": "DEN"
+    },
+    {
+      "gsis_id": "00-0036956",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Darren Hall",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0036968",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Brady Christensen",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0036983",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kendrick Green",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0036984",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Trey Sermon",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0037031",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Nikola Kalinic",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0037057",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Keir Thomas",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0037078",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Cole Turner",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0037086",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Grant Calcaterra",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "PHI"
+    },
+    {
+      "gsis_id": "00-0037141",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Joey Blount",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ARI"
+    },
+    {
+      "gsis_id": "00-0037156",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Irvin Charles",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "SEA"
+    },
+    {
+      "gsis_id": "00-0037197",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Isiah Pacheco",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0037205",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Brenden Schooler",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R05",
+      "team": "NE"
+    },
+    {
+      "gsis_id": "00-0037229",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ikem Ekwonu",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0037251",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Alex Wright",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0037266",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Matt Waletzko",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0037276",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ty Chandler",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0037281",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Damone Clark",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0037297",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Cade Mays",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0037303",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Matt Henningsen",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DEN"
+    },
+    {
+      "gsis_id": "00-0037307",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ja'Sir Taylor",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "CIN"
+    },
+    {
+      "gsis_id": "00-0037324",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Chris Oladokun",
+      "position": "QB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0037327",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Skylar Thompson",
+      "position": "QB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "BAL"
+    },
+    {
+      "gsis_id": "00-0037329",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Brittain Brown",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0037385",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Michael Niese",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0037395",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dallis Flowers",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0037431",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kingsley Jonathan",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0037544",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Nephi Sewell",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0037549",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Darrell Baker Jr.",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0037602",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Sam Okuayinonu",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0037661",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ja'Marcus Ingram",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0037667",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kerby Joseph",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0037753",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Cam Taylor-Britt",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R40",
+      "team": "IND"
+    },
+    {
+      "gsis_id": "00-0037804",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Zachary Carter",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "ARI"
+    },
+    {
+      "gsis_id": "00-0037808",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "DeAngelo Malone",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0037826",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Drake Jackson",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0037831",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Nick Zakelj",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0037832",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kalia Davis",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0037837",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Calvin Austin III",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYG"
+    },
+    {
+      "gsis_id": "00-0038043",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Joshua Williams",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0038099",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Phidarian Mathis",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R40",
+      "team": "BUF"
+    },
+    {
+      "gsis_id": "00-0038105",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Damarri Mathis",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0038111",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kyler Gordon",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0038136",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Coby Bryant",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0038145",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Thomas Odukoya",
+      "position": "TE",
+      "raw_status": "EXE",
+      "raw_status_description": "E02",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0038390",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Noah Sewell",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0038394",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Will Mallory",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "IND"
+    },
+    {
+      "gsis_id": "00-0038401",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jarrick Bernard-Converse",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYG"
+    },
+    {
+      "gsis_id": "00-0038405",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Travis Bell",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0038462",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Keshawn Banks",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0038494",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Trey Dean III",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0038506",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jordon Riley",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0038566",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Nick Saldiveri",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0038585",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Cameron Mitchell",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "IND"
+    },
+    {
+      "gsis_id": "00-0038590",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Justin Shorter",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0038610",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Bryce Baringer",
+      "position": "P",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NE"
+    },
+    {
+      "gsis_id": "00-0038614",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Scott Matlock",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "LAC"
+    },
+    {
+      "gsis_id": "00-0038679",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tyrell Shavers",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "BUF"
+    },
+    {
+      "gsis_id": "00-0038703",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kendell Brooks",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0038720",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Julian Hill",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NE"
+    },
+    {
+      "gsis_id": "00-0038724",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ali Gaye",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0038735",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Princeton Fant",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DAL"
+    },
+    {
+      "gsis_id": "00-0038752",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jake Bobo",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SEA"
+    },
+    {
+      "gsis_id": "00-0038781",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Rejzohn Wright",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0038809",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ben Sims",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0038865",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Andrew Farmer",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0038977",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tank Dell",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0038995",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Bryan Bresee",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0039003",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Drew Sanders",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DEN"
+    },
+    {
+      "gsis_id": "00-0039004",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Carter Warren",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0039009",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dylan Horton",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0039042",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ryan Hayes",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0039051",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Josh Hayes",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "TB"
+    },
+    {
+      "gsis_id": "00-0039072",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jakorian Bennett",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "PHI"
+    },
+    {
+      "gsis_id": "00-0039141",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Brian Branch",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0039144",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Luke Musgrave",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0039165",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Zach Charbonnet",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "SEA"
+    },
+    {
+      "gsis_id": "00-0039236",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Johnny Wilson",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "PHI"
+    },
+    {
+      "gsis_id": "00-0039244",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Chris Collier",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0039263",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "McCallan Castles",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "W03",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0039267",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Andre' Sam",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "PHI"
+    },
+    {
+      "gsis_id": "00-0039318",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Curtis Jacobs",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0039352",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Marist Liufau",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "DAL"
+    },
+    {
+      "gsis_id": "00-0039362",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Giovanni Manu",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R05",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0039363",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Isaac Guerendo",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0039370",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "JD Bertrand",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0039379",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jamari Thrash",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0039381",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dominique Hampton",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0039388",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jaylan Ford",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0039389",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Logan Lee",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "PIT"
+    },
+    {
+      "gsis_id": "00-0039419",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Michael Jurgens",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0039427",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Solomon Byrd",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0039436",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jaylen Harrell",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0039438",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Nick Gargiulo",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "DEN"
+    },
+    {
+      "gsis_id": "00-0039454",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Beanie Bishop Jr.",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R40",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0039481",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Storm Duck",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0039506",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Alex Johnson",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0039534",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Carter Bradley",
+      "position": "QB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0039565",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Levelle Bailey",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DEN"
+    },
+    {
+      "gsis_id": "00-0039568",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Frank Crum",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "DEN"
+    },
+    {
+      "gsis_id": "00-0039620",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Rico Payton",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYG"
+    },
+    {
+      "gsis_id": "00-0039623",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Mason Tipton",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0039626",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Cole Burgess",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "PIT"
+    },
+    {
+      "gsis_id": "00-0039644",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Isaiah Iton",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NE"
+    },
+    {
+      "gsis_id": "00-0039676",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Chigozie Anusiem",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0039710",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jeshaun Jones",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R40",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0039720",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Taki Taimani",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0039737",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tip Reiman",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "ARI"
+    },
+    {
+      "gsis_id": "00-0039764",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Elijah Chatman",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0039784",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Justin Dedich",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0039833",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "C.J. Hanson",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0039836",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Brennan Jackson",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0039877",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Mohamed Kamara",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "TB"
+    },
+    {
+      "gsis_id": "00-0039878",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Edefuan Ulofoshio",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0039883",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Daequan Hardy",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "PIT"
+    },
+    {
+      "gsis_id": "00-0039903",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Terrion Arnold",
+      "position": "DB",
+      "raw_status": "EXE",
+      "raw_status_description": "E02",
+      "team": "SEA"
+    },
+    {
+      "gsis_id": "00-0039906",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jer'Zhan Newton",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0039916",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ricky Pearsall",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0039921",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Trey Benson",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ARI"
+    },
+    {
+      "gsis_id": "00-0039936",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Thomas Yassmin",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0040004",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "T.J. Maguranyanga",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0040009",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Savion Williams",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0040012",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Collin Oliver",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0040033",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Johnathan Baldwin",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0040059",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Amari Kight",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SEA"
+    },
+    {
+      "gsis_id": "00-0040073",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Bilhal Kone",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "BAL"
+    },
+    {
+      "gsis_id": "00-0040120",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jimmy Holiday",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0040127",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kenneth Grant",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0040130",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jayden Higgins",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0040135",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Nick Martin",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0040161",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kyle Kennard",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAC"
+    },
+    {
+      "gsis_id": "00-0040167",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ruben Hyppolite II",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0040196",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tyler Baron",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0040197",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dorian Strong",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R05",
+      "team": "BUF"
+    },
+    {
+      "gsis_id": "00-0040202",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Devin Neal",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0040211",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Graham Mertz",
+      "position": "QB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0040212",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Branson Taylor",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "LAC"
+    },
+    {
+      "gsis_id": "00-0040226",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Marcus Bryant",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "NE"
+    },
+    {
+      "gsis_id": "00-0040229",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kyonte Hamilton",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0040232",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Donte Kent",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "PIT"
+    },
+    {
+      "gsis_id": "00-0040240",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Caleb Lohner",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "DEN"
+    },
+    {
+      "gsis_id": "00-0040243",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Korie Black",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "NYG"
+    },
+    {
+      "gsis_id": "00-0040244",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Moliki Matavao",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0040289",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Bam Martin-Scott",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0040317",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jacoby Jones",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0040328",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Ethan Downs",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0040352",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Coleman Owen",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "IND"
+    },
+    {
+      "gsis_id": "00-0040395",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jared Bartlett",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0040407",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Aaron Smith",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SEA"
+    },
+    {
+      "gsis_id": "00-0040413",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "K.C. Ossai",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0040432",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Beaux Collins",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0040488",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Carter Runyon",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0040492",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tyler Batty",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0040498",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dontae Fleming",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0040503",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dorian Mausi",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0040504",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Bryson Nesbit",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "W03",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0040550",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dontae Manning",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0040554",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Malik Verdon",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0040570",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jeremiah Webb",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NE"
+    },
+    {
+      "gsis_id": "00-0040577",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jalon Walker",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0040578",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "James Pearce Jr.",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R40",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0040581",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dont'e Thornton Jr.",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0040629",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dalevon Campbell",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAC"
+    },
+    {
+      "gsis_id": "00-0040644",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Trevor Etienne",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0040649",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Robbie Ouzts",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SEA"
+    },
+    {
+      "gsis_id": "00-0040652",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Mason Richman",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SEA"
+    },
+    {
+      "gsis_id": "00-0040660",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Mykel Williams",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0040704",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dillon Gabriel",
+      "position": "QB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0040731",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Trey Amos",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0040741",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Shemar Turner",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0040746",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Nic Scourton",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0040748",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Omarr Norman-Lott",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R04",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0040786",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jacob Roberts",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0040853",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Carson Towt",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "IND"
+    },
+    {
+      "gsis_id": "00-0040875",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Devin Moore",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "DAL"
+    },
+    {
+      "gsis_id": "00-0040888",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Adam Randall",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "BAL"
+    },
+    {
+      "gsis_id": "00-0040901",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jaren Kanak",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0040929",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tucker Large",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R05",
+      "team": "PHI"
+    },
+    {
+      "gsis_id": "00-0040933",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kelvin Gilliam",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DAL"
+    },
+    {
+      "gsis_id": "00-0040937",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Dominic Richardson",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0040938",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "DJ Rogers",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DAL"
+    },
+    {
+      "gsis_id": "00-0040953",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jeff Caldwell",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0040955",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "John Michael Gyllenborg",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0040964",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "EJ Smith",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0040988",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jahquez Robinson",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "BAL"
+    },
+    {
+      "gsis_id": "00-0041003",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Justin Pickett",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0041004",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Chase Roberts",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0041005",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Corey Rucker",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0041029",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jordyn Tyson",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0041047",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Chris Brazzell II",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0041087",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Joe Royer",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R49",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0041089",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Lorenzo Styles Jr.",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0041091",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Zane Durant",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "BUF"
+    },
+    {
+      "gsis_id": "00-0041097",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Anez Cooper",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0041098",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Brian Parker II",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "CIN"
+    },
+    {
+      "gsis_id": "00-0041120",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "VJ Payne",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0041122",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Zach Durfee",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0041127",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Parker Hughes",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0041136",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Rene Konga",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0041142",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Thaddeus Dixon",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYG"
+    },
+    {
+      "gsis_id": "00-0041170",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Hayden Large",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0041180",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Quentin Moore",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0041181",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Malik Spencer",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0041208",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Garrett DiGiorgio",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0041239",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Chip Trayanum",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0041303",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Sam Hagen",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0041321",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Khalil Jacobs",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NE"
+    },
+    {
+      "gsis_id": "00-0041323",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Myles Montgomery",
+      "position": "RB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NE"
+    },
+    {
+      "gsis_id": "00-0041329",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Michael Heldman",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0041339",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Deshawn McKnight",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "TB"
+    },
+    {
+      "gsis_id": "00-0041340",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Marcus Allen",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0041344",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Tyreek Chappell",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0041360",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Mikail Kamara",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0041366",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Jameson Geers",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ARI"
+    },
+    {
+      "gsis_id": "00-0041374",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Sincere Brown",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAC"
+    },
+    {
+      "gsis_id": "00-0041387",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Isaiah World",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R05",
+      "team": "LAC"
+    },
+    {
+      "gsis_id": "00-0041394",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Keagen Trost",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0041414",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Matthew Caldwell",
+      "position": "QB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0041429",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Eddie Walls III",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0041446",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kendrick Law",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0041451",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Brock Rechsteiner",
+      "position": "WR",
+      "raw_status": "RES",
+      "raw_status_description": "R40",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0041463",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Bud Clark",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "SEA"
+    },
+    {
+      "gsis_id": "00-0041468",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Chase Bisontis",
+      "position": "OL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ARI"
+    },
+    {
+      "gsis_id": "00-0041484",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Anterio Thompson",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R05",
+      "team": "ATL"
+    },
+    {
+      "gsis_id": "00-0041493",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Marlon Jones",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0041526",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Trey Moore",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R48",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0041553",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Keyron Crawford",
+      "position": "LB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0041555",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Kaleb Proctor",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "ARI"
+    },
+    {
+      "gsis_id": "00-0041577",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Connor Hulstein",
+      "position": "TE",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0041587",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Daniel Rickert",
+      "position": "DL",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0041592",
+      "model_treatment": "excluded_from_ACT_eligibility_unpriced",
+      "player_name": "Xavier Williams",
+      "position": "DB",
+      "raw_status": "RES",
+      "raw_status_description": "R01",
+      "team": "TB"
+    }
+  ],
+  "roster_status_counts": {
+    "ACT": 1693,
+    "CUT": 414,
+    "DEV": 545,
+    "EXE": 5,
+    "RES": 275,
+    "RET": 23
+  },
+  "schema_version": 1,
+  "script_sha256": "b14526e791f85341e1288cb28e9ca9a00625d882f10dece02f2598221d0e1790",
+  "starter_changes_from_september_07": [],
+  "status": "BLOCKED",
+  "week1_games": [
+    {
+      "away": "NE",
+      "away_rest": 7,
+      "game_id": "2026_01_NE_SEA",
+      "home": "SEA",
+      "home_rest": 7,
+      "kickoff": "2026-09-10T00:20:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-09T23:20:00+00:00"
+    },
+    {
+      "away": "SF",
+      "away_rest": 7,
+      "game_id": "2026_01_SF_LA",
+      "home": "LAR",
+      "home_rest": 7,
+      "kickoff": "2026-09-11T00:35:00+00:00",
+      "location": "Neutral",
+      "lock_at": "2026-09-10T23:35:00+00:00"
+    },
+    {
+      "away": "ATL",
+      "away_rest": 7,
+      "game_id": "2026_01_ATL_PIT",
+      "home": "PIT",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T16:00:00+00:00"
+    },
+    {
+      "away": "BAL",
+      "away_rest": 7,
+      "game_id": "2026_01_BAL_IND",
+      "home": "IND",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T16:00:00+00:00"
+    },
+    {
+      "away": "BUF",
+      "away_rest": 7,
+      "game_id": "2026_01_BUF_HOU",
+      "home": "HOU",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T16:00:00+00:00"
+    },
+    {
+      "away": "CHI",
+      "away_rest": 7,
+      "game_id": "2026_01_CHI_CAR",
+      "home": "CAR",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T16:00:00+00:00"
+    },
+    {
+      "away": "CLE",
+      "away_rest": 7,
+      "game_id": "2026_01_CLE_JAX",
+      "home": "JAX",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T16:00:00+00:00"
+    },
+    {
+      "away": "NO",
+      "away_rest": 7,
+      "game_id": "2026_01_NO_DET",
+      "home": "DET",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T16:00:00+00:00"
+    },
+    {
+      "away": "NYJ",
+      "away_rest": 7,
+      "game_id": "2026_01_NYJ_TEN",
+      "home": "TEN",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T16:00:00+00:00"
+    },
+    {
+      "away": "TB",
+      "away_rest": 7,
+      "game_id": "2026_01_TB_CIN",
+      "home": "CIN",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T16:00:00+00:00"
+    },
+    {
+      "away": "ARI",
+      "away_rest": 7,
+      "game_id": "2026_01_ARI_LAC",
+      "home": "LAC",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T19:25:00+00:00"
+    },
+    {
+      "away": "GB",
+      "away_rest": 7,
+      "game_id": "2026_01_GB_MIN",
+      "home": "MIN",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T19:25:00+00:00"
+    },
+    {
+      "away": "MIA",
+      "away_rest": 7,
+      "game_id": "2026_01_MIA_LV",
+      "home": "LV",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T19:25:00+00:00"
+    },
+    {
+      "away": "WAS",
+      "away_rest": 7,
+      "game_id": "2026_01_WAS_PHI",
+      "home": "PHI",
+      "home_rest": 7,
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T19:25:00+00:00"
+    },
+    {
+      "away": "DAL",
+      "away_rest": 7,
+      "game_id": "2026_01_DAL_NYG",
+      "home": "NYG",
+      "home_rest": 7,
+      "kickoff": "2026-09-14T00:20:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-13T23:20:00+00:00"
+    },
+    {
+      "away": "DEN",
+      "away_rest": 7,
+      "game_id": "2026_01_DEN_KC",
+      "home": "KC",
+      "home_rest": 7,
+      "kickoff": "2026-09-15T00:15:00+00:00",
+      "location": "Home",
+      "lock_at": "2026-09-14T23:15:00+00:00"
+    }
+  ]
+}

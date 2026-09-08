@@ -1,0 +1,18 @@
+{
+  "charter_sha256": "22e7c00e9bc5b1dc96664fe445c0954699d58b700acb23a98618e96440e2a578",
+  "code_sha256": {
+    "pgo_challenger.py": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+    "pgo_forecast_snapshot.py": "d8d13986805efec7b2ca400d0550e5d413e8136760c53ee69ffd53406b1ed120",
+    "pgo_opponent_adjustment.py": "f0a84e125492d5d6dfea27f349d17cf8e5e13e6033ff62bf2e4f5912bad9f665",
+    "pgo_opponent_evaluation.py": "9aa136652da5bcea5b93547c6ffc41e93c7f0efce9c0e8507aa598adefdf5323",
+    "pgo_sources.py": "97bd522580eadc87719757a8c3d1adb20601fa75bbb9e315308dc15d28cd3fb8",
+    "tests/test_pgo_opponent_adjustment.py": "573f6d20ca24c141886780cca631859ea5a17a62ade919ed92fadd9323eeb5fa",
+    "tests/test_pgo_opponent_evaluation.py": "94119abb8aa5907a51dfd5201663ccefcb4fc994b8d352f5a33eb4676835b266"
+  },
+  "identity": "pgo-opponent-epa-retrospective-20260907",
+  "recovered_fit_sha256": "1b960834b33cdda08bf69b792fa24ee2bb57ff738b1153aa1c1d833914af2036",
+  "schema_version": 1,
+  "snapshot_manifest_sha256": "43bdeee73a2d3301eedbcecc7d291dc9ebe68cf196860e7217326570e4fe2f42",
+  "started_at": "2026-09-08T01:39:09.765777+00:00",
+  "status": "STARTED_INCOMPLETE_UNTIL_MANIFEST_EXISTS"
+}

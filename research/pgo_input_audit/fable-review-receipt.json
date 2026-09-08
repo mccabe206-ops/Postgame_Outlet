@@ -1,0 +1,17 @@
+{
+  "disposition": "See README.md; original review text is preserved verbatim.",
+  "duration_ms": 640690,
+  "observation_boundary": "Fable observed run-start before attempt02 completed. Final results were separately verified by verify_run.py.",
+  "original_response_sha256": "65b50ec160899bbb0a0358ec44eb8b4c5d6ea8f190a9232fec50a66dfa50c76c",
+  "permission_denials": [],
+  "persona_sha256": "162b2e6cc66b3ac212dc491cd252a539bb7116076cdcd6d76b8f125265552db8",
+  "previous_attempt": "fable-review-status.json",
+  "prompt_sha256": "6f2b03f4ee3c8ec78adfef3f7216e5e72a47b6f826104c27f12f1617212d2f52",
+  "recorded_at": "2026-09-08T04:54:32.579954+00:00",
+  "requested_model": "fable",
+  "review_model_returned": "claude-fable-5-1",
+  "review_utf8_sha256": "8f50ed45ab4f7060e3c75f079951ab006a8425e29cb55b2dfde17e789de86f96",
+  "scope": "Read-only adapter, methodology and explanation review; final attempt02 metrics were not reviewed by Fable.",
+  "status": "INDEPENDENT_REVIEW_RETURNED",
+  "verdict": "No blocking correctness defect found in the seven-arm adapter, symmetry construction or evaluation."
+}

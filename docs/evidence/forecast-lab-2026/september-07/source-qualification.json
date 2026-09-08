@@ -1,0 +1,1079 @@
+{
+  "active_qb_identity_conflicts": [],
+  "active_qbs_missing_depth": [],
+  "artifact_kind": "PGO_SNAPSHOT_SOURCE_QUALIFICATION",
+  "capture_manifest_sha256": "291e607ca39a1243853fb14dfc9e7763630b0f07fdc7d6ddfb9ce4cdb63b0ab9",
+  "captured_at": "2026-09-07T21:28:03.743073+00:00",
+  "checks": {
+    "272_unique_games": true,
+    "32_teams_17_games_each": true,
+    "all_active_qbs_have_depth": true,
+    "all_kickoffs_after_capture": true,
+    "asset_publication_chronology:depth_charts:depth_charts_2026.csv.gz": true,
+    "asset_publication_chronology:depth_charts:timestamp.json": true,
+    "asset_publication_chronology:rosters:roster_2026.csv.gz": true,
+    "asset_publication_chronology:rosters:timestamp.json": true,
+    "asset_publication_chronology:schedules:games.csv.gz": true,
+    "asset_publication_chronology:schedules:timestamp.json": true,
+    "capture_chronology:depth.csv.gz": true,
+    "capture_chronology:depth_charts-release.json": true,
+    "capture_chronology:depth_charts-timestamp.json": true,
+    "capture_chronology:nfl-week-1.html": true,
+    "capture_chronology:roster.csv.gz": true,
+    "capture_chronology:rosters-release.json": true,
+    "capture_chronology:rosters-timestamp.json": true,
+    "capture_chronology:schedule.csv.gz": true,
+    "capture_chronology:schedules-release.json": true,
+    "capture_chronology:schedules-timestamp.json": true,
+    "depth_roster_unique_match:ARI:00-0033119": true,
+    "depth_roster_unique_match:ARI:00-0035289": true,
+    "depth_roster_unique_match:ARI:00-0041561": true,
+    "depth_roster_unique_match:ATL:00-0033662": true,
+    "depth_roster_unique_match:ATL:00-0036212": true,
+    "depth_roster_unique_match:ATL:00-0039917": true,
+    "depth_roster_unique_match:ATL:00-0041194": true,
+    "depth_roster_unique_match:BAL:00-0034796": true,
+    "depth_roster_unique_match:BAL:00-0035993": true,
+    "depth_roster_unique_match:BAL:00-0037327": true,
+    "depth_roster_unique_match:BAL:00-0040981": true,
+    "depth_roster_unique_match:BUF:00-0034577": true,
+    "depth_roster_unique_match:BUF:00-0034857": true,
+    "depth_roster_unique_match:CAR:00-0038102": true,
+    "depth_roster_unique_match:CAR:00-0039150": true,
+    "depth_roster_unique_match:CAR:00-0041149": true,
+    "depth_roster_unique_match:CHI:00-0028986": true,
+    "depth_roster_unique_match:CHI:00-0038416": true,
+    "depth_roster_unique_match:CHI:00-0039918": true,
+    "depth_roster_unique_match:CIN:00-0026158": true,
+    "depth_roster_unique_match:CIN:00-0036442": true,
+    "depth_roster_unique_match:CLE:00-0033537": true,
+    "depth_roster_unique_match:CLE:00-0040668": true,
+    "depth_roster_unique_match:CLE:00-0040704": true,
+    "depth_roster_unique_match:CLE:00-0041092": true,
+    "depth_roster_unique_match:DAL:00-0033077": true,
+    "depth_roster_unique_match:DAL:00-0037077": true,
+    "depth_roster_unique_match:DEN:00-0035264": true,
+    "depth_roster_unique_match:DEN:00-0036879": true,
+    "depth_roster_unique_match:DEN:00-0039732": true,
+    "depth_roster_unique_match:DET:00-0033106": true,
+    "depth_roster_unique_match:DET:00-0033949": true,
+    "depth_roster_unique_match:GB:00-0028118": true,
+    "depth_roster_unique_match:GB:00-0036264": true,
+    "depth_roster_unique_match:HOU:00-0036898": true,
+    "depth_roster_unique_match:HOU:00-0039163": true,
+    "depth_roster_unique_match:HOU:00-0040211": true,
+    "depth_roster_unique_match:IND:00-0035710": true,
+    "depth_roster_unique_match:IND:00-0039164": true,
+    "depth_roster_unique_match:IND:00-0040206": true,
+    "depth_roster_unique_match:JAX:00-0036971": true,
+    "depth_roster_unique_match:JAX:00-0039534": true,
+    "depth_roster_unique_match:JAX:00-0040234": true,
+    "depth_roster_unique_match:KC:00-0033873": true,
+    "depth_roster_unique_match:KC:00-0036945": true,
+    "depth_roster_unique_match:KC:00-0040906": true,
+    "depth_roster_unique_match:LAC:00-0036355": true,
+    "depth_roster_unique_match:LAC:00-0037012": true,
+    "depth_roster_unique_match:LAR:00-0026498": true,
+    "depth_roster_unique_match:LAR:00-0039107": true,
+    "depth_roster_unique_match:LAR:00-0041414": true,
+    "depth_roster_unique_match:LAR:00-0041568": true,
+    "depth_roster_unique_match:LV:00-0029604": true,
+    "depth_roster_unique_match:LV:00-0038579": true,
+    "depth_roster_unique_match:LV:00-0041562": true,
+    "depth_roster_unique_match:MIA:00-0038128": true,
+    "depth_roster_unique_match:MIA:00-0040014": true,
+    "depth_roster_unique_match:MIA:00-0040398": true,
+    "depth_roster_unique_match:MIN:00-0032950": true,
+    "depth_roster_unique_match:MIN:00-0035228": true,
+    "depth_roster_unique_match:MIN:00-0039923": true,
+    "depth_roster_unique_match:NE:00-0038476": true,
+    "depth_roster_unique_match:NE:00-0039851": true,
+    "depth_roster_unique_match:NE:00-0041123": true,
+    "depth_roster_unique_match:NO:00-0037013": true,
+    "depth_roster_unique_match:NO:00-0039376": true,
+    "depth_roster_unique_match:NO:00-0040743": true,
+    "depth_roster_unique_match:NYG:00-0031503": true,
+    "depth_roster_unique_match:NYG:00-0040691": true,
+    "depth_roster_unique_match:NYJ:00-0030565": true,
+    "depth_roster_unique_match:NYJ:00-0041056": true,
+    "depth_roster_unique_match:PHI:00-0027973": true,
+    "depth_roster_unique_match:PHI:00-0036389": true,
+    "depth_roster_unique_match:PHI:00-0038400": true,
+    "depth_roster_unique_match:PHI:00-0040891": true,
+    "depth_roster_unique_match:PIT:00-0023459": true,
+    "depth_roster_unique_match:PIT:00-0034771": true,
+    "depth_roster_unique_match:PIT:00-0040203": true,
+    "depth_roster_unique_match:PIT:00-0041565": true,
+    "depth_roster_unique_match:SEA:00-0034869": true,
+    "depth_roster_unique_match:SEA:00-0035704": true,
+    "depth_roster_unique_match:SEA:00-0040673": true,
+    "depth_roster_unique_match:SF:00-0036972": true,
+    "depth_roster_unique_match:SF:00-0037834": true,
+    "depth_roster_unique_match:SF:00-0040589": true,
+    "depth_roster_unique_match:TB:00-0034855": true,
+    "depth_roster_unique_match:TB:00-0041251": true,
+    "depth_roster_unique_match:TEN:00-0033869": true,
+    "depth_roster_unique_match:TEN:00-0040676": true,
+    "depth_roster_unique_match:WAS:00-0032268": true,
+    "depth_roster_unique_match:WAS:00-0039910": true,
+    "depth_roster_unique_match:WAS:00-0041117": true,
+    "exactly_32_unique_starters": true,
+    "game_id_agrees_with_identity": true,
+    "hash_and_size:depth.csv.gz": true,
+    "hash_and_size:depth_charts-release.json": true,
+    "hash_and_size:depth_charts-timestamp.json": true,
+    "hash_and_size:nfl-week-1.html": true,
+    "hash_and_size:roster.csv.gz": true,
+    "hash_and_size:rosters-release.json": true,
+    "hash_and_size:rosters-timestamp.json": true,
+    "hash_and_size:schedule.csv.gz": true,
+    "hash_and_size:schedules-release.json": true,
+    "hash_and_size:schedules-timestamp.json": true,
+    "last_modified_before_capture:depth.csv.gz": true,
+    "last_modified_before_capture:depth_charts-release.json": true,
+    "last_modified_before_capture:depth_charts-timestamp.json": true,
+    "last_modified_before_capture:roster.csv.gz": true,
+    "last_modified_before_capture:rosters-release.json": true,
+    "last_modified_before_capture:rosters-timestamp.json": true,
+    "last_modified_before_capture:schedule.csv.gz": true,
+    "last_modified_before_capture:schedules-release.json": true,
+    "last_modified_before_capture:schedules-timestamp.json": true,
+    "no_active_qb_multiteam_identity_conflicts": true,
+    "no_current_outcomes": true,
+    "no_depth_observations_after_capture": true,
+    "no_duplicate_team_in_week": true,
+    "no_roster_team_gsis_duplicates": true,
+    "official_16_week1_games": true,
+    "official_date_only_fragments_match_full_timestamps": true,
+    "official_html_no_conflicting_game_objects": true,
+    "official_week1_matchups_and_kickoffs_exact": true,
+    "official_week1_neutral_sites_match": true,
+    "old_lock_exact_272_identities": true,
+    "old_lock_schedule_unchanged": true,
+    "one_coherent_latest_snapshot_all_32": true,
+    "one_release_asset:depth_charts:depth_charts_2026.csv.gz": true,
+    "one_release_asset:depth_charts:timestamp.json": true,
+    "one_release_asset:rosters:roster_2026.csv.gz": true,
+    "one_release_asset:rosters:timestamp.json": true,
+    "one_release_asset:schedules:games.csv.gz": true,
+    "one_release_asset:schedules:timestamp.json": true,
+    "provider_timestamp:depth_charts": true,
+    "provider_timestamp:rosters": true,
+    "provider_timestamp:schedules": true,
+    "release_digest_and_size:depth_charts:depth_charts_2026.csv.gz": true,
+    "release_digest_and_size:depth_charts:timestamp.json": true,
+    "release_digest_and_size:rosters:roster_2026.csv.gz": true,
+    "release_digest_and_size:rosters:timestamp.json": true,
+    "release_digest_and_size:schedules:games.csv.gz": true,
+    "release_digest_and_size:schedules:timestamp.json": true,
+    "release_metadata:depth_charts": true,
+    "release_metadata:rosters": true,
+    "release_metadata:schedules": true,
+    "roster_2026_week1_regular": true,
+    "roster_32_teams": true,
+    "starter_active_and_identity:ARI": true,
+    "starter_active_and_identity:ATL": true,
+    "starter_active_and_identity:BAL": true,
+    "starter_active_and_identity:BUF": true,
+    "starter_active_and_identity:CAR": true,
+    "starter_active_and_identity:CHI": true,
+    "starter_active_and_identity:CIN": true,
+    "starter_active_and_identity:CLE": true,
+    "starter_active_and_identity:DAL": true,
+    "starter_active_and_identity:DEN": true,
+    "starter_active_and_identity:DET": true,
+    "starter_active_and_identity:GB": true,
+    "starter_active_and_identity:HOU": true,
+    "starter_active_and_identity:IND": true,
+    "starter_active_and_identity:JAX": true,
+    "starter_active_and_identity:KC": true,
+    "starter_active_and_identity:LAC": true,
+    "starter_active_and_identity:LAR": true,
+    "starter_active_and_identity:LV": true,
+    "starter_active_and_identity:MIA": true,
+    "starter_active_and_identity:MIN": true,
+    "starter_active_and_identity:NE": true,
+    "starter_active_and_identity:NO": true,
+    "starter_active_and_identity:NYG": true,
+    "starter_active_and_identity:NYJ": true,
+    "starter_active_and_identity:PHI": true,
+    "starter_active_and_identity:PIT": true,
+    "starter_active_and_identity:SEA": true,
+    "starter_active_and_identity:SF": true,
+    "starter_active_and_identity:TB": true,
+    "starter_active_and_identity:TEN": true,
+    "starter_active_and_identity:WAS": true,
+    "ten_unique_capture_entries": true,
+    "unique_contiguous_qb_depth:ARI": true,
+    "unique_contiguous_qb_depth:ATL": true,
+    "unique_contiguous_qb_depth:BAL": true,
+    "unique_contiguous_qb_depth:BUF": true,
+    "unique_contiguous_qb_depth:CAR": true,
+    "unique_contiguous_qb_depth:CHI": true,
+    "unique_contiguous_qb_depth:CIN": true,
+    "unique_contiguous_qb_depth:CLE": true,
+    "unique_contiguous_qb_depth:DAL": true,
+    "unique_contiguous_qb_depth:DEN": true,
+    "unique_contiguous_qb_depth:DET": true,
+    "unique_contiguous_qb_depth:GB": true,
+    "unique_contiguous_qb_depth:HOU": true,
+    "unique_contiguous_qb_depth:IND": true,
+    "unique_contiguous_qb_depth:JAX": true,
+    "unique_contiguous_qb_depth:KC": true,
+    "unique_contiguous_qb_depth:LAC": true,
+    "unique_contiguous_qb_depth:LAR": true,
+    "unique_contiguous_qb_depth:LV": true,
+    "unique_contiguous_qb_depth:MIA": true,
+    "unique_contiguous_qb_depth:MIN": true,
+    "unique_contiguous_qb_depth:NE": true,
+    "unique_contiguous_qb_depth:NO": true,
+    "unique_contiguous_qb_depth:NYG": true,
+    "unique_contiguous_qb_depth:NYJ": true,
+    "unique_contiguous_qb_depth:PHI": true,
+    "unique_contiguous_qb_depth:PIT": true,
+    "unique_contiguous_qb_depth:SEA": true,
+    "unique_contiguous_qb_depth:SF": true,
+    "unique_contiguous_qb_depth:TB": true,
+    "unique_contiguous_qb_depth:TEN": true,
+    "unique_contiguous_qb_depth:WAS": true,
+    "unique_depth_qb_identity": true,
+    "weeks_1_to_18": true
+  },
+  "chosen_qbs": [
+    {
+      "depth_name": "Jacoby Brissett",
+      "depth_rank": 1,
+      "gsis_id": "00-0033119",
+      "player_name": "Jacoby Brissett",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "ARI"
+    },
+    {
+      "depth_name": "Tua Tagovailoa",
+      "depth_rank": 1,
+      "gsis_id": "00-0036212",
+      "player_name": "Tua Tagovailoa",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "ATL"
+    },
+    {
+      "depth_name": "Lamar Jackson",
+      "depth_rank": 1,
+      "gsis_id": "00-0034796",
+      "player_name": "Lamar Jackson",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "BAL"
+    },
+    {
+      "depth_name": "Josh Allen",
+      "depth_rank": 1,
+      "gsis_id": "00-0034857",
+      "player_name": "Josh Allen",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "BUF"
+    },
+    {
+      "depth_name": "Bryce Young",
+      "depth_rank": 1,
+      "gsis_id": "00-0039150",
+      "player_name": "Bryce Young",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "CAR"
+    },
+    {
+      "depth_name": "Caleb Williams",
+      "depth_rank": 1,
+      "gsis_id": "00-0039918",
+      "player_name": "Caleb Williams",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "CHI"
+    },
+    {
+      "depth_name": "Joe Burrow",
+      "depth_rank": 1,
+      "gsis_id": "00-0036442",
+      "player_name": "Joe Burrow",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "CIN"
+    },
+    {
+      "depth_name": "Deshaun Watson",
+      "depth_rank": 1,
+      "gsis_id": "00-0033537",
+      "player_name": "Deshaun Watson",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "CLE"
+    },
+    {
+      "depth_name": "Dak Prescott",
+      "depth_rank": 1,
+      "gsis_id": "00-0033077",
+      "player_name": "Dak Prescott",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "DAL"
+    },
+    {
+      "depth_name": "Bo Nix",
+      "depth_rank": 1,
+      "gsis_id": "00-0039732",
+      "player_name": "Bo Nix",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "DEN"
+    },
+    {
+      "depth_name": "Jared Goff",
+      "depth_rank": 1,
+      "gsis_id": "00-0033106",
+      "player_name": "Jared Goff",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "DET"
+    },
+    {
+      "depth_name": "Jordan Love",
+      "depth_rank": 1,
+      "gsis_id": "00-0036264",
+      "player_name": "Jordan Love",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "GB"
+    },
+    {
+      "depth_name": "C.J. Stroud",
+      "depth_rank": 1,
+      "gsis_id": "00-0039163",
+      "player_name": "C.J. Stroud",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "HOU"
+    },
+    {
+      "depth_name": "Daniel Jones",
+      "depth_rank": 1,
+      "gsis_id": "00-0035710",
+      "player_name": "Daniel Jones",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "IND"
+    },
+    {
+      "depth_name": "Trevor Lawrence",
+      "depth_rank": 1,
+      "gsis_id": "00-0036971",
+      "player_name": "Trevor Lawrence",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "JAX"
+    },
+    {
+      "depth_name": "Patrick Mahomes",
+      "depth_rank": 1,
+      "gsis_id": "00-0033873",
+      "player_name": "Patrick Mahomes",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "KC"
+    },
+    {
+      "depth_name": "Justin Herbert",
+      "depth_rank": 1,
+      "gsis_id": "00-0036355",
+      "player_name": "Justin Herbert",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "LAC"
+    },
+    {
+      "depth_name": "Matthew Stafford",
+      "depth_rank": 1,
+      "gsis_id": "00-0026498",
+      "player_name": "Matthew Stafford",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "LAR"
+    },
+    {
+      "depth_name": "Kirk Cousins",
+      "depth_rank": 1,
+      "gsis_id": "00-0029604",
+      "player_name": "Kirk Cousins",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "LV"
+    },
+    {
+      "depth_name": "Malik Willis",
+      "depth_rank": 1,
+      "gsis_id": "00-0038128",
+      "player_name": "Malik Willis",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "MIA"
+    },
+    {
+      "depth_name": "Kyler Murray",
+      "depth_rank": 1,
+      "gsis_id": "00-0035228",
+      "player_name": "Kyler Murray",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "MIN"
+    },
+    {
+      "depth_name": "Drake Maye",
+      "depth_rank": 1,
+      "gsis_id": "00-0039851",
+      "player_name": "Drake Maye",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "NE"
+    },
+    {
+      "depth_name": "Tyler Shough",
+      "depth_rank": 1,
+      "gsis_id": "00-0040743",
+      "player_name": "Tyler Shough",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "NO"
+    },
+    {
+      "depth_name": "Jaxson Dart",
+      "depth_rank": 1,
+      "gsis_id": "00-0040691",
+      "player_name": "Jaxson Dart",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "NYG"
+    },
+    {
+      "depth_name": "Geno Smith",
+      "depth_rank": 1,
+      "gsis_id": "00-0030565",
+      "player_name": "Geno Smith",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "NYJ"
+    },
+    {
+      "depth_name": "Jalen Hurts",
+      "depth_rank": 1,
+      "gsis_id": "00-0036389",
+      "player_name": "Jalen Hurts",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "PHI"
+    },
+    {
+      "depth_name": "Aaron Rodgers",
+      "depth_rank": 1,
+      "gsis_id": "00-0023459",
+      "player_name": "Aaron Rodgers",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "PIT"
+    },
+    {
+      "depth_name": "Sam Darnold",
+      "depth_rank": 1,
+      "gsis_id": "00-0034869",
+      "player_name": "Sam Darnold",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "SEA"
+    },
+    {
+      "depth_name": "Brock Purdy",
+      "depth_rank": 1,
+      "gsis_id": "00-0037834",
+      "player_name": "Brock Purdy",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "SF"
+    },
+    {
+      "depth_name": "Baker Mayfield",
+      "depth_rank": 1,
+      "gsis_id": "00-0034855",
+      "player_name": "Baker Mayfield",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "TB"
+    },
+    {
+      "depth_name": "Cam Ward",
+      "depth_rank": 1,
+      "gsis_id": "00-0040676",
+      "player_name": "Cam Ward",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "TEN"
+    },
+    {
+      "depth_name": "Jayden Daniels",
+      "depth_rank": 1,
+      "gsis_id": "00-0039910",
+      "player_name": "Jayden Daniels",
+      "roster_status": "ACT",
+      "status_description": "A01",
+      "team": "WAS"
+    }
+  ],
+  "depth_qb_count": 92,
+  "depth_snapshot": "2026-09-07T13:13:25Z",
+  "failed_checks": [],
+  "limitations": [
+    "Engineering source qualification only; no forecast or scientific qualification.",
+    "ACT is roster status, not a claim of injury-free status or a final game-day inactive decision.",
+    "Only Week 1 is independently checked against captured official NFL data; weeks 2-18 retain provider schedule timing.",
+    "All 16 Week 18 games carry provider time 2027-01-10 13:00 America/New_York; preserve as captured timing, not separately confirmed final kickoff assignments.",
+    "Source market fields and current-score/outcome fields are not admitted as model inputs by this qualification."
+  ],
+  "nonactive_depth_qbs": [
+    {
+      "depth_name": "Skylar Thompson",
+      "depth_rank": 4,
+      "gsis_id": "00-0037327",
+      "player_name": "Skylar Thompson",
+      "roster_status": "RES",
+      "status_description": "R01",
+      "team": "BAL"
+    },
+    {
+      "depth_name": "Dillon Gabriel",
+      "depth_rank": 4,
+      "gsis_id": "00-0040704",
+      "player_name": "Dillon Gabriel",
+      "roster_status": "RES",
+      "status_description": "R48",
+      "team": "CLE"
+    },
+    {
+      "depth_name": "Graham Mertz",
+      "depth_rank": 3,
+      "gsis_id": "00-0040211",
+      "player_name": "Graham Mertz",
+      "roster_status": "RES",
+      "status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "depth_name": "Carter Bradley",
+      "depth_rank": 3,
+      "gsis_id": "00-0039534",
+      "player_name": "Carter Bradley",
+      "roster_status": "RES",
+      "status_description": "R01",
+      "team": "JAX"
+    },
+    {
+      "depth_name": "Matthew Caldwell",
+      "depth_rank": 4,
+      "gsis_id": "00-0041414",
+      "player_name": "Matthew Caldwell",
+      "roster_status": "RES",
+      "status_description": "R01",
+      "team": "LAR"
+    }
+  ],
+  "nonactive_roster_qbs": [
+    {
+      "gsis_id": "00-0026300",
+      "player_name": "Josh Johnson",
+      "status": "DEV",
+      "status_description": "P07",
+      "team": "CIN"
+    },
+    {
+      "gsis_id": "00-0031237",
+      "player_name": "Teddy Bridgewater",
+      "status": "RET",
+      "status_description": "R02",
+      "team": "DET"
+    },
+    {
+      "gsis_id": "00-0033319",
+      "player_name": "Nick Mullens",
+      "status": "DEV",
+      "status_description": "P07",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0035251",
+      "player_name": "Will Grier",
+      "status": "RET",
+      "status_description": "R02",
+      "team": "CAR"
+    },
+    {
+      "gsis_id": "00-0035282",
+      "player_name": "Easton Stick",
+      "status": "DEV",
+      "status_description": "P07",
+      "team": "TB"
+    },
+    {
+      "gsis_id": "00-0036679",
+      "player_name": "Shane Buechele",
+      "status": "DEV",
+      "status_description": "P01",
+      "team": "BUF"
+    },
+    {
+      "gsis_id": "00-0037324",
+      "player_name": "Chris Oladokun",
+      "status": "RES",
+      "status_description": "R01",
+      "team": "KC"
+    },
+    {
+      "gsis_id": "00-0037327",
+      "player_name": "Skylar Thompson",
+      "status": "RES",
+      "status_description": "R01",
+      "team": "BAL"
+    },
+    {
+      "gsis_id": "00-0038108",
+      "player_name": "Bailey Zappe",
+      "status": "DEV",
+      "status_description": "P07",
+      "team": "NYJ"
+    },
+    {
+      "gsis_id": "00-0038391",
+      "player_name": "Sean Clifford",
+      "status": "DEV",
+      "status_description": "P06",
+      "team": "CIN"
+    },
+    {
+      "gsis_id": "00-0038550",
+      "player_name": "Hendon Hooker",
+      "status": "DEV",
+      "status_description": "P06",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0038658",
+      "player_name": "Adrian Martinez",
+      "status": "CUT",
+      "status_description": "W03",
+      "team": "SF"
+    },
+    {
+      "gsis_id": "00-0038998",
+      "player_name": "Jake Haener",
+      "status": "DEV",
+      "status_description": "P06",
+      "team": "NYG"
+    },
+    {
+      "gsis_id": "00-0039152",
+      "player_name": "Will Levis",
+      "status": "CUT",
+      "status_description": "W03",
+      "team": "TEN"
+    },
+    {
+      "gsis_id": "00-0039398",
+      "player_name": "Joe Milton III",
+      "status": "DEV",
+      "status_description": "P06",
+      "team": "DAL"
+    },
+    {
+      "gsis_id": "00-0039464",
+      "player_name": "Austin Reed",
+      "status": "CUT",
+      "status_description": "W03",
+      "team": "BAL"
+    },
+    {
+      "gsis_id": "00-0039534",
+      "player_name": "Carter Bradley",
+      "status": "RES",
+      "status_description": "R01",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0039577",
+      "player_name": "Kedon Slovis",
+      "status": "DEV",
+      "status_description": "P06",
+      "team": "GB"
+    },
+    {
+      "gsis_id": "00-0039677",
+      "player_name": "Sam Hartman",
+      "status": "DEV",
+      "status_description": "P01",
+      "team": "WAS"
+    },
+    {
+      "gsis_id": "00-0040211",
+      "player_name": "Graham Mertz",
+      "status": "RES",
+      "status_description": "R01",
+      "team": "HOU"
+    },
+    {
+      "gsis_id": "00-0040222",
+      "player_name": "Cam Miller",
+      "status": "CUT",
+      "status_description": "W03",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0040415",
+      "player_name": "Connor Bazelak",
+      "status": "CUT",
+      "status_description": "W03",
+      "team": "TB"
+    },
+    {
+      "gsis_id": "00-0040464",
+      "player_name": "DJ Uiagalelei",
+      "status": "DEV",
+      "status_description": "P01",
+      "team": "LAC"
+    },
+    {
+      "gsis_id": "00-0040494",
+      "player_name": "Max Brosmer",
+      "status": "DEV",
+      "status_description": "P06",
+      "team": "MIN"
+    },
+    {
+      "gsis_id": "00-0040656",
+      "player_name": "Hunter Dekkers",
+      "status": "CUT",
+      "status_description": "W03",
+      "team": "NO"
+    },
+    {
+      "gsis_id": "00-0040704",
+      "player_name": "Dillon Gabriel",
+      "status": "RES",
+      "status_description": "R48",
+      "team": "CLE"
+    },
+    {
+      "gsis_id": "00-0040996",
+      "player_name": "Jacob Clark",
+      "status": "CUT",
+      "status_description": "W03",
+      "team": "LV"
+    },
+    {
+      "gsis_id": "00-0041156",
+      "player_name": "Mark Gronowski",
+      "status": "CUT",
+      "status_description": "P01",
+      "team": "MIA"
+    },
+    {
+      "gsis_id": "00-0041172",
+      "player_name": "Miller Moss",
+      "status": "CUT",
+      "status_description": "W03",
+      "team": "CHI"
+    },
+    {
+      "gsis_id": "00-0041203",
+      "player_name": "Joey Aguilar",
+      "status": "DEV",
+      "status_description": "P01",
+      "team": "JAX"
+    },
+    {
+      "gsis_id": "00-0041414",
+      "player_name": "Matthew Caldwell",
+      "status": "RES",
+      "status_description": "R01",
+      "team": "LAR"
+    },
+    {
+      "gsis_id": "00-0041453",
+      "player_name": "Luke Altmyer",
+      "status": "DEV",
+      "status_description": "P01",
+      "team": "DET"
+    }
+  ],
+  "official_week1_games": [
+    {
+      "away": "NE",
+      "home": "SEA",
+      "kickoff": "2026-09-10T00:20:00+00:00",
+      "neutral_site": false,
+      "official_id": "a8fb0d78-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "SF",
+      "home": "LAR",
+      "kickoff": "2026-09-11T00:35:00+00:00",
+      "neutral_site": true,
+      "official_id": "a8fc08da-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "CHI",
+      "home": "CAR",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "neutral_site": false,
+      "official_id": "a8fc0e5c-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "TB",
+      "home": "CIN",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "neutral_site": false,
+      "official_id": "a8fc106b-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "NO",
+      "home": "DET",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "neutral_site": false,
+      "official_id": "a8fc1203-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "BUF",
+      "home": "HOU",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "neutral_site": false,
+      "official_id": "a8fc1393-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "BAL",
+      "home": "IND",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "neutral_site": false,
+      "official_id": "a8fc15bd-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "CLE",
+      "home": "JAX",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "neutral_site": false,
+      "official_id": "a8fc1728-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "ATL",
+      "home": "PIT",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "neutral_site": false,
+      "official_id": "a8fc1864-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "NYJ",
+      "home": "TEN",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "neutral_site": false,
+      "official_id": "a8fc1998-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "ARI",
+      "home": "LAC",
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "neutral_site": false,
+      "official_id": "a9a87603-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "MIA",
+      "home": "LV",
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "neutral_site": false,
+      "official_id": "a9a881ca-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "GB",
+      "home": "MIN",
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "neutral_site": false,
+      "official_id": "a9a88631-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "WAS",
+      "home": "PHI",
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "neutral_site": false,
+      "official_id": "a9a889dd-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "DAL",
+      "home": "NYG",
+      "kickoff": "2026-09-14T00:20:00+00:00",
+      "neutral_site": false,
+      "official_id": "a9a88d52-4feb-11f1-abca-2c54536568a9"
+    },
+    {
+      "away": "DEN",
+      "home": "KC",
+      "kickoff": "2026-09-15T00:15:00+00:00",
+      "neutral_site": false,
+      "official_id": "a9a890ed-4feb-11f1-abca-2c54536568a9"
+    }
+  ],
+  "old_lock_schedule_changes": [],
+  "old_lock_sha256": "d6ebf73188c41046f945a54653bdb89eadc2dc18d917276a47c0166b9ada98e9",
+  "provider_metadata": [
+    {
+      "asset": "roster_2026.csv.gz",
+      "asset_updated_at": "2026-09-07T13:10:29Z",
+      "digest": "sha256:e356efc0f9ff9b8d50d82e2524312bda3ebb6598cf487eee69ba339b90f6230a",
+      "provider_timestamp": "2026-09-07T09:10:27-04:00",
+      "tag": "rosters"
+    },
+    {
+      "asset": "timestamp.json",
+      "asset_updated_at": "2026-09-07T13:10:30Z",
+      "digest": "sha256:f298daf8f63db12c434a23cdeffa0f5f06acb8413e6c24ffdfa8e94478120e09",
+      "provider_timestamp": "2026-09-07T09:10:27-04:00",
+      "tag": "rosters"
+    },
+    {
+      "asset": "depth_charts_2026.csv.gz",
+      "asset_updated_at": "2026-09-07T13:13:34Z",
+      "digest": "sha256:92ced698838f0d3208ebfefc935c0eb260b82bbcc9f2040133e9181367761c23",
+      "provider_timestamp": "2026-09-07T09:13:31-04:00",
+      "tag": "depth_charts"
+    },
+    {
+      "asset": "timestamp.json",
+      "asset_updated_at": "2026-09-07T13:13:34Z",
+      "digest": "sha256:9b8a5a879ad9b0e95ddbd1f0e0e9b87839c7d61e5a309c12452853a4f00d0d5a",
+      "provider_timestamp": "2026-09-07T09:13:31-04:00",
+      "tag": "depth_charts"
+    },
+    {
+      "asset": "games.csv.gz",
+      "asset_updated_at": "2026-09-07T21:06:15Z",
+      "digest": "sha256:abeb9b6c541648308d61d3c187ae94ca82b2d4005829740e48daa64bdd33aa6f",
+      "provider_timestamp": "2026-09-07T17:06:14-04:00",
+      "tag": "schedules"
+    },
+    {
+      "asset": "timestamp.json",
+      "asset_updated_at": "2026-09-07T21:06:16Z",
+      "digest": "sha256:28bf220cd76f3060464bf9eb0917fc6d45d024af278e8ef27773e1cefdb252a7",
+      "provider_timestamp": "2026-09-07T17:06:14-04:00",
+      "tag": "schedules"
+    }
+  ],
+  "raw_sources": [
+    {
+      "bytes": 360132,
+      "captured_at": "2026-09-07T21:28:03.047852+00:00",
+      "file": "roster.csv.gz",
+      "last_modified": "Mon, 07 Sep 2026 13:10:29 GMT",
+      "sha256": "e356efc0f9ff9b8d50d82e2524312bda3ebb6598cf487eee69ba339b90f6230a",
+      "started_at": "2026-09-07T21:28:02.735687+00:00",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_2026.csv.gz"
+    },
+    {
+      "bytes": 9824615,
+      "captured_at": "2026-09-07T21:28:03.208350+00:00",
+      "file": "depth.csv.gz",
+      "last_modified": "Mon, 07 Sep 2026 13:13:33 GMT",
+      "sha256": "92ced698838f0d3208ebfefc935c0eb260b82bbcc9f2040133e9181367761c23",
+      "started_at": "2026-09-07T21:28:02.736311+00:00",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2026.csv.gz"
+    },
+    {
+      "bytes": 512110,
+      "captured_at": "2026-09-07T21:28:03.020510+00:00",
+      "file": "schedule.csv.gz",
+      "last_modified": "Mon, 07 Sep 2026 21:06:15 GMT",
+      "sha256": "abeb9b6c541648308d61d3c187ae94ca82b2d4005829740e48daa64bdd33aa6f",
+      "started_at": "2026-09-07T21:28:02.736729+00:00",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv.gz"
+    },
+    {
+      "bytes": 1671204,
+      "captured_at": "2026-09-07T21:28:03.592025+00:00",
+      "file": "nfl-week-1.html",
+      "last_modified": null,
+      "sha256": "05aee0c759959bb0d53b5446259316435004119caf78bb776ff03fb68a22b2b3",
+      "started_at": "2026-09-07T21:28:03.021550+00:00",
+      "url": "https://www.nfl.com/schedules/2026/by-week/reg-1"
+    },
+    {
+      "bytes": 641224,
+      "captured_at": "2026-09-07T21:28:03.468458+00:00",
+      "file": "rosters-release.json",
+      "last_modified": "Mon, 07 Sep 2026 13:10:30 GMT",
+      "sha256": "761d5e96beae2f77c113afcf282d8dac7460ee74e77a4356ad235e55c2d9c77a",
+      "started_at": "2026-09-07T21:28:03.049611+00:00",
+      "url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/rosters"
+    },
+    {
+      "bytes": 43,
+      "captured_at": "2026-09-07T21:28:03.359889+00:00",
+      "file": "rosters-timestamp.json",
+      "last_modified": "Mon, 07 Sep 2026 13:10:29 GMT",
+      "sha256": "f298daf8f63db12c434a23cdeffa0f5f06acb8413e6c24ffdfa8e94478120e09",
+      "started_at": "2026-09-07T21:28:03.236067+00:00",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/timestamp.json"
+    },
+    {
+      "bytes": 163956,
+      "captured_at": "2026-09-07T21:28:03.600803+00:00",
+      "file": "depth_charts-release.json",
+      "last_modified": "Mon, 07 Sep 2026 13:13:35 GMT",
+      "sha256": "f5e4fab36b1e248c430a9eea475e3d23a6100bb31a4a388159b70b01ebc64d0a",
+      "started_at": "2026-09-07T21:28:03.360441+00:00",
+      "url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/depth_charts"
+    },
+    {
+      "bytes": 43,
+      "captured_at": "2026-09-07T21:28:03.579613+00:00",
+      "file": "depth_charts-timestamp.json",
+      "last_modified": "Mon, 07 Sep 2026 13:13:34 GMT",
+      "sha256": "9b8a5a879ad9b0e95ddbd1f0e0e9b87839c7d61e5a309c12452853a4f00d0d5a",
+      "started_at": "2026-09-07T21:28:03.469618+00:00",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/timestamp.json"
+    },
+    {
+      "bytes": 12386,
+      "captured_at": "2026-09-07T21:28:03.741102+00:00",
+      "file": "schedules-release.json",
+      "last_modified": "Mon, 07 Sep 2026 21:06:16 GMT",
+      "sha256": "abb33b2f8a96a5747b465075d65657086d1a407b8c036ad5e0d40e0723c9016b",
+      "started_at": "2026-09-07T21:28:03.580405+00:00",
+      "url": "https://api.github.com/repos/nflverse/nflverse-data/releases/tags/schedules"
+    },
+    {
+      "bytes": 43,
+      "captured_at": "2026-09-07T21:28:03.687011+00:00",
+      "file": "schedules-timestamp.json",
+      "last_modified": "Mon, 07 Sep 2026 21:06:16 GMT",
+      "sha256": "28bf220cd76f3060464bf9eb0917fc6d45d024af278e8ef27773e1cefdb252a7",
+      "started_at": "2026-09-07T21:28:03.594032+00:00",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/timestamp.json"
+    }
+  ],
+  "roster_duplicate_keys": [],
+  "roster_qb_status_counts": {
+    "ACT": 87,
+    "CUT": 9,
+    "DEV": 15,
+    "RES": 6,
+    "RET": 2
+  },
+  "schedule_count": 272,
+  "schema_version": 1,
+  "script_sha256": "65ab6e47c7c51f81b2874f165a4995cdc8af84d23e8c7e14faf0a0a844fc20b0",
+  "status": "PASS"
+}

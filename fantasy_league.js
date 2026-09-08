@@ -25,7 +25,8 @@ const PGOLeague = (() => {
     receiving_2pt_conversions: 2,
     special_teams_tds: 6,
     fumbles_lost_total: -2,
-    te_reception_bonus: 0
+    te_reception_bonus: 0,
+    wr_reception_bonus: 0
   });
   const PRESETS = Object.freeze({
     STANDARD: Object.freeze({...HALF_PPR, receptions: 0}),
@@ -57,7 +58,8 @@ const PGOLeague = (() => {
     passing_2pt_conversions: [0, 6],
     rushing_2pt_conversions: [0, 6],
     receiving_2pt_conversions: [0, 6],
-    te_reception_bonus: [0, 3]
+    te_reception_bonus: [0, 3],
+    wr_reception_bonus: [0, 3]
   };
   const SCORING_KEYS = Object.keys(SCORING_RANGES);
 
@@ -104,16 +106,18 @@ const PGOLeague = (() => {
     if (!SLOT_NAMES.some(slot => profile.slots[slot] > 0)) {
       throw new RangeError('Profile must have at least one lineup slot');
     }
-    requireKeys(profile.scoring, SCORING_KEYS, 'Profile scoring');
+    if (!isObject(profile.scoring)) throw new TypeError('Profile scoring must be an object');
+    const scoring = {wr_reception_bonus: 0, ...profile.scoring};
+    requireKeys(scoring, SCORING_KEYS, 'Profile scoring');
     for (const [field, [minimum, maximum]] of Object.entries(SCORING_RANGES)) {
-      requireNumber(profile.scoring[field], minimum, maximum, field);
+      requireNumber(scoring[field], minimum, maximum, field);
     }
     return {
       version: 1,
       name,
       teams: profile.teams,
       slots: {...profile.slots},
-      scoring: {...profile.scoring}
+      scoring
     };
   }
 
@@ -151,7 +155,9 @@ const PGOLeague = (() => {
       }
       const weight = profile.scoring[field]
         + (field === 'receptions' && player.position === 'TE'
-          ? profile.scoring.te_reception_bonus : 0);
+          ? profile.scoring.te_reception_bonus : 0)
+        + (field === 'receptions' && player.position === 'WR'
+          ? profile.scoring.wr_reception_bonus : 0);
       score += (weight - HALF_PPR[field]) * value;
     }
     if (!Number.isFinite(score)) throw new RangeError('Player score must be finite');

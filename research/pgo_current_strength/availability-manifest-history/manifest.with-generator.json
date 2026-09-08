@@ -1,0 +1,48 @@
+{
+  "files": {
+    "availability-coverage.json": {
+      "bytes": 14884,
+      "sha256": "7c089db2cf056773d006074b2e9c916939715e69d1c271d07ca9d70156513238"
+    },
+    "availability-role-coverage.json": {
+      "bytes": 5269,
+      "sha256": "5e6faa893eb1b1502f38709395cc0c51a296d847ad7cfa9eaeee8f8a2259fa58"
+    },
+    "availability-scenario.csv": {
+      "bytes": 2051,
+      "sha256": "d092d65598f992e23ae61b47d0c330c2b539425eab8c670be6fa724614ec1101"
+    },
+    "availability-scenario.json": {
+      "bytes": 12160,
+      "sha256": "0676153a0c5c8f53d23cb87b5ca68c3d251bde46a3e59a45281bdab33b76bcbc"
+    },
+    "availability.csv": {
+      "bytes": 2480,
+      "sha256": "7b686e52c287c9b35d7d70a2a4e6ae6b531d14c5c737c33fb71113da06b1d8fb"
+    },
+    "capture.json": {
+      "bytes": 257,
+      "sha256": "c274d886939f3713a0d26168d1cac789f546192b379e1751ec4ebcb97326d6d8"
+    },
+    "injury-source.json": {
+      "bytes": 15464,
+      "sha256": "7bd4a23d22e90898f4f30d5614f8127c69dc134174e61fedc9de5941760096bc"
+    },
+    "report.md": {
+      "bytes": 2261,
+      "sha256": "138eb51429a56fc5cca138942032a0069463c1ea3054435bf5c58bfcf4d514fa"
+    },
+    "scenario-report.md": {
+      "bytes": 749,
+      "sha256": "b9599a44875bed4d665e1376724d1f9d6fb12f8a22b11f592b0dab6bb45745c2"
+    }
+  },
+  "fit_run_manifest_sha256": "6682197b16fcc0974fef19e6c704ef238d4d2a30ba0db066e3e86a6bad35ee4a",
+  "generator_sha256": "8f18884658326b7b0b7149d7e099dd567e2e1b989d12d82f77d5b7b252872759",
+  "identity": "pgo-current-availability-20260908",
+  "raw_source_bytes": 328956,
+  "raw_source_retention": "Exact NFL HTML remains in the local output capture; it is not copied here.",
+  "raw_source_sha256": "8036332159db6056c9fd24355603cd2e21172e4200d0844f537d9dbb265f6797",
+  "schema_version": 1,
+  "source_url": "https://www.nfl.com/injuries/"
+}

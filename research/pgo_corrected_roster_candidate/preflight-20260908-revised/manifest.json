@@ -1,0 +1,29 @@
+{
+  "files": {
+    "coverage.json": {
+      "bytes": 8596219,
+      "sha256": "326f547ee30b0b84048646b538f15055172d8eed71a36fcf4d4f570da3bf3f00"
+    },
+    "historical-context.json": {
+      "bytes": 1640475,
+      "sha256": "7e05aaff1254d9c951b1a5cdb8225dc50af0f47a894f86c2a4796fb0697811ac"
+    },
+    "historical-features.json": {
+      "bytes": 6940679,
+      "sha256": "39be871ad7797084d8ce594efe83ab241b6587b1ecb4b0f8a253d11e8c248eae"
+    },
+    "raw-roster-inventory.json": {
+      "bytes": 62648,
+      "sha256": "d194def4b702cf70e63b219b9cc028210b2e52cc03e212e669fc38865f96505a"
+    },
+    "run-receipt.json": {
+      "bytes": 22612,
+      "sha256": "ccd8624fc884e033443d1a6a399f50754fa1dbf86363068de5f419ebc692627c"
+    },
+    "run-start.json": {
+      "bytes": 22262,
+      "sha256": "f68e00300719357e91d5c10eb13573eed66784381d8bda177be5e5e4a156fa58"
+    }
+  },
+  "identity": "pgo-corrected-roster-candidate-2026-09-08"
+}

@@ -1,0 +1,38 @@
+{
+  "files": {
+    "final-fit.json": {
+      "bytes": 88326,
+      "sha256": "f6e6deda6665ded3ea0764a486fc68bc4667abd4a49f17afe5e3c39284a8806f"
+    },
+    "fold-fits.json": {
+      "bytes": 652250,
+      "sha256": "809987da9b85aacbd34e1c2be3bb8ba7549ef419193cf532919eeb0cc79a76bc"
+    },
+    "historical-context.json": {
+      "bytes": 133895,
+      "sha256": "c1ef8a85e091ed616db18a90d5594aea92fb55c5859108712a62a0a40737dfdc"
+    },
+    "historical-features.json": {
+      "bytes": 4516418,
+      "sha256": "eb67f3de6f4257da90baff165467ce0b6fd6c72ef1c683f1b18b5ed9a706b39e"
+    },
+    "matched-predictions.csv": {
+      "bytes": 374121,
+      "sha256": "2a5e9098b5d4b6b97ea5ce630091e4eb5d525917eaa4d427c9711e237f1453f7"
+    },
+    "metrics.json": {
+      "bytes": 111933,
+      "sha256": "ad74c2a3a1f8ad364c781e3504364b38bb863076057fd889e990b75b987f578d"
+    },
+    "run-receipt.json": {
+      "bytes": 34864,
+      "sha256": "8557f26bbe53992dec795ec6db696d6415ac7aee79ff3828dd6cee4a01b42dc7"
+    },
+    "run-start.json": {
+      "bytes": 11384,
+      "sha256": "09106fcdbe6a11f357ea703eaed0c59b34bf13f669298a97f751e482bbaebf9b"
+    }
+  },
+  "identity": "pgo-week1-corrected-2026-09-08",
+  "schema_version": 1
+}

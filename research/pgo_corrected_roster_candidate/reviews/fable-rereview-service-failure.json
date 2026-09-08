@@ -1,0 +1,18 @@
+{
+    "status":  "service_failure",
+    "review_completed":  false,
+    "retry_before_reset":  false,
+    "prompt_sha256":  "8a983d36406e521834be39b77bdc99ffa244813ed2bed33ecc98dddc1b0eb827",
+    "input_hash_manifest_sha256":  "02881303940f6549c269c1026e7de70b467328db982dcdd0661ce52b9b824e9b",
+    "raw_response_sha256":  "25e282652678b670446a8fee88c79f472b395dbed50aa1bf87306a96d3c2dacc",
+    "stderr_sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "api_error_status":  429,
+    "terminal_reason":  "api_error",
+    "message":  "You\u0027ve hit your session limit · resets 3:40pm (America/New_York)",
+    "duration_ms":  1169,
+    "num_turns":  1,
+    "session_id":  "465d0432-64aa-42fe-85a2-905eac78d80d",
+    "input_tokens":  0,
+    "output_tokens":  0,
+    "model_identity_available":  false
+}

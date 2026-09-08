@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-09-08T17:42:06.381735+00:00",
+  "status": "IMPLEMENTED_FOR_NO_FIT_PREPARATION; FINAL_FIT_BLOCKED_PENDING_PARENT_AND_FABLE_REVIEW",
+  "charter_creation_note": "Original charter was written before adapter implementation; parent authorized adapter/tests and no-fit preparation while Fable review was pending. Original chronology was true when written.",
+  "original_charter_sha256": "d5740df0e22f9548447cd5c69f8e495709a8378479e3c99d6640d437d1a8a699",
+  "revised_charter_sha256": "a33f4d400dcbfe4a466ac332400067bae4c136592113b8368d4603800edf2b6b",
+  "first_preparation": {
+    "path": "preflight-20260908",
+    "started_at": "2026-09-08T17:28:43.435659+00:00",
+    "run_start_sha256": "5b945cc7119ce381fde348c3f4e3bfef052c261a3060678761d137cf46d30899",
+    "outcome": "INTERRUPTED_INCOMPLETE",
+    "reason": "Stopped only owned tool session 84580 with Ctrl-C after Fable revision verdict and independent finding of missing current replay label; no fitting invoked; no unrelated Python process stopped.",
+    "manifest_present": false,
+    "model_fits": 0
+  },
+  "required_corrections": [
+    "Historical preparation is independent of optional current diagnostic; current replay label fixed and regression covered.",
+    "All seven reference pins enforced plus current constructor, new source/tests and this receipt before/after.",
+    "Explicit reviewed prepared manifest is bound in fit start receipt and reverified after fitting.",
+    "Inherited ACT role fallback zeros and unique name snap fallback disclosed, counted only in coverage.",
+    "Raw versus collapsed coverage, ID-less stop, 2016 per-team blank draft coverage and current-only GSIS collision guards.",
+    "UTC date boundary and strict DOB parsing, exact three-criterion screen and signed missing-pattern invariants."
+  ],
+  "tests": {
+    "command": "python -B -m unittest research.pgo_corrected_roster_candidate.test_candidate research.pgo_corrected_roster_candidate.test_temporal",
+    "passed": 14,
+    "seconds": 0.201,
+    "coefficient_fits": 0
+  },
+  "source_hashes": {
+    "adapter.py": "b287c33ce08995821f3aaf1dbab5d46e431ad624c72bac775b6ead5c16143bb2",
+    "train.py": "182b2a303bf20e128bd67da712c79bcb80960ef761ca934465b1e940616cdfe0",
+    "test_candidate.py": "428f1c66c2b3695527e14f9c7f514122bf8992b726cffedf81ac5249aeb6ab77",
+    "test_temporal.py": "b0a081d74c09d1f8040af03ddab48fb3f63375e8a64d176c2eaaa853d4e9308a"
+  },
+  "next_step": "One separate exclusive no-fit historical preparation, then optional separately manifested current diagnostic. Root and actual Fable re-review before fitting."
+}

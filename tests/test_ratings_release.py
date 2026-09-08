@@ -2,6 +2,7 @@ import copy
 import csv
 import gc
 import json
+import re
 import tempfile
 import unittest
 import warnings
@@ -469,11 +470,34 @@ class GeneratedDocumentTests(unittest.TestCase):
             with patch.object(generate_site, "DATA", temp):
                 document = generate_site.build_html(self.rows, self.config)
 
-        self.assertIn("--mut:#5b6c84; --dim:#5b6c84;", document)
-        self.assertIn(
-            "header .updated { color:rgba(255,255,255,.75);",
-            document,
-        )
+        theme_link = '<link rel="stylesheet" href="pgo-theme.css">'
+        self.assertEqual(document.count(theme_link), 1)
+        self.assertGreater(document.index(theme_link), document.index("</style>"))
+        self.assertNotIn("fonts.googleapis.com", document)
+        theme = Path(generate_site.__file__).parent.joinpath("docs", "pgo-theme.css").read_text(encoding="utf-8")
+        colors = dict(re.findall(r"--([a-z0-9-]+):(#[0-9a-f]{6})", document + theme))
+        colors["active-text"] = colors["action-ink"]
+        colors["hero-text"] = re.search(r"header \.updated \{ color:(#[0-9a-f]+);", document).group(1)
+        # The board hero uses a gradient; check both stops as well as the Lab hero.
+        hero_stops = re.search(r"\.hero \{ background:linear-gradient\([^,]+,(#[0-9a-f]+),(#[0-9a-f]+)\)", theme)
+        colors["hero-start"], colors["hero-end"] = hero_stops.groups()
+
+        def luminance(color):
+            if len(color) == 4:
+                color = "#" + "".join(channel * 2 for channel in color[1:])
+            rgb = [int(color[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+            linear = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
+            return sum(c * weight for c, weight in zip(linear, (0.2126, 0.7152, 0.0722)))
+
+        for foreground, background in (
+            ("mut", "panel"), ("mut", "row-alt"), ("dim", "row-alt"),
+            ("dim", "hover"), ("active-text", "action-bg"),
+            ("hero-text", "hero-start"), ("hero-text", "hero-end"),
+            ("hero-text", "hero-bg"), ("notice-ink", "notice-bg"),
+            ("highlight", "hero-bg"), ("mut", "panel2"),
+        ):
+            light, dark = sorted((luminance(colors[foreground]), luminance(colors[background])), reverse=True)
+            self.assertGreaterEqual((light + 0.05) / (dark + 0.05), 4.5, (foreground, background))
 
 
 if __name__ == "__main__":

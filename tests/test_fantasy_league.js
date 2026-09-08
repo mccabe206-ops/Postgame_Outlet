@@ -53,7 +53,7 @@ test('exports the browser and Node API with frozen defaults', () => {
     'scorePlayer', 'validateProfile'
   ]);
   assert.deepEqual(Object.keys(PGOLeague.HALF_PPR).sort(), [
-    ...COMPONENTS, 'te_reception_bonus'
+    ...COMPONENTS, 'te_reception_bonus', 'wr_reception_bonus'
   ].sort());
   assert.deepEqual(Object.keys(PGOLeague.PRESETS), ['STANDARD', 'HALF_PPR', 'PPR']);
   assert.equal(PGOLeague.DEFAULT_PROFILE.teams, 12);
@@ -132,7 +132,7 @@ test('validateProfile enforces every scoring range and finite numeric type', () 
     special_teams_tds: [0, 12], receptions: [0, 3],
     passing_interceptions: [-10, 0], fumbles_lost_total: [-10, 0],
     passing_2pt_conversions: [0, 6], rushing_2pt_conversions: [0, 6],
-    receiving_2pt_conversions: [0, 6], te_reception_bonus: [0, 3]
+    receiving_2pt_conversions: [0, 6], te_reception_bonus: [0, 3], wr_reception_bonus: [0, 3]
   };
   const boundary = profile();
   for (const [field, [minimum, maximum]] of Object.entries(ranges)) {
@@ -168,6 +168,44 @@ test('scorePlayer uses all 13 anchor deltas', () => {
   )});
   const stats = components(Object.fromEntries(COMPONENTS.map(name => [name, 2])));
   assert.equal(PGOLeague.scorePlayer(player('all', 'RB', 10, {components: stats}), custom), 16.5);
+});
+
+test('WR reception bonus is separate from normal PPR and TE premium', () => {
+  const stats = components({receptions: 8});
+  for (const preset of Object.values(PGOLeague.PRESETS)) {
+    const base = profile({scoring: preset});
+    const bonus = profile({scoring: {...preset, wr_reception_bonus: 0.5}});
+    for (const position of ['QB', 'RB', 'WR', 'TE']) {
+      const row = player(position, position, 20, {components: stats});
+      assert.equal(PGOLeague.scorePlayer(row, bonus) - PGOLeague.scorePlayer(row, base),
+        position === 'WR' ? 4 : 0);
+    }
+  }
+  const both = profile({scoring: {receptions: 1, wr_reception_bonus: 0.5, te_reception_bonus: 1}});
+  assert.equal(PGOLeague.scorePlayer(player('wr', 'WR', 20, {components: stats}), both), 28);
+  assert.equal(PGOLeague.scorePlayer(player('te', 'TE', 20, {components: stats}), both), 32);
+  assert.equal(PGOLeague.scorePlayer(player('out', 'WR', 20, {inactive: true}), both), 0);
+});
+
+test('legacy saved profiles default WR bonus to zero and new profiles survive save/reload', () => {
+  const legacy = profile({name: 'Existing league', teams: 10, scoring: {te_reception_bonus: 0.75}});
+  delete legacy.scoring.wr_reception_bonus;
+  const restored = PGOLeague.validateProfile(JSON.parse(JSON.stringify(legacy)));
+  assert.deepEqual(restored, {...legacy, scoring: {...legacy.scoring, wr_reception_bonus: 0}});
+  assert.equal(Object.hasOwn(legacy.scoring, 'wr_reception_bonus'), false);
+  restored.scoring.wr_reception_bonus = 0.25;
+  assert.deepEqual(PGOLeague.validateProfile(JSON.parse(JSON.stringify(restored))), restored);
+  for (const invalid of [-0.1, 3.1, null, undefined, '0.5', Infinity, NaN, true]) {
+    assert.throws(() => PGOLeague.validateProfile(profile({scoring: {wr_reception_bonus: invalid}})),
+      /wr_reception_bonus/);
+  }
+});
+
+test('UI still accepts the frozen 13-component payload after adding positional premiums', () => {
+  const source = fs.readFileSync(require.resolve('../fantasy_league_ui.js'), 'utf8');
+  const declaration = source.match(/const componentNames =[\s\S]*?;/)[0];
+  const names = vm.runInNewContext(declaration + '\ncomponentNames;', {PGOLeague});
+  assert.deepEqual([...names], [...COMPONENTS].sort());
 });
 
 test('scorePlayer rejects malformed players and incomplete custom components', () => {

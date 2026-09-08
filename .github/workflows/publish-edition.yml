@@ -37,11 +37,13 @@ jobs:
         run: python snapshot.py "$LABEL"
       - name: Refresh public board without replacing approved PGO panel
         run: python pgo_comparison.py --refresh-mccabe
+      - name: Render verified Forecast Lab archive
+        run: python pgo_forecast_lab.py
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/snapshots.json docs/index.html
+          git add data/snapshots.json docs/index.html docs/forecast-lab.html
           if git diff --cached --quiet; then
             echo "Nothing changed - snapshot may already exist."
             exit 1

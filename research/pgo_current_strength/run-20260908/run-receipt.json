@@ -1,0 +1,3756 @@
+{
+  "arms": [
+    "raw",
+    "starter",
+    "starter_recency",
+    "starter_recency_roster",
+    "without_results_history",
+    "without_team_passing",
+    "without_other_team_performance",
+    "without_qb",
+    "without_roster_continuity",
+    "without_coaching",
+    "without_skill_quality",
+    "without_availability"
+  ],
+  "charter_sha256": "edf1328d2dc1a7d047f75d40cffa6ba3eb1d4e0a2b5858e8de5ef0b74aafa157",
+  "code_sha256": {
+    "pgo_challenger.py": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+    "pgo_current_strength.py": "10372fa6afe5a81e1b2db7cb7c78d46726f24ca4c40c3daacde119bd214c3bbd",
+    "pgo_forecast_snapshot.py": "d8d13986805efec7b2ca400d0550e5d413e8136760c53ee69ffd53406b1ed120",
+    "pgo_model.py": "174f165c3343a1a045707bb1c4731bbbcae0958fe07618dd0ddd7ae25ae56ac5",
+    "pgo_opponent_evaluation.py": "318072774cc25140c1f36aeae8f6f4edfa87091fc04964f1301a9f7ad773fe62",
+    "pgo_prospective.py": "1e8a0f6e70103195d47bd8db20e6e064dfaa99f375deed2ca1942f6946ce8711",
+    "pgo_roster_strength.py": "cbf0d317febaa1bf08333a7ac1fb5d0d3787042dbbb8539e7af8e8852aa2799e",
+    "pgo_sources.py": "97bd522580eadc87719757a8c3d1adb20601fa75bbb9e315308dc15d28cd3fb8",
+    "pgo_strength_evaluation.py": "243b347883e295b00d7db08ddcad4292f86a0ff100e65b7a3cc196eef4132666"
+  },
+  "completed_at": "2026-09-08T02:34:18.211406+00:00",
+  "coverage": {
+    "raw": {
+      "historical_roster_by_season": [],
+      "last_kickoff": null,
+      "snapshot_roster_coverage": [],
+      "starter": {
+        "ambiguous_roster": 0,
+        "by_season": {},
+        "matched": 0,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 0,
+        "unavailable": []
+      }
+    },
+    "starter": {
+      "historical_roster_by_season": [],
+      "last_kickoff": null,
+      "snapshot_roster_coverage": [],
+      "starter": {
+        "ambiguous_roster": 0,
+        "by_season": {
+          "2013": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2014": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2015": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2016": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2017": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2018": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2019": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2020": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2021": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          },
+          "2022": {
+            "ambiguous_roster": 0,
+            "matched": 542,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 542
+          },
+          "2023": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          },
+          "2024": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          },
+          "2025": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          }
+        },
+        "matched": 6814,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 6814,
+        "unavailable": []
+      }
+    },
+    "starter_recency": {
+      "historical_roster_by_season": [],
+      "last_kickoff": "2026-01-05T01:20:00+00:00",
+      "snapshot_roster_coverage": [],
+      "starter": {
+        "ambiguous_roster": 0,
+        "by_season": {
+          "2013": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2014": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2015": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2016": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2017": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2018": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2019": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2020": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2021": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          },
+          "2022": {
+            "ambiguous_roster": 0,
+            "matched": 542,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 542
+          },
+          "2023": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          },
+          "2024": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          },
+          "2025": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          }
+        },
+        "matched": 6814,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 6814,
+        "unavailable": []
+      }
+    },
+    "starter_recency_roster": {
+      "historical_roster_by_season": [
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 512,
+          "observed_history_role_weight": 0.0,
+          "season": 2013,
+          "team_games": 512,
+          "total_role_weight": 0.0
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 512,
+          "observed_history_role_weight": 0.0,
+          "season": 2013,
+          "team_games": 512,
+          "total_role_weight": 0.0
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 512,
+          "observed_history_role_weight": 0.0,
+          "season": 2013,
+          "team_games": 512,
+          "total_role_weight": 0.0
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 512,
+          "observed_history_role_weight": 0.0,
+          "season": 2013,
+          "team_games": 512,
+          "total_role_weight": 0.0
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 474.24369754722477,
+          "season": 2014,
+          "team_games": 512,
+          "total_role_weight": 570.0963412524015
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 446.3634283132883,
+          "season": 2014,
+          "team_games": 512,
+          "total_role_weight": 570.0963412524015
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 1,
+          "observed_history_role_weight": 570.2397071688257,
+          "season": 2014,
+          "team_games": 512,
+          "total_role_weight": 658.5144373686107
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1032.6100493739686,
+          "season": 2014,
+          "team_games": 512,
+          "total_role_weight": 1263.6983007057843
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 456.4523866108339,
+          "season": 2015,
+          "team_games": 512,
+          "total_role_weight": 559.7531442349157
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 432.2423080667267,
+          "season": 2015,
+          "team_games": 512,
+          "total_role_weight": 559.7531442349157
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 609.1151551437518,
+          "season": 2015,
+          "team_games": 512,
+          "total_role_weight": 666.0878614024443
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1074.1976850455774,
+          "season": 2015,
+          "team_games": 512,
+          "total_role_weight": 1263.584616034543
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 493.5141876945252,
+          "season": 2016,
+          "team_games": 512,
+          "total_role_weight": 567.0220756455944
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 487.50296023962494,
+          "season": 2016,
+          "team_games": 512,
+          "total_role_weight": 567.0220756455944
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 589.7496553060118,
+          "season": 2016,
+          "team_games": 512,
+          "total_role_weight": 646.0951660439338
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1151.1782213951824,
+          "season": 2016,
+          "team_games": 512,
+          "total_role_weight": 1343.6000456935078
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 452.44883766605466,
+          "season": 2017,
+          "team_games": 512,
+          "total_role_weight": 559.3514192925949
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 448.010363785031,
+          "season": 2017,
+          "team_games": 512,
+          "total_role_weight": 559.3514192925949
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 586.8468747021448,
+          "season": 2017,
+          "team_games": 512,
+          "total_role_weight": 665.4105164858021
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1144.1993500256776,
+          "season": 2017,
+          "team_games": 512,
+          "total_role_weight": 1288.4535857489943
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 469.40545958990486,
+          "season": 2018,
+          "team_games": 512,
+          "total_role_weight": 556.6608784393849
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 464.23896637851317,
+          "season": 2018,
+          "team_games": 512,
+          "total_role_weight": 556.6608784393849
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 1,
+          "observed_history_role_weight": 554.2972847721078,
+          "season": 2018,
+          "team_games": 512,
+          "total_role_weight": 642.3944247737854
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1116.292021659609,
+          "season": 2018,
+          "team_games": 512,
+          "total_role_weight": 1297.4263791697451
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 483.78047114550253,
+          "season": 2019,
+          "team_games": 512,
+          "total_role_weight": 560.7224818527432
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 476.44480130599453,
+          "season": 2019,
+          "team_games": 512,
+          "total_role_weight": 560.7224818527432
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 1,
+          "observed_history_role_weight": 557.259239992423,
+          "season": 2019,
+          "team_games": 512,
+          "total_role_weight": 638.7711326966216
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1117.2298041225552,
+          "season": 2019,
+          "team_games": 512,
+          "total_role_weight": 1296.5683115344088
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 467.4659133194889,
+          "season": 2020,
+          "team_games": 512,
+          "total_role_weight": 552.6146192443598
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 462.0730842457134,
+          "season": 2020,
+          "team_games": 512,
+          "total_role_weight": 552.6146192443598
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 612.8180402985845,
+          "season": 2020,
+          "team_games": 512,
+          "total_role_weight": 655.8545894078221
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1094.8376996602542,
+          "season": 2020,
+          "team_games": 512,
+          "total_role_weight": 1297.9437281243338
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 507.7549895241982,
+          "season": 2021,
+          "team_games": 544,
+          "total_role_weight": 581.5304991273854
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 500.82994045488545,
+          "season": 2021,
+          "team_games": 544,
+          "total_role_weight": 581.5304991273854
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 628.764317086869,
+          "season": 2021,
+          "team_games": 544,
+          "total_role_weight": 702.4568650579679
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1210.7512772331731,
+          "season": 2021,
+          "team_games": 544,
+          "total_role_weight": 1364.7203770858207
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 503.5394990738518,
+          "season": 2022,
+          "team_games": 542,
+          "total_role_weight": 574.698410062711
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 500.75613935138966,
+          "season": 2022,
+          "team_games": 542,
+          "total_role_weight": 574.698410062711
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 1,
+          "observed_history_role_weight": 612.8590254758191,
+          "season": 2022,
+          "team_games": 542,
+          "total_role_weight": 697.4080649709791
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1208.6849761442554,
+          "season": 2022,
+          "team_games": 542,
+          "total_role_weight": 1353.1177242115502
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 501.5248602692134,
+          "season": 2023,
+          "team_games": 544,
+          "total_role_weight": 579.4643328705096
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 514.1301619549479,
+          "season": 2023,
+          "team_games": 544,
+          "total_role_weight": 579.4643328705096
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 602.9425131248169,
+          "season": 2023,
+          "team_games": 544,
+          "total_role_weight": 700.1545420752569
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1176.7070342427787,
+          "season": 2023,
+          "team_games": 544,
+          "total_role_weight": 1401.8848296977574
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 526.8945431156868,
+          "season": 2024,
+          "team_games": 544,
+          "total_role_weight": 575.1478914528664
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 527.78431876847,
+          "season": 2024,
+          "team_games": 544,
+          "total_role_weight": 575.1478914528664
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 641.1147221538487,
+          "season": 2024,
+          "team_games": 544,
+          "total_role_weight": 719.1433234975259
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1193.7636315188279,
+          "season": 2024,
+          "team_games": 544,
+          "total_role_weight": 1375.2595676700932
+        },
+        {
+          "feature": "quality_rb_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 484.7481058317283,
+          "season": 2025,
+          "team_games": 544,
+          "total_role_weight": 585.4478345240008
+        },
+        {
+          "feature": "quality_rb_rushing",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 484.46200880635166,
+          "season": 2025,
+          "team_games": 544,
+          "total_role_weight": 585.4478345240008
+        },
+        {
+          "feature": "quality_te_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 641.0854506940356,
+          "season": 2025,
+          "team_games": 544,
+          "total_role_weight": 735.7185519419727
+        },
+        {
+          "feature": "quality_wr_receiving",
+          "missing_role_team_games": 0,
+          "observed_history_role_weight": 1171.8046785365966,
+          "season": 2025,
+          "team_games": 544,
+          "total_role_weight": 1342.746624286766
+        }
+      ],
+      "last_kickoff": "2026-01-05T01:20:00+00:00",
+      "snapshot_roster_coverage": [
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.2967061632984915,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "NE",
+              "total_role_weight": 1.2967061632984915
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.2967061632984915,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "NE",
+              "total_role_weight": 1.2967061632984915
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.7311629811629812,
+              "observed_role_weight_coverage": 0.7909597809443405,
+              "players_on_roster": 4,
+              "players_using_position_prior": 1,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "NE",
+              "total_role_weight": 0.9243996961388266
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.551181665482023,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "NE",
+              "total_role_weight": 2.551181665482023
+            }
+          },
+          "team": "NE",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "LAR",
+              "total_role_weight": 1.0
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "LAR",
+              "total_role_weight": 1.0
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.1553567447045707,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "LAR",
+              "total_role_weight": 2.1553567447045707
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.6898346339650687,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 7,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "LAR",
+              "total_role_weight": 1.6898346339650687
+            }
+          },
+          "team": "LAR",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.43900323774283073,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "SEA",
+              "total_role_weight": 0.43900323774283073
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.4100177304964539,
+              "observed_role_weight_coverage": 0.9339742745511216,
+              "players_on_roster": 4,
+              "players_using_position_prior": 1,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "SEA",
+              "total_role_weight": 0.43900323774283073
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.319741532976827,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "SEA",
+              "total_role_weight": 1.319741532976827
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.239944199023483,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "SEA",
+              "total_role_weight": 2.239944199023483
+            }
+          },
+          "team": "SEA",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.7417464114832535,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "BAL",
+              "total_role_weight": 0.7417464114832535
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.7417464114832535,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "BAL",
+              "total_role_weight": 0.7417464114832535
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.640650406504065,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "BAL",
+              "total_role_weight": 0.640650406504065
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.5353133387793207,
+              "observed_role_weight_coverage": 0.9195688644026351,
+              "players_on_roster": 6,
+              "players_using_position_prior": 1,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "BAL",
+              "total_role_weight": 1.669601264475915
+            }
+          },
+          "team": "BAL",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.6436169044901606,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "JAX",
+              "total_role_weight": 0.6436169044901606
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.6436169044901606,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "JAX",
+              "total_role_weight": 0.6436169044901606
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.050036732785681,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "JAX",
+              "total_role_weight": 1.050036732785681
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.2628616756062554,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "JAX",
+              "total_role_weight": 2.2628616756062554
+            }
+          },
+          "team": "JAX",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0090350877192982,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "BUF",
+              "total_role_weight": 1.0090350877192982
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0090350877192982,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "BUF",
+              "total_role_weight": 1.0090350877192982
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.3558145363408522,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "BUF",
+              "total_role_weight": 1.3558145363408522
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.3629437229437227,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "BUF",
+              "total_role_weight": 2.3629437229437227
+            }
+          },
+          "team": "BUF",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.386090636090636,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "SF",
+              "total_role_weight": 1.386090636090636
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.386090636090636,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "SF",
+              "total_role_weight": 1.386090636090636
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.230643793143793,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "SF",
+              "total_role_weight": 1.230643793143793
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.8570472803418132,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "SF",
+              "total_role_weight": 1.8570472803418132
+            }
+          },
+          "team": "SF",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.7536701763396678,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "DEN",
+              "total_role_weight": 0.7536701763396678
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.7536701763396678,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "DEN",
+              "total_role_weight": 0.7536701763396678
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.1815059870892375,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "DEN",
+              "total_role_weight": 1.1815059870892375
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.8684620381280403,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "DEN",
+              "total_role_weight": 2.8684620381280403
+            }
+          },
+          "team": "DEN",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.652381474978051,
+              "observed_role_weight_coverage": 0.9348495900880796,
+              "players_on_roster": 3,
+              "players_using_position_prior": 1,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "HOU",
+              "total_role_weight": 0.6978464577564665
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.6978464577564665,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "HOU",
+              "total_role_weight": 0.6978464577564665
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.4102564102564101,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "HOU",
+              "total_role_weight": 1.4102564102564101
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.9303966038088298,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "HOU",
+              "total_role_weight": 1.9303966038088298
+            }
+          },
+          "team": "HOU",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0245571658615136,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "PHI",
+              "total_role_weight": 1.0245571658615136
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0245571658615136,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "PHI",
+              "total_role_weight": 1.0245571658615136
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0466394762545868,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "PHI",
+              "total_role_weight": 1.0466394762545868
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.805617286606573,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "PHI",
+              "total_role_weight": 1.805617286606573
+            }
+          },
+          "team": "PHI",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9992220450115187,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "PIT",
+              "total_role_weight": 0.9992220450115187
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9992220450115187,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "PIT",
+              "total_role_weight": 0.9992220450115187
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0067497611247611,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "PIT",
+              "total_role_weight": 1.0067497611247611
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.3438196938196938,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "PIT",
+              "total_role_weight": 1.3438196938196938
+            }
+          },
+          "team": "PIT",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.4272877215445785,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "LAC",
+              "total_role_weight": 1.4272877215445785
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.4272877215445785,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "LAC",
+              "total_role_weight": 1.4272877215445785
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.043326355661882,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "LAC",
+              "total_role_weight": 1.043326355661882
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.9581416847041848,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "LAC",
+              "total_role_weight": 1.9581416847041848
+            }
+          },
+          "team": "LAC",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.7624143835616438,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "DET",
+              "total_role_weight": 0.7624143835616438
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.7624143835616438,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "DET",
+              "total_role_weight": 0.7624143835616438
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.0,
+              "observed_role_weight_coverage": null,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "DET",
+              "total_role_weight": 0.0
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.586083391759987,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "DET",
+              "total_role_weight": 2.586083391759987
+            }
+          },
+          "team": "DET",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9924242424242424,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "CHI",
+              "total_role_weight": 0.9924242424242424
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9924242424242424,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "CHI",
+              "total_role_weight": 0.9924242424242424
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.569602272727273,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "CHI",
+              "total_role_weight": 1.569602272727273
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9813070776255708,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "CHI",
+              "total_role_weight": 0.9813070776255708
+            }
+          },
+          "team": "CHI",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.3521921341070277,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "GB",
+              "total_role_weight": 0.3521921341070277
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.3521921341070277,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "GB",
+              "total_role_weight": 0.3521921341070277
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.7280350950563717,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "GB",
+              "total_role_weight": 0.7280350950563717
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.6088276380829571,
+              "observed_role_weight_coverage": 0.8915837695303434,
+              "players_on_roster": 6,
+              "players_using_position_prior": 1,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "GB",
+              "total_role_weight": 1.8044604366569323
+            }
+          },
+          "team": "GB",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.8251862891207153,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "MIN",
+              "total_role_weight": 0.8251862891207153
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.8251862891207153,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "MIN",
+              "total_role_weight": 0.8251862891207153
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0944582436385715,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "MIN",
+              "total_role_weight": 1.0944582436385715
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.5982175383814727,
+              "observed_role_weight_coverage": 0.9965132974199036,
+              "players_on_roster": 5,
+              "players_using_position_prior": 1,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "MIN",
+              "total_role_weight": 2.607308447472382
+            }
+          },
+          "team": "MIN",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.5893894935797035,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "KC",
+              "total_role_weight": 0.5893894935797035
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.5893894935797035,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "KC",
+              "total_role_weight": 0.5893894935797035
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.4669129521963824,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "KC",
+              "total_role_weight": 1.4669129521963824
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.8310840005083238,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "KC",
+              "total_role_weight": 0.8310840005083238
+            }
+          },
+          "team": "KC",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9690078003757249,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 2,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "ATL",
+              "total_role_weight": 0.9690078003757249
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9690078003757249,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 2,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "ATL",
+              "total_role_weight": 0.9690078003757249
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.9472813651919305,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "ATL",
+              "total_role_weight": 1.9472813651919305
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.8938603072099705,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "ATL",
+              "total_role_weight": 1.8938603072099705
+            }
+          },
+          "team": "ATL",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0846382909583947,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "CIN",
+              "total_role_weight": 1.0846382909583947
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0846382909583947,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "CIN",
+              "total_role_weight": 1.0846382909583947
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.081425565755363,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "CIN",
+              "total_role_weight": 1.081425565755363
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.1813060309228405,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "CIN",
+              "total_role_weight": 2.1813060309228405
+            }
+          },
+          "team": "CIN",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.5210258642930858,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "NYG",
+              "total_role_weight": 1.5210258642930858
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.5210258642930858,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "NYG",
+              "total_role_weight": 1.5210258642930858
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.205539962936394,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "NYG",
+              "total_role_weight": 1.205539962936394
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.7985406198330804,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "NYG",
+              "total_role_weight": 1.7985406198330804
+            }
+          },
+          "team": "NYG",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0866563944530048,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "MIA",
+              "total_role_weight": 1.0866563944530048
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0866563944530048,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "MIA",
+              "total_role_weight": 1.0866563944530048
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.3718181818181818,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 3,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "MIA",
+              "total_role_weight": 0.3718181818181818
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.7890909090909091,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 3,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "MIA",
+              "total_role_weight": 0.7890909090909091
+            }
+          },
+          "team": "MIA",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.8754385964912281,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "IND",
+              "total_role_weight": 0.8754385964912281
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.8754385964912281,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "IND",
+              "total_role_weight": 0.8754385964912281
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.2041835357624833,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "IND",
+              "total_role_weight": 1.2041835357624833
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.2432424421698887,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "IND",
+              "total_role_weight": 2.2432424421698887
+            }
+          },
+          "team": "IND",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.261136252857335,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "TB",
+              "total_role_weight": 1.261136252857335
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.261136252857335,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "TB",
+              "total_role_weight": 1.261136252857335
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.1900652985074627,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "TB",
+              "total_role_weight": 1.1900652985074627
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.045962443218689,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "TB",
+              "total_role_weight": 2.045962443218689
+            }
+          },
+          "team": "TB",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.3223688679509156,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "NO",
+              "total_role_weight": 1.3223688679509156
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.3223688679509156,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "NO",
+              "total_role_weight": 1.3223688679509156
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9087179160708572,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "NO",
+              "total_role_weight": 0.9087179160708572
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.8113154960981048,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "NO",
+              "total_role_weight": 0.8113154960981048
+            }
+          },
+          "team": "NO",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.1934508224356721,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "DAL",
+              "total_role_weight": 1.1934508224356721
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.1934508224356721,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "DAL",
+              "total_role_weight": 1.1934508224356721
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.2448275862068967,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "DAL",
+              "total_role_weight": 1.2448275862068967
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.660655386592418,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "DAL",
+              "total_role_weight": 2.660655386592418
+            }
+          },
+          "team": "DAL",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.8489119297933001,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "WAS",
+              "total_role_weight": 0.8489119297933001
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.8489119297933001,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "WAS",
+              "total_role_weight": 0.8489119297933001
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.7916088176228173,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "WAS",
+              "total_role_weight": 1.7916088176228173
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.150976964143451,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 7,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "WAS",
+              "total_role_weight": 2.150976964143451
+            }
+          },
+          "team": "WAS",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.4142300194931774,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "CAR",
+              "total_role_weight": 0.4142300194931774
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.4142300194931774,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "CAR",
+              "total_role_weight": 0.4142300194931774
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.7994456023718781,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "CAR",
+              "total_role_weight": 1.7994456023718781
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 3.3539101823115622,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "CAR",
+              "total_role_weight": 3.3539101823115622
+            }
+          },
+          "team": "CAR",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.6561771561771561,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "CLE",
+              "total_role_weight": 0.6561771561771561
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.6561771561771561,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "CLE",
+              "total_role_weight": 0.6561771561771561
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0367132867132867,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "CLE",
+              "total_role_weight": 1.0367132867132867
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.8387666255313313,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 2,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "CLE",
+              "total_role_weight": 1.8387666255313313
+            }
+          },
+          "team": "CLE",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.36178496555855044,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "ARI",
+              "total_role_weight": 0.36178496555855044
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.36178496555855044,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "ARI",
+              "total_role_weight": 0.36178496555855044
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.5709728867623602,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "ARI",
+              "total_role_weight": 1.5709728867623602
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.9193125434901754,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 7,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "ARI",
+              "total_role_weight": 1.9193125434901754
+            }
+          },
+          "team": "ARI",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9760079802452685,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "LV",
+              "total_role_weight": 0.9760079802452685
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9760079802452685,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "LV",
+              "total_role_weight": 0.9760079802452685
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.4297820823244551,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 3,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "LV",
+              "total_role_weight": 1.4297820823244551
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.2673610545015137,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "LV",
+              "total_role_weight": 2.2673610545015137
+            }
+          },
+          "team": "LV",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0119157022103518,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "TEN",
+              "total_role_weight": 1.0119157022103518
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.0119157022103518,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "TEN",
+              "total_role_weight": 1.0119157022103518
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.7064630898362791,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "TEN",
+              "total_role_weight": 1.7064630898362791
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 2.3873049262200206,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "TEN",
+              "total_role_weight": 2.3873049262200206
+            }
+          },
+          "team": "TEN",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        },
+        {
+          "features": {
+            "quality_rb_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9783077453855442,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": 0.010011638813577977,
+              "position_group": "FB/RB",
+              "prior_opportunities": 30.0,
+              "team": "NYJ",
+              "total_role_weight": 0.9783077453855442
+            },
+            "quality_rb_rushing": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9783077453855442,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 5,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 0,
+              "population_mean": -0.057576962611299416,
+              "position_group": "FB/RB",
+              "prior_opportunities": 75.0,
+              "team": "NYJ",
+              "total_role_weight": 0.9783077453855442
+            },
+            "quality_te_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 0.9147403829567018,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 4,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22993079695638338,
+              "position_group": "TE",
+              "prior_opportunities": 50.0,
+              "team": "NYJ",
+              "total_role_weight": 0.9147403829567018
+            },
+            "quality_wr_receiving": {
+              "ambiguous_player_ids": 0,
+              "observed_history_role_weight": 1.9042503410671512,
+              "observed_role_weight_coverage": 1.0,
+              "players_on_roster": 6,
+              "players_using_position_prior": 0,
+              "players_with_unavailable_value": 0,
+              "players_without_role_weight": 1,
+              "population_mean": 0.22662665691183098,
+              "position_group": "WR",
+              "prior_opportunities": 50.0,
+              "team": "NYJ",
+              "total_role_weight": 1.9042503410671512
+            }
+          },
+          "team": "NYJ",
+          "unavailable_player_quality": [
+            "offensive_line",
+            "defense"
+          ],
+          "window": {
+            "seasons": [
+              2025,
+              2024,
+              2023
+            ],
+            "weights": [
+              1.0,
+              0.5,
+              0.25
+            ]
+          }
+        }
+      ],
+      "starter": {
+        "ambiguous_roster": 0,
+        "by_season": {
+          "2013": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2014": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2015": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2016": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2017": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2018": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2019": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2020": {
+            "ambiguous_roster": 0,
+            "matched": 512,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 512
+          },
+          "2021": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          },
+          "2022": {
+            "ambiguous_roster": 0,
+            "matched": 542,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 542
+          },
+          "2023": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          },
+          "2024": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          },
+          "2025": {
+            "ambiguous_roster": 0,
+            "matched": 544,
+            "missing_id": 0,
+            "missing_roster": 0,
+            "team_games": 544
+          }
+        },
+        "matched": 6814,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 6814,
+        "unavailable": []
+      }
+    }
+  },
+  "leakage_verdict": "REVIEW REQUIRED",
+  "promotion_status": "HOLD",
+  "protected_artifacts_before_after": {
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\prospective_lock.json": "d6ebf73188c41046f945a54653bdb89eadc2dc18d917276a47c0166b9ada98e9",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\prospective_predictions.csv": "8b17ab8c4744586e5386a7755ceaf63ccf8a8438533e8c904de68b5bc25dca6f",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\depth.csv.gz": "92ced698838f0d3208ebfefc935c0eb260b82bbcc9f2040133e9181367761c23",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\depth_charts-release.json": "f5e4fab36b1e248c430a9eea475e3d23a6100bb31a4a388159b70b01ebc64d0a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\depth_charts-timestamp.json": "9b8a5a879ad9b0e95ddbd1f0e0e9b87839c7d61e5a309c12452853a4f00d0d5a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\fit.json": "f24429f99f078d57b135881bf1c371bc158539d3ff945e4434dd3e02533136d4",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\forecasts.csv": "1b8a55cbb233ff5720cfb21468f841a1628f908337f1d44bce7c914c8619de0b",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\july-snapshot-states.json": "c24ace892e6bb41b3ba82588f215b0a8b20f9096eb8e8f04add435378feeceb9",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\manifest.json": "43bdeee73a2d3301eedbcecc7d291dc9ebe68cf196860e7217326570e4fe2f42",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\original-july-backtest.json": "ab32daa4cb3de5f6f5004a538edab9f145e8dbd3d7bcfb4b3fd069af7c05d9da",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\original-july-ratings.csv": "6f983ddbb8e79263d70043429639ee5aa4c092edb847c41248a089b7a1e5a335",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\ratings.csv": "befe7b2583d15bba6c967ee0ce581d7bb58a38a51f7773f21cd00fe9024aa0e4",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\roster.csv.gz": "e356efc0f9ff9b8d50d82e2524312bda3ebb6598cf487eee69ba339b90f6230a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\rosters-release.json": "761d5e96beae2f77c113afcf282d8dac7460ee74e77a4356ad235e55c2d9c77a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\rosters-timestamp.json": "f298daf8f63db12c434a23cdeffa0f5f06acb8413e6c24ffdfa8e94478120e09",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\schedule.csv.gz": "abeb9b6c541648308d61d3c187ae94ca82b2d4005829740e48daa64bdd33aa6f",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\schedules-release.json": "abb33b2f8a96a5747b465075d65657086d1a407b8c036ad5e0d40e0723c9016b",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\schedules-timestamp.json": "28bf220cd76f3060464bf9eb0917fc6d45d024af278e8ef27773e1cefdb252a7",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\scoring-history-2025.csv": "536f4fd60c8bc61a4b22770b6c1308dbea1463fad17d137fe969df94c8d759b8",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\snapshot.json": "60a11ed87f67f1726eb9152b400ca7b1b685b2e0dc5d7dfa2709c806c47716a9",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\source-manifest.json": "6a0fb71403dfd63f87ba779c7fc1451dfaf886dca7b4363f195b7cc2b80c7250",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\september-07\\source-qualification.json": "4c691dd4132584892a41bbec63fe6fb7de885743c0e1d5b657ee8baf7fbcb359",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\docs\\evidence\\forecast-lab-2026\\weekly\\20260907T223412922311Z.json": "52062e66dbd18cc963b75f9441edfbc1efa8f92a5d26053d40eb0a79b8d6740a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\output\\pgo-snapshot-review-20260907\\public-fit-recovery\\recovered-fit.json": "1b960834b33cdda08bf69b792fa24ee2bb57ff738b1153aa1c1d833914af2036",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_challenger.py": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_current_strength.py": "10372fa6afe5a81e1b2db7cb7c78d46726f24ca4c40c3daacde119bd214c3bbd",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_forecast_snapshot.py": "d8d13986805efec7b2ca400d0550e5d413e8136760c53ee69ffd53406b1ed120",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_model.py": "174f165c3343a1a045707bb1c4731bbbcae0958fe07618dd0ddd7ae25ae56ac5",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_opponent_evaluation.py": "318072774cc25140c1f36aeae8f6f4edfa87091fc04964f1301a9f7ad773fe62",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_prospective.py": "1e8a0f6e70103195d47bd8db20e6e064dfaa99f375deed2ca1942f6946ce8711",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_roster_strength.py": "cbf0d317febaa1bf08333a7ac1fb5d0d3787042dbbb8539e7af8e8852aa2799e",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_sources.py": "97bd522580eadc87719757a8c3d1adb20601fa75bbb9e315308dc15d28cd3fb8",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\pgo_strength_evaluation.py": "243b347883e295b00d7db08ddcad4292f86a0ff100e65b7a3cc196eef4132666",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_current_strength\\charter.md": "edf1328d2dc1a7d047f75d40cffa6ba3eb1d4e0a2b5858e8de5ef0b74aafa157",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\README.md": "0096d58626c624c54a715da075bb9ffac4b192ba657075ecd77d06553277796e",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\charter.md": "22e7c00e9bc5b1dc96664fe445c0954699d58b700acb23a98618e96440e2a578",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\evaluator-at-run.py.txt": "9aa136652da5bcea5b93547c6ffc41e93c7f0efce9c0e8507aa598adefdf5323",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\run-20260907\\fold-fits.json": "d15de0e0014641c8a160c4b5641b700c95212158ba5f4f2b92c231697159a1dc",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\run-20260907\\manifest.json": "0e2fd095579fdd33a6ab1c728eeeb07c373779cdb32da6c8d14ce48b08de5998",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\run-20260907\\matched-predictions.csv": "ae164efec3c25ba4202ee44aaa5ad95c7dab85b578cf9c4aa00c6202fee0c7f1",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\run-20260907\\metrics.json": "ca75d3a57ba5d412ef77021aab2e67a3e041e894f2595689365d682da9a6ffee",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\run-20260907\\rating-details.json": "555026bbbefbe1ef0f2fb174c8fb821f9feb77c7ef0b81a932adeb973abd738d",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\run-20260907\\ratings.csv": "d4eebfa5ee0bc8ca02b6392172566ceb642532f5685f2348884b966a7eac3571",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\run-20260907\\report.md": "4774b5949b32de803169c11db05a6703106f2e51211bb50be0261e33efc1c5d2",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\run-20260907\\run-receipt.json": "b552ac4c750f6dbd4d46e5b6312498e2d5c802b3c4d2104de1558098090395c9",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_opponent_adjustment\\run-20260907\\run-start.json": "3174e15b6d21b65372823153a5908c9e92976f376e1901fc2d4abb463a04198d",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_v1\\backtest.json": "ab32daa4cb3de5f6f5004a538edab9f145e8dbd3d7bcfb4b3fd069af7c05d9da",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_v1\\ratings_2026_preseason.csv": "6f983ddbb8e79263d70043429639ee5aa4c092edb847c41248a089b7a1e5a335",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_v1\\source_audit.json": "b6e7787b7f2d27046ca1543260d8fba6e5cda7c76821e7253d0d43b34951d3ac",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_v1\\sources.lock.json": "3a7673ac4617d57954cb56954f2216226a358c7b187b1e3ce62994a6f2b3fd29",
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_v1\\validation_predictions.csv": "b697b6f8f5eee9ae1efe607272458964a681f99f440a94f86d8edce2ad5a19b7"
+  },
+  "raw_final_fit_reproduction": {
+    "coefficients_exact": true,
+    "feature_names": true,
+    "medians_exact": true,
+    "missing_features": true,
+    "parameters": true,
+    "passed": true,
+    "scales_exact": true,
+    "training_count": true,
+    "training_seasons": true
+  },
+  "roster_profile_receipt": {
+    "charter_sha256": "edf1328d2dc1a7d047f75d40cffa6ba3eb1d4e0a2b5858e8de5ef0b74aafa157",
+    "features": [
+      "quality_wr_receiving",
+      "quality_te_receiving",
+      "quality_rb_receiving",
+      "quality_rb_rushing"
+    ],
+    "limitations": [
+      "Skill-player EPA rates are role- and context-dependent efficiency proxies, not player WAR.",
+      "Offensive-line and defensive player quality are unavailable from the admitted inputs.",
+      "Availability remains in the incumbent availability features and is not multiplied into quality."
+    ],
+    "prior_opportunities": {
+      "quality_rb_receiving": 30.0,
+      "quality_rb_rushing": 75.0,
+      "quality_te_receiving": 50.0,
+      "quality_wr_receiving": 50.0
+    },
+    "season_weights": [
+      1.0,
+      0.5,
+      0.25
+    ],
+    "sources": [
+      {
+        "bytes": 1134278,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\2cbbc0fed52a203c9d5c95ed6c500bdc949f3088058dc03c28c38d9a46827b1a.csv.gz",
+        "season": 2013,
+        "sha256": "2cbbc0fed52a203c9d5c95ed6c500bdc949f3088058dc03c28c38d9a46827b1a"
+      },
+      {
+        "bytes": 1156548,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\24f687e3f63911bac32e5733088dab5fd558b0da08b9a3047fbfad6ad8b21a10.csv.gz",
+        "season": 2014,
+        "sha256": "24f687e3f63911bac32e5733088dab5fd558b0da08b9a3047fbfad6ad8b21a10"
+      },
+      {
+        "bytes": 1161213,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\af95af6b3ef4dcc89c2b30c60d5fcbf885c89f7eb9cb2f7248899d515a360919.csv.gz",
+        "season": 2015,
+        "sha256": "af95af6b3ef4dcc89c2b30c60d5fcbf885c89f7eb9cb2f7248899d515a360919"
+      },
+      {
+        "bytes": 1158077,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\36a60ff93fd4737ff73d22c0f7dea444f304050c524802bd85705222fbc47e1c.csv.gz",
+        "season": 2016,
+        "sha256": "36a60ff93fd4737ff73d22c0f7dea444f304050c524802bd85705222fbc47e1c"
+      },
+      {
+        "bytes": 1153068,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e11696bbe46b409235a774a3ad2a73743fe2c8c175836ac522440e4504fb02c9.csv.gz",
+        "season": 2017,
+        "sha256": "e11696bbe46b409235a774a3ad2a73743fe2c8c175836ac522440e4504fb02c9"
+      },
+      {
+        "bytes": 1152493,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\25c7a4cd4b036704594c533a11d9f402db977d5b9d05568247fb4a01315b2d3a.csv.gz",
+        "season": 2018,
+        "sha256": "25c7a4cd4b036704594c533a11d9f402db977d5b9d05568247fb4a01315b2d3a"
+      },
+      {
+        "bytes": 1151599,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\cdcd329b258d63088fb2e3d9ed9def4f3267ac2271b6974437f6be8207fb581b.csv.gz",
+        "season": 2019,
+        "sha256": "cdcd329b258d63088fb2e3d9ed9def4f3267ac2271b6974437f6be8207fb581b"
+      },
+      {
+        "bytes": 1172772,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\01b8a5104cbd6249fd0afde2b20b2628be8047b42047f1c1a777b8f2799058d9.csv.gz",
+        "season": 2020,
+        "sha256": "01b8a5104cbd6249fd0afde2b20b2628be8047b42047f1c1a777b8f2799058d9"
+      },
+      {
+        "bytes": 1250705,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\d63df896c8ecdf83b8ad41e0de3681cc1afea67b45440f005c0890bd2bef1bb5.csv.gz",
+        "season": 2021,
+        "sha256": "d63df896c8ecdf83b8ad41e0de3681cc1afea67b45440f005c0890bd2bef1bb5"
+      },
+      {
+        "bytes": 1236818,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\2c0d172b75d6241c0d9fae4e6375103d84049fa4d1fb2e5e81673528bc619cd9.csv.gz",
+        "season": 2022,
+        "sha256": "2c0d172b75d6241c0d9fae4e6375103d84049fa4d1fb2e5e81673528bc619cd9"
+      },
+      {
+        "bytes": 1232988,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\57c1cc7fc687aed7f0db45ae239eefb0a0c1206244ede2455ac4fc39cfbebb06.csv.gz",
+        "season": 2023,
+        "sha256": "57c1cc7fc687aed7f0db45ae239eefb0a0c1206244ede2455ac4fc39cfbebb06"
+      },
+      {
+        "bytes": 1239692,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4a517b8b66200ddc5cb00bc8b42706436ad09208dbea1cb3b5bd3e6928c0d52c.csv.gz",
+        "season": 2024,
+        "sha256": "4a517b8b66200ddc5cb00bc8b42706436ad09208dbea1cb3b5bd3e6928c0d52c"
+      },
+      {
+        "bytes": 1258615,
+        "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4d540f34138528c917b957ed3d84e4854eee082a0d4b30af57f225f7d75fe2ef.csv.gz",
+        "season": 2025,
+        "sha256": "4d540f34138528c917b957ed3d84e4854eee082a0d4b30af57f225f7d75fe2ef"
+      }
+    ]
+  },
+  "snapshot_generated_at": "2026-09-07T22:01:01.941144+00:00",
+  "source_inventory_before_after": {
+    "current_roster:2026": {
+      "bytes": 306258,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\6bd436cd5029af07f1761ef368c88318d392c20ada6fba0f5bc8b88128d05a3d.csv.gz",
+      "sha256": "6bd436cd5029af07f1761ef368c88318d392c20ada6fba0f5bc8b88128d05a3d"
+    },
+    "injury_reports:2013": {
+      "bytes": 689228,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\b84c71cf23be81375bbca62f7d2c51d53fa75330fbcf9f598ec4ac17fea7d8be.csv",
+      "sha256": "b84c71cf23be81375bbca62f7d2c51d53fa75330fbcf9f598ec4ac17fea7d8be"
+    },
+    "injury_reports:2014": {
+      "bytes": 692574,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e675fd5d86c3451d76e7c5d530095db1641347eb3f9796c9a30dd7a75e3ba634.csv",
+      "sha256": "e675fd5d86c3451d76e7c5d530095db1641347eb3f9796c9a30dd7a75e3ba634"
+    },
+    "injury_reports:2015": {
+      "bytes": 715948,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\fbca54ef42594cc52facc0d8c8dd74802b812771b9e33032e44ae8c7e21b0360.csv",
+      "sha256": "fbca54ef42594cc52facc0d8c8dd74802b812771b9e33032e44ae8c7e21b0360"
+    },
+    "injury_reports:2016": {
+      "bytes": 674980,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\504e05968cb9c54ddc730fd9b6e7d1dd16a62db8029cc784d3d7bafcea7ff7cb.csv",
+      "sha256": "504e05968cb9c54ddc730fd9b6e7d1dd16a62db8029cc784d3d7bafcea7ff7cb"
+    },
+    "injury_reports:2017": {
+      "bytes": 665280,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0d5139fbf41b0866517bd2bd5fd85bb20dbd4dd9bc36a706fed030a88731de6f.csv",
+      "sha256": "0d5139fbf41b0866517bd2bd5fd85bb20dbd4dd9bc36a706fed030a88731de6f"
+    },
+    "injury_reports:2018": {
+      "bytes": 665119,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4724e1f37cc3076f564e997fbf269190e7dbe795a39315b903788e0a9c40065e.csv",
+      "sha256": "4724e1f37cc3076f564e997fbf269190e7dbe795a39315b903788e0a9c40065e"
+    },
+    "injury_reports:2019": {
+      "bytes": 700757,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\daddfe8e04ddc3a29bce14f362e774fbadfb274c807f1f0fde7b5bf32aaf6cdf.csv",
+      "sha256": "daddfe8e04ddc3a29bce14f362e774fbadfb274c807f1f0fde7b5bf32aaf6cdf"
+    },
+    "injury_reports:2020": {
+      "bytes": 737474,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\706cca82824214f6b73ba0c6e537d3ee39766a50c644b8974b9fc28d7518de90.csv",
+      "sha256": "706cca82824214f6b73ba0c6e537d3ee39766a50c644b8974b9fc28d7518de90"
+    },
+    "injury_reports:2021": {
+      "bytes": 737083,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\1049fb9ff0fe7cfcf3ba8bfe1f5a35d3aba985c461c8fb7bf5201735b6d34254.csv",
+      "sha256": "1049fb9ff0fe7cfcf3ba8bfe1f5a35d3aba985c461c8fb7bf5201735b6d34254"
+    },
+    "injury_reports:2022": {
+      "bytes": 752433,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\5f0d60324e597edd1a2ced8540b04e40b51dd440591dd1df11b8d96343387c9e.csv",
+      "sha256": "5f0d60324e597edd1a2ced8540b04e40b51dd440591dd1df11b8d96343387c9e"
+    },
+    "injury_reports:2023": {
+      "bytes": 738501,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\16b04e21da5aa3944cfa9c22cafcc84ed7e6d9866eaddf0344e9b8cbf2f63afe.csv",
+      "sha256": "16b04e21da5aa3944cfa9c22cafcc84ed7e6d9866eaddf0344e9b8cbf2f63afe"
+    },
+    "injury_reports:2024": {
+      "bytes": 816989,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\498bce8e13cb64b2ab9bb0ad6cb81d0a63c2ddb24016c9fc90c2de2126fae449.csv",
+      "sha256": "498bce8e13cb64b2ab9bb0ad6cb81d0a63c2ddb24016c9fc90c2de2126fae449"
+    },
+    "injury_reports:2025": {
+      "bytes": 695623,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\15ee790fef634caea988e7b6562fc393a63739dd7ee38229d1b42161427709df.csv",
+      "sha256": "15ee790fef634caea988e7b6562fc393a63739dd7ee38229d1b42161427709df"
+    },
+    "player_weekly_stats:2013": {
+      "bytes": 1134278,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\2cbbc0fed52a203c9d5c95ed6c500bdc949f3088058dc03c28c38d9a46827b1a.csv.gz",
+      "sha256": "2cbbc0fed52a203c9d5c95ed6c500bdc949f3088058dc03c28c38d9a46827b1a"
+    },
+    "player_weekly_stats:2014": {
+      "bytes": 1156548,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\24f687e3f63911bac32e5733088dab5fd558b0da08b9a3047fbfad6ad8b21a10.csv.gz",
+      "sha256": "24f687e3f63911bac32e5733088dab5fd558b0da08b9a3047fbfad6ad8b21a10"
+    },
+    "player_weekly_stats:2015": {
+      "bytes": 1161213,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\af95af6b3ef4dcc89c2b30c60d5fcbf885c89f7eb9cb2f7248899d515a360919.csv.gz",
+      "sha256": "af95af6b3ef4dcc89c2b30c60d5fcbf885c89f7eb9cb2f7248899d515a360919"
+    },
+    "player_weekly_stats:2016": {
+      "bytes": 1158077,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\36a60ff93fd4737ff73d22c0f7dea444f304050c524802bd85705222fbc47e1c.csv.gz",
+      "sha256": "36a60ff93fd4737ff73d22c0f7dea444f304050c524802bd85705222fbc47e1c"
+    },
+    "player_weekly_stats:2017": {
+      "bytes": 1153068,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e11696bbe46b409235a774a3ad2a73743fe2c8c175836ac522440e4504fb02c9.csv.gz",
+      "sha256": "e11696bbe46b409235a774a3ad2a73743fe2c8c175836ac522440e4504fb02c9"
+    },
+    "player_weekly_stats:2018": {
+      "bytes": 1152493,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\25c7a4cd4b036704594c533a11d9f402db977d5b9d05568247fb4a01315b2d3a.csv.gz",
+      "sha256": "25c7a4cd4b036704594c533a11d9f402db977d5b9d05568247fb4a01315b2d3a"
+    },
+    "player_weekly_stats:2019": {
+      "bytes": 1151599,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\cdcd329b258d63088fb2e3d9ed9def4f3267ac2271b6974437f6be8207fb581b.csv.gz",
+      "sha256": "cdcd329b258d63088fb2e3d9ed9def4f3267ac2271b6974437f6be8207fb581b"
+    },
+    "player_weekly_stats:2020": {
+      "bytes": 1172772,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\01b8a5104cbd6249fd0afde2b20b2628be8047b42047f1c1a777b8f2799058d9.csv.gz",
+      "sha256": "01b8a5104cbd6249fd0afde2b20b2628be8047b42047f1c1a777b8f2799058d9"
+    },
+    "player_weekly_stats:2021": {
+      "bytes": 1250705,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\d63df896c8ecdf83b8ad41e0de3681cc1afea67b45440f005c0890bd2bef1bb5.csv.gz",
+      "sha256": "d63df896c8ecdf83b8ad41e0de3681cc1afea67b45440f005c0890bd2bef1bb5"
+    },
+    "player_weekly_stats:2022": {
+      "bytes": 1236818,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\2c0d172b75d6241c0d9fae4e6375103d84049fa4d1fb2e5e81673528bc619cd9.csv.gz",
+      "sha256": "2c0d172b75d6241c0d9fae4e6375103d84049fa4d1fb2e5e81673528bc619cd9"
+    },
+    "player_weekly_stats:2023": {
+      "bytes": 1232988,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\57c1cc7fc687aed7f0db45ae239eefb0a0c1206244ede2455ac4fc39cfbebb06.csv.gz",
+      "sha256": "57c1cc7fc687aed7f0db45ae239eefb0a0c1206244ede2455ac4fc39cfbebb06"
+    },
+    "player_weekly_stats:2024": {
+      "bytes": 1239692,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4a517b8b66200ddc5cb00bc8b42706436ad09208dbea1cb3b5bd3e6928c0d52c.csv.gz",
+      "sha256": "4a517b8b66200ddc5cb00bc8b42706436ad09208dbea1cb3b5bd3e6928c0d52c"
+    },
+    "player_weekly_stats:2025": {
+      "bytes": 1258615,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4d540f34138528c917b957ed3d84e4854eee082a0d4b30af57f225f7d75fe2ef.csv.gz",
+      "sha256": "4d540f34138528c917b957ed3d84e4854eee082a0d4b30af57f225f7d75fe2ef"
+    },
+    "schedule_results": {
+      "bytes": 2173367,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39.csv",
+      "sha256": "cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39"
+    },
+    "snap_counts:2013": {
+      "bytes": 2148056,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\9d1fdd557875b9a2c71d88e583da24a739dfca671edf8223d6171e39a421000e.csv",
+      "sha256": "9d1fdd557875b9a2c71d88e583da24a739dfca671edf8223d6171e39a421000e"
+    },
+    "snap_counts:2014": {
+      "bytes": 2156558,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\84540709d9483552185c8ca3ef30b2f66fb94b30c3e6c21e7a27205f337f21d3.csv",
+      "sha256": "84540709d9483552185c8ca3ef30b2f66fb94b30c3e6c21e7a27205f337f21d3"
+    },
+    "snap_counts:2015": {
+      "bytes": 2155797,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\841496252ada825c3c50d3ba9b4b26d3f4fabd0fedc5fb44f286ddaaa5bdb7e0.csv",
+      "sha256": "841496252ada825c3c50d3ba9b4b26d3f4fabd0fedc5fb44f286ddaaa5bdb7e0"
+    },
+    "snap_counts:2016": {
+      "bytes": 2157110,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\a778e24e9eb665ffe8f16093b03c5a263dca0250b3aa92bd6002f61f534bea59.csv",
+      "sha256": "a778e24e9eb665ffe8f16093b03c5a263dca0250b3aa92bd6002f61f534bea59"
+    },
+    "snap_counts:2017": {
+      "bytes": 2157818,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\eab2fad2df99249d4061ed9c5c34d312cdba07cf3159d027d255bdc9b6526917.csv",
+      "sha256": "eab2fad2df99249d4061ed9c5c34d312cdba07cf3159d027d255bdc9b6526917"
+    },
+    "snap_counts:2018": {
+      "bytes": 2157555,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\9a408b78a55f799110aed70de3564e157faf089ce9bed780d0368bf49ae13e0b.csv",
+      "sha256": "9a408b78a55f799110aed70de3564e157faf089ce9bed780d0368bf49ae13e0b"
+    },
+    "snap_counts:2019": {
+      "bytes": 2156311,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0cd52be8fa57f18503b670cb8263246c4f548375b768cbcad1c7a7462c98970d.csv",
+      "sha256": "0cd52be8fa57f18503b670cb8263246c4f548375b768cbcad1c7a7462c98970d"
+    },
+    "snap_counts:2020": {
+      "bytes": 2257664,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\c3b2a9aa472aca23332c030e574cfb134f885608ddf74fe0a659c38584d14358.csv",
+      "sha256": "c3b2a9aa472aca23332c030e574cfb134f885608ddf74fe0a659c38584d14358"
+    },
+    "snap_counts:2021": {
+      "bytes": 2388493,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\8e4dae054a4749cf2d4919508d9161a6068fd67509979aefa385bfb3803d0ee5.csv",
+      "sha256": "8e4dae054a4749cf2d4919508d9161a6068fd67509979aefa385bfb3803d0ee5"
+    },
+    "snap_counts:2022": {
+      "bytes": 2379719,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0018a4833fbf0f825286c1c27450c6254391b548d6c55bcde728e93e4816815a.csv",
+      "sha256": "0018a4833fbf0f825286c1c27450c6254391b548d6c55bcde728e93e4816815a"
+    },
+    "snap_counts:2023": {
+      "bytes": 2394875,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\303b61aa5c33ffda863f93a750fc14483f397f9187ad502b1ce71e9b516a64c0.csv",
+      "sha256": "303b61aa5c33ffda863f93a750fc14483f397f9187ad502b1ce71e9b516a64c0"
+    },
+    "snap_counts:2024": {
+      "bytes": 2402841,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\a2aa58efe093f8aa0ad5aadf09f81d8ec690a1183bd2dde68d20e7f109a9c335.csv",
+      "sha256": "a2aa58efe093f8aa0ad5aadf09f81d8ec690a1183bd2dde68d20e7f109a9c335"
+    },
+    "snap_counts:2025": {
+      "bytes": 2401193,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\80b02a6e511aa20283551cae622b29ba4d0a6f006c489a2d91591fcad33792e7.csv",
+      "sha256": "80b02a6e511aa20283551cae622b29ba4d0a6f006c489a2d91591fcad33792e7"
+    },
+    "team_weekly_stats:2013": {
+      "bytes": 71452,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\920bde147689f0c73bec8e4c94faef7532005152879b92451c269273ed8062da.csv.gz",
+      "sha256": "920bde147689f0c73bec8e4c94faef7532005152879b92451c269273ed8062da"
+    },
+    "team_weekly_stats:2014": {
+      "bytes": 70990,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\dc941b098e086e4a93f193ed49c5a2205f2f9b4b2617cd8e25ed66761ebd54c5.csv.gz",
+      "sha256": "dc941b098e086e4a93f193ed49c5a2205f2f9b4b2617cd8e25ed66761ebd54c5"
+    },
+    "team_weekly_stats:2015": {
+      "bytes": 71211,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\595292ef09bb23fd8bc892fa2a6741322fa6e9608c54f7327c57cefe1cc393ad.csv.gz",
+      "sha256": "595292ef09bb23fd8bc892fa2a6741322fa6e9608c54f7327c57cefe1cc393ad"
+    },
+    "team_weekly_stats:2016": {
+      "bytes": 71081,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\baf74c9dc216a709a7207a6d4e06aa5ccb7dc6574c154f27c3c4e4d689b366cc.csv.gz",
+      "sha256": "baf74c9dc216a709a7207a6d4e06aa5ccb7dc6574c154f27c3c4e4d689b366cc"
+    },
+    "team_weekly_stats:2017": {
+      "bytes": 71194,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\f2b70cb27bdb7acc6d48bcda29818f44268fe544cfae31cd037ca09d6961a2f3.csv.gz",
+      "sha256": "f2b70cb27bdb7acc6d48bcda29818f44268fe544cfae31cd037ca09d6961a2f3"
+    },
+    "team_weekly_stats:2018": {
+      "bytes": 71342,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\62d07da27c364634698ec11e17f4111d28c738f1b15ff3281fadce1ace045dea.csv.gz",
+      "sha256": "62d07da27c364634698ec11e17f4111d28c738f1b15ff3281fadce1ace045dea"
+    },
+    "team_weekly_stats:2019": {
+      "bytes": 71563,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\b82e3dd7f9e234c8ff5460c89dfe04337599c1d963443a090c9bab5a79b08631.csv.gz",
+      "sha256": "b82e3dd7f9e234c8ff5460c89dfe04337599c1d963443a090c9bab5a79b08631"
+    },
+    "team_weekly_stats:2020": {
+      "bytes": 71539,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e4dde2d912654a429e3b76fde7bb0e75e320cd801c033c7c80a0d7df18ce2c54.csv.gz",
+      "sha256": "e4dde2d912654a429e3b76fde7bb0e75e320cd801c033c7c80a0d7df18ce2c54"
+    },
+    "team_weekly_stats:2021": {
+      "bytes": 75920,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\b5b65fdf141695c04000fe8a0ab182be00b3bfe8345dc84e76dd0627199a8815.csv.gz",
+      "sha256": "b5b65fdf141695c04000fe8a0ab182be00b3bfe8345dc84e76dd0627199a8815"
+    },
+    "team_weekly_stats:2022": {
+      "bytes": 76157,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\3462c9d16ecc28a019e3deab7361f1331f062d26c4cf4fb09a2aa38f857c23b2.csv.gz",
+      "sha256": "3462c9d16ecc28a019e3deab7361f1331f062d26c4cf4fb09a2aa38f857c23b2"
+    },
+    "team_weekly_stats:2023": {
+      "bytes": 76087,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\7b42d3b699d2ea55e77e3abe897289c12a858c573107829250d5e1b177b57415.csv.gz",
+      "sha256": "7b42d3b699d2ea55e77e3abe897289c12a858c573107829250d5e1b177b57415"
+    },
+    "team_weekly_stats:2024": {
+      "bytes": 76189,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\3dde26ba6a2beecaf65d172823b6e3a6303cca05a07c346d2725d7d9ba86e13c.csv.gz",
+      "sha256": "3dde26ba6a2beecaf65d172823b6e3a6303cca05a07c346d2725d7d9ba86e13c"
+    },
+    "team_weekly_stats:2025": {
+      "bytes": 76176,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\54a223acb26c33c706aa1b509f56323e2889110b5bbe0c2f2c1163c325bd8f80.csv.gz",
+      "sha256": "54a223acb26c33c706aa1b509f56323e2889110b5bbe0c2f2c1163c325bd8f80"
+    },
+    "weekly_rosters:2013": {
+      "bytes": 9377446,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\76c47a629075ffd75f9c4ee49fadb6dad45396be486af897078fee5722969781.csv",
+      "sha256": "76c47a629075ffd75f9c4ee49fadb6dad45396be486af897078fee5722969781"
+    },
+    "weekly_rosters:2014": {
+      "bytes": 9638161,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\331022cd3b0c69d99c581f02b6fde6853e87ac431739c4b49841ee6e02893d6c.csv",
+      "sha256": "331022cd3b0c69d99c581f02b6fde6853e87ac431739c4b49841ee6e02893d6c"
+    },
+    "weekly_rosters:2015": {
+      "bytes": 9955118,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\198904f48eeebafc1f34028a00c1b8c0fc135aba04fc4b276e636ef87709751a.csv",
+      "sha256": "198904f48eeebafc1f34028a00c1b8c0fc135aba04fc4b276e636ef87709751a"
+    },
+    "weekly_rosters:2016": {
+      "bytes": 10803214,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\ab05dfeffe6f9a1d969133cd6740f1625d135bfad672aaa916adb609ab662883.csv",
+      "sha256": "ab05dfeffe6f9a1d969133cd6740f1625d135bfad672aaa916adb609ab662883"
+    },
+    "weekly_rosters:2017": {
+      "bytes": 15945119,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\fd3fe005b676fe0ad8d88c50701d71adef4287501397c33f479c9765cd8c45d4.csv",
+      "sha256": "fd3fe005b676fe0ad8d88c50701d71adef4287501397c33f479c9765cd8c45d4"
+    },
+    "weekly_rosters:2018": {
+      "bytes": 16566753,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\c3bca1ee53e63e21b964f1bb42c251e25b7b4b8c55210730dd4ded2f9d4a709a.csv",
+      "sha256": "c3bca1ee53e63e21b964f1bb42c251e25b7b4b8c55210730dd4ded2f9d4a709a"
+    },
+    "weekly_rosters:2019": {
+      "bytes": 16588230,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\af6aa7b8aa7850c47fe307d548d66fa7c1cac88fe11e5951c781974cb6909e03.csv",
+      "sha256": "af6aa7b8aa7850c47fe307d548d66fa7c1cac88fe11e5951c781974cb6909e03"
+    },
+    "weekly_rosters:2020": {
+      "bytes": 14333971,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0b948cca8735a2417cbda14464f4532aeee58d871e2fcd8464a23e969e45789e.csv",
+      "sha256": "0b948cca8735a2417cbda14464f4532aeee58d871e2fcd8464a23e969e45789e"
+    },
+    "weekly_rosters:2021": {
+      "bytes": 15242660,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\88adfe0fba5cbedd260d7928ad373476d4fb168d0213cb52ef1163ed5d3056b7.csv",
+      "sha256": "88adfe0fba5cbedd260d7928ad373476d4fb168d0213cb52ef1163ed5d3056b7"
+    },
+    "weekly_rosters:2022": {
+      "bytes": 14790824,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\bd6a50de334473c10f8058afa948fd0c6adc8a8b081da41c500cc0aa069c5312.csv",
+      "sha256": "bd6a50de334473c10f8058afa948fd0c6adc8a8b081da41c500cc0aa069c5312"
+    },
+    "weekly_rosters:2023": {
+      "bytes": 14612235,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\1433f1f239784dde7fcb35349d211a9b83abfc0156337b72ec4f923abf715bd3.csv",
+      "sha256": "1433f1f239784dde7fcb35349d211a9b83abfc0156337b72ec4f923abf715bd3"
+    },
+    "weekly_rosters:2024": {
+      "bytes": 14926918,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\074ecaeb9325de943c11f7bbc941425626985090ef8386f90cd837fa5cb5d4b3.csv",
+      "sha256": "074ecaeb9325de943c11f7bbc941425626985090ef8386f90cd837fa5cb5d4b3"
+    },
+    "weekly_rosters:2025": {
+      "bytes": 15385661,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\c2f7a1ffebe06058400af1989d1cd2900cc5c9659f084623708a06d4e28de35b.csv",
+      "sha256": "c2f7a1ffebe06058400af1989d1cd2900cc5c9659f084623708a06d4e28de35b"
+    }
+  },
+  "started_at": "2026-09-08T02:32:52.751271+00:00",
+  "status": "EXPLORATORY_RETROSPECTIVE_RESEARCH"
+}

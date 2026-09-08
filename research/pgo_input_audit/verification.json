@@ -1,0 +1,383 @@
+{
+  "NE_changes_against_active4_clean": {
+    "active4": {
+      "control": "active4_clean",
+      "control_rank": 1,
+      "control_rating": 5.209628277457597,
+      "largest_term_deltas": [
+        [
+          "head_coach_continuity",
+          -0.7113606795333636
+        ],
+        [
+          "returning_offense_snap_share",
+          -0.6470588286417241
+        ],
+        [
+          "incoming_prior_snap_share",
+          -0.2952727328133333
+        ],
+        [
+          "pgo_v0",
+          -0.13399286263746113
+        ],
+        [
+          "head_coach_tenure",
+          -0.06656087590480185
+        ],
+        [
+          "explosive_play_rate_for",
+          0.03887562509193798
+        ],
+        [
+          "qb_epa_per_dropback",
+          -0.037943945622340935
+        ],
+        [
+          "returning_defense_snap_share",
+          0.0341276158031033
+        ],
+        [
+          "qb_experience_prior",
+          0.029842744854373493
+        ],
+        [
+          "qb_cpoe",
+          -0.028996768451415966
+        ]
+      ],
+      "rank": 4,
+      "rating": 3.433458678151794,
+      "rating_delta": -1.7761695993058026
+    },
+    "active4_compact": {
+      "control": "active4_clean",
+      "control_rank": 1,
+      "control_rating": 5.209628277457597,
+      "largest_term_deltas": [
+        [
+          "qb_sack_avoidance",
+          -0.4934385962306413
+        ],
+        [
+          "passing_epa_per_play_for",
+          0.4031389952820177
+        ],
+        [
+          "giveaway_avoidance_rate",
+          0.21314295813226153
+        ],
+        [
+          "qb_experience_prior",
+          -0.19901790766382854
+        ],
+        [
+          "qb_cpoe",
+          -0.17338922826282796
+        ],
+        [
+          "qb_ball_security",
+          0.10852068198866541
+        ],
+        [
+          "qb_draft_prior",
+          -0.07273392174934469
+        ],
+        [
+          "rushing_epa_per_play_for",
+          -0.06741017793286902
+        ],
+        [
+          "explosive_play_rate_for",
+          0.05983182218306432
+        ],
+        [
+          "pgo_v0",
+          0.05331679454148763
+        ]
+      ],
+      "rank": 1,
+      "rating": 5.051571718169399,
+      "rating_delta": -0.15805655928819817
+    },
+    "active4_exposure": {
+      "control": "active4_clean",
+      "control_rank": 1,
+      "control_rating": 5.209628277457597,
+      "largest_term_deltas": [
+        [
+          "explosive_play_rate_for",
+          0.03283924294889362
+        ],
+        [
+          "rushing_epa_per_play_for",
+          -0.017842949043668677
+        ],
+        [
+          "qb_sack_avoidance",
+          -0.015195793995877394
+        ],
+        [
+          "qb_rushing_epa_per_carry",
+          0.011906162294141652
+        ],
+        [
+          "qb_cpoe",
+          -0.01182175991243975
+        ],
+        [
+          "qb_experience_prior",
+          -0.010994998614465262
+        ],
+        [
+          "explosive_play_prevention_rate",
+          -0.008494715682220932
+        ],
+        [
+          "qb_epa_per_dropback",
+          -0.005764440069253363
+        ],
+        [
+          "passing_epa_per_play_against",
+          0.00450387090815299
+        ],
+        [
+          "passing_epa_per_play_for",
+          0.0035519374144791227
+        ]
+      ],
+      "rank": 1,
+      "rating": 5.193781564665471,
+      "rating_delta": -0.015846712792125572
+    },
+    "active4_symmetric": {
+      "control": "active4_clean",
+      "control_rank": 1,
+      "control_rating": 5.209628277457597,
+      "largest_term_deltas": [
+        [
+          "passing_epa_per_play_for",
+          -0.016833487471889064
+        ],
+        [
+          "giveaway_avoidance_rate",
+          0.014734016216546589
+        ],
+        [
+          "qb_cpoe",
+          -0.013924322401025424
+        ],
+        [
+          "qb_sack_avoidance",
+          0.01062875705713856
+        ],
+        [
+          "qb_epa_per_dropback",
+          0.006726899664189379
+        ],
+        [
+          "explosive_play_rate_for",
+          0.005103524368954004
+        ],
+        [
+          "explosive_play_prevention_rate",
+          0.004876140399087681
+        ],
+        [
+          "qb_experience_prior",
+          -0.004844056546725567
+        ],
+        [
+          "passing_epa_per_play_against",
+          0.0034483520239000226
+        ],
+        [
+          "rushing_epa_per_play_for",
+          -0.002700644078810821
+        ]
+      ],
+      "rank": 1,
+      "rating": 5.216732699499701,
+      "rating_delta": 0.007104422042104375
+    },
+    "active8_clean": {
+      "control": "active4_clean",
+      "control_rank": 1,
+      "control_rating": 5.209628277457597,
+      "largest_term_deltas": [
+        [
+          "sack_avoidance_rate",
+          -0.41226960705549065
+        ],
+        [
+          "explosive_play_rate_for",
+          0.34757711725401264
+        ],
+        [
+          "rushing_epa_per_play_for",
+          -0.30444027847036803
+        ],
+        [
+          "passing_epa_per_play_for",
+          -0.19168795711075715
+        ],
+        [
+          "takeaway_rate",
+          -0.15827120844938153
+        ],
+        [
+          "pgo_v0",
+          -0.10569497688443485
+        ],
+        [
+          "giveaway_avoidance_rate",
+          0.07159588220819507
+        ],
+        [
+          "explosive_play_prevention_rate",
+          -0.052935090023349896
+        ],
+        [
+          "qb_epa_per_dropback",
+          -0.034132921223713364
+        ],
+        [
+          "qb_experience_prior",
+          0.026782516207114665
+        ]
+      ],
+      "rank": 2,
+      "rating": 4.395293953416427,
+      "rating_delta": -0.8143343240411696
+    },
+    "reference4": {
+      "control": "active4_clean",
+      "control_rank": 1,
+      "control_rating": 5.209628277457597,
+      "largest_term_deltas": [
+        [
+          "returning_offense_snap_share",
+          0.6401601139733306
+        ],
+        [
+          "head_coach_continuity",
+          -0.6026319408129591
+        ],
+        [
+          "pgo_v0",
+          -0.15358915906679194
+        ],
+        [
+          "qb_sack_avoidance",
+          -0.10355330422429898
+        ],
+        [
+          "incoming_prior_snap_share",
+          -0.08512733156064264
+        ],
+        [
+          "passing_epa_per_play_for",
+          -0.08272168618430642
+        ],
+        [
+          "head_coach_tenure",
+          -0.06462741482095602
+        ],
+        [
+          "qb_epa_per_dropback",
+          0.050091367747586935
+        ],
+        [
+          "giveaway_avoidance_rate",
+          0.04959850553813144
+        ],
+        [
+          "passing_epa_per_play_against",
+          0.0479221381033723
+        ]
+      ],
+      "rank": 1,
+      "rating": 4.860654112269742,
+      "rating_delta": -0.3489741651878546
+    }
+  },
+  "arms": [
+    "reference4",
+    "active4",
+    "active4_clean",
+    "active8_clean",
+    "active4_compact",
+    "active4_exposure",
+    "active4_symmetric"
+  ],
+  "current_ratings_verified": 224,
+  "fold_reference_and_chronology": "PASS",
+  "games": 2127,
+  "historical_source_vintage": "REVIEW REQUIRED",
+  "manifest_members": 8,
+  "maximum_contribution_difference": 0.0,
+  "maximum_metric_bootstrap_difference": 3.552713678800501e-15,
+  "no_fit_or_evaluator_helpers": true,
+  "numeric_metric_bootstrap_checks": 4710,
+  "promotion_status": "HOLD",
+  "run_manifest_sha256": "440734823c333f3f47229ba3edc2e43d50d84be62aa318c4c59395744d15899c",
+  "sources_verified": 67,
+  "status": "PASS",
+  "symmetry_checks": [
+    {
+      "maximum_swap_sum": 0.0,
+      "missing_patterns": 26,
+      "team_pairs": 1024,
+      "training_through": 2017
+    },
+    {
+      "maximum_swap_sum": 0.0,
+      "missing_patterns": 26,
+      "team_pairs": 1024,
+      "training_through": 2018
+    },
+    {
+      "maximum_swap_sum": 0.0,
+      "missing_patterns": 26,
+      "team_pairs": 1024,
+      "training_through": 2019
+    },
+    {
+      "maximum_swap_sum": 0.0,
+      "missing_patterns": 26,
+      "team_pairs": 1024,
+      "training_through": 2020
+    },
+    {
+      "maximum_swap_sum": 0.0,
+      "missing_patterns": 26,
+      "team_pairs": 1024,
+      "training_through": 2021
+    },
+    {
+      "maximum_swap_sum": 6.862399419756801e-18,
+      "missing_patterns": 26,
+      "team_pairs": 1024,
+      "training_through": 2022
+    },
+    {
+      "maximum_swap_sum": 2.038287235334331e-20,
+      "missing_patterns": 26,
+      "team_pairs": 1024,
+      "training_through": 2023
+    },
+    {
+      "maximum_swap_sum": 1.734723475976807e-18,
+      "missing_patterns": 26,
+      "team_pairs": 1024,
+      "training_through": 2024
+    },
+    {
+      "maximum_swap_sum": 2.168404344971009e-19,
+      "missing_patterns": 26,
+      "team_pairs": 1024,
+      "training_through": 2025
+    }
+  ],
+  "verifier_sha256": "366514b4259eb13355cb1fe04e257a2bd1be7a50f8b087a1399abe06fe6bf3fc"
+}

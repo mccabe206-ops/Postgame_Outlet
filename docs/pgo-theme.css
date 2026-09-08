@@ -1,0 +1,48 @@
+/* Shared Cobalt presentation for the ratings board and Forecast Lab. */
+:root {
+  color-scheme:light;
+  --bg:#f7f8fc; --bg2:#f7f8fc; --panel:#ffffff; --panel2:#edf0f8;
+  --row-alt:#f4f6fb; --hover:#e7edff; --border:#d9deeb; --border2:#7b89a3;
+  --ink:#152238; --mut:#42536e; --dim:#53627b;
+  --teal:#2647ba; --teal2:#2647ba; --violet:#152238; --violet2:#42536e;
+  --pos:#096b4d; --neg:#ac332b; --accent:#2647ba; --orange:#2647ba;
+  --highlight:#ffbd9f; --hero-bg:#203b9c; --table-head:#152238;
+  --table-head-hover:#263c60; --action-bg:#2647ba; --action-ink:#ffffff;
+  --focus:#2647ba; --notice-ink:#7c381c; --notice-bg:#fff1e7; --notice-border:#ad5b2c;
+  --disp:ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --body:ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+body { -webkit-font-smoothing:antialiased; }
+.lab-hero { background:var(--hero-bg); }
+.hero { background:linear-gradient(115deg,#152b7c,#2647ba); border-bottom-width:3px; }
+header h1 { font-weight:800; letter-spacing:-.035em; }
+.panel.active { border-radius:10px; }
+.panel.active,.metric { box-shadow:0 3px 16px rgba(21,34,56,.04); }
+thead th { background:var(--table-head); color:#fff; letter-spacing:.045em; }
+thead th:hover { background:var(--table-head-hover); color:var(--highlight); }
+thead th.up,thead th.down { color:var(--highlight); }
+td[data-v],.brk-v { font-variant-numeric:tabular-nums; }
+.tab { min-height:44px; border-radius:7px; }
+.tab.active,
+#panel-fantasy .fantasy-view-buttons .fantasy-view-button[aria-pressed="true"],
+#panel-fantasy .fantasy-league-actions button[type="submit"] {
+  background:var(--action-bg); color:var(--action-ink); border-color:var(--action-bg);
+}
+.method,.dr-writeup p,.dr-writeup li,.dr-writeup .stub { color:var(--mut); }
+.wrap a,.drawer a { color:var(--accent); }
+.drawer-close { width:40px; height:40px; }
+.dr-head { padding-right:42px; }
+.status,#panel-comparison .model-status,#panel-fantasy .fantasy-status {
+  color:var(--notice-ink); background:var(--notice-bg); border-color:var(--notice-border);
+}
+.lab-hero .status { color:var(--highlight); background:transparent; border-color:var(--highlight); }
+input::placeholder { color:var(--dim); opacity:1; }
+input,select,textarea { accent-color:var(--accent); }
+:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+#panel-fantasy a.fantasy-source-badge:focus-visible,
+#panel-fantasy .fantasy-details summary:focus-visible { outline-color:var(--focus); }
+.lab-hero a:focus-visible { outline-color:var(--highlight); }
+@media(max-width:480px) {
+  .lab-wrap { padding-left:10px; padding-right:10px; }
+  .lab-hero { padding:20px 16px; }
+}

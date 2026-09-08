@@ -1,0 +1,646 @@
+"""Fixed seven-arm audit of historical roster eligibility and PGO inputs."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import gc
+import hashlib
+import json
+import math
+from collections import Counter, defaultdict
+from contextlib import contextmanager
+from dataclasses import replace
+from datetime import datetime, timezone
+from pathlib import Path
+
+import numpy as np
+
+import pgo_challenger as ch
+import pgo_current_strength as current
+import pgo_forecast_snapshot
+import pgo_model
+import pgo_opponent_evaluation as base
+import pgo_sources
+import pgo_strength_evaluation as strength
+
+
+ROOT = Path(__file__).resolve().parents[2]
+CHARTER = ROOT / "research/pgo_input_audit/charter.md"
+CHARTER_SHA256 = "4be3031146e6f7f58347a7139a8c249b5bbb40a69876b86547ddaca4b45f52fd"
+ADDENDUM = ROOT / "research/pgo_input_audit/charter-v2-addendum.md"
+ADDENDUM_SHA256 = "5887a72aa0734735e0663328082541dad00ac850947e21bcfe8ac697b5ac8f71"
+SYMMETRY_CHARTER = ROOT / "research/pgo_input_audit/charter-v3-symmetry.md"
+SYMMETRY_CHARTER_SHA256 = "66ff8f1ba98e33fbc400b4345336afcd8c971b25043540319d5c2bdf8632d52d"
+PRIOR_RUN = ROOT / "research/pgo_current_strength/run-20260908"
+PRIOR_RUN_MANIFEST_SHA256 = "6682197b16fcc0974fef19e6c704ef238d4d2a30ba0db066e3e86a6bad35ee4a"
+SNAPSHOT_DIR = ROOT / "docs/evidence/forecast-lab-2026/september-07"
+SNAPSHOT_MANIFEST_SHA256 = "43bdeee73a2d3301eedbcecc7d291dc9ebe68cf196860e7217326570e4fe2f42"
+DEFAULT_OUTPUT = ROOT / "research/pgo_input_audit/run-20260908-eligibility-attempt02"
+ARMS = (
+    "reference4", "active4", "active4_clean", "active8_clean",
+    "active4_compact", "active4_exposure", "active4_symmetric",
+)
+ROSTER_COACH = {
+    "returning_offense_snap_share", "returning_defense_snap_share",
+    "incoming_prior_snap_share", "rookie_draft_capital",
+    "head_coach_continuity", "head_coach_tenure",
+}
+COMPACT_DROP = {
+    "qb_cpoe", "qb_sack_avoidance", "qb_ball_security", "qb_log_dropbacks",
+    "qb_experience_prior", "qb_draft_prior",
+}
+CODE = (
+    "research/pgo_input_audit/audit_model.py", "tests/test_pgo_input_audit.py",
+    "pgo_challenger.py", "pgo_current_strength.py", "pgo_strength_evaluation.py",
+    "pgo_opponent_evaluation.py", "pgo_forecast_snapshot.py", "pgo_sources.py",
+    "pgo_model.py",
+)
+
+
+def sha256(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _verified_manifest(directory, expected):
+    directory = Path(directory)
+    raw = (directory / "manifest.json").read_bytes()
+    if sha256(raw) != expected:
+        raise ValueError(f"Manifest differs: {directory}")
+    manifest = json.loads(raw)
+    for name, entry in manifest["files"].items():
+        payload = (directory / name).read_bytes()
+        if sha256(payload) != entry["sha256"] or len(payload) != entry["bytes"]:
+            raise ValueError(f"Manifest member differs: {name}")
+    return manifest
+
+
+def _metric_shrink(history, population, numerator, denominator, prior):
+    population_denominator = population.get(denominator, 0.0)
+    if population_denominator <= 0:
+        return None
+    mean = population.get(numerator, 0.0) / population_denominator
+    player_denominator = history.get(denominator, 0.0)
+    if player_denominator <= 0:
+        return mean
+    player = history.get(numerator, 0.0) / player_denominator
+    weight = player_denominator / (player_denominator + prior)
+    return weight * player + (1.0 - weight) * mean
+
+
+def exposure_qb_features(player_id, years_exp, draft_number, context):
+    history = context["qb_history"].get(player_id, {})
+    population = context["qb_population"]
+    values = {
+        "qb_epa_per_dropback": _metric_shrink(
+            history, population, "passing_epa", "passing_epa_plays", 200.0),
+        "qb_cpoe": _metric_shrink(
+            history, population, "cpoe_sum", "cpoe_plays", 200.0),
+        "qb_sack_avoidance": _metric_shrink(
+            history, population, "sack_free_dropbacks", "sack_dropbacks", 200.0),
+        "qb_ball_security": _metric_shrink(
+            history, population, "secure_dropbacks", "security_dropbacks", 200.0),
+        "qb_rushing_epa_per_carry": _metric_shrink(
+            history, population, "rushing_epa", "carries", 50.0),
+        "qb_log_dropbacks": math.log1p(history.get("dropbacks", 0.0)),
+        "qb_experience_prior": math.log1p(max(0, years_exp)),
+        "qb_draft_prior": 1.0 / math.sqrt(draft_number)
+        if draft_number and draft_number > 0 else 0.0,
+    }
+    values["qb_value"] = values["qb_epa_per_dropback"] or 0.0
+    return values
+
+
+@contextmanager
+def construction_scope(paths, *, active_only, half_life_games, exposure_fix):
+    """Patch only the sequential research walk and always restore globals."""
+    original_open = ch.open_csv
+    original_load = ch._load_inputs
+    original_walk = ch._walk
+    original_qb = ch._qb_features
+    roster_paths = {
+        Path(path).resolve() for (name, _season), path in paths.items()
+        if name == "weekly_rosters"
+    }
+
+    def filtered_open(path):
+        for row in original_open(path):
+            if not active_only or Path(path).resolve() not in roster_paths:
+                yield row
+            elif (row.get("status") or "").strip() == "ACT":
+                yield row
+
+    def fresh_inputs(local_paths):
+        return ch._read_inputs(local_paths)
+
+    def fixed_walk(local_paths, _ignored_half_life, *args, **kwargs):
+        return original_walk(local_paths, half_life_games, *args, **kwargs)
+
+    try:
+        ch.open_csv = filtered_open
+        ch._load_inputs = fresh_inputs
+        ch._walk = fixed_walk
+        if exposure_fix:
+            ch._qb_features = exposure_qb_features
+        yield
+    finally:
+        ch.open_csv = original_open
+        ch._load_inputs = original_load
+        ch._walk = original_walk
+        ch._qb_features = original_qb
+
+
+def drop_features(rows, removed):
+    removed = set(removed)
+    if any(not removed <= set(row.features) for row in rows):
+        raise ValueError("Feature removal set is absent")
+    return [replace(row, features={k: v for k, v in row.features.items() if k not in removed})
+            for row in rows]
+
+
+def validate_arms(arms):
+    if tuple(arms) != ARMS:
+        raise ValueError("Evaluation arms do not match the charter")
+    reference = [base._row_identity(row) for row in arms["reference4"]]
+    if len(reference) != len({row[0] for row in reference}):
+        raise ValueError("Reference contains duplicate game identities")
+    for name in ARMS[1:]:
+        if [base._row_identity(row) for row in arms[name]] != reference:
+            raise ValueError(f"Game identity or target differs: {name}")
+
+
+def _scheduled_coaches(snapshot_dir):
+    selected = {}
+    for row in pgo_sources.open_csv(Path(snapshot_dir) / "schedule.csv.gz"):
+        if row.get("season") != "2026" or row.get("game_type") != "REG":
+            continue
+        kickoff = ch._kickoff(row["gameday"], row.get("gametime", ""))
+        for side in ("home", "away"):
+            team = pgo_sources.normalize_team(row[f"{side}_team"])
+            coach = row.get(f"{side}_coach", "").strip()
+            if not coach:
+                raise ValueError(f"Current coach unavailable: {team}")
+            candidate = (kickoff, row["game_id"], coach)
+            if team not in selected or candidate < selected[team]:
+                selected[team] = candidate
+    if set(selected) != set(pgo_model.CURRENT_TEAMS):
+        raise ValueError("Current coaches must cover all 32 teams")
+    return {team: value[2] for team, value in selected.items()}
+
+
+def _reconstructed_current(snapshot, context, snapshot_dir):
+    features = current.snapshot_features(
+        snapshot, context, "starter_recency", apply_offseason=True,
+        snapshot_dir=snapshot_dir,
+    )
+    metadata = current._snapshot_metadata(snapshot, context, snapshot_dir)
+    coaches = _scheduled_coaches(snapshot_dir)
+    for team, values in features.items():
+        players = metadata[team]["roster"]
+        offense_total = sum(p["offense_snap_share"] for p in players.values()
+                            if p["offense_snap_share"] is not None)
+        defense_total = sum(p["defense_snap_share"] for p in players.values()
+                            if p["defense_snap_share"] is not None)
+        combined = offense_total + defense_total
+        values["pgo_v0"] = context["ratings"].get(team, 0.0) * ch.V0_PARAMETERS.offseason_retention
+        for name in ch.PERFORMANCE_FEATURES:
+            values[name] = context["ratios"].get(team, {}).get(name, ch._RatioState()).value
+        values["returning_offense_snap_share"] = ch._roster_share(
+            players, context["last_team"], team, "offense_snap_share", offense_total, False)
+        values["returning_defense_snap_share"] = ch._roster_share(
+            players, context["last_team"], team, "defense_snap_share", defense_total, False)
+        values["incoming_prior_snap_share"] = ch._roster_share(
+            players, context["last_team"], team, None, combined, True)
+        values["rookie_draft_capital"] = sum(
+            p["qb_draft_prior"] for p in players.values() if p["years_exp"] == 0
+        ) / max(1, len(players))
+        coach = coaches[team]
+        previous = context["coaches"].get(team)
+        values["head_coach_continuity"] = None if previous is None else float(previous == coach)
+        values["head_coach_tenure"] = math.log1p(context["coach_games"].get((team, coach), 0))
+        values["offense_availability"] = 0.0
+        values["defense_availability"] = 0.0
+    return features
+
+
+def build_arm(paths, snapshot, snapshot_dir, name):
+    active = name != "reference4"
+    half_life = 8 if name == "active8_clean" else 4
+    exposure = name == "active4_exposure"
+    with construction_scope(
+        paths, active_only=active, half_life_games=half_life,
+        exposure_fix=exposure,
+    ):
+        rows, context, inputs = current.build_rows(paths, "starter_recency")
+        if active and any(
+            (row.get("status") or "").strip() != "ACT"
+            for roster in inputs["rosters"].values() for row in roster
+        ):
+            raise ValueError("Non-ACT roster row survived eligibility filter")
+        if name == "reference4":
+            current_features = current.snapshot_features(
+                snapshot, context, "starter_recency", apply_offseason=True,
+                snapshot_dir=snapshot_dir,
+            )
+        else:
+            current_features = _reconstructed_current(snapshot, context, snapshot_dir)
+    removed = set()
+    if name in {
+        "active4_clean", "active8_clean", "active4_compact",
+        "active4_exposure", "active4_symmetric",
+    }:
+        removed |= ROSTER_COACH
+    if name == "active4_compact":
+        removed |= COMPACT_DROP
+    if removed:
+        rows = drop_features(rows, removed)
+        current_features = {
+            team: {k: v for k, v in values.items() if k not in removed}
+            for team, values in current_features.items()
+        }
+    return rows, context, inputs, current_features, {
+        "active_only": active, "half_life_games": half_life,
+        "exposure_fix": exposure, "removed_features": sorted(removed),
+        "starter_coverage": context["current_strength"]["coverage"],
+    }
+
+
+def metric_summary(rows, key):
+    if not rows:
+        return {
+            "count": 0, "mae": None, "rmse": None,
+            "bias_predicted_minus_actual": None,
+            "winner": {"correct": 0, "denominator": 0, "accuracy": None,
+                       "actual_ties": 0, "predicted_ties": 0},
+        }
+    actual = np.asarray([float(row["actual_margin"]) for row in rows])
+    predicted = np.asarray([float(row[key]) for row in rows])
+    if not np.isfinite(actual).all() or not np.isfinite(predicted).all():
+        raise ValueError("Metric values must be finite")
+    error = predicted - actual
+    decisions = actual != 0.0
+    correct = int(np.sum(
+        ((actual[decisions] > 0) & (predicted[decisions] > 0)) |
+        ((actual[decisions] < 0) & (predicted[decisions] < 0))
+    ))
+    denominator = int(np.sum(decisions))
+    return {
+        "count": len(rows), "mae": float(np.mean(np.abs(error))),
+        "rmse": float(np.sqrt(np.mean(error ** 2))), "bias_predicted_minus_actual": float(np.mean(error)),
+        "winner": {"correct": correct, "denominator": denominator,
+                   "accuracy": correct / denominator if denominator else None,
+                   "actual_ties": int(np.sum(actual == 0)),
+                   "predicted_ties": int(np.sum(predicted == 0))},
+    }
+
+
+def symmetric_rows(rows):
+    output = []
+    for row in rows:
+        output.append(row)
+        output.append(replace(
+            row, game_id=f"{row.game_id}:reversed", actual_margin=-row.actual_margin,
+            features={name: None if value is None else -float(value)
+                      for name, value in row.features.items()},
+        ))
+    return output
+
+
+def _fit_arm(name, rows):
+    training = symmetric_rows(rows) if name == "active4_symmetric" else rows
+    feature_names = tuple(sorted(training[0].features))
+    pp = ch.fit_preprocessor(training, feature_names)
+    alpha = 200.0 if name == "active4_symmetric" else 100.0
+    coefficients = ch.fit_huber_ridge(
+        pp.transform(training), np.asarray([row.actual_margin for row in training]),
+        alpha, 1.0,
+    )
+    return pp, coefficients, training
+
+
+def _symmetry_checks(pp, coefficients, rows):
+    complete = ch.FeatureRow(
+        "self", 2026, 0, "", 0.0,
+        {name: 0.0 for name in pp.feature_names}, {},
+    )
+    self_value = float(ch.predict(pp.transform([complete]), coefficients)[0])
+    probe_features = dict(rows[0].features)
+    for name in ("home_field", "rest_difference"):
+        if name in probe_features:
+            probe_features[name] = 0.0
+    probe = replace(rows[0], features=probe_features)
+    reversed_probe = symmetric_rows([probe])[1]
+    values = ch.predict(pp.transform([probe, reversed_probe]), coefficients)
+    checks = {
+        "self_neutral_absolute": abs(self_value),
+        "neutral_nonzero_swap_sum_absolute": abs(float(values[0] + values[1])),
+        "maximum_missing_coefficient_absolute": max(
+            [abs(float(coefficients[1 + len(pp.feature_names) + i]))
+             for i in range(len(pp.missing_features))] or [0.0]
+        ),
+    }
+    missing_sums = []
+    patterns = [{name} for name in pp.missing_features]
+    if pp.missing_features:
+        patterns.append(set(pp.missing_features))
+    for index, missing_names in enumerate(patterns):
+        features = dict(probe_features)
+        for name in missing_names:
+            features[name] = None
+        missing = ch.FeatureRow(f"missing-{index}", 2026, 0, "", 0.0, features, {})
+        reverse_missing = symmetric_rows([missing])[1]
+        missing_values = ch.predict(pp.transform([missing, reverse_missing]), coefficients)
+        missing_sums.append(abs(float(missing_values.sum())))
+    checks["maximum_missing_pattern_swap_sum_absolute"] = max(missing_sums or [0.0])
+    checks["tolerance"] = 1e-8
+    checks["passed"] = all(value <= 1e-8 for key, value in checks.items()
+                           if key.endswith("_absolute"))
+    if not checks["passed"]:
+        raise ValueError(f"Symmetry invariant failed: {checks}")
+    return checks
+
+
+def metric_views(rows, key):
+    seasons = sorted({int(row["season"]) for row in rows})
+    selected = {
+        "overall": rows,
+        "weeks_1_4": [r for r in rows if 1 <= int(r["week"]) <= 4],
+        "weeks_5_18": [r for r in rows if 5 <= int(r["week"]) <= 18],
+        "week_1": [r for r in rows if int(r["week"]) == 1],
+        "large_predicted_margin_abs_ge_7": [r for r in rows if abs(float(r[key])) >= 7.0],
+        "neutral_site": [r for r in rows if r["neutral_site"]],
+    }
+    result = {name: metric_summary(values, key) for name, values in selected.items()}
+    result["seasons"] = [
+        {"season": season, **metric_summary([r for r in rows if int(r["season"]) == season], key)}
+        for season in seasons
+    ]
+    result["teams"] = []
+    for team in sorted(pgo_model.CURRENT_TEAMS):
+        team_rows = []
+        for row in rows:
+            if row["home_team"] == team:
+                team_rows.append(row)
+            elif row["away_team"] == team:
+                adjusted = dict(row)
+                adjusted["actual_margin"] = -float(row["actual_margin"])
+                adjusted[key] = -float(row[key])
+                team_rows.append(adjusted)
+        result["teams"].append({"team": team, **metric_summary(team_rows, key)})
+    return result
+
+
+def _paths_from_prior(receipt):
+    paths = {}
+    for label, entry in receipt["source_inventory_before_after"].items():
+        raw = Path(entry["path"]).read_bytes()
+        if sha256(raw) != entry["sha256"] or len(raw) != entry["bytes"]:
+            raise ValueError(f"Locked source differs: {label}")
+        name, separator, tail = label.rpartition(":")
+        key = (name, int(tail)) if separator and tail.isdigit() else (label, None)
+        paths[key] = Path(entry["path"])
+    return paths
+
+
+def _status_receipt(paths):
+    counts = Counter()
+    by_season = {}
+    for (name, season), path in sorted(paths.items()):
+        if name != "weekly_rosters":
+            continue
+        current_counts = Counter((row.get("status") or "").strip() for row in pgo_sources.open_csv(path))
+        counts.update(current_counts)
+        by_season[str(season)] = dict(sorted(current_counts.items()))
+    return {"all": dict(sorted(counts.items())), "by_season": by_season,
+            "accepted_status": "ACT", "filter_stage": "before duplicate-status collapse"}
+
+
+def _schedule_teams(paths):
+    result = {}
+    for row in pgo_sources.open_csv(paths[("schedule_results", None)]):
+        game_id = row.get("game_id", "").strip()
+        if game_id:
+            result[game_id] = (
+                pgo_sources.normalize_team(row["home_team"]),
+                pgo_sources.normalize_team(row["away_team"]),
+                row.get("location", "").strip().casefold() == "neutral",
+            )
+    return result
+
+
+def _prior_rows():
+    rows = list(pgo_sources.open_csv(PRIOR_RUN / "matched-predictions.csv"))
+    return {row["game_id"]: row for row in rows}
+
+
+def _fit_receipt(pp, coefficients, training, validation, half_life, *, name, fit_training=None):
+    used = fit_training if fit_training is not None else training
+    receipt = base._fit_receipt(pp, coefficients, used, validation)
+    receipt["parameters"]["half_life_games"] = half_life
+    if name == "active4_symmetric":
+        receipt["parameters"]["alpha"] = 200.0
+        receipt["training"] = {
+            "count": len(training), "unique_game_count": len(training),
+            "augmented_row_count": len(used),
+            "season_min": min(row.season for row in training),
+            "season_max": max(row.season for row in training),
+            "game_ids": [row.game_id for row in training],
+        }
+        receipt["symmetry_invariants"] = _symmetry_checks(
+            pp, coefficients, training,
+        )
+    return receipt
+
+
+def _screen(candidate, reference, interval):
+    ref_seasons = {r["season"]: r for r in reference["seasons"]}
+    wins = sum(r["mae"] < ref_seasons[r["season"]]["mae"] for r in candidate["seasons"])
+    checks = {
+        "pooled_mae_improves": candidate["overall"]["mae"] < reference["overall"]["mae"],
+        "interval_vs_reference_above_zero": interval["lower"] > 0,
+        "at_least_five_seasons_improve": wins >= 5,
+        "weeks_1_4_not_worse": candidate["weeks_1_4"]["mae"] <= reference["weeks_1_4"]["mae"],
+    }
+    return {"season_mae_wins": wins, "checks": checks,
+            "merits_future_prospective_comparison": all(checks.values()),
+            "promotion_status": "HOLD"}
+
+
+def run_experiment(output=DEFAULT_OUTPUT):
+    output = Path(output).resolve()
+    if output.exists():
+        raise ValueError("Research output must be a new directory")
+    if (sha256(CHARTER.read_bytes()) != CHARTER_SHA256
+            or sha256(ADDENDUM.read_bytes()) != ADDENDUM_SHA256
+            or sha256(SYMMETRY_CHARTER.read_bytes()) != SYMMETRY_CHARTER_SHA256):
+        raise ValueError("Audit charter bytes differ")
+    _verified_manifest(PRIOR_RUN, PRIOR_RUN_MANIFEST_SHA256)
+    _verified_manifest(SNAPSHOT_DIR, SNAPSHOT_MANIFEST_SHA256)
+    prior_receipt = json.loads((PRIOR_RUN / "run-receipt.json").read_bytes())
+    paths_all = _paths_from_prior(prior_receipt)
+    paths = {key: value for key, value in paths_all.items() if key != ("current_roster", 2026)}
+    if len(paths) != 66 or len(paths_all) != 67:
+        raise ValueError("Locked source inventory differs")
+    protected = {name: sha256((ROOT / name).read_bytes()) for name in CODE}
+    protected.update({
+        str(PRIOR_RUN / "manifest.json"): PRIOR_RUN_MANIFEST_SHA256,
+        str(SNAPSHOT_DIR / "manifest.json"): SNAPSHOT_MANIFEST_SHA256,
+        str(CHARTER): CHARTER_SHA256, str(ADDENDUM): ADDENDUM_SHA256,
+        str(SYMMETRY_CHARTER): SYMMETRY_CHARTER_SHA256,
+    })
+    base.verify_protected(protected)
+    output.mkdir(parents=True, exist_ok=False)
+    start = {"schema_version": 1, "status": "STARTED_INCOMPLETE_UNTIL_MANIFEST_EXISTS",
+             "started_at": datetime.now(timezone.utc).isoformat(),
+             "charter_sha256": CHARTER_SHA256, "addendum_sha256": ADDENDUM_SHA256,
+             "symmetry_charter_sha256": SYMMETRY_CHARTER_SHA256,
+             "code_sha256": {name: protected[name] for name in CODE}}
+    base._write_exclusive(output / "run-start.json", base._json_bytes(start))
+    snapshot = pgo_forecast_snapshot.load_snapshot(SNAPSHOT_DIR)
+    arms, arm_receipts, current_features = {}, {}, {}
+    for name in ARMS:
+        print(f"building {name}", flush=True)
+        rows, context, _inputs, features, receipt = build_arm(paths, snapshot, SNAPSHOT_DIR, name)
+        arms[name], arm_receipts[name], current_features[name] = rows, receipt, features
+        del context, _inputs
+        gc.collect()
+    validate_arms(arms)
+    prior = _prior_rows()
+    schedule = _schedule_teams(paths)
+    matched = {}
+    for row in arms["reference4"]:
+        if row.season not in base.EVALUATION_SEASONS:
+            continue
+        old = prior.get(row.game_id)
+        if old is None or float(old["actual_margin"]) != row.actual_margin:
+            raise ValueError("Prior matched row identity differs")
+        home, away, neutral = schedule[row.game_id]
+        matched[row.game_id] = {
+            "game_id": row.game_id, "season": row.season, "week": row.week,
+            "kickoff": row.kickoff, "home_team": home, "away_team": away,
+            "neutral_site": neutral,
+            "actual_margin": row.actual_margin,
+            "prior_raw": float(old["raw"]), "prior_starter": float(old["starter"]),
+            "pgo_v0": float(old["pgo_v0"]), "constant": float(old["constant"]),
+        }
+    fits, final_fits = {}, {}
+    for name, rows in arms.items():
+        fits[name] = []
+        half_life = arm_receipts[name]["half_life_games"]
+        for season, training, validation in base.expanding_folds(rows):
+            pp, coefficients, fit_training = _fit_arm(name, training)
+            predictions = base._predict_rows(validation, pp, coefficients)
+            for row, prediction in zip(validation, predictions):
+                matched[row.game_id][name] = prediction
+            fits[name].append({"evaluation_season": season,
+                               **_fit_receipt(pp, coefficients, training, validation, half_life,
+                                              name=name, fit_training=fit_training)})
+        pp, coefficients, fit_training = _fit_arm(name, rows)
+        final_fits[name] = (pp, coefficients)
+        fits[name].append({"fit": "final_2013_2025",
+                           **_fit_receipt(pp, coefficients, rows, (), half_life,
+                                          name=name, fit_training=fit_training)})
+        print(f"fitted {name}", flush=True)
+    matched_rows = sorted(matched.values(), key=lambda r: (r["season"], r["week"], r["kickoff"], r["game_id"]))
+    if len(matched_rows) != 2127:
+        raise ValueError("Evaluation game count differs")
+    for row in matched_rows:
+        if not math.isclose(
+            row["reference4"], float(prior[row["game_id"]]["starter_recency"]),
+            rel_tol=0.0, abs_tol=1e-12,
+        ):
+            raise ValueError("Reference predictions do not reproduce")
+    prior_fits = json.loads((PRIOR_RUN / "fold-fits.json").read_bytes())["starter_recency"]
+    if fits["reference4"] != prior_fits:
+        raise ValueError("Reference fit receipts do not reproduce")
+    metrics = {name: metric_views(matched_rows, name) for name in (
+        "prior_raw", "prior_starter", "pgo_v0", "constant", *ARMS)}
+    comparisons = {
+        "active4": "reference4", "active4_clean": "active4",
+        "active8_clean": "active4_clean", "active4_compact": "active4_clean",
+        "active4_exposure": "active4_clean",
+        "active4_symmetric": "active4_clean",
+    }
+    bootstrap = {}
+    screening = {}
+    for name in ARMS[1:]:
+        bootstrap[name] = {
+            "vs_reference4": base.season_block_bootstrap(
+                matched_rows, name, "reference4", seed=20260908),
+            f"vs_{comparisons[name]}": base.season_block_bootstrap(
+                matched_rows, name, comparisons[name], seed=20260908),
+        }
+        screening[name] = _screen(metrics[name], metrics["reference4"], bootstrap[name]["vs_reference4"])
+    details, rating_rows = [], {}
+    for name in ARMS:
+        rows = strength._ratings(current_features[name], final_fits[name])
+        for row in rows:
+            details.append({"variant": name, **row})
+            rating_rows.setdefault(row["team"], {"team": row["team"]})
+            rating_rows[row["team"]].update({f"{name}_rank": row["rank"], f"{name}_rating": row["rating"]})
+    symmetry = fits["active4_symmetric"][-1]["symmetry_invariants"]
+    saved_details = json.loads((PRIOR_RUN / "rating-details.json").read_bytes())
+    saved_reference = {r["team"]: r for r in saved_details if r["variant"] == "starter_recency"}
+    generated_reference = {r["team"]: r for r in details if r["variant"] == "reference4"}
+    for team in pgo_model.CURRENT_TEAMS:
+        if not math.isclose(
+            saved_reference[team]["rating"], generated_reference[team]["rating"],
+            rel_tol=0.0, abs_tol=1e-12,
+        ):
+            raise ValueError("Reference current ratings do not reproduce")
+    if not math.isclose(
+        generated_reference["NE"]["rating"], 4.860654112269742,
+        rel_tol=0.0, abs_tol=1e-12,
+    ):
+        raise ValueError("Reference NE audit anchor differs")
+    source_before = {label: {"sha256": entry["sha256"], "bytes": entry["bytes"]}
+                     for label, entry in prior_receipt["source_inventory_before_after"].items()}
+    _paths_from_prior(prior_receipt)
+    _verified_manifest(PRIOR_RUN, PRIOR_RUN_MANIFEST_SHA256)
+    _verified_manifest(SNAPSHOT_DIR, SNAPSHOT_MANIFEST_SHA256)
+    base.verify_protected(protected)
+    receipt = {**start, "status": "EXPLORATORY_RETROSPECTIVE_RESEARCH",
+               "completed_at": datetime.now(timezone.utc).isoformat(), "arms": list(ARMS),
+               "promotion_status": "HOLD", "leakage_verdict": "REVIEW REQUIRED",
+               "source_inventory_before_after": source_before,
+               "roster_statuses": _status_receipt(paths), "arm_construction": arm_receipts,
+               "symmetry_invariants": symmetry,
+               "reference_reproduction": {"predictions": True, "fit_receipts": True,
+                                            "current_ratings": True, "ne_rating": generated_reference["NE"]["rating"]}}
+    report = ["# PGO input eligibility audit", "", "EXPERIMENTAL / HOLD. No model is promoted.", "",
+              "| Arm | Games | MAE | RMSE | Bias | Winner accuracy |", "|---|---:|---:|---:|---:|---:|"]
+    for name in ARMS:
+        m = metrics[name]["overall"]
+        report.append(f"| {name} | {m['count']} | {m['mae']:.4f} | {m['rmse']:.4f} | {m['bias_predicted_minus_actual']:+.4f} | {m['winner']['accuracy']:.2%} |")
+    report += ["", "Historical status and actual-starter vintages are not certified T-60 observations.",
+               "The same eight evaluation seasons were reused; intervals are exploratory.",
+               "Current ratings are model-scale sensitivities, not calibrated spreads.", ""]
+    artifacts = {
+        "matched-predictions.csv": base._csv_bytes(matched_rows),
+        "fold-fits.json": base._json_bytes(fits),
+        "metrics.json": base._json_bytes({"metrics": metrics, "paired_bootstrap": bootstrap, "screening": screening}),
+        "ratings.csv": base._csv_bytes([rating_rows[t] for t in sorted(rating_rows)]),
+        "rating-details.json": base._json_bytes(details),
+        "run-receipt.json": base._json_bytes(receipt),
+        "report.md": "\n".join(report).encode("utf-8"),
+    }
+    for name, raw in artifacts.items():
+        base._write_exclusive(output / name, raw)
+    artifacts["run-start.json"] = (output / "run-start.json").read_bytes()
+    base._write_exclusive(output / "manifest.json", base._json_bytes({
+        "schema_version": 1, "identity": "pgo-input-audit-eligibility-20260908",
+        "files": {name: {"sha256": sha256(raw), "bytes": len(raw)} for name, raw in artifacts.items()},
+    }))
+    return receipt
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    args = parser.parse_args(argv)
+    result = run_experiment(args.output)
+    print(json.dumps({"status": result["status"], "output": str(args.output)}))
+
+
+if __name__ == "__main__":
+    main()

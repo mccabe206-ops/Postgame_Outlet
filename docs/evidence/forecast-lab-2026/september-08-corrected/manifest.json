@@ -1,0 +1,107 @@
+{
+  "edition": "pgo-corrected-week1-2026-09-08",
+  "files": {
+    "capture.json": {
+      "bytes": 12485,
+      "sha256": "122ef5740e94ba2e8b4464d7ea9e6e8fe953d0e0ac49527fee5a6050039672f2"
+    },
+    "charter.md": {
+      "bytes": 6185,
+      "sha256": "643cdc172fc3ad15393989d8e9b021b3975833d6ae51f7ee162a837c39a25c12"
+    },
+    "depth.csv.gz": {
+      "bytes": 9866229,
+      "sha256": "a2bcbdd515d45fc20c9fcdbba795fb10069849a8475290f58bc2965193968549"
+    },
+    "depth_charts-release.json": {
+      "bytes": 163952,
+      "sha256": "3a0ffc60faee2bcc8fc02dda54526db9f13239c8455b8b8f57ba6df20cbb359b"
+    },
+    "depth_charts-timestamp.json": {
+      "bytes": 43,
+      "sha256": "c8459d0841aff47b83649e215b32702eb0025a697e045bdbd5dbc11d80560b38"
+    },
+    "final-fit.json": {
+      "bytes": 88326,
+      "sha256": "f6e6deda6665ded3ea0764a486fc68bc4667abd4a49f17afe5e3c39284a8806f"
+    },
+    "forecasts.csv": {
+      "bytes": 4507,
+      "sha256": "b01d735961442c228939d00de2f3f48c34e228e406f79b194daa6efa65edcab8"
+    },
+    "historical-context.json": {
+      "bytes": 133895,
+      "sha256": "c1ef8a85e091ed616db18a90d5594aea92fb55c5859108712a62a0a40737dfdc"
+    },
+    "nfl-injuries.html": {
+      "bytes": 328646,
+      "sha256": "9985cba4a5a8c3a81eb32feba980406063420af001f5b371f204b02dd04be4bd"
+    },
+    "nfl-week-1.html": {
+      "bytes": 1771177,
+      "sha256": "8431c787ca70b41876a80bb6ae85bf9e74a5ed63a14c651aadf3188668acb34b"
+    },
+    "patriots-week1-injury.html": {
+      "bytes": 428499,
+      "sha256": "88e366a561c2634c35321f41ef8e41009458c5e9c0be4459513e654fae0ed51e"
+    },
+    "ratings.csv": {
+      "bytes": 1617,
+      "sha256": "cd50a92816f37236a69f778a6a0fd6aad0395d7e264989a366ad2bc92a6728cc"
+    },
+    "research-manifest.json": {
+      "bytes": 1213,
+      "sha256": "7530b3199f8a17ffec34f9e5351919ea67cb45df66e16befd655ab4e746f7a4c"
+    },
+    "roster.csv.gz": {
+      "bytes": 360272,
+      "sha256": "2b2c39db80f1c9d9bf68b956a475cfba9ca19d4b456eefd2b4fa045f3a757965"
+    },
+    "rosters-release.json": {
+      "bytes": 641219,
+      "sha256": "2cb3a1efdb13190bcef6ba3a1ad639a5b6e042842e89740cc035fd3185a5be82"
+    },
+    "rosters-timestamp.json": {
+      "bytes": 43,
+      "sha256": "688b1b0494de6b478acf15159efb7b44560fb30a9c11e0d93980f751362dce13"
+    },
+    "run-receipt.json": {
+      "bytes": 34864,
+      "sha256": "8557f26bbe53992dec795ec6db696d6415ac7aee79ff3828dd6cee4a01b42dc7"
+    },
+    "schedule.csv.gz": {
+      "bytes": 512103,
+      "sha256": "da833d174e5791ccb9ae697aa13c48534b66c198c9ac5ca3d6c47e240a6f94cf"
+    },
+    "schedules-release.json": {
+      "bytes": 12386,
+      "sha256": "fff90659ab96ca1da1d488d773686876614792b165ee9c029a9c4efe298b48ea"
+    },
+    "schedules-timestamp.json": {
+      "bytes": 43,
+      "sha256": "37e8ea5b65b408b74926880e4c12de07c1132b507145bbf627d65843728d53ba"
+    },
+    "scoring-history-2025.csv": {
+      "bytes": 10357,
+      "sha256": "536f4fd60c8bc61a4b22770b6c1308dbea1463fad17d137fe969df94c8d759b8"
+    },
+    "seahawks-week1-injury.html": {
+      "bytes": 637156,
+      "sha256": "7dcf24072665f11e77816b6b426bcd072be36f575808e796332172938ba977a7"
+    },
+    "snapshot.json": {
+      "bytes": 271687,
+      "sha256": "b7064ca078f2ba317d34c3cdf7422c228f96daa6dcfb4d8d131878754ac11deb"
+    },
+    "source-qualification.json": {
+      "bytes": 120207,
+      "sha256": "4c7f700531dc43b38181f9c205564057615ff54613832a2c2970d1963d60d76b"
+    },
+    "source-refresh-clarification.md": {
+      "bytes": 1859,
+      "sha256": "c9749324b8bf39f088811717f121255f11b2dd6bb107372d6d0a7ea638c2f05b"
+    }
+  },
+  "generated_at": "2026-09-08T15:18:05.595213+00:00",
+  "schema_version": 1
+}

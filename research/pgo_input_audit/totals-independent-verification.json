@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "raw_schedule_sha256": "cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39",
+  "source_lock_sha256": "3a7673ac4617d57954cb56954f2216226a358c7b187b1e3ce62994a6f2b3fd29",
+  "charter_sha256": "4be3031146e6f7f58347a7139a8c249b5bbb40a69876b86547ddaca4b45f52fd",
+  "code_sha256": "c9adfe86268a9eda0b1e65b29cb7bae8d00b5f5c20d0587987f25393f03abc71",
+  "corrected_manifest_sha256": "b41fc98752b08eea05d1c0bd9c6475b32eee4cd3b790ae86802ca048e521ba69",
+  "game_count": 2127,
+  "independently_recomputed_prediction_fields": 17112,
+  "metric_views": 12,
+  "improvement_control_minus_candidate": {
+    "mean": 0.038308089149919955,
+    "lower": -0.06091382052960676,
+    "upper": 0.12459533294787892,
+    "blocks": 8,
+    "samples": 10000,
+    "seed": 20260908
+  },
+  "future_perturbations": {
+    "every_evaluated_season": true,
+    "changed_actuals_confirmed": true
+  },
+  "duplicate_guard_meaningful": true,
+  "original_predictions_and_metrics_preserved": true,
+  "initial_bootstrap_superseded": {
+    "wrong_seed": 20260907,
+    "reversed_direction": true
+  },
+  "check_totals_or_evaluator_functions_called": false,
+  "findings": [],
+  "limits": [
+    "Historical source vintage remains REVIEW REQUIRED.",
+    "Totals-only verification does not validate exact scores, margins, or fixed-season strength."
+  ]
+}

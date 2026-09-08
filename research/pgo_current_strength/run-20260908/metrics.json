@@ -1,0 +1,2345 @@
+{
+  "metrics": {
+    "constant": {
+      "overall": {
+        "count": 2127,
+        "mae": 11.057958155158351,
+        "rmse": 14.326249822306764,
+        "winner": {
+          "accuracy": 0.5403492213308164,
+          "actual_ties": 8,
+          "correct": 1145,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.727691650390625,
+          "rmse": 14.33799212541549,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6023622047244095,
+            "actual_ties": 2,
+            "correct": 153,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 11.661056518554688,
+          "rmse": 15.027262024050831,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.5176470588235295,
+            "actual_ties": 1,
+            "correct": 132,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 11.143933977399552,
+          "rmse": 14.345176942970468,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.4980392156862745,
+            "actual_ties": 1,
+            "correct": 127,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 12.147058823529411,
+          "rmse": 15.40426522503492,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.5166051660516605,
+            "actual_ties": 1,
+            "correct": 140,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 9.547151355134242,
+          "rmse": 12.326481231766037,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.5613382899628253,
+            "actual_ties": 2,
+            "correct": 151,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.101337775557926,
+          "rmse": 14.423010128247743,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.5551470588235294,
+            "actual_ties": 0,
+            "correct": 151,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.099787347701916,
+          "rmse": 14.431547954348101,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.5330882352941176,
+            "actual_ties": 0,
+            "correct": 145,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.051199690402475,
+          "rmse": 14.152406618118665,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.5387453874538746,
+            "actual_ties": 1,
+            "correct": 146,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 10.592477000451328,
+        "rmse": 13.911516818608266,
+        "winner": {
+          "accuracy": 0.5208747514910537,
+          "actual_ties": 6,
+          "correct": 262,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 11.204391967115011,
+        "rmse": 14.45425859842699,
+        "winner": {
+          "accuracy": 0.5464108910891089,
+          "actual_ties": 2,
+          "correct": 883,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "pgo_v0": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.266150234488956,
+        "rmse": 13.229771660093688,
+        "winner": {
+          "accuracy": 0.6304860783388391,
+          "actual_ties": 8,
+          "correct": 1336,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.118525340662512,
+          "rmse": 13.368398848083352,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6653543307086615,
+            "actual_ties": 2,
+            "correct": 169,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.621299813442999,
+          "rmse": 13.64561859612453,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6588235294117647,
+            "actual_ties": 1,
+            "correct": 168,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.163500769323878,
+          "rmse": 13.145342087195795,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6352941176470588,
+            "actual_ties": 1,
+            "correct": 162,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.309144319503492,
+          "rmse": 14.181760970294935,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6014760147601476,
+            "actual_ties": 1,
+            "correct": 163,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.989204922195716,
+          "rmse": 11.673137668170396,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6171003717472119,
+            "actual_ties": 2,
+            "correct": 166,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.46737440161242,
+          "rmse": 13.564960614567436,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6066176470588235,
+            "actual_ties": 0,
+            "correct": 165,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.182203244899581,
+          "rmse": 13.215404184123972,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6360294117647058,
+            "actual_ties": 0,
+            "correct": 173,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.279423542973651,
+          "rmse": 12.925134557460924,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6273062730627307,
+            "actual_ties": 1,
+            "correct": 170,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 10.056913350351143,
+        "rmse": 13.20438386904988,
+        "winner": {
+          "accuracy": 0.584493041749503,
+          "actual_ties": 6,
+          "correct": 294,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.331973209783238,
+        "rmse": 13.23774823362305,
+        "winner": {
+          "accuracy": 0.6448019801980198,
+          "actual_ties": 2,
+          "correct": 1042,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "raw": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.193698744603742,
+        "rmse": 13.159375078059318,
+        "winner": {
+          "accuracy": 0.6394525719679094,
+          "actual_ties": 8,
+          "correct": 1355,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.21038506742289,
+          "rmse": 13.36500206725438,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6614173228346457,
+            "actual_ties": 2,
+            "correct": 168,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.639276054545487,
+          "rmse": 13.655166432573047,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6274509803921569,
+            "actual_ties": 1,
+            "correct": 160,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.045694982635748,
+          "rmse": 12.978397887923762,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6588235294117647,
+            "actual_ties": 1,
+            "correct": 168,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.241510486204277,
+          "rmse": 14.288602729345676,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6346863468634686,
+            "actual_ties": 1,
+            "correct": 172,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.86381362575672,
+          "rmse": 11.546532371812384,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6579925650557621,
+            "actual_ties": 2,
+            "correct": 177,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.37765039499671,
+          "rmse": 13.530694826243769,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6176470588235294,
+            "actual_ties": 0,
+            "correct": 168,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.886669313195696,
+          "rmse": 12.878771485613461,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6617647058823529,
+            "actual_ties": 0,
+            "correct": 180,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.298186623299747,
+          "rmse": 12.887072085958184,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.5977859778597786,
+            "actual_ties": 1,
+            "correct": 162,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 10.046918676487959,
+        "rmse": 13.269398408775116,
+        "winner": {
+          "accuracy": 0.6063618290258449,
+          "actual_ties": 6,
+          "correct": 305,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.2398736856859,
+        "rmse": 13.12457257595962,
+        "winner": {
+          "accuracy": 0.6497524752475248,
+          "actual_ties": 2,
+          "correct": 1050,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "starter": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.119285584844752,
+        "rmse": 13.088143930071022,
+        "winner": {
+          "accuracy": 0.6498348277489382,
+          "actual_ties": 8,
+          "correct": 1377,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.206043678328397,
+          "rmse": 13.306302353393177,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6811023622047244,
+            "actual_ties": 2,
+            "correct": 173,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.451509602986238,
+          "rmse": 13.498052531344253,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6352941176470588,
+            "actual_ties": 1,
+            "correct": 162,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.010407771600248,
+          "rmse": 12.898167629673107,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6705882352941176,
+            "actual_ties": 1,
+            "correct": 171,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.072134060727912,
+          "rmse": 14.063650240254782,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6531365313653137,
+            "actual_ties": 1,
+            "correct": 177,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.872618716629951,
+          "rmse": 11.66543930300974,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.654275092936803,
+            "actual_ties": 2,
+            "correct": 176,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.179126262643733,
+          "rmse": 13.325214350329327,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6323529411764706,
+            "actual_ties": 0,
+            "correct": 172,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.90838610571321,
+          "rmse": 12.941042085264069,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6801470588235294,
+            "actual_ties": 0,
+            "correct": 185,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.26771657537053,
+          "rmse": 12.90106645733926,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.5940959409594095,
+            "actual_ties": 1,
+            "correct": 161,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.922333152861672,
+        "rmse": 13.155327120908467,
+        "winner": {
+          "accuracy": 0.6222664015904572,
+          "actual_ties": 6,
+          "correct": 313,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.181244044597157,
+        "rmse": 13.066937620890604,
+        "winner": {
+          "accuracy": 0.6584158415841584,
+          "actual_ties": 2,
+          "correct": 1064,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "starter_recency": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.11977535825325,
+        "rmse": 13.069497347241652,
+        "winner": {
+          "accuracy": 0.6559697970740915,
+          "actual_ties": 8,
+          "correct": 1390,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.230882629813031,
+          "rmse": 13.301478939061283,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6732283464566929,
+            "actual_ties": 2,
+            "correct": 171,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.536877653123222,
+          "rmse": 13.581281910374237,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6431372549019608,
+            "actual_ties": 1,
+            "correct": 164,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.109942301118497,
+          "rmse": 12.980838810286965,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6588235294117647,
+            "actual_ties": 1,
+            "correct": 168,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.059407865378974,
+          "rmse": 14.04689229330689,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6605166051660517,
+            "actual_ties": 1,
+            "correct": 179,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.856084109933391,
+          "rmse": 11.620384177329255,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6468401486988847,
+            "actual_ties": 2,
+            "correct": 174,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.248658169824004,
+          "rmse": 13.399958447196008,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6580882352941176,
+            "actual_ties": 0,
+            "correct": 179,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.74884553248542,
+          "rmse": 12.777809589717236,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6948529411764706,
+            "actual_ties": 0,
+            "correct": 189,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.193351416483281,
+          "rmse": 12.740734570365474,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6125461254612546,
+            "actual_ties": 1,
+            "correct": 166,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.958549717349442,
+        "rmse": 13.178749664091363,
+        "winner": {
+          "accuracy": 0.6182902584493042,
+          "actual_ties": 6,
+          "correct": 311,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.170494672975153,
+        "rmse": 13.034938765693267,
+        "winner": {
+          "accuracy": 0.6676980198019802,
+          "actual_ties": 2,
+          "correct": 1079,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "starter_recency_roster": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.131840378834895,
+        "rmse": 13.083557912682956,
+        "winner": {
+          "accuracy": 0.658329400660689,
+          "actual_ties": 8,
+          "correct": 1395,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.182613401307215,
+          "rmse": 13.257215036056778,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6732283464566929,
+            "actual_ties": 2,
+            "correct": 171,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.505674336889232,
+          "rmse": 13.571304086588317,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6352941176470588,
+            "actual_ties": 1,
+            "correct": 162,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.130410353778082,
+          "rmse": 12.960333690177865,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6588235294117647,
+            "actual_ties": 1,
+            "correct": 168,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.078244050143693,
+          "rmse": 14.065907994837316,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6826568265682657,
+            "actual_ties": 1,
+            "correct": 185,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.915374219280176,
+          "rmse": 11.726980027521622,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6505576208178439,
+            "actual_ties": 2,
+            "correct": 175,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.260155307383336,
+          "rmse": 13.387089841943911,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6617647058823529,
+            "actual_ties": 0,
+            "correct": 180,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.750709818049295,
+          "rmse": 12.788929784767292,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6985294117647058,
+            "actual_ties": 0,
+            "correct": 190,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.251962003877397,
+          "rmse": 12.810549846265204,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6051660516605166,
+            "actual_ties": 1,
+            "correct": 164,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.94594091043696,
+        "rmse": 13.164503514204377,
+        "winner": {
+          "accuracy": 0.6242544731610338,
+          "actual_ties": 6,
+          "correct": 314,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.190321731995923,
+        "rmse": 13.057989812644527,
+        "winner": {
+          "accuracy": 0.6689356435643564,
+          "actual_ties": 2,
+          "correct": 1081,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "without_availability": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.146177045876923,
+        "rmse": 13.096915648432125,
+        "winner": {
+          "accuracy": 0.654554034922133,
+          "actual_ties": 8,
+          "correct": 1387,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.17128094790418,
+          "rmse": 13.263713249149035,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.65748031496063,
+            "actual_ties": 2,
+            "correct": 167,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.49136260869676,
+          "rmse": 13.534405875182541,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6392156862745098,
+            "actual_ties": 1,
+            "correct": 163,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.152721820604668,
+          "rmse": 12.98210487911168,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6431372549019608,
+            "actual_ties": 1,
+            "correct": 164,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.10429697711171,
+          "rmse": 14.12228309101396,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6789667896678967,
+            "actual_ties": 1,
+            "correct": 184,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.90518152396872,
+          "rmse": 11.721228817957885,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6505576208178439,
+            "actual_ties": 2,
+            "correct": 175,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.292029050902476,
+          "rmse": 13.358412137076286,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6286764705882353,
+            "actual_ties": 0,
+            "correct": 171,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.822362550633152,
+          "rmse": 12.901819843532689,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.7169117647058824,
+            "actual_ties": 0,
+            "correct": 195,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.247785123632303,
+          "rmse": 12.786885628222851,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6199261992619927,
+            "actual_ties": 1,
+            "correct": 168,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.943328021413349,
+        "rmse": 13.14277239510973,
+        "winner": {
+          "accuracy": 0.6202783300198808,
+          "actual_ties": 6,
+          "correct": 312,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.20999049053203,
+        "rmse": 13.082456525647968,
+        "winner": {
+          "accuracy": 0.6652227722772277,
+          "actual_ties": 2,
+          "correct": 1075,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "without_coaching": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.120749847698145,
+        "rmse": 13.077521406946486,
+        "winner": {
+          "accuracy": 0.654554034922133,
+          "actual_ties": 8,
+          "correct": 1387,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.088068704088762,
+          "rmse": 13.151239707679576,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6968503937007874,
+            "actual_ties": 2,
+            "correct": 177,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.511617557236836,
+          "rmse": 13.573517664142198,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6392156862745098,
+            "actual_ties": 1,
+            "correct": 163,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.137011463337858,
+          "rmse": 12.967393981120301,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6588235294117647,
+            "actual_ties": 1,
+            "correct": 168,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.12431807286524,
+          "rmse": 14.128043189267672,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6642066420664207,
+            "actual_ties": 1,
+            "correct": 180,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.921076548150056,
+          "rmse": 11.749137020682078,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6171003717472119,
+            "actual_ties": 2,
+            "correct": 166,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.269215439845278,
+          "rmse": 13.40339252997408,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6617647058823529,
+            "actual_ties": 0,
+            "correct": 180,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.72081636579172,
+          "rmse": 12.731164526774196,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6911764705882353,
+            "actual_ties": 0,
+            "correct": 188,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.211490430289832,
+          "rmse": 12.80811362280133,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6088560885608856,
+            "actual_ties": 1,
+            "correct": 165,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.901879470865246,
+        "rmse": 13.09126764857881,
+        "winner": {
+          "accuracy": 0.6322067594433399,
+          "actual_ties": 6,
+          "correct": 318,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.189603384044217,
+        "rmse": 13.07319404431921,
+        "winner": {
+          "accuracy": 0.661509900990099,
+          "actual_ties": 2,
+          "correct": 1069,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "without_other_team_performance": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.129967834169749,
+        "rmse": 13.103332564007696,
+        "winner": {
+          "accuracy": 0.6451156205757432,
+          "actual_ties": 8,
+          "correct": 1367,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.192176458104639,
+          "rmse": 13.295323125081584,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6692913385826772,
+            "actual_ties": 2,
+            "correct": 170,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.547650041125681,
+          "rmse": 13.64766791246533,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6352941176470588,
+            "actual_ties": 1,
+            "correct": 162,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.01681972835125,
+          "rmse": 12.88697282360695,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6549019607843137,
+            "actual_ties": 1,
+            "correct": 167,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.998292930093667,
+          "rmse": 13.984934849175936,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6346863468634686,
+            "actual_ties": 1,
+            "correct": 172,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.987029102569698,
+          "rmse": 11.816278222434859,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6468401486988847,
+            "actual_ties": 2,
+            "correct": 174,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.272819644052754,
+          "rmse": 13.416774085176057,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.625,
+            "actual_ties": 0,
+            "correct": 170,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.760246874217199,
+          "rmse": 12.802613943192334,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6948529411764706,
+            "actual_ties": 0,
+            "correct": 189,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.282079015687058,
+          "rmse": 12.886678573064934,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6014760147601476,
+            "actual_ties": 1,
+            "correct": 163,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.988382540361828,
+        "rmse": 13.254553212336559,
+        "winner": {
+          "accuracy": 0.6003976143141153,
+          "actual_ties": 6,
+          "correct": 302,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.174508572456666,
+        "rmse": 13.0553984991213,
+        "winner": {
+          "accuracy": 0.6590346534653465,
+          "actual_ties": 2,
+          "correct": 1065,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "without_qb": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.21842304040172,
+        "rmse": 13.177541192002304,
+        "winner": {
+          "accuracy": 0.6474752241623407,
+          "actual_ties": 8,
+          "correct": 1372,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.176693204869443,
+          "rmse": 13.292815431489359,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6653543307086615,
+            "actual_ties": 2,
+            "correct": 169,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.654207248697807,
+          "rmse": 13.684362651743639,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6274509803921569,
+            "actual_ties": 1,
+            "correct": 160,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.139057821405164,
+          "rmse": 13.004917184531962,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6705882352941176,
+            "actual_ties": 1,
+            "correct": 171,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.237663118783662,
+          "rmse": 14.219926450152123,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6494464944649446,
+            "actual_ties": 1,
+            "correct": 176,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.895398513090536,
+          "rmse": 11.614417187547858,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6654275092936803,
+            "actual_ties": 2,
+            "correct": 179,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.406161608614426,
+          "rmse": 13.581673074405623,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6139705882352942,
+            "actual_ties": 0,
+            "correct": 167,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.890947897015694,
+          "rmse": 12.911630530727399,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6838235294117647,
+            "actual_ties": 0,
+            "correct": 186,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.360901976667053,
+          "rmse": 12.976559072692254,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6051660516605166,
+            "actual_ties": 1,
+            "correct": 164,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 10.009909830475946,
+        "rmse": 13.230286310862894,
+        "winner": {
+          "accuracy": 0.6222664015904572,
+          "actual_ties": 6,
+          "correct": 313,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.284018357986529,
+        "rmse": 13.1609046113156,
+        "winner": {
+          "accuracy": 0.6553217821782178,
+          "actual_ties": 2,
+          "correct": 1059,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "without_results_history": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.161341545794166,
+        "rmse": 13.130262282136368,
+        "winner": {
+          "accuracy": 0.6493629070316187,
+          "actual_ties": 8,
+          "correct": 1376,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.19065535663003,
+          "rmse": 13.273380397113375,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6692913385826772,
+            "actual_ties": 2,
+            "correct": 170,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.531882388714116,
+          "rmse": 13.584623419294317,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6352941176470588,
+            "actual_ties": 1,
+            "correct": 162,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.2114364434799,
+          "rmse": 13.074663240706576,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6549019607843137,
+            "actual_ties": 1,
+            "correct": 167,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.17889885324817,
+          "rmse": 14.136214471731119,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6715867158671587,
+            "actual_ties": 1,
+            "correct": 182,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.899073016786424,
+          "rmse": 11.748185770562875,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6579925650557621,
+            "actual_ties": 2,
+            "correct": 177,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.217871521298248,
+          "rmse": 13.374979966036618,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6213235294117647,
+            "actual_ties": 0,
+            "correct": 169,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.817024574763163,
+          "rmse": 12.876035718707142,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6727941176470589,
+            "actual_ties": 0,
+            "correct": 183,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.265717138984954,
+          "rmse": 12.874324416497059,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6125461254612546,
+            "actual_ties": 1,
+            "correct": 166,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.917903289558259,
+        "rmse": 13.156612083891059,
+        "winner": {
+          "accuracy": 0.6163021868787276,
+          "actual_ties": 6,
+          "correct": 310,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.237923790802865,
+        "rmse": 13.121962064888159,
+        "winner": {
+          "accuracy": 0.6596534653465347,
+          "actual_ties": 2,
+          "correct": 1066,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "without_roster_continuity": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.108202068725603,
+        "rmse": 13.067071800426932,
+        "winner": {
+          "accuracy": 0.655497876356772,
+          "actual_ties": 8,
+          "correct": 1389,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.191261826193452,
+          "rmse": 13.307774313562913,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6614173228346457,
+            "actual_ties": 2,
+            "correct": 168,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.423045696623475,
+          "rmse": 13.47571127886514,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6313725490196078,
+            "actual_ties": 1,
+            "correct": 161,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.128512986630103,
+          "rmse": 12.981703241347603,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6549019607843137,
+            "actual_ties": 1,
+            "correct": 167,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.024629472739562,
+          "rmse": 13.993362657003537,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6789667896678967,
+            "actual_ties": 1,
+            "correct": 184,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.884697798630375,
+          "rmse": 11.69750284634453,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6468401486988847,
+            "actual_ties": 2,
+            "correct": 174,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.25158928207578,
+          "rmse": 13.399072792084985,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6654411764705882,
+            "actual_ties": 0,
+            "correct": 181,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.73989303793443,
+          "rmse": 12.77929642836715,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.7058823529411765,
+            "actual_ties": 0,
+            "correct": 192,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.242089112882894,
+          "rmse": 12.80762569119228,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.5977859778597786,
+            "actual_ties": 1,
+            "correct": 162,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.872408190135966,
+        "rmse": 13.118387600752165,
+        "winner": {
+          "accuracy": 0.614314115308151,
+          "actual_ties": 6,
+          "correct": 309,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.182379500247313,
+        "rmse": 13.050886851276777,
+        "winner": {
+          "accuracy": 0.6683168316831684,
+          "actual_ties": 2,
+          "correct": 1080,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "without_skill_quality": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.11977535825325,
+        "rmse": 13.069497347241652,
+        "winner": {
+          "accuracy": 0.6559697970740915,
+          "actual_ties": 8,
+          "correct": 1390,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.230882629813031,
+          "rmse": 13.301478939061283,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6732283464566929,
+            "actual_ties": 2,
+            "correct": 171,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.536877653123222,
+          "rmse": 13.581281910374237,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6431372549019608,
+            "actual_ties": 1,
+            "correct": 164,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.109942301118497,
+          "rmse": 12.980838810286965,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6588235294117647,
+            "actual_ties": 1,
+            "correct": 168,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.059407865378974,
+          "rmse": 14.04689229330689,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6605166051660517,
+            "actual_ties": 1,
+            "correct": 179,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.856084109933391,
+          "rmse": 11.620384177329255,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6468401486988847,
+            "actual_ties": 2,
+            "correct": 174,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.248658169824004,
+          "rmse": 13.399958447196008,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6580882352941176,
+            "actual_ties": 0,
+            "correct": 179,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.74884553248542,
+          "rmse": 12.777809589717236,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6948529411764706,
+            "actual_ties": 0,
+            "correct": 189,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.193351416483281,
+          "rmse": 12.740734570365474,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6125461254612546,
+            "actual_ties": 1,
+            "correct": 166,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.958549717349442,
+        "rmse": 13.178749664091363,
+        "winner": {
+          "accuracy": 0.6182902584493042,
+          "actual_ties": 6,
+          "correct": 311,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.170494672975153,
+        "rmse": 13.034938765693267,
+        "winner": {
+          "accuracy": 0.6676980198019802,
+          "actual_ties": 2,
+          "correct": 1079,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "without_team_passing": {
+      "overall": {
+        "count": 2127,
+        "mae": 10.131331363275642,
+        "rmse": 13.0789499751114,
+        "winner": {
+          "accuracy": 0.656441717791411,
+          "actual_ties": 8,
+          "correct": 1391,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "seasons": [
+        {
+          "count": 256,
+          "mae": 10.181377197461222,
+          "rmse": 13.243589046089609,
+          "season": 2018,
+          "winner": {
+            "accuracy": 0.6732283464566929,
+            "actual_ties": 2,
+            "correct": 171,
+            "denominator": 254,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.495622088175995,
+          "rmse": 13.568595132712009,
+          "season": 2019,
+          "winner": {
+            "accuracy": 0.6313725490196078,
+            "actual_ties": 1,
+            "correct": 161,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 256,
+          "mae": 10.128627602444755,
+          "rmse": 12.961100108760572,
+          "season": 2020,
+          "winner": {
+            "accuracy": 0.6627450980392157,
+            "actual_ties": 1,
+            "correct": 169,
+            "denominator": 255,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 11.072824607392347,
+          "rmse": 14.055727711430727,
+          "season": 2021,
+          "winner": {
+            "accuracy": 0.6752767527675276,
+            "actual_ties": 1,
+            "correct": 183,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 271,
+          "mae": 8.933200800386885,
+          "rmse": 11.739803635896633,
+          "season": 2022,
+          "winner": {
+            "accuracy": 0.6468401486988847,
+            "actual_ties": 2,
+            "correct": 174,
+            "denominator": 269,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.24963104687128,
+          "rmse": 13.367272483300269,
+          "season": 2023,
+          "winner": {
+            "accuracy": 0.6617647058823529,
+            "actual_ties": 0,
+            "correct": 180,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 9.751626097711112,
+          "rmse": 12.792333449351023,
+          "season": 2024,
+          "winner": {
+            "accuracy": 0.6948529411764706,
+            "actual_ties": 0,
+            "correct": 189,
+            "denominator": 272,
+            "predicted_ties": 0
+          }
+        },
+        {
+          "count": 272,
+          "mae": 10.257550268001225,
+          "rmse": 12.805757079119784,
+          "season": 2025,
+          "winner": {
+            "accuracy": 0.6051660516605166,
+            "actual_ties": 1,
+            "correct": 164,
+            "denominator": 271,
+            "predicted_ties": 0
+          }
+        }
+      ],
+      "weeks_1_4": {
+        "count": 509,
+        "mae": 9.953254953223714,
+        "rmse": 13.158062529767358,
+        "winner": {
+          "accuracy": 0.6182902584493042,
+          "actual_ties": 6,
+          "correct": 311,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "count": 1618,
+        "mae": 10.18735169251942,
+        "rmse": 13.053963141116062,
+        "winner": {
+          "accuracy": 0.6683168316831684,
+          "actual_ties": 2,
+          "correct": 1080,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    }
+  },
+  "paired_bootstrap": {
+    "raw": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": -0.0026735476578742283,
+        "mean": 0.07245148988521634,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.1543646680064369
+      }
+    },
+    "starter": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.05770455003104531,
+        "mean": 0.1468646496442027,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.22607711838815306
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": 0.017285959856872844,
+        "mean": 0.07441315975898638,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.13871418488552434
+      }
+    },
+    "starter_recency": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.04535400217325639,
+        "mean": 0.1463748762357069,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.255580089017783
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": 0.01581704842156169,
+        "mean": 0.07392338635049056,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.12704833646127536
+      },
+      "vs_starter": {
+        "blocks": 8,
+        "lower": -0.05496853107663039,
+        "mean": -0.0004897734084958212,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.05853708329917478
+      }
+    },
+    "starter_recency_roster": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.041362310745836815,
+        "mean": 0.1343098556540627,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.24334270513344747
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": 7.739296616649449e-05,
+        "mean": 0.06185836576884637,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.11830935153623942
+      },
+      "vs_starter_recency": {
+        "blocks": 8,
+        "lower": -0.03603692355162964,
+        "mean": -0.012065020581644192,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.012776919642096025
+      }
+    },
+    "without_availability": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.0408992974973781,
+        "mean": 0.11997318861203146,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.2100070784432916
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": -0.011901834652362197,
+        "mean": 0.04752169872681513,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.09918943696775556
+      },
+      "vs_starter_recency_roster": {
+        "blocks": 8,
+        "lower": -0.03521558893032239,
+        "mean": -0.014336667042031223,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.003617319156695274
+      }
+    },
+    "without_coaching": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.06561979484923,
+        "mean": 0.14540038679081232,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.24965096404867643
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": 0.006898765464158683,
+        "mean": 0.07294889690559599,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.12642066831559576
+      },
+      "vs_starter_recency_roster": {
+        "blocks": 8,
+        "lower": -0.012689811655977178,
+        "mean": 0.011090531136749628,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.04037073701360693
+      }
+    },
+    "without_other_team_performance": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.03192351877853493,
+        "mean": 0.13618240031920853,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.2513439361165181
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": -0.006107112621764724,
+        "mean": 0.06373091043399219,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.13350268155920203
+      },
+      "vs_starter_recency_roster": {
+        "blocks": 8,
+        "lower": -0.03424599040686389,
+        "mean": 0.0018725446651458256,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.045240058035001134
+      }
+    },
+    "without_qb": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": -0.022494590790990737,
+        "mean": 0.04772719408723569,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.13271721566570227
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": -0.050401170569070314,
+        "mean": -0.024724295797980647,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": -0.0007694332931164568
+      },
+      "vs_starter_recency_roster": {
+        "blocks": 8,
+        "lower": -0.1327813727665595,
+        "mean": -0.08658266156682701,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": -0.03317295342759228
+      }
+    },
+    "without_results_history": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.013963566828182455,
+        "mean": 0.10480868869479186,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.20537469471300981
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": -0.036527963672688527,
+        "mean": 0.032357198809575535,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.08948158923013012
+      },
+      "vs_starter_recency_roster": {
+        "blocks": 8,
+        "lower": -0.06213103469654692,
+        "mean": -0.02950116695927082,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.0027736413077473353
+      }
+    },
+    "without_roster_continuity": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.057138706016109986,
+        "mean": 0.15794816576335435,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.26884942633747017
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": 0.014351103958482698,
+        "mean": 0.08549667587813801,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.15446737627231377
+      },
+      "vs_starter_recency_roster": {
+        "blocks": 8,
+        "lower": 0.0059100091565408635,
+        "mean": 0.023638310109291658,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.04468855360448971
+      }
+    },
+    "without_skill_quality": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.04535400217325639,
+        "mean": 0.1463748762357069,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.255580089017783
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": 0.01581704842156169,
+        "mean": 0.07392338635049056,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.12704833646127536
+      },
+      "vs_starter_recency_roster": {
+        "blocks": 8,
+        "lower": -0.012776919642096025,
+        "mean": 0.012065020581644192,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.03603692355162963
+      }
+    },
+    "without_team_passing": {
+      "vs_pgo_v0": {
+        "blocks": 8,
+        "lower": 0.0404134631023197,
+        "mean": 0.13481887121331387,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.24483320570482534
+      },
+      "vs_raw": {
+        "blocks": 8,
+        "lower": -0.004752125320624617,
+        "mean": 0.062367381328097556,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.12256342684207308
+      },
+      "vs_starter_recency_roster": {
+        "blocks": 8,
+        "lower": -0.005807229985685689,
+        "mean": 0.0005090155592511901,
+        "samples": 10000,
+        "seed": 20260908,
+        "upper": 0.005998689051601618
+      }
+    }
+  },
+  "screening": {
+    "starter": {
+      "checks": {
+        "at_least_five_seasons_improve": true,
+        "pooled_mae_improves": true,
+        "season_block_interval_above_zero": true,
+        "weeks_1_4_not_worse": true
+      },
+      "merits_further_prospective_study": true,
+      "promotion_status": "HOLD",
+      "season_mae_wins": 6
+    },
+    "starter_recency": {
+      "checks": {
+        "at_least_five_seasons_improve": true,
+        "pooled_mae_improves": true,
+        "season_block_interval_above_zero": true,
+        "weeks_1_4_not_worse": true
+      },
+      "merits_further_prospective_study": true,
+      "promotion_status": "HOLD",
+      "season_mae_wins": 6
+    },
+    "starter_recency_roster": {
+      "checks": {
+        "at_least_five_seasons_improve": true,
+        "pooled_mae_improves": true,
+        "season_block_interval_above_zero": true,
+        "weeks_1_4_not_worse": true
+      },
+      "merits_further_prospective_study": true,
+      "promotion_status": "HOLD",
+      "season_mae_wins": 6
+    }
+  }
+}

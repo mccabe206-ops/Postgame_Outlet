@@ -17,6 +17,7 @@ import generate_site
 import pgo_challenger
 import pgo_fantasy_prospective as fantasy_prospective
 import pgo_model
+import pgo_current_board
 import snapshot
 from release_ratings import atomic_write_text, load_release_rows, rating_total
 
@@ -466,6 +467,7 @@ def _league_controls():
             ("receiving_2pt_conversions", "Receiving two-point conversion", 0, 6),
             ("special_teams_tds", "Return touchdown", 0, 12),
             ("te_reception_bonus", "Extra points per TE reception", 0, 3),
+            ("wr_reception_bonus", "Extra points per WR reception", 0, 3),
         )
     )
     return f'''<details class="fantasy-league" id="fantasy-league-settings">
@@ -482,7 +484,7 @@ def _league_controls():
           </select></label>
         </div>
         <fieldset><legend>Starting lineup per team</legend><div class="fantasy-league-grid">{slots}</div></fieldset>
-        <details><summary>Scoring points and TE premium</summary>
+        <details><summary>Scoring points and reception bonuses</summary>
           <fieldset><legend>Points awarded or deducted</legend><div class="fantasy-league-grid">{scoring}</div></fieldset>
           <p>Supports the listed scoring categories. Threshold bonuses, first downs, kickers and team defenses are not included.</p>
         </details>
@@ -566,6 +568,44 @@ def add_fantasy_leagues(panel, players, scoring=None):
         'title="Projected points above the estimated replacement player">Value</button></th></tr></thead>', 1)
     return panel.replace('</section>', f'<script type="application/json" id="fantasy-scoring-data" '
         f'data-sha256="{digest}">{data}</script>\n</section>', 1)
+
+
+def _upgrade_fantasy_league_controls(panel):
+    """Add the WR control to the published v1 form, preserving source markup."""
+    count = panel.count('name="score_wr_reception_bonus"')
+    if count > 1:
+        raise ValueError("Duplicate fantasy WR reception bonus controls")
+    if count == 0:
+        field = re.search(r'<label class="fantasy-field">Extra points per WR reception<input[^>]+></label>',
+                          _league_controls())[0]
+        panel, count = re.subn(r'(<label class="fantasy-field">Extra points per TE reception<input[^>]+></label>)',
+                              lambda match: match[0] + field, panel)
+        if count != 1:
+            raise ValueError("Existing fantasy reception bonus control is missing or duplicated")
+    return _plain_fantasy_explanation(panel.replace('Scoring points and TE premium', 'Scoring points and reception bonuses'))
+
+
+def _plain_fantasy_explanation(panel):
+    """Keep the original draft/source warning available beneath a short explanation."""
+    if 'id="fantasy-scoring-details"' not in panel:
+        summary = '<p id="fantasy-scoring-summary" class="fantasy-league-explanation"></p>'
+        panel = panel.replace(summary, '<details class="fantasy-details" id="fantasy-scoring-details">'
+                              '<summary>Scoring totals and technical notes</summary>' + summary + '</details>', 1)
+    if 'id="fantasy-source-details"' in panel:
+        return panel
+    status = re.search(r'<div class="fantasy-status">(PREVIEW / HOLD|AVAILABILITY / HOLD)</div>', panel)
+    warning = re.search(r'<p class="fantasy-warning">.*?</p>', panel, re.S)
+    if not status or not warning:
+        return panel
+    dates = re.findall(r'<time\b[^>]*datetime="([^"]+)"[^>]*>.*?</time>', warning[0], re.S)
+    generated = f' Projection created {pgo_current_board._time(html.unescape(dates[0]))}.' if dates else ''
+    explanation = ('<p>These estimates are still being tested and are not yet part of a scored prediction record.'
+                   + generated + ' Set your league scoring below, including extra points per receiver catch. '
+                   'Check player availability before setting a lineup; an injury report alone does not change these projections.</p>')
+    panel = panel.replace(status[0], '<div class="fantasy-status" data-model-status="HOLD">Experimental — still being tested</div>', 1)
+    return panel.replace(warning[0], explanation + '<details class="fantasy-details" id="fantasy-source-details">'
+                         '<summary>Projection sources and technical status</summary>'
+                         + status[0] + warning[0] + '</details>', 1)
 
 
 def render_fantasy_panel(preview):
@@ -763,7 +803,185 @@ def render_fantasy_panel(preview):
     </details>
   </section>
 """
-    return add_fantasy_leagues(panel, eligible)
+    return _plain_fantasy_explanation(add_fantasy_leagues(panel, eligible))
+
+
+def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_PATH):
+    """Explain saved contribution groups without changing published ratings."""
+    page = pgo_current_board.strip_current_board(page)
+    receipt = validate_receipt(json.loads(Path(backtest_path).read_text(encoding="utf-8")))
+    rows = load_model_rows(model_path, receipt)
+    for row in rows:
+        for name in ("performance_points", "roster_coaching_points"):
+            row[name] = _finite(row[name], f"{row['team']} {name}")
+        if not math.isclose(row["performance_points"] + row["roster_coaching_points"],
+                            row["full_strength_rating"], rel_tol=0, abs_tol=1e-6):
+            raise ValueError(f"PGO component algebra failed for {row['team']}")
+    roster_mean = math.fsum(row["roster_coaching_points"] for row in rows) / len(rows)
+    names = {meta[0]: name for name, meta in generate_site.TEAM.items()}
+    by_name = {names[row["team"]].casefold(): row for row in rows}
+    lineup_ranks = {row["team"]: rank for rank, row in enumerate(
+        sorted(rows, key=lambda row: (-row["current_lineup_rating"], row["team"])), 1)}
+    original = extract_comparison_panel(page)
+    start, end = "<!-- PGO EXPLANATIONS START -->", "<!-- PGO EXPLANATIONS END -->"
+    if original.count(start) != original.count(end) or original.count(start) > 1:
+        raise ValueError("Invalid PGO explanation markers")
+    panel = re.sub(re.escape(start) + r".*?" + re.escape(end) + r"\n?", "", original, flags=re.S)
+    seen = set()
+    comparisons = {}
+
+    def explain_row(match):
+        markup = match.group(0)
+        header = re.search(r'<th\b[^>]*data-sort="([^"]+)"[^>]*>.*?</th>', markup, re.S)
+        if header is None:
+            return markup
+        name = html.unescape(header.group(1)).casefold()
+        if name not in by_name or name in seen:
+            raise ValueError(f"Invalid PGO explanation team: {name}")
+        row = by_name[name]
+        cells = re.findall(r'<td\b[^>]*>.*?</td>', markup, re.S)
+        expected = (row["rank"], row["full_strength_rating"], row["availability_adjustment"],
+                    lineup_ranks[row["team"]], row["current_lineup_rating"])
+        if len(cells) not in {8, 9}:
+            raise ValueError(f"Incomplete PGO explanation row: {name}")
+        for cell, value in zip(cells, expected):
+            displayed = html.unescape(re.sub(r'<[^>]*>', '', cell)).strip()
+            if (not math.isclose(_cell_sort_value(cell, name), value, rel_tol=0, abs_tol=1e-6)
+                    or not math.isclose(_finite(displayed, name), float(f"{value:.1f}"),
+                                        rel_tol=0, abs_tol=1e-6)):
+                raise ValueError(f"PGO explanation snapshot mismatch: {name}")
+        mccabe_rank = _cell_sort_value(cells[5], name)
+        pgo_rank = row["rank"] if row["headline_view"] == "full_strength" else lineup_ranks[row["team"]]
+        if (not mccabe_rank.is_integer() or not 1 <= mccabe_rank <= 32
+                or _cell_sort_value(cells[7], name) != pgo_rank - mccabe_rank):
+            raise ValueError(f"PGO rank comparison mismatch: {name}")
+        comparisons[row["team"]] = (names[row["team"]], pgo_rank, int(mccabe_rank))
+        if len(cells) == 9:
+            markup = markup[:markup.rfind(cells[8])] + markup[markup.rfind(cells[8]) + len(cells[8]):]
+        seen.add(name)
+        button = (f'<button type="button" class="pgo-rating-trigger row-trigger team-trigger" '
+                  f'data-pgo-team="{row["team"]}" aria-haspopup="dialog" '
+                  f'aria-controls="drawer">{html.escape(names[row["team"]])}</button>')
+        new_header = header.group(0).split('>', 1)[0] + '>' + button + '</th>'
+        return markup[:header.start()] + new_header + markup[header.end():]
+
+    panel = re.sub(r'<tr\b[^>]*>.*?</tr>', explain_row, panel, flags=re.S)
+    if seen != set(by_name):
+        raise ValueError("PGO explanations require all 32 saved teams")
+    if {comparison[2] for comparison in comparisons.values()} != set(range(1, 33)):
+        raise ValueError("PGO explanations require unique McCabe ranks 1 through 32")
+    as_of = html.escape(str(receipt["as_of"]))
+    date = datetime.fromisoformat(str(receipt["as_of"])).strftime("%B %d, %Y")
+    metadata = re.search(r'<p class="comparison-summary">.*?</p>', panel, re.S)
+    mccabe_date = re.search(
+        r'(?:Current McCabe ratings from data/ratings\.csv as of|McCabe [^<\n]+? locked)'
+        r'\s+(\d{4}-\d{2}-\d{2})T', metadata.group(0) if metadata else '')
+    if not mccabe_date:
+        raise ValueError("PGO explanations require dated McCabe metadata")
+    label = "Experimental model — HOLD" if receipt["status"] == "HOLD" else "Validated model — PASS"
+    meaning = ("PGO values are independent model outputs fitted to game margins and centered "
+               "across 32 teams under this snapshot's full-strength assumptions. Positive values "
+               "mean a higher model estimate than the league-average team; negative values mean lower. "
+               "These scores are not established neutral-field prices: the issued regression's "
+               "neutral game margin also includes an offset that cancels from centered ratings. "
+               "This is not a Super Bowl probability.")
+    limits = ("These are model contribution groups, not independent football grades. "
+              "Both use a common league-average baseline; inputs can be correlated. "
+              "The roster/coaching group is centered across all 32 teams, with CSV rounding "
+              "residual retained in performance. The public fit has been reconstructed; "
+              "its feature-level audit is linked separately. July starting-QB/depth assumptions "
+              "used historical efficiency selection. The issued September edition uses active "
+              "expected starters; later research changes remain unadopted. Group contributions "
+              "do not establish predictive quality.")
+    templates = []
+    for row in rows:
+        roster = row["roster_coaching_points"] - roster_mean
+        performance = row["full_strength_rating"] - roster
+        displayed_performance = round(row["full_strength_rating"], 3) - round(roster, 3)
+        values = (("full_strength", "Full-strength model output", row["full_strength_rating"]),
+                  ("performance", "Performance contribution", performance),
+                  ("roster", "Roster/coaching contribution", roster),
+                  ("availability", "Availability adjustment at snapshot", row["availability_adjustment"]),
+                  ("lineup", "PGO lineup output at snapshot", row["current_lineup_rating"]))
+        details = ''.join(f'<dt>{title}</dt><dd data-component="{key}" data-value="{value}">'
+                          f'{(displayed_performance if key == "performance" else value):+.3f}</dd>'
+                          for key, title, value in values)
+        team_name, pgo_rank, mccabe_rank = comparisons[row["team"]]
+        templates.append(
+            f'<template id="pgo-explanation-{row["team"]}">'
+            f'<h2 id="drawerTitle">{html.escape(names[row["team"]])}</h2><p>{label}</p>'
+            f'<p>Archived {html.escape(date)} snapshot: <time datetime="{as_of}">{as_of}</time>.</p>'
+            f'<p>{html.escape(team_name)}: PGO #{pgo_rank}, McCabe #{mccabe_rank}. '
+            'Rank comparison across the dated snapshots shown on the board.</p>'
+            f'<p class="rating-takeaway">The saved performance group contributes {displayed_performance:+.3f}; '
+            f'roster/coaching contributes {roster:+.3f}. Together they explain the '
+            f'{row["full_strength_rating"]:+.3f} full-strength output on this archived edition. '
+            'These are fitted contributions, not separate football grades.</p>'
+            f'<p><a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#rating-{row["team"]}" '
+            'target="_blank" rel="noopener noreferrer">See the issued September 7 explanation</a>. '
+            'Unadopted research does not replace either saved edition. '
+            f'<a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#corrected-rating-{row["team"]}" '
+            'target="_blank" rel="noopener noreferrer">Inspect the September 8 corrected weekly draft inputs</a>.</p><dl>' + details + '</dl>'
+            '<details><summary>How these saved contributions are calculated</summary>'
+            f'<p>{html.escape(meaning)}</p><p>{html.escape(limits)}</p><p>Availability and lineup values belong to this '
+            'snapshot, not a current injury report. A July zero adjustment does not '
+            'establish September health.</p></details></template>')
+    ranked = list(comparisons.values())
+    highlights = []
+    groups = (
+        ("Closest agreements", sorted(ranked, key=lambda item: (abs(item[1] - item[2]), item[0]))),
+        ("Biggest disagreements", sorted(ranked, key=lambda item: (-abs(item[1] - item[2]), item[0]))),
+        ("PGO higher", sorted((item for item in ranked if item[1] < item[2]),
+                              key=lambda item: (item[1] - item[2], item[0]))),
+        ("McCabe higher", sorted((item for item in ranked if item[1] > item[2]),
+                                 key=lambda item: (item[2] - item[1], item[0]))),
+    )
+    for title, selected in groups:
+        entries = '; '.join(f'{html.escape(name)}: PGO #{pgo_rank}, McCabe #{mccabe_rank}'
+                            for name, pgo_rank, mccabe_rank in selected[:3])
+        highlights.append(f'<li><strong>{title}:</strong> {entries or "None in this snapshot"}.</li>')
+    block = (f'{start}\n<p class="pgo-rating-meaning">McCabe&#x27;s human-set neutral-field '
+             'point total is QB + non-QB offense + defense. PGO is independent, fitted to game '
+             'margins; its point interpretation remains experimental. '
+             f'Source freshness — archived PGO snapshot: {html.escape(date)} (including lineup and availability). '
+             f'McCabe snapshot: {mccabe_date.group(1)}. Select a team for its saved contributions.</p>\n'
+             '<p><a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html" '
+             'target="_blank" rel="noopener noreferrer">Forecast Lab: corrected weekly drafts and the frozen 2026 record</a></p>\n'
+             '<p>Calibrated uncertainty: unavailable. <a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#model-sensitivity" '
+             'target="_blank" rel="noopener noreferrer">September rank gaps and model sensitivity</a> '
+             'use a separate preseason edition; sensitivity is not a confidence interval.</p>\n'
+             f'<details><summary>Snapshot limits and open audit</summary><p>{html.escape(limits)}</p>'
+             '<p><a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/model-audit-2026-09-07.md" '
+             'target="_blank" rel="noopener noreferrer">Read the September 7 New England and Jacksonville audit</a>.</p>'
+             '<p>July availability is not a current injury report; a zero adjustment does not '
+             'establish September health.</p></details>\n'
+             '<details class="pgo-rank-disclosure"><summary>Where PGO and McCabe agree and disagree</summary>'
+             '<div class="pgo-rank-highlights"><p>Rank comparisons across the dated snapshots '
+             'shown above, not point-price disagreements.</p><ul>'
+             + ''.join(highlights) + '</ul></div></details>\n' + '\n'.join(templates) + f'\n{end}\n')
+    panel = panel.replace('<h2>PGO v1 Power Ratings</h2>', '<h2>PGO vs McCabe</h2>', 1)
+    panel = panel.replace('    <h2>PGO vs McCabe</h2>\n',
+                          '    <h2>PGO vs McCabe</h2>\n' + block, 1)
+    if panel.count(start) != 1:
+        raise ValueError("PGO explanation heading is missing")
+    wrapper = '<details class="pgo-comparison-metadata">'
+    if panel.count(wrapper) > 1:
+        raise ValueError("Duplicated PGO comparison metadata disclosure")
+    if wrapper not in panel:
+        panel = panel.replace(metadata.group(0), wrapper + '<summary>Snapshot dates and backtest</summary>'
+                              + metadata.group(0) + '</details>', 1)
+    panel = panel.replace("    <p>Postgame Outlet's independent statistical rating, compared "
+                          "with McCabe's human rating and never blended.</p>\n", '')
+    panel = panel.replace("PGO today", "PGO lineup")
+    panel = re.sub(r'\s*<th scope="col"[^>]*><button[^>]*data-column="9">Rating gap</button></th>', '', panel)
+    panel = panel.replace('\n      Positive rating gap means PGO rates the team higher.', '')
+    page = page.replace(original, panel, 1)
+    # Upgrade the existing comparison script too when enriching an older saved page.
+    script = re.compile(r"<script>\s*\(\(\) => \{\s*const panel = document\.querySelector\('#panel-comparison'\);.*?</script>", re.S)
+    page, count = script.subn(lambda _: COMPARISON_SCRIPT.strip(), page)
+    if count != 1:
+        raise ValueError("PGO explanation comparison script is missing or duplicated")
+    return page
 
 
 def render_comparison_panel(rows, receipt):
@@ -836,8 +1054,8 @@ def render_comparison_panel(rows, receipt):
           <th scope="col" aria-sort="ascending"><button type="button" class="sort-button" data-column="1">PGO full #</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="2">PGO full</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="3">Avail.</button></th>
-          <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="4">PGO today #</button></th>
-          <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="5">PGO today</button></th>
+          <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="4">PGO lineup #</button></th>
+          <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="5">PGO lineup</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="6">McCabe #</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="7">McCabe</button></th>
           <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-column="8">Rank gap</button></th>
@@ -857,16 +1075,30 @@ def render_comparison_panel(rows, receipt):
 """
 
 
-COMPARISON_TAB = """
+ACTIVE_COMPARISON_TAB = """
     <button type="button" class="tab active" id="tab-comparison" role="tab"
       aria-selected="true" aria-controls="panel-comparison" tabindex="0"
       data-panel="comparison">PGO Model</button>
 """
 
 
-FANTASY_TAB = """
+COMPARISON_TAB = """
+    <button type="button" class="tab" id="tab-comparison" role="tab"
+      aria-selected="false" aria-controls="panel-comparison" tabindex="-1"
+      data-panel="comparison">PGO Model</button>
+"""
+
+
+ACTIVE_FANTASY_TAB = """
     <button type="button" class="tab active" id="tab-fantasy" role="tab"
       aria-selected="true" aria-controls="panel-fantasy" tabindex="0"
+      data-panel="fantasy">Fantasy Week 1</button>
+"""
+
+
+FANTASY_TAB = """
+    <button type="button" class="tab" id="tab-fantasy" role="tab"
+      aria-selected="false" aria-controls="panel-fantasy" tabindex="-1"
       data-panel="fantasy">Fantasy Week 1</button>
 """
 
@@ -875,6 +1107,12 @@ COMPARISON_SCRIPT = """
 <script>
   (() => {
     const panel = document.querySelector('#panel-comparison');
+    if (panel) panel.querySelectorAll('.pgo-rating-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const template = document.getElementById('pgo-explanation-' + trigger.dataset.pgoTeam);
+        if (template && typeof openDrawer === 'function') openDrawer(template.innerHTML, trigger);
+      });
+    });
     const body = panel && panel.querySelector('.comparison-table tbody');
     const status = panel && panel.querySelector('.comparison-sort-status');
     const buttons = panel ? [...panel.querySelectorAll('.comparison-table .sort-button')] : [];
@@ -924,6 +1162,8 @@ FANTASY_SCRIPT = "\n<script>\n" + "\n".join(
     (HERE / name).read_text(encoding="utf-8")
     for name in ("fantasy_league.js", "fantasy_league_ui.js")
 ) + "\n</script>\n"
+# The published v1 script before the WR bonus; admit only these exact legacy bytes.
+LEGACY_FANTASY_SCRIPT_SHA256 = "0a5648db26f63922a632413a0b0cb528ac56d0a9a6342909b4581a5529fb2fe7"
 
 
 def inject_comparison(base_html, panel_html):
@@ -935,29 +1175,23 @@ def inject_comparison(base_html, panel_html):
     )
     fixed_replacements = (
         (
-            '<meta name="description" content="Sean McCabe’s',
-            '<meta name="description" content="Postgame Outlet’s independent PGO v1',
-        ),
-        (
-            '<div class="updated">By Sean McCabe &middot;',
-            '<div class="updated">By Postgame Outlet Model &middot;',
-        ),
-        (
-            'aria-selected="true" aria-controls="panel-ratings" tabindex="0"',
-            'aria-selected="false" aria-controls="panel-ratings" tabindex="-1"',
-        ),
-        (
             'data-panel="ratings">Power Ratings</button>',
             'data-panel="ratings">McCabe Ratings</button>',
         ),
         (">QB Ratings</button>", ">McCabe QBs</button>"),
-        (">Methodology</button>", ">McCabe Method</button>"),
+        (
+            ">Methodology</button>",
+            ">McCabe Method</button>" + COMPARISON_TAB,
+        ),
     )
     markers = (
         "</style>",
         "</body>",
         rating_tab,
         rating_panel,
+        '<meta name="description" content="Sean McCabe’s',
+        '<div class="updated">By Sean McCabe &middot;',
+        'aria-selected="true" aria-controls="panel-ratings" tabindex="0"',
         *(old for old, _new in fixed_replacements),
     )
     if any(base_html.count(marker) != 1 for marker in markers):
@@ -967,16 +1201,25 @@ def inject_comparison(base_html, panel_html):
     )
     for old, new in fixed_replacements:
         output = output.replace(old, new, 1)
-    output = output.replace(
-        rating_tab,
-        COMPARISON_TAB
-        + '    <button type="button" class="tab" id="tab-ratings"',
-        1,
+    active_panel = '<section class="panel active" id="panel-comparison"'
+    inactive_panel = '<section class="panel" id="panel-comparison"'
+    active_label = 'aria-labelledby="tab-comparison">'
+    inactive_label = 'aria-labelledby="tab-comparison" hidden>'
+    active = panel_html.count(active_panel) == panel_html.count(active_label) == 1
+    inactive = (
+        panel_html.count(inactive_panel) == panel_html.count(inactive_label) == 1
     )
+    if panel_html.count('id="panel-comparison"') == 1:
+        if active == inactive:
+            raise ValueError("PGO comparison panel active state changed")
+        if active:
+            panel_html = panel_html.replace(
+                active_panel, inactive_panel, 1
+            ).replace(active_label, inactive_label, 1)
     output = output.replace(
         rating_panel,
         panel_html
-        + '\n  <section class="panel" id="panel-ratings" hidden',
+        + '\n  <section class="panel active" id="panel-ratings"',
         1,
     )
     output = output.replace("</body>", COMPARISON_SCRIPT + "\n</body>", 1)
@@ -991,8 +1234,8 @@ def inject_fantasy_preview(existing_html, panel_html):
         raise ValueError("Existing ratings page already has a fantasy preview")
 
     comparison_panel = extract_comparison_panel(existing_html)
-    panel_class = '<section class="panel active" id="panel-comparison"'
-    panel_label = 'aria-labelledby="tab-comparison">'
+    panel_class = '<section class="panel" id="panel-comparison"'
+    panel_label = 'aria-labelledby="tab-comparison" hidden>'
     markers = ("</style>", "</body>", COMPARISON_TAB, comparison_panel)
     if (
         any(existing_html.count(marker) != 1 for marker in markers)
@@ -1003,24 +1246,27 @@ def inject_fantasy_preview(existing_html, panel_html):
     ):
         raise ValueError("Fantasy preview page markers changed")
 
-    inactive_tab = (
-        COMPARISON_TAB
-        .replace('class="tab active"', 'class="tab"', 1)
-        .replace('aria-selected="true"', 'aria-selected="false"', 1)
-        .replace('tabindex="0"', 'tabindex="-1"', 1)
+    active_fantasy = '<section class="panel active" id="panel-fantasy"'
+    inactive_fantasy = '<section class="panel" id="panel-fantasy"'
+    active_label = 'aria-labelledby="tab-fantasy">'
+    inactive_label = 'aria-labelledby="tab-fantasy" hidden>'
+    active = panel_html.count(active_fantasy) == panel_html.count(active_label) == 1
+    inactive = (
+        panel_html.count(inactive_fantasy) == panel_html.count(inactive_label) == 1
     )
-    inactive_panel = (
-        comparison_panel
-        .replace(panel_class, '<section class="panel" id="panel-comparison"', 1)
-        .replace(panel_label, 'aria-labelledby="tab-comparison" hidden>', 1)
-    )
+    if active == inactive:
+        raise ValueError("Fantasy preview panel active state changed")
+    if active:
+        panel_html = panel_html.replace(
+            active_fantasy, inactive_fantasy, 1
+        ).replace(active_label, inactive_label, 1)
     fantasy_css = FANTASY_CSS
     if 'class="fantasy-availability"' in panel_html:
         fantasy_css += "\n" + FANTASY_AVAILABILITY_CSS
     output = existing_html.replace("</style>", fantasy_css + "\n</style>", 1)
-    output = output.replace(COMPARISON_TAB, inactive_tab + FANTASY_TAB, 1)
+    output = output.replace(COMPARISON_TAB, COMPARISON_TAB + FANTASY_TAB, 1)
     output = output.replace(
-        comparison_panel, inactive_panel + "\n" + panel_html, 1
+        comparison_panel, comparison_panel + "\n" + panel_html, 1
     )
     output = output.replace("</body>", FANTASY_SCRIPT + "\n</body>", 1)
     return output
@@ -1052,7 +1298,11 @@ def _extract_published_fantasy_panel(existing_html):
     panel_count = existing_html.count('id="panel-fantasy"')
     css_count = existing_html.count(FANTASY_CSS)
     availability_css_count = existing_html.count(FANTASY_AVAILABILITY_CSS)
-    script_count = existing_html.count(FANTASY_SCRIPT)
+    scripts = re.findall(r"\n<script>\n'use strict';\s+const PGOLeague =.*?</script>\n", existing_html, re.S)
+    script_count = sum(script == FANTASY_SCRIPT or hashlib.sha256(script.encode("utf-8")).hexdigest()
+                       == LEGACY_FANTASY_SCRIPT_SHA256 for script in scripts)
+    if script_count != len(scripts):
+        raise ValueError("Existing fantasy script is not a recognized current or legacy version")
     if (
         tab_count == panel_count == css_count == availability_css_count
         == script_count == 0
@@ -1065,12 +1315,24 @@ def _extract_published_fantasy_panel(existing_html):
     if (
         tab_count != 1
         or panel_count != 1
-        or existing_html.count(FANTASY_TAB) != 1
+        or sum(existing_html.count(tab) for tab in (
+            FANTASY_TAB, ACTIVE_FANTASY_TAB
+        )) != 1
         or css_count != 1
         or script_count != 1
     ):
         raise ValueError("Existing fantasy preview markers are incomplete or duplicated")
-    start_marker = '<section class="panel active" id="panel-fantasy"'
+    active_tab = existing_html.count(ACTIVE_FANTASY_TAB) == 1
+    start_markers = (
+        '<section class="panel active" id="panel-fantasy"',
+        '<section class="panel" id="panel-fantasy"',
+    )
+    matches = [
+        marker for marker in start_markers if existing_html.count(marker) == 1
+    ]
+    if len(matches) != 1 or active_tab != (matches[0] == start_markers[0]):
+        raise ValueError("Existing fantasy preview active state changed")
+    start_marker = matches[0]
     start = existing_html.find(start_marker)
     end_marker = "</section>"
     end = existing_html.find(end_marker, start)
@@ -1087,6 +1349,60 @@ def _extract_published_fantasy_panel(existing_html):
             "Existing fantasy availability CSS is missing, duplicated, or orphaned"
         )
     return panel
+
+
+def _validate_active_board_state(existing_html, allowed):
+    expected = ["ratings", "qbs", "method", "comparison"]
+    if "fantasy" in allowed:
+        expected.append("fantasy")
+    tabs = []
+    for tag in re.findall(r'<button\b[^>]*>', existing_html):
+        match = re.search(r'\bid="tab-([^" ]+)"', tag)
+        if match:
+            tabs.append((match[1], tag))
+    panels = []
+    for tag in re.findall(r'<section\b[^>]*>', existing_html):
+        match = re.search(r'\bid="panel-([^" ]+)"', tag)
+        if match:
+            panels.append((match[1], tag))
+    if sorted(name for name, _tag in tabs) != sorted(expected) or sorted(
+        name for name, _tag in panels
+    ) != sorted(expected):
+        raise ValueError("Existing public board active tab or panel state changed")
+
+    active = []
+    panel_by_name = dict(panels)
+    for name, tab in tabs:
+        panel = panel_by_name[name]
+        tab_active = 'class="tab active"' in tab
+        panel_active = 'class="panel active"' in panel
+        hidden = re.search(r'\shidden(?:\s|=|>)', panel) is not None
+        selected = "true" if tab_active else "false"
+        tabindex = "0" if tab_active else "-1"
+        if (
+            tab_active == ('class="tab"' in tab)
+            or panel_active == ('class="panel"' in panel)
+            or tab.count('class="') != 1
+            or tab.count('role="tab"') != 1
+            or tab.count('aria-selected="') != 1
+            or tab.count(f'aria-selected="{selected}"') != 1
+            or tab.count('aria-controls="') != 1
+            or tab.count(f'aria-controls="panel-{name}"') != 1
+            or tab.count('tabindex="') != 1
+            or tab.count(f'tabindex="{tabindex}"') != 1
+            or panel.count('class="') != 1
+            or panel.count('role="tabpanel"') != 1
+            or panel.count('aria-labelledby="') != 1
+            or panel.count(f'aria-labelledby="tab-{name}"') != 1
+            or panel_active != tab_active
+            or hidden == tab_active
+        ):
+            raise ValueError("Existing public board active tab or panel state changed")
+        if tab_active:
+            active.append(name)
+    if len(active) != 1 or active[0] not in allowed:
+        raise ValueError("Existing public board active tab or panel state changed")
+    return active[0]
 
 
 def _validate_fantasy_leagues(panel, page):
@@ -1256,16 +1572,12 @@ def _refresh_comparison_panel(panel_html, mccabe_rows, source_timestamp):
         if team_key not in mccabe_by_team:
             raise ValueError(f"Existing PGO comparison has unknown team: {team_key}")
         cells = cell_pattern.findall(row_html)
-        if len(cells) != 9:
+        if len(cells) not in {8, 9}:
             raise ValueError(f"Existing PGO comparison row is incomplete: {team_key}")
 
         old_rank = int(_cell_sort_value(cells[5], f"{team_key} McCabe rank"))
-        old_rating = _cell_sort_value(cells[6], f"{team_key} McCabe rating")
         headline_rank = old_rank + int(
             _cell_sort_value(cells[7], f"{team_key} rank gap")
-        )
-        headline_rating = old_rating + _cell_sort_value(
-            cells[8], f"{team_key} rating gap"
         )
         current = mccabe_by_team[team_key]
         updates = {
@@ -1275,11 +1587,14 @@ def _refresh_comparison_panel(panel_html, mccabe_rows, source_timestamp):
                 headline_rank - current["rank"],
                 f"{headline_rank - current['rank']:+d}",
             ),
-            8: (
+        }
+        if len(cells) == 9:
+            old_rating = _cell_sort_value(cells[6], f"{team_key} McCabe rating")
+            headline_rating = old_rating + _cell_sort_value(cells[8], f"{team_key} rating gap")
+            updates[8] = (
                 headline_rating - current["rating"],
                 _signed(headline_rating - current["rating"]),
-            ),
-        }
+            )
 
         cell_index = 0
 
@@ -1305,26 +1620,36 @@ def _refresh_comparison_panel(panel_html, mccabe_rows, source_timestamp):
 
 
 def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
+    existing_html = pgo_current_board.strip_current_board(existing_html)
     mccabe_rows = load_mccabe_rows(mccabe_path)
     fantasy_panel = _extract_published_fantasy_panel(existing_html)
     comparison_panel = extract_comparison_panel(existing_html)
+    active_panel = _validate_active_board_state(
+        existing_html,
+        {"ratings", "fantasy"} if fantasy_panel is not None
+        else {"ratings", "comparison"},
+    )
+    active_comparison = '<section class="panel active" id="panel-comparison"'
+    inactive_comparison = '<section class="panel" id="panel-comparison"'
+    visible_label = 'aria-labelledby="tab-comparison">'
+    hidden_label = 'aria-labelledby="tab-comparison" hidden>'
     if fantasy_panel is not None:
-        inactive_start = '<section class="panel" id="panel-comparison"'
-        hidden_label = 'aria-labelledby="tab-comparison" hidden>'
-        if comparison_panel.count(inactive_start) != 1 or comparison_panel.count(hidden_label) != 1:
+        if (
+            comparison_panel.count(inactive_comparison) != 1
+            or comparison_panel.count(hidden_label) != 1
+        ):
             raise ValueError("Existing fantasy preview comparison state changed")
-        comparison_panel = (
-            comparison_panel.replace(
-                inactive_start,
-                '<section class="panel active" id="panel-comparison"',
-                1,
-            ).replace(hidden_label, 'aria-labelledby="tab-comparison">', 1)
-        )
+    elif active_panel == "comparison":
+        if (
+            comparison_panel.count(active_comparison) != 1
+            or comparison_panel.count(visible_label) != 1
+        ):
+            raise ValueError("Existing PGO comparison panel active state changed")
     elif (
-        comparison_panel.count('<section class="panel active" id="panel-comparison"') != 1
-        or comparison_panel.count('aria-labelledby="tab-comparison">') != 1
+        comparison_panel.count(inactive_comparison) != 1
+        or comparison_panel.count(hidden_label) != 1
     ):
-        raise ValueError("Existing PGO comparison panel must be active")
+        raise ValueError("Existing PGO comparison panel active state changed")
     panel = _refresh_comparison_panel(
         comparison_panel,
         mccabe_rows,
@@ -1332,7 +1657,7 @@ def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
     )
     output = inject_comparison(base_html, panel)
     if fantasy_panel is not None:
-        output = inject_fantasy_preview(output, fantasy_panel)
+        output = inject_fantasy_preview(output, _upgrade_fantasy_league_controls(fantasy_panel))
     return output
 
 
@@ -1416,6 +1741,8 @@ def main(argv=None):
                     base_html,
                     render_comparison_panel(comparison_rows, receipt),
                 )
+        preview = add_rating_explanations(preview)
+        preview = pgo_current_board.add_current_board(preview)
         atomic_write_text(output, preview)
     except (csv.Error, KeyError, OSError, TypeError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
@@ -1425,7 +1752,7 @@ def main(argv=None):
     if receipt:
         print(f"  {len(comparison_rows)} teams | {receipt['publication_status']}")
     else:
-        print("  Preserved the existing approved PGO panel")
+        print("  Displayed the latest verified corrected edition; preserved the July archive")
     if fantasy_preview is not None:
         eligible = sum(
             row["ranking_eligible"] for row in fantasy_preview["rows"]

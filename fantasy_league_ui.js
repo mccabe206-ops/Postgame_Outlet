@@ -20,7 +20,8 @@
   const clone = value => JSON.parse(JSON.stringify(value));
   const positionNames = {QB: 'QB', RB: 'RB', WR: 'WR', TE: 'TE', FLEX: 'FLEX', SUPERFLEX: 'Superflex'};
   const presetNames = {STANDARD: 'Standard', HALF_PPR: 'Half-PPR', PPR: 'Full PPR', CUSTOM: 'Custom scoring'};
-  const componentNames = Object.keys(PGOLeague.HALF_PPR).filter(name => name !== 'te_reception_bonus').sort();
+  const componentNames = Object.keys(PGOLeague.HALF_PPR)
+    .filter(name => !['te_reception_bonus', 'wr_reception_bonus'].includes(name)).sort();
   const rowIds = rows.map(row => row.dataset.playerId);
   if (new Set(rowIds).size !== rows.length || rows.some(row =>
     !row.dataset.playerId || !['QB', 'RB', 'WR', 'TE'].includes(row.dataset.position)
@@ -215,6 +216,9 @@
     summary.replaceChildren(document.createTextNode(preset === 'HALF_PPR'
       ? 'Original half-PPR projections. League value adjusts for your starting lineup.'
       : 'Experimental scoring adjustment to the half-PPR forecast. Custom scoring weights are scenarios; model status remains HOLD.'));
+    summary.append(document.createTextNode(' Reception points: ' + profile.scoring.receptions
+      + ' base; WR ' + Number((profile.scoring.receptions + profile.scoring.wr_reception_bonus).toFixed(3))
+      + '; TE ' + Number((profile.scoring.receptions + profile.scoring.te_reception_bonus).toFixed(3)) + '.'));
     if (scoring.available && scoring.receipt_url) {
       const link = document.createElement('a');
       link.href = scoring.receipt_url;

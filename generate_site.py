@@ -534,17 +534,14 @@ TEMPLATE = """<!DOCTYPE html>
 <title>{{EDITION}} NFL Power Ratings | Postgame Outlet</title>
 <meta name="description" content="Sean McCabe’s {{EDITION}} NFL Power Ratings, expressed as neutral-field points above or below a league-average team.">
 <link rel="canonical" href="https://postgameoutlet.com/pages/power-ratings">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Postgame Outlet (Shopify Spotlight) palette: white canvas, slate-blue ink
-     (#384f6f), orange accent (#fd962f family), Oswald display + Montserrat body. */
+  /* Base layout; the shared pgo-theme.css supplies the current visual theme. */
   :root {
-    --bg:#ffffff; --bg2:#ffffff; --panel:#ffffff; --panel2:#f0f3f8;
-    --row-alt:#f7f9fc; --hover:#edf1f7; --border:#dfe6ef; --border2:#c9d3e2;
-    --ink:#384f6f; --mut:#5b6c84; --dim:#5b6c84;
-    --teal:#e0821c; --teal2:#8a4a05; --violet:#384f6f; --violet2:#384f6f;
-    --pos:#08734f; --neg:#a73525; --accent:#e0821c; --orange:#fd962f;
+    --bg:#faf7f2; --bg2:#faf7f2; --panel:#ffffff; --panel2:#f3ece6;
+    --row-alt:#faf7f2; --hover:#f7e3e8; --border:#ded5cf; --border2:#afa09b;
+    --ink:#142640; --mut:#40516a; --dim:#526078;
+    --teal:#a42c50; --teal2:#76223e; --violet:#142640; --violet2:#40516a;
+    --pos:#08734f; --neg:#a73525; --accent:#a42c50; --orange:#a42c50; --highlight:#ffb1bd;
     --disp:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     --body:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
@@ -555,6 +552,7 @@ TEMPLATE = """<!DOCTYPE html>
     overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
   }
   :focus-visible { outline:3px solid #005fcc; outline-offset:3px; }
+  #panel-fantasy a.fantasy-source-badge:focus-visible { outline-color:var(--ink); }
   .tab, .sort-button, .row-trigger, .drawer-close { font:inherit; }
   .sort-button, .row-trigger {
     border:0; background:transparent; color:inherit; padding:0; cursor:pointer;
@@ -566,22 +564,22 @@ TEMPLATE = """<!DOCTYPE html>
   }
   .wrap { max-width:1040px; margin:0 auto; padding:0 16px 72px; }
 
-  /* Full-bleed slate banner, same family as the store's hero boxes */
-  .hero { background:linear-gradient(120deg,#324763 0%,#384f6f 55%,#3f5878 100%);
+  /* Full-bleed banner matches the storefront feature. */
+  .hero { background:#76223e;
           padding:38px 16px 34px; margin-bottom:26px;
-          border-bottom:3px solid var(--orange); }
+          border-bottom:5px solid var(--highlight); }
   header { text-align:center; max-width:1040px; margin:0 auto; }
   header h1 {
     margin:0; font-family:var(--disp); font-weight:700; line-height:.95;
     font-size:clamp(34px,6.5vw,60px); letter-spacing:.5px; color:#fff;
     text-transform:uppercase;
   }
-  header h1 .accent { color:var(--orange); }
-  header .sub { color:rgba(255,255,255,.72); font-size:13px; margin-top:9px;
+  header h1 .accent { color:var(--highlight); }
+  header .sub { color:#fff; font-size:13px; margin-top:9px;
                 letter-spacing:.04em; }
-  header .updated { color:rgba(255,255,255,.75); font-size:11px; margin-top:6px;
+  header .updated { color:#fff; font-size:11px; margin-top:6px;
                     letter-spacing:.06em; text-transform:uppercase; }
-  header .updated::before { content:"● "; color:var(--orange); }
+  header .updated::before { content:"● "; color:var(--highlight); }
 
   .panel.active { background:var(--panel);
     border:1px solid var(--border); border-radius:14px; padding:18px 16px 20px;
@@ -596,8 +594,8 @@ TEMPLATE = """<!DOCTYPE html>
     user-select:none; border-bottom:2px solid var(--orange);
   }
   th:first-child { border-top-left-radius:9px; } th:last-child { border-top-right-radius:9px; }
-  th:hover { color:#ffc07a; background:#2e415c; }
-  th.up { color:var(--orange); } th.down { color:var(--orange); }
+  th:hover { color:var(--highlight); background:#2e415c; }
+  th.up { color:var(--highlight); } th.down { color:var(--highlight); }
   th.up::after { content:" \\2191"; } th.down::after { content:" \\2193"; }
   tbody tr { border-bottom:1px solid var(--border); }
   tbody tr:nth-child(even) { background:var(--row-alt); }
@@ -613,7 +611,7 @@ TEMPLATE = """<!DOCTYPE html>
           box-shadow:0 1px 3px rgba(0,0,0,.4); }
   .tname { font-weight:600; color:var(--ink); }
   .div { color:var(--dim); font-size:11px; margin-left:8px; text-transform:uppercase; letter-spacing:.04em; }
-  .qbn { color:var(--mut); font-weight:500; }
+  td.qbn { color:var(--mut); font-weight:500; }
   .inj { color:var(--neg); font-size:11px; font-weight:700; }
   .movement { text-align:center; width:64px; }
   .move { font-weight:700; white-space:nowrap; }
@@ -636,7 +634,8 @@ TEMPLATE = """<!DOCTYPE html>
     font-size:14px; font-weight:600; letter-spacing:.01em; transition:all .12s;
   }
   .tab:hover { color:var(--ink); border-color:var(--border2); }
-  .tab.active { color:#18283a; background:var(--orange); border-color:var(--orange); }
+  .tab.active { color:#fff; background:var(--orange); border-color:var(--orange); }
+  #panel-fantasy .fantasy-view-buttons .fantasy-view-button[aria-pressed="true"] { color:#fff; }
   .panel { display:none; } .panel.active { display:block; }
   .sort-button { width:100%; text-align:inherit; text-transform:inherit; letter-spacing:inherit; }
   .row-trigger { display:inline-flex; align-items:center; text-align:left; }
@@ -781,6 +780,7 @@ TEMPLATE = """<!DOCTYPE html>
     *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; }
   }
 </style>
+<link rel="stylesheet" href="pgo-theme.css">
 </head>
 <body>
 <div class="hero">

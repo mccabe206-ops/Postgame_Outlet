@@ -1,0 +1,83 @@
+{
+  "edition": "pgo-active-roster-2026-09-07",
+  "files": {
+    "depth.csv.gz": {
+      "bytes": 9824615,
+      "sha256": "92ced698838f0d3208ebfefc935c0eb260b82bbcc9f2040133e9181367761c23"
+    },
+    "depth_charts-release.json": {
+      "bytes": 163956,
+      "sha256": "f5e4fab36b1e248c430a9eea475e3d23a6100bb31a4a388159b70b01ebc64d0a"
+    },
+    "depth_charts-timestamp.json": {
+      "bytes": 43,
+      "sha256": "9b8a5a879ad9b0e95ddbd1f0e0e9b87839c7d61e5a309c12452853a4f00d0d5a"
+    },
+    "fit.json": {
+      "bytes": 5766,
+      "sha256": "f24429f99f078d57b135881bf1c371bc158539d3ff945e4434dd3e02533136d4"
+    },
+    "forecasts.csv": {
+      "bytes": 52103,
+      "sha256": "1b8a55cbb233ff5720cfb21468f841a1628f908337f1d44bce7c914c8619de0b"
+    },
+    "july-snapshot-states.json": {
+      "bytes": 92516,
+      "sha256": "c24ace892e6bb41b3ba82588f215b0a8b20f9096eb8e8f04add435378feeceb9"
+    },
+    "original-july-backtest.json": {
+      "bytes": 19135,
+      "sha256": "ab32daa4cb3de5f6f5004a538edab9f145e8dbd3d7bcfb4b3fd069af7c05d9da"
+    },
+    "original-july-ratings.csv": {
+      "bytes": 5598,
+      "sha256": "6f983ddbb8e79263d70043429639ee5aa4c092edb847c41248a089b7a1e5a335"
+    },
+    "ratings.csv": {
+      "bytes": 2964,
+      "sha256": "befe7b2583d15bba6c967ee0ce581d7bb58a38a51f7773f21cd00fe9024aa0e4"
+    },
+    "roster.csv.gz": {
+      "bytes": 360132,
+      "sha256": "e356efc0f9ff9b8d50d82e2524312bda3ebb6598cf487eee69ba339b90f6230a"
+    },
+    "rosters-release.json": {
+      "bytes": 641224,
+      "sha256": "761d5e96beae2f77c113afcf282d8dac7460ee74e77a4356ad235e55c2d9c77a"
+    },
+    "rosters-timestamp.json": {
+      "bytes": 43,
+      "sha256": "f298daf8f63db12c434a23cdeffa0f5f06acb8413e6c24ffdfa8e94478120e09"
+    },
+    "schedule.csv.gz": {
+      "bytes": 512110,
+      "sha256": "abeb9b6c541648308d61d3c187ae94ca82b2d4005829740e48daa64bdd33aa6f"
+    },
+    "schedules-release.json": {
+      "bytes": 12386,
+      "sha256": "abb33b2f8a96a5747b465075d65657086d1a407b8c036ad5e0d40e0723c9016b"
+    },
+    "schedules-timestamp.json": {
+      "bytes": 43,
+      "sha256": "28bf220cd76f3060464bf9eb0917fc6d45d024af278e8ef27773e1cefdb252a7"
+    },
+    "scoring-history-2025.csv": {
+      "bytes": 10357,
+      "sha256": "536f4fd60c8bc61a4b22770b6c1308dbea1463fad17d137fe969df94c8d759b8"
+    },
+    "snapshot.json": {
+      "bytes": 543602,
+      "sha256": "60a11ed87f67f1726eb9152b400ca7b1b685b2e0dc5d7dfa2709c806c47716a9"
+    },
+    "source-manifest.json": {
+      "bytes": 28912,
+      "sha256": "6a0fb71403dfd63f87ba779c7fc1451dfaf886dca7b4363f195b7cc2b80c7250"
+    },
+    "source-qualification.json": {
+      "bytes": 35638,
+      "sha256": "4c691dd4132584892a41bbec63fe6fb7de885743c0e1d5b657ee8baf7fbcb359"
+    }
+  },
+  "generated_at": "2026-09-07T22:01:01.941144+00:00",
+  "schema_version": 1
+}

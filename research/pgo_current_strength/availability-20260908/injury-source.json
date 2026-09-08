@@ -1,0 +1,386 @@
+{
+  "players": [
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0036981",
+      "injury": "",
+      "player": "Christian Barmore",
+      "position": "DT",
+      "practice_status": "Full Participation in Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "NE"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0037413",
+      "injury": "",
+      "player": "Ben Brown",
+      "position": "C",
+      "practice_status": "Did Not Participate In Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "NE"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0040734",
+      "injury": "",
+      "player": "TreVeyon Henderson",
+      "position": "RB",
+      "practice_status": "Did Not Participate In Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "NE"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0039793",
+      "injury": "",
+      "player": "AJ Barner",
+      "position": "TE",
+      "practice_status": "Full Participation in Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "SEA"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0039020",
+      "injury": "",
+      "player": "Anthony Bradford",
+      "position": "G",
+      "practice_status": "Full Participation in Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "SEA"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0040733",
+      "injury": "",
+      "player": "Nick Emmanwori",
+      "position": "S",
+      "practice_status": "Limited Participation in Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "SEA"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0040648",
+      "injury": "",
+      "player": "Tory Horton",
+      "position": "WR",
+      "practice_status": "Limited Participation in Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "SEA"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0036363",
+      "injury": "",
+      "player": "Josh Jones",
+      "position": "T",
+      "practice_status": "Limited Participation in Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "SEA"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0040873",
+      "injury": "",
+      "player": "Julian Neal",
+      "position": "CB",
+      "practice_status": "Full Participation in Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "SEA"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0038765",
+      "injury": "",
+      "player": "Ty Okada",
+      "position": "S",
+      "practice_status": "Did Not Participate In Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "SEA"
+    },
+    {
+      "availability_text": "",
+      "game_status": "",
+      "gsis_id": "00-0038797",
+      "injury": "",
+      "player": "Emanuel Wilson",
+      "position": "RB",
+      "practice_status": "Full Participation in Practice",
+      "source_url": "https://www.nfl.com/injuries/",
+      "team": "SEA"
+    }
+  ],
+  "schema_version": 2,
+  "source": "NFL.com official Week 1 injury report",
+  "source_as_of": "2026-09-08T02:24:19.275711+00:00",
+  "team_sources": [
+    {
+      "coverage_note": "NFL.com Week 1 formal practice report was present in the captured page.",
+      "source_kind": "formal_injury_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_NE_SEA",
+      "team": "NE"
+    },
+    {
+      "coverage_note": "NFL.com Week 1 formal practice report was present in the captured page.",
+      "source_kind": "formal_injury_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_NE_SEA",
+      "team": "SEA"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_SF_LA",
+      "team": "SF"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_SF_LA",
+      "team": "LAR"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_CHI_CAR",
+      "team": "CHI"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_CHI_CAR",
+      "team": "CAR"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_BUF_HOU",
+      "team": "BUF"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_BUF_HOU",
+      "team": "HOU"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_NO_DET",
+      "team": "NO"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_NO_DET",
+      "team": "DET"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_CLE_JAX",
+      "team": "CLE"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_CLE_JAX",
+      "team": "JAX"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_TB_CIN",
+      "team": "TB"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_TB_CIN",
+      "team": "CIN"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_ATL_PIT",
+      "team": "ATL"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_ATL_PIT",
+      "team": "PIT"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_NYJ_TEN",
+      "team": "NYJ"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_NYJ_TEN",
+      "team": "TEN"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_BAL_IND",
+      "team": "BAL"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_BAL_IND",
+      "team": "IND"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_ARI_LAC",
+      "team": "ARI"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_ARI_LAC",
+      "team": "LAC"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_WAS_PHI",
+      "team": "WAS"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_WAS_PHI",
+      "team": "PHI"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_MIA_LV",
+      "team": "MIA"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_MIA_LV",
+      "team": "LV"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_GB_MIN",
+      "team": "GB"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_GB_MIN",
+      "team": "MIN"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_DAL_NYG",
+      "team": "DAL"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_DAL_NYG",
+      "team": "NYG"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_DEN_KC",
+      "team": "DEN"
+    },
+    {
+      "coverage_note": "NFL.com displayed No Injuries Reported at capture time; this is recorded as no formal report and does not establish health or final game availability.",
+      "source_kind": "no_formal_report",
+      "source_published_at": "",
+      "source_url": "https://www.nfl.com/injuries/",
+      "target_game": "2026_01_DEN_KC",
+      "team": "KC"
+    }
+  ]
+}

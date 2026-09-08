@@ -1,0 +1,6 @@
+{
+  "interrupted_at": "2026-09-08T04:11:02.582775+00:00",
+  "next_attempt": "run-20260908-eligibility-attempt2",
+  "reason": "Runner retained unused full historical contexts across arms; stopped during active4 construction before any fit or metric artifact to avoid memory pressure.",
+  "status": "INTERRUPTED_BEFORE_FITTING"
+}
