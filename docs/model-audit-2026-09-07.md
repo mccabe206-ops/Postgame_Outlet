@@ -29,7 +29,9 @@ The tiny Baltimore/Jacksonville gap also hides a large questionable adjustment. 
 
 **Why the fresh snapshot did not reset these rankings:** it updated eligible rosters and QB selection while keeping the fitted model and performance history through 2025. Team efficiency has a four-game half-life; QB history is shrunk toward the population with a 200-dropback prior. The embedded results-history input retains the end-of-2025 value without a new 2026 offseason shrink. The separate PGO v0 game-forecast baseline does apply 0.5 offseason retention. That inherited difference is a preseason inference limitation to test, not something an explanation update silently repairs.
 
-The [Forecast Lab now exposes the largest positive and negative contributions for every team](forecast-lab.html#rating-explanations), with the remaining inputs reconciled to the total and exact gaps to neighboring ranks. The saved ratings and game forecasts have not changed. The arithmetic is explainable; the unusual fitted relationships and historical HOLD result still prevent a confident predictive endorsement.
+The [Forecast Lab shows the same seven contribution groups for every team](forecast-lab.html#rating-explanations): results history, team passing efficiency, other team efficiency, QB history, roster composition, coaching, and other adjustments. Each summary reconciles to the total and includes exact gaps to neighboring ranks. Its QB-history row combines all eight QB inputs; the audit table above isolates QB passing efficiency. An expandable breakdown lists all 55 fitted terms in the same order for every team, including zeros. Grouping can hide positive and negative terms that cancel; zero other adjustments do not establish comprehensive injury coverage.
+
+The saved ratings and game forecasts have not changed. The arithmetic is explainable; the unusual fitted relationships and historical HOLD result still prevent a confident predictive endorsement.
 
 ## Why the July ratings are high
 

@@ -17,6 +17,7 @@ from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 import generate_site
+from pgo_challenger import PERFORMANCE_FEATURES, QB_FEATURES
 import pgo_forecast_snapshot
 import pgo_forecast_weekly
 import pgo_prospective
@@ -598,25 +599,43 @@ def _rating_explanations(snapshot):
         "rest_difference": "Rest adjustment",
     }
     teams = sorted(snapshot["teams"], key=lambda team: team["rank"])
+    preprocessor = snapshot["fit"]["preprocessor"]
+    names = [*preprocessor["feature_names"],
+             *(name + "_missing" for name in preprocessor["missing_features"])]
+    groups = (
+        ("Results history", ("pgo_v0",)),
+        ("Team passing efficiency", ("passing_epa_per_play_for",)),
+        ("Other team efficiency", tuple(name for name in PERFORMANCE_FEATURES
+                                        if name != "passing_epa_per_play_for")),
+        ("QB history", QB_FEATURES),
+        ("Roster composition", ("returning_offense_snap_share", "returning_defense_snap_share",
+                                "incoming_prior_snap_share", "rookie_draft_capital")),
+        ("Coaching", ("head_coach_continuity", "head_coach_tenure")),
+    )
+    grouped_names = {name for _, members in groups for name in members}
+    groups += (("Other adjustments", tuple(name for name in names if name not in grouped_names)),)
+
+    def contribution_row(label, value):
+        number = f"{value:+.3f}".replace("-0.000", "+0.000")
+        return f'<tr><th scope="row">{html.escape(label)}</th><td>{number}</td></tr>'
+
     cards = []
     for index, team in enumerate(teams):
         contributions = team["contributions"]
-        if (not contributions or not all(math.isfinite(v) for v in contributions.values())
+        if (not contributions or set(contributions) != set(names)
+                or not all(math.isfinite(v) for v in contributions.values())
                 or not math.isclose(math.fsum(contributions.values()), team["rating"],
                                     abs_tol=1e-8, rel_tol=0)):
             raise ValueError("Saved contributions must reconcile to the team rating")
-        positive = sorted((item for item in contributions.items() if item[1] > 0),
-                          key=lambda item: (-item[1], item[0]))[:4]
-        negative = sorted((item for item in contributions.items() if item[1] < 0),
-                          key=lambda item: (item[1], item[0]))[:4]
-        selected = dict(positive + negative)
-        rows = []
-        for name, value in selected.items():
+        rows = [contribution_row(label, math.fsum(contributions.get(name, 0.0) for name in members))
+                for label, members in groups]
+        rows.append(contribution_row("Total model rating", team["rating"]))
+        terms = []
+        for name in names:
             label = labels.get(name.removesuffix("_missing"), name.replace("_", " "))
             if name.endswith("_missing"):
                 label = "Missing-data adjustment: " + label
-            rows.append(f'<tr><th scope="row">{html.escape(label)}</th><td>{value:+.3f}</td></tr>')
-        remainder = math.fsum(value for name, value in contributions.items() if name not in selected)
+            terms.append(contribution_row(label, contributions[name]))
         gaps = []
         for neighbor, direction in ((index - 1, "below"), (index + 1, "above")):
             if 0 <= neighbor < len(teams):
@@ -629,15 +648,19 @@ def _rating_explanations(snapshot):
             f'<p>{"; ".join(gaps)}. Expected QB1: {html.escape(team["qb_name"])}.</p>'
             '<p>These are model contributions, not independent team grades. '
             '<a href="#rating-explanations">How to read them</a>.</p>'
-            '<table><thead><tr><th>Fitted input</th><th>Contribution</th></tr></thead>'
-            f'<tbody>{"".join(rows)}<tr><th scope="row">Remaining inputs (net)</th><td>{remainder:+.3f}</td></tr>'
-            f'<tr><th scope="row">Total model rating</th><td>{team["rating"]:+.3f}</td></tr></tbody></table></details>'
+            '<table class="rating-summary"><thead><tr><th>Input group</th><th>Contribution</th></tr></thead>'
+            f'<tbody>{"".join(rows)}</tbody></table>'
+            f'<details class="lab-detail"><summary>All {len(names)} fitted terms</summary>'
+            '<p>The same input order for every team, including zero contributions. Group totals can hide offsetting positive and negative terms.</p>'
+            '<table class="rating-terms"><thead><tr><th>Fitted input</th><th>Contribution</th></tr></thead>'
+            f'<tbody>{"".join(terms)}</tbody></table></details></details>'
         )
     return '''<details class="lab-detail" id="rating-explanations">
 <summary>Why teams rank here &middot; All 32 September ratings</summary>
 <p>Open a team to see what raises and lowers its saved September 7 output. Higher totals rank higher; the gaps show how close neighboring teams are.</p>
 <p><a href="#rating-NE">New England</a> &middot; <a href="#rating-JAX">Jacksonville</a> &middot; <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/model-audit-2026-09-07.md">Read the outlier audit</a></p>
-<p>Each table shows up to four positive and four negative contributions, plus everything else combined. All are centered against the 32-team average and sum to the rating before rounding. These are fitted adjustments, <strong>not independent football grades</strong>, player values, or calibrated point-spread prices.</p>
+<p>Every summary shows the same seven input groups in the same order, so you can compare teams row by row. All are centered against the 32-team average and sum to the rating before rounding. These are fitted adjustments, <strong>not independent football grades</strong>, player values, or calibrated point-spread prices.</p>
+<p>Team passing efficiency is shown separately from the other nine team-efficiency inputs. QB history combines eight QB inputs; roster composition combines returning offensive and defensive snap shares, incoming snap share, and rookie draft capital; coaching combines continuity and tenure. Other adjustments include availability, the QB lineup adjustment, venue, rest, and missing-data indicators. A zero here does not establish comprehensive injury coverage. Open the full breakdown to see every term.</p>
 <p>EPA means expected points added. Team efficiency uses games through 2025 with a four-game half-life; QB efficiency uses shrunk player history. The PGO v0 input carries the earlier results rating forward without a new offseason shrink, unlike the separate v0 game-forecast baseline.</p>
 <p><strong>Audit concern:</strong> some learned directions run against football intuition. Lower returning offensive snap share raises this model's output, and head-coach continuity lowers it. Correlated inputs and these fitted relationships need testing; the arithmetic does not establish that roster turnover or coaching changes help a team. Returning snap share measures historical snap weight among currently eligible players, not the percentage of last season's roster retained.</p>
 ''' + "".join(cards) + '''<p>Full precision and all inputs: <a href="evidence/forecast-lab-2026/september-07/snapshot.json">saved snapshot JSON</a>. Ratings remain EXPERIMENTAL / HOLD.</p></details>'''
@@ -843,7 +866,7 @@ def render_lab(lock, results, provenance, *, snapshot=None,
 <title>PGO Forecast Lab</title>{font_links}<style>{css}
 .lab-wrap{{max-width:1180px;margin:0 auto;padding:24px 18px 60px}}.lab-wrap a{{color:var(--accent)}}.lab-hero{{max-width:none;padding:26px;border-radius:14px;color:#fff;text-align:left}}.lab-hero a{{color:var(--highlight)}}.lab-hero a:focus-visible{{outline-color:var(--highlight)}}.lab-hero .status{{border-color:var(--highlight);margin-bottom:22px}}
 .status{{display:inline-block;padding:6px 10px;border:1px solid var(--orange);border-radius:999px;font-weight:800}}.metric-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}}.metric{{padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}}.metric h3{{margin-top:0}}.forecast-week,.lab-detail,.original-archive,.preseason-archive{{margin:12px 0;border:1px solid var(--border);border-radius:10px;padding:12px}}.forecast-week summary,.lab-detail summary,.original-archive>summary,.preseason-archive>summary{{cursor:pointer;font-weight:800}}.forecast-week summary span{{color:var(--mut);font-weight:500}}table{{width:100%;border-collapse:collapse}}th,td{{padding:9px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}}th:first-child{{text-align:left}}.notice{{padding:14px;border-left:4px solid var(--orange);background:var(--panel)}}code{{overflow-wrap:anywhere}}.weekly-status{{font-weight:800}}
-.rating-explanation table{{table-layout:fixed}}.rating-explanation th{{white-space:normal}}.rating-explanation thead th:last-child{{width:110px}}.rating-explanation tr:last-child{{font-weight:800}}
+.rating-explanation table{{table-layout:fixed}}.rating-explanation th{{white-space:normal;user-select:text}}.rating-explanation tbody th{{background:transparent;color:inherit;font-size:inherit;letter-spacing:normal;text-transform:none}}.rating-explanation thead th:last-child{{width:110px}}.rating-summary tr:last-child{{font-weight:800}}
 </style></head><body><main class="lab-wrap">
 {lead}{archive_open}{archive_heading}
 <section><h2>Record so far</h2>{_metric_cards(metrics)}

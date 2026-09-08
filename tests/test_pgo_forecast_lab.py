@@ -69,6 +69,7 @@ class ForecastLabTests(unittest.TestCase):
             })
         return {
             "generated_at": "2026-09-07T22:00:00Z",
+            "fit": {"preprocessor": {"feature_names": ["pgo_v0"], "missing_features": []}},
             "league_mean_total": 46.0,
             "teams": teams,
             "games": [
@@ -469,13 +470,33 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn("0.062 below #4 BAL", rendered)
         self.assertIn("0.684 above #6 BUF", rendered)
         self.assertIn("not independent football grades", rendered)
-        self.assertIn("Remaining inputs (net)", rendered)
+        self.assertIn("All 55 fitted terms", rendered)
         self.assertIn("Returning offensive snap share", rendered)
+        expected_labels = ["Results history", "Team passing efficiency", "Other team efficiency",
+                           "QB history", "Roster composition", "Coaching", "Other adjustments",
+                           "Total model rating"]
+        expected_ne = [3.864, 2.084, 0.470, 1.013, 0.461, -0.672, 0.000, 7.219]
+        expected_lar = [4.610, 1.582, 0.527, 0.198, -0.014, 0.029, 0.000, 6.932]
+        full_labels = None
         for team in snapshot["teams"]:
             detail = rendered.split(f'id="rating-{team["team"]}"', 1)[1].split("</details>", 1)[0]
-            values = [float(value) for value in re.findall(r"<td>([+-]\d+\.\d{3})</td>", detail)]
+            summary = detail.split('<table class="rating-summary">', 1)[1].split("</table>", 1)[0]
+            self.assertEqual(re.findall(r'<th scope="row">([^<]+)</th>', summary), expected_labels)
+            values = [float(value) for value in re.findall(r"<td>([+-]\d+\.\d{3})</td>", summary)]
             self.assertAlmostEqual(values[-1], team["rating"], delta=0.00051)
             self.assertAlmostEqual(sum(values[:-1]), values[-1], delta=0.0051)
+            if team["team"] in ("NE", "LAR"):
+                self.assertEqual(values, expected_ne if team["team"] == "NE" else expected_lar)
+            full = detail.split('<table class="rating-terms">', 1)[1].split("</table>", 1)[0]
+            labels = re.findall(r'<th scope="row">([^<]+)</th>', full)
+            self.assertEqual(len(labels), 55)
+            if full_labels is None:
+                full_labels = labels
+            self.assertEqual(labels, full_labels)
+            values = [float(value) for value in re.findall(r"<td>([+-]\d+\.\d{3})</td>", full)]
+            pp = snapshot["fit"]["preprocessor"]
+            names = pp["feature_names"] + [name + "_missing" for name in pp["missing_features"]]
+            self.assertEqual(values, [round(team["contributions"][name], 3) for name in names])
         ne = rendered.split('id="rating-NE"', 1)[1].split("</details>", 1)[0]
         self.assertIn("+3.864", ne)
         self.assertIn("+2.084", ne)
