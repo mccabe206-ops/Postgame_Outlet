@@ -1,0 +1,38 @@
+{
+  "files": {
+    "fold-fits.json": {
+      "bytes": 2132966,
+      "sha256": "d15de0e0014641c8a160c4b5641b700c95212158ba5f4f2b92c231697159a1dc"
+    },
+    "matched-predictions.csv": {
+      "bytes": 305044,
+      "sha256": "ae164efec3c25ba4202ee44aaa5ad95c7dab85b578cf9c4aa00c6202fee0c7f1"
+    },
+    "metrics.json": {
+      "bytes": 20875,
+      "sha256": "ca75d3a57ba5d412ef77021aab2e67a3e041e894f2595689365d682da9a6ffee"
+    },
+    "rating-details.json": {
+      "bytes": 1295346,
+      "sha256": "555026bbbefbe1ef0f2fb174c8fb821f9feb77c7ef0b81a932adeb973abd738d"
+    },
+    "ratings.csv": {
+      "bytes": 5465,
+      "sha256": "d4eebfa5ee0bc8ca02b6392172566ceb642532f5685f2348884b966a7eac3571"
+    },
+    "report.md": {
+      "bytes": 1108,
+      "sha256": "4774b5949b32de803169c11db05a6703106f2e51211bb50be0261e33efc1c5d2"
+    },
+    "run-receipt.json": {
+      "bytes": 50023,
+      "sha256": "b552ac4c750f6dbd4d46e5b6312498e2d5c802b3c4d2104de1558098090395c9"
+    },
+    "run-start.json": {
+      "bytes": 1207,
+      "sha256": "3174e15b6d21b65372823153a5908c9e92976f376e1901fc2d4abb463a04198d"
+    }
+  },
+  "identity": "pgo-opponent-epa-retrospective-20260907",
+  "schema_version": 1
+}

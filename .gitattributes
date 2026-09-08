@@ -8,3 +8,6 @@ docs/evidence/forecast-lab-2026/results/*/results.csv -text
 docs/evidence/forecast-lab-2026/results/*/capture.json -text
 docs/evidence/forecast-lab-2026/september-07/** -text
 docs/evidence/forecast-lab-2026/weekly/** -text
+research/pgo_opponent_adjustment/** -text
+pgo_opponent_*.py text eol=lf
+tests/test_pgo_opponent_*.py text eol=lf
