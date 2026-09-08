@@ -145,6 +145,25 @@ class CorrectedPackageTests(unittest.TestCase):
             self.assertEqual(game['incumbent_margin'], old[game['game_id']]['margin'])
             self.assertEqual(game['pgo_v0_margin'], old[game['game_id']]['pgo_v0_margin'])
 
+    def test_csv_consistency_uses_saved_values_after_tolerant_numeric_replay(self):
+        derive = corrected._derive
+        def roundoff(*args, **kwargs):
+            result = derive(*args, **kwargs)
+            result[0][0]['rating'] += 1e-12
+            result[1][0]['margin'] += 1e-12
+            return result
+        before = {name: (self.output / name).read_bytes() for name in ('snapshot.json', 'ratings.csv', 'forecasts.csv')}
+        with mock.patch.object(corrected, '_derive', side_effect=roundoff):
+            self.assertEqual(corrected.load_snapshot(self.output), self.data)
+        self.assertEqual(before, {name: (self.output / name).read_bytes() for name in before})
+        raw = before['forecasts.csv'] + b'\n'
+        (self.output / 'forecasts.csv').write_bytes(raw)
+        manifest = corrected._read(self.output / 'manifest.json')
+        manifest['files']['forecasts.csv'] = {'bytes': len(raw), 'sha256': corrected._hash(raw)}
+        (self.output / 'manifest.json').write_bytes(corrected._json(manifest))
+        with self.assertRaisesRegex(ValueError, 'CSV'):
+            corrected.load_snapshot(self.output)
+
     def test_remanifested_predictions_contributions_and_baselines_fail(self):
         for change in (lambda d: d['games'][0].update(margin=99.),
                        lambda d: d['games'][0].update(incumbent_margin=99.),

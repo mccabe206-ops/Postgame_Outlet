@@ -376,7 +376,9 @@ def _validate(directory, manifest, raw):
             raise ValueError('Corrected issuance is at or after a game cutoff')
     sources = [dict(name=s['file'], url=s['url'], sha256=s['sha256'], bytes=s['bytes'], captured_at=s['captured_at']) for s in capture['sources']]
     _same(data['sources'], sources, 'sources')
-    if raw['ratings.csv'] != _csv(teams, TEAM_COLUMNS) or raw['forecasts.csv'] != _csv(games, GAME_COLUMNS):
+    # Numerical replay was checked above; CSV must exactly match the saved JSON.
+    if (raw['ratings.csv'] != _csv(data['teams'], TEAM_COLUMNS)
+            or raw['forecasts.csv'] != _csv(data['games'], GAME_COLUMNS)):
         raise ValueError('Corrected CSV differs from verified values')
     return data
 

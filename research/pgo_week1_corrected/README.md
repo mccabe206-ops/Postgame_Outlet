@@ -119,3 +119,13 @@ be present. Do not overwrite or re-fit the published run. The corrected source
 package has a separate verifier:
 
 `python pgo_forecast_corrected.py --verify docs/evidence/forecast-lab-2026/september-08-corrected`
+
+## Renderer portability correction
+
+The first publication workflow passed 553 tests (one optional skip), then its
+Linux renderer rejected CSV text regenerated from numerical replay because of
+floating-point last-digit differences. The verifier now checks exact CSV bytes
+against the saved JSON values after the existing independent numerical replay
+check at the unchanged 1e-9 tolerance. A regression covers tolerated replay
+roundoff and rejects a separately re-manifested CSV mutation. Saved sources,
+fits, forecasts, weekly revisions and their manifests are unchanged.
