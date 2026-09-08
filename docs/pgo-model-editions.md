@@ -42,4 +42,8 @@ McCabe comparisons use rank gaps; the two rating scales are not subtracted.
 
 Checks cover current team/value identity, archive preservation, repeatable
 rendering, existing sorting/drawers, mobile layouts, and the published byte
-comparison. The later UI color options are previews and do not alter the model.
+comparison. The selected Cobalt theme applies to both the board and Forecast
+Lab. Short explanations and important injury/accuracy limits stay visible;
+formulas, full contribution tables, source records and model history remain
+available in closed technical-details panels. These presentation changes do
+not alter the model or any saved forecast.

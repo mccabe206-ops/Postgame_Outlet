@@ -60,6 +60,15 @@ class CurrentBoardTests(unittest.TestCase):
         source.assert_called_once_with(None, weekly, lab.WEEKLY_DIR)
         self.assertIn(self.snapshot['edition'], page)
 
+    def test_ne_explanation_follows_a_changed_snapshot_rank(self):
+        ne = next(row for row in self.snapshot['teams'] if row['team'] == 'NE')
+        lar = next(row for row in self.snapshot['teams'] if row['team'] == 'LAR')
+        ne['rank'], lar['rank'] = lar['rank'], ne['rank']
+        ne['rating'], lar['rating'] = lar['rating'], ne['rating']
+        current = self.add().split(board.START, 1)[1].split(board.END, 1)[0]
+        self.assertIn('New England is #2 in this snapshot', current)
+        self.assertNotIn('Why NE is first', current)
+
     def test_legacy_refresh_and_explanations_strip_only_presentation(self):
         current = self.add()
         self.assertEqual(comparison.add_rating_explanations(current), comparison.add_rating_explanations(self.page))

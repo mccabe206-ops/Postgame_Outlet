@@ -534,10 +534,8 @@ TEMPLATE = """<!DOCTYPE html>
 <title>{{EDITION}} NFL Power Ratings | Postgame Outlet</title>
 <meta name="description" content="Sean McCabe’s {{EDITION}} NFL Power Ratings, expressed as neutral-field points above or below a league-average team.">
 <link rel="canonical" href="https://postgameoutlet.com/pages/power-ratings">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Shared PGO palette: burgundy, navy and warm white. */
+  /* Base layout; the shared pgo-theme.css supplies the current visual theme. */
   :root {
     --bg:#faf7f2; --bg2:#faf7f2; --panel:#ffffff; --panel2:#f3ece6;
     --row-alt:#faf7f2; --hover:#f7e3e8; --border:#ded5cf; --border2:#afa09b;
@@ -782,6 +780,7 @@ TEMPLATE = """<!DOCTYPE html>
     *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; }
   }
 </style>
+<link rel="stylesheet" href="pgo-theme.css">
 </head>
 <body>
 <div class="hero">

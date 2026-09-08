@@ -23,3 +23,4 @@ docs/evidence/forecast-lab-2026/september-08-corrected/** -text whitespace=cr-at
 pgo_forecast_corrected.py text eol=lf
 tests/test_pgo_forecast_corrected.py text eol=lf
 tests/test_pgo_week1_corrected.py text eol=lf
+research/pgo_corrected_roster_candidate/** -text whitespace=cr-at-eol

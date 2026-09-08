@@ -470,10 +470,17 @@ class GeneratedDocumentTests(unittest.TestCase):
             with patch.object(generate_site, "DATA", temp):
                 document = generate_site.build_html(self.rows, self.config)
 
-        colors = dict(re.findall(r"--([a-z0-9-]+):(#[0-9a-f]{6})", document))
-        colors["active-text"] = re.search(r"\.tab\.active \{ color:(#[0-9a-f]+);", document).group(1)
+        theme_link = '<link rel="stylesheet" href="pgo-theme.css">'
+        self.assertEqual(document.count(theme_link), 1)
+        self.assertGreater(document.index(theme_link), document.index("</style>"))
+        self.assertNotIn("fonts.googleapis.com", document)
+        theme = Path(generate_site.__file__).parent.joinpath("docs", "pgo-theme.css").read_text(encoding="utf-8")
+        colors = dict(re.findall(r"--([a-z0-9-]+):(#[0-9a-f]{6})", document + theme))
+        colors["active-text"] = colors["action-ink"]
         colors["hero-text"] = re.search(r"header \.updated \{ color:(#[0-9a-f]+);", document).group(1)
-        colors["hero"] = re.search(r"\.hero \{ background:(#[0-9a-f]+);", document).group(1)
+        # The board hero uses a gradient; check both stops as well as the Lab hero.
+        hero_stops = re.search(r"\.hero \{ background:linear-gradient\([^,]+,(#[0-9a-f]+),(#[0-9a-f]+)\)", theme)
+        colors["hero-start"], colors["hero-end"] = hero_stops.groups()
 
         def luminance(color):
             if len(color) == 4:
@@ -484,7 +491,10 @@ class GeneratedDocumentTests(unittest.TestCase):
 
         for foreground, background in (
             ("mut", "panel"), ("mut", "row-alt"), ("dim", "row-alt"),
-            ("dim", "hover"), ("active-text", "orange"), ("hero-text", "hero"),
+            ("dim", "hover"), ("active-text", "action-bg"),
+            ("hero-text", "hero-start"), ("hero-text", "hero-end"),
+            ("hero-text", "hero-bg"), ("notice-ink", "notice-bg"),
+            ("highlight", "hero-bg"), ("mut", "panel2"),
         ):
             light, dark = sorted((luminance(colors[foreground]), luminance(colors[background])), reverse=True)
             self.assertGreaterEqual((light + 0.05) / (dark + 0.05), 4.5, (foreground, background))

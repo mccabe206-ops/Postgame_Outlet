@@ -702,6 +702,11 @@ class ComparisonTests(unittest.TestCase):
         panel = pgo_comparison.render_fantasy_panel(
             self._fantasy_preview()
         )
+        reader = panel.split('<details class="fantasy-details" id="fantasy-source-details">', 1)[0]
+        self.assertIn('still being tested', reader)
+        self.assertNotIn('gradeable', reader)
+        self.assertNotIn('PREVIEW / HOLD', reader)
+        self.assertEqual(panel, pgo_comparison._plain_fantasy_explanation(panel))
 
         self.assertEqual(panel.count('class="fantasy-row"'), 4)
         self.assertNotIn("Buffalo Backup", panel)

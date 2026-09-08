@@ -1,5 +1,11 @@
 # Why are New England and Jacksonville so high?
 
+**Current board:** [PGO Corrected, September 8](https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#corrected-ratings)
+has New England first at +5.200 and Jacksonville fifth at +3.354. The explanations
+and numbers below describe earlier saved editions. “Corrected” means problems
+in the calculation were repaired; it does not mean greater accuracy has been
+proved. All editions remain experimental, and the earlier record is preserved.
+
 **September 8 update:** the original arithmetic
 audit below is preserved. The [new input and valuation audit](../research/pgo_input_audit/README.md)
 found a historical/current roster-eligibility mismatch, preseason transition

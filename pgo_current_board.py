@@ -1,8 +1,9 @@
 """Present the verified registered corrected edition above the preserved July board."""
-from datetime import datetime, timezone
+from datetime import datetime
 import html
 import math
 import re
+from zoneinfo import ZoneInfo
 
 START = '<!-- PGO CURRENT BOARD START -->'
 END = '<!-- PGO CURRENT BOARD END -->'
@@ -28,7 +29,7 @@ def _time(value):
     if parsed.tzinfo is None:
         raise ValueError('Current board source timestamps require a timezone')
     return (f'<time datetime="{html.escape(value, quote=True)}">'
-            f'{parsed.astimezone(timezone.utc):%B %d, %Y at %H:%M UTC}</time>')
+            f'{parsed.astimezone(ZoneInfo("America/New_York")):%B %d, %Y at %I:%M %p %Z}</time>')
 
 
 def add_current_board(page, snapshot=None, mccabe_rows=None):
@@ -52,6 +53,7 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
             or teams != sorted(teams, key=lambda row: (-row['rating'], row['team']))):
         raise ValueError('Current board requires 32 verified ranked team identities')
     rows = []
+    ne_rank = next(team['rank'] for team in teams if team['team'] == 'NE')
     for team in teams:
         code, rank = team['team'], team['rank']
         name = human[code]['team']
@@ -66,29 +68,41 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
         f'{START}<style>'
         '#panel-comparison .current-pgo-table th:first-child {text-align:left;position:sticky;left:0;z-index:1;}'
         '#panel-comparison .current-pgo-table tbody th {background:var(--panel);color:var(--ink);'
-        'font-size:inherit;letter-spacing:normal;text-transform:none;border-bottom:1px solid var(--border);}'
-        '#panel-comparison .current-pgo-table a {color:var(--ink);text-decoration:none;}'
+        'font-size:inherit;letter-spacing:normal;text-transform:none;user-select:text;border-bottom:1px solid var(--border);}'
+        '#panel-comparison .current-pgo-table a {color:var(--accent);text-decoration:underline;text-underline-offset:3px;}'
         '#panel-comparison .current-pgo-table a:hover {color:var(--accent);text-decoration:underline;}'
         '@media(max-width:680px){#panel-comparison .current-pgo-table {font-size:12px;}'
         '#panel-comparison .current-pgo-table th,#panel-comparison .current-pgo-table td {padding:8px 7px;}}'
         f'</style><div class="pgo-current-board" data-edition="{corrected.EDITION}">'
-        '<div class="model-status">EXPERIMENTAL / HOLD</div>'
+        '<div class="model-status" data-model-status="HOLD">Experimental — still being tested</div>'
         '<h2>PGO Corrected — September 8, 2026</h2>'
-        '<p>Independent team-strength estimates, conditional on the listed QB. '
-        'Non-QB injuries are unpriced. These model outputs are not calibrated point prices.</p>'
-        f'<p>Inputs captured through {_time(snapshot["inputs_as_of"])}; '
-        f'snapshot generated {_time(snapshot["generated_at"])}. '
+        '<p>Higher ratings mean the model expects a stronger team. These numbers are not betting lines. '
+        '“Corrected” means we repaired the calculation; greater accuracy has not been proved.</p>'
+        '<p><strong>Injuries beyond the quarterback are not included.</strong> '
+        'These ratings assume the listed quarterback plays.</p>'
+        f'<p>Roster information saved through {_time(snapshot["inputs_as_of"])}. '
+        'Game and player performance comes from the 2025 regular season and earlier. '
+        'Select a team to see why it ranks here. Team explanations open in a new tab.</p>'
+        f'<p><strong>New England is #{ne_rank} in this snapshot.</strong> '
+        'The ranking is an estimate, not proof of where the team belongs. '
+        '<a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#corrected-rating-NE" '
+        'target="_blank" rel="noopener noreferrer">Read New England’s explanation</a>.</p>'
+        '<details><summary>How to read this board — dates and technical details</summary>'
+        '<p>Research status: EXPERIMENTAL / HOLD. Zero is the average of these 32 teams. '
+        'A +5 rating does not mean a team should be favored by five points.</p>'
+        f'<p>Snapshot generated {_time(snapshot["generated_at"])}. '
         f'McCabe source: {_time(comparison.mccabe_source_timestamp(comparison.MCCABE_PATH))}. '
         'Performance history ends with the 2025 regular season.</p>'
-        '<p>Rank gap = PGO rank minus McCabe rank; positive means PGO ranks the team lower. '
+        '<p>“vs McCabe” compares rank positions: +3 means PGO ranks the team three spots lower. '
+        'It is PGO rank minus McCabe rank, not a difference in points. '
         '<a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#corrected-ratings" '
         'target="_blank" rel="noopener noreferrer">Forecast Lab: explanations, source coverage, and weekly drafts</a>. '
-        'Select a team for its corrected explanation.</p>'
+        '</p></details>'
         '<div class="table-shell"><table class="current-pgo-table">'
         '<caption class="visually-hidden">All 32 teams: corrected PGO model output and current McCabe rank</caption>'
         '<thead><tr><th scope="col">Team</th><th scope="col">PGO #</th>'
-        '<th scope="col">Model output</th><th scope="col">Expected QB</th>'
-        '<th scope="col">McCabe #</th><th scope="col">Rank gap</th></tr></thead>'
+        '<th scope="col">PGO rating</th><th scope="col">Expected QB</th>'
+        '<th scope="col">McCabe #</th><th scope="col">vs McCabe</th></tr></thead>'
         f'<tbody>{"".join(rows)}</tbody></table></div></div>{END}')
     panel = comparison.extract_comparison_panel(page)
     opening = panel.index('>') + 1

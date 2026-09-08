@@ -46,13 +46,25 @@ class ForecastLabTests(unittest.TestCase):
                     'observations': [{'gsis_id': 'brown', 'player_name': 'Ben Brown', 'report_position': 'OL', 'game_status': 'Out'}]}}]}
         panel = pgo_forecast_lab._corrected_section(corrected)
         for text in ('corrected-rating-NE', '&lt;Maye&gt;', '&lt;review&gt;',
-                     'Non-QB injuries are not priced', 'model units', 'Raw input',
+                     'Injuries beyond the quarterback are not included', 'model units', 'Raw input',
                      'Fitted contribution', 'HOLD', '+2.000', 'PGO Corrected',
                      'Model construction', 'Snapshot generated', '2025 regular season',
                      'id="model-editions"', 'July 21', 'September 7'):
             self.assertIn(text, panel)
         self.assertNotIn('<Maye>', panel)
         self.assertEqual(panel.count('Ben Brown (OL): Out'), 1)
+        team = panel.split('id="corrected-rating-NE">', 1)[1]
+        reader, technical = team.split('<details class="technical-details">', 1)
+        self.assertIn('recent game results', reader)
+        self.assertIn('not proof', reader)
+        self.assertNotIn('Fitted contribution', reader)
+        self.assertNotIn('model units', reader)
+        self.assertIn('Fitted contribution', technical)
+        self.assertNotIn('<details class="technical-details" open', panel)
+        corrected['teams'][0]['rank'] = 3
+        moved = pgo_forecast_lab._corrected_section(corrected)
+        self.assertIn('Why does New England rank #3?', moved)
+        self.assertNotIn('First place in this calculation', moved)
         corrected['teams'][0]['contributions']['pgo_v0'] = 3.0
         with self.assertRaises(ValueError):
             pgo_forecast_lab._corrected_section(corrected)
@@ -620,7 +632,7 @@ class ForecastLabTests(unittest.TestCase):
             html,
         )
         self.assertIn(
-            '<link href="https://fonts.googleapis.com/css2?family=Oswald', html
+            '</style><link rel="stylesheet" href="pgo-theme.css">', html
         )
 
         escaped = pgo_forecast_lab.render_lab(
@@ -733,6 +745,11 @@ class ForecastLabTests(unittest.TestCase):
         self.assertEqual(combined["total"]["mae"], 1.0)
         self.assertEqual(combined["score"]["mae"], 0.5)
         cards = pgo_forecast_lab._snapshot_metric_cards(metrics)
+        reader, technical = cards.split('<details class="technical-details">', 1)
+        self.assertIn('Average miss <strong>0.500 points', reader)
+        self.assertNotIn('RMSE', reader)
+        self.assertIn('<th>RMSE</th>', technical)
+        self.assertNotIn('<details class="technical-details" open', cards)
         self.assertIn("Original archive margin", cards)
         self.assertIn("League mean + venue", cards)
         self.assertIn("Unavailable", cards)
@@ -981,7 +998,7 @@ class ForecastLabTests(unittest.TestCase):
             self.assertFalse((root / "preseason/results").exists())
             self.assertFalse((root / "legacy").exists())
             page = (root / "lab.html").read_text(encoding="utf-8")
-            self.assertIn("1 of 1 recorded weekly forecasts have finalized results", page)
+            self.assertIn("1 of 1 saved weekly forecasts have final results", page)
             self.assertIn("0 of 2 finalized results recorded", page)
 
 

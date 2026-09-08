@@ -582,7 +582,30 @@ def _upgrade_fantasy_league_controls(panel):
                               lambda match: match[0] + field, panel)
         if count != 1:
             raise ValueError("Existing fantasy reception bonus control is missing or duplicated")
-    return panel.replace('Scoring points and TE premium', 'Scoring points and reception bonuses')
+    return _plain_fantasy_explanation(panel.replace('Scoring points and TE premium', 'Scoring points and reception bonuses'))
+
+
+def _plain_fantasy_explanation(panel):
+    """Keep the original draft/source warning available beneath a short explanation."""
+    if 'id="fantasy-scoring-details"' not in panel:
+        summary = '<p id="fantasy-scoring-summary" class="fantasy-league-explanation"></p>'
+        panel = panel.replace(summary, '<details class="fantasy-details" id="fantasy-scoring-details">'
+                              '<summary>Scoring totals and technical notes</summary>' + summary + '</details>', 1)
+    if 'id="fantasy-source-details"' in panel:
+        return panel
+    status = re.search(r'<div class="fantasy-status">(PREVIEW / HOLD|AVAILABILITY / HOLD)</div>', panel)
+    warning = re.search(r'<p class="fantasy-warning">.*?</p>', panel, re.S)
+    if not status or not warning:
+        return panel
+    dates = re.findall(r'<time\b[^>]*datetime="([^"]+)"[^>]*>.*?</time>', warning[0], re.S)
+    generated = f' Projection created {pgo_current_board._time(html.unescape(dates[0]))}.' if dates else ''
+    explanation = ('<p>These estimates are still being tested and are not yet part of a scored prediction record.'
+                   + generated + ' Set your league scoring below, including extra points per receiver catch. '
+                   'Check player availability before setting a lineup; an injury report alone does not change these projections.</p>')
+    panel = panel.replace(status[0], '<div class="fantasy-status" data-model-status="HOLD">Experimental — still being tested</div>', 1)
+    return panel.replace(warning[0], explanation + '<details class="fantasy-details" id="fantasy-source-details">'
+                         '<summary>Projection sources and technical status</summary>'
+                         + status[0] + warning[0] + '</details>', 1)
 
 
 def render_fantasy_panel(preview):
@@ -780,7 +803,7 @@ def render_fantasy_panel(preview):
     </details>
   </section>
 """
-    return add_fantasy_leagues(panel, eligible)
+    return _plain_fantasy_explanation(add_fantasy_leagues(panel, eligible))
 
 
 def add_rating_explanations(page, model_path=MODEL_PATH, backtest_path=BACKTEST_PATH):
