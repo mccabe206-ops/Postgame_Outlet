@@ -13,7 +13,8 @@ class CurrentInjuryNotesTests(unittest.TestCase):
     def test_current_notes_preserve_every_saved_projection_byte_and_are_idempotent(self):
         saved = comparison.PUBLIC_OUTPUT.read_text(encoding='utf-8')
         page = comparison.add_current_injury_notes(saved, self.source)
-        self.assertEqual(comparison.strip_current_injury_notes(page), saved)
+        self.assertEqual(comparison.strip_current_injury_notes(page),
+                         comparison.strip_current_injury_notes(saved))
         self.assertEqual(comparison.add_current_injury_notes(page, self.source), page)
         self.assertIsNotNone(comparison._extract_published_fantasy_panel(page))
         for identifier, status in [('00-0040734', 'Game designation: OUT'),

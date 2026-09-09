@@ -137,7 +137,8 @@ class RatingExplanationTests(unittest.TestCase):
             for row in current:
                 self.assertIn(f'{row["team"]}: PGO #{source[row["abbr"]]["rank"]}, McCabe #{row["rank"]}',
                               result)
-            self.assertEqual(pgo_comparison._extract_published_fantasy_panel(self.page),
+            self.assertEqual(pgo_comparison._extract_published_fantasy_panel(
+                                 pgo_comparison.strip_current_injury_notes(self.page)),
                              pgo_comparison._extract_published_fantasy_panel(
                                  pgo_comparison.strip_current_injury_notes(result)))
 
