@@ -46,3 +46,32 @@ the live Shopify iframe now uses `?release=b0fe9a9`. The cache update is
 recorded in native theme commit `f96b849` and matched Shopify readback exactly.
 Live browser checks confirmed the new injury wording and BAL 25.2 / IND 24.8,
 with Baltimore favored by 0.4 points. No saved forecast was rewritten.
+
+## Follow-up: readable score estimates
+
+The user found Patriots 23.1 / Seattle 23.5 too similar to the original apparent
+tie. Show independently rounded whole-point estimates in the score cell, with
+the decimal model averages in a native disclosure. If both scores round equal,
+say "About 25 points each" rather than presenting a tied final score. The
+favored-team column continues to use the unrounded margin, so no winner or
+larger edge is invented. Apply the same display policy to weekly and archived
+score estimates; preserve every issued forecast and grading calculation.
+
+The user's additional request is a plain-language explanation of what goes
+into each prediction. Add a native "Why this forecast?" disclosure: saved team
+strength gap, venue and rest adjustments, expected quarterbacks, 2025 scoring
+averages, and the split from combined points into each team's estimate. Bind
+the detailed corrected-model explanation to the exact source manifest and
+saved game; older or mismatched sources receive only their saved score
+arithmetic. Link the existing team explanations and separate injury scenarios.
+Reconcile every displayed component before showing it. These explanations
+describe the formula without changing forecasts or asserting improved accuracy.
+
+Follow-up validation: all 38 Forecast Lab tests passed in 15.734 seconds.
+Independent review reconciled all 16 current explanations and verified that
+the 272 archived rows do not borrow corrected-model drivers. All 288 score
+summaries, favorites, totals, comparison values, grades, and 84 issued evidence
+files preserve their saved values. Desktop review and a 375-pixel viewport
+check confirmed readable wrapping; the rating link opens its team disclosure
+with keyboard activation. Scores stay at the top of an expanded explanation.
+Receipts are under `output/rounded-scores-20260909/`.

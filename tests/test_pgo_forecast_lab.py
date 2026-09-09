@@ -30,11 +30,13 @@ class ForecastLabTests(unittest.TestCase):
         weekly = {'revisions': [dict(source_edition='pgo-corrected-week1-2026-09-08',
             source_directory='../september-08-corrected'),
             dict(source_edition='pgo-corrected-week1-2026-09-08', source_directory='../september-09-refresh')]}
-        with patch('pgo_forecast_corrected.load_snapshot', return_value={}) as load:
+        with patch('pgo_forecast_corrected.load_snapshot', return_value={}) as load, \
+                patch.object(Path, 'read_bytes', return_value=b'verified manifest'):
             data, directory = pgo_forecast_lab._load_corrected(None, weekly, weekly_root)
         self.assertEqual(directory, weekly_root.parent / 'september-09-refresh')
         load.assert_called_once_with(directory)
         self.assertIn('september-09-refresh/snapshot.json', data['_download_url'])
+        self.assertEqual(data['_manifest_sha256'], hashlib.sha256(b'verified manifest').hexdigest())
 
     def test_corrected_panel_distinguishes_scale_and_unpriced_absences(self):
         corrected = {'generated_at': '2026-09-08T16:00:00Z', 'inputs_as_of': '2026-09-08T15:00:00Z',
@@ -789,7 +791,7 @@ class ForecastLabTests(unittest.TestCase):
             "September 9, 2026 at 8:20 PM EDT</time>", page,
         )
         self.assertIn(
-            "Estimated scores and combined points are shown to one decimal. "
+            "Score summaries use whole-number rounded averages; model averages and combined points use one decimal. "
             "Evaluation uses the original unrounded projections.", page,
         )
         self.assertIn(
@@ -821,18 +823,80 @@ class ForecastLabTests(unittest.TestCase):
                 expected,
             )
 
-    def test_displayed_tie_uses_saved_decimal_scores_and_unrounded_favorite(self):
+    def test_why_forecast_uses_only_matching_saved_corrected_inputs(self):
+        saved = json.loads((pgo_forecast_lab.CORRECTED_DIR / 'snapshot.json').read_bytes())
+        saved['_manifest_sha256'] = hashlib.sha256(
+            (pgo_forecast_lab.CORRECTED_DIR / 'manifest.json').read_bytes()).hexdigest()
+        game = {**saved['games'][0], 'source_edition': saved['edition'],
+                'source_generated_at': saved['generated_at'],
+                'source_manifest_sha256': saved['_manifest_sha256'],
+                'lock_at': '2026-09-09T23:20:00Z'}
+        before = copy.deepcopy((game, saved))
+        rendered = pgo_forecast_lab._forecast_weeks([game], [], weekly=True, corrected=saved)
+        for text in ('Why this forecast', 'NE by 1.2 points', 'adds 1.6 points for SEA',
+                     'same rest', 'SEA by 0.4 points', 'Drake Maye', 'Sam Darnold',
+                     '28.82', '18.82', '28.41', '17.18', '46.62',
+                     '23.53', '23.09', '#corrected-rating-NE', '#nonqb-availability'):
+            self.assertIn(text, rendered)
+        self.assertEqual((game, saved), before)
+        neutral = {**game, **next(g for g in saved['games'] if g['location'] == 'Neutral')}
+        self.assertIn('neutral site adds no home advantage',
+                      pgo_forecast_lab._forecast_reason(neutral, saved))
+        for key, value in (('source_manifest_sha256', 'old'), ('source_edition', 'old'),
+                           ('source_generated_at', 'old'), ('home_rest', 10),
+                           ('location', 'Neutral'), ('margin', 99), ('total', 99),
+                           ('home_points', 99), ('away_points', 99), ('kickoff', 'old')):
+            with self.subTest(field=key):
+                fallback = pgo_forecast_lab._forecast_reason({**game, key: value}, saved)
+                self.assertIn('Saved score calculation', fallback)
+                self.assertNotIn('Before the venue adjustment', fallback)
+                self.assertNotIn('Drake Maye', fallback)
+        for section in ('fit', 'scoring_rates', 'teams'):
+            altered = copy.deepcopy(saved)
+            if section == 'fit':
+                altered['fit']['coefficients'][5] += 1
+            elif section == 'scoring_rates':
+                altered['scoring_rates']['NE']['pf'] += 1
+            else:
+                altered['teams'][0]['rating'] += 1
+            self.assertNotIn('Before the venue adjustment',
+                             pgo_forecast_lab._forecast_reason(game, altered))
+        archive = pgo_forecast_lab._forecast_weeks([game], [], corrected=saved)
+        self.assertIn('Saved score calculation', archive)
+        self.assertNotIn('Before the venue adjustment', archive)
+        self.assertNotIn('Drake Maye', archive)
+
+    def test_whole_score_summaries_keep_decimal_averages_and_unrounded_favorite(self):
         saved = json.loads((pgo_forecast_lab.CORRECTED_DIR / 'snapshot.json').read_bytes())
         game = next(game for game in saved['games'] if game['game_id'] == '2026_01_BAL_IND')
         before = copy.deepcopy(game)
         self.assertEqual(round(game['away_points']), round(game['home_points']))
         rendered = pgo_forecast_lab._forecast_weeks([game], [])
+        self.assertIn('About 25 points each<details><summary>Model averages</summary>', rendered)
+        self.assertNotIn('BAL 25, IND 25', rendered)
         self.assertIn('BAL 25.2, IND 24.8', rendered)
         self.assertIn('BAL by 0.4 points', rendered)
         self.assertIn('<th>Who PGO favors</th>', rendered)
         self.assertIn('<th>Estimated score</th>', rendered)
         self.assertEqual(game, before)
         self.assertEqual(pgo_forecast_lab._projected_score(25.25), '25.3')
+        patriots = next(game for game in saved['games'] if game['game_id'] == '2026_01_NE_SEA')
+        before = copy.deepcopy(patriots)
+        rendered = pgo_forecast_lab._forecast_weeks([patriots], [])
+        self.assertIn('NE 23, SEA 24<details><summary>Model averages</summary>', rendered)
+        self.assertIn('NE 23.1, SEA 23.5', rendered)
+        self.assertIn('SEA by 0.4 points', rendered)
+        self.assertEqual(patriots, before)
+        for away, home, summary, favorite in (
+                (25.5, 25.5, 'About 26 points each', 'No projected edge'),
+                (25.49, 25.5, 'BAL 25, IND 26', 'IND by less than 0.1 point')):
+            boundary = {**game, 'away_points': away, 'home_points': home,
+                        'margin': home - away, 'total': home + away}
+            before = copy.deepcopy(boundary)
+            rendered = pgo_forecast_lab._forecast_weeks([boundary], [])
+            self.assertIn(summary + '<details><summary>Model averages</summary>', rendered)
+            self.assertIn(favorite, rendered)
+            self.assertEqual(boundary, before)
 
     def test_original_archive_keeps_tiny_edges_and_exact_zero_without_mutation(self):
         lock = self.synthetic_lock()
