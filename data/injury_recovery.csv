@@ -1,0 +1,48 @@
+key,match,surgery,priority,weeks_min,weeks_max,label
+acl,acl,,3,36,52,ACL tear
+achilles,achilles,,3,26,44,Achilles tear
+patellar,patellar tendon|patella tendon,,3,26,52,Patellar tendon
+quad_tendon,quad tendon|quadriceps tendon,,3,26,52,Quad tendon
+pcl,pcl,,3,4,10,PCL sprain
+mcl,mcl,,3,2,8,MCL sprain
+lcl,lcl,,3,3,8,LCL sprain
+meniscus_repair,meniscus,y,3,10,24,Meniscus (repair)
+meniscus,meniscus,,3,3,6,Meniscus (scope)
+high_ankle,high ankle|high-ankle|syndesmosis,,3,4,8,High-ankle sprain
+lisfranc,lisfranc,,3,10,20,Lisfranc (foot)
+jones_fx,jones fracture|fifth metatarsal|5th metatarsal,,3,8,12,Foot (Jones fx)
+labrum,labrum|rotator,,3,16,26,Shoulder (labrum/rotator)
+pectoral,pec|pectoral,,3,16,24,Pectoral tear
+biceps,bicep|biceps,,3,14,24,Biceps tear
+triceps,tricep|triceps,,3,12,24,Triceps tear
+sports_hernia,sports hernia|core muscle|athletic pubalgia,,3,3,8,Core / sports hernia
+turf_toe,turf toe,,3,2,8,Turf toe
+concussion,concussion,,3,1,3,Concussion
+stinger,stinger|burner,,3,1,3,Stinger
+forearm_fx,forearm,,3,6,10,Forearm fracture
+collarbone,collarbone|clavicle,,3,6,10,Collarbone
+hamstring,hamstring,,2,2,6,Hamstring strain
+groin,groin|adductor,,2,1,4,Groin strain
+calf,calf,,2,2,5,Calf strain
+quad,quad|quadriceps,,2,2,5,Quad strain
+hip_flexor,hip flexor|hip pointer,,2,2,4,Hip flexor
+oblique,oblique|abdomen|abdominal,,2,3,8,Oblique / abdomen
+ribs,rib,,2,2,5,Ribs
+fracture,fracture|broken,,2,6,10,Fracture
+illness,illness|flu|virus,,2,0,1,Illness
+knee,knee,,1,2,6,Knee
+ankle,ankle,,1,1,4,Ankle sprain
+foot,foot,,1,3,8,Foot
+shoulder,shoulder|ac joint,,1,2,6,Shoulder
+wrist,wrist,,1,1,4,Wrist
+hand,hand,,1,2,6,Hand
+finger,finger|thumb,,1,1,4,Finger / thumb
+elbow,elbow,,1,2,6,Elbow
+neck,neck,,1,1,6,Neck
+back,back|spine|lumbar|herniated disc,,1,1,6,Back
+hip,hip,,1,2,5,Hip
+shin,shin|tibia|lower leg,,1,4,10,Lower leg
+knee_surg_generic,knee,y,1,8,16,Knee (surgery)
+foot_surg_generic,foot,y,1,10,20,Foot (surgery)
+shoulder_surg_generic,shoulder,y,1,16,24,Shoulder (surgery)
+wrist_surg_generic,wrist,y,1,6,12,Wrist (surgery)

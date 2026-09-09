@@ -1,10 +1,1 @@
-key,value,description
-home_field_adv,2.0,Points added to the home team in a projection
-scheme_mode,additive,additive = scheme_value adds directly to rating; multiplier = scheme_value scales (off_value+def_value) by (1+scheme_value/10)
-season,2026,Season label for the output workbook
-edition,Week 1 2026 - McCabe Sep 9,Public edition label
-author,Sean McCabe,Named Power Ratings author
-injury_checked_at,2026-09-09T14:46:46+00:00,Official injury review; independent of rating snapshot time
-injury_status,NE/SEA final injury reports; SF/LAR practice reports; 28 teams unconfirmed in the league overview. Final inactives are pending. Injury notes do not automatically change grades.,Official injury review; independent of rating snapshot time
-injury_source_url,https://www.nfl.com/injuries/,Official injury review; independent of rating snapshot time
-injury_snapshot,research/pgo_opening_night_20260909/injuries/injury-source.json,Reviewed current fantasy injury annotations; projection inputs remain frozen
+key,value

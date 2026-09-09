@@ -25,6 +25,7 @@ tests/test_pgo_forecast_corrected.py text eol=lf
 tests/test_pgo_week1_corrected.py text eol=lf
 research/pgo_corrected_roster_candidate/** -text whitespace=cr-at-eol
 research/pgo_opening_night_20260909/** -text whitespace=cr-at-eol
+research/pgo_publication_20260909/** -text whitespace=cr-at-eol
 research/pgo_snap_identity_repair_20260909/** -text whitespace=cr-at-eol
 research/pgo_ranking_trace_20260909/** -text whitespace=cr-at-eol
 pgo_challenger.py -text whitespace=cr-at-eol

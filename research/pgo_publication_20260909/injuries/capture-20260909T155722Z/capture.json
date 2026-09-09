@@ -1,0 +1,57 @@
+{
+  "captured_at": "2026-09-09T15:57:23.228021+00:00",
+  "sources": [
+    {
+      "bytes": 332889,
+      "captured_at": "2026-09-09T15:57:22.812053+00:00",
+      "file": "nfl-injuries.html",
+      "final_url": "https://www.nfl.com/injuries/",
+      "http_date": "Wed, 09 Sep 2026 15:57:22 GMT",
+      "last_modified": null,
+      "name": "nfl-injuries",
+      "sha256": "fd38b6d5f04a0a2518c0db8bcd115d706063036f8262e6163b85754c6ee034e8",
+      "started_at": "2026-09-09T15:57:22.565149+00:00",
+      "status": 200,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 899588,
+      "captured_at": "2026-09-09T15:57:22.915277+00:00",
+      "file": "nfl-week1-statuses.html",
+      "final_url": "https://www.nfl.com/news/nfl-week-1-injury-report-2026-season",
+      "http_date": "Wed, 09 Sep 2026 15:57:22 GMT",
+      "last_modified": null,
+      "name": "nfl-week1-statuses",
+      "sha256": "bfbccef83785e533f2b8bc8d840d211464eea2713d1e361f5f7963ab874e94e9",
+      "started_at": "2026-09-09T15:57:22.565719+00:00",
+      "status": 200,
+      "url": "https://www.nfl.com/news/nfl-week-1-injury-report-2026-season"
+    },
+    {
+      "bytes": 431813,
+      "captured_at": "2026-09-09T15:57:22.771225+00:00",
+      "file": "patriots-week1.html",
+      "final_url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks",
+      "http_date": "Wed, 09 Sep 2026 15:57:22 GMT",
+      "last_modified": null,
+      "name": "patriots-week1",
+      "sha256": "808987351634fb48da6fba3726654617f3a88a7dce4c38515007b7a7821beae2",
+      "started_at": "2026-09-09T15:57:22.566105+00:00",
+      "status": 200,
+      "url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks"
+    },
+    {
+      "bytes": 645117,
+      "captured_at": "2026-09-09T15:57:22.745383+00:00",
+      "file": "seahawks-week1.html",
+      "final_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots",
+      "http_date": "Wed, 09 Sep 2026 15:57:22 GMT",
+      "last_modified": null,
+      "name": "seahawks-week1",
+      "sha256": "3701b2f2742a4546ff725ef7f515906655723db1ff499a2d525f7b913fe3067b",
+      "started_at": "2026-09-09T15:57:22.566334+00:00",
+      "status": 200,
+      "url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots"
+    }
+  ]
+}
