@@ -1,16 +1,16 @@
-## The case for above-average
+## The case for above average
 
-Tampa Bay grades comfortably above the line — a strong QB and a good skill group, with a defense that grades just below average.
+Tampa Bay grades above the line — a good quarterback and a strong skill group, with a defense that's lost some teeth.
 
 ## Quarterback
 
-Baker Mayfield (+2.0) is a solid-plus starter grade, the anchor of an above-average offense.
+Baker Mayfield (+2.0) is an above-average grade — a confident, high-volume passer coming off a strong stretch.
 
 ## What moved the number
 
-- **Offense (+1.0):** a genuine strength — Chris Godwin and rookie Emeka Egbuka headline it, even after losing Mike Evans to San Francisco.
-- **Defense (−0.5):** dipped after losing Reddick and Lavonte David — grades a touch below the line.
+- **Offense (+1.0):** a top-tier group — Godwin and Egbuka headline, even after Mike Evans left for San Francisco.
+- **Defense (-0.5):** below average after losing Reddick and David.
 
 ## Bottom line
 
-An offense-led team with a proven QB. The Mike Evans departure is absorbed by the skill grade; the swing factor is whether the defense holds up after its veteran losses.
+The offense is a real strength. The defensive losses are the one thing keeping this from a higher tier.

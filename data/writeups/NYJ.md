@@ -1,16 +1,16 @@
-## The case for the basement
+## The case off the bottom
 
-The Jets grade out as a bottom-tier team — every unit sits below the line, with a defense that's better than the number suggests dragged down by the offense.
+The Jets still grade below the line, but less severely than before — the quarterback is the anchor, while the units around him are better than replacement-level.
 
 ## Quarterback
 
-Geno Smith (−2.0) is priced as a below-average starter here. He's a competent veteran, but the model doesn't see a lever that lifts a thin roster.
+Geno Smith (−2.0) holds — a capable veteran, but the rating reflects a limited situation and caps the ceiling here.
 
 ## What moved the number
 
-- **Offense (−2.0):** dangerously thin at skill — Garrett Wilson is the lone real threat. Little around him.
-- **Defense (−1.5 on the sheet, but genuinely strong):** the notes flag Fitzpatrick, Demario Davis, Sweat, and Onyemata — a legitimately good front. The grade lags the talent here.
+- **Offense (−1.0):** raised from −2.0, which was an extreme that didn't fit the personnel. **Garrett Wilson is a bona fide top-tier WR1**, Breece Hall is a real lead back, and the young offensive line (Fashanu, Tippmann, Membou) is ascending. It's thin behind Wilson, but not extreme-negative thin.
+- **Defense (−1.0):** raised from −1.5. This is a genuinely **strong unit** — Minkah Fitzpatrick, Demario Davis, T'Vondre Sweat, and Onyemata — so a near-extreme grade undersold it. Edge Joseph Ossai (ruptured plantar fascia) is doubtful for Week 1, but that's a short-term rotation loss.
 
 ## Bottom line
 
-The defense may be the most underpriced unit on this rating. The offense is what's holding the Jets in the basement — if the skill group develops, the overall number has room to rise.
+Still a bottom-tier overall rating driven by the quarterback spot, but the offense and defense are both better than the old numbers implied — the roster around Geno is the reason this climbed off the floor.

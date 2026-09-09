@@ -1,16 +1,16 @@
-## The case for the middle-low
+## The case for a middling number
 
-Pittsburgh grades below average, held there by an aging-QB question even though the defense remains a strength.
+Pittsburgh lands right at average — a strong defense balanced against a below-average, aging quarterback situation.
 
 ## Quarterback
 
-Aaron Rodgers (−1.0) is priced as a below-average starter at this stage of his career — the model isn't betting on a late-career resurgence.
+Aaron Rodgers (-1.0) is a below-average grade at this stage of his career. The arm talent is still there in flashes, but the availability and mobility risk is priced in.
 
 ## What moved the number
 
-- **Offense (0.0):** dead average. Pittman and Dowdle add competent pieces without moving the needle much.
-- **Defense (+1.0):** still the identity — T.J. Watt anchors it, with Dean and Savage added.
+- **Offense (0.0):** exactly average — Pittman and Dowdle are useful adds, but there's no elite lever.
+- **Defense (+1.0):** T.J. Watt anchors a genuinely good unit, with Dean and Savage adding depth.
 
 ## Bottom line
 
-A strong defense and a middling offense, gated by the quarterback grade. If Rodgers plays better than his number, this team climbs; the model isn't counting on it.
+The defense keeps this team at the waterline. How far Rodgers can push the offense is the whole question.
