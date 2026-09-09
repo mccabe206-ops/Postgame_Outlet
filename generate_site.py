@@ -1174,3 +1174,5 @@ def main(argv=None):
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+# CI health check 2026-09-08 — verify Update board passes post date-deadlock fix
