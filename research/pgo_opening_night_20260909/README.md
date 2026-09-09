@@ -46,7 +46,7 @@ review of the private artifact.
 
 ## Validation and private preview
 
-The final integration receipt records test outcomes, browser checks, source
+`final-integration.json` records test outcomes, browser checks, source
 preservation, the local checkpoint and the generated preview hashes. The
 repository's supported suite is `python -B -m unittest discover -s tests`;
 the separate corrected-roster checks are the three modules named in the Task 1
@@ -54,8 +54,14 @@ report. Plain `python -m unittest` has an existing sibling-import discovery
 problem; the supported invocation is authoritative.
 
 The private preview is `output/opening-night/site/index.html`, served at
-`http://127.0.0.1:8769/`. The Task 1 report contains its regeneration command.
-The local `output/opening-night/build_preview.py` helper additionally asserts
+`http://127.0.0.1:8769/`. Regenerate it with:
+
+```powershell
+python -B research/pgo_opening_night_20260909/build_preview.py
+python -m http.server 8769 --bind 127.0.0.1 --directory output/opening-night/site
+```
+
+The builder uses the existing rendering functions and additionally asserts
 that removing the separately marked current injury notes recovers every byte
 of the saved Fantasy panel. Saved Forecast Lab files and evidence are copied
 into the private preview directory for inspection.
