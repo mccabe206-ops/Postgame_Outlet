@@ -51,6 +51,7 @@ class ModelUpdateTests(unittest.TestCase):
         self.assertIn('regular season and playoffs', rendered)
         self.assertIn('non-QB player quality', rendered)
         self.assertIn('Before the venue adjustment: NE by 1.2 points', rendered)
+        self.assertNotIn('href="#latest-inactive-notes"', rendered)
         self.assertEqual(snapshot, before)
 
     def test_actual_verified_candidate_keeps_issued_values_and_separate_identity(self):
@@ -71,11 +72,47 @@ class ModelUpdateTests(unittest.TestCase):
         self.assertIn('Game designation: Out', rendered)
         self.assertIn('Game designation: Questionable', rendered)
         self.assertIn('ACT roster defenders', rendered)
-        self.assertIn('0 of 16 saved candidate forecasts', rendered)
+        self.assertIn('0 of 16 saved September 9 forecasts', rendered)
         self.assertIn('data-weekly-cutoff=', rendered)
         self.assertIn('function updateWeeklyLocks()', lab.FORECAST_DISPLAY_SCRIPT)
         self.assertIn('function openFragment(hash)', lab.FORECAST_DISPLAY_SCRIPT)
         self.assertEqual(before, {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in before})
+
+    def test_selected_postseason_board_leads_and_previous_models_roundtrip(self):
+        import pgo_current_board as board
+        import pgo_forecast_lab as lab
+        from tests.test_pgo_current_board import CurrentBoardTests
+        from tests.test_pgo_forecast_lab import ForecastLabTests
+        fixture = CurrentBoardTests()
+        fixture.setUp()
+        updates = view.render_updates(self.snapshot())
+        with patch.object(view, 'render_current_updates', return_value=updates):
+            page = board.add_current_board(fixture.page, fixture.snapshot, fixture.mccabe)
+        self.assertIn('<h2>PGO Power Rankings &mdash; Experimental</h2>', page)
+        self.assertLess(page.index('data-postseason-team='), page.index('data-current-pgo-team='))
+        self.assertIn('<details class="pgo-previous-models" id="previous-models">', page)
+        self.assertIn('<summary>Compare previous models</summary>', page)
+        self.assertLess(page.index('id="previous-models"'), page.index('data-current-pgo-team='))
+        self.assertEqual(page.count('data-postseason-team='), 32)
+        self.assertEqual(page.count('data-current-pgo-team='), 32)
+        self.assertEqual(page.count(lab.FORECAST_DISPLAY_SCRIPT), 1)
+        self.assertEqual(board.strip_current_board(page), fixture.page)
+        self.assertIn('Injury reports are shown as context', page)
+        self.assertIn('not numerical adjustments', page)
+        archive = ForecastLabTests()
+        with patch.object(view, 'render_current_updates', return_value=updates):
+            lab_page = lab.render_lab(archive.synthetic_lock(), [], [],
+                snapshot=archive.synthetic_snapshot(), weekly={'games': [], 'revisions': []})
+        self.assertLess(lab_page.index('data-postseason-team='), lab_page.index('Weekly predictions'))
+        self.assertIn('<summary>Compare previous models</summary>', lab_page)
+        self.assertEqual(lab_page.count('data-postseason-game-id='), 16)
+        self.assertIn('September 7 preseason baseline', lab_page)
+        self.assertIn('Original frozen forecast record', lab_page)
+        with patch.object(view, 'render_current_updates', return_value=''):
+            fallback = board.add_current_board(fixture.page, fixture.snapshot, fixture.mccabe)
+        self.assertNotIn('id="previous-models"', fallback)
+        self.assertIn('data-current-pgo-team=', fallback)
+        self.assertEqual(board.strip_current_board(fallback), fixture.page)
 
     def test_passing_screen_does_not_promote_and_invalid_core_is_rejected(self):
         snapshot = self.snapshot()
@@ -142,7 +179,7 @@ class ModelUpdateTests(unittest.TestCase):
             accepted.assert_called_once()
             self.assertEqual(accepted.call_args.args[0], original / 'results')
             self.assertEqual(len(accepted.call_args.args[1]['games']), 2)
-            self.assertIn('1 of 1 saved candidate forecasts', rendered)
+            self.assertIn('1 of 1 saved September 9 forecasts', rendered)
             self.assertEqual(rendered.count('data-postseason-game-id='), 1)
             self.assertIn('Before the venue adjustment', rendered)
 
@@ -179,7 +216,7 @@ class ModelUpdateTests(unittest.TestCase):
                                       'practice_status': 'Did Not Participate'}]}}
         annotated = view._depth_evidence(depth, coverage)
         self.assertIn('Game designation: Out', annotated)
-        self.assertIn('Current report notes captured', annotated)
+        self.assertIn('Earlier forecast-input report notes captured', annotated)
         self.assertIn('Data coverage:', annotated)
         coverage[codes[0]]['observations'][0]['game_status'] = ''
         annotated = view._depth_evidence(depth, coverage)

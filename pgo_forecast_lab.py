@@ -847,9 +847,22 @@ def _rating_explanations(snapshot):
 ''' + "".join(cards) + '''<p>Full precision and all inputs: <a href="evidence/forecast-lab-2026/september-07/snapshot.json">saved snapshot JSON</a>. Ratings remain EXPERIMENTAL / HOLD.</p></details>'''
 
 
-def _corrected_section(snapshot):
+def _corrected_section(snapshot, *, latest_inactive_notes=False):
     if snapshot is None:
         return ''
+    postseason = snapshot.get('edition') == 'pgo-postseason-week1-2026-09-09'
+    prefix = 'postseason' if postseason else 'corrected'
+    container = 'div' if postseason else 'section'
+    edition_date = 'September 9, 2026' if postseason else 'September 8, 2026'
+    heading = 'Why teams rank here — September 9, 2026' if postseason else 'PGO Corrected — September 8, 2026'
+    introduction = (
+        'This edition includes regular season and playoffs in its team and quarterback history. '
+        'Historical testing did not establish an accuracy improvement.' if postseason else
+        '“Corrected” means we repaired problems in the calculation. It does not mean this version has proved more accurate.')
+    history_label = '2025 regular season and playoffs, and earlier seasons' if postseason else '2025 regular season and earlier'
+    contract = 'pgo_postseason_candidate' if postseason else 'pgo_week1_corrected'
+    audit_doc = 'model-update-2026-09-09.md' if postseason else 'model-depth-audit-2026-09-09.md'
+    default_download = f'evidence/forecast-lab-2026/september-{"09-postseason" if postseason else "08-corrected"}/snapshot.json'
     labels = _rating_labels()
     plain_labels = {
         'pgo_v0': 'recent game results',
@@ -918,12 +931,20 @@ def _corrected_section(snapshot):
         drivers = ', '.join(plain_labels.get(name, 'adjustments for missing information'
                             if name.endswith('_missing') else 'other adjustments')
                             for name, _value in upward) or 'no individual input above the league average'
+        downward_note = ''
+        if postseason:
+            downward = sorted(((name, value) for name, value in terms.items() if value < -1e-8),
+                              key=lambda item: item[1])[:3]
+            drags = ', '.join(plain_labels.get(name, 'adjustments for missing information'
+                             if name.endswith('_missing') else 'other adjustments') for name, _value in downward)
+            downward_note = ('<p><strong>What holds this rating back:</strong> the largest downward contributions come from '
+                             + html.escape(drags) + '.</p>') if drags else ''
         if team['team'] == 'NE':
             ne_explanation = (f'<p><strong>Why does New England rank #{team["rank"]}?</strong> '
                               f'The biggest boosts in this calculation come from {html.escape(drivers)}. '
                               '<strong>The model does not separately grade current edge-rusher and linebacker depth '
                               'or the quality of their backups.</strong> This is not a complete assessment of the current roster. '
-                              '<a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/model-depth-audit-2026-09-09.md">'
+                              f'<a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/{audit_doc}">'
                               'What the model includes and misses</a>. '
                               'Several performance inputs describe the same games, so they are not separate proof '
                               'of the team’s strength. We have not established that this is the right ranking.</p>')
@@ -932,13 +953,31 @@ def _corrected_section(snapshot):
                    'Recent results and passing numbers partly describe the same games. This position in the ranking '
                    'is not proof that New England is the NFL’s best team.' if team['team'] == 'NE' else
                    'Several inputs describe the same games. This ranking is not proof of how the team will perform next.')
-        cards.append(f'''<details class="lab-detail rating-explanation corrected-team" id="corrected-rating-{html.escape(team['team'], quote=True)}">
+        if postseason and team['team'] == 'NE':
+            caution = ('The model does not separately grade current edge-rusher and linebacker depth or the quality of their backups. '
+                       'Past team results and quarterback history partly describe the same games. This is an incomplete assessment of the current roster.')
+        report_heading = 'Report saved with this forecast' if postseason else 'Injury report'
+        report_timing = html.escape(str(coverage.get('report_date') or 'Report date unavailable'))
+        if postseason:
+            report_timing = ('Captured ' + _snapshot_kickoff_time(coverage['captured_at'])
+                             if coverage.get('captured_at') else 'Capture time unavailable')
+            report_timing += '. These are the earlier saved inputs. '
+            report_timing += ('<a href="#latest-inactive-notes">Later final-inactive notes for NE–SEA</a> '
+                             'are separate context and do not change the saved rating' if latest_inactive_notes else
+                             'Later final-inactive notes are unavailable in this view')
+        edition_comparison = (f'<p>September 8 comparison: #{team["baseline_rank"]}, '
+                              f'rating {team["baseline_rating"]:+.3f}. This edition adds playoff history; '
+                              'the change compares model editions, not movement from a newly played game.</p>'
+                              if postseason else '')
+        cards.append(f'''<details class="lab-detail rating-explanation corrected-team" id="{prefix}-rating-{html.escape(team['team'], quote=True)}">
 <summary>#{team['rank']} {html.escape(team['team'])} &middot; PGO rating {team['rating']:+.3f}</summary>
+{edition_comparison}
 <p><strong>Expected quarterback:</strong> {html.escape(team['qb_name'])}.</p>
 <p><strong>What lifts this rating:</strong> the biggest boosts in the calculation come from {html.escape(drivers)}.</p>
+{downward_note}
 <p><strong>Keep in mind:</strong> {caution} A boost from an input reflects how the formula weighs it; it is not a separate football grade.</p>
-<p><strong>Injury report:</strong> {report_status}.
-{html.escape(str(coverage.get('report_date') or 'Report date unavailable'))}. {source_link}</p>
+<p><strong>{report_heading}:</strong> {report_status}.
+{report_timing}. {source_link}</p>
 <ul>{absence_list}{observations}</ul>
 <details class="technical-details"><summary>Technical details and calculations</summary>
 <ul>{note_list}</ul>
@@ -948,34 +987,35 @@ def _corrected_section(snapshot):
     skipped = ''.join(f'<li>{html.escape(row["game_id"])}: {html.escape(row["reason"])}</li>'
                       for row in snapshot.get('skipped_games', []))
     skipped = f'<p>Games without a new forecast in this update:</p><ul>{skipped}</ul>' if skipped else ''
-    return f'''<section id="corrected-ratings"><h2>PGO Corrected — September 8, 2026</h2>
-<p><strong>Experimental — accuracy is still being tested.</strong> “Corrected” means we repaired problems in the calculation. It does not mean this version has proved more accurate.</p>
+    return f'''<{container} id="{prefix}-ratings"><h2>{heading}</h2>
+<p><strong>Experimental — accuracy is still being tested.</strong> {introduction}</p>
 <p>Higher ratings mean the model expects a stronger team; zero is the average of these 32 teams. A +5 rating does not mean a team should be favored by five points.</p>
-<p>Roster information saved through {_snapshot_kickoff_time(snapshot['inputs_as_of'])}. Game and player performance comes from the 2025 regular season and earlier.</p>
+<p>Roster information saved through {_snapshot_kickoff_time(snapshot['inputs_as_of'])}. Game and player performance comes from the {history_label}.</p>
 <p class="notice"><strong>Injuries beyond the quarterback are not included.</strong> These ratings assume the listed quarterback plays.
-Being on the active roster does not mean a player is healthy. Reports need another review before each game locks.</p>
+Being on the active roster does not mean a player is healthy. {'Later injury updates are dated separately; issued forecasts keep their saved inputs.' if postseason else 'Reports need another review before each game locks.'}</p>
 {ne_explanation}
-<p>Choose a team below for its main reasons and injury information. <a href="#corrected-rating-NE">New England</a> &middot; <a href="#corrected-rating-JAX">Jacksonville</a></p>
+<p>Choose a team below for its main reasons and injury information. <a href="#{prefix}-rating-NE">New England</a> &middot; <a href="#{prefix}-rating-JAX">Jacksonville</a></p>
 <details class="technical-details"><summary>How the model works — technical notes and sources</summary>
-<p><strong>EXPERIMENTAL / HOLD.</strong> Model construction: September 8, 2026.
+<p><strong>EXPERIMENTAL / HOLD.</strong> Model construction: {edition_date}.
 Snapshot generated {_snapshot_kickoff_time(snapshot['generated_at'])}.
 Outputs are model units, not established neutral-field point prices or rank-confidence intervals.</p>
 <p>This version matches historical and current ACT eligibility, removes six roster/coaching transition inputs,
 uses statistic-specific QB exposure and enforces symmetric neutral-field predictions. It keeps four-game team history and a one-year QB half-life.
 Those construction repairs do not establish superior forecasting accuracy. The same historical seasons have already been examined.</p>
 <p>The results-history input responds to winning or losing margins that beat the model’s own expectation, not fans’ or media expectations.</p>
-<p><a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_week1_corrected/charter.md">Fixed construction and evaluation contract</a> &middot;
-<a href="{html.escape(snapshot.get('_download_url', 'evidence/forecast-lab-2026/september-08-corrected/snapshot.json'), quote=True)}">All inputs and source evidence</a></p></details>
-<details id="model-editions"><summary>Model versions and snapshot dates</summary>
+<p><a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/{contract}/charter.md">Fixed construction and evaluation contract</a> &middot;
+<a href="{html.escape(snapshot.get('_download_url', default_download), quote=True)}">All inputs and source evidence</a></p></details>
+<details id="{'postseason-model-editions' if postseason else 'model-editions'}"><summary>Model versions and snapshot dates</summary>
 <p><strong>July 21 — archived PGO v1 ratings:</strong> the original saved preseason board.
 <strong>September 7 — refreshed v1 construction:</strong> active expected starters with the recovered original fit.
-<strong>September 8 — PGO Corrected:</strong> the separately fitted construction described below, used by this opening-week experiment.</p>
+<strong>September 8 — PGO Corrected:</strong> the separately fitted regular-season-history construction.</p>
+{'<p><strong>September 9 — primary experimental edition:</strong> adds playoff history. Earlier editions remain available under Compare previous models; this display choice is not proof of greater accuracy.</p>' if postseason else ''}
 <p>The July/August frozen 272-game season forecast is a separate 75% v0 / 25% challenger blend.
 It is preserved as its own forecast record, not identified as the July v1 ratings board.</p>
 <p>The earlier research name <strong>PGO v2</strong> identifies a separate roster-age and draft-pedigree experiment that remained HOLD.
-It is not the name of this corrected edition. A model version describes the calculation; a snapshot date records a particular set of inputs and outputs.
+It is not the name of this {'postseason' if postseason else 'corrected'} edition. A model version describes the calculation; a snapshot date records a particular set of inputs and outputs.
 Every saved edition remains available. A newer date does not establish greater predictive accuracy.</p></details>
-{skipped}{''.join(cards)}</section>'''
+{skipped}{''.join(cards)}</{container}>'''
 
 
 def _load_corrected(directory, weekly, weekly_root):
@@ -1264,7 +1304,7 @@ def _model_sensitivity(sensitivity, strength_study=None):
 <p><strong>Latest review:</strong> <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md">Input definitions, roster eligibility, neutral-field consistency, and separate weekly/season tests</a>. The earlier experiments below remain available as dated evidence.</p>
 <p>The completed input audit compares seven constructions on 2,127 matched games. NE ranks 1&ndash;4 and JAX 5&ndash;7 across those specific choices; these are sensitivity ranges, not confidence intervals. The symmetric arm fixes neutral-field reversal and has the lowest margin MAE (10.0982 versus 10.1198 for its reference), but none of the six new candidates passes the predeclared improvement screen. All remain HOLD.</p>
 <p><strong>EXPERIMENTAL — HOLD. Calibrated uncertainty: unavailable.</strong> The ranges below show how six specified model variants change each team's output. This is model sensitivity, not a confidence or prediction interval; it does not measure the chance that a rating or game result falls inside the range.</p>
-<p>McCabe's human ranks are compared with the September 7 preseason PGO baseline here. The main board shows September 8 corrected ratings and keeps the July board in a closed archive. Rank gap = PGO rank minus McCabe rank: positive means PGO ranks the team lower. No point-price gap is calculated.</p>
+<p>McCabe's human ranks are compared with the September 7 preseason PGO baseline here. The main board leads with the September 9 postseason edition; September 8 and July remain available for comparison. Rank gap = PGO rank minus McCabe rank: positive means PGO ranks the team lower. No point-price gap is calculated.</p>
 <p>Source freshness: McCabe source revision {html.escape(sensitivity['mccabe_as_of'])}; September baseline generated {html.escape(sensitivity['snapshot_generated_at'])}; depth snapshot {html.escape(sensitivity['depth_as_of'])}. Roster/source captures: {html.escape(captures)}. Performance history ends with the 2025 regular season; these are not current injury updates.</p>
 <div class="table-shell"><table><thead><tr><th>Team</th><th>McCabe rank</th><th>September PGO rank</th><th>Rank gap</th><th>Sensitivity: rank span</th><th>Sensitivity: model-output span</th></tr></thead><tbody>{rows}</tbody></table></div>
 <p>The six variants cross raw, opponent-adjusted team EPA, and opponent-adjusted team plus QB EPA with either the unchanged earlier results-based PGO input or 50% offseason retention of that input. Ranges are descriptive, centered model-scale outputs. Both opponent-adjustment arms remain HOLD; this retrospective study does not replace issued forecasts or validate the September inference policy.</p>
@@ -1277,7 +1317,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
                weekly_results=(), weekly_provenance=(), corrected=None):
     """Render a standalone, escaped, no-fetch Forecast Lab page."""
     from pgo_availability_view import render_current_scenario
-    from pgo_model_updates import render_current_updates
+    from pgo_model_updates import EDITION as selected_edition, render_current_updates
     css = _shared_css()
     if snapshot is None:
         lead = f'''<header class="lab-hero hero"><div class="status">Experimental &middot; frozen archive</div>
@@ -1289,9 +1329,10 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
     else:
         lead = _snapshot_section(snapshot, snapshot_results, snapshot_provenance)
         if weekly is not None:
+            updates = render_current_updates()
+            selected = f'data-edition="{selected_edition}"' in updates
             lead = (
                 _weekly_section(weekly, snapshot, weekly_results, weekly_provenance, corrected=corrected)
-                + render_current_updates()
                 + _corrected_section(corrected)
                 + render_current_scenario()
                 + _rating_explanations(snapshot)
@@ -1299,6 +1340,14 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
                 '<summary>September 7 preseason baseline &middot; All 272 games and 32 team ratings</summary>'
                 + lead.replace('<h1>PGO Forecast Lab</h1>', '') + '</details>'
             )
+            if selected:
+                lead = ('<header class="lab-hero hero"><h1>PGO Forecast Lab</h1>'
+                        '<p>September 9 predictions, explanations and grades. '
+                        '<a href="index.html">Back to the ratings board</a>.</p></header>'
+                        + updates + '<details class="lab-detail" id="previous-models">'
+                        '<summary>Compare previous models</summary>' + lead + '</details>')
+            else:
+                lead += updates
         else:
             lead += _rating_explanations(snapshot)
         archive_open = '<details class="original-archive"><summary>Original July/August archive &middot; Frozen 25% stability blend</summary>'

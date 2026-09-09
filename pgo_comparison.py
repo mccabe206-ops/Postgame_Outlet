@@ -1832,7 +1832,7 @@ def main(argv=None):
     if receipt:
         print(f"  {len(comparison_rows)} teams | {receipt['publication_status']}")
     else:
-        print("  Displayed the latest verified corrected edition; preserved the July archive")
+        print("  Displayed the selected verified PGO edition; preserved earlier models")
     if fantasy_preview is not None:
         eligible = sum(
             row["ranking_eligible"] for row in fantasy_preview["rows"]

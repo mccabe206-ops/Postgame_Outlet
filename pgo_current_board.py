@@ -1,4 +1,4 @@
-"""Present the verified registered corrected edition above the preserved July board."""
+"""Present the selected verified edition and preserve earlier boards for comparison."""
 from datetime import datetime
 import html
 import math
@@ -68,7 +68,7 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
     import pgo_comparison as comparison
     import pgo_forecast_corrected as corrected
     from pgo_availability_view import render_current_scenario
-    from pgo_model_updates import render_current_updates
+    from pgo_model_updates import EDITION as selected_edition, render_current_updates
     page = strip_current_board(page)
     if snapshot is None:
         import pgo_forecast_lab as lab
@@ -101,15 +101,13 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
             f'<td class="pgo-detail">{html.escape(team["qb_name"])}</td>'
             f'<td class="pgo-detail">{mccabe_rank}</td><td class="pgo-detail">{rank - mccabe_rank:+d}</td></tr>')
     updates = render_current_updates()
+    selected = f'data-edition="{selected_edition}"' in updates
     if updates:
         from pgo_forecast_lab import FORECAST_DISPLAY_SCRIPT
         updates += FORECAST_DISPLAY_SCRIPT
-    updates_link = ('<p><a href="#model-updates">New model candidate and defensive-depth evidence</a></p>'
-                    if updates else '')
     current = (
-        f'{START}<div class="pgo-current-board" data-edition="{corrected.EDITION}">'
+        f'<div class="pgo-current-board" data-edition="{corrected.EDITION}">'
         '<div class="model-status" data-model-status="HOLD">Experimental — still being tested</div>'
-        f'{updates_link}'
         '<h2>PGO Corrected — September 8, 2026</h2>'
         '<p>Higher ratings mean the model expects a stronger team. These numbers are not betting lines. '
         '“Corrected” means we repaired the calculation; greater accuracy has not been proved.</p>'
@@ -146,7 +144,13 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
         '<th scope="col" class="pgo-detail"><span class="pgo-scale-label"><span aria-hidden="true">-14</span><span>Rating scale</span><span aria-hidden="true">+14</span></span></th>'
         '<th scope="col" class="pgo-detail">Expected QB</th>'
         '<th scope="col" class="pgo-detail">McCabe #</th><th scope="col" class="pgo-detail">vs McCabe</th></tr></thead>'
-        f'<tbody>{"".join(rows)}</tbody></table></div>{updates}{render_current_scenario()}</div>{END}')
+        f'<tbody>{"".join(rows)}</tbody></table></div>{render_current_scenario()}</div>')
+    if selected:
+        current = (updates + '<details class="pgo-previous-models" id="previous-models">'
+                   '<summary>Compare previous models</summary>' + current + '</details>')
+    else:
+        current += updates
+    current = START + current + END
     panel = comparison.extract_comparison_panel(page)
     opening = panel.index('>') + 1
     closing = panel.rindex('</section>')

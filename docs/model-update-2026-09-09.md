@@ -46,7 +46,17 @@ average margin error is 10.102 points versus 10.099 for the baseline, improving
 in four of eight seasons. The paired error-reduction interval is -0.0196 to
 +0.0145 points. The difference is very small and does not establish an accuracy
 gain. Week 1 error is 9.899 versus 9.891. The candidate is published for open
-comparison and separate prospective grading; the leading model is not replaced.
+comparison and separate prospective grading. The September 9 edition is now
+the primary public display, titled **PGO Power Rankings — Experimental**, because
+it includes both regular-season and playoff history. This display choice does
+not establish an accuracy improvement or change its EXPERIMENTAL / HOLD status.
+The September 8 board remains available under **Compare previous models**, with
+its original forecasts and grades preserved. Non-QB injuries are shown as dated
+context and are not included in either edition's saved forecast numbers.
+The primary board's team links explain each September 9 rating using that
+edition's saved contributions, including both upward and downward factors.
+Its matchup list and grades use the September 9 records already issued before
+their cutoff; selecting the display does not recalculate a locked prediction.
 [Saved candidate forecasts](evidence/forecast-lab-2026/september-09-postseason/forecasts.csv),
 [complete inputs and outputs](evidence/forecast-lab-2026/september-09-postseason/snapshot.json),
 [historical test](../research/pgo_postseason_candidate/run-20260909-attempt01/metrics.json).
