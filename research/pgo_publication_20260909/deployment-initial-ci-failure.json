@@ -1,0 +1,153 @@
+{
+  "status": "REPAIR_REQUIRED",
+  "recorded_at": "2026-09-09T16:31:59.701466+00:00",
+  "release_live": true,
+  "update_board": {
+    "conclusion": "failure",
+    "headSha": "795edfc9939e7b4a144147e66762770d03b34b92",
+    "jobs": [
+      {
+        "completedAt": "2026-09-09T16:30:54Z",
+        "conclusion": "failure",
+        "databaseId": 102549952226,
+        "name": "build",
+        "startedAt": "2026-09-09T16:22:42Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-09T16:22:44Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-09T16:22:43Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:22:49Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v7",
+            "number": 2,
+            "startedAt": "2026-09-09T16:22:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:22:49Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-python@v7",
+            "number": 3,
+            "startedAt": "2026-09-09T16:22:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:22:53Z",
+            "conclusion": "success",
+            "name": "Install PGO test dependency",
+            "number": 4,
+            "startedAt": "2026-09-09T16:22:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:30:52Z",
+            "conclusion": "failure",
+            "name": "Run tests (includes the editorial gate)",
+            "number": 5,
+            "startedAt": "2026-09-09T16:22:53Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:30:52Z",
+            "conclusion": "skipped",
+            "name": "Refresh public board without replacing approved PGO panel",
+            "number": 6,
+            "startedAt": "2026-09-09T16:30:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:30:52Z",
+            "conclusion": "skipped",
+            "name": "Render verified Forecast Lab archive",
+            "number": 7,
+            "startedAt": "2026-09-09T16:30:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:30:52Z",
+            "conclusion": "skipped",
+            "name": "Commit and push if changed (walshja9 only)",
+            "number": 8,
+            "startedAt": "2026-09-09T16:30:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:30:52Z",
+            "conclusion": "skipped",
+            "name": "Upload Pages artifact (mccabe206-ops only)",
+            "number": 9,
+            "startedAt": "2026-09-09T16:30:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:30:52Z",
+            "conclusion": "skipped",
+            "name": "Post Run actions/setup-python@v7",
+            "number": 17,
+            "startedAt": "2026-09-09T16:30:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:30:52Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v7",
+            "number": 18,
+            "startedAt": "2026-09-09T16:30:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T16:30:52Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 19,
+            "startedAt": "2026-09-09T16:30:52Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/walshja9/Postgame_Outlet/actions/runs/34376330141/job/102549952226"
+      },
+      {
+        "completedAt": "2026-09-09T16:30:54Z",
+        "conclusion": "skipped",
+        "databaseId": 102552892541,
+        "name": "deploy",
+        "startedAt": "2026-09-09T16:30:55Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://github.com/walshja9/Postgame_Outlet/actions/runs/34376330141/job/102552892541"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/walshja9/Postgame_Outlet/actions/runs/34376330141"
+  },
+  "initial_pages": {
+    "conclusion": "success",
+    "headSha": "795edfc9939e7b4a144147e66762770d03b34b92",
+    "status": "completed",
+    "url": "https://github.com/walshja9/Postgame_Outlet/actions/runs/34376328620"
+  },
+  "failures": [
+    {
+      "test": "test_pgo_comparison.RatingExplanationTests.test_legacy_and_current_refresh_recompute_rank_highlights",
+      "line": 140,
+      "cause": "Reference Fantasy panel already annotated; stripped result compared to unstripped reference."
+    },
+    {
+      "test": "test_pgo_current_injury_notes.CurrentInjuryNotesTests.test_current_notes_preserve_every_saved_projection_byte_and_are_idempotent",
+      "line": 16,
+      "cause": "Committed saved page already annotated; stripping output cannot equal unstripped saved input."
+    }
+  ],
+  "tests_run": 576,
+  "failed": 2,
+  "optional_skipped": 1,
+  "log": "update-board-34376330141-failure.log",
+  "actions": "No source edit, push or workflow retry by reviewer; root performing bounded release repair."
+}

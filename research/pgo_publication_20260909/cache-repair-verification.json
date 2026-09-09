@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "base": "795edfc",
+  "repair_source": "05e49c2",
+  "generated_artifacts": {
+    "index.html": {
+      "sha256": "8a5b1eb61ca171bd6e9a61e7d490e017c8cab29382a04e78986a0a12d37f6f58",
+      "only_css_url_and_header_render_clock_changed": true
+    },
+    "forecast-lab.html": {
+      "sha256": "1412a0d00044fd0f89e8c4044913cc6c8d00fc50483a2a13f7dd306b69849cdf",
+      "only_css_url_and_header_render_clock_changed": true
+    }
+  },
+  "all_data_issued_evidence_and_active_model_code_unchanged": true
+}

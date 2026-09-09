@@ -1,0 +1,89 @@
+build	Run tests (includes the editorial gate)	ï»¿2026-09-09T16:22:53.2108880Z ##[group]Run python -m unittest discover -s tests
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2109409Z ^[[36;1mpython -m unittest discover -s tests^[[0m
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2110052Z ^[[36;1mpython -m unittest research.pgo_corrected_roster_candidate.test_candidate research.pgo_corrected_roster_candidate.test_temporal^[[0m
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2133263Z shell: /usr/bin/bash -e {0}
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2133589Z env:
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2133932Z   TZ: America/New_York
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2134293Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2134828Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2135331Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2135741Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2136188Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2136611Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+build	Run tests (includes the editorial gate)	2026-09-09T16:22:53.2137008Z ##[endgroup]
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:38.4002983Z ...........................................................................................................................................F...............F.....................................ERROR: second write failed
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:38.5004526Z ......ERROR: receipt write failed
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:38.5160778Z ..ERROR: offline
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:38.5177581Z .ERROR: frozen_at must be a timezone-bearing timestamp
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:38.5184863Z ERROR: Refusing to replace existing candidate output: output/pgo-fantasy-source-v2-candidate.lock.json
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.2590933Z ................................................ERROR: Artifact output aliases frozen evidence
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.2617280Z ERROR: depth source was captured after prediction time
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.5908972Z .......ERROR: Artifact output aliases frozen evidence
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.5968533Z .ERROR: [Errno 17] File exists: '/tmp/tmpk1vbkqju/preview.json'
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.6073268Z .ERROR: [Errno 17] File exists: '/tmp/tmp314omxet/fantasy_lock.json'
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.6122944Z ERROR: [Errno 17] File exists: '/tmp/tmp314omxet/fantasy_week_grade.json'
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.6172166Z ERROR: [Errno 17] File exists: '/tmp/tmp314omxet/foreign.bin'
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.6293391Z .ERROR: [Errno 17] File exists: '/tmp/tmpeq9jo7mu/preview.json'
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.6351250Z .ERROR: [Errno 17] File exists: '/tmp/tmpj83768ck/preview.json'
+build	Run tests (includes the editorial gate)	2026-09-09T16:23:44.6376296Z .ERROR: Prospective model config is invalid
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:50.3304129Z .........................................................................................s.....................................................................................preview failed: preview output must remain under output/
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:50.3311560Z .preview failed: offline
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1054383Z ..........................................................................................................................................
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1055401Z ======================================================================
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1055982Z HOLD: pgo_v1 research gate
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1057103Z FAIL: test_legacy_and_current_refresh_recompute_rank_highlights (test_pgo_comparison.RatingExplanationTests.test_legacy_and_current_refresh_recompute_rank_highlights)
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1057901Z HOLD: pgo_v1 research gate
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1058896Z ----------------------------------------------------------------------
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1059484Z Traceback (most recent call last):
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1066219Z   File "/home/runner/work/Postgame_Outlet/Postgame_Outlet/tests/test_pgo_comparison.py", line 140, in test_legacy_and_current_refresh_recompute_rank_highlights
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1067368Z     self.assertEqual(pgo_comparison._extract_published_fantasy_panel(self.page),
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1068803Z AssertionError: '  <s[117 chars]dden><!-- CURRENT INJURY NOTE --><p class="fan[802956 chars]ion>' != '  <s[117 chars]dden>\n    <div class="fantasy-status" data-mo[798618 chars]ion>'
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1069798Z 
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1069991Z ======================================================================
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1071047Z FAIL: test_current_notes_preserve_every_saved_projection_byte_and_are_idempotent (test_pgo_current_injury_notes.CurrentInjuryNotesTests.test_current_notes_preserve_every_saved_projection_byte_and_are_idempotent)
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1072000Z ----------------------------------------------------------------------
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1072402Z Traceback (most recent call last):
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1073277Z   File "/home/runner/work/Postgame_Outlet/Postgame_Outlet/tests/test_pgo_current_injury_notes.py", line 16, in test_current_notes_preserve_every_saved_projection_byte_and_are_idempotent
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1074076Z     self.assertEqual(comparison.strip_current_injury_notes(page), saved)
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1074838Z AssertionError: '<!DO[170894 chars]dden>\n    <div class="fantasy-status" data-mo[1233860 chars]l>\n' != '<!DO[170894 chars]dden><!-- CURRENT INJURY NOTE --><p class="fan[1238198 chars]l>\n'
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1075474Z 
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1075671Z ----------------------------------------------------------------------
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1076053Z Ran 576 tests in 478.148s
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1076202Z 
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1076412Z FAILED (failures=2, skipped=1)
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1076817Z Wrote /home/runner/work/Postgame_Outlet/Postgame_Outlet/docs/index.html
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1077224Z   32 teams | EXPERIMENTAL
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1077674Z Wrote /home/runner/work/Postgame_Outlet/Postgame_Outlet/output/fantasy/index.html
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1078477Z   Displayed the latest verified corrected edition; preserved the July archive
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1079192Z   4 fantasy players | PREVIEW / HOLD
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1079613Z Wrote /home/runner/work/Postgame_Outlet/Postgame_Outlet/output/preview.html
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1080046Z   32 teams | EXPERIMENTAL
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1080403Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1080741Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1081101Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1081440Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1081768Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1082110Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1082531Z PASS: accepted PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1082984Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1083333Z BLOCKED: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1083684Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1084029Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1084353Z PASS: PGO fantasy source qualification
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1084796Z usage: python -m unittest [-h] {preview,lock,grade-week,grade-season} ...
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1085148Z 
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1085336Z Build and grade local PGO fantasy prospective evidence
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1085570Z 
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1085719Z positional arguments:
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1086066Z   {preview,lock,grade-week,grade-season}
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1086298Z 
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1086404Z options:
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1086727Z   -h, --help            show this help message and exit
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1087154Z Wrote /tmp/tmp5bpyf20h/lab.html (0 of 2 results)
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1087534Z Wrote /tmp/tmpqli296y0/lab.html (0 of 2 results)
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1087965Z Wrote /tmp/tmpg5qlf_rc/lab.html (0 of 2 results)
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1088609Z Recorded 1 games in 20260908T120000000000Z.json
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1089134Z Verified 1 weekly revisions; 1 games
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1089566Z wrote private preview: /tmp/tmp1ul3f3ca/output/preview.html
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1090004Z wrote private preview: /tmp/tmpq1unpycy/output/preview.html
+build	Run tests (includes the editorial gate)	2026-09-09T16:30:52.1432283Z ##[error]Process completed with exit code 1.

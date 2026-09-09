@@ -16,6 +16,14 @@ The release integrates canonical upstream `951ec61`, reviewed opening-night work
 
 The public HTML is regenerated with `pgo_comparison.py --refresh-mccabe` and `pgo_forecast_lab.py`. `release-verification.json` records generated artifacts, equivalence to the reviewed preview, and preservation of issued evidence and the saved Fantasy panel. Deployment and live verification are separate, later evidence.
 
+## Publication follow-up
+
+Initial release `795edfc` deployed successfully through Pages, but Update board run `34376330141` failed two tests whose reference fixtures assumed the published page had no current injury annotations. The preserved failed-run log documents this. Repair `d7ce3ae` (integrated as `05e49c2`) strips the separately marked annotations from both sides of those comparisons; full saved-payload equality and independent idempotence checks remain enforced. Both stylesheet links now request `pgo-theme.css?v=20260909`, because the existing Shopify iframe retained the old unversioned CSS in its browser cache.
+
+After regenerating both public pages, the complete affected set passed again: **126 tests, 39.973 seconds**. `cache-repair-verification.json` confirms the public artifact changes are only the stylesheet URL and main header render clock. All ratings data, issued evidence and active model code remain unchanged. The next GitHub run must independently pass before the release is reported complete.
+
+The active Shopify Power Ratings template (`159107678440`, page `124696264936`) was also updated through its existing fields: edition `Week 1 2026 · Sean McCabe`, Data as of `September 9, 2026`, and Updated time `September 9, 2026`. Its application URL uses an explicit release query to refresh returning readers' cached HTML; this remains the latest generated application, not a frozen forecast URL. Author, methodology, accountability, archive links and model limitations were preserved. Live deployment receipts are retained in `output/pgo-publication-20260909/` after the final checks.
+
 ## Model and availability limits
 
 The saved model is operationally reproducible and remains **EXPERIMENTAL / HOLD**. Predictive utility is unproved. Publication does not adopt the failed corrected-plus-v2 candidate, refit any model, change issued forecasts, or apply uncalibrated injury penalties.

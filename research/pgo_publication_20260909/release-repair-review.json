@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "commit": "d7ce3aef2089225bdfbe4293c1419e181a8715b4",
+  "base": "795edfc9939e7b4a144147e66762770d03b34b92",
+  "files": [
+    "generate_site.py",
+    "output/pgo-release-fix-20260909/report.md",
+    "pgo_forecast_lab.py",
+    "tests/test_pgo_comparison.py",
+    "tests/test_pgo_current_injury_notes.py",
+    "tests/test_pgo_forecast_lab.py",
+    "tests/test_ratings_release.py"
+  ],
+  "files_sha256": {
+    "generate_site.py": "ff5a2a162da68ad79e43c5ca1ecab672487f1589ee0a184ac468fc226e02fbf4",
+    "output/pgo-release-fix-20260909/report.md": "3420c5fcd1fdcd4b12a721b9f64b99b00ecff93a9643ca1e3d97523cc5eb4022",
+    "pgo_forecast_lab.py": "aac7c7eb62ad736e8b0301c9b004670f81f90bdf6960ea9af80ed6182b37dac9",
+    "tests/test_pgo_comparison.py": "4fbc74a993370603541ea378e8a82ff7e9a228c5e6faf1db9643a78dbe190c01",
+    "tests/test_pgo_current_injury_notes.py": "ce178f3fd6038d1bb97f8208d50e45b0000909896fc457aaccfaef12553df4fd",
+    "tests/test_pgo_forecast_lab.py": "5ec45bc87cb1a6efedc40c3424137f6a016b5f9f058cf59ad8bdb33ae6d1e6e0",
+    "tests/test_ratings_release.py": "bb275944213d2a2f9cba4b7ee5464e6d9e0cdda29b7cbdd87888e0bbbb59bcea"
+  },
+  "independent_exact_failed_tests": {
+    "passed": 2,
+    "seconds": 0.468
+  },
+  "implementer_affected_test_evidence": {
+    "passed": 126,
+    "seconds": 47.566
+  },
+  "model_data_issued_evidence_generated_docs_unchanged": true,
+  "remaining_findings": []
+}
