@@ -4,7 +4,7 @@ scheme_mode,additive,additive = scheme_value adds directly to rating; multiplier
 season,2026,Season label for the output workbook
 edition,Week 1 2026 - McCabe Sep 9,Public edition label
 author,Sean McCabe,Named Power Ratings author
-injury_checked_at,2026-09-09T22:52:14.272959+00:00,Official injury review; independent of rating snapshot time
-injury_status,NE/SEA final inactives are confirmed. Seattle: Nick Emmanwori and Tory Horton inactive; New England: Erick Hunter inactive. See the full lists in the report. Other teams retain earlier dated reports. These notes do not recalculate saved forecasts or grades.,Official injury review; independent of rating snapshot time
+injury_checked_at,2026-09-09T23:15:18.707959+00:00,Official injury review; independent of rating snapshot time
+injury_status,Patriots final inactives rechecked at 7:15 PM ET: Behren Morton is the emergency quarterback; Ben Brown (knee) and TreVeyon Henderson (ankle) are inactive. Seattle final inactives were checked at 6:52 PM ET. Other teams retain earlier dated reports. These notes do not recalculate saved forecasts or grades.,Official injury review; independent of rating snapshot time
 injury_source_url,https://github.com/walshja9/Postgame_Outlet/blob/main/docs/model-update-2026-09-09.md,Official injury review; independent of rating snapshot time
-injury_snapshot,research/pgo_defensive_depth_candidate/source-review-20260909/injury-source.json,Reviewed current fantasy injury annotations; projection inputs remain frozen
+injury_snapshot,research/pgo_defensive_depth_candidate/source-review-20260909/patriots-correction-20260909T231518Z/injury-source.json,Reviewed current fantasy injury annotations; projection inputs remain frozen

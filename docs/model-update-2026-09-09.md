@@ -126,6 +126,17 @@ as context; saved forecasts and model inputs are unchanged.
 
 ## Injury reports and grades
 
+**Patriots clarification verified at 7:15 PM Eastern:** Behren Morton is
+inactive as the emergency quarterback. The club's analysis identifies Ben
+Brown (knee), Karon Prunty, Erick Hunter, Morton, TreVeyon Henderson (ankle),
+Walter Rouse and Efton Chism III as its seven inactives. Both the current club
+roster and official stories spell the linebacker Erick Hunter. Our earlier
+check used the plain inactive list, which omitted Morton's emergency-QB detail;
+the separate analysis now supplies that qualification. This updates reader
+annotations only; earlier source captures and all forecast inputs are preserved.
+[Official Patriots analysis](https://www.patriots.com/news/inactives-analysis-patriots-elevate-rb-lan-larison-from-practice-squad-with-treveyon-henderson-inactive-for-season-opener-vs-seahawks),
+[dated clarification and captures](../research/pgo_defensive_depth_candidate/source-review-20260909/patriots-correction-20260909T231518Z/review.md).
+
 **Final inactives verified at 6:52 PM Eastern:** Seattle's Nick Emmanwori and
 Tory Horton, previously questionable, are inactive. Seattle also lists Ty
 Okada, Nick Kallerup, Beau Stephens, Mike Morris and Jalen Milroe (emergency
