@@ -1,0 +1,73 @@
+{
+  "adoption_status": "NOT_ADOPTED",
+  "artifact_sha256": {
+    "README.md": "9ac19402bb44839bc34d32ec4d4ffb81fb5a010e527d9aa3d42520d46df6e8ed",
+    "current-ratings-diagnostic-20260909.json": "0a155880cf135721c33a1797b7e54b6fbc80ce7dbdd480abf749f06b6343b290",
+    "resume-20260908T232831Z.json": "c471bb2144275b8e2d4b401410cb762a6c743c29b508574035aa391d985d58d0",
+    "reviews/fit-go-ahead-20260909.json": "987c29c534a861fcd8fff619c631ddfdbfd06580d25c6fb8b1e5d54d7b966860",
+    "reviews/independent-current-arithmetic-20260909T002748512653Z.json": "ba60050fa445d6f68b5f19e230d28fad14003eb78ff7af37762aa82f64bdacbe",
+    "reviews/independent-postfit-review-20260909T002603593668Z.json": "53c2e004ecabe63fe6eb4e8c9c70b194bda5bccf1611be91b47e08cfcd565789",
+    "reviews/prepared-state-README-20260909.md": "61fc51ee21a03e076b37d04a1e580c8b962b5d8590c0218a03cfcda69ad32407",
+    "reviews/replacement-prefit-review-20260909-receipt.json": "f13a7b93924ab4da0a551ec7420cd59e8d610c09fb24b4ac92b10331069ea7cc",
+    "reviews/replacement-prefit-review-20260909.md": "3c5ab34b6cd628f269e17e6caa58475b0fcc449f60cca5a213ed3a177da40a5c",
+    "reviews/reviewer-substitution-20260909T001653Z.md": "fc69e70b3ddf74893093a6b279a407b15242982ad558b28b2d8dcef6d16f36f9",
+    "run-20260908/manifest.json": "6bbd0b987d7a619a7b6ffae10c2dde43268b44a3ccb81c7ccd22afd6f51da759",
+    "saved-fit-verification.json": "966e7473de57f4b1a2fc7cfa319ae97786c2e97584a9c5856de3242a95427f88",
+    "test_verify.py": "50e4b198731128d9b3e673a24da9415363e3356c4e8d9f844aa869864c37aba9",
+    "verify.py": "06e8231a703904b41d7b72a750da70559eed401ef5bdb1d67d5817939f442218"
+  },
+  "baseline_refits": 0,
+  "candidate_invocations": 1,
+  "candidate_status": "CLOSED_SCREEN_FAIL",
+  "coefficient_fits": 9,
+  "further_study_screen": {
+    "checks": {
+      "at_least_five_of_eight_seasons": false,
+      "lower_pooled_mae": false,
+      "positive_interval_lower": false
+    },
+    "early_weeks": "DESCRIPTIVE_ONLY",
+    "scientific_status": "EXPERIMENTAL / HOLD",
+    "season_wins": 3,
+    "status": "FAIL"
+  },
+  "limitations": [
+    "Reused historical evaluation seasons; not fresh prospective confirmation.",
+    "Historical source publication vintage and recorded-starter availability remain REVIEW REQUIRED.",
+    "Frozen-current rankings are construction diagnostics and were not used to decide the screen.",
+    "A replacement independent Codex review was used under the user proceed instruction and additive coordination record; no actual Fable concurrence."
+  ],
+  "new_source_captures": 0,
+  "next_action": "Stop this fixed candidate. Keep the issued corrected model and all public outputs unchanged. No additional variants, refits or adoption under this charter.",
+  "primary_comparison": {
+    "candidate_mae": 10.133540443186957,
+    "corrected_mae": 10.099455867555735,
+    "paired_gain": {
+      "blocks": 8,
+      "lower": -0.10230672525946934,
+      "mean": -0.03408457563122193,
+      "samples": 10000,
+      "seed": 20260908,
+      "upper": 0.04482320794383636
+    }
+  },
+  "publications": 0,
+  "recorded_at": "2026-09-09T00:31:10.552077+00:00",
+  "schema_version": 1,
+  "scientific_status": "EXPERIMENTAL / HOLD",
+  "task_status": "COMPLETE",
+  "verification": {
+    "focused_tests_passed": 15,
+    "independent_artifact_review": "PASS",
+    "independent_frozen_current_review": "PASS",
+    "matched_predictions_replayed": 2127,
+    "metric_and_bootstrap_values_verified": 2987,
+    "protected_code_files_unchanged": 23,
+    "protected_public_files_unchanged": 156,
+    "raw_sources_unchanged": 67,
+    "results_documentation_review": "PASS_NO_FACTUAL_OR_CLAIM_ERRORS",
+    "reviewed_readme_preserved_in_archive": true,
+    "reviewed_scientific_inputs_preserved": 46,
+    "serialized_fits_replayed": 9
+  }
+}

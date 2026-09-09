@@ -1,0 +1,74 @@
+{
+  "centered_saved_rating_sum": 4.973799150320701e-14,
+  "diagnostic_sha256": "0a155880cf135721c33a1797b7e54b6fbc80ce7dbdd480abf749f06b6343b290",
+  "final_fit_sha256": "324b6a01d144daf4f665dac6d2173c6113ac942febad2b3d43237930bee8f3d0",
+  "finite_model_input_cells": 1088,
+  "inputs_as_of": "2026-09-08T15:01:38.802823+00:00",
+  "issues": [],
+  "limitations": [
+    "Frozen September 8 construction arithmetic only; no new capture, coefficient fit or source interpretation.",
+    "Historical further-study screen remains FAIL on all three criteria.",
+    "These research ratings supply no adoption, forecast issuance, current-week, source-vintage or true-strength claim."
+  ],
+  "maximum_pair_error": 2.6645352591003757e-14,
+  "maximum_rating_error": 2.1316282072803006e-14,
+  "maximum_swap_sum": 2.7755575615628914e-17,
+  "method": "Independent stdlib math.fsum scoring from saved coefficients/medians/scales with home_field and rest_difference zero. Center all 32 scalar scores, verify all ranks and corrected snapshot annotations, then check all ordered pair differences and reversed signs. No model or verification helper imports.",
+  "pair_checks": 1024,
+  "preservation": {
+    "code_files": 23,
+    "drift": [],
+    "protected_public_data_workflow_files": 156,
+    "raw_sources": 67
+  },
+  "recorded_at": "2026-09-09T00:27:48.512653+00:00",
+  "reviewer": "/root/fit_readiness",
+  "run_manifest_sha256": "6bbd0b987d7a619a7b6ffae10c2dde43268b44a3ccb81c7ccd22afd6f51da759",
+  "saved_fit_verification_sha256": "966e7473de57f4b1a2fc7cfa319ae97786c2e97584a9c5856de3242a95427f88",
+  "schema_version": 1,
+  "scientific_status": "EXPERIMENTAL / HOLD",
+  "status": "PASS_FROZEN_CURRENT_ARITHMETIC_ONLY",
+  "teams": 32,
+  "top_five": [
+    {
+      "corrected_rank": 2,
+      "corrected_rating": 4.506527155798153,
+      "qb_name": "Matthew Stafford",
+      "rank": 1,
+      "rating": 4.874159906519111,
+      "team": "LAR"
+    },
+    {
+      "corrected_rank": 1,
+      "corrected_rating": 5.20024122657874,
+      "qb_name": "Drake Maye",
+      "rank": 2,
+      "rating": 4.844038825211925,
+      "team": "NE"
+    },
+    {
+      "corrected_rank": 3,
+      "corrected_rating": 4.017110306058484,
+      "qb_name": "Sam Darnold",
+      "rank": 3,
+      "rating": 4.2023979437284,
+      "team": "SEA"
+    },
+    {
+      "corrected_rank": 5,
+      "corrected_rating": 3.3536720635727306,
+      "qb_name": "Trevor Lawrence",
+      "rank": 4,
+      "rating": 3.645649446240043,
+      "team": "JAX"
+    },
+    {
+      "corrected_rank": 6,
+      "corrected_rating": 2.991190550066065,
+      "qb_name": "C.J. Stroud",
+      "rank": 5,
+      "rating": 3.531991029951513,
+      "team": "HOU"
+    }
+  ]
+}

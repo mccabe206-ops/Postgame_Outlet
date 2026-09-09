@@ -1,0 +1,292 @@
+{
+  "checks": {
+    "centered_rating_sum": 4.973799150320701e-14,
+    "finite_team_feature_cells": 1088,
+    "maximum_pair_difference_error": 2.6645352591003757e-14,
+    "maximum_scalar_score_error": 2.1316282072803006e-14,
+    "old_sources_unchanged": true,
+    "pair_checks": 1024,
+    "teams": 32
+  },
+  "final_fit_sha256": "324b6a01d144daf4f665dac6d2173c6113ac942febad2b3d43237930bee8f3d0",
+  "identity": "pgo-corrected-roster-candidate-2026-09-08",
+  "independent_helper_sha256": "366514b4259eb13355cb1fe04e257a2bd1be7a50f8b087a1399abe06fe6bf3fc",
+  "input_manifests": {
+    "docs\\evidence\\forecast-lab-2026\\september-08-corrected": "85fe35069145505410567709261663be0939b3ae2fbe05ad147da1d17fc54d83",
+    "research\\pgo_corrected_roster_candidate\\current-preflight-20260908": "0e35d51dc0bcdeb739a17b10e693d47d55e0f8b4810d59da4271dc85b6cf2200",
+    "research\\pgo_corrected_roster_candidate\\run-20260908": "6bbd0b987d7a619a7b6ffae10c2dde43268b44a3ccb81c7ccd22afd6f51da759"
+  },
+  "inputs_as_of": "2026-09-08T15:01:38.802823+00:00",
+  "limitations": [
+    "Frozen September 8 inputs and expected QBs; not a new capture or current-week update.",
+    "Failed historical further-study screen remains FAIL regardless of this ordering.",
+    "No rank-confidence interval, player-quality grade, win probability or calibrated spread-price claim.",
+    "Historical source-vintage uncertainty remains REVIEW REQUIRED."
+  ],
+  "method": "Apply the saved final fit to each team feature vector with neutral venue and equal rest, then subtract the 32-team mean; verify independently with scalar arithmetic and all 1024 pair differences.",
+  "purpose": "Frozen-input construction diagnostic only; not a forecast issuance or selection criterion",
+  "ratings": [
+    {
+      "corrected_rank": 2,
+      "corrected_rating": 4.506527155798153,
+      "qb_name": "Matthew Stafford",
+      "rank": 1,
+      "rating": 4.874159906519111,
+      "team": "LAR"
+    },
+    {
+      "corrected_rank": 1,
+      "corrected_rating": 5.20024122657874,
+      "qb_name": "Drake Maye",
+      "rank": 2,
+      "rating": 4.844038825211925,
+      "team": "NE"
+    },
+    {
+      "corrected_rank": 3,
+      "corrected_rating": 4.017110306058484,
+      "qb_name": "Sam Darnold",
+      "rank": 3,
+      "rating": 4.2023979437284,
+      "team": "SEA"
+    },
+    {
+      "corrected_rank": 5,
+      "corrected_rating": 3.3536720635727306,
+      "qb_name": "Trevor Lawrence",
+      "rank": 4,
+      "rating": 3.645649446240043,
+      "team": "JAX"
+    },
+    {
+      "corrected_rank": 6,
+      "corrected_rating": 2.991190550066065,
+      "qb_name": "C.J. Stroud",
+      "rank": 5,
+      "rating": 3.531991029951513,
+      "team": "HOU"
+    },
+    {
+      "corrected_rank": 4,
+      "corrected_rating": 3.6069738565939673,
+      "qb_name": "Josh Allen",
+      "rank": 6,
+      "rating": 3.3055106466126034,
+      "team": "BUF"
+    },
+    {
+      "corrected_rank": 8,
+      "corrected_rating": 2.671490831398742,
+      "qb_name": "Caleb Williams",
+      "rank": 7,
+      "rating": 2.7415749822658597,
+      "team": "CHI"
+    },
+    {
+      "corrected_rank": 16,
+      "corrected_rating": 0.5753458831041485,
+      "qb_name": "Aaron Rodgers",
+      "rank": 8,
+      "rating": 2.631964086984553,
+      "team": "PIT"
+    },
+    {
+      "corrected_rank": 9,
+      "corrected_rating": 2.2960872317287766,
+      "qb_name": "Lamar Jackson",
+      "rank": 9,
+      "rating": 2.53070522264656,
+      "team": "BAL"
+    },
+    {
+      "corrected_rank": 12,
+      "corrected_rating": 1.648921582277751,
+      "qb_name": "Jared Goff",
+      "rank": 10,
+      "rating": 2.4244367891121783,
+      "team": "DET"
+    },
+    {
+      "corrected_rank": 7,
+      "corrected_rating": 2.9845859611446173,
+      "qb_name": "Jalen Hurts",
+      "rank": 11,
+      "rating": 2.334483598016803,
+      "team": "PHI"
+    },
+    {
+      "corrected_rank": 11,
+      "corrected_rating": 1.9750719916063417,
+      "qb_name": "Brock Purdy",
+      "rank": 12,
+      "rating": 2.1469724305636575,
+      "team": "SF"
+    },
+    {
+      "corrected_rank": 10,
+      "corrected_rating": 2.0021272566739157,
+      "qb_name": "Bo Nix",
+      "rank": 13,
+      "rating": 1.665327736644386,
+      "team": "DEN"
+    },
+    {
+      "corrected_rank": 13,
+      "corrected_rating": 1.5583729102044543,
+      "qb_name": "Joe Burrow",
+      "rank": 14,
+      "rating": 0.8927414395367492,
+      "team": "CIN"
+    },
+    {
+      "corrected_rank": 14,
+      "corrected_rating": 1.355907108984809,
+      "qb_name": "Justin Herbert",
+      "rank": 15,
+      "rating": 0.8656753107881627,
+      "team": "LAC"
+    },
+    {
+      "corrected_rank": 17,
+      "corrected_rating": 0.5125349828885106,
+      "qb_name": "Jordan Love",
+      "rank": 16,
+      "rating": 0.2576601335216395,
+      "team": "GB"
+    },
+    {
+      "corrected_rank": 18,
+      "corrected_rating": 0.2258426613898905,
+      "qb_name": "Daniel Jones",
+      "rank": 17,
+      "rating": 0.0857249529944184,
+      "team": "IND"
+    },
+    {
+      "corrected_rank": 15,
+      "corrected_rating": 0.9588752150705915,
+      "qb_name": "Kyler Murray",
+      "rank": 18,
+      "rating": -0.30722899931374315,
+      "team": "MIN"
+    },
+    {
+      "corrected_rank": 24,
+      "corrected_rating": -1.4895347860496173,
+      "qb_name": "Jaxson Dart",
+      "rank": 19,
+      "rating": -0.482811617926842,
+      "team": "NYG"
+    },
+    {
+      "corrected_rank": 19,
+      "corrected_rating": 0.07934162099758169,
+      "qb_name": "Baker Mayfield",
+      "rank": 20,
+      "rating": -0.5887623961646895,
+      "team": "TB"
+    },
+    {
+      "corrected_rank": 21,
+      "corrected_rating": -0.2901723523153521,
+      "qb_name": "Tua Tagovailoa",
+      "rank": 21,
+      "rating": -0.71221103722538,
+      "team": "ATL"
+    },
+    {
+      "corrected_rank": 20,
+      "corrected_rating": 0.0303216283112846,
+      "qb_name": "Patrick Mahomes",
+      "rank": 22,
+      "rating": -0.7655238626769787,
+      "team": "KC"
+    },
+    {
+      "corrected_rank": 23,
+      "corrected_rating": -1.3868958687869366,
+      "qb_name": "Dak Prescott",
+      "rank": 23,
+      "rating": -1.0768129705435001,
+      "team": "DAL"
+    },
+    {
+      "corrected_rank": 26,
+      "corrected_rating": -2.158132794194188,
+      "qb_name": "Bryce Young",
+      "rank": 24,
+      "rating": -1.5286900702843909,
+      "team": "CAR"
+    },
+    {
+      "corrected_rank": 22,
+      "corrected_rating": -1.3860361279929236,
+      "qb_name": "Jayden Daniels",
+      "rank": 25,
+      "rating": -1.6078923799538671,
+      "team": "WAS"
+    },
+    {
+      "corrected_rank": 25,
+      "corrected_rating": -1.7863724874073057,
+      "qb_name": "Tyler Shough",
+      "rank": 26,
+      "rating": -2.204936216758419,
+      "team": "NO"
+    },
+    {
+      "corrected_rank": 27,
+      "corrected_rating": -3.355557652886148,
+      "qb_name": "Malik Willis",
+      "rank": 27,
+      "rating": -3.319815521660942,
+      "team": "MIA"
+    },
+    {
+      "corrected_rank": 28,
+      "corrected_rating": -4.774939508742264,
+      "qb_name": "Jacoby Brissett",
+      "rank": 28,
+      "rating": -4.85569093767171,
+      "team": "ARI"
+    },
+    {
+      "corrected_rank": 29,
+      "corrected_rating": -5.2389074783773,
+      "qb_name": "Deshaun Watson",
+      "rank": 29,
+      "rating": -4.886447788631955,
+      "team": "CLE"
+    },
+    {
+      "corrected_rank": 30,
+      "corrected_rating": -5.890582465243995,
+      "qb_name": "Cam Ward",
+      "rank": 30,
+      "rating": -5.9537506125231445,
+      "team": "TEN"
+    },
+    {
+      "corrected_rank": 31,
+      "corrected_rating": -7.2242661196070515,
+      "qb_name": "Kirk Cousins",
+      "rank": 31,
+      "rating": -7.001188851153884,
+      "team": "LV"
+    },
+    {
+      "corrected_rank": 32,
+      "corrected_rating": -7.569144382846289,
+      "qb_name": "Geno Smith",
+      "rank": 32,
+      "rating": -7.689251218849066,
+      "team": "NYJ"
+    }
+  ],
+  "recorded_at": "2026-09-09T00:25:22.890532+00:00",
+  "saved_fit_verification_sha256": "966e7473de57f4b1a2fc7cfa319ae97786c2e97584a9c5856de3242a95427f88",
+  "scalar_scoring_helper_sha256": "85fc37bab585843c2603a3b7e599e2682e29cd3b92cb4498dffbb13cdad0070d",
+  "schema_version": 1,
+  "scientific_status": "EXPERIMENTAL / HOLD",
+  "used_for_selection": false
+}
