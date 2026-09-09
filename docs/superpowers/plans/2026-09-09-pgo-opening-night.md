@@ -75,3 +75,27 @@ pending until their actual release; hand off the exact next refresh command.
   drawers, sorting, McCabe/PGO distinction, links and injury clocks.
 - Verify original checkout, raw sources, old receipts and issued forecasts retain
   their pinned bytes; collect final private preview and reviewable release diff.
+
+## Integration outcome - September 9
+
+All three task implementations and independent reviews passed. The first source
+checkpoint is `c0c6c8c`; the final evidence receipt under
+`research/pgo_opening_night_20260909/` records subsequent checkpoint and preview
+hashes. Public generation/push and the game-day inactive lock remain separate.
+
+- Supported repository discovery: 572 tests, one skip, exit 0 (607.408 seconds).
+- Final focused renderer/release/comparison/annotation checks: 82 passed
+  (49.571 seconds), including the final Tua starter/backup and age/experience
+  corrections. All 32 supplied component grades remain exact.
+- Source preservation: 431 original-checkout paths, 476 protected paths,
+  51 issued evidence files and prior snapshot entries verified unchanged.
+  `docs/index.html` also retains its original checkout hash after the tests.
+- Desktop/mobile/embedded browser checks passed. Final Forecast Lab CSS fixes
+  unreadable old row headers; no generated archive or forecast was rewritten.
+- The whole-diff whitespace check reports only three upstream trailing spaces
+  in the byte-pinned Bills news capture. The source check excludes that exact
+  raw capture and passes; evidence bytes were preserved instead of reformatted.
+
+The final Task 1 report records the separate corrected-roster package checks.
+The opening-night README and Task 3 report retain the next official inactive
+capture procedure and the explicit unknown-report coverage.

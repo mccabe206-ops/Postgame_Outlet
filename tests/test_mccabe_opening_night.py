@@ -22,6 +22,8 @@ class McCabeOpeningNightTests(unittest.TestCase):
         self.assertEqual(len(starters), 32)
         self.assertEqual(len(backups), 18)
         self.assertFalse({row["name"] for row in starters} & {row["name"] for row in backups})
+        tua = next(row for row in starters if row["name"] == "Tua Tagovailoa")
+        self.assertEqual((tua["age"], tua["exp"]), ("28", "6"))
 
     def test_comparison_uses_the_active_config_edition_snapshot(self):
         rows = [{"team": "Alpha", "rating": 1.0}]

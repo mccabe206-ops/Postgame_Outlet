@@ -20,7 +20,7 @@ review of the private artifact.
 - `injuries/editorial-application*.json` records the subsequent factual wording
   changes. No injury point penalties were invented and approved grades remain
   exact. `injuries/injury-source.json` is the validated 32-team, 29-player ledger;
-  `annotations-reviewed.json` and the dated capture folders retain source bytes,
+  `injuries/annotations-reviewed.json` and the dated capture folders retain source bytes,
   IDs, publication clocks and actual observation clocks.
 - The official reports were checked September 9, 10:42-10:46 a.m. Eastern:
   NE/SEA final game designations, SF/LAR practice reports, and 28 teams with
@@ -34,6 +34,10 @@ review of the private artifact.
   versus the preserved 115-row diagnostic. The full comparison covers 310,475
   REG snap rows / 416 team-seasons; 8,461 unresolved rows remain unresolved.
   Raw sources and default model source selection remain intact.
+- `editorial-metadata-followup.json` carries Tua Tagovailoa's existing 28/6
+  age/experience fields from the backup source into his newly approved Atlanta
+  starter row. The shared QB loader also omits current starters from backups.
+  This changes no grade and invents no replacement quarterback value.
 - `identity/package-20260909` retains the first STOP attempt and its exact
   builder. Only `package-complete-20260909` passed. No historical feature walk,
   model fit, spent-study rerun, or forecast adoption occurred.
@@ -59,7 +63,8 @@ into the private preview directory for inspection.
 Browser review covers desktop 1280 px, mobile 375 px and embedded width 640 px;
 no page overflow, all-column scrolling, sorting, historical snapshots, keyboard
 drawer open/close and focus restoration, separate McCabe/PGO views, Fantasy
-search, and Henderson OUT / Horton QUESTIONABLE source badges.
+search, and Henderson OUT / Horton QUESTIONABLE source badges. The shared theme
+also supplies readable Forecast Lab row headers without rewriting the archive.
 
 ## Next game-day check
 
