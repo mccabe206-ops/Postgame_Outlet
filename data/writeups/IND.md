@@ -1,16 +1,20 @@
-## The case for the middle
+## Week 1 availability
 
-Indianapolis grades as a roughly average team across the board — no glaring weakness, no real strength.
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
+## The case for a solid roster
+
+Indianapolis grades as a well-built roster held back by the quarterback spot — an above-average skill group and a defense lifted by a real secondary upgrade.
 
 ## Quarterback
 
-Daniel Jones (0.0) is priced as an exactly-average starter. The model sees a competent placeholder, not a difference-maker.
+Daniel Jones (0.0) is priced as a middling starter — neither a lever up nor a big weight down; his mobility and the weapons around him support the grade.
 
 ## What moved the number
 
-- **Offense (0.0):** Jonathan Taylor is the engine at running back, but the unit as a whole grades neutral.
-- **Defense (−0.5):** a touch below average even with Key and Clemons added to the front.
+- **Offense (+0.5):** raised from 0.0. This is an above-average non-QB group: **Jonathan Taylor is an elite back**, the offensive line is strong (Nelson, Raimann, Bortolini), the receiver trio (Pierce, Keenan Allen, Josh Downs) is real, and **Tyler Warren is a talented second-year tight end**. Every current injury (Downs calf, Warren groin) is minor and trending to play.
+- **Defense (0.0):** raised from −0.5. Adding **Sauce Gardner and Charvarius Ward** is a genuine secondary upgrade — both are expected to play Week 1 — alongside Key, Latu, and Grover Stewart up front. Linebacker is thin and the pass rush is only average, which keeps it at neutral rather than positive.
 
 ## Bottom line
 
-A middle-of-the-pack roster with a middle-of-the-pack QB. Nothing here is broken, but nothing lifts it — the definition of an average team.
+A quietly complete roster; the ceiling is capped by Daniel Jones, but the surrounding talent — Taylor, the line, and the upgraded secondary — makes this better than a bottom-half team.

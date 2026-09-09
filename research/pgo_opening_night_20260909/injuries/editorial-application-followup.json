@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "applied_at": "2026-09-09T14:56:37.117298+00:00",
+  "reason": "Final source review removes residual unsupported current-health wording",
+  "edits": [
+    {
+      "team": "BUF",
+      "before_sha256": "cfcc35586fb6717af4d1cf0575d2bd100cade88ca102640becfdd2b1eeb13186",
+      "after_sha256": "48a0eb223a7d715f64abce78e5999053f44f59a8247c950779a8bfdf892fdb4c",
+      "replacements": [
+        [
+          "With the receiver room down to DJ Moore plus two banged-up complementary starters",
+          "With the receiver room relying on DJ Moore and complementary starters whose current availability remains unverified"
+        ]
+      ]
+    },
+    {
+      "team": "SF",
+      "before_sha256": "2e6dd263be9963058605407344fef09f87c9729ced6cf1605e46570532f5e710",
+      "after_sha256": "f9101f36aafda9da32364d3ae4eae9841f3ef2c686f16950a62df888481c948b",
+      "replacements": [
+        [
+          "Pearsall on IR, McCaffrey banged up, Kittle working back",
+          "Pearsall on IR, McCaffrey's current injury designation unverified, Kittle working back"
+        ]
+      ]
+    },
+    {
+      "team": "NE",
+      "before_sha256": "f7df99965d24abd14d03b6e3f7cc69eeacf7a0e091f17c3d013f0f21bee84687",
+      "after_sha256": "8d22482fe2a6283874f0580a1cb333a813e8cb9684e27ad388dd6593e3e5f365",
+      "replacements": [
+        [
+          "Barmore is expected to go.",
+          "Barmore practiced fully and had no game designation in the September 8 final report."
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,653 @@
+{
+  "status": "PASS",
+  "imported_at": "2026-09-09T14:51:47.234384+00:00",
+  "edition": "Week 1 2026 - McCabe Sep 9",
+  "scope": "User-approved human editorial grades and supplied prose; private preview, not public publication",
+  "source_sha256": "164f9b55a42064ef3107f4e089cb32cd99acec93ac8dd20342d9afd37ca8dae7",
+  "teams": 32,
+  "rendered_writeups_match_supplied_html": true,
+  "previous_snapshot_entries_unchanged": true,
+  "injury_corrections": "Applied separately after this exact import; original reference remains intact",
+  "rows": [
+    {
+      "team": "Los Angeles Rams",
+      "abbr": "LAR",
+      "supplied_rank": 1,
+      "supplied_rating": "+7.6",
+      "before": {
+        "qb_name": "Matthew Stafford",
+        "qb_value": "5.5",
+        "off_value": "0.9",
+        "def_value": "0.9"
+      },
+      "after": {
+        "qb_name": "Matthew Stafford",
+        "qb_value": "5.5",
+        "off_value": "0.9",
+        "def_value": "1.2"
+      },
+      "supplied_writeup_rendered_sha256": "c8f0b53c48b994f1cc1ddeb9c25ec577ad606435fc3f927e398d93ad5f81a1df",
+      "imported_markdown_sha256": "1badafa31b3e81b4527bdae12d15bf72779043aa4de515a37b371b2bbcb86f05"
+    },
+    {
+      "team": "Buffalo Bills",
+      "abbr": "BUF",
+      "supplied_rank": 2,
+      "supplied_rating": "+6.6",
+      "before": {
+        "qb_name": "Josh Allen",
+        "qb_value": "6.5",
+        "off_value": "1.0",
+        "def_value": "-0.5"
+      },
+      "after": {
+        "qb_name": "Josh Allen",
+        "qb_value": "6.5",
+        "off_value": "0.6",
+        "def_value": "-0.5"
+      },
+      "supplied_writeup_rendered_sha256": "8a4cf402e96217a7f3623906bb36291aef8f3694af8b475281e1b525942e3646",
+      "imported_markdown_sha256": "a31659a8ec174e97395d1acbf4126d0b718ca21b069fb78a6ad335278adc1380"
+    },
+    {
+      "team": "Baltimore Ravens",
+      "abbr": "BAL",
+      "supplied_rank": 3,
+      "supplied_rating": "+6.0",
+      "before": {
+        "qb_name": "Lamar Jackson",
+        "qb_value": "4.5",
+        "off_value": "0.5",
+        "def_value": "0.5"
+      },
+      "after": {
+        "qb_name": "Lamar Jackson",
+        "qb_value": "4.5",
+        "off_value": "0.5",
+        "def_value": "1.0"
+      },
+      "supplied_writeup_rendered_sha256": "6637a822f2efdf8a6fa28eb146416d51f25e5ad4d2c46f7ab6f2c1dfdae91b62",
+      "imported_markdown_sha256": "773b73fffd242513ea4c49aba44bebaa4768f81eb32995b89bfcb984e38faeba"
+    },
+    {
+      "team": "Seattle Seahawks",
+      "abbr": "SEA",
+      "supplied_rank": 4,
+      "supplied_rating": "+5.5",
+      "before": {
+        "qb_name": "Sam Darnold",
+        "qb_value": "2.0",
+        "off_value": "2.0",
+        "def_value": "2.0"
+      },
+      "after": {
+        "qb_name": "Sam Darnold",
+        "qb_value": "2.0",
+        "off_value": "1.5",
+        "def_value": "2.0"
+      },
+      "supplied_writeup_rendered_sha256": "258b4fa5243345cc911b209e03bf45e7be39f4c7e4c11dced8060ce310f1d857",
+      "imported_markdown_sha256": "1fb7b1fe098db626a187aec1e5310a540bd876868e9c4bd62a5463bedc5ed6ba"
+    },
+    {
+      "team": "Cincinnati Bengals",
+      "abbr": "CIN",
+      "supplied_rank": 5,
+      "supplied_rating": "+5.0",
+      "before": {
+        "qb_name": "Joe Burrow",
+        "qb_value": "5.0",
+        "off_value": "0.5",
+        "def_value": "-0.5"
+      },
+      "after": {
+        "qb_name": "Joe Burrow",
+        "qb_value": "5.0",
+        "off_value": "0.5",
+        "def_value": "-0.5"
+      },
+      "supplied_writeup_rendered_sha256": "b62ea92282ab28e950748d0cc0220a56d46ccb1d513bc72c91690353b74acccc",
+      "imported_markdown_sha256": "c389d5311dcd39aa685ef9887f4f2161eea78d668500e6ee0df358a3592626d0"
+    },
+    {
+      "team": "Los Angeles Chargers",
+      "abbr": "LAC",
+      "supplied_rank": 6,
+      "supplied_rating": "+4.8",
+      "before": {
+        "qb_name": "Justin Herbert",
+        "qb_value": "4.0",
+        "off_value": "0.5",
+        "def_value": "0.5"
+      },
+      "after": {
+        "qb_name": "Justin Herbert",
+        "qb_value": "4.0",
+        "off_value": "0.3",
+        "def_value": "0.5"
+      },
+      "supplied_writeup_rendered_sha256": "87cb09f6cae5ffc5439ae35192637bd1bbb6f5bbe1a978706cd04165b29f2373",
+      "imported_markdown_sha256": "76275a6e40bc8f6c479e49a2ef9ca679f93f98bea276ef3a3918c7a4fbfa2ab3"
+    },
+    {
+      "team": "New England Patriots",
+      "abbr": "NE",
+      "supplied_rank": 7,
+      "supplied_rating": "+4.0",
+      "before": {
+        "qb_name": "Drake Maye",
+        "qb_value": "3.0",
+        "off_value": "0.5",
+        "def_value": "0.5"
+      },
+      "after": {
+        "qb_name": "Drake Maye",
+        "qb_value": "3.0",
+        "off_value": "0.5",
+        "def_value": "0.5"
+      },
+      "supplied_writeup_rendered_sha256": "aeecd5d403fffc0618071e2d1cc5a71a5b869eb8f41bebe7a76a5c6bff5c2d4a",
+      "imported_markdown_sha256": "953ca15fded01183cc456cac4621d4df2d55d86baa95642ca15a4a79ebb0cd7c"
+    },
+    {
+      "team": "San Francisco 49ers",
+      "abbr": "SF",
+      "supplied_rank": 8,
+      "supplied_rating": "+3.2",
+      "before": {
+        "qb_name": "Brock Purdy",
+        "qb_value": "2.5",
+        "off_value": "0.25",
+        "def_value": "0.5"
+      },
+      "after": {
+        "qb_name": "Brock Purdy",
+        "qb_value": "2.5",
+        "off_value": "0.2",
+        "def_value": "0.5"
+      },
+      "supplied_writeup_rendered_sha256": "dab6d19beb5fd4ed3a7e2577b919676f420f8c5815b6c3e82897de9421263a3b",
+      "imported_markdown_sha256": "4aff982ded2c0f74d2c4757634e8456d825a9ec4a04d152b9b49c5b5c762c55a"
+    },
+    {
+      "team": "Jacksonville Jaguars",
+      "abbr": "JAX",
+      "supplied_rank": 9,
+      "supplied_rating": "+3.0",
+      "before": {
+        "qb_name": "Trevor Lawrence",
+        "qb_value": "3.0",
+        "off_value": "0.0",
+        "def_value": "0.0"
+      },
+      "after": {
+        "qb_name": "Trevor Lawrence",
+        "qb_value": "3.0",
+        "off_value": "0.0",
+        "def_value": "0.0"
+      },
+      "supplied_writeup_rendered_sha256": "5b2e545ef5ac7ea48741c99e386b965366a1bfc4d0b16d4f025febb5a9b57dd6",
+      "imported_markdown_sha256": "78d9afe65bf180dd4182eeaf5dacc669b9db380a156c21acb57947eba6f5ca64"
+    },
+    {
+      "team": "Kansas City Chiefs",
+      "abbr": "KC",
+      "supplied_rank": 10,
+      "supplied_rating": "+3.0",
+      "before": {
+        "qb_name": "Patrick Mahomes",
+        "qb_value": "4.5",
+        "off_value": "0.0",
+        "def_value": "-0.5"
+      },
+      "after": {
+        "qb_name": "Patrick Mahomes",
+        "qb_value": "3.5",
+        "off_value": "0.0",
+        "def_value": "-0.5"
+      },
+      "supplied_writeup_rendered_sha256": "1a12a4f58102c7289eaa28548f31353e022f9e92fe17a746cd58a335221bee89",
+      "imported_markdown_sha256": "a7a37ca1e1e76aeb167342c1abb134da5ef84373960b2c30c5832b4bf77c7947"
+    },
+    {
+      "team": "Philadelphia Eagles",
+      "abbr": "PHI",
+      "supplied_rank": 11,
+      "supplied_rating": "+3.0",
+      "before": {
+        "qb_name": "Jalen Hurts",
+        "qb_value": "2.0",
+        "off_value": "0.0",
+        "def_value": "0.5"
+      },
+      "after": {
+        "qb_name": "Jalen Hurts",
+        "qb_value": "2.0",
+        "off_value": "0.5",
+        "def_value": "0.5"
+      },
+      "supplied_writeup_rendered_sha256": "d313c09a49c2d61e34f3f0d7bd5e00477c9cd5974945e9f087675560a418bff2",
+      "imported_markdown_sha256": "5576c9f2dd11a3ebedd4f37be63e78f649b92e0df25520a0c88f02c577bc3553"
+    },
+    {
+      "team": "Houston Texans",
+      "abbr": "HOU",
+      "supplied_rank": 12,
+      "supplied_rating": "+2.8",
+      "before": {
+        "qb_name": "C.J. Stroud",
+        "qb_value": "0.5",
+        "off_value": "0.5",
+        "def_value": "2.0"
+      },
+      "after": {
+        "qb_name": "C.J. Stroud",
+        "qb_value": "0.5",
+        "off_value": "0.3",
+        "def_value": "2.0"
+      },
+      "supplied_writeup_rendered_sha256": "aec4af549ce8d7e00b0804dde440d22a1b3525bae85c61511b52783f1f7bbfab",
+      "imported_markdown_sha256": "eae4f6c7566dabc689b6544159a2c82cb87e5e2e156f421df5e8ac04dbaddedb"
+    },
+    {
+      "team": "Chicago Bears",
+      "abbr": "CHI",
+      "supplied_rank": 13,
+      "supplied_rating": "+2.5",
+      "before": {
+        "qb_name": "Caleb Williams",
+        "qb_value": "3.0",
+        "off_value": "0.5",
+        "def_value": "-0.5"
+      },
+      "after": {
+        "qb_name": "Caleb Williams",
+        "qb_value": "3.0",
+        "off_value": "0.0",
+        "def_value": "-0.5"
+      },
+      "supplied_writeup_rendered_sha256": "141e679b8ec2b436e3bd5e6392d0499a6bd0b2b1d595fa1be4003c54abd340e2",
+      "imported_markdown_sha256": "6cd3b07de948113b25357ee727f9395eccb428c01186188f4a81bb8dc9e02b64"
+    },
+    {
+      "team": "Tampa Bay Buccaneers",
+      "abbr": "TB",
+      "supplied_rank": 14,
+      "supplied_rating": "+2.5",
+      "before": {
+        "qb_name": "Baker Mayfield",
+        "qb_value": "2.0",
+        "off_value": "1.0",
+        "def_value": "-0.5"
+      },
+      "after": {
+        "qb_name": "Baker Mayfield",
+        "qb_value": "2.0",
+        "off_value": "1.0",
+        "def_value": "-0.5"
+      },
+      "supplied_writeup_rendered_sha256": "fc8e2745875f4e969dceb719dd4764ebe763452ac0d883c269a1f55e0c3c4f27",
+      "imported_markdown_sha256": "55d498911d3b8ede4bc58fbd12ec785bca0b0ba97e8ab8c04e45b2a4bb2d7fd8"
+    },
+    {
+      "team": "Denver Broncos",
+      "abbr": "DEN",
+      "supplied_rank": 15,
+      "supplied_rating": "+2.2",
+      "before": {
+        "qb_name": "Bo Nix",
+        "qb_value": "-0.5",
+        "off_value": "0.0",
+        "def_value": "2.0"
+      },
+      "after": {
+        "qb_name": "Bo Nix",
+        "qb_value": "0.0",
+        "off_value": "0.5",
+        "def_value": "1.7"
+      },
+      "supplied_writeup_rendered_sha256": "c1b46f8e616f30e002c8774b7fbd16b91a9a802d4a72b623d2d4d9bee8a63cf2",
+      "imported_markdown_sha256": "686d5cd0f7116b3ec8ddb7ff438205386d63f2342ed31fa1370433be34acd367"
+    },
+    {
+      "team": "Dallas Cowboys",
+      "abbr": "DAL",
+      "supplied_rank": 16,
+      "supplied_rating": "+2.0",
+      "before": {
+        "qb_name": "Dak Prescott",
+        "qb_value": "1.5",
+        "off_value": "0.5",
+        "def_value": "0.0"
+      },
+      "after": {
+        "qb_name": "Dak Prescott",
+        "qb_value": "1.5",
+        "off_value": "1.0",
+        "def_value": "-0.5"
+      },
+      "supplied_writeup_rendered_sha256": "e668a28a7f344dd05d9defeb2486cc7a111aa20388ffe1ecacde428a9c89d11a",
+      "imported_markdown_sha256": "e1226611c383a8149e0c5eb6884b757e967324141a7b0f544bc3b714488f1ef4"
+    },
+    {
+      "team": "Detroit Lions",
+      "abbr": "DET",
+      "supplied_rank": 17,
+      "supplied_rating": "+2.0",
+      "before": {
+        "qb_name": "Jared Goff",
+        "qb_value": "2.0",
+        "off_value": "1.0",
+        "def_value": "0.0"
+      },
+      "after": {
+        "qb_name": "Jared Goff",
+        "qb_value": "2.0",
+        "off_value": "1.0",
+        "def_value": "-1.0"
+      },
+      "supplied_writeup_rendered_sha256": "f98bc9c019203fe5bdedd00c447981e10e44bd98006ba229281020185419516f",
+      "imported_markdown_sha256": "b6887b1a50130f33bd2246c34bb46662836e69d2eb8c1690a6cb0ce9080c8cbb"
+    },
+    {
+      "team": "Green Bay Packers",
+      "abbr": "GB",
+      "supplied_rank": 18,
+      "supplied_rating": "+1.0",
+      "before": {
+        "qb_name": "Jordan Love",
+        "qb_value": "1.0",
+        "off_value": "0.5",
+        "def_value": "-0.5"
+      },
+      "after": {
+        "qb_name": "Jordan Love",
+        "qb_value": "1.0",
+        "off_value": "0.5",
+        "def_value": "-0.5"
+      },
+      "supplied_writeup_rendered_sha256": "2ed5b468de116fc549c80ae8bb2c315cf3c2ad64470b5e630b5327a9fa129f6b",
+      "imported_markdown_sha256": "65bb0b0d6f8c79c07e7c643595b0885181d8a22e45f276f6105c4fa33b30bccb"
+    },
+    {
+      "team": "Minnesota Vikings",
+      "abbr": "MIN",
+      "supplied_rank": 19,
+      "supplied_rating": "+1.0",
+      "before": {
+        "qb_name": "Kyler Murray",
+        "qb_value": "-0.5",
+        "off_value": "1.0",
+        "def_value": "0.5"
+      },
+      "after": {
+        "qb_name": "Kyler Murray",
+        "qb_value": "-0.5",
+        "off_value": "1.0",
+        "def_value": "0.5"
+      },
+      "supplied_writeup_rendered_sha256": "28d7c98d9a3e891360e3b2a18a3e08725137b28b2c2a98d4855a781be34cf09f",
+      "imported_markdown_sha256": "74bd94d6509c3664d6b7405ccde6b56acc5cba3ebf60bd459e611c23d1c6d00c"
+    },
+    {
+      "team": "Indianapolis Colts",
+      "abbr": "IND",
+      "supplied_rank": 20,
+      "supplied_rating": "+0.5",
+      "before": {
+        "qb_name": "Daniel Jones",
+        "qb_value": "0.0",
+        "off_value": "0.0",
+        "def_value": "-0.5"
+      },
+      "after": {
+        "qb_name": "Daniel Jones",
+        "qb_value": "0.0",
+        "off_value": "0.5",
+        "def_value": "0.0"
+      },
+      "supplied_writeup_rendered_sha256": "2cc9ed4e70bf577e200010bb42be4ed677bb93bcbab23480580232ae28d9d529",
+      "imported_markdown_sha256": "67538e3f50264fb4c7faf0f3c2ed2441a05b218563a4ad6518e481a85c2db50c"
+    },
+    {
+      "team": "Pittsburgh Steelers",
+      "abbr": "PIT",
+      "supplied_rank": 21,
+      "supplied_rating": "+0.0",
+      "before": {
+        "qb_name": "Aaron Rodgers",
+        "qb_value": "-1.0",
+        "off_value": "0.0",
+        "def_value": "1.0"
+      },
+      "after": {
+        "qb_name": "Aaron Rodgers",
+        "qb_value": "-1.0",
+        "off_value": "0.0",
+        "def_value": "1.0"
+      },
+      "supplied_writeup_rendered_sha256": "93eac6b41dc8cc9aaa5d1c246cbf51f422053eba720fcf4d915e4073279eb9c6",
+      "imported_markdown_sha256": "f4518119d43e206e80c9ed406275d6536a543108153238f4f354973a7adfee16"
+    },
+    {
+      "team": "Washington Commanders",
+      "abbr": "WAS",
+      "supplied_rank": 22,
+      "supplied_rating": "+0.0",
+      "before": {
+        "qb_name": "Jayden Daniels",
+        "qb_value": "2.0",
+        "off_value": "0.0",
+        "def_value": "-1.0"
+      },
+      "after": {
+        "qb_name": "Jayden Daniels",
+        "qb_value": "2.0",
+        "off_value": "-1.0",
+        "def_value": "-1.0"
+      },
+      "supplied_writeup_rendered_sha256": "4473011e69a843b3ea23b2b416a1b17ac0561ae34e4dffc3a7d079ef392ec5e4",
+      "imported_markdown_sha256": "d0d4861236707d8a6897739a1a852798626b0feea51da682786f4acbd450dd1d"
+    },
+    {
+      "team": "Tennessee Titans",
+      "abbr": "TEN",
+      "supplied_rank": 23,
+      "supplied_rating": "-0.5",
+      "before": {
+        "qb_name": "Cam Ward",
+        "qb_value": "0.0",
+        "off_value": "-0.5",
+        "def_value": "0.0"
+      },
+      "after": {
+        "qb_name": "Cam Ward",
+        "qb_value": "0.0",
+        "off_value": "-0.5",
+        "def_value": "0.0"
+      },
+      "supplied_writeup_rendered_sha256": "55b1e65f6a79940db9807e20d90317bad2ad7c7d63312fa7263c2bb090cd475b",
+      "imported_markdown_sha256": "33510cd636a8081699f318164d918ba4824a72a220bb791ec23f9470512576e1"
+    },
+    {
+      "team": "Carolina Panthers",
+      "abbr": "CAR",
+      "supplied_rank": 24,
+      "supplied_rating": "-0.5",
+      "before": {
+        "qb_name": "Bryce Young",
+        "qb_value": "0.5",
+        "off_value": "0.0",
+        "def_value": "0.0"
+      },
+      "after": {
+        "qb_name": "Bryce Young",
+        "qb_value": "0.5",
+        "off_value": "-1.0",
+        "def_value": "0.0"
+      },
+      "supplied_writeup_rendered_sha256": "980c542c7120bc12c8d07c62a8472932c39fa410d187991aaa3be29fc3f3e3bb",
+      "imported_markdown_sha256": "87a22a1882d56b53d2fe6a626ab80f1481f9752d0076eb12d4504b3f2e056cd2"
+    },
+    {
+      "team": "New York Giants",
+      "abbr": "NYG",
+      "supplied_rank": 25,
+      "supplied_rating": "-1.0",
+      "before": {
+        "qb_name": "Jaxson Dart",
+        "qb_value": "-1.0",
+        "off_value": "-0.5",
+        "def_value": "0.5"
+      },
+      "after": {
+        "qb_name": "Jaxson Dart",
+        "qb_value": "-1.0",
+        "off_value": "-0.5",
+        "def_value": "0.5"
+      },
+      "supplied_writeup_rendered_sha256": "7868a0d2e974e0d9592e82b72b03eea48f5512d12dc797d837b88622eb0bc551",
+      "imported_markdown_sha256": "29e10f6e7304758e9892f8ca7f0e253eb18679142617383a6021d68108bdc34b"
+    },
+    {
+      "team": "New Orleans Saints",
+      "abbr": "NO",
+      "supplied_rank": 26,
+      "supplied_rating": "-1.3",
+      "before": {
+        "qb_name": "Tyler Shough",
+        "qb_value": "-1.0",
+        "off_value": "0.2",
+        "def_value": "0.0"
+      },
+      "after": {
+        "qb_name": "Tyler Shough",
+        "qb_value": "-1.0",
+        "off_value": "0.0",
+        "def_value": "-0.3"
+      },
+      "supplied_writeup_rendered_sha256": "be3fbdeb4d1025a7618323a68f4a8f4597b0fa1572939f84ffe1eede0c009112",
+      "imported_markdown_sha256": "94b70b89c2f7546ff56d34fde6af1512ef4f1d34ef5ab9eb2ffc19c248549183"
+    },
+    {
+      "team": "Atlanta Falcons",
+      "abbr": "ATL",
+      "supplied_rank": 27,
+      "supplied_rating": "-2.0",
+      "before": {
+        "qb_name": "Michael Penix Jr.",
+        "qb_value": "-2.0",
+        "off_value": "1.0",
+        "def_value": "0.0"
+      },
+      "after": {
+        "qb_name": "Tua Tagovailoa",
+        "qb_value": "-2.5",
+        "off_value": "1.0",
+        "def_value": "-0.5"
+      },
+      "supplied_writeup_rendered_sha256": "da706514db5dd6406a15faf13b33328a754d34956422c8e392b564b494019922",
+      "imported_markdown_sha256": "9393dfc495fe8480e083f2c7c5353d7d32e7fd909f25ef1c31b34b5f50a195f8"
+    },
+    {
+      "team": "Cleveland Browns",
+      "abbr": "CLE",
+      "supplied_rank": 28,
+      "supplied_rating": "-2.5",
+      "before": {
+        "qb_name": "Deshaun Watson",
+        "qb_value": "-2.5",
+        "off_value": "-1.0",
+        "def_value": "1.0"
+      },
+      "after": {
+        "qb_name": "Deshaun Watson",
+        "qb_value": "-2.5",
+        "off_value": "-1.0",
+        "def_value": "1.0"
+      },
+      "supplied_writeup_rendered_sha256": "a16c35a63d03aa47920fa16469b0109820ea4f86fffde232c5390289b6c1aff5",
+      "imported_markdown_sha256": "2607dd67e0af2c2b38fc6a46f24280f4800d437c1314d6c0056987621f09a69e"
+    },
+    {
+      "team": "Arizona Cardinals",
+      "abbr": "ARI",
+      "supplied_rank": 29,
+      "supplied_rating": "-3.5",
+      "before": {
+        "qb_name": "Jacoby Brissett",
+        "qb_value": "-1.5",
+        "off_value": "-1.0",
+        "def_value": "-1.0"
+      },
+      "after": {
+        "qb_name": "Jacoby Brissett",
+        "qb_value": "-1.5",
+        "off_value": "-1.0",
+        "def_value": "-1.0"
+      },
+      "supplied_writeup_rendered_sha256": "4086c40038b6cd6c35118528c9f134e866934b49115be7770fe3723b49457189",
+      "imported_markdown_sha256": "5d49abe407fa6d070fcfecca54c978647bcdf44a64c17b11007d31a3eb4974d1"
+    },
+    {
+      "team": "New York Jets",
+      "abbr": "NYJ",
+      "supplied_rank": 30,
+      "supplied_rating": "-4.0",
+      "before": {
+        "qb_name": "Geno Smith",
+        "qb_value": "-2.0",
+        "off_value": "-2.0",
+        "def_value": "-1.5"
+      },
+      "after": {
+        "qb_name": "Geno Smith",
+        "qb_value": "-2.0",
+        "off_value": "-1.0",
+        "def_value": "-1.0"
+      },
+      "supplied_writeup_rendered_sha256": "ee3b31f85629ba3c4ebf03ac96231f3205133dec40d350b134d734013ab55fcf",
+      "imported_markdown_sha256": "66e5e2d26b2b558386abec42fa4d0cc8d280c980851eb11c424ddecb425d8e4c"
+    },
+    {
+      "team": "Las Vegas Raiders",
+      "abbr": "LV",
+      "supplied_rank": 31,
+      "supplied_rating": "-4.0",
+      "before": {
+        "qb_name": "Kirk Cousins",
+        "qb_value": "-2.5",
+        "off_value": "-0.5",
+        "def_value": "-1.0"
+      },
+      "after": {
+        "qb_name": "Kirk Cousins",
+        "qb_value": "-2.5",
+        "off_value": "-0.5",
+        "def_value": "-1.0"
+      },
+      "supplied_writeup_rendered_sha256": "500eb8d078159e1f5c8183513fb8f8682f42a210b03fc6f5acfc73fd600b66eb",
+      "imported_markdown_sha256": "7192922a54e1d05d29004bbc4cc3762cb0c4fcafc5c297b1df59cf1cd644f3ce"
+    },
+    {
+      "team": "Miami Dolphins",
+      "abbr": "MIA",
+      "supplied_rank": 32,
+      "supplied_rating": "-4.5",
+      "before": {
+        "qb_name": "Malik Willis",
+        "qb_value": "-1.5",
+        "off_value": "-1.5",
+        "def_value": "-1.5"
+      },
+      "after": {
+        "qb_name": "Malik Willis",
+        "qb_value": "-1.5",
+        "off_value": "-1.5",
+        "def_value": "-1.5"
+      },
+      "supplied_writeup_rendered_sha256": "01cc39c4967f3c261e0d8d3ec46fe0217e5768e9d6f0cc246efa071cb0f3b25b",
+      "imported_markdown_sha256": "00f54039d1e81b333d1d29fee9c2341565239ca82f7aa685ed8275bef2602743"
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "recorded_at": "2026-09-09T14:51:29.596562+00:00",
+  "sources": [
+    {
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\49ers-news-index.html",
+      "url": "https://www.49ers.com/news/",
+      "captured_at": "2026-09-09T14:42:35.237216+00:00",
+      "bytes": 477981,
+      "sha256": "507f9e4dacee911792436b2bb583b0f82352273c264102dc9e8e088dba6f7476",
+      "status": 200
+    },
+    {
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\nfl-injuries.html",
+      "url": "https://www.nfl.com/injuries/",
+      "captured_at": "2026-09-09T14:42:35.114360+00:00",
+      "bytes": 332889,
+      "sha256": "e34ea66372ab635902a9a3bdab64328478be3dfd8613a441402f56aa7bb7a6ac",
+      "status": 200
+    },
+    {
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\patriots-week1.html",
+      "url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks",
+      "captured_at": "2026-09-09T14:42:35.171518+00:00",
+      "bytes": 431813,
+      "sha256": "8f0fc571945f788d7cc12eb7c6e3c09c9536a0407413cb02decf0eee2d1fe10a",
+      "status": 200
+    },
+    {
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\rams-updates-index.html",
+      "url": "https://www.therams.com/news/injury-updates",
+      "captured_at": "2026-09-09T14:42:35.318486+00:00",
+      "bytes": 458268,
+      "sha256": "b6171a92f35851fb84b860c49646ac808a71d3fa44c190703bc9ba10588b5d36",
+      "status": 200
+    },
+    {
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\seahawks-week1.html",
+      "url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots",
+      "captured_at": "2026-09-09T14:42:35.128903+00:00",
+      "bytes": 645117,
+      "sha256": "9609e73bf2796739dafaf1324f5035e8c6cf254ad94c524d8d7aef2c2fe146e0",
+      "status": 200
+    },
+    {
+      "bytes": 899645,
+      "captured_at": "2026-09-09T14:46:46.770517+00:00",
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-fourth\\nfl-week1-statuses.html",
+      "final_url": "https://www.nfl.com/news/nfl-week-1-injury-report-2026-season",
+      "http_date": "Wed, 09 Sep 2026 14:46:46 GMT",
+      "last_modified": null,
+      "name": "nfl-week1-statuses",
+      "sha256": "f2a12e6104b72e9e3642650d43558b9bf54eafdb7d663d3330f6efd2dd10f30b",
+      "started_at": "2026-09-09T14:46:46.467580+00:00",
+      "status": 200,
+      "url": "https://www.nfl.com/news/nfl-week-1-injury-report-2026-season"
+    },
+    {
+      "bytes": 893324,
+      "captured_at": "2026-09-09T14:46:46.830026+00:00",
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-fourth\\nfl-sept8-roundup.html",
+      "final_url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8",
+      "http_date": "Wed, 09 Sep 2026 14:46:46 GMT",
+      "last_modified": null,
+      "name": "nfl-sept8-roundup",
+      "sha256": "3c949a3c687b3db072bf309d7a2453aa026a0c643192ce141b5e7afb27415417",
+      "started_at": "2026-09-09T14:46:46.468469+00:00",
+      "status": 200,
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8"
+    },
+    {
+      "bytes": 316112,
+      "captured_at": "2026-09-09T14:44:34.992846+00:00",
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-second\\rams-donald-garrett.html",
+      "final_url": "https://www.therams.com/news/aaron-donald-will-not-play-week-1-2026-49ers-myles-garrett-ready-to-go",
+      "http_date": "Wed, 09 Sep 2026 14:44:34 GMT",
+      "last_modified": null,
+      "name": "rams-donald-garrett",
+      "sha256": "fb76e5ca0c3f8c4e8d44d9ba45399cc86bce956835b74327fee834d88434ef81",
+      "started_at": "2026-09-09T14:44:34.585341+00:00",
+      "status": 200,
+      "url": "https://www.therams.com/news/aaron-donald-will-not-play-week-1-2026-49ers-myles-garrett-ready-to-go"
+    },
+    {
+      "bytes": 668511,
+      "captured_at": "2026-09-09T14:44:35.152171+00:00",
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-second\\49ers-injury-news.html",
+      "final_url": "https://www.49ers.com/news/morning-reports/morning-report-status-on-injuries-more-updates-from-australia",
+      "http_date": "Wed, 09 Sep 2026 14:44:34 GMT",
+      "last_modified": null,
+      "name": "49ers-injury-news",
+      "sha256": "a371372af2a8c245e644c55dbf7c3ae0f9098015878bdc1120af1902dec42781",
+      "started_at": "2026-09-09T14:44:34.585919+00:00",
+      "status": 200,
+      "url": "https://www.49ers.com/news/morning-reports/morning-report-status-on-injuries-more-updates-from-australia"
+    },
+    {
+      "bytes": 449487,
+      "captured_at": "2026-09-09T14:44:35.008464+00:00",
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-second\\bills-news-index.html",
+      "final_url": "https://www.buffalobills.com/news/",
+      "http_date": "Wed, 09 Sep 2026 14:44:34 GMT",
+      "last_modified": null,
+      "name": "bills-news-index",
+      "sha256": "d2b15cf769d31d19e0500a56db1248c5ba7892d5563c51a00cf01a8aec9b0d5e",
+      "started_at": "2026-09-09T14:44:34.586369+00:00",
+      "status": 200,
+      "url": "https://www.buffalobills.com/news/"
+    },
+    {
+      "bytes": 469054,
+      "captured_at": "2026-09-09T14:45:37.243097+00:00",
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-third\\bills-preweek1-news.html",
+      "final_url": "https://www.buffalobills.com/news/bills-gm-brandon-beane-provides-team-injury-updates-prior-to-week-1-of-2026-season",
+      "http_date": "Wed, 09 Sep 2026 14:45:36 GMT",
+      "last_modified": null,
+      "name": "bills-preweek1-news",
+      "sha256": "c9a164cffbc9ba671c2c03aec82e8242f1c119d543b7f95a37d995fcc2189909",
+      "started_at": "2026-09-09T14:45:36.895659+00:00",
+      "status": 200,
+      "url": "https://www.buffalobills.com/news/bills-gm-brandon-beane-provides-team-injury-updates-prior-to-week-1-of-2026-season"
+    },
+    {
+      "bytes": 313389,
+      "captured_at": "2026-09-09T14:45:37.187469+00:00",
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-third\\rams-nacua-august.html",
+      "final_url": "https://www.therams.com/news/rams-puka-nacua-injury-update-cowboys-joint-practice-psoas",
+      "http_date": "Wed, 09 Sep 2026 14:45:36 GMT",
+      "last_modified": null,
+      "name": "rams-nacua-august",
+      "sha256": "b5a72fded316c8c7d46189fea17df5e1d2d5f317de4f3144743cc65b290ee8e7",
+      "started_at": "2026-09-09T14:45:36.896450+00:00",
+      "status": 200,
+      "url": "https://www.therams.com/news/rams-puka-nacua-injury-update-cowboys-joint-practice-psoas"
+    },
+    {
+      "bytes": 465767,
+      "captured_at": "2026-09-09T14:45:37.187582+00:00",
+      "file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-third\\49ers-roster-injuries.html",
+      "final_url": "https://www.49ers.com/news/5-takeaways-from-john-lynch-and-kyle-shanahan-ahead-of-australia",
+      "http_date": "Wed, 09 Sep 2026 14:45:36 GMT",
+      "last_modified": null,
+      "name": "49ers-roster-injuries",
+      "sha256": "3d2251002406202a3a140972e944a3d79355153d21d7664a33d51ab9b9e01749",
+      "started_at": "2026-09-09T14:45:36.896865+00:00",
+      "status": 200,
+      "url": "https://www.49ers.com/news/5-takeaways-from-john-lynch-and-kyle-shanahan-ahead-of-australia"
+    }
+  ],
+  "main_article_metadata": {
+    "patriots-week1": {
+      "headline": "Week 1 Injury Report: Patriots at Seahawks",
+      "source_published_at": "2026-09-08T20:50:00Z",
+      "source_updated_at": "2026-09-08T20:55:53.502Z",
+      "captured_at": "2026-09-09T14:42:35.171518+00:00",
+      "source_url": "https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks",
+      "source_file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\patriots-week1.html",
+      "source_sha256": "8f0fc571945f788d7cc12eb7c6e3c09c9536a0407413cb02decf0eee2d1fe10a"
+    },
+    "seahawks-week1": {
+      "headline": "Week 1 Injury Report: Seahawks vs. Patriots",
+      "source_published_at": "2026-09-08T22:00:00Z",
+      "source_updated_at": "2026-09-08T22:29:51.204Z",
+      "captured_at": "2026-09-09T14:42:35.128903+00:00",
+      "source_url": "https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots",
+      "source_file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\seahawks-week1.html",
+      "source_sha256": "9609e73bf2796739dafaf1324f5035e8c6cf254ad94c524d8d7aef2c2fe146e0"
+    },
+    "nfl-week1-statuses": {
+      "headline": "NFL Week 1 injury report: Player statuses for all 16 games\n",
+      "source_published_at": "2026-09-08T20:59:38.207Z",
+      "source_updated_at": "2026-09-09T12:36:06.292Z",
+      "captured_at": "2026-09-09T14:46:46.770517+00:00",
+      "source_url": "https://www.nfl.com/news/nfl-week-1-injury-report-2026-season",
+      "source_file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-fourth\\nfl-week1-statuses.html",
+      "source_sha256": "f2a12e6104b72e9e3642650d43558b9bf54eafdb7d663d3330f6efd2dd10f30b"
+    },
+    "nfl-sept8-roundup": {
+      "headline": "NFL news roundup: Brandon Graham retires again; 49ers DT Alfred Collins out for season with torn patellar tendon ",
+      "source_published_at": "2026-09-08T16:39:36.845Z",
+      "source_updated_at": "2026-09-09T03:02:31.577Z",
+      "captured_at": "2026-09-09T14:46:46.830026+00:00",
+      "source_url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8",
+      "source_file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-fourth\\nfl-sept8-roundup.html",
+      "source_sha256": "3c949a3c687b3db072bf309d7a2453aa026a0c643192ce141b5e7afb27415417"
+    },
+    "rams-donald-garrett": {
+      "headline": "McVay: Aaron Donald won't play Week 1 vs. 49ers nor travel to Australia, but Myles Garrett (knee) will be 'ready to go'",
+      "source_published_at": "2026-09-08T20:47:00.598Z",
+      "source_updated_at": "2026-09-08T20:52:17.668Z",
+      "captured_at": "2026-09-09T14:44:34.992846+00:00",
+      "source_url": "https://www.therams.com/news/aaron-donald-will-not-play-week-1-2026-49ers-myles-garrett-ready-to-go",
+      "source_file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-second\\rams-donald-garrett.html",
+      "source_sha256": "fb76e5ca0c3f8c4e8d44d9ba45399cc86bce956835b74327fee834d88434ef81"
+    },
+    "49ers-injury-news": {
+      "headline": "Morning Report: Status on Injuries, More Updates from Australia  🗞️ ",
+      "source_published_at": "2026-09-09T13:00:00Z",
+      "source_updated_at": "2026-09-09T13:00:28.405Z",
+      "captured_at": "2026-09-09T14:44:35.152171+00:00",
+      "source_url": "https://www.49ers.com/news/morning-reports/morning-report-status-on-injuries-more-updates-from-australia",
+      "source_file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-second\\49ers-injury-news.html",
+      "source_sha256": "a371372af2a8c245e644c55dbf7c3ae0f9098015878bdc1120af1902dec42781"
+    },
+    "bills-preweek1-news": {
+      "headline": "BIlls GM Brandon Beane provides team injury updates prior to Week 1 of 2026 season",
+      "source_published_at": "2026-09-01T21:52:30.295Z",
+      "source_updated_at": "2026-09-01T22:24:50.338Z",
+      "captured_at": "2026-09-09T14:45:37.243097+00:00",
+      "source_url": "https://www.buffalobills.com/news/bills-gm-brandon-beane-provides-team-injury-updates-prior-to-week-1-of-2026-season",
+      "source_file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-third\\bills-preweek1-news.html",
+      "source_sha256": "c9a164cffbc9ba671c2c03aec82e8242f1c119d543b7f95a37d995fcc2189909"
+    },
+    "rams-nacua-august": {
+      "headline": "McVay: Puka Nacua dealing with soreness in psoas, but expected to be back at practice next week 'ready to go'",
+      "source_published_at": "2026-08-13T21:13:31.954Z",
+      "source_updated_at": "2026-08-13T21:13:52.19Z",
+      "captured_at": "2026-09-09T14:45:37.187469+00:00",
+      "source_url": "https://www.therams.com/news/rams-puka-nacua-injury-update-cowboys-joint-practice-psoas",
+      "source_file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-third\\rams-nacua-august.html",
+      "source_sha256": "b5a72fded316c8c7d46189fea17df5e1d2d5f317de4f3144743cc65b290ee8e7"
+    },
+    "49ers-roster-injuries": {
+      "headline": "5 Takeaways from John Lynch and Kyle Shanahan Ahead of Australia",
+      "source_published_at": "2026-09-01T02:32:16.575Z",
+      "source_updated_at": "2026-09-08T18:41:09.769Z",
+      "captured_at": "2026-09-09T14:45:37.187582+00:00",
+      "source_url": "https://www.49ers.com/news/5-takeaways-from-john-lynch-and-kyle-shanahan-ahead-of-australia",
+      "source_file": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-third\\49ers-roster-injuries.html",
+      "source_sha256": "3d2251002406202a3a140972e944a3d79355153d21d7664a33d51ab9b9e01749"
+    }
+  },
+  "failed_requests": [
+    {
+      "url": "https://www.buffalobills.com/news/injury-report",
+      "error": "HTTP 404 on initial parallel capture; no response bytes retained",
+      "request_window_utc": "2026-09-09T14:42:34Z to 2026-09-09T14:42:36Z",
+      "timestamp_precision": "window from initial capture task, not an exact failure clock",
+      "disposition": "No retry of this URL; current Bills news index and official Sept.1 team injury article captured separately. All32 coverage comes from the successful NFL.com overview."
+    }
+  ],
+  "raw_source_policy": "Append-only captured bytes; no forecast or modeling input rewritten."
+}

@@ -1,16 +1,20 @@
-## The case for a contender
+## Week 1 availability
 
-The Chargers grade as a well-rounded contender — an elite QB on top of above-average units on both sides.
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
+## The case near the top
+
+The Chargers are a top-tier roster on the strength of an elite quarterback and above-average units — though the offensive line took a real hit before the opener.
 
 ## Quarterback
 
-Justin Herbert (+4.0) is a top-tier grade, one of the highest in the model, and the foundation of this rating.
+Justin Herbert (+4.0) is a top-tier grade — arm talent and efficiency that lift the whole offense.
 
 ## What moved the number
 
-- **Offense (+0.5):** Ladd McConkey emerging as a real target, with Njoku added at tight end.
-- **Defense (+0.5):** Khalil Mack still anchors it, with Tomlinson added inside.
+- **Offense (+0.3):** trimmed from +0.5. The interior line is **compromised**: **center Tyler Biadasz is out for the season** (knee, IR — he was the team's big March signing), and **left tackle Rashawn Slater is working through a knee issue** (questionable, but tracking to play). Ladd McConkey is a rising weapon and rookie **Tre' Harris is healthy** and active, with Njoku at tight end — but protecting Herbert with a patched-up line is the concern that pulls the grade down.
+- **Defense (+0.5):** above average, anchored by Derwin James, with Khalil Mack on the edge and Tomlinson bolstering the interior.
 
 ## Bottom line
 
-No weaknesses on the sheet — an elite quarterback with above-average support both ways. This is one of the cleaner contender profiles in the league.
+Elite quarterback and a real defense, with the offensive line as the one soft spot after losing Biadasz for the year. If the line holds together in front of Herbert, this is a genuine contender profile.

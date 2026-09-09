@@ -112,8 +112,9 @@ class RatingExplanationTests(unittest.TestCase):
                          pgo_comparison._extract_published_fantasy_panel(result))
         refreshed = pgo_comparison.refresh_mccabe_page(ComparisonTests._base_html(), result)
         self.assertEqual(pgo_comparison.add_rating_explanations(refreshed), refreshed)
-        self.assertEqual(re.findall(r'<template.*?</template>', result, re.S),
-                         re.findall(r'<template.*?</template>', refreshed, re.S))
+        component_values = r'data-component="([^"]+)" data-value="([^"]+)"'
+        self.assertEqual(re.findall(component_values, result),
+                         re.findall(component_values, refreshed))
 
     def test_legacy_and_current_refresh_recompute_rank_highlights(self):
         current = pgo_comparison.load_mccabe_rows(pgo_comparison.MCCABE_PATH)
@@ -137,7 +138,8 @@ class RatingExplanationTests(unittest.TestCase):
                 self.assertIn(f'{row["team"]}: PGO #{source[row["abbr"]]["rank"]}, McCabe #{row["rank"]}',
                               result)
             self.assertEqual(pgo_comparison._extract_published_fantasy_panel(self.page),
-                             pgo_comparison._extract_published_fantasy_panel(result))
+                             pgo_comparison._extract_published_fantasy_panel(
+                                 pgo_comparison.strip_current_injury_notes(result)))
 
     def test_rejects_invalid_components_and_source_algebra(self):
         with pgo_comparison.MODEL_PATH.open(encoding="utf-8", newline="") as handle:
@@ -590,6 +592,7 @@ class ComparisonTests(unittest.TestCase):
                 patch.object(
                     pgo_comparison.generate_site,
                     "load_config",
+                    return_value={},
                 ) as load_config,
                 patch.object(
                     pgo_comparison,
@@ -606,7 +609,7 @@ class ComparisonTests(unittest.TestCase):
 
         self.assertEqual(code, 0)
         load.assert_called_once_with(Path("frozen.json").resolve())
-        load_config.assert_not_called()
+        load_config.assert_called_once_with()
         load_comparison.assert_not_called()
         write.assert_called_once()
         target, rendered = write.call_args.args
@@ -1093,7 +1096,7 @@ class ComparisonTests(unittest.TestCase):
         self.assertEqual(
             digest,
             # Comparison script now also binds saved-rating drawer triggers.
-            "d8e9ce5f6f1328d654e39e677a33b64f44db5b200565268cdc09f23a4055acd4",
+            "43c330c99f9a116e19c72edbc367f68d5f37a3268a36f7b90968d49b19d24178",
         )
 
     def test_injection_adds_one_accessible_tab_and_preserves_base_page(self):
@@ -1500,7 +1503,7 @@ class ComparisonTests(unittest.TestCase):
     def test_comparison_team_labels_have_contrasting_backgrounds(self):
         self.assertIn(
             "#panel-comparison .comparison-table thead th:first-child {\n"
-            "  background:var(--ink);",
+            "  background:var(--panel2);",
             pgo_comparison.MODEL_CSS,
         )
         self.assertIn(

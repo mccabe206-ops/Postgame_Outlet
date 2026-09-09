@@ -121,16 +121,16 @@ class RosterHook:
         full.update(values)
         current.update(values)
         # Postgame coverage only: these data never enter values or prior history.
-        # Mirror the inherited resolver to disclose its default-zero updates.
+        # Use the history updater's resolver; these remain postgame audit counts.
         snapped, unmatched, name_fallback = set(), 0, 0
         for row in inputs.get('snaps', {}).get((season, week, team), ()):
-            pid = metadata.get('pfr_ids', {}).get(row.get('pfr_player_id', '').strip())
-            if not pid:
-                pid = metadata.get('name_ids', {}).get(ch._normalize_player_name(row.get('player', '')))
-                name_fallback += int(pid is not None)
+            pid, method = ch._snap_identity(row, metadata)
+            name_fallback += int(method == 'name')
             if pid is None:
                 unmatched += 1
             else:
+                if pid in snapped:
+                    raise ValueError(f'Duplicate snap assignment: {season} {week} {team} {pid}')
                 snapped.add(pid)
         coverage['postgame_role_update_audit_only'] = dict(
             ACT_without_resolved_snap_row=len(set(ids) - snapped),

@@ -18,6 +18,7 @@ import pgo_challenger
 import pgo_fantasy_prospective as fantasy_prospective
 import pgo_model
 import pgo_current_board
+import pgo_injury_source
 import snapshot
 from release_ratings import atomic_write_text, load_release_rows, rating_total
 
@@ -79,9 +80,10 @@ def load_mccabe_rows(path):
 
 def load_mccabe_snapshot(path, rows):
     snaps = snapshot.load_snaps(path)
-    if MCCABE_SNAPSHOT_LABEL not in snaps:
-        raise ValueError(f"Missing McCabe snapshot: {MCCABE_SNAPSHOT_LABEL}")
-    entry = snapshot.normalize_snapshot_entry(snaps[MCCABE_SNAPSHOT_LABEL])
+    edition = generate_site.load_config().get("edition", MCCABE_SNAPSHOT_LABEL)
+    if edition not in snaps:
+        raise ValueError(f"Missing McCabe snapshot: {edition}")
+    entry = snapshot.normalize_snapshot_entry(snaps[edition])
     if not entry["published_at"]:
         raise ValueError("McCabe comparison snapshot has no published_at")
     current = {row["team"]: row["rating"] for row in rows}
@@ -92,7 +94,7 @@ def load_mccabe_snapshot(path, rows):
     if frozen != current:
         raise ValueError("Reviewed McCabe ratings do not match the frozen snapshot")
     return {
-        "mccabe_edition": MCCABE_SNAPSHOT_LABEL,
+        "mccabe_edition": edition,
         "mccabe_published_at": entry["published_at"],
     }
 
@@ -285,7 +287,7 @@ MODEL_CSS = """
   position:sticky; left:0; z-index:1;
 }
 #panel-comparison .comparison-table thead th:first-child {
-  background:var(--ink);
+  background:var(--panel2);
 }
 #panel-comparison .comparison-table tbody th:first-child {
   background:var(--panel); color:var(--ink);
@@ -1226,6 +1228,74 @@ def inject_comparison(base_html, panel_html):
     return output
 
 
+def strip_current_injury_notes(page):
+    return re.sub(r'<!-- CURRENT INJURY NOTE -->.*?<!-- END CURRENT INJURY NOTE -->',
+                  '', page, flags=re.S)
+
+
+def add_current_injury_notes(page, source_path=None):
+    """Annotate saved fantasy projections without changing any scoring inputs."""
+    page = strip_current_injury_notes(page)
+    if 'id="panel-fantasy"' not in page:
+        return page
+    configured = source_path or generate_site.load_config().get("injury_snapshot", "")
+    if not configured:
+        return page
+    path = HERE / configured
+    snapshot_data = pgo_injury_source.load_snapshot(path)
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    sources = {row["team"]: row for row in raw["team_sources"]}
+    players = {(row["team"], row["gsis_id"]): row for row in snapshot_data["players"]
+               if row["source_kind"] == "formal_injury_report"}
+    marked = lambda text: '<!-- CURRENT INJURY NOTE -->' + text + '<!-- END CURRENT INJURY NOTE -->'
+    matched = 0
+
+    def annotate(match):
+        nonlocal matched
+        attrs = dict(re.findall(r'([\w-]+)="([^"]*)"', match[1]))
+        key = tuple(html.unescape(attrs.get(name, "")) for name in ("data-team", "data-player-id"))
+        player = players.get(key)
+        if player is None:
+            return match[0]
+        source = sources[key[0]]
+        checked = source.get("captured_at", "")
+        if not checked:
+            raise ValueError("Current injury annotation requires the actual source capture time")
+        capture_time = pgo_injury_source._parse_timestamp(checked, "source capture time")
+        if capture_time > pgo_injury_source._parse_timestamp(snapshot_data["source_as_of"], "snapshot time"):
+            raise ValueError("Source capture time is later than the injury snapshot")
+        clock = pgo_current_board._time(checked)
+        designation = player["game_status"]
+        status = (f'Game designation: {designation.upper()}' if designation
+                  else f'Practice: {player["practice_status"]}; no final game designation supplied')
+        if player["injury"]:
+            status += f' ({player["injury"]})'
+        note = marked(
+            '<span class="fantasy-current-report" style="display:block;white-space:normal;font-size:12px;'
+            'margin-top:6px;color:var(--notice-ink)"><strong>Current report: '
+            f'{html.escape(status)}</strong>. Checked {clock}. '
+            f'<a href="{html.escape(player["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer">'
+            'Official report</a>. Final inactives pending.</span>')
+        cells, count = re.subn(r'(<th\b[^>]*class="fantasy-player"[^>]*>)([^<]*)',
+                              lambda cell: cell[1] + cell[2] + note, match[2], count=1)
+        if count != 1:
+            raise ValueError("Current injury note requires a unique fantasy player header")
+        matched += 1
+        return '<tr class="fantasy-row"' + match[1] + '>' + cells + '</tr>'
+
+    page = re.sub(r'<tr class="fantasy-row"([^>]*)>(.*?)</tr>', annotate, page, flags=re.S)
+    if matched:
+        note = marked('<p class="fantasy-current-report"><strong>Current injury notes appear beside affected players.</strong> '
+                      'Other injury labels and point projections belong to the saved projection snapshot. '
+                      'Current report notes supersede those older availability labels; points and league values have not been '
+                      'recalculated. A player ruled out should not be started. Missing current notes do not establish health.</p>')
+        page, count = re.subn(r'(<section\b[^>]*id="panel-fantasy"[^>]*>)',
+                             lambda match: match[1] + note, page, count=1)
+        if count != 1:
+            raise ValueError("Current injury notes require one fantasy panel")
+    return page
+
+
 def inject_fantasy_preview(existing_html, panel_html):
     if (
         'id="tab-fantasy"' in existing_html
@@ -1269,7 +1339,7 @@ def inject_fantasy_preview(existing_html, panel_html):
         comparison_panel, comparison_panel + "\n" + panel_html, 1
     )
     output = output.replace("</body>", FANTASY_SCRIPT + "\n</body>", 1)
-    return output
+    return add_current_injury_notes(output)
 
 
 def extract_comparison_panel(existing_html):
@@ -1624,6 +1694,7 @@ def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
     mccabe_rows = load_mccabe_rows(mccabe_path)
     fantasy_panel = _extract_published_fantasy_panel(existing_html)
     comparison_panel = extract_comparison_panel(existing_html)
+    had_explanations = "<!-- PGO EXPLANATIONS START -->" in comparison_panel
     active_panel = _validate_active_board_state(
         existing_html,
         {"ratings", "fantasy"} if fantasy_panel is not None
@@ -1658,7 +1729,7 @@ def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
     output = inject_comparison(base_html, panel)
     if fantasy_panel is not None:
         output = inject_fantasy_preview(output, _upgrade_fantasy_league_controls(fantasy_panel))
-    return output
+    return add_rating_explanations(output) if had_explanations else output
 
 
 def parse_args(argv=None):

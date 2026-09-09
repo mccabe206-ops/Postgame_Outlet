@@ -1691,8 +1691,10 @@ class FeatureTests(unittest.TestCase):
         self.assertEqual(unique_coverage["rejected_name_volume"], 0.0)
         self.assertEqual(policy, {
             "scope": "season-week-team",
-            "normalization": "casefold and collapse whitespace",
+            "normalization": "casefold, collapse whitespace, remove trailing generational suffix",
+            "source_names": ["full_name", "first_name + last_name", "football_name + last_name"],
             "ambiguous_names": "rejected",
+            "unresolved_usage": "missing; known-PFR absence is zero only on an observed unit feed",
         })
 
         ambiguous_feature, ambiguous_coverage = results["ambiguous"]

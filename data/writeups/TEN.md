@@ -1,16 +1,20 @@
-## The case for the middle-low
+## Week 1 availability
 
-Tennessee grades just below average — a rookie-QB rebuild year with a defense that's more quantity than quality.
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
+## The case for a rookie-QB bet
+
+Tennessee grades right around the bottom third — a rookie quarterback the model is willing to price at league-average on upside, with a below-average offense and a middling defense around him.
 
 ## Quarterback
 
-Cam Ward (0.0) is priced as a league-average starter out of the gate — a fair, uninflated grade for a rookie the model neither fades nor hypes.
+Cam Ward (0.0) is the No. 1 overall pick, and 0.0 is an optimistic-but-defensible projection rather than a track record: it's the middling-starter line, generous for a Week 1 rookie behind a shaky front, and it reflects the arm talent and pedigree more than anything he's proven. The honest range skews down (rookie variance, thin protection); the bet is that the ceiling shows up early.
 
 ## What moved the number
 
-- **Offense (−0.5):** Wan'Dale Robinson adds a piece, but the group grades a hair below average.
-- **Defense (0.0):** big volume of additions (J. Johnson, JFM), but the note flags it as *quantity* — bodies more than difference-makers.
+- **Offense (-0.5):** the receiver group is actually a strength on paper — **Calvin Ridley** as the vertical WR1, **Wan'Dale Robinson** underneath, and rookie **Carnell Tate** (all trending to play). What sinks it below the line is everything else protecting and complementing the rookie: a weak, rebuilt offensive line (Dan Moore, Skoronski, JC Latham still gelling) and an unremarkable backfield. Weapons don't matter much if the QB is running for his life.
+- **Defense (0.0):** average by design. **Jermaine Johnson II** headlines the edge and the front added bodies in volume ("quantity" more than top-end talent), while the secondary is average-at-best. Starting linebacker **Cedric Gray is in concussion protocol** after a weekend UTV accident and is in doubt for Week 1 — a short-term dent, not a season-long one.
 
 ## Bottom line
 
-A patient read on a rebuild. The rookie grade leaves room to rise if Ward hits; the defense needs one of those volume adds to become a real anchor.
+This is a rebuild priced on a rookie's ceiling. The receivers give Ward a real chance, but until the offensive line holds up and the defense proves it's more than warm bodies, the floor here is low — the whole rating swings on how fast the No. 1 pick arrives.

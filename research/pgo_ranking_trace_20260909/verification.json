@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-09-09T01:33:28.425911+00:00",
+  "head": "275289e71ae4d8950b621f86447fff673f84840d",
+  "status": "DESCRIPTIVE AUDIT COMPLETE; EXPERIMENTAL / HOLD UNCHANGED",
+  "files": {
+    "analysis.json": {
+      "sha256": "44b38f58711930eec897de25851c1ac4c589518cb741c905c50ff6fccc22572e",
+      "bytes": 510351
+    },
+    "analyze.py": {
+      "sha256": "3c941fabcd0f979a947ddfef7533e7fe06a5789e40ec97e89e205c58ddf3daaf",
+      "bytes": 8163
+    },
+    "availability-notes.md": {
+      "sha256": "7d4e635a706d1b1a060e7e3050dbad429261cf76af6e006f5404e8536a9e2f34",
+      "bytes": 8367
+    },
+    "check_player_inputs.py": {
+      "sha256": "04dcb0ee44fae50d09f88d2428d02340111ce1b3586367c18f70aeec267d7486",
+      "bytes": 6524
+    },
+    "player-input-notes.md": {
+      "sha256": "67209133b95ba903ed472b0987647b82a007c5072c326418f2d5f8b3c2612c08",
+      "bytes": 84008
+    },
+    "README.md": {
+      "sha256": "f838c31ebaa7953172a419f0d6432458cb3e323fc8ac99c8c1155c477dc1e693",
+      "bytes": 17219
+    },
+    "trace-review.md": {
+      "sha256": "cf806e341da39599b012e16f86cf2507241b6d1b6107ccf676981f763157e859",
+      "bytes": 7693
+    }
+  },
+  "checks": {
+    "saved_analysis_reproduced": true,
+    "team_ratings_reconciled": 32,
+    "added_descriptor_cells_reconstructed": 320,
+    "descriptor_maximum_error": 0.0,
+    "maximum_rating_reconciliation_error": 2.2426505097428162e-14,
+    "pinned_manifest_and_member_files_unchanged": 46,
+    "external_raw_sources_sha256_matched": 67,
+    "verified_false_zero_players": [
+      "00-0036198",
+      "00-0036246"
+    ],
+    "independent_review": "PASS for accounting, preservation and report scope",
+    "tracked_files_changed": 0
+  },
+  "no_fit_or_source_capture": true,
+  "issued_forecasts_and_public_files_unchanged": true
+}

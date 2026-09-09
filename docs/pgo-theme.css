@@ -1,26 +1,27 @@
-/* Shared Cobalt presentation for the ratings board and Forecast Lab. */
+/* Shared slate/Cobalt presentation for the ratings board and Forecast Lab. */
 :root {
-  color-scheme:light;
-  --bg:#f7f8fc; --bg2:#f7f8fc; --panel:#ffffff; --panel2:#edf0f8;
-  --row-alt:#f4f6fb; --hover:#e7edff; --border:#d9deeb; --border2:#7b89a3;
-  --ink:#152238; --mut:#42536e; --dim:#53627b;
-  --teal:#2647ba; --teal2:#2647ba; --violet:#152238; --violet2:#42536e;
-  --pos:#096b4d; --neg:#ac332b; --accent:#2647ba; --orange:#2647ba;
-  --highlight:#ffbd9f; --hero-bg:#203b9c; --table-head:#152238;
-  --table-head-hover:#263c60; --action-bg:#2647ba; --action-ink:#ffffff;
-  --focus:#2647ba; --notice-ink:#7c381c; --notice-bg:#fff1e7; --notice-border:#ad5b2c;
+  color-scheme:dark;
+  --bg:#0e1116; --bg2:#111720; --panel:#171c24; --panel2:#0e131b;
+  --row-alt:#141a22; --hover:#19263a; --border:#273040; --border2:#53647c;
+  --ink:#e6edf3; --mut:#b2bfcc; --dim:#93a1b0;
+  --teal:#60a5fa; --teal2:#9dc1ff; --violet:#e6edf3; --violet2:#b2bfcc;
+  --pos:#45bd69; --neg:#ff7168; --accent:#3b82f6; --orange:#3b82f6;
+  --highlight:#b8d3ff; --hero-bg:#0e1116; --table-head:#0e131b;
+  --table-head-hover:#1a2534; --action-bg:#3b82f6; --action-ink:#08111f;
+  --focus:#60a5fa; --notice-ink:#ffd0a8; --notice-bg:#2b2118; --notice-border:#986238;
   --disp:ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
   --body:ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
 }
 body { -webkit-font-smoothing:antialiased; }
 .lab-hero { background:var(--hero-bg); }
-.hero { background:linear-gradient(115deg,#152b7c,#2647ba); border-bottom-width:3px; }
+.hero { background:linear-gradient(115deg,#0e1116,#15233a); border-bottom-width:1px; }
 header h1 { font-weight:800; letter-spacing:-.035em; }
 .panel.active { border-radius:10px; }
-.panel.active,.metric { box-shadow:0 3px 16px rgba(21,34,56,.04); }
+.panel.active,.metric { box-shadow:0 10px 30px rgba(0,0,0,.22); }
 thead th { background:var(--table-head); color:#fff; letter-spacing:.045em; }
 thead th:hover { background:var(--table-head-hover); color:var(--highlight); }
 thead th.up,thead th.down { color:var(--highlight); }
+.lab-wrap tbody th { background:var(--panel); color:var(--ink); }
 td[data-v],.brk-v { font-variant-numeric:tabular-nums; }
 .tab { min-height:44px; border-radius:7px; }
 .tab.active,

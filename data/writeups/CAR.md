@@ -1,16 +1,20 @@
-## The case for the middle
+## Week 1 availability
 
-Carolina grades right around average — a young QB taking a step and neutral units on both sides.
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
+## The case with the line banged up
+
+Carolina grades below the line, dragged there by an offensive line missing both starting tackles.
 
 ## Quarterback
 
-Bryce Young (+0.5) has climbed to just above average in this model — a notable vote of confidence in his development.
+Bryce Young (+0.5) is a slightly-above-average grade — a young passer the model has warmed to, though he needs protection to show it.
 
 ## What moved the number
 
-- **Offense (0.0):** Xavier Legette and rookie WR help around him; the unit grades neutral, with Dillon added at back.
-- **Defense (0.0):** average — Jaelan Phillips and Devin Lloyd are real adds that lift a previously thin group to the line.
+- **Offense (-1.0):** cut hard with **both starting tackles (Ekwonu and Moton) out** — a major blow to the protection in front of Young. McMillan is a real weapon and Dillon adds to the backfield, but the line is the story. This should recover as the tackles return.
+- **Defense (0.0):** average, boosted by Jaelan Phillips and Devin Lloyd.
 
-## Bottom line
+## Risk
 
-A quietly improving roster. Young grading above average is the story — if he keeps climbing, an average team today has room to become a positive one.
+The offensive grade is injury-driven and expected to climb as the line gets healthy. Young's development is the longer-term lever.

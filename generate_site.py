@@ -19,6 +19,7 @@ import os
 import re
 import sys
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from release_ratings import atomic_write_text, load_release_rows
 from snapshot import load_snaps, normalize_snapshot_entry
@@ -154,10 +155,46 @@ def md_to_html(text):
 def _inline(s):
     """Escape then apply inline emphasis/code. Order matters: escape first."""
     s = html.escape(s)
+    s = re.sub(
+        r"\[([^\]]+)\]\((https://[^\s)]+)\)",
+        r'<a href="\2">\1</a>',
+        s,
+    )
     s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
     s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
     s = re.sub(r"\*([^*]+)\*", r"<em>\1</em>", s)
     return s
+
+
+def build_injury_status(config):
+    checked = config.get("injury_checked_at", "").strip()
+    status = config.get("injury_status", "").strip()
+    source = config.get("injury_source_url", "").strip()
+    if not any((checked, status, source)):
+        return ""
+    if not checked or not status or not source.startswith("https://"):
+        raise ValueError("Injury status requires a checked time, status, and HTTPS source")
+    try:
+        instant = datetime.fromisoformat(checked.replace("Z", "+00:00"))
+    except ValueError as error:
+        raise ValueError("Injury checked time must be a valid ISO-8601 datetime") from error
+    if instant.tzinfo is None or instant.utcoffset() is None:
+        raise ValueError("Injury checked time must include a timezone")
+    local = instant.astimezone(ZoneInfo("America/New_York"))
+    display_time = (
+        f"{local:%B} {local.day}, {local.year} at "
+        f"{local:%I:%M %p}".lstrip("0")
+        + " ET"
+    )
+    pending = " &middot; final inactives pending" if "final inactives are pending" in status.casefold() else ""
+    return (
+        '<aside><details class="injury-status"><summary>Injuries checked '
+        f'{display_time}{pending}</summary><p><strong>Availability evidence.</strong> '
+        'Official injury report coverage checked as of '
+        f'<time datetime="{html.escape(checked, quote=True)}">{display_time}</time>. '
+        f'{html.escape(status)} <a href="{html.escape(source, quote=True)}">Source coverage</a>.</p>'
+        '</details></aside>'
+    )
 
 
 def load_writeup(abbr):
@@ -263,12 +300,15 @@ def load_qbs(team_ratings=None):
                              "age": r.get("age", "").strip(), "exp": r.get("exp", "").strip(),
                              "team_rating": team_ratings.get(r["team"])})
     starters.sort(key=lambda x: -x["val"])
+    starter_names = {row["name"] for row in starters}
 
     backups = []
     path = os.path.join(DATA, "qb_depth.csv")
     if os.path.exists(path):
         with open(path, encoding="utf-8", newline="") as handle:
             for r in csv.DictReader(handle):
+                if r["qb_name"] in starter_names:
+                    continue
                 backups.append({"name": r["qb_name"], "team": r["team"],
                                 "string": int(r["string"]), "val": float(r["value"] or 0),
                                 "notes": r.get("notes", ""),
@@ -290,6 +330,18 @@ def _bar(label, v, scale=6.5):
             f'<span class="brk-track"><span class="brk-fill" '
             f'style="{side};width:{pct:.1f}%;background:{color}"></span></span>'
             f'<span class="brk-v">{v:+.1f}</span></div>')
+
+
+def rating_bar(value, scale=8.0):
+    fraction = max(-1, min(1, value / scale))
+    side = "left:50%" if fraction >= 0 else "right:50%"
+    kind = "pos" if fraction > 0 else "neg" if fraction < 0 else "zero"
+    return (
+        f'<span class="rating-bar" role="img" aria-label="Total rating {value:+.1f} on a -8 to +8 scale">'
+        '<span class="rating-track" aria-hidden="true"><span class="rating-mid"></span>'
+        f'<span class="rating-fill {kind}" style="{side};width:{abs(fraction) * 50:.1f}%"></span>'
+        '</span></span>'
+    )
 
 
 def movement_by_team(current_rows, previous_rows):
@@ -338,8 +390,9 @@ def render_rating_rows(rows, detail=True, movements=None):
         prior = f'{r["prior"]:+.2f}' if r.get("prior", "") != "" else "—"
         bg = heat(r["rating"], lo, hi)
         team_content = (
-            f'<span class="chip" style="background:{c1};border-color:{c2}">{abbr}</span>'
-            f'<span class="tname">{nm}</span><span class="div">{r["conf"]} {r["div"]}</span>'
+            f'<span class="team-marker" style="--team-primary:{c1};--team-secondary:{c2}" aria-hidden="true"></span>'
+            f'<span class="chip">{abbr}</span><span class="tname">{nm}</span>'
+            f'<span class="mobile-qb">{qbn}</span><span class="div">{r["conf"]} {r["div"]}</span>'
         )
         if detail:
             team_content = (
@@ -357,6 +410,7 @@ def render_rating_rows(rows, detail=True, movements=None):
       <td class="detail-col" data-v="{r['def']}">{r['def']:+.1f}</td>
       <td class="prior detail-col" data-v="{r['prior'] or -99}">{prior}</td>
       <td class="rating" data-v="{r['rating']}" style="background:{bg}">{r['rating']:+.1f}</td>
+      <td class="rating-bar-col">{rating_bar(r['rating'])}</td>
     </tr>""")
     return "\n".join(out)
 
@@ -381,7 +435,7 @@ def build_details(rows):
                 + _bar("Defense", r["def"]))
         subtitle = f'{r["conf"]} {r["div"]} &middot; QB: {html.escape(r.get("qb_name", ""))}'
         details[abbr] = (
-            f'<div class="dr-head"><span class="chip" style="background:{c1};border-color:{c2}">{abbr}</span>'
+            f'<div class="dr-head"><span class="team-marker" style="--team-primary:{c1};--team-secondary:{c2}" aria-hidden="true"></span><span class="chip">{abbr}</span>'
             f'<div class="dr-title"><h2 class="dr-name" id="drawerTitle">{nm}</h2>'
             f'<span class="dr-sub">{subtitle}</span></div>'
             f'<span class="dr-rating {rating_cls}">{r["rating"]:+.1f}</span></div>'
@@ -419,7 +473,7 @@ def build_qb_detail(q, kind, rank):
 
     bar = _bar("Value", val)
     return (
-        f'<div class="dr-head"><span class="chip" style="background:{c1};border-color:{c2}">{abbr}</span>'
+            f'<div class="dr-head"><span class="team-marker" style="--team-primary:{c1};--team-secondary:{c2}" aria-hidden="true"></span><span class="chip">{abbr}</span>'
         f'<div class="dr-title"><h2 class="dr-name" id="drawerTitle">{nm}</h2>'
         f'<span class="dr-sub">{subtitle}</span></div>'
         f'<span class="dr-rating {val_cls}">{val:+.1f}</span></div>'
@@ -488,7 +542,7 @@ def build_html(rows, config, generated_at=None):
         trigger = (
             f'<button type="button" class="row-trigger qb-trigger" '
             f'data-qb="{html.escape(key)}" aria-haspopup="dialog">'
-            f'<span class="chip" style="background:{c1};border-color:{c2}">{abbr}</span>'
+            f'<span class="team-marker" style="--team-primary:{c1};--team-secondary:{c2}" aria-hidden="true"></span><span class="chip">{abbr}</span>'
             f'<span class="tname">{nm}</span>{tag}</button>'
         )
         return (f'<tr class="qbrow"><td class="rank">{rank}</td>'
@@ -512,6 +566,7 @@ def build_html(rows, config, generated_at=None):
             .replace("{{AUTHOR}}", html.escape(author))
             .replace("{{UPDATED_ISO}}", html.escape(updated_iso))
             .replace("{{UPDATED}}", updated)
+            .replace("{{INJURY_STATUS}}", build_injury_status(config))
             .replace("{{ROWS}}", body)
             .replace("{{DETAILS_JSON}}", details_json)
             .replace("{{VERSIONS_JSON}}", versions_json)
@@ -535,15 +590,17 @@ TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="Sean McCabe’s {{EDITION}} NFL Power Ratings, expressed as neutral-field points above or below a league-average team.">
 <link rel="canonical" href="https://postgameoutlet.com/pages/power-ratings">
 <style>
-  /* Base layout; the shared pgo-theme.css supplies the current visual theme. */
+  /* Slate/Cobalt base; the shared pgo-theme.css keeps companion pages aligned. */
   :root {
-    --bg:#faf7f2; --bg2:#faf7f2; --panel:#ffffff; --panel2:#f3ece6;
-    --row-alt:#faf7f2; --hover:#f7e3e8; --border:#ded5cf; --border2:#afa09b;
-    --ink:#142640; --mut:#40516a; --dim:#526078;
-    --teal:#a42c50; --teal2:#76223e; --violet:#142640; --violet2:#40516a;
-    --pos:#08734f; --neg:#a73525; --accent:#a42c50; --orange:#a42c50; --highlight:#ffb1bd;
-    --disp:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-    --body:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    color-scheme:dark;
+    --bg:#0e1116; --bg2:#111720; --panel:#171c24; --panel2:#0e131b;
+    --row-alt:#141a22; --hover:#19263a; --border:#273040; --border2:#53647c;
+    --ink:#e6edf3; --mut:#b2bfcc; --dim:#93a1b0;
+    --teal:#60a5fa; --teal2:#9dc1ff; --violet:#e6edf3; --violet2:#b2bfcc;
+    --pos:#45bd69; --neg:#ff7168; --accent:#3b82f6; --orange:#3b82f6; --highlight:#b8d3ff;
+    --action-bg:#3b82f6; --action-ink:#08111f;
+    --disp:ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+    --body:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
   * { box-sizing:border-box; }
   [hidden] { display:none !important; }
@@ -551,7 +608,7 @@ TEMPLATE = """<!DOCTYPE html>
     position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
     overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
   }
-  :focus-visible { outline:3px solid #005fcc; outline-offset:3px; }
+  :focus-visible { outline:3px solid #60a5fa; outline-offset:3px; }
   #panel-fantasy a.fantasy-source-badge:focus-visible { outline-color:var(--ink); }
   .tab, .sort-button, .row-trigger, .drawer-close { font:inherit; }
   .sort-button, .row-trigger {
@@ -562,39 +619,37 @@ TEMPLATE = """<!DOCTYPE html>
     background:var(--bg);
     background-attachment:fixed; min-height:100vh;
   }
-  .wrap { max-width:1040px; margin:0 auto; padding:0 16px 72px; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 16px 72px; }
 
-  /* Full-bleed banner matches the storefront feature. */
-  .hero { background:#76223e;
-          padding:38px 16px 34px; margin-bottom:26px;
-          border-bottom:5px solid var(--highlight); }
-  header { text-align:center; max-width:1040px; margin:0 auto; }
+  .hero { background:radial-gradient(900px 220px at 8% -35%,rgba(59,130,246,.24),transparent 60%),var(--bg);
+          padding:30px 16px 24px; margin-bottom:22px; border-bottom:1px solid var(--border); }
+  header { text-align:left; max-width:1180px; margin:0 auto; }
   header h1 {
     margin:0; font-family:var(--disp); font-weight:700; line-height:.95;
-    font-size:clamp(34px,6.5vw,60px); letter-spacing:.5px; color:#fff;
+    font-size:clamp(30px,5vw,48px); letter-spacing:-.035em; color:#fff;
     text-transform:uppercase;
   }
-  header h1 .accent { color:var(--highlight); }
+  header h1 .accent { color:var(--accent); }
   header .sub { color:#fff; font-size:13px; margin-top:9px;
                 letter-spacing:.04em; }
   header .updated { color:#fff; font-size:11px; margin-top:6px;
                     letter-spacing:.06em; text-transform:uppercase; }
-  header .updated::before { content:"● "; color:var(--highlight); }
+  header .updated::before { content:"● "; color:var(--accent); }
 
   .panel.active { background:var(--panel);
     border:1px solid var(--border); border-radius:14px; padding:18px 16px 20px;
-    box-shadow:0 10px 30px rgba(56,79,111,.10); }
+    box-shadow:0 10px 30px rgba(0,0,0,.22); }
 
   .table-shell { width:100%; max-width:100%; overflow-x:auto; }
   table { width:100%; border-collapse:collapse; background:transparent; }
-  th,td { padding:10px 11px; text-align:right; white-space:nowrap; }
+  th,td { padding:8px 10px; text-align:right; white-space:nowrap; }
   th {
-    background:var(--ink); color:rgba(255,255,255,.78); font-family:var(--body); font-weight:600;
+    background:var(--panel2); color:var(--dim); font-family:var(--body); font-weight:600;
     font-size:11px; letter-spacing:.07em; text-transform:uppercase;
     user-select:none; border-bottom:2px solid var(--orange);
   }
   th:first-child { border-top-left-radius:9px; } th:last-child { border-top-right-radius:9px; }
-  th:hover { color:var(--highlight); background:#2e415c; }
+  th:hover { color:var(--highlight); background:#1a2534; }
   th.up { color:var(--highlight); } th.down { color:var(--highlight); }
   th.up::after { content:" \\2191"; } th.down::after { content:" \\2193"; }
   tbody tr { border-bottom:1px solid var(--border); }
@@ -604,9 +659,11 @@ TEMPLATE = """<!DOCTYPE html>
   td.rank { text-align:center; color:var(--dim); font-family:var(--body);
             font-weight:600; font-size:14px; width:40px; font-variant-numeric:tabular-nums; }
   td.team, th.team, td.qbn, th.qbn { text-align:left; }
-  .chip { display:inline-block; min-width:40px; text-align:center; padding:3px 6px; margin-right:9px;
-          border-radius:5px; font-size:11px; font-weight:700; color:#fff; border:1px solid;
-          background:#18283a !important;
+  .team-marker { display:inline-block; width:5px; height:24px; margin-right:6px; flex:0 0 auto;
+          border-radius:3px; background:var(--team-primary); border-bottom:5px solid var(--team-secondary); }
+  .chip { display:inline-block; min-width:36px; text-align:center; padding:3px 6px; margin-right:9px;
+          border-radius:5px; font-size:11px; font-weight:700; color:#fff; border:1px solid var(--border2);
+          background:#18283a;
           vertical-align:middle; text-shadow:0 1px 1px rgba(0,0,0,.55);
           box-shadow:0 1px 3px rgba(0,0,0,.4); }
   .tname { font-weight:600; color:var(--ink); }
@@ -618,8 +675,16 @@ TEMPLATE = """<!DOCTYPE html>
   .move.up { color:var(--pos); }
   .move.down { color:var(--neg); }
   .move.same { color:var(--dim); }
-  td.rating { font-family:var(--body); font-weight:700; font-size:16px; border-radius:4px;
+  td.rating { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-weight:800; font-size:18px; border-radius:4px;
               color:var(--ink); }
+  .rating-bar-col { width:190px; }
+  .scale-label { display:flex; justify-content:space-between; min-width:150px; color:var(--dim); }
+  .rating-bar,.rating-track { display:block; width:100%; }
+  .rating-track { position:relative; height:14px; border:1px solid var(--border); border-radius:5px; background:var(--panel2); }
+  .rating-mid { position:absolute; left:50%; top:-2px; bottom:-2px; width:1px; background:var(--border2); }
+  .rating-fill { position:absolute; top:0; bottom:0; border-radius:4px; }
+  .rating-fill.pos { background:linear-gradient(90deg,rgba(69,189,105,.5),var(--pos)); }
+  .rating-fill.neg { background:linear-gradient(270deg,rgba(255,113,104,.5),var(--neg)); }
   td.prior { color:var(--dim); }
   td[data-v] { font-variant-numeric:tabular-nums; color:var(--ink); }
   .legend { color:var(--mut); font-size:12px; margin-top:16px; line-height:1.7;
@@ -634,17 +699,24 @@ TEMPLATE = """<!DOCTYPE html>
     font-size:14px; font-weight:600; letter-spacing:.01em; transition:all .12s;
   }
   .tab:hover { color:var(--ink); border-color:var(--border2); }
-  .tab.active { color:#fff; background:var(--orange); border-color:var(--orange); }
-  #panel-fantasy .fantasy-view-buttons .fantasy-view-button[aria-pressed="true"] { color:#fff; }
+  .tab.active { color:var(--action-ink); background:var(--action-bg); border-color:var(--action-bg); }
+  #panel-fantasy .fantasy-view-buttons .fantasy-view-button[aria-pressed="true"] { color:var(--action-ink); }
   .panel { display:none; } .panel.active { display:block; }
   .sort-button { width:100%; text-align:inherit; text-transform:inherit; letter-spacing:inherit; }
   .row-trigger { display:inline-flex; align-items:center; text-align:left; }
+  .mobile-qb { display:none; color:var(--dim); font-size:12px; }
 
   .weekbar { display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
   .weekbar label { font-weight:600; color:var(--mut); font-size:13px; }
   .weekbar select { background:var(--panel2); color:var(--ink); border:1px solid var(--border2);
          border-radius:8px; padding:7px 12px; font-size:14px; font-family:var(--body); }
   .weekbar .note { color:var(--dim); font-size:12px; }
+  .column-toggle { display:none; align-items:center; gap:6px; color:var(--mut); font-size:12px; }
+  .injury-status { margin:0 0 14px; padding:10px 12px; color:var(--mut); background:var(--panel);
+    border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:7px; font-size:12px; }
+  .injury-status strong { color:var(--ink); }
+  .injury-status summary { cursor:pointer; color:var(--ink); font-weight:700; }
+  .injury-status p { margin:8px 0 0; }
   .version-meta { color:var(--mut); font-size:12px; margin:8px 0 0; }
   .version-meta:empty { display:none; }
   .version-meta p { margin:4px 0 0; }
@@ -663,16 +735,23 @@ TEMPLATE = """<!DOCTYPE html>
               letter-spacing:.03em; white-space:nowrap; }
   @media (max-width:960px) {
     .row-trigger {
-      display:grid; grid-template-columns:auto minmax(0,1fr); max-width:100%;
+      display:grid; grid-template-columns:auto auto minmax(0,1fr); max-width:100%;
     }
-    .row-trigger .tname, .row-trigger .div { grid-column:2; min-width:0; }
+    .row-trigger .team-marker { grid-row:1 / 4; align-self:center; }
+    .row-trigger .chip { grid-row:1 / 4; align-self:center; }
+    .row-trigger .tname, .row-trigger .mobile-qb, .row-trigger .div { grid-column:3; min-width:0; }
+    .row-trigger .mobile-qb { display:block; margin-top:2px; }
     .row-trigger .div { margin:2px 0 0; }
-    .detail-col { display:none; }
+    .detail-col, .movement, .rating-bar-col { display:none; }
+    #panel-ratings.show-details .detail-col,
+    #panel-ratings.show-details .movement,
+    #panel-ratings.show-details .rating-bar-col { display:table-cell; }
+    .column-toggle { display:inline-flex; }
     .panel.active { padding:12px 8px 16px; }
     th, td { padding:9px 7px; }
     td.team, th.team { white-space:normal; }
     .tname { overflow-wrap:anywhere; }
-    .div { display:block; margin:2px 0 0 49px; }
+    .div { display:block; margin:2px 0 0; }
     .chip { margin-right:6px; }
   }
 
@@ -689,14 +768,14 @@ TEMPLATE = """<!DOCTYPE html>
   }
 
   /* --- Team drawer (slides in from right; table stays put) --- */
-  .scrim { position:fixed; inset:0; background:rgba(30,42,60,.45);
+  .scrim { position:fixed; inset:0; background:rgba(0,0,0,.62);
            backdrop-filter:blur(2px); opacity:0; pointer-events:none;
            transition:opacity .2s ease; z-index:40; }
   .scrim.open { opacity:1; pointer-events:auto; }
   .drawer {
     position:fixed; top:0; right:0; height:100vh; width:min(460px,92vw);
     background:var(--bg2); border-left:1px solid var(--border2);
-    box-shadow:-24px 0 60px rgba(56,79,111,.25); z-index:50;
+    box-shadow:-24px 0 60px rgba(0,0,0,.45); z-index:50;
     transform:translateX(100%); transition:transform .24s cubic-bezier(.4,0,.2,1);
     display:flex; flex-direction:column;
   }
@@ -753,17 +832,17 @@ TEMPLATE = """<!DOCTYPE html>
     font-family:var(--disp); font-weight:600; color:var(--teal2); text-transform:uppercase;
     letter-spacing:.03em; margin:18px 0 7px; font-size:14px; }
   .dr-writeup h4:first-child { margin-top:0; }
-  .dr-writeup p { margin:0 0 11px; color:#4a5d78; }
+  .dr-writeup p { margin:0 0 11px; color:var(--mut); }
   .dr-writeup ul { margin:0 0 11px; padding-left:20px; }
-  .dr-writeup li { margin:3px 0; color:#4a5d78; }
+  .dr-writeup li { margin:3px 0; color:var(--mut); }
   .dr-writeup strong { color:var(--ink); }
   .dr-writeup code { background:var(--panel2); padding:1px 5px; border-radius:4px;
                      font-size:12px; color:var(--teal2); }
-  .dr-writeup .stub { font-style:italic; color:#4a5d78; }
+  .dr-writeup .stub { font-style:italic; color:var(--mut); }
   .dr-writeup .stub-hint { color:var(--dim); font-size:12px; margin-top:4px; }
 
   /* Methodology tab */
-  .method { color:#4a5d78; font-size:15px; line-height:1.65; }
+  .method { color:var(--mut); font-size:15px; line-height:1.65; }
   .method h3 { font-family:var(--disp); font-weight:600; color:var(--ink);
                text-transform:uppercase; letter-spacing:.03em; font-size:19px;
                margin:24px 0 9px; border-bottom:2px solid var(--teal); padding-bottom:5px; }
@@ -786,11 +865,12 @@ TEMPLATE = """<!DOCTYPE html>
 <div class="hero">
   <header>
     <h1>NFL Power Ratings <span class="accent">{{SEASON}}</span></h1>
-    <div class="sub">Preseason &middot; roster-based, points vs. a league-average team (0.0)</div>
+    <div class="sub">McCabe&#x27;s editorial ratings &middot; roster-based, points vs. a league-average team (0.0)</div>
     <div class="updated">By {{AUTHOR}} &middot; {{EDITION}} &middot; Updated <time datetime="{{UPDATED_ISO}}">{{UPDATED}}</time></div>
   </header>
 </div>
 <div class="wrap">
+  {{INJURY_STATUS}}
   <div class="tabs" role="tablist" aria-label="Ratings views">
     <button type="button" class="tab active" id="tab-ratings" role="tab"
       aria-selected="true" aria-controls="panel-ratings" tabindex="0"
@@ -808,6 +888,7 @@ TEMPLATE = """<!DOCTYPE html>
     <label for="ver">Snapshot</label>
     <select id="ver">{{VERSION_OPTS}}</select>
     <span class="note">Click any column to sort &middot; pick a past week to see ratings as they stood</span>
+    <label class="column-toggle"><input id="ratings-columns" type="checkbox"> Show all columns</label>
   </div>
     <div id="versionMeta" class="version-meta" role="status" aria-live="polite"></div>
   <p class="visually-hidden" id="tableStatus" role="status" aria-live="polite"></p>
@@ -821,10 +902,11 @@ TEMPLATE = """<!DOCTYPE html>
         <th scope="col" class="movement" aria-sort="none"><button type="button" class="sort-button" data-column="2">Move</button></th>
         <th scope="col" class="qbn detail-col" aria-sort="none"><button type="button" class="sort-button" data-column="3">QB</button></th>
         <th scope="col" class="detail-col" aria-sort="none"><button type="button" class="sort-button" data-column="4">QB</button></th>
-        <th scope="col" class="detail-col" aria-sort="none"><button type="button" class="sort-button" data-column="5">Off</button></th>
-        <th scope="col" class="detail-col" aria-sort="none"><button type="button" class="sort-button" data-column="6">Def</button></th>
+        <th scope="col" class="detail-col" aria-sort="none"><button type="button" class="sort-button" data-column="5">Offense</button></th>
+        <th scope="col" class="detail-col" aria-sort="none"><button type="button" class="sort-button" data-column="6">Defense</button></th>
         <th scope="col" class="detail-col" aria-sort="none"><button type="button" class="sort-button" data-column="7">End '25</button></th>
         <th scope="col" aria-sort="descending"><button type="button" class="sort-button" data-column="8">Rating</button></th>
+        <th scope="col" class="rating-bar-col"><span class="scale-label"><span aria-hidden="true">-8</span><span>Rating scale</span><span aria-hidden="true">+8</span></span></th>
       </tr>
     </thead>
     <tbody>
@@ -926,6 +1008,10 @@ TEMPLATE = """<!DOCTYPE html>
   const tb = document.querySelector('#pr tbody');
   const sortButtons = [...document.querySelectorAll('#pr .sort-button')];
   const tableStatus = document.getElementById('tableStatus');
+  const panelRatings = document.getElementById('panel-ratings');
+  document.getElementById('ratings-columns').addEventListener('change', event => {
+    panelRatings.classList.toggle('show-details', event.target.checked);
+  });
   let sortCol = 8;
   let asc = false;
 

@@ -1,16 +1,20 @@
-## The case for a contender
+## Week 1 availability
 
-Philadelphia grades as a balanced contender — an above-average QB with positive units on both sides and no real weakness.
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
+## The case for above average
+
+Philadelphia grades above the line — a proven quarterback, a talented supporting cast, and a defense holding up despite edge losses.
 
 ## Quarterback
 
-Jalen Hurts (+2.0) is a solid-plus starter grade, the steady foundation of a well-rounded roster.
+Jalen Hurts (+2.0) is an above-average dual-threat grade — a high-floor winner with rushing value baked in.
 
 ## What moved the number
 
-- **Offense (0.0):** Saquon Barkley, DeVonta Smith, and Dallas Goedert make this a dangerous group; the grade is conservative given that talent.
-- **Defense (+0.5):** above average, though the edge rush thinned — lost Graham, Ojulari, and Phillips; added Greenard and Epenesa.
+- **Offense (+0.5):** raised from 0.0. Even after **losing A.J. Brown**, this is a strong group: **Saquon Barkley is an elite back**, DeVonta Smith headlines a still-solid receiver room, Dallas Goedert is a real tight end, and the offensive line is very good (Mailata, Dickerson, Lane Johnson). Barkley plus that line is enough to grade above average on its own.
+- **Defense (+0.5):** the secondary is a young strength (Quinyon Mitchell, DeJean, Woolen, Mukuba) and the interior is stout, but they lost edge production (Graham, Ojulari, Phillips) and added Greenard and Epenesa — the pass rush is the question that keeps this from grading higher.
 
 ## Bottom line
 
-A complete team with a proven QB and a strong skill group. The one watch item is the reshuffled pass rush — if the new edges hit, the defensive grade has room to rise.
+A balanced, above-average roster with a quarterback who wins. Losing A.J. Brown trims the ceiling, but Barkley and the line keep the offense above the line; the edge rush is the one thing to watch.

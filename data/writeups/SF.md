@@ -1,16 +1,20 @@
-## The case for a contender
+## Week 1 availability
 
-San Francisco still grades as a contender — an above-average QB fronting a deep offensive cast — but a cluster of offensive-skill injuries has trimmed the ceiling.
+Checked September 9, 2026, 10:42–10:46 a.m. ET. **Alfred Collins will miss the season**, according to Shanahan. George Kittle was limited with an Achilles issue; no final game designation was captured. [September 8 NFL update](https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8). Collins also appears as limited in the practice table; the explicit season-ending announcement governs this note. McCabe's approved grade has no automatic adjustment for this update.
+
+## The case for a top-ten grade
+
+San Francisco grades comfortably above the line — a good quarterback and above-average defense, with an offense the model keeps positive despite a stack of skill-position injuries.
 
 ## Quarterback
 
-Brock Purdy (+2.5) is a solid-plus starter grade — the model rewards the efficiency and the system, not just the draft slot.
+Brock Purdy (+2.5) is an above-average grade — an efficient, well-supported passer who plays up in this scheme.
 
 ## What moved the number
 
-- **Offense (+0.25, down from +1.5):** the skill group is banged up across the board. **Ricky Pearsall is out for the year (IR)**, **Christian McCaffrey is dinged up to an unknown degree**, and **George Kittle is working back from an Achilles issue (PUP)** — a carryover from last season, projected back around Week 1. This offense's whole case was built on McCaffrey and Kittle anchoring the Evans/Kirk additions, so being thin at three skill spots at once is a real cluster hit. **If Kittle is ready for Week 1, expect this to climb back +0.5.**
-- **Defense (+0.5):** unchanged — above average, with Odighizuwa and Greenlaw added.
+- **Offense (+0.2):** held slightly above average even through a real injury cluster — **Pearsall on IR, McCaffrey's current injury designation unverified, Kittle working back from an Achilles issue (limited in the captured practice report; final game status pending)** — with Evans and Kirk added. There's +0.5 upside if Kittle is fully healthy. The point: even with the injuries, the model still finds this group slightly above average.
+- **Defense (+0.5):** above average, with Odighizuwa and Greenlaw as the anchors. Greenlaw was limited with an Achilles issue in the [September 8 NFL update](https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8); no final game designation was captured.
 
 ## Bottom line
 
-A balanced roster whose offensive ceiling now hinges on health. The talent is still here — if the skill guys, especially Kittle, are on the field by Week 1, the number bounces back quickly; if the injuries linger, the drop may not be done.
+McCabe's injury discount still leaves the roster in his top ten. The latest availability report appears above; the approved grade is an editorial assessment, with no automatic injury recalculation.

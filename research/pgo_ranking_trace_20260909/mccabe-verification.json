@@ -1,0 +1,218 @@
+{
+  "source_sha256": {
+    "data\\ratings.csv": "01689a02c604a41d825402aea8b94edd5711c50a05d8915f3047ac47d62f0130",
+    "data\\writeups\\LAR.md": "d10f17e25d8b89b167dcad64aa42235028834706b0db127fd4a4ff9a134fd871",
+    "pgo_comparison.py": "dc575021e3e502c52ac91a0bd15bad35b20cbe45254c579c556a206bb2ca5dd7",
+    "release_ratings.py": "a6df38461ce6d941b160608b87f6211344dc8e604a1a2793107c10cc1067bcc1"
+  },
+  "method": "Existing pgo_comparison.load_mccabe_rows; retain stable input-order display ranks for ties. No data mutations.",
+  "mccabe_displayed_mean": 1.475,
+  "mccabe_component_sum_mean": 1.4765625,
+  "mccabe_rams_centered_for_comparison": 5.824999999999999,
+  "candidate_rams": 4.874159906519111,
+  "rows": [
+    {
+      "team": "Los Angeles Rams",
+      "abbr": "LAR",
+      "rating": 7.3,
+      "rank": 1
+    },
+    {
+      "team": "Buffalo Bills",
+      "abbr": "BUF",
+      "rating": 7.0,
+      "rank": 2
+    },
+    {
+      "team": "Seattle Seahawks",
+      "abbr": "SEA",
+      "rating": 6.0,
+      "rank": 3
+    },
+    {
+      "team": "Baltimore Ravens",
+      "abbr": "BAL",
+      "rating": 5.5,
+      "rank": 4
+    },
+    {
+      "team": "Cincinnati Bengals",
+      "abbr": "CIN",
+      "rating": 5.0,
+      "rank": 5
+    },
+    {
+      "team": "Los Angeles Chargers",
+      "abbr": "LAC",
+      "rating": 5.0,
+      "rank": 6
+    },
+    {
+      "team": "New England Patriots",
+      "abbr": "NE",
+      "rating": 4.0,
+      "rank": 7
+    },
+    {
+      "team": "Kansas City Chiefs",
+      "abbr": "KC",
+      "rating": 4.0,
+      "rank": 8
+    },
+    {
+      "team": "San Francisco 49ers",
+      "abbr": "SF",
+      "rating": 3.2,
+      "rank": 9
+    },
+    {
+      "team": "Houston Texans",
+      "abbr": "HOU",
+      "rating": 3.0,
+      "rank": 10
+    },
+    {
+      "team": "Jacksonville Jaguars",
+      "abbr": "JAX",
+      "rating": 3.0,
+      "rank": 11
+    },
+    {
+      "team": "Chicago Bears",
+      "abbr": "CHI",
+      "rating": 3.0,
+      "rank": 12
+    },
+    {
+      "team": "Detroit Lions",
+      "abbr": "DET",
+      "rating": 3.0,
+      "rank": 13
+    },
+    {
+      "team": "Philadelphia Eagles",
+      "abbr": "PHI",
+      "rating": 2.5,
+      "rank": 14
+    },
+    {
+      "team": "Tampa Bay Buccaneers",
+      "abbr": "TB",
+      "rating": 2.5,
+      "rank": 15
+    },
+    {
+      "team": "Dallas Cowboys",
+      "abbr": "DAL",
+      "rating": 2.0,
+      "rank": 16
+    },
+    {
+      "team": "Denver Broncos",
+      "abbr": "DEN",
+      "rating": 1.5,
+      "rank": 17
+    },
+    {
+      "team": "Washington Commanders",
+      "abbr": "WAS",
+      "rating": 1.0,
+      "rank": 18
+    },
+    {
+      "team": "Green Bay Packers",
+      "abbr": "GB",
+      "rating": 1.0,
+      "rank": 19
+    },
+    {
+      "team": "Minnesota Vikings",
+      "abbr": "MIN",
+      "rating": 1.0,
+      "rank": 20
+    },
+    {
+      "team": "Carolina Panthers",
+      "abbr": "CAR",
+      "rating": 0.5,
+      "rank": 21
+    },
+    {
+      "team": "Pittsburgh Steelers",
+      "abbr": "PIT",
+      "rating": 0.0,
+      "rank": 22
+    },
+    {
+      "team": "Indianapolis Colts",
+      "abbr": "IND",
+      "rating": -0.5,
+      "rank": 23
+    },
+    {
+      "team": "Tennessee Titans",
+      "abbr": "TEN",
+      "rating": -0.5,
+      "rank": 24
+    },
+    {
+      "team": "New Orleans Saints",
+      "abbr": "NO",
+      "rating": -0.8,
+      "rank": 25
+    },
+    {
+      "team": "New York Giants",
+      "abbr": "NYG",
+      "rating": -1.0,
+      "rank": 26
+    },
+    {
+      "team": "Atlanta Falcons",
+      "abbr": "ATL",
+      "rating": -1.0,
+      "rank": 27
+    },
+    {
+      "team": "Cleveland Browns",
+      "abbr": "CLE",
+      "rating": -2.5,
+      "rank": 28
+    },
+    {
+      "team": "Arizona Cardinals",
+      "abbr": "ARI",
+      "rating": -3.5,
+      "rank": 29
+    },
+    {
+      "team": "Las Vegas Raiders",
+      "abbr": "LV",
+      "rating": -4.0,
+      "rank": 30
+    },
+    {
+      "team": "Miami Dolphins",
+      "abbr": "MIA",
+      "rating": -4.5,
+      "rank": 31
+    },
+    {
+      "team": "New York Jets",
+      "abbr": "NYJ",
+      "rating": -5.5,
+      "rank": 32
+    }
+  ],
+  "report_sha256": "ee048a8214878b3694f049ba1b59578f5c9afa95449b78ba164b5f20072a7226",
+  "original_audit_artifact_hashes_unchanged": true,
+  "user_supplied_injury_narrative_independently_verified": false,
+  "selected_qb_differences": [
+    {
+      "team": "ATL",
+      "mccabe_qb": "Michael Penix Jr.",
+      "candidate_qb": "Tua Tagovailoa"
+    }
+  ],
+  "independent_review": "PASS for arithmetic and scope; reviewer-requested ATL QB-assumption disclosure added and source-checked"
+}

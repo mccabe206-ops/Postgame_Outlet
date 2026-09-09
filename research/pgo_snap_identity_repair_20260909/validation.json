@@ -1,0 +1,177 @@
+{
+  "recorded_at": "2026-09-09T02:09:00.630800+00:00",
+  "branch": "codex/pgo-snap-identity-repair-20260909",
+  "base_commit": "275289e71ae4d8950b621f86447fff673f84840d",
+  "code_status": "IMPLEMENTED AND REVIEWED LOCALLY; UNCOMMITTED",
+  "definitions_status": "COMPLETE; DEFINITIONS ONLY",
+  "source_qualification": "STOP: 115 PFR/name conflict rows; diagnostic inventory complete",
+  "scientific_status": "EXPERIMENTAL / HOLD unchanged",
+  "model_fits": 0,
+  "real_history_walks": 0,
+  "source_fetches": 0,
+  "tests": [
+    {
+      "command": "python -B -m unittest discover -s tests",
+      "tests": 565,
+      "skipped": 1,
+      "result": "OK",
+      "seconds": 602.353,
+      "scope": "before final conflicting-PFR guard"
+    },
+    {
+      "command": "python -B -m unittest tests.test_pgo_snap_identity tests.test_pgo_challenger tests.test_pgo_current_strength tests.test_pgo_opponent_adjustment",
+      "tests": 114,
+      "result": "OK",
+      "seconds": 18.273,
+      "scope": "final code"
+    },
+    {
+      "command": "python -B -m unittest research.pgo_corrected_roster_candidate.test_candidate research.pgo_corrected_roster_candidate.test_temporal research.pgo_corrected_roster_candidate.test_verify",
+      "tests": 15,
+      "result": "OK",
+      "seconds": 0.233,
+      "scope": "final code"
+    }
+  ],
+  "independent_reviews": {
+    "code": "Final conflicting-PFR finding closed; no remaining findings",
+    "definitions": "No material correction needed"
+  },
+  "preservation": {
+    "protected_tracked_files": 215,
+    "byte_identical": 170,
+    "checkout_line_endings_only": [
+      ".github/workflows/publish-edition.yml",
+      ".github/workflows/update-board.yml",
+      "data/config.csv",
+      "data/hfa.csv",
+      "data/mccabe_availability.csv",
+      "data/prior_2025.csv",
+      "data/snapshots.json",
+      "data/writeups/ARI.md",
+      "data/writeups/ATL.md",
+      "data/writeups/BAL.md",
+      "data/writeups/BUF.md",
+      "data/writeups/CAR.md",
+      "data/writeups/CHI.md",
+      "data/writeups/CIN.md",
+      "data/writeups/CLE.md",
+      "data/writeups/DAL.md",
+      "data/writeups/DEN.md",
+      "data/writeups/DET.md",
+      "data/writeups/GB.md",
+      "data/writeups/HOU.md",
+      "data/writeups/IND.md",
+      "data/writeups/JAX.md",
+      "data/writeups/KC.md",
+      "data/writeups/LAC.md",
+      "data/writeups/LAR.md",
+      "data/writeups/LV.md",
+      "data/writeups/MIA.md",
+      "data/writeups/MIN.md",
+      "data/writeups/NE.md",
+      "data/writeups/NO.md",
+      "data/writeups/NYG.md",
+      "data/writeups/NYJ.md",
+      "data/writeups/PHI.md",
+      "data/writeups/PIT.md",
+      "data/writeups/SEA.md",
+      "data/writeups/SF.md",
+      "data/writeups/TB.md",
+      "data/writeups/TEN.md",
+      "data/writeups/WAS.md",
+      "research/pgo/backtest.json",
+      "research/pgo/ratings_2026_preseason.csv",
+      "research/pgo_v1/backtest.json",
+      "research/pgo_v1/ratings_2026_preseason.csv",
+      "research/pgo_v1/source_audit.json",
+      "research/pgo_v1/sources.lock.json"
+    ],
+    "protected_git_diff": [],
+    "old_checkout_tracked_diff": [],
+    "copied_trace_sha256": {
+      "research\\pgo_ranking_trace_20260909\\analysis.json": "44b38f58711930eec897de25851c1ac4c589518cb741c905c50ff6fccc22572e",
+      "research\\pgo_ranking_trace_20260909\\analyze.py": "3c941fabcd0f979a947ddfef7533e7fe06a5789e40ec97e89e205c58ddf3daaf",
+      "research\\pgo_ranking_trace_20260909\\availability-notes.md": "7d4e635a706d1b1a060e7e3050dbad429261cf76af6e006f5404e8536a9e2f34",
+      "research\\pgo_ranking_trace_20260909\\check_player_inputs.py": "04dcb0ee44fae50d09f88d2428d02340111ce1b3586367c18f70aeec267d7486",
+      "research\\pgo_ranking_trace_20260909\\mccabe-comparison.md": "ee048a8214878b3694f049ba1b59578f5c9afa95449b78ba164b5f20072a7226",
+      "research\\pgo_ranking_trace_20260909\\mccabe-verification.json": "cada8db424453c2bec382407351c289efb56807e9a4612738b05c3fa33c9cb86",
+      "research\\pgo_ranking_trace_20260909\\player-input-notes.md": "67209133b95ba903ed472b0987647b82a007c5072c326418f2d5f8b3c2612c08",
+      "research\\pgo_ranking_trace_20260909\\README.md": "f838c31ebaa7953172a419f0d6432458cb3e323fc8ac99c8c1155c477dc1e693",
+      "research\\pgo_ranking_trace_20260909\\trace-review.md": "cf806e341da39599b012e16f86cf2507241b6d1b6107ccf676981f763157e859",
+      "research\\pgo_ranking_trace_20260909\\verification.json": "8b92960d98ed11e8eb3982f79bbfe07855b2e654c9c63a06868bb684129aa191"
+    },
+    "pinned_sources_and_receipt_context_verified": 28
+  },
+  "source_inventory_summary": {
+    "REG_snap_rows": 310475,
+    "REG_snap_volume": 9957627.0,
+    "conflict_rows": 115,
+    "conflict_volume": 2195.0,
+    "duplicate_snap_assignments": 0,
+    "new_matched_rows": 301899,
+    "new_matched_volume": 9714193.0,
+    "new_unmatched_rows": 8461,
+    "new_unmatched_volume": 241239.0,
+    "newly_matched_rows": 2244,
+    "newly_matched_volume": 81088.0,
+    "newly_rejected_rows": 16,
+    "newly_rejected_volume": 109.0,
+    "old_match_conflict_rows": 114,
+    "old_match_conflict_volume": 2190.0,
+    "old_matched_rows": 299785,
+    "old_matched_volume": 9635404.0,
+    "old_resolved_identities_reassigned": 0,
+    "team_seasons": 416
+  },
+  "files": {
+    "pgo_challenger.py": {
+      "sha256": "0369a31a13703f2030bd930c37cd3e4087488151706968bff79f1223d9b340d8",
+      "bytes": 114627
+    },
+    "research/pgo_corrected_roster_candidate/adapter.py": {
+      "sha256": "e09304ea4b88bf837624ab52d678a3075d30faa3f607c956f590c2829d32f8ee",
+      "bytes": 15562
+    },
+    "tests/test_pgo_challenger.py": {
+      "sha256": "e929df509b5375d00942722ba254b26b7f7f5d3df688595d0e0160f71c505486",
+      "bytes": 148814
+    },
+    "tests/test_pgo_snap_identity.py": {
+      "sha256": "6c553cb7edf330d977d239cf92c0edbb0b2f939b08e431be99493331845cebda",
+      "bytes": 6621
+    },
+    "docs/superpowers/plans/2026-09-09-pgo-snap-identity-repair.md": {
+      "sha256": "00345613247d9f3591cb90f4f267f7f557145877f676c0f3768f148c1d5eee1e",
+      "bytes": 1971
+    },
+    "docs/superpowers/specs/2026-09-09-pgo-player-value-definitions.md": {
+      "sha256": "9f26467b293910ee7d68b1ba37826a8701f59401e643edcb146bbc79c9d1f043",
+      "bytes": 14870
+    },
+    "research/pgo_snap_identity_repair_20260909/notes.md": {
+      "sha256": "7417732212526a20327892d4f1d1b543ce5af704a3391399256c5b9e2adcaac2",
+      "bytes": 9021
+    },
+    "research/pgo_snap_identity_repair_20260909/README.md": {
+      "sha256": "c29a049ea01e46930ffc4341addf51af88e93487b6c29aff2d503f81c1cc56c4",
+      "bytes": 4514
+    },
+    "research/pgo_snap_identity_repair_20260909/source-conflict-inventory.json": {
+      "sha256": "c3f721962886ba77fd1ff8d45637508d2050fd294c0f3185dff77f3561a66a29",
+      "bytes": 1039497
+    },
+    "research/pgo_snap_identity_repair_20260909/source-verification-final.json": {
+      "sha256": "65736ac308d87dbd2d93e1817aa62a0afb8744176e9a42a8a2465ea3d215a812",
+      "bytes": 19511
+    },
+    "research/pgo_snap_identity_repair_20260909/source-verification.json": {
+      "sha256": "366f005b12680f912d63362fc268ce9b15e8289c57a6785ca72b3d6d573dd86f",
+      "bytes": 352635
+    },
+    "research/pgo_snap_identity_repair_20260909/verify_sources.py": {
+      "sha256": "332e3a632a4aaace4bd0fb224e9e3b35c98b4b65dad1d169a041a600dc00ee8d",
+      "bytes": 14934
+    }
+  }
+}
