@@ -1,16 +1,16 @@
-## The case for a low rating
+## The case for a below-average grade
 
-The Giants grade below average — a rookie-QB year with an aging receiver room, though the defense is a modest bright spot.
+The Giants grade below the line — a rookie quarterback and thin offense, propped up slightly by an improved defense.
 
 ## Quarterback
 
-Jaxson Dart (−1.0) is priced as a below-average rookie starter — a measured grade, neither faded nor hyped.
+Jaxson Dart (-1.0) is a below-average rookie grade — real upside, but priced for the growing pains.
 
 ## What moved the number
 
-- **Offense (−0.5):** Malik Nabers is a real ascending WR1, but he's surrounded by aging vets (OBJ, Mooney, JuJu) rather than a stable supporting cast.
-- **Defense (+0.5):** the bright spot — Edmunds and Burns added to a group that grades above the line.
+- **Offense (-0.5):** Malik Nabers is a legitimate WR1, but the rest of the room is aging (OBJ, Mooney, JuJu).
+- **Defense (+0.5):** the Edmunds and Burns additions push this unit above average — the best part of the roster.
 
 ## Bottom line
 
-A rebuild anchored by a young WR1 and a decent defense, gated by rookie QB play. If Dart develops faster than his grade, there's room to climb.
+Nabers and a rebuilt defense are the reasons for hope. The rookie QB grade keeps the overall number negative for now.

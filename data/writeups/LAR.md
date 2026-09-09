@@ -1,20 +1,16 @@
 ## The case for #1
 
-The Rams grade out at the very top of the league — the rare team that pairs an elite quarterback with positive grades on *both* the offensive supporting cast and the defense.
+The Rams top the board — an elite quarterback fronting above-average units on both sides, with a defense reshaped by marquee additions.
 
 ## Quarterback
 
-Matthew Stafford (+5.5) is a top-tier grade, one of the highest QB values in the model, and the foundation of the number one rating.
+Matthew Stafford (+5.5) is a top-tier grade — veteran precision and arm talent that lift the whole offense.
 
 ## What moved the number
 
-- **Offense (+0.9):** Puka Nacua and Kyren Williams headline a genuinely strong group around Stafford.
-- **Defense (+0.9):** landing Myles Garrett (from Cleveland) plus McDuffie and Watson makes this a real strength.
-
-## What changed (7.5 → 7.3)
-
-A mild −0.2 trim (−0.1 offense, −0.1 defense): both **Puka Nacua** (offense) and **Myles Garrett** (defense) are working back from injuries. Both are expected back around Week 1, so this is **not** a talent downgrade — just a small hedge that they may not be in perfect football shape to open the season. The 0.2 comes back once both are healthy and up to game speed.
+- **Offense (+0.9):** Nacua and Kyren headline an above-average group, but the number is discounted for injuries: **Nacua is working back from a psoas injury** (a hip-flexor-area strain from August; expected to play the opener), and **left tackle Alaric Jackson is banged up too** — a camp ankle injury plus an ongoing blood-clot condition he manages, and he's expected to play but hasn't been full-go. **Fully healthy, this offense grades +1.5** — the current number is an injury-discounted read, not the ceiling.
+- **Defense (+1.2):** a genuinely reshaped unit — **Myles Garrett**, McDuffie, Watson, and **Aaron Donald back** (though rusty after a couple of years retired, so his bump is modest). On healthy talent this front is close to elite; it's trimmed toward 1.2 because **Garrett is working through left knee swelling** (missed most of camp; McVay says he's good to go for Week 1), Donald is ramping up after his layoff, and Kobie Turner is questionable. The **healthy ceiling here is ~1.5** as well.
 
 ## Bottom line
 
-Still the most complete roster in the model — elite QB, plus offense, plus a Garrett-anchored defense — and still #1 even after the trim. Two minor injuries and an older franchise QB's availability are the only clouds; a full season will test them.
+The most complete top-tier profile in the model: elite quarterback, above-average units, and a defense that added real names. The current grade is discounted for early injuries — both the offense (+1.5) and the defense (~+1.5) have a higher healthy ceiling than what's on the board today.

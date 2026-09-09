@@ -1,16 +1,16 @@
-## The case for a low rating
+## The case for a bottom-tier grade
 
-Las Vegas grades near the bottom — below average at every level, with an aging QB and thin skill support.
+Las Vegas grades near the floor — a below-average quarterback and negative marks on both units.
 
 ## Quarterback
 
-Kirk Cousins (−2.5) is one of the lowest starter grades in the model, reflecting age and fit rather than a total collapse.
+Kirk Cousins (-2.5) is a bottom-tier starter grade here, reflecting a sharp decline and limited mobility priced in.
 
 ## What moved the number
 
-- **Offense (−0.5):** Brock Bowers is a genuine weapon at tight end and Linderbaum firms the line, but the group grades below average overall.
-- **Defense (−1.0):** Maxx Crosby is elite, but the unit around him (Paye, Q. Walker, Dean added) grades below the line.
+- **Offense (-0.5):** Bowers is a genuine weapon at tight end and Linderbaum stabilizes the middle, but the group grades below average.
+- **Defense (-1.0):** Maxx Crosby is elite, but the unit around him — Paye, Q. Walker, Dean — nets negative.
 
 ## Bottom line
 
-Two star-level players (Bowers, Crosby) on a roster the model sees as below average everywhere else. The QB grade is the ceiling here.
+Crosby and Bowers are real. The quarterback grade and thin support drag this to the back of the board.

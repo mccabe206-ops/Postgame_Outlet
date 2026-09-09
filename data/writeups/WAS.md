@@ -1,16 +1,16 @@
-## The case for above-average
+## The case for average despite the injuries
 
-Washington's rating is a quarterback story — an above-average QB grade lifting the team despite a defense that grades below the line.
+Washington nets out right at the waterline — an above-average quarterback offsetting units both dinged below the line.
 
 ## Quarterback
 
-Jayden Daniels (+2.0) is the engine — an ascending dual-threat starter the model already rates as a clear positive.
+Jayden Daniels (+2.0) is an above-average grade — a dynamic dual-threat and the reason this team stays afloat.
 
 ## What moved the number
 
-- **Offense (0.0):** Terry McLaurin anchors it with White added; the group grades neutral.
-- **Defense (−1.0):** the weak spot — Chaisson, Omenihu, and Oweh added, but the unit still grades below average.
+- **Offense (-1.0):** cut hard after **Laremy Tunsil landed on IR** — losing that blindside anchor is a huge blow to the line, even with McLaurin and the White addition in the skill group.
+- **Defense (-1.0):** below average; Chaisson, Omenihu, and Oweh are the additions, but the unit grades negative.
 
-## Bottom line
+## Risk
 
-A young franchise QB carrying a roster with a soft defense. If Daniels keeps climbing and the pass rush additions land, this is a team the model would move up.
+The offensive grade is depressed by the Tunsil injury. If the line stabilizes, there's room to climb — Daniels gives the whole thing a high ceiling.

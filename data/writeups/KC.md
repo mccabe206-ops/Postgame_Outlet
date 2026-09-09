@@ -1,16 +1,16 @@
-## Why the injury flag
+## The case near the top
 
-Kansas City's 2025 ending rating was deflated by a hurt Mahomes down the stretch, so this number leans on the **roster talent build** rather than last year's finish. That's what the ▲inj tag means throughout the site.
+Kansas City is a quarterback-carried contender — but the opener comes with a real asterisk, because it's Patrick Mahomes's first game back from a major knee injury.
 
 ## Quarterback
 
-Mahomes carries a +4.5 — elite, but with a deliberate injury haircut baked in. He's the most talented QB in the league on a per-snap basis; the rating simply prices in that *expected* 2026 value has to account for availability risk.
+Mahomes (+3.5) — trimmed from +4.5. He **tore his ACL and LCL in Week 15 of last season**, missed the final three games, and played no preseason. He's cleared to start Week 1 (Monday night vs. Denver), but this is his **first live action nine months post-surgery**, so the grade carries a return-to-play/rust haircut. Get him a few games back to full speed and this climbs back toward its +4.5 ceiling — he's still the best insurance policy in football.
 
 ## What moved the number
 
-- Skill group is fast and young — Worthy and Rice on the perimeter, plus Walker III added.
-- **Defense (−0.5):** a hair below average on paper after the Sneed/Elam reshuffle, which is the main thing keeping the overall number out of the top tier.
+- **Offense (0.0):** average as built, and we're comfortable there with **Ken Walker III and Rashee Rice starting** alongside Xavier Worthy — a solid, functional group. The catch is up front: rookie left tackle **Josh Simmons is likely out for Week 1** (back), so Mahomes's blindside protection is patched together for the opener.
+- **Defense (−0.5):** just below the line; Karlaftis and Bolton anchor it, with Sneed and Elam the notable pieces.
 
 ## Bottom line
 
-A healthy Mahomes almost certainly outruns this rating. It's built to be honest about the downside, not to chase the ceiling.
+The whole rating hinges on Mahomes's knee. Priced at +3.5 for a rusty Week 1 return behind a banged-up line, Kansas City still projects as a playoff-caliber team — and the number rises the moment he looks like himself again.

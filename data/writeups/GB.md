@@ -1,16 +1,16 @@
-## The case for above-average
+## The case for above average
 
-Green Bay grades modestly above the line — a solid young QB with balanced, unspectacular units. One of the teams the model flags as a possible edge outlier.
+Green Bay grades above the line — a rising quarterback and a solid offense, with a defense in transition.
 
 ## Quarterback
 
-Jordan Love (+1.0) is priced as an above-average starter — a positive grade without the elite tier.
+Jordan Love (+1.0) is an above-average grade — a talented starter the model likes without pricing him elite yet.
 
 ## What moved the number
 
-- **Offense (+0.5):** Josh Jacobs is the engine; the receiver room churned (lost Doubs and Wicks), leaving it above average but unsettled.
-- **Defense (−0.5):** Hargrave and Franklin added, but losing Gary hurts — grades just below the line.
+- **Offense (+0.5):** Josh Jacobs anchors the run game; lost Doubs and Wicks from the receiver room.
+- **Defense (-0.5):** Hargrave and Franklin add interior beef and Gary was lost — and while **Micah Parsons now belongs to this roster, he's currently injured**, so the grade is held at -0.5 until he's healthy and on the field.
 
 ## Bottom line
 
-A balanced, slightly-above-average team. Worth a note: the README flags GB as a recurring name on the season-long edge list — which usually means *my* number is the outlier, so treat specific GB edges with a grain of salt.
+An above-average offense with a QB on the rise. The defensive grade has real upside the moment Parsons is playing.

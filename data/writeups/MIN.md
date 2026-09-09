@@ -1,16 +1,16 @@
-## The case for the middle
+## The case for above average
 
-Minnesota grades around average — strong skill and a decent defense, held back by a below-average QB grade.
+Minnesota grades above the line — a strong offense and above-average defense carrying a below-average quarterback situation.
 
 ## Quarterback
 
-Kyler Murray (−0.5) sits just below average in this model — the note reflects fit and expectation, not a collapse.
+Kyler Murray (-0.5) is a slightly-below-average grade — mobility and flashes, but priced with real risk.
 
 ## What moved the number
 
-- **Offense (+1.0):** a genuine strength — Justin Jefferson and Jordan Addison, with Jennings added, is one of the better receiver groups in the league.
-- **Defense (+0.5):** above average despite real churn — lost Greenard, Allen, and Hargrave.
+- **Offense (+1.0):** a top-tier group — Jefferson and Addison, with Jennings added.
+- **Defense (+0.5):** above average even after losing Greenard, Allen, and Hargrave.
 
 ## Bottom line
 
-The supporting cast grades better than the quarterback. If Murray plays above his number, the surrounding talent (especially that receiver room) could push this team up quickly.
+The weapons and defense do the lifting. If Murray plays clean, this roster has more in it than the QB grade suggests.

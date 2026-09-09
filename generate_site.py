@@ -47,7 +47,7 @@ def parse_args(argv=None):
 
 # Teams whose 2025 ending rating was deflated by a hurt/benched starter —
 # trust the talent build more for these.
-INJURY_DEFLATED = {"Kansas City Chiefs", "Cincinnati Bengals", "Baltimore Ravens"}
+INJURY_DEFLATED = {"Kansas City Chiefs"}
 
 # Primary / secondary brand colors + abbreviation per team.
 TEAM = {

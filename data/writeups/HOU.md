@@ -1,16 +1,16 @@
-## The case for a balanced riser
+## The case for a defense-led riser
 
-Houston grades as one of the most complete young teams in the league — positive on all three components, led by an elite defense.
+Houston's identity is a top-tier defense, with an ascending quarterback and a skill group thinned by injury.
 
 ## Quarterback
 
-C.J. Stroud (+0.5) sits just above average here. Not yet in the elite tier, but a stable, ascending starter the model trusts.
+C.J. Stroud (+0.5) grades as a slightly-above-average starter with clear upside — an efficient young passer the model likes going forward.
 
 ## What moved the number
 
-- **Offense (+0.5):** Nico Collins is a legitimate WR1, with Montgomery added to the group.
-- **Defense (+2.0):** the strength of the roster — Will Anderson and Derek Stingley Jr. headline a genuinely elite unit.
+- **Offense (+0.3):** Nico Collins is a real WR1 and Montgomery helps the run game, but the number was trimmed -0.2 with **Jayden Higgins on IR** — a slight downgrade — and **Boutte in but still learning the playbook**.
+- **Defense (+2.0):** elite. Anderson and Stingley headline one of the best units in the league.
 
 ## Bottom line
 
-A defense-led team with a young QB still climbing. If Stroud takes the next step, the ceiling here is a lot higher than the current number.
+A defense that can win games on its own, plus a quarterback trending up. The offense just needs its skill group healthy to match.
