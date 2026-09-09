@@ -1,0 +1,4322 @@
+{
+  "game_types": {
+    "CON": 26,
+    "DIV": 52,
+    "REG": 3407,
+    "SB": 13,
+    "WC": 64
+  },
+  "historical_core_sha256": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+  "historical_role_policy": "Exact corrected constructor; inherited role identity/zero-fill limits retained",
+  "historical_source_vintage": "REVIEW REQUIRED",
+  "history_games": 3562,
+  "policy": "REG+WC+DIV+CON+SB update history; REG-only fitting/evaluation targets",
+  "postseason": [
+    {
+      "game_id": "2013_18_KC_IND",
+      "game_type": "WC",
+      "kickoff": "2014-01-04T16:35-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "IND": {
+          "active_roster_rows": 51,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2013_18_NO_PHI",
+      "game_type": "WC",
+      "kickoff": "2014-01-04T20:10-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "NO": {
+          "active_roster_rows": 51,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2013_18_SD_CIN",
+      "game_type": "WC",
+      "kickoff": "2014-01-05T13:05-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "CIN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "LAC": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2013_18_SF_GB",
+      "game_type": "WC",
+      "kickoff": "2014-01-05T16:40-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2013_19_NO_SEA",
+      "game_type": "DIV",
+      "kickoff": "2014-01-11T16:35-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "NO": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2013_19_IND_NE",
+      "game_type": "DIV",
+      "kickoff": "2014-01-11T20:15-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "IND": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2013_19_SF_CAR",
+      "game_type": "DIV",
+      "kickoff": "2014-01-12T13:05-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "CAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2013_19_SD_DEN",
+      "game_type": "DIV",
+      "kickoff": "2014-01-12T16:40-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "DEN": {
+          "active_roster_rows": 51,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        },
+        "LAC": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2013_20_NE_DEN",
+      "game_type": "CON",
+      "kickoff": "2014-01-19T15:00-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "DEN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2013_20_SF_SEA",
+      "game_type": "CON",
+      "kickoff": "2014-01-19T18:30-05:00",
+      "neutral": false,
+      "season": 2013,
+      "teams": {
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2013_21_SEA_DEN",
+      "game_type": "SB",
+      "kickoff": "2014-02-02T18:25-05:00",
+      "neutral": true,
+      "season": 2013,
+      "teams": {
+        "DEN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 42,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 2,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2014_18_ARI_CAR",
+      "game_type": "WC",
+      "kickoff": "2015-01-03T16:35-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "ARI": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "CAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2014_18_BAL_PIT",
+      "game_type": "WC",
+      "kickoff": "2015-01-03T20:15-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 53,
+          "qb_rows": 2,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2014_18_CIN_IND",
+      "game_type": "WC",
+      "kickoff": "2015-01-04T13:05-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "CIN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "IND": {
+          "active_roster_rows": 51,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2014_18_DET_DAL",
+      "game_type": "WC",
+      "kickoff": "2015-01-04T16:40-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "DAL": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "DET": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2014_19_BAL_NE",
+      "game_type": "DIV",
+      "kickoff": "2015-01-10T16:35-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2014_19_CAR_SEA",
+      "game_type": "DIV",
+      "kickoff": "2015-01-10T20:15-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "CAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 2,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2014_19_DAL_GB",
+      "game_type": "DIV",
+      "kickoff": "2015-01-11T13:05-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "DAL": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "GB": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2014_19_IND_DEN",
+      "game_type": "DIV",
+      "kickoff": "2015-01-11T16:40-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "DEN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "IND": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2014_20_GB_SEA",
+      "game_type": "CON",
+      "kickoff": "2015-01-18T15:05-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2014_20_IND_NE",
+      "game_type": "CON",
+      "kickoff": "2015-01-18T18:50-05:00",
+      "neutral": false,
+      "season": 2014,
+      "teams": {
+        "IND": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2014_21_NE_SEA",
+      "game_type": "SB",
+      "kickoff": "2015-02-01T18:30-05:00",
+      "neutral": true,
+      "season": 2014,
+      "teams": {
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2015_18_KC_HOU",
+      "game_type": "WC",
+      "kickoff": "2016-01-09T16:35-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "HOU": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 53,
+          "qb_rows": 2,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2015_18_PIT_CIN",
+      "game_type": "WC",
+      "kickoff": "2016-01-09T20:15-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "CIN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 53,
+          "qb_rows": 2,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2015_18_SEA_MIN",
+      "game_type": "WC",
+      "kickoff": "2016-01-10T13:05-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "MIN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2015_18_GB_WAS",
+      "game_type": "WC",
+      "kickoff": "2016-01-10T16:40-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "WAS": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2015_19_KC_NE",
+      "game_type": "DIV",
+      "kickoff": "2016-01-16T16:35-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2015_19_GB_ARI",
+      "game_type": "DIV",
+      "kickoff": "2016-01-16T20:15-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "ARI": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "GB": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2015_19_SEA_CAR",
+      "game_type": "DIV",
+      "kickoff": "2016-01-17T13:05-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "CAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 2,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2015_19_PIT_DEN",
+      "game_type": "DIV",
+      "kickoff": "2016-01-17T16:40-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "DEN": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2015_20_NE_DEN",
+      "game_type": "CON",
+      "kickoff": "2016-01-24T15:05-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "DEN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2015_20_ARI_CAR",
+      "game_type": "CON",
+      "kickoff": "2016-01-24T18:40-05:00",
+      "neutral": false,
+      "season": 2015,
+      "teams": {
+        "ARI": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "CAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 3,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2015_21_CAR_DEN",
+      "game_type": "SB",
+      "kickoff": "2016-02-07T18:30-05:00",
+      "neutral": true,
+      "season": 2015,
+      "teams": {
+        "CAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 2,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "DEN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2016_18_OAK_HOU",
+      "game_type": "WC",
+      "kickoff": "2017-01-07T16:35-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "HOU": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "LV": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2016_18_DET_SEA",
+      "game_type": "WC",
+      "kickoff": "2017-01-07T20:15-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "DET": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2016_18_MIA_PIT",
+      "game_type": "WC",
+      "kickoff": "2017-01-08T13:05-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "MIA": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2016_18_NYG_GB",
+      "game_type": "WC",
+      "kickoff": "2017-01-08T16:40-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "NYG": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2016_19_SEA_ATL",
+      "game_type": "DIV",
+      "kickoff": "2017-01-14T16:35-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "ATL": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2016_19_HOU_NE",
+      "game_type": "DIV",
+      "kickoff": "2017-01-14T20:15-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "HOU": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2016_19_GB_DAL",
+      "game_type": "DIV",
+      "kickoff": "2017-01-15T16:40-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "DAL": {
+          "active_roster_rows": 52,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "GB": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2016_19_PIT_KC",
+      "game_type": "DIV",
+      "kickoff": "2017-01-15T20:20-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2016_20_GB_ATL",
+      "game_type": "CON",
+      "kickoff": "2017-01-22T15:05-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "ATL": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "GB": {
+          "active_roster_rows": 53,
+          "qb_rows": 2,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2016_20_PIT_NE",
+      "game_type": "CON",
+      "kickoff": "2017-01-22T18:40-05:00",
+      "neutral": false,
+      "season": 2016,
+      "teams": {
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2016_21_NE_ATL",
+      "game_type": "SB",
+      "kickoff": "2017-02-05T18:30-05:00",
+      "neutral": true,
+      "season": 2016,
+      "teams": {
+        "ATL": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2017_18_TEN_KC",
+      "game_type": "WC",
+      "kickoff": "2018-01-06T16:36-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 54,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "TEN": {
+          "active_roster_rows": 54,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2017_18_ATL_LA",
+      "game_type": "WC",
+      "kickoff": "2018-01-06T20:15-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "ATL": {
+          "active_roster_rows": 55,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        },
+        "LAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2017_18_BUF_JAX",
+      "game_type": "WC",
+      "kickoff": "2018-01-07T13:05-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 55,
+          "qb_rows": 2,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "JAX": {
+          "active_roster_rows": 55,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2017_18_CAR_NO",
+      "game_type": "WC",
+      "kickoff": "2018-01-07T16:40-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "CAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 2,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "NO": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2017_19_ATL_PHI",
+      "game_type": "DIV",
+      "kickoff": "2018-01-13T16:35-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "ATL": {
+          "active_roster_rows": 55,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 55,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2017_19_TEN_NE",
+      "game_type": "DIV",
+      "kickoff": "2018-01-13T20:15-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "NE": {
+          "active_roster_rows": 55,
+          "qb_rows": 2,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "TEN": {
+          "active_roster_rows": 54,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2017_19_JAX_PIT",
+      "game_type": "DIV",
+      "kickoff": "2018-01-14T13:05-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "JAX": {
+          "active_roster_rows": 55,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 54,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2017_19_NO_MIN",
+      "game_type": "DIV",
+      "kickoff": "2018-01-14T16:40-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "MIN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NO": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2017_20_JAX_NE",
+      "game_type": "CON",
+      "kickoff": "2018-01-21T15:05-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "JAX": {
+          "active_roster_rows": 55,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 55,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2017_20_MIN_PHI",
+      "game_type": "CON",
+      "kickoff": "2018-01-21T18:41-05:00",
+      "neutral": false,
+      "season": 2017,
+      "teams": {
+        "MIN": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 55,
+          "qb_rows": 2,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2017_21_PHI_NE",
+      "game_type": "SB",
+      "kickoff": "2018-02-04T18:31-05:00",
+      "neutral": true,
+      "season": 2017,
+      "teams": {
+        "NE": {
+          "active_roster_rows": 55,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 55,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2018_18_IND_HOU",
+      "game_type": "WC",
+      "kickoff": "2019-01-05T16:35-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "HOU": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "IND": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2018_18_SEA_DAL",
+      "game_type": "WC",
+      "kickoff": "2019-01-05T20:15-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "DAL": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2018_18_LAC_BAL",
+      "game_type": "WC",
+      "kickoff": "2019-01-06T13:05-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "LAC": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2018_18_PHI_CHI",
+      "game_type": "WC",
+      "kickoff": "2019-01-06T16:40-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "CHI": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2018_19_IND_KC",
+      "game_type": "DIV",
+      "kickoff": "2019-01-12T16:35-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "IND": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2018_19_DAL_LA",
+      "game_type": "DIV",
+      "kickoff": "2019-01-12T20:15-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "DAL": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "LAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2018_19_LAC_NE",
+      "game_type": "DIV",
+      "kickoff": "2019-01-13T13:05-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "LAC": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2018_19_PHI_NO",
+      "game_type": "DIV",
+      "kickoff": "2019-01-13T16:40-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "NO": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2018_20_LA_NO",
+      "game_type": "CON",
+      "kickoff": "2019-01-20T15:05-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "LAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NO": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2018_20_NE_KC",
+      "game_type": "CON",
+      "kickoff": "2019-01-20T18:40-05:00",
+      "neutral": false,
+      "season": 2018,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2018_21_NE_LA",
+      "game_type": "SB",
+      "kickoff": "2019-02-03T18:30-05:00",
+      "neutral": true,
+      "season": 2018,
+      "teams": {
+        "LAR": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 53,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2019_18_BUF_HOU",
+      "game_type": "WC",
+      "kickoff": "2020-01-04T16:35-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "HOU": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2019_18_TEN_NE",
+      "game_type": "WC",
+      "kickoff": "2020-01-04T20:15-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "NE": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "TEN": {
+          "active_roster_rows": 46,
+          "qb_rows": 2,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2019_18_MIN_NO",
+      "game_type": "WC",
+      "kickoff": "2020-01-05T13:05-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "MIN": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "NO": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2019_18_SEA_PHI",
+      "game_type": "WC",
+      "kickoff": "2020-01-05T16:40-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "PHI": {
+          "active_roster_rows": 46,
+          "qb_rows": 2,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2019_19_MIN_SF",
+      "game_type": "DIV",
+      "kickoff": "2020-01-11T16:35-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "MIN": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2019_19_TEN_BAL",
+      "game_type": "DIV",
+      "kickoff": "2020-01-11T20:15-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "TEN": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2019_19_HOU_KC",
+      "game_type": "DIV",
+      "kickoff": "2020-01-12T15:05-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "HOU": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2019_19_SEA_GB",
+      "game_type": "DIV",
+      "kickoff": "2020-01-12T18:40-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2019_20_TEN_KC",
+      "game_type": "CON",
+      "kickoff": "2020-01-19T15:05-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "TEN": {
+          "active_roster_rows": 46,
+          "qb_rows": 2,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2019_20_GB_SF",
+      "game_type": "CON",
+      "kickoff": "2020-01-19T18:40-05:00",
+      "neutral": false,
+      "season": 2019,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2019_21_SF_KC",
+      "game_type": "SB",
+      "kickoff": "2020-02-02T18:30-05:00",
+      "neutral": true,
+      "season": 2019,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 46,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2020_18_IND_BUF",
+      "game_type": "WC",
+      "kickoff": "2021-01-09T13:05-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "IND": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2020_18_LA_SEA",
+      "game_type": "WC",
+      "kickoff": "2021-01-09T16:40-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2020_18_TB_WAS",
+      "game_type": "WC",
+      "kickoff": "2021-01-09T20:15-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "WAS": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2020_18_BAL_TEN",
+      "game_type": "WC",
+      "kickoff": "2021-01-10T13:05-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "TEN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2020_18_CHI_NO",
+      "game_type": "WC",
+      "kickoff": "2021-01-10T16:40-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "CHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "NO": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2020_18_CLE_PIT",
+      "game_type": "WC",
+      "kickoff": "2021-01-10T20:15-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "CLE": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 18
+    },
+    {
+      "game_id": "2020_19_LA_GB",
+      "game_type": "DIV",
+      "kickoff": "2021-01-16T16:35-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2020_19_BAL_BUF",
+      "game_type": "DIV",
+      "kickoff": "2021-01-16T20:15-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2020_19_CLE_KC",
+      "game_type": "DIV",
+      "kickoff": "2021-01-17T15:05-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "CLE": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2020_19_TB_NO",
+      "game_type": "DIV",
+      "kickoff": "2021-01-17T18:40-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "NO": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2020_20_TB_GB",
+      "game_type": "CON",
+      "kickoff": "2021-01-24T15:05-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2020_20_BUF_KC",
+      "game_type": "CON",
+      "kickoff": "2021-01-24T18:40-05:00",
+      "neutral": false,
+      "season": 2020,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2020_21_KC_TB",
+      "game_type": "SB",
+      "kickoff": "2021-02-07T18:30-05:00",
+      "neutral": true,
+      "season": 2020,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2021_19_LV_CIN",
+      "game_type": "WC",
+      "kickoff": "2022-01-15T16:30-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "CIN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "LV": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2021_19_NE_BUF",
+      "game_type": "WC",
+      "kickoff": "2022-01-15T20:15-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2021_19_PHI_TB",
+      "game_type": "WC",
+      "kickoff": "2022-01-16T13:00-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2021_19_SF_DAL",
+      "game_type": "WC",
+      "kickoff": "2022-01-16T16:30-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "DAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2021_19_PIT_KC",
+      "game_type": "WC",
+      "kickoff": "2022-01-16T20:15-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2021_19_ARI_LA",
+      "game_type": "WC",
+      "kickoff": "2022-01-17T20:15-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "ARI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2021_20_CIN_TEN",
+      "game_type": "DIV",
+      "kickoff": "2022-01-22T16:30-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "CIN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "TEN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2021_20_SF_GB",
+      "game_type": "DIV",
+      "kickoff": "2022-01-22T20:15-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2021_20_LA_TB",
+      "game_type": "DIV",
+      "kickoff": "2022-01-23T15:00-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2021_20_BUF_KC",
+      "game_type": "DIV",
+      "kickoff": "2022-01-23T18:30-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2021_21_CIN_KC",
+      "game_type": "CON",
+      "kickoff": "2022-01-30T15:00-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "CIN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2021_21_SF_LA",
+      "game_type": "CON",
+      "kickoff": "2022-01-30T18:30-05:00",
+      "neutral": false,
+      "season": 2021,
+      "teams": {
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2021_22_LA_CIN",
+      "game_type": "SB",
+      "kickoff": "2022-02-13T18:30-05:00",
+      "neutral": true,
+      "season": 2021,
+      "teams": {
+        "CIN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 22
+    },
+    {
+      "game_id": "2022_19_SEA_SF",
+      "game_type": "WC",
+      "kickoff": "2023-01-14T16:30-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "SEA": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2022_19_LAC_JAX",
+      "game_type": "WC",
+      "kickoff": "2023-01-14T20:15-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "JAX": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "LAC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2022_19_MIA_BUF",
+      "game_type": "WC",
+      "kickoff": "2023-01-15T13:00-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "MIA": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2022_19_NYG_MIN",
+      "game_type": "WC",
+      "kickoff": "2023-01-15T16:50-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "MIN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "NYG": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2022_19_BAL_CIN",
+      "game_type": "WC",
+      "kickoff": "2023-01-15T20:15-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "CIN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2022_19_DAL_TB",
+      "game_type": "WC",
+      "kickoff": "2023-01-16T20:15-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "DAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 43,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2022_20_JAX_KC",
+      "game_type": "DIV",
+      "kickoff": "2023-01-21T16:30-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "JAX": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2022_20_NYG_PHI",
+      "game_type": "DIV",
+      "kickoff": "2023-01-21T20:15-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "NYG": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2022_20_CIN_BUF",
+      "game_type": "DIV",
+      "kickoff": "2023-01-22T15:00-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "CIN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2022_20_DAL_SF",
+      "game_type": "DIV",
+      "kickoff": "2023-01-22T18:30-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "DAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2022_21_SF_PHI",
+      "game_type": "CON",
+      "kickoff": "2023-01-29T15:00-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2022_21_CIN_KC",
+      "game_type": "CON",
+      "kickoff": "2023-01-29T18:30-05:00",
+      "neutral": false,
+      "season": 2022,
+      "teams": {
+        "CIN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2022_22_KC_PHI",
+      "game_type": "SB",
+      "kickoff": "2023-02-12T18:30-05:00",
+      "neutral": true,
+      "season": 2022,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 22
+    },
+    {
+      "game_id": "2023_19_CLE_HOU",
+      "game_type": "WC",
+      "kickoff": "2024-01-13T16:30-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "CLE": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "HOU": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2023_19_MIA_KC",
+      "game_type": "WC",
+      "kickoff": "2024-01-13T20:00-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "MIA": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2023_19_GB_DAL",
+      "game_type": "WC",
+      "kickoff": "2024-01-14T16:30-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "DAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "GB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2023_19_LA_DET",
+      "game_type": "WC",
+      "kickoff": "2024-01-14T20:00-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "DET": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2023_19_PIT_BUF",
+      "game_type": "WC",
+      "kickoff": "2024-01-15T16:30-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2023_19_PHI_TB",
+      "game_type": "WC",
+      "kickoff": "2024-01-15T20:00-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2023_20_HOU_BAL",
+      "game_type": "DIV",
+      "kickoff": "2024-01-20T16:30-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "HOU": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2023_20_GB_SF",
+      "game_type": "DIV",
+      "kickoff": "2024-01-20T20:15-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2023_20_TB_DET",
+      "game_type": "DIV",
+      "kickoff": "2024-01-21T15:00-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "DET": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2023_20_KC_BUF",
+      "game_type": "DIV",
+      "kickoff": "2024-01-21T18:30-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2023_21_KC_BAL",
+      "game_type": "CON",
+      "kickoff": "2024-01-28T15:00-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2023_21_DET_SF",
+      "game_type": "CON",
+      "kickoff": "2024-01-28T18:30-05:00",
+      "neutral": false,
+      "season": 2023,
+      "teams": {
+        "DET": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2023_22_SF_KC",
+      "game_type": "SB",
+      "kickoff": "2024-02-11T18:30-05:00",
+      "neutral": true,
+      "season": 2023,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 22
+    },
+    {
+      "game_id": "2024_19_LAC_HOU",
+      "game_type": "WC",
+      "kickoff": "2025-01-11T16:30-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "HOU": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "LAC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2024_19_PIT_BAL",
+      "game_type": "WC",
+      "kickoff": "2025-01-11T20:00-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2024_19_DEN_BUF",
+      "game_type": "WC",
+      "kickoff": "2025-01-12T13:00-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        },
+        "DEN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2024_19_GB_PHI",
+      "game_type": "WC",
+      "kickoff": "2025-01-12T16:30-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "GB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2024_19_WAS_TB",
+      "game_type": "WC",
+      "kickoff": "2025-01-12T20:00-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "TB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "WAS": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2024_19_MIN_LA",
+      "game_type": "WC",
+      "kickoff": "2025-01-13T20:00-05:00",
+      "neutral": true,
+      "season": 2024,
+      "teams": {
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "MIN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2024_20_HOU_KC",
+      "game_type": "DIV",
+      "kickoff": "2025-01-18T16:30-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "HOU": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2024_20_WAS_DET",
+      "game_type": "DIV",
+      "kickoff": "2025-01-18T20:00-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "DET": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "WAS": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2024_20_LA_PHI",
+      "game_type": "DIV",
+      "kickoff": "2025-01-19T15:00-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 45,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2024_20_BAL_BUF",
+      "game_type": "DIV",
+      "kickoff": "2025-01-19T18:30-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "BAL": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2024_21_WAS_PHI",
+      "game_type": "CON",
+      "kickoff": "2025-01-26T15:00-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        },
+        "WAS": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2024_21_BUF_KC",
+      "game_type": "CON",
+      "kickoff": "2025-01-26T18:30-05:00",
+      "neutral": false,
+      "season": 2024,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2024_22_KC_PHI",
+      "game_type": "SB",
+      "kickoff": "2025-02-09T18:30-05:00",
+      "neutral": true,
+      "season": 2024,
+      "teams": {
+        "KC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 44,
+          "team_rows": 1
+        },
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 22
+    },
+    {
+      "game_id": "2025_19_LA_CAR",
+      "game_type": "WC",
+      "kickoff": "2026-01-10T16:30-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "CAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2025_19_GB_CHI",
+      "game_type": "WC",
+      "kickoff": "2026-01-10T20:00-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "CHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "GB": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2025_19_BUF_JAX",
+      "game_type": "WC",
+      "kickoff": "2026-01-11T13:00-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "JAX": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2025_19_SF_PHI",
+      "game_type": "WC",
+      "kickoff": "2026-01-11T16:30-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "PHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2025_19_LAC_NE",
+      "game_type": "WC",
+      "kickoff": "2026-01-11T20:00-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "LAC": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2025_19_HOU_PIT",
+      "game_type": "WC",
+      "kickoff": "2026-01-12T20:00-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "HOU": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "PIT": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 19
+    },
+    {
+      "game_id": "2025_20_BUF_DEN",
+      "game_type": "DIV",
+      "kickoff": "2026-01-17T16:30-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "BUF": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "DEN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2025_20_SF_SEA",
+      "game_type": "DIV",
+      "kickoff": "2026-01-17T20:00-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "SEA": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 48,
+          "team_rows": 1
+        },
+        "SF": {
+          "active_roster_rows": 48,
+          "qb_rows": 2,
+          "snap_rows": 48,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2025_20_HOU_NE",
+      "game_type": "DIV",
+      "kickoff": "2026-01-18T15:00-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "HOU": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2025_20_LA_CHI",
+      "game_type": "DIV",
+      "kickoff": "2026-01-18T18:30-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "CHI": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 20
+    },
+    {
+      "game_id": "2025_21_NE_DEN",
+      "game_type": "CON",
+      "kickoff": "2026-01-25T15:00-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "DEN": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "NE": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2025_21_LA_SEA",
+      "game_type": "CON",
+      "kickoff": "2026-01-25T18:30-05:00",
+      "neutral": false,
+      "season": 2025,
+      "teams": {
+        "LAR": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 46,
+          "team_rows": 1
+        }
+      },
+      "week": 21
+    },
+    {
+      "game_id": "2025_22_SEA_NE",
+      "game_type": "SB",
+      "kickoff": "2026-02-08T18:30-05:00",
+      "neutral": true,
+      "season": 2025,
+      "teams": {
+        "NE": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        },
+        "SEA": {
+          "active_roster_rows": 48,
+          "qb_rows": 1,
+          "snap_rows": 47,
+          "team_rows": 1
+        }
+      },
+      "week": 22
+    }
+  ],
+  "postseason_games": 155,
+  "regular_targets": 3407,
+  "starter_coverage": {
+    "ambiguous_roster": 0,
+    "by_season": {
+      "2013": {
+        "ambiguous_roster": 0,
+        "matched": 516,
+        "missing_id": 0,
+        "missing_roster": 18,
+        "team_games": 534
+      },
+      "2014": {
+        "ambiguous_roster": 0,
+        "matched": 500,
+        "missing_id": 0,
+        "missing_roster": 34,
+        "team_games": 534
+      },
+      "2015": {
+        "ambiguous_roster": 0,
+        "matched": 501,
+        "missing_id": 0,
+        "missing_roster": 33,
+        "team_games": 534
+      },
+      "2016": {
+        "ambiguous_roster": 0,
+        "matched": 534,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 534
+      },
+      "2017": {
+        "ambiguous_roster": 0,
+        "matched": 534,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 534
+      },
+      "2018": {
+        "ambiguous_roster": 0,
+        "matched": 534,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 534
+      },
+      "2019": {
+        "ambiguous_roster": 0,
+        "matched": 534,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 534
+      },
+      "2020": {
+        "ambiguous_roster": 0,
+        "matched": 538,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 538
+      },
+      "2021": {
+        "ambiguous_roster": 0,
+        "matched": 570,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 570
+      },
+      "2022": {
+        "ambiguous_roster": 0,
+        "matched": 566,
+        "missing_id": 0,
+        "missing_roster": 2,
+        "team_games": 568
+      },
+      "2023": {
+        "ambiguous_roster": 0,
+        "matched": 570,
+        "missing_id": 0,
+        "missing_roster": 0,
+        "team_games": 570
+      },
+      "2024": {
+        "ambiguous_roster": 0,
+        "matched": 562,
+        "missing_id": 0,
+        "missing_roster": 8,
+        "team_games": 570
+      },
+      "2025": {
+        "ambiguous_roster": 0,
+        "matched": 566,
+        "missing_id": 0,
+        "missing_roster": 4,
+        "team_games": 570
+      }
+    },
+    "matched": 7025,
+    "missing_id": 0,
+    "missing_roster": 99,
+    "team_games": 7124,
+    "unavailable": [
+      {
+        "game_id": "2013_01_TEN_PIT",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "TEN",
+        "week": 1
+      },
+      {
+        "game_id": "2013_01_ARI_STL",
+        "gsis_id": "00-0027854",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "LAR",
+        "week": 1
+      },
+      {
+        "game_id": "2013_02_STL_ATL",
+        "gsis_id": "00-0027854",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "LAR",
+        "week": 2
+      },
+      {
+        "game_id": "2013_02_TEN_HOU",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "TEN",
+        "week": 2
+      },
+      {
+        "game_id": "2013_03_CLE_MIN",
+        "gsis_id": "00-0026625",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "CLE",
+        "week": 3
+      },
+      {
+        "game_id": "2013_03_SD_TEN",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "TEN",
+        "week": 3
+      },
+      {
+        "game_id": "2013_03_STL_DAL",
+        "gsis_id": "00-0027854",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "LAR",
+        "week": 3
+      },
+      {
+        "game_id": "2013_04_SF_STL",
+        "gsis_id": "00-0027854",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "LAR",
+        "week": 4
+      },
+      {
+        "game_id": "2013_04_CIN_CLE",
+        "gsis_id": "00-0026625",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "CLE",
+        "week": 4
+      },
+      {
+        "game_id": "2013_04_NYJ_TEN",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "TEN",
+        "week": 4
+      },
+      {
+        "game_id": "2013_05_BUF_CLE",
+        "gsis_id": "00-0026625",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "CLE",
+        "week": 5
+      },
+      {
+        "game_id": "2013_05_JAX_STL",
+        "gsis_id": "00-0027854",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "LAR",
+        "week": 5
+      },
+      {
+        "game_id": "2013_06_STL_HOU",
+        "gsis_id": "00-0027854",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "LAR",
+        "week": 6
+      },
+      {
+        "game_id": "2013_07_STL_CAR",
+        "gsis_id": "00-0027854",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "LAR",
+        "week": 7
+      },
+      {
+        "game_id": "2013_07_SF_TEN",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "TEN",
+        "week": 7
+      },
+      {
+        "game_id": "2013_09_TEN_STL",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "TEN",
+        "week": 9
+      },
+      {
+        "game_id": "2013_10_JAX_TEN",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "TEN",
+        "week": 10
+      },
+      {
+        "game_id": "2013_10_PHI_GB",
+        "gsis_id": "00-0022055",
+        "reason": "missing_roster",
+        "season": 2013,
+        "team": "GB",
+        "week": 10
+      },
+      {
+        "game_id": "2014_01_MIN_STL",
+        "gsis_id": "00-0023662",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "MIN",
+        "week": 1
+      },
+      {
+        "game_id": "2014_01_TEN_KC",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "TEN",
+        "week": 1
+      },
+      {
+        "game_id": "2014_01_WAS_HOU",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 1
+      },
+      {
+        "game_id": "2014_01_SD_ARI",
+        "gsis_id": "00-0021429",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "ARI",
+        "week": 1
+      },
+      {
+        "game_id": "2014_02_DAL_TEN",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "TEN",
+        "week": 2
+      },
+      {
+        "game_id": "2014_02_NE_MIN",
+        "gsis_id": "00-0023662",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "MIN",
+        "week": 2
+      },
+      {
+        "game_id": "2014_02_HOU_OAK",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 2
+      },
+      {
+        "game_id": "2014_03_HOU_NYG",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 3
+      },
+      {
+        "game_id": "2014_03_MIN_NO",
+        "gsis_id": "00-0023662",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "MIN",
+        "week": 3
+      },
+      {
+        "game_id": "2014_03_TEN_CIN",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "TEN",
+        "week": 3
+      },
+      {
+        "game_id": "2014_04_BUF_HOU",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 4
+      },
+      {
+        "game_id": "2014_05_CLE_TEN",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "TEN",
+        "week": 5
+      },
+      {
+        "game_id": "2014_05_HOU_DAL",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 5
+      },
+      {
+        "game_id": "2014_06_IND_HOU",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 6
+      },
+      {
+        "game_id": "2014_06_WAS_ARI",
+        "gsis_id": "00-0021429",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "ARI",
+        "week": 6
+      },
+      {
+        "game_id": "2014_07_ARI_OAK",
+        "gsis_id": "00-0021429",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "ARI",
+        "week": 7
+      },
+      {
+        "game_id": "2014_07_HOU_PIT",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 7
+      },
+      {
+        "game_id": "2014_08_HOU_TEN",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 8
+      },
+      {
+        "game_id": "2014_08_PHI_ARI",
+        "gsis_id": "00-0021429",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "ARI",
+        "week": 8
+      },
+      {
+        "game_id": "2014_08_WAS_DAL",
+        "gsis_id": "00-0027688",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "WAS",
+        "week": 8
+      },
+      {
+        "game_id": "2014_09_ARI_DAL",
+        "gsis_id": "00-0021429",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "ARI",
+        "week": 9
+      },
+      {
+        "game_id": "2014_09_PHI_HOU",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 9
+      },
+      {
+        "game_id": "2014_10_STL_ARI",
+        "gsis_id": "00-0021429",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "ARI",
+        "week": 10
+      },
+      {
+        "game_id": "2014_11_HOU_CLE",
+        "gsis_id": "00-0028012",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 11
+      },
+      {
+        "game_id": "2014_12_CIN_HOU",
+        "gsis_id": "00-0028012",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 12
+      },
+      {
+        "game_id": "2014_13_TEN_HOU",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 13
+      },
+      {
+        "game_id": "2014_13_WAS_IND",
+        "gsis_id": "00-0027688",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "WAS",
+        "week": 13
+      },
+      {
+        "game_id": "2014_14_HOU_JAX",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 14
+      },
+      {
+        "game_id": "2014_14_STL_WAS",
+        "gsis_id": "00-0027688",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "WAS",
+        "week": 14
+      },
+      {
+        "game_id": "2014_15_CIN_CLE",
+        "gsis_id": "00-0031409",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "CLE",
+        "week": 15
+      },
+      {
+        "game_id": "2014_15_HOU_IND",
+        "gsis_id": "00-0023682",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "HOU",
+        "week": 15
+      },
+      {
+        "game_id": "2014_15_WAS_NYG",
+        "gsis_id": "00-0027688",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "WAS",
+        "week": 15
+      },
+      {
+        "game_id": "2014_15_NYJ_TEN",
+        "gsis_id": "00-0027946",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "TEN",
+        "week": 15
+      },
+      {
+        "game_id": "2014_16_CLE_CAR",
+        "gsis_id": "00-0031409",
+        "reason": "missing_roster",
+        "season": 2014,
+        "team": "CLE",
+        "week": 16
+      },
+      {
+        "game_id": "2015_01_CLE_NYJ",
+        "gsis_id": "00-0021206",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "CLE",
+        "week": 1
+      },
+      {
+        "game_id": "2015_01_BAL_DEN",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 1
+      },
+      {
+        "game_id": "2015_01_NYG_DAL",
+        "gsis_id": "00-0021678",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "DAL",
+        "week": 1
+      },
+      {
+        "game_id": "2015_01_MIN_SF",
+        "gsis_id": "00-0027974",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "SF",
+        "week": 1
+      },
+      {
+        "game_id": "2015_02_SF_PIT",
+        "gsis_id": "00-0027974",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "SF",
+        "week": 2
+      },
+      {
+        "game_id": "2015_02_BAL_OAK",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 2
+      },
+      {
+        "game_id": "2015_02_DAL_PHI",
+        "gsis_id": "00-0021678",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "DAL",
+        "week": 2
+      },
+      {
+        "game_id": "2015_03_CIN_BAL",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 3
+      },
+      {
+        "game_id": "2015_03_NO_CAR",
+        "gsis_id": "00-0022864",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "NO",
+        "week": 3
+      },
+      {
+        "game_id": "2015_03_OAK_CLE",
+        "gsis_id": "00-0021206",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "CLE",
+        "week": 3
+      },
+      {
+        "game_id": "2015_03_SF_ARI",
+        "gsis_id": "00-0027974",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "SF",
+        "week": 3
+      },
+      {
+        "game_id": "2015_04_BAL_PIT",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 4
+      },
+      {
+        "game_id": "2015_04_CLE_SD",
+        "gsis_id": "00-0021206",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "CLE",
+        "week": 4
+      },
+      {
+        "game_id": "2015_04_GB_SF",
+        "gsis_id": "00-0027974",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "SF",
+        "week": 4
+      },
+      {
+        "game_id": "2015_05_CLE_BAL",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 5
+      },
+      {
+        "game_id": "2015_05_CLE_BAL",
+        "gsis_id": "00-0021206",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "CLE",
+        "week": 5
+      },
+      {
+        "game_id": "2015_05_SF_NYG",
+        "gsis_id": "00-0027974",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "SF",
+        "week": 5
+      },
+      {
+        "game_id": "2015_06_DEN_CLE",
+        "gsis_id": "00-0021206",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "CLE",
+        "week": 6
+      },
+      {
+        "game_id": "2015_06_BAL_SF",
+        "gsis_id": "00-0027974",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "SF",
+        "week": 6
+      },
+      {
+        "game_id": "2015_06_BAL_SF",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 6
+      },
+      {
+        "game_id": "2015_07_SEA_SF",
+        "gsis_id": "00-0027974",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "SF",
+        "week": 7
+      },
+      {
+        "game_id": "2015_07_CLE_STL",
+        "gsis_id": "00-0021206",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "CLE",
+        "week": 7
+      },
+      {
+        "game_id": "2015_07_BAL_ARI",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 7
+      },
+      {
+        "game_id": "2015_08_ARI_CLE",
+        "gsis_id": "00-0021206",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "CLE",
+        "week": 8
+      },
+      {
+        "game_id": "2015_08_SD_BAL",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 8
+      },
+      {
+        "game_id": "2015_08_SF_STL",
+        "gsis_id": "00-0027974",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "SF",
+        "week": 8
+      },
+      {
+        "game_id": "2015_10_JAX_BAL",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 10
+      },
+      {
+        "game_id": "2015_11_DAL_MIA",
+        "gsis_id": "00-0021678",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "DAL",
+        "week": 11
+      },
+      {
+        "game_id": "2015_11_NYJ_HOU",
+        "gsis_id": "00-0028090",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "HOU",
+        "week": 11
+      },
+      {
+        "game_id": "2015_11_STL_BAL",
+        "gsis_id": "00-0026158",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "BAL",
+        "week": 11
+      },
+      {
+        "game_id": "2015_12_CAR_DAL",
+        "gsis_id": "00-0021678",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "DAL",
+        "week": 12
+      },
+      {
+        "game_id": "2015_12_BAL_CLE",
+        "gsis_id": "00-0021206",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "CLE",
+        "week": 12
+      },
+      {
+        "game_id": "2015_15_HOU_IND",
+        "gsis_id": "00-0028090",
+        "reason": "missing_roster",
+        "season": 2015,
+        "team": "HOU",
+        "week": 15
+      },
+      {
+        "game_id": "2022_11_CAR_BAL",
+        "gsis_id": "00-0033275",
+        "reason": "missing_roster",
+        "season": 2022,
+        "team": "CAR",
+        "week": 11
+      },
+      {
+        "game_id": "2022_15_PIT_CAR",
+        "gsis_id": "00-0038102",
+        "reason": "missing_roster",
+        "season": 2022,
+        "team": "PIT",
+        "week": 15
+      },
+      {
+        "game_id": "2024_08_KC_LV",
+        "gsis_id": "00-0038579",
+        "reason": "missing_roster",
+        "season": 2024,
+        "team": "LV",
+        "week": 8
+      },
+      {
+        "game_id": "2024_13_LV_KC",
+        "gsis_id": "00-0035289",
+        "reason": "missing_roster",
+        "season": 2024,
+        "team": "LV",
+        "week": 13
+      },
+      {
+        "game_id": "2024_14_LV_TB",
+        "gsis_id": "00-0035289",
+        "reason": "missing_roster",
+        "season": 2024,
+        "team": "LV",
+        "week": 14
+      },
+      {
+        "game_id": "2024_15_ATL_LV",
+        "gsis_id": "00-0038579",
+        "reason": "missing_roster",
+        "season": 2024,
+        "team": "LV",
+        "week": 15
+      },
+      {
+        "game_id": "2024_16_CLE_CIN",
+        "gsis_id": "00-0031503",
+        "reason": "missing_roster",
+        "season": 2024,
+        "team": "CLE",
+        "week": 16
+      },
+      {
+        "game_id": "2024_17_DAL_PHI",
+        "gsis_id": "00-0036389",
+        "reason": "missing_roster",
+        "season": 2024,
+        "team": "PHI",
+        "week": 17
+      },
+      {
+        "game_id": "2024_17_MIA_CLE",
+        "gsis_id": "00-0031503",
+        "reason": "missing_roster",
+        "season": 2024,
+        "team": "CLE",
+        "week": 17
+      },
+      {
+        "game_id": "2024_18_MIA_NYJ",
+        "gsis_id": "00-0036212",
+        "reason": "missing_roster",
+        "season": 2024,
+        "team": "MIA",
+        "week": 18
+      },
+      {
+        "game_id": "2025_04_WAS_ATL",
+        "gsis_id": "00-0039910",
+        "reason": "missing_roster",
+        "season": 2025,
+        "team": "WAS",
+        "week": 4
+      },
+      {
+        "game_id": "2025_08_BUF_CAR",
+        "gsis_id": "00-0039150",
+        "reason": "missing_roster",
+        "season": 2025,
+        "team": "CAR",
+        "week": 8
+      },
+      {
+        "game_id": "2025_08_WAS_KC",
+        "gsis_id": "00-0039910",
+        "reason": "missing_roster",
+        "season": 2025,
+        "team": "WAS",
+        "week": 8
+      },
+      {
+        "game_id": "2025_17_NE_NYJ",
+        "gsis_id": "00-0028118",
+        "reason": "missing_roster",
+        "season": 2025,
+        "team": "NYJ",
+        "week": 17
+      }
+    ]
+  }
+}

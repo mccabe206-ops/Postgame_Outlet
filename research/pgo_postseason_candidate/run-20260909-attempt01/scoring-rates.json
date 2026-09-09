@@ -1,0 +1,198 @@
+{
+  "league_mean_total": 45.95789473684211,
+  "policy": "2025 REG+POST PF/PA; equally weighted games per team; unfitted heuristic",
+  "rates": {
+    "ARI": {
+      "games": 17,
+      "pa": 28.705882352941178,
+      "pf": 20.88235294117647,
+      "postseason_games": 0
+    },
+    "ATL": {
+      "games": 17,
+      "pa": 23.58823529411765,
+      "pf": 20.764705882352942,
+      "postseason_games": 0
+    },
+    "BAL": {
+      "games": 17,
+      "pa": 23.41176470588235,
+      "pf": 24.941176470588236,
+      "postseason_games": 0
+    },
+    "BUF": {
+      "games": 19,
+      "pa": 22.210526315789473,
+      "pf": 28.31578947368421,
+      "postseason_games": 2
+    },
+    "CAR": {
+      "games": 18,
+      "pa": 23.0,
+      "pf": 19.0,
+      "postseason_games": 1
+    },
+    "CHI": {
+      "games": 19,
+      "pa": 24.31578947368421,
+      "pf": 25.736842105263158,
+      "postseason_games": 2
+    },
+    "CIN": {
+      "games": 17,
+      "pa": 28.941176470588236,
+      "pf": 24.352941176470587,
+      "postseason_games": 0
+    },
+    "CLE": {
+      "games": 17,
+      "pa": 22.294117647058822,
+      "pf": 16.41176470588235,
+      "postseason_games": 0
+    },
+    "DAL": {
+      "games": 17,
+      "pa": 30.058823529411764,
+      "pf": 27.705882352941178,
+      "postseason_games": 0
+    },
+    "DEN": {
+      "games": 19,
+      "pa": 18.473684210526315,
+      "pf": 23.210526315789473,
+      "postseason_games": 2
+    },
+    "DET": {
+      "games": 17,
+      "pa": 24.294117647058822,
+      "pf": 28.294117647058822,
+      "postseason_games": 0
+    },
+    "GB": {
+      "games": 18,
+      "pa": 21.72222222222222,
+      "pf": 23.22222222222222,
+      "postseason_games": 1
+    },
+    "HOU": {
+      "games": 19,
+      "pa": 17.31578947368421,
+      "pf": 23.68421052631579,
+      "postseason_games": 2
+    },
+    "IND": {
+      "games": 17,
+      "pa": 24.235294117647058,
+      "pf": 27.41176470588235,
+      "postseason_games": 0
+    },
+    "JAX": {
+      "games": 18,
+      "pa": 20.166666666666668,
+      "pf": 27.666666666666668,
+      "postseason_games": 1
+    },
+    "KC": {
+      "games": 17,
+      "pa": 19.294117647058822,
+      "pf": 21.294117647058822,
+      "postseason_games": 0
+    },
+    "LAC": {
+      "games": 18,
+      "pa": 19.77777777777778,
+      "pf": 20.61111111111111,
+      "postseason_games": 1
+    },
+    "LAR": {
+      "games": 20,
+      "pa": 21.25,
+      "pf": 29.95,
+      "postseason_games": 3
+    },
+    "LV": {
+      "games": 17,
+      "pa": 25.41176470588235,
+      "pf": 14.176470588235293,
+      "postseason_games": 0
+    },
+    "MIA": {
+      "games": 17,
+      "pa": 24.941176470588236,
+      "pf": 20.41176470588235,
+      "postseason_games": 0
+    },
+    "MIN": {
+      "games": 17,
+      "pa": 19.58823529411765,
+      "pf": 20.235294117647058,
+      "postseason_games": 0
+    },
+    "NE": {
+      "games": 21,
+      "pa": 17.857142857142858,
+      "pf": 26.523809523809526,
+      "postseason_games": 4
+    },
+    "NO": {
+      "games": 17,
+      "pa": 22.529411764705884,
+      "pf": 18.0,
+      "postseason_games": 0
+    },
+    "NYG": {
+      "games": 17,
+      "pa": 25.823529411764707,
+      "pf": 22.41176470588235,
+      "postseason_games": 0
+    },
+    "NYJ": {
+      "games": 17,
+      "pa": 29.58823529411765,
+      "pf": 17.647058823529413,
+      "postseason_games": 0
+    },
+    "PHI": {
+      "games": 18,
+      "pa": 19.333333333333332,
+      "pf": 22.11111111111111,
+      "postseason_games": 1
+    },
+    "PIT": {
+      "games": 18,
+      "pa": 23.166666666666668,
+      "pf": 22.38888888888889,
+      "postseason_games": 1
+    },
+    "SEA": {
+      "games": 20,
+      "pa": 16.9,
+      "pf": 29.2,
+      "postseason_games": 3
+    },
+    "SF": {
+      "games": 19,
+      "pa": 22.68421052631579,
+      "pf": 24.526315789473685,
+      "postseason_games": 2
+    },
+    "TB": {
+      "games": 17,
+      "pa": 24.176470588235293,
+      "pf": 22.352941176470587,
+      "postseason_games": 0
+    },
+    "TEN": {
+      "games": 17,
+      "pa": 28.11764705882353,
+      "pf": 16.705882352941178,
+      "postseason_games": 0
+    },
+    "WAS": {
+      "games": 17,
+      "pa": 26.529411764705884,
+      "pf": 20.941176470588236,
+      "postseason_games": 0
+    }
+  }
+}

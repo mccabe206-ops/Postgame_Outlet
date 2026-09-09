@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import patch
 
 import pgo_availability_view as view
+from pgo_model_updates import STYLE as MODEL_UPDATE_STYLE
 
 
 def scenario():
@@ -118,10 +119,12 @@ class AvailabilityViewTests(unittest.TestCase):
         from pgo_current_board import strip_current_board
         fixture = CurrentBoardTests()
         fixture.setUp()
-        with patch.object(view, 'render_current_scenario', return_value=''):
+        with patch.object(view, 'render_current_scenario', return_value=''), \
+                patch('pgo_model_updates.render_current_updates', return_value=MODEL_UPDATE_STYLE):
             baseline = fixture.add()
         addition = view.render_scenario(scenario())
-        with patch.object(view, 'render_current_scenario', return_value=addition):
+        with patch.object(view, 'render_current_scenario', return_value=addition), \
+                patch('pgo_model_updates.render_current_updates', return_value=MODEL_UPDATE_STYLE):
             enriched = fixture.add()
         self.assertEqual(enriched.replace(addition, '', 1), baseline)
         self.assertEqual(strip_current_board(enriched), fixture.page)
@@ -132,10 +135,12 @@ class AvailabilityViewTests(unittest.TestCase):
         import pgo_forecast_lab as lab
         fixture = ForecastLabTests()
         kwargs = dict(snapshot=fixture.synthetic_snapshot(), weekly={'games': [], 'revisions': []})
-        with patch.object(view, 'render_current_scenario', return_value=''):
+        with patch.object(view, 'render_current_scenario', return_value=''), \
+                patch('pgo_model_updates.render_current_updates', return_value=MODEL_UPDATE_STYLE):
             baseline = lab.render_lab(fixture.synthetic_lock(), [], [], **kwargs)
         addition = view.render_scenario(scenario())
-        with patch.object(view, 'render_current_scenario', return_value=addition):
+        with patch.object(view, 'render_current_scenario', return_value=addition), \
+                patch('pgo_model_updates.render_current_updates', return_value=MODEL_UPDATE_STYLE):
             enriched = lab.render_lab(fixture.synthetic_lock(), [], [], **kwargs)
         self.assertEqual(enriched.replace(addition, '', 1), baseline)
         self.assertEqual(enriched.count('id="nonqb-availability"'), 1)
@@ -150,7 +155,8 @@ class AvailabilityViewTests(unittest.TestCase):
         plain = comparison.inject_comparison(
             ComparisonTests._base_html(),
             comparison.render_comparison_panel([], ComparisonTests._held_receipt()))
-        with patch.object(view, 'render_current_scenario', return_value=view.render_scenario(scenario())):
+        with patch.object(view, 'render_current_scenario', return_value=view.render_scenario(scenario())), \
+                patch('pgo_model_updates.render_current_updates', return_value=MODEL_UPDATE_STYLE):
             current = board.add_current_board(plain, fixture.snapshot, fixture.mccabe)
         fantasy = comparison.render_fantasy_panel(ComparisonTests._fantasy_preview())
         enriched = comparison.inject_fantasy_preview(current, fantasy)

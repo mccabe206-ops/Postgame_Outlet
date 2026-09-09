@@ -1,0 +1,418 @@
+[
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 16.549416669975724,
+      "defense_prior_history_coverage": 0.9545454545454546,
+      "defense_prior_pass_defended_per_100_snaps": 0.6428988895382817,
+      "defense_prior_qb_hits_per_100_snaps": 1.0300993571011106
+    },
+    "baseline_rank": 2,
+    "baseline_rating": 4.506547493005314,
+    "rank": 1,
+    "rating": 5.319585670849122,
+    "team": "LAR"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.107620129616441,
+      "defense_prior_history_coverage": 0.75,
+      "defense_prior_pass_defended_per_100_snaps": 0.7573732513588167,
+      "defense_prior_qb_hits_per_100_snaps": 0.6593602423594405
+    },
+    "baseline_rank": 1,
+    "baseline_rating": 5.198596600478879,
+    "rank": 2,
+    "rating": 4.682407301356335,
+    "team": "NE"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 14.511186504120571,
+      "defense_prior_history_coverage": 0.9166666666666666,
+      "defense_prior_pass_defended_per_100_snaps": 0.7467994310099573,
+      "defense_prior_qb_hits_per_100_snaps": 1.2802275960170697
+    },
+    "baseline_rank": 3,
+    "baseline_rating": 4.017376157184017,
+    "rank": 3,
+    "rating": 4.406204496897885,
+    "team": "SEA"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 16.949444649982564,
+      "defense_prior_history_coverage": 1.0,
+      "defense_prior_pass_defended_per_100_snaps": 0.865265760197775,
+      "defense_prior_qb_hits_per_100_snaps": 0.9147095179233622
+    },
+    "baseline_rank": 7,
+    "baseline_rating": 2.9843067894120026,
+    "rank": 4,
+    "rating": 4.32363206371771,
+    "team": "PHI"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 16.511364479748757,
+      "defense_prior_history_coverage": 0.8076923076923077,
+      "defense_prior_pass_defended_per_100_snaps": 0.6586169045005489,
+      "defense_prior_qb_hits_per_100_snaps": 1.0733016221490426
+    },
+    "baseline_rank": 4,
+    "baseline_rating": 3.6063723252776185,
+    "rank": 5,
+    "rating": 3.924544679455309,
+    "team": "BUF"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.443440214206275,
+      "defense_prior_history_coverage": 0.8,
+      "defense_prior_pass_defended_per_100_snaps": 0.8007898200965335,
+      "defense_prior_qb_hits_per_100_snaps": 0.9104870557261957
+    },
+    "baseline_rank": 5,
+    "baseline_rating": 3.354060087222223,
+    "rank": 6,
+    "rating": 3.426583919726639,
+    "team": "JAX"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 16.16434313315204,
+      "defense_prior_history_coverage": 0.96,
+      "defense_prior_pass_defended_per_100_snaps": 0.7734616706772086,
+      "defense_prior_qb_hits_per_100_snaps": 1.246132691646614
+    },
+    "baseline_rank": 10,
+    "baseline_rating": 2.0025304810559277,
+    "rank": 7,
+    "rating": 3.0887165024488468,
+    "team": "DEN"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 14.289750729121138,
+      "defense_prior_history_coverage": 0.76,
+      "defense_prior_pass_defended_per_100_snaps": 0.8297290140347781,
+      "defense_prior_qb_hits_per_100_snaps": 0.8826904404625298
+    },
+    "baseline_rank": 6,
+    "baseline_rating": 2.991294090134133,
+    "rank": 8,
+    "rating": 2.5598283595094387,
+    "team": "HOU"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 18.793839212288024,
+      "defense_prior_history_coverage": 0.88,
+      "defense_prior_pass_defended_per_100_snaps": 0.6628628964591374,
+      "defense_prior_qb_hits_per_100_snaps": 0.5957375398556805
+    },
+    "baseline_rank": 13,
+    "baseline_rating": 1.5577809500426696,
+    "rank": 9,
+    "rating": 2.467542059277889,
+    "team": "CIN"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 16.35097730057515,
+      "defense_prior_history_coverage": 0.84,
+      "defense_prior_pass_defended_per_100_snaps": 0.6161971830985915,
+      "defense_prior_qb_hits_per_100_snaps": 0.7746478873239436
+    },
+    "baseline_rank": 9,
+    "baseline_rating": 2.2951626807386987,
+    "rank": 10,
+    "rating": 2.3529902623392047,
+    "team": "BAL"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 14.01236959516232,
+      "defense_prior_history_coverage": 0.6923076923076923,
+      "defense_prior_pass_defended_per_100_snaps": 0.7909751037344398,
+      "defense_prior_qb_hits_per_100_snaps": 0.8947095435684648
+    },
+    "baseline_rank": 8,
+    "baseline_rating": 2.6718735223369663,
+    "rank": 11,
+    "rating": 2.1287166452136432,
+    "team": "CHI"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.973726046597431,
+      "defense_prior_history_coverage": 0.76,
+      "defense_prior_pass_defended_per_100_snaps": 0.5567707297673494,
+      "defense_prior_qb_hits_per_100_snaps": 0.4672897196261682
+    },
+    "baseline_rank": 11,
+    "baseline_rating": 1.974381075339167,
+    "rank": 12,
+    "rating": 1.476095320396027,
+    "team": "SF"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.725524130993449,
+      "defense_prior_history_coverage": 0.8333333333333334,
+      "defense_prior_pass_defended_per_100_snaps": 0.7288317256162915,
+      "defense_prior_qb_hits_per_100_snaps": 0.8145766345123259
+    },
+    "baseline_rank": 14,
+    "baseline_rating": 1.3557672739119369,
+    "rank": 13,
+    "rating": 1.2994753888041402,
+    "team": "LAC"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.191473108871449,
+      "defense_prior_history_coverage": 0.7037037037037037,
+      "defense_prior_pass_defended_per_100_snaps": 0.5991938119620873,
+      "defense_prior_qb_hits_per_100_snaps": 0.773504739078331
+    },
+    "baseline_rank": 12,
+    "baseline_rating": 1.6486114265957497,
+    "rank": 14,
+    "rating": 0.9393977383628425,
+    "team": "DET"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.93232569727774,
+      "defense_prior_history_coverage": 0.8333333333333334,
+      "defense_prior_pass_defended_per_100_snaps": 0.6919589596754951,
+      "defense_prior_qb_hits_per_100_snaps": 0.946472600015907
+    },
+    "baseline_rank": 16,
+    "baseline_rating": 0.5757472762027191,
+    "rank": 15,
+    "rating": 0.8697060835115167,
+    "team": "PIT"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.145146621381402,
+      "defense_prior_history_coverage": 0.84,
+      "defense_prior_pass_defended_per_100_snaps": 0.6400931044515565,
+      "defense_prior_qb_hits_per_100_snaps": 0.5528076811172534
+    },
+    "baseline_rank": 17,
+    "baseline_rating": 0.5118987953272693,
+    "rank": 16,
+    "rating": 0.41387041345821274,
+    "team": "GB"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.12992686883214,
+      "defense_prior_history_coverage": 0.72,
+      "defense_prior_pass_defended_per_100_snaps": 0.6867458059452566,
+      "defense_prior_qb_hits_per_100_snaps": 0.9908760914352988
+    },
+    "baseline_rank": 19,
+    "baseline_rating": 0.07961974962483964,
+    "rank": 17,
+    "rating": -0.11740107022403379,
+    "team": "TB"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 16.640793189856435,
+      "defense_prior_history_coverage": 0.875,
+      "defense_prior_pass_defended_per_100_snaps": 0.6593014967925873,
+      "defense_prior_qb_hits_per_100_snaps": 0.8820384889522452
+    },
+    "baseline_rank": 22,
+    "baseline_rating": -1.38642647756663,
+    "rank": 18,
+    "rating": -0.632431112023383,
+    "team": "WAS"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 14.164638152347399,
+      "defense_prior_history_coverage": 0.8076923076923077,
+      "defense_prior_pass_defended_per_100_snaps": 0.6594724220623501,
+      "defense_prior_qb_hits_per_100_snaps": 0.6714628297362111
+    },
+    "baseline_rank": 21,
+    "baseline_rating": -0.289926054461489,
+    "rank": 19,
+    "rating": -0.674373429775855,
+    "team": "ATL"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 12.785239958154808,
+      "defense_prior_history_coverage": 0.7083333333333334,
+      "defense_prior_pass_defended_per_100_snaps": 0.5763363091874788,
+      "defense_prior_qb_hits_per_100_snaps": 0.7458469883602667
+    },
+    "baseline_rank": 15,
+    "baseline_rating": 0.9589914602685923,
+    "rank": 20,
+    "rating": -0.7074016408708559,
+    "team": "MIN"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 12.474176137429945,
+      "defense_prior_history_coverage": 0.6296296296296297,
+      "defense_prior_pass_defended_per_100_snaps": 0.6278149310768391,
+      "defense_prior_qb_hits_per_100_snaps": 0.9963149993175925
+    },
+    "baseline_rank": 18,
+    "baseline_rating": 0.2261752001205224,
+    "rank": 21,
+    "rating": -0.9835465009076927,
+    "team": "IND"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 16.725678052550496,
+      "defense_prior_history_coverage": 0.8076923076923077,
+      "defense_prior_pass_defended_per_100_snaps": 0.4949025042066713,
+      "defense_prior_qb_hits_per_100_snaps": 0.9403147579926755
+    },
+    "baseline_rank": 23,
+    "baseline_rating": -1.3871143515454065,
+    "rank": 22,
+    "rating": -1.0463452612800097,
+    "team": "DAL"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 12.953728185010233,
+      "defense_prior_history_coverage": 0.6666666666666666,
+      "defense_prior_pass_defended_per_100_snaps": 0.6096802289411472,
+      "defense_prior_qb_hits_per_100_snaps": 0.9829538384969516
+    },
+    "baseline_rank": 20,
+    "baseline_rating": 0.030006521112397877,
+    "rank": 23,
+    "rating": -1.2361073191572416,
+    "team": "KC"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.560107797936295,
+      "defense_prior_history_coverage": 0.8,
+      "defense_prior_pass_defended_per_100_snaps": 0.6979695431472082,
+      "defense_prior_qb_hits_per_100_snaps": 0.9200507614213198
+    },
+    "baseline_rank": 24,
+    "baseline_rating": -1.4898576571545874,
+    "rank": 24,
+    "rating": -1.2382829105666247,
+    "team": "NYG"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 17.706835370663327,
+      "defense_prior_history_coverage": 0.8518518518518519,
+      "defense_prior_pass_defended_per_100_snaps": 0.6128133704735376,
+      "defense_prior_qb_hits_per_100_snaps": 0.8913649025069638
+    },
+    "baseline_rank": 25,
+    "baseline_rating": -1.7862778988126422,
+    "rank": 25,
+    "rating": -1.3425211250021363,
+    "team": "NO"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 13.409621404911736,
+      "defense_prior_history_coverage": 0.75,
+      "defense_prior_pass_defended_per_100_snaps": 0.6823198876179009,
+      "defense_prior_qb_hits_per_100_snaps": 0.5518763796909493
+    },
+    "baseline_rank": 26,
+    "baseline_rating": -2.156715205022536,
+    "rank": 26,
+    "rating": -2.9136551563724282,
+    "team": "CAR"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 18.35633400159665,
+      "defense_prior_history_coverage": 0.88,
+      "defense_prior_pass_defended_per_100_snaps": 0.6971837446105862,
+      "defense_prior_qb_hits_per_100_snaps": 0.5595816897532336
+    },
+    "baseline_rank": 28,
+    "baseline_rating": -4.774384854501747,
+    "rank": 27,
+    "rating": -3.5998597199485545,
+    "team": "ARI"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 15.469167345434704,
+      "defense_prior_history_coverage": 0.8333333333333334,
+      "defense_prior_pass_defended_per_100_snaps": 0.6614116154752198,
+      "defense_prior_qb_hits_per_100_snaps": 0.9422850412249706
+    },
+    "baseline_rank": 29,
+    "baseline_rating": -5.23784198771763,
+    "rank": 28,
+    "rating": -4.971705129066521,
+    "team": "CLE"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 16.70412663361175,
+      "defense_prior_history_coverage": 0.84,
+      "defense_prior_pass_defended_per_100_snaps": 0.7289794287996805,
+      "defense_prior_qb_hits_per_100_snaps": 0.8188536049530657
+    },
+    "baseline_rank": 30,
+    "baseline_rating": -5.88864142716254,
+    "rank": 29,
+    "rating": -5.255771285381854,
+    "team": "TEN"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 10.807715278028798,
+      "defense_prior_history_coverage": 0.6521739130434783,
+      "defense_prior_pass_defended_per_100_snaps": 0.38517091959557054,
+      "defense_prior_qb_hits_per_100_snaps": 0.8184882041405874
+    },
+    "baseline_rank": 27,
+    "baseline_rating": -3.3582445745705627,
+    "rank": 30,
+    "rating": -5.33456738743871,
+    "team": "MIA"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 20.16101186181064,
+      "defense_prior_history_coverage": 0.88,
+      "defense_prior_pass_defended_per_100_snaps": 0.49714328114565554,
+      "defense_prior_qb_hits_per_100_snaps": 0.5490836239519181
+    },
+    "baseline_rank": 32,
+    "baseline_rating": -7.568295508546143,
+    "rank": 31,
+    "rating": -6.415601379095762,
+    "team": "NYJ"
+  },
+  {
+    "added_features": {
+      "defense_prior_effective_contributors": 17.465205840777617,
+      "defense_prior_history_coverage": 0.8076923076923077,
+      "defense_prior_pass_defended_per_100_snaps": 0.4324622745675377,
+      "defense_prior_qb_hits_per_100_snaps": 0.791313949208686
+    },
+    "baseline_rank": 31,
+    "baseline_rating": -7.223373958329702,
+    "rank": 32,
+    "rating": -7.209726478213099,
+    "team": "LV"
+  }
+]

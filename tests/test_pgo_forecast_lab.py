@@ -25,6 +25,11 @@ ATTESTATION = ROOT / "research/pgo_stability_blend/prospective_attestation.json"
 
 
 class ForecastLabTests(unittest.TestCase):
+    def setUp(self):
+        # These fixtures exercise archived/weekly Lab inputs; the real additive
+        # packages and shared grading feed are covered in test_pgo_model_updates.
+        self.enterContext(patch("pgo_model_updates.render_current_updates", return_value=""))
+
     def test_latest_corrected_revision_drives_the_input_panel_after_refresh(self):
         weekly_root = Path('docs/evidence/forecast-lab-2026/weekly').resolve()
         weekly = {'revisions': [dict(source_edition='pgo-corrected-week1-2026-09-08',

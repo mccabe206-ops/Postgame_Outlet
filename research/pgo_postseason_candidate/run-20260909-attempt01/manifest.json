@@ -1,0 +1,53 @@
+{
+  "files": {
+    "control-parity.json": {
+      "bytes": 182,
+      "sha256": "82d234afc4a026e12f0c6c1c9484f2a4547e33475d62747d1e0dfd30f300f3ea"
+    },
+    "coverage.json": {
+      "bytes": 96538,
+      "sha256": "c96973a6353e6403d45620c8f17952460cbc3364ec6607d4bf65737e73e28ced"
+    },
+    "final-fit.json": {
+      "bytes": 88194,
+      "sha256": "65b7eee1bd3c343f46f54bac61538d3060f86f2b464b3df153f5cbdf43fcb1d5"
+    },
+    "fold-fits.json": {
+      "bytes": 652211,
+      "sha256": "24f74f17b68a82bb3638a48c808f8ff95dc734294a2d8efb7f80514e41f1baa9"
+    },
+    "historical-context.json": {
+      "bytes": 134065,
+      "sha256": "7986f97e97a85ef9f4bfa3cb59bbefcb3fb5d3068af8f7251e6593785e6aae1e"
+    },
+    "historical-features.json": {
+      "bytes": 5036960,
+      "sha256": "5b0aa4ac3d06ff37314c71984003651434f0df1cb2f17c6a74e7b26c44f20365"
+    },
+    "matched-predictions.csv": {
+      "bytes": 414197,
+      "sha256": "3df4dbf26743a3686b6253bb4eb578457d0e2629dde1f0218f215c462feea0cf"
+    },
+    "metrics.json": {
+      "bytes": 130900,
+      "sha256": "c71ee1574e4d8764cff1077994ffe765cd90ee41b268ea689e4d11b9a190167e"
+    },
+    "run-receipt.json": {
+      "bytes": 40048,
+      "sha256": "bf5e5930d30dd4fafb583985e69b226aa43a284f2814af86d74a049a1c11eba6"
+    },
+    "run-start.json": {
+      "bytes": 39343,
+      "sha256": "d8cf4c8129f315864ef0d4796dc503d4288293e5288d7aeeced3ed2843b48723"
+    },
+    "scoring-history-2025.csv": {
+      "bytes": 87029,
+      "sha256": "4c4632f069f080e13709a5b3489bc93668e9e1688b628e81fe12786185de897f"
+    },
+    "scoring-rates.json": {
+      "bytes": 4217,
+      "sha256": "24ca1d9a41a6e4f0c37b1e1b6328726220806108c8d6d41900cb9cace1fe7d00"
+    }
+  },
+  "identity": "pgo-postseason-candidate-2026-09-09"
+}

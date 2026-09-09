@@ -1087,6 +1087,24 @@ class ComparisonTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "already has"):
             pgo_comparison.inject_fantasy_preview(output, fantasy)
 
+    def test_fantasy_injection_accepts_only_the_known_additive_model_style(self):
+        from pgo_model_updates import STYLE
+        plain = pgo_comparison.inject_comparison(self._base_html(),
+            pgo_comparison.render_comparison_panel([], self._held_receipt()))
+        fantasy = pgo_comparison.render_fantasy_panel(self._fantasy_preview())
+        panel = pgo_comparison.extract_comparison_panel(plain)
+        def with_style(style):
+            return plain.replace(panel, panel.replace('</section>', style + '</section>', 1), 1)
+        styled = with_style(STYLE)
+        output = pgo_comparison.inject_fantasy_preview(styled, fantasy)
+        self.assertEqual(output.replace(STYLE, '', 1),
+                         pgo_comparison.inject_fantasy_preview(plain, fantasy))
+        self.assertEqual(output.count(STYLE), 1)
+        for extra in ('<style>unrecognized</style>', STYLE + STYLE,
+                      STYLE.replace('margin-top:28px', 'margin-top:29px')):
+            with self.subTest(extra=extra[:30]), self.assertRaisesRegex(ValueError, 'markers changed'):
+                pgo_comparison.inject_fantasy_preview(with_style(extra), fantasy)
+
     def test_injection_without_fantasy_remains_byte_identical(self):
         output = pgo_comparison.inject_comparison(
             self._base_html(),

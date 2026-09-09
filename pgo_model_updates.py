@@ -1,0 +1,409 @@
+"""Additive presentation of separately verified model updates; never issues forecasts."""
+import html
+import hashlib
+import math
+import json
+from pathlib import Path
+
+import pgo_current_board
+
+EDITION = 'pgo-postseason-week1-2026-09-09'
+ROOT = Path(__file__).resolve().parent
+DEFAULT_DIR = ROOT / 'docs/evidence/forecast-lab-2026/september-09-postseason'
+DEFENSE_TEST_DIR = ROOT / 'research/pgo_defensive_depth_candidate/run-20260909-attempt01'
+DEFENSE_TEST_MANIFEST_SHA256 = 'd23b20fb253ad13d00bd71807c89ecad5368868f06bb146418ac2eb47d422f92'
+
+STYLE = """<style>
+.pgo-model-updates{margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
+.pgo-model-updates .table-shell{overflow-x:auto;container-type:inline-size}
+.pgo-model-updates table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.pgo-model-updates th,.pgo-model-updates td{padding:9px;border-bottom:1px solid var(--border);text-align:right;vertical-align:top;white-space:nowrap}
+.pgo-model-updates tbody th{text-align:left;letter-spacing:normal;text-transform:none;background:var(--panel);color:var(--ink)}
+.pgo-model-updates summary{cursor:pointer;font-weight:700}
+.pgo-model-updates .forecast-week{margin:12px 0;padding:12px;border:1px solid var(--border);border-radius:10px}
+.pgo-model-updates .forecast-reason-row>td{text-align:left;padding:0 9px 10px;white-space:normal}
+.pgo-model-updates .forecast-reason{width:min(960px,calc(100cqw - 18px));max-width:100%;font-size:13px;font-weight:400;line-height:1.5}
+.pgo-model-updates .forecast-reason>summary{padding:7px 0}
+.pgo-model-updates .forecast-reason-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px;padding:8px 0}
+.pgo-model-updates .forecast-reason-block{min-width:0;padding:14px;border:1px solid var(--border);border-radius:8px;background:var(--panel);white-space:normal;overflow-wrap:anywhere}
+.pgo-model-updates .forecast-reason-block h3{margin:0 0 8px;font-size:14px;color:var(--accent)}
+.pgo-model-updates .forecast-reason-block p{margin:0 0 10px;white-space:normal}
+.pgo-model-updates .forecast-reason-block p:last-child{margin-bottom:0}
+.pgo-model-updates .forecast-reason-calculation{margin-top:12px}
+.pgo-model-updates .model-update-evidence{margin:16px 0}
+.pgo-model-updates .model-update-evidence li{margin:8px 0;overflow-wrap:anywhere}
+.pgo-model-updates .model-update-columns{display:none;align-items:center;gap:8px;margin:12px 0}
+@media(max-width:700px){.pgo-model-updates .pgo-team-name{display:none}.pgo-model-updates .model-update-columns{display:flex}.postseason-team-table .model-update-extra{display:none}.model-update-columns:has(input:checked)+.table-shell .model-update-extra{display:table-cell}}
+</style>"""
+
+
+def _text(value):
+    return html.escape(str(value), quote=True)
+
+
+def _block(title, content):
+    return f'<div class="forecast-reason-block"><h3>{_text(title)}</h3>{content}</div>'
+
+
+def _reason(game, snapshot):
+    # Every game comes directly from this verified package, not the weekly ledger.
+    from pgo_challenger import _rest_difference
+    from pgo_forecast_lab import _spread
+    teams = {row['team']: row for row in snapshot['teams']}
+    home, away = game['home'], game['away']
+    margin, total = game['margin'], game['total']
+    for actual, expected in ((game['home_points'], (total + margin) / 2),
+                             (game['away_points'], (total - margin) / 2)):
+        if not math.isclose(actual, expected, rel_tol=0, abs_tol=1e-9):
+            raise ValueError('Candidate saved scores do not reconcile')
+    fit = snapshot['fit']
+    pp = fit['preprocessor']
+    def coefficient(name):
+        index = pp['feature_names'].index(name)
+        return fit['coefficients'][index + 1] / pp['scales'][index]
+    gap = teams[home]['rating'] - teams[away]['rating']
+    venue = 0.0 if game['location'] == 'Neutral' else coefficient('home_field')
+    rest_input = _rest_difference(game['home_rest'], game['away_rest'])
+    rest = None if rest_input is None else rest_input * coefficient('rest_difference')
+    edge = f'<p>Saved candidate: {_spread(game)}.</p>'
+    if rest is not None and math.isclose(gap + venue + rest, margin, rel_tol=0, abs_tol=1e-9):
+        venue_text = ('The neutral site adds no home advantage.' if game['location'] == 'Neutral'
+                      else f'Playing at home adds {venue:.1f} points for {_text(home)}.')
+        rest_text = ('Both teams have the same rest, so there is no rest adjustment.'
+                     if game['home_rest'] == game['away_rest'] else
+                     f'The rest adjustment adds {rest:+.2f} points to the home-team lead; '
+                     'the difference in days is capped at seven.')
+        edge = (f'<p>Before the venue adjustment: {_spread({**game, "margin": gap})}. '
+                f'{venue_text} {rest_text} That leaves {_spread(game)}.</p>')
+    rates = snapshot['scoring_rates']
+    values = [rates[team][kind] for team in (away, home) for kind in ('pf', 'pa')]
+    if not math.isclose(math.fsum(values) / 2, total, rel_tol=0, abs_tol=1e-9):
+        raise ValueError('Candidate scoring history does not reconcile')
+    history = snapshot['history']
+    body = _block('How the edge is built', edge)
+    body += _block('What changed',
+        '<p>This candidate includes regular season and playoffs in its historical team and '
+        'quarterback inputs. The September 8 model used regular-season history. '
+        'More history does not automatically make the prediction more accurate.</p>'
+        f'<p>Expected quarterbacks: {_text(away)}: {_text(teams[away]["qb_name"])}; '
+        f'{_text(home)}: {_text(teams[home]["qb_name"])}. Their history is already in the ratings.</p>')
+    body += _block('Combined points',
+        f'<p>Using the {history["scoring_season"]} regular season and playoffs: '
+        f'{_text(away)} averaged {values[0]:.2f} scored and {values[1]:.2f} allowed '
+        f'over {rates[away]["games"]} games; {_text(home)} averaged {values[2]:.2f} scored '
+        f'and {values[3]:.2f} allowed over {rates[home]["games"]} games. '
+        f'Add these four averages and divide by two: {total:.2f} combined points.</p>'
+        '<p>Playoff teams have more games in these averages. This remains a simple scoring-history estimate.</p>')
+    body += _block('What is still missing',
+        '<p>Current non-QB player quality and the quality of defensive backups are not fitted '
+        'adjustments in this candidate. The defensive-depth evidence below is descriptive. '
+        'It does not add or subtract points from this forecast.</p>')
+    calculation = (
+        f'<p>Home score = (combined points + home-team lead) / 2: '
+        f'({total:.2f} + ({margin:+.2f})) / 2 = {game["home_points"]:.2f}. '
+        f'Away score = (combined points - home-team lead) / 2 = {game["away_points"]:.2f}. '
+        'Displayed figures are rounded; saved values keep full precision.</p>'
+        f'<p>September 8 comparison: {_spread({**game, "margin": game["corrected_margin"]})}; '
+        f'{game["corrected_total"]:.2f} combined points.</p>'
+        f'<p>Saved edition: {_text(snapshot["edition"])}. '
+        'EXPERIMENTAL / HOLD. This explains the calculation, not certainty about the result.</p>')
+    return ('<details class="forecast-reason"><summary>Why this forecast</summary>'
+            f'<div class="forecast-reason-body">{body}</div>'
+            '<details class="forecast-reason-block forecast-reason-calculation">'
+            f'<summary>Full calculation and saved version</summary>{calculation}</details></details>')
+
+
+def _candidate(snapshot, weekly=None, results=(), provenance=()):
+    from pgo_forecast_lab import _forecast_weeks, _forecast_reason, snapshot_interim_metrics, _snapshot_metric_cards, _https_url, _spread
+    if snapshot['edition'] != EDITION or snapshot['method']['status'] != 'EXPERIMENTAL / HOLD':
+        raise ValueError('Model update requires the separate experimental postseason edition')
+    teams = sorted(snapshot['teams'], key=lambda row: row['rank'])
+    expected = {row[0] for row in pgo_current_board.generate_site.TEAM.values()}
+    if (len(teams) != 32 or {row['team'] for row in teams} != expected
+            or [row['rank'] for row in teams] != list(range(1, 33))
+            or any(not math.isfinite(row['rating']) for row in teams)
+            or teams != sorted(teams, key=lambda row: (-row['rating'], row['team']))):
+        raise ValueError('Candidate requires all 32 verified ranked teams')
+    validation = snapshot['validation']
+    if validation['status'] not in ('PASS', 'FAIL'):
+        raise ValueError('Candidate historical screen status is unavailable')
+    outcome = ('passed the historical screen' if validation['status'] == 'PASS'
+               else 'did not pass the historical screen')
+    ne = next(team for team in teams if team['team'] == 'NE')
+    opener = next((game for game in snapshot['games'] if {game['home'], game['away']} == {'NE', 'SEA'}), None)
+    comparison = (f'<p><strong>New England moves from #{ne["baseline_rank"]} to #{ne["rank"]} in this candidate. '
+                  f'This candidate {outcome} and remains EXPERIMENTAL / HOLD.</strong> '
+                  + (f'Its Seattle matchup favors {_spread(opener)}. '
+                     f'<a href="#postseason-why-{_text(opener["game_id"])}">Why this forecast</a>.' if opener else '') + '</p>')
+    rows = []
+    for team in teams:
+        code = team['team']
+        rows.append(f'<tr data-postseason-team="{_text(code)}">'
+            f'<td class="pgo-rank">{team["rank"]}</td>'
+            f'<th scope="row" class="pgo-team">{pgo_current_board.team_identity(code)}</th>'
+            f'<td class="pgo-rating-value" data-value="{team["rating"]}">{team["rating"]:+.3f}</td>'
+            f'<td>{team["rank"] - team["baseline_rank"]:+d}</td>'
+            f'<td class="model-update-extra pgo-rating-scale">{pgo_current_board.rating_bar(team["rating"])}</td>'
+            f'<td class="model-update-extra">{team["baseline_rating"]:+.3f}</td>'
+            f'<td class="model-update-extra">{_text(team["qb_name"])}</td></tr>')
+    games = snapshot['games'] if weekly is None else weekly['games']
+    source_games = {game['game_id']: game for game in snapshot['games']}
+    fields = ('game_id', 'season', 'week', 'game_type', 'home', 'away', 'kickoff',
+              'location', 'home_rest', 'away_rest', 'margin', 'total', 'home_points', 'away_points')
+    reasons = {}
+    for game in games:
+        if weekly is None:
+            matches = True
+        else:
+            if game.get('source_edition') != EDITION:
+                raise ValueError('Candidate ledger contains another model edition')
+            source = source_games.get(game['game_id'])
+            matches = (source is not None and snapshot.get('_manifest_sha256')
+                       and game['source_manifest_sha256'] == snapshot['_manifest_sha256']
+                       and game['source_generated_at'] == snapshot['generated_at']
+                       and all(game.get(key) == source.get(key) for key in fields))
+        reason = _reason(game, snapshot) if matches else _forecast_reason(game)
+        reasons[game['game_id']] = reason.replace('<details class="forecast-reason"',
+            f'<details id="postseason-why-{_text(game["game_id"])}" class="forecast-reason"', 1)
+    metrics = snapshot_interim_metrics({**snapshot, 'games': games}, results)
+    results_sources = ''.join(f'<li><a href="{_text(_https_url(item["source_url"]))}">'
+                             f'Shared final-result source</a>; {_text(item["captured_at"])}</li>' for item in provenance)
+    history = snapshot['history']
+    limits = ''.join(f'<li>{_text(item)}</li>' for item in validation['limitations'])
+    return (
+        f'<div id="postseason-model-update" data-edition="{EDITION}">'
+        '<div class="model-status" data-model-status="HOLD">EXPERIMENTAL / HOLD</div>'
+        '<h2>Postseason history &mdash; September 9, 2026 candidate</h2>'
+        '<p>This separate version carries playoff games into the team and quarterback history. '
+        'It is shown alongside the September 8 model; it does not rewrite earlier saved forecasts.</p>'
+        f'<p><strong>This candidate {outcome}.</strong> Average margin error was '
+        f'{validation["candidate_mae"]:.3f} points, compared with {validation["baseline_mae"]:.3f} '
+        f'for the baseline on the same {validation["games"]} games. Lower is better. '
+        'These reused historical seasons do not establish future accuracy.</p>'
+        f'{comparison}'
+        f'<p>Inputs saved through {pgo_current_board._time(snapshot["inputs_as_of"])}. '
+        f'Candidate created {pgo_current_board._time(snapshot["generated_at"])}.</p>'
+        '<h3>All 32 candidate ratings</h3><p>Higher ratings mean stronger model output; zero is '
+        'the 32-team average. Rank change is candidate rank minus September 8 rank, so a positive '
+        'number means a lower position. Ratings are model units, not betting lines.</p>'
+        '<label class="model-update-columns"><input type="checkbox"> Show rating scale, earlier rating and QB</label>'
+        '<div class="table-shell"><table class="postseason-team-table"><thead><tr>'
+        '<th>Rank</th><th>Team</th><th>Candidate rating</th><th>Rank change</th>'
+        '<th class="model-update-extra">Rating scale (-14 to +14)</th>'
+        '<th class="model-update-extra">September 8 rating</th>'
+        '<th class="model-update-extra">Expected QB</th></tr></thead>'
+        f'<tbody>{"".join(rows)}</tbody></table></div>'
+        '<h3>Saved candidate matchups</h3><p>Scores are rounded averages. Open Model averages '
+        'for decimals. About 25 points each means both estimates round to 25, not a predicted '
+        'tie. The favored team uses the unrounded margin. These are separate candidate records, '
+        'not a replacement for the original weekly forecast ledger.</p>'
+        f'{_forecast_weeks(games, results, weekly=weekly is not None, reasons=reasons, series="postseason", incumbent_label="September 8 corrected")}'
+        f'<h3>Candidate forecast record</h3><p>{len(results)} of {len(games)} saved candidate forecasts '
+        'have final results. Interim grades include misses as well as hits; they are not scientific promotion.</p>'
+        f'{_snapshot_metric_cards(metrics, "postseason candidate", incumbent_label="September 8 corrected margin")}'
+        '<details class="model-update-evidence"><summary>Testing, history and saved source</summary>'
+        f'<p>History includes {_text(", ".join(history["game_types"]))}: '
+        f'{history["regular_games"]} regular-season and {history["postseason_games"]} playoff games. '
+        f'History through {pgo_current_board._time(history["through"])}.</p>'
+        f'<p>Seasons with lower error: {validation["season_wins"]}. Paired error-reduction interval: '
+        f'{validation["interval"]["lower"]:+.3f} to {validation["interval"]["upper"]:+.3f}. '
+        'This is a historical comparison, not a range for a game result.</p>'
+        f'<ul>{limits}</ul><ul>{results_sources}</ul><p><a href="evidence/forecast-lab-2026/september-09-postseason/snapshot.json">'
+        'Saved candidate inputs and outputs</a> &middot; '
+        '<a href="evidence/forecast-lab-2026/september-09-postseason/manifest.json">Package verification</a>'
+        '</p></details></div>')
+
+
+def _depth_evidence(depth, coverage=None):
+    from pgo_forecast_lab import _https_url
+    if depth['status'] != 'DESCRIPTIVE / NOT IN MODEL' or depth['forecast_adjustment'] is not None:
+        raise ValueError('Defensive depth evidence must not imply a fitted forecast adjustment')
+    teams = sorted(depth['teams'], key=lambda row: row['team'])
+    expected = {row[0] for row in pgo_current_board.generate_site.TEAM.values()}
+    if len(teams) != 32 or {team['team'] for team in teams} != expected:
+        raise ValueError('Defensive depth requires all 32 team identities')
+    def cell(value):
+        return 'Unavailable' if value is None else _text(value)
+    rows, details = [], []
+    columns = ('active_defenders', 'listed_starters', 'listed_backups',
+               'backups_with_prior_defensive_snaps', 'backups_without_prior_defensive_snaps',
+               'unlisted_defenders')
+    for team in teams:
+        code = team['team']
+        rows.append(f'<tr data-depth-team="{_text(code)}"><th scope="row">'
+            f'<a href="#depth-players-{_text(code)}">{pgo_current_board.team_identity(code)}</a></th>'
+            + ''.join(f'<td>{cell(team[key])}</td>' for key in columns) + '</tr>')
+        players = []
+        report = (coverage or {}).get(code, {})
+        report_source = ''
+        if report.get('captured_at'):
+            report_source = (f'<p>Current report notes captured {pgo_current_board._time(report["captured_at"])}. '
+                             f'<a href="{_text(_https_url(report["source_url"]))}">Official report source</a>.</p>')
+        for player in team['players']:
+            observations = [row for row in report.get('observations', [])
+                            if row.get('gsis_id') and row['gsis_id'] == player['gsis_id']]
+            injury = ''
+            if len(observations) == 1:
+                row = observations[0]
+                note = ('Game designation: ' + row['game_status'] if row.get('game_status') else
+                        'Practice report: ' + row['practice_status'] if row.get('practice_status') else
+                        'No game designation listed')
+                injury = f'<br><small>{_text(note)}</small>'
+
+            roles = ', '.join(f'{row["position"]} #{row["rank"]}' for row in player['depth_rows'])
+            players.append('<tr>'
+                f'<th scope="row">{_text(player["name"])}<br><small>{_text(player["gsis_id"])}</small></th>'
+                f'<td>{_text(player["position"])} / {_text(player["roster_status"])}<br>'
+                f'{_text(roles or "Not assigned a verified depth role")}<br>{_text(player["depth_status"])}{injury}</td>'
+                + ''.join(f'<td>{cell(player.get(key))}</td>' for key in
+                          ('defensive_snaps', 'def_sacks', 'def_qb_hits', 'def_tackles_for_loss',
+                           'def_pass_defended', 'def_interceptions'))
+                + f'<td>{_text(player["history_status"])}<br>{cell(player["observed_games"])} observed games<br>'
+                  f'{_text(", ".join(player["previous_teams"]) or "No prior team recorded")}</td></tr>')
+        clock = ('Depth snapshot time unavailable' if team['depth_snapshot_at'] is None else
+                 pgo_current_board._time(team['depth_snapshot_at']))
+        details.append(f'<details class="model-update-evidence" id="depth-players-{_text(code)}">'
+            f'<summary>{_text(code)}: player roles and prior production</summary>'
+            f'<p>Data coverage: {_text(team["coverage_status"])}. {clock}. '
+            'ACT, RES, DEV and EXE are source roster-status labels; reserve players are not assumed available.</p>'
+            f'{report_source}'
+            '<div class="table-shell"><table><thead><tr><th>Player</th><th>Position / roster / depth</th>'
+            '<th>Defensive snaps</th><th>Sacks</th><th>QB hits</th><th>Tackles for loss</th>'
+            '<th>Passes defended</th><th>Interceptions</th><th>History coverage</th></tr></thead>'
+            f'<tbody>{"".join(players)}</tbody></table></div></details>')
+    sources = []
+    for source in depth['sources']:
+        label = source.get('file') or 'Source'
+        url = source.get('url')
+        link = f'<a href="{_text(_https_url(url))}">{_text(label)}</a>' if url else _text(label)
+        captured = (pgo_current_board._time(source['captured_at']) if source.get('captured_at')
+                    else 'Capture time unavailable')
+        sources.append(f'<li>{link}; {captured}; SHA-256 <code>{_text(source.get("sha256", "Unavailable"))}</code></li>')
+    limitations = ''.join(f'<li>{_text(value)}</li>' for value in depth['limitations'])
+    return (
+        '<div id="defensive-depth-update"><h2>Defensive depth: what the sources show</h2>'
+        '<p><strong>DESCRIPTIVE / NOT IN MODEL.</strong> This evidence does not change any rating or forecast. '
+        'It shows current listed roles and past defensive playing time and production; it is not a talent ranking.</p>'
+        '<p>A rookie or player without matched history is unknown, not automatically a poor replacement. '
+        'Position labels are preserved from the source: not every linebacker is an edge rusher. '
+        'Past production does not isolate player quality or prove that the same role continues. '
+        'Listed first means rank one in a source position or subpackage slot; a team can have '
+        'more than eleven such listings. It is not an inferred starting lineup.</p>'
+        f'<p>Current inputs through {pgo_current_board._time(depth["inputs_as_of"])}; '
+        f'package created {pgo_current_board._time(depth["generated_at"])}. '
+        f'Historical window: {_text(depth["historical_window"])}.</p>'
+        '<p>ACT is an active-roster status, not a promise that a player will play. These counts include '
+        'players with injury designations. No injury note does not establish that a player is healthy.</p>'
+        '<p><strong>Final inactives checked September 9 at 6:52 PM Eastern:</strong> '
+        'Seattle confirmed Nick Emmanwori and Tory Horton inactive; New England also listed Erick Hunter inactive. '
+        'These later announcements do not change the captured roster counts or saved forecasts.</p>'
+        '<details class="model-update-evidence"><summary>Tonight\'s official inactive lists</summary>'
+        '<p><a href="https://www.patriots.com/news/week-1-inactives-patriots-at-seahawks">New England</a>: '
+        'Karon Prunty, TreVeyon Henderson, Erick Hunter, Walter Rouse, Ben Brown, Efton Chism and Behren Morton.</p>'
+        '<p><a href="https://www.seahawks.com/news/nick-emmanwori-tory-horton-inactive-for-seahawks-opener-vs-patriots">Seattle</a>: '
+        'Nick Emmanwori, Tory Horton, Ty Okada, Nick Kallerup, Beau Stephens and Mike Morris; '
+        'Jalen Milroe is designated the emergency third quarterback.</p></details>'
+        '<p><strong>Seattle roster update, September 9:</strong> '
+        '<a href="https://www.seahawks.com/news/seahawks-make-roster-moves-ahead-of-season-opener-vs-patriots">'
+        'The club announced</a> AJ Finley joining the 53-player roster, Rodney Thomas II and Velus Jones Jr. '
+        'being elevated, and Bryce Cabeldue being waived. Those moves are missing from this captured '
+        'provider roster. The table and saved forecasts retain their dated inputs.</p>'
+        '<p>Select a team for player-level evidence. A backup with past snaps has recorded experience, '
+        'not a verified quality grade. Missing depth roles and missing history stay explicit.</p>'
+        '<div class="table-shell"><table><thead><tr><th>Team</th><th>ACT roster defenders</th>'
+        '<th>Listed first</th><th>Listed backups</th><th>Backups with past snaps</th>'
+        '<th>Backups without past snaps</th><th>Unlisted defenders</th></tr></thead>'
+        f'<tbody>{"".join(rows)}</tbody></table></div>{"".join(details)}'
+        '<details class="model-update-evidence"><summary>Depth sources and limitations</summary>'
+        f'<ul>{limitations}</ul><ul>{"".join(sources)}</ul></details></div>')
+
+
+def render_defense_test(summary):
+    """Present an independently verified diagnostic; do not blend its predictions."""
+    from pgo_forecast_lab import _https_url
+    if summary['status'] not in ('PASS', 'FAIL'):
+        raise ValueError('Unknown defensive test screen')
+    outcome = 'passed the historical screen' if summary['status'] == 'PASS' else 'did not pass the historical screen'
+    ne = summary.get('ne')
+    movement = (f' On the same fresh inputs, New England moved from #{ne["baseline_rank"]} '
+                f'in the control to #{ne["rank"]} in this diagnostic. Rank movement is not evidence '
+                'that a model is more accurate.' if ne else '')
+    return (
+        '<div id="defense-production-test"><h2>Defensive-production test</h2>'
+        '<p><strong>EXPERIMENTAL / HOLD.</strong> This separate test added prior defensive '
+        'activity, experienced-contributor breadth, and history coverage to the September 8 '
+        'construction. It does not use current depth-chart order as a fitted feature or grade backup talent.</p>'
+        f'<p><strong>It {outcome}.</strong> Average margin error: '
+        f'{summary["candidate_mae"]:.3f} points versus {summary["baseline_mae"]:.3f} for the baseline '
+        f'on the same {summary["games"]} games; lower is better. '
+        f'It improved {summary["season_wins"]} of 8 seasons.{movement}</p>'
+        '<p>These results are not added to the postseason forecasts. Previously inspected '
+        'historical seasons and uneven source coverage limit what this test can establish.</p>'
+        '<details class="model-update-evidence"><summary>Defensive test result and source</summary>'
+        f'<p>Paired error-reduction interval: {summary["interval"]["lower"]:+.3f} to '
+        f'{summary["interval"]["upper"]:+.3f} points. This compares historical error; '
+        'it is not an uncertainty range for a game forecast.</p>'
+        f'<ul>{"".join(f"<li>{_text(item)}</li>" for item in summary["limitations"])}</ul>'
+        f'<p><a href="{_text(_https_url(summary["report_url"]))}">Full model-update report</a>. '
+        f'Verified research manifest: <code>{_text(summary["manifest_sha256"])}</code>.</p></details></div>')
+
+
+def _load_defense_test():
+    if not DEFENSE_TEST_DIR.exists():
+        return None
+    from research.pgo_input_audit.audit_model import _verified_manifest
+    _verified_manifest(DEFENSE_TEST_DIR, DEFENSE_TEST_MANIFEST_SHA256)
+    metrics = json.loads((DEFENSE_TEST_DIR / 'metrics.json').read_bytes())
+    receipt = json.loads((DEFENSE_TEST_DIR / 'run-receipt.json').read_bytes())
+    if receipt['status'] != 'EXPERIMENTAL / HOLD':
+        raise ValueError('Defensive research must retain HOLD')
+    candidate, baseline = (metrics['metrics'][key]['overall'] for key in ('candidate', 'corrected'))
+    screen = metrics['further_study_screen']
+    return dict(status=screen['status'], candidate_mae=candidate['mae'], baseline_mae=baseline['mae'],
+                games=candidate['count'], season_wins=screen['season_wins'],
+                interval=metrics['paired_bootstrap']['vs_corrected'],
+                ne=next(row for row in json.loads((DEFENSE_TEST_DIR / 'current-ratings.json').read_bytes()) if row['team'] == 'NE'),
+                limitations=['Historical source publication vintage remains under review.',
+                             'Missing identities and statistic exposure are excluded and reported, not treated as zero ability.',
+                             'The fixed diagnostic screen does not remove EXPERIMENTAL / HOLD.'],
+                manifest_sha256=DEFENSE_TEST_MANIFEST_SHA256,
+                report_url='https://github.com/walshja9/Postgame_Outlet/blob/main/docs/model-update-2026-09-09.md')
+
+
+def render_updates(snapshot=None, depth=None, *, weekly=None, results=(), provenance=(), defense_test=None):
+    if snapshot is None and depth is None and defense_test is None:
+        return ''
+    return ('<div class="pgo-model-updates" id="model-updates">' + STYLE
+            + (_candidate(snapshot, weekly, results, provenance) if snapshot is not None else '')
+            + (render_defense_test(defense_test) if defense_test is not None else '')
+            + (_depth_evidence(depth, snapshot.get('coverage') if snapshot else None) if depth is not None else '') + '</div>')
+
+
+def render_current_updates():
+    snapshot, weekly, results, provenance = None, None, [], []
+    if DEFAULT_DIR.exists() or DEFAULT_DIR.is_symlink():
+        from pgo_forecast_postseason import load_snapshot
+        import pgo_forecast_lab as lab
+        snapshot = load_snapshot(DEFAULT_DIR)
+        snapshot = {**snapshot, '_manifest_sha256': hashlib.sha256((DEFAULT_DIR / 'manifest.json').read_bytes()).hexdigest()}
+        candidate_ledger = DEFAULT_DIR.parent / 'weekly-postseason'
+        if candidate_ledger.exists() or candidate_ledger.is_symlink():
+            weekly = lab.pgo_forecast_weekly.load_weekly(candidate_ledger)
+            original = lab.pgo_forecast_weekly.load_weekly(lab.WEEKLY_DIR)
+            union = {game['game_id']: game for game in original['games']}
+            identity = lab.pgo_forecast_weekly._IDENTITY_KEYS
+            for game in weekly['games']:
+                prior = union.get(game['game_id'])
+                if prior and any(game.get(key) != prior.get(key) for key in identity):
+                    raise ValueError('Candidate result identity differs from the original ledger')
+                union[game['game_id']] = game
+            accepted, provenance = lab.load_results(lab.WEEKLY_DIR / 'results', {'games': list(union.values())})
+            candidate_ids = {game['game_id'] for game in weekly['games']}
+            results = [result for result in accepted if result['game_id'] in candidate_ids]
+    depth = None
+    depth_dir = DEFAULT_DIR.parents[1] / 'defensive-depth-2026/september-09'
+    if depth_dir.exists() or depth_dir.is_symlink():
+        from research.pgo_defensive_depth_candidate.validation import load_verified
+        depth = load_verified(depth_dir, optional=True)
+    return render_updates(snapshot, depth, weekly=weekly, results=results, provenance=provenance,
+                          defense_test=_load_defense_test())

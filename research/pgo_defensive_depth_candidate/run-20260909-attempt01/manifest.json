@@ -1,0 +1,33 @@
+{
+  "files": {
+    "current-ratings.json": {
+      "bytes": 13724,
+      "sha256": "844ab9c99294dc9d2b475757b9671aecd2d52ae9fc3d7aed978d0607a9f52d35"
+    },
+    "final-fit.json": {
+      "bytes": 89005,
+      "sha256": "344e3a9e2ed36677050ef908fd29f4fa7bab3eb6d43ea60c866010a9c331f9b0"
+    },
+    "fold-fits.json": {
+      "bytes": 660085,
+      "sha256": "951c1f2ebbd89de472aac4c7d4fbb54517386d97fef3c7b3b95304d727c7975b"
+    },
+    "matched-predictions.csv": {
+      "bytes": 414242,
+      "sha256": "f3d41b143fe79d2b5c9cc8314d7fc2d5776c8f81574f2ac9c4a157a58d06e848"
+    },
+    "metrics.json": {
+      "bytes": 130863,
+      "sha256": "f65fd42e452c87022582c05af7f26904c2ee5577688e385e1daa7674db91c4e5"
+    },
+    "run-receipt.json": {
+      "bytes": 21458,
+      "sha256": "454c20ee900d7d48b28e27a72543fca4cb9361bf9d75392c17849f3102453fe0"
+    },
+    "run-start.json": {
+      "bytes": 20899,
+      "sha256": "4dd1c6aafbb14f0747d4846f01cddea7c5516551a2fd93dfbacd7188e8b385bd"
+    }
+  },
+  "identity": "pgo-defensive-production-candidate-2026-09-09"
+}

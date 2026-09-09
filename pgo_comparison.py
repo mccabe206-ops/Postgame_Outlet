@@ -1246,7 +1246,7 @@ def add_current_injury_notes(page, source_path=None):
     raw = json.loads(path.read_text(encoding="utf-8"))
     sources = {row["team"]: row for row in raw["team_sources"]}
     players = {(row["team"], row["gsis_id"]): row for row in snapshot_data["players"]
-               if row["source_kind"] == "formal_injury_report"}
+               if row["source_kind"] in ("formal_injury_report", "official_news")}
     marked = lambda text: '<!-- CURRENT INJURY NOTE -->' + text + '<!-- END CURRENT INJURY NOTE -->'
     matched = 0
 
@@ -1266,8 +1266,11 @@ def add_current_injury_notes(page, source_path=None):
             raise ValueError("Source capture time is later than the injury snapshot")
         clock = pgo_current_board._time(checked)
         designation = player["game_status"]
-        status = (f'Game designation: {designation.upper()}' if designation
-                  else f'Practice: {player["practice_status"]}; no final game designation supplied')
+        if player["source_kind"] == "official_news":
+            status = player["availability_text"]
+        else:
+            status = (f'Game designation: {designation.upper()}' if designation
+                      else f'Practice: {player["practice_status"]}; no final game designation supplied')
         if player["injury"]:
             status += f' ({player["injury"]})'
         note = marked(
@@ -1275,7 +1278,7 @@ def add_current_injury_notes(page, source_path=None):
             'margin-top:6px;color:var(--notice-ink)"><strong>Current report: '
             f'{html.escape(status)}</strong>. Checked {clock}. '
             f'<a href="{html.escape(player["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer">'
-            'Official report</a>. Final inactives pending.</span>')
+            'Official report</a>.</span>')
         cells, count = re.subn(r'(<th\b[^>]*class="fantasy-player"[^>]*>)([^<]*)',
                               lambda cell: cell[1] + cell[2] + note, match[2], count=1)
         if count != 1:
@@ -1306,9 +1309,15 @@ def inject_fantasy_preview(existing_html, panel_html):
     comparison_panel = extract_comparison_panel(existing_html)
     panel_class = '<section class="panel" id="panel-comparison"'
     panel_label = 'aria-labelledby="tab-comparison" hidden>'
-    markers = ("</style>", "</body>", COMPARISON_TAB, comparison_panel)
+    from pgo_model_updates import STYLE as model_update_style
+    model_style_count = existing_html.count(model_update_style)
+    markers = ("</body>", COMPARISON_TAB, comparison_panel)
     if (
         any(existing_html.count(marker) != 1 for marker in markers)
+        or model_style_count > 1
+        or comparison_panel.count(model_update_style) != model_style_count
+        or existing_html.count("</style>") != 1 + model_style_count
+        or (model_style_count and existing_html.index(model_update_style) < existing_html.index("</style>"))
         or existing_html.count(FANTASY_AVAILABILITY_CSS) != 0
         or comparison_panel.count(panel_class) != 1
         or comparison_panel.count(panel_label) != 1

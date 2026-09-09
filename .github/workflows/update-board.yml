@@ -15,6 +15,11 @@ on:
       - "pgo_forecast_snapshot.py"
       - "pgo_forecast_weekly.py"
       - "pgo_forecast_corrected.py"
+      - "pgo_forecast_postseason.py"
+      - "pgo_model_updates.py"
+      - "research/pgo_postseason_candidate/**"
+      - "research/pgo_defensive_depth_candidate/**"
+      - "docs/evidence/defensive-depth-2026/**"
       - "research/pgo_corrected_roster_candidate/*.py"
       - "docs/evidence/forecast-lab-2026/**"
       - "docs/evidence/nonqb-availability-2026/**"
@@ -51,6 +56,7 @@ jobs:
         run: |
           python -m unittest discover -s tests
           python -m unittest research.pgo_corrected_roster_candidate.test_candidate research.pgo_corrected_roster_candidate.test_temporal
+          python -m unittest research.pgo_defensive_depth_candidate.test_candidate research.pgo_defensive_depth_candidate.test_evidence
       - name: Refresh public board without replacing approved PGO panel
         run: python pgo_comparison.py --refresh-mccabe
       - name: Render verified Forecast Lab archive

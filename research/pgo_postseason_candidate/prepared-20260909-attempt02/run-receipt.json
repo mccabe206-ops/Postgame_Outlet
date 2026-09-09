@@ -1,0 +1,463 @@
+{
+  "charter_sha256": "7d3e2a926de0f84537b765e8e13b6fedc3fa41f90161036cd1c2448a2e695b0e",
+  "code_and_issued_sha256": {
+    "D:\\CodexWorktrees\\Postgame_Outlet-league-profiles\\research\\pgo_week1_corrected\\charter.md": "643cdc172fc3ad15393989d8e9b021b3975833d6ae51f7ee162a837c39a25c12",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\fantasy-scoring-20260907-031950.json": "024b883760389653351188b0c10601cfad3c0a3457f25bd8fd1d2b306478c156",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\prospective_lock.json": "d6ebf73188c41046f945a54653bdb89eadc2dc18d917276a47c0166b9ada98e9",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\prospective_predictions.csv": "8b17ab8c4744586e5386a7755ceaf63ccf8a8438533e8c904de68b5bc25dca6f",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\depth.csv.gz": "92ced698838f0d3208ebfefc935c0eb260b82bbcc9f2040133e9181367761c23",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\depth_charts-release.json": "f5e4fab36b1e248c430a9eea475e3d23a6100bb31a4a388159b70b01ebc64d0a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\depth_charts-timestamp.json": "9b8a5a879ad9b0e95ddbd1f0e0e9b87839c7d61e5a309c12452853a4f00d0d5a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\fit.json": "f24429f99f078d57b135881bf1c371bc158539d3ff945e4434dd3e02533136d4",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\forecasts.csv": "1b8a55cbb233ff5720cfb21468f841a1628f908337f1d44bce7c914c8619de0b",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\july-snapshot-states.json": "c24ace892e6bb41b3ba82588f215b0a8b20f9096eb8e8f04add435378feeceb9",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\manifest.json": "43bdeee73a2d3301eedbcecc7d291dc9ebe68cf196860e7217326570e4fe2f42",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\original-july-backtest.json": "ab32daa4cb3de5f6f5004a538edab9f145e8dbd3d7bcfb4b3fd069af7c05d9da",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\original-july-ratings.csv": "6f983ddbb8e79263d70043429639ee5aa4c092edb847c41248a089b7a1e5a335",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\ratings.csv": "befe7b2583d15bba6c967ee0ce581d7bb58a38a51f7773f21cd00fe9024aa0e4",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\roster.csv.gz": "e356efc0f9ff9b8d50d82e2524312bda3ebb6598cf487eee69ba339b90f6230a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\rosters-release.json": "761d5e96beae2f77c113afcf282d8dac7460ee74e77a4356ad235e55c2d9c77a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\rosters-timestamp.json": "f298daf8f63db12c434a23cdeffa0f5f06acb8413e6c24ffdfa8e94478120e09",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\schedule.csv.gz": "abeb9b6c541648308d61d3c187ae94ca82b2d4005829740e48daa64bdd33aa6f",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\schedules-release.json": "abb33b2f8a96a5747b465075d65657086d1a407b8c036ad5e0d40e0723c9016b",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\schedules-timestamp.json": "28bf220cd76f3060464bf9eb0917fc6d45d024af278e8ef27773e1cefdb252a7",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\scoring-history-2025.csv": "536f4fd60c8bc61a4b22770b6c1308dbea1463fad17d137fe969df94c8d759b8",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\snapshot.json": "60a11ed87f67f1726eb9152b400ca7b1b685b2e0dc5d7dfa2709c806c47716a9",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\source-manifest.json": "6a0fb71403dfd63f87ba779c7fc1451dfaf886dca7b4363f195b7cc2b80c7250",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-07\\source-qualification.json": "4c691dd4132584892a41bbec63fe6fb7de885743c0e1d5b657ee8baf7fbcb359",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\capture.json": "122ef5740e94ba2e8b4464d7ea9e6e8fe953d0e0ac49527fee5a6050039672f2",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\charter.md": "643cdc172fc3ad15393989d8e9b021b3975833d6ae51f7ee162a837c39a25c12",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\depth.csv.gz": "a2bcbdd515d45fc20c9fcdbba795fb10069849a8475290f58bc2965193968549",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\depth_charts-release.json": "3a0ffc60faee2bcc8fc02dda54526db9f13239c8455b8b8f57ba6df20cbb359b",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\depth_charts-timestamp.json": "c8459d0841aff47b83649e215b32702eb0025a697e045bdbd5dbc11d80560b38",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\final-fit.json": "f6e6deda6665ded3ea0764a486fc68bc4667abd4a49f17afe5e3c39284a8806f",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\forecasts.csv": "b01d735961442c228939d00de2f3f48c34e228e406f79b194daa6efa65edcab8",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\historical-context.json": "c1ef8a85e091ed616db18a90d5594aea92fb55c5859108712a62a0a40737dfdc",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\manifest.json": "85fe35069145505410567709261663be0939b3ae2fbe05ad147da1d17fc54d83",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\nfl-injuries.html": "9985cba4a5a8c3a81eb32feba980406063420af001f5b371f204b02dd04be4bd",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\nfl-week-1.html": "8431c787ca70b41876a80bb6ae85bf9e74a5ed63a14c651aadf3188668acb34b",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\patriots-week1-injury.html": "88e366a561c2634c35321f41ef8e41009458c5e9c0be4459513e654fae0ed51e",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\ratings.csv": "cd50a92816f37236a69f778a6a0fd6aad0395d7e264989a366ad2bc92a6728cc",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\research-manifest.json": "7530b3199f8a17ffec34f9e5351919ea67cb45df66e16befd655ab4e746f7a4c",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\roster.csv.gz": "2b2c39db80f1c9d9bf68b956a475cfba9ca19d4b456eefd2b4fa045f3a757965",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\rosters-release.json": "2cb3a1efdb13190bcef6ba3a1ad639a5b6e042842e89740cc035fd3185a5be82",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\rosters-timestamp.json": "688b1b0494de6b478acf15159efb7b44560fb30a9c11e0d93980f751362dce13",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\run-receipt.json": "8557f26bbe53992dec795ec6db696d6415ac7aee79ff3828dd6cee4a01b42dc7",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\schedule.csv.gz": "da833d174e5791ccb9ae697aa13c48534b66c198c9ac5ca3d6c47e240a6f94cf",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\schedules-release.json": "fff90659ab96ca1da1d488d773686876614792b165ee9c029a9c4efe298b48ea",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\schedules-timestamp.json": "37e8ea5b65b408b74926880e4c12de07c1132b507145bbf627d65843728d53ba",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\scoring-history-2025.csv": "536f4fd60c8bc61a4b22770b6c1308dbea1463fad17d137fe969df94c8d759b8",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\seahawks-week1-injury.html": "7dcf24072665f11e77816b6b426bcd072be36f575808e796332172938ba977a7",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\snapshot.json": "b7064ca078f2ba317d34c3cdf7422c228f96daa6dcfb4d8d131878754ac11deb",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\source-qualification.json": "4c7f700531dc43b38181f9c205564057615ff54613832a2c2970d1963d60d76b",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\september-08-corrected\\source-refresh-clarification.md": "c9749324b8bf39f088811717f121255f11b2dd6bb107372d6d0a7ea638c2f05b",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\weekly\\20260907T223412922311Z.json": "52062e66dbd18cc963b75f9441edfbc1efa8f92a5d26053d40eb0a79b8d6740a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\forecast-lab-2026\\weekly\\20260908T152319158416Z.json": "34de3020267227a4c97ceb20e3ae3ca117623e98fb5b1f4ad2d267103d81efcb",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\base.json": "d44ae61d53ba670389cc787e92e8a054f7574e302ba4202c9b3b66a9c4e89c54",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\evidence.json": "9aa2aec17c15a6b56b3f8d8a40ffc04d5b4521f616fdd9e9fecc12e9313f8bf7",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\fit.json": "41c628f821db20c0a0fe3d050f34faf4aa38075dd1d55263c1cbd99736862fec",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\manifest.json": "4cc93e8ff89b81e435140bff9b38196e243915c8b0bf323b341f1cbe8dfc8659",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171404Z\\nfl-injuries.html": "e393ff3d9134056dc5c962581b9382995410147beef45663e955ea1f64393faf",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171404Z\\nfl-week1.html": "11e275be130c79ba3ff3231a7ba001e73a705c8d8ed5d22db85f6a14581b06ef",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171404Z\\patriots-week1.html": "57c4eab1147574e7067cf8c3c5288c08f11e81f985e201999a27befd1138b401",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171404Z\\seahawks-week1.html": "0b79de57aa434288e14561ab92f4d0aa4d6b2109b079a543b9e8c58771acee21",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171524Z\\49ers-sept8.html": "bd7d4c094489f3786d1b562087d31bf579621cfb530a6ecef5666f8c28031078",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171524Z\\49ers-week1.html": "1f121848ba3c0901340d981965fa756838cf8448489c01f3e706f1a74b8a6fff",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171524Z\\patriots-roster.html": "de73af8d1016810f6810272104555bef3ca4d89e88cb2538cfa750f7b3789c81",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171524Z\\patriots-transactions.html": "70b26ad680f94ea2063751dcf97738a281525b65b9fbe7d6ea785583117306ef",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171524Z\\rams-donald.html": "61a08de25353a9a0ab40ae5c61573e495bd84f9502d38b5bd5e17d88d66190c1",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171524Z\\rams-week1.html": "b32cd0b3fe71db6511b07cab14a00723513b9a05e96aadd50e697018bbb8d498",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171524Z\\seahawks-roster.html": "6c8d91364b28dd7677bd6e204c8270c9431debdef5e4ca345427737c92d0081a",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171524Z\\seahawks-transactions.html": "34b3bcb23fcaa59614274a7a7073928435a5bc7c53108774bfca5ca2240880c5",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\depth.csv.gz": "396f8faf4d85d51277b3e946e5ed11081a402d6a9579d96d2a14b6a7cad22694",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\depth_charts-release.json": "6bf17232fff632b011f80b14060a18f6d9e80bf29c15c3ae06e57d8452f533b3",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\depth_charts-timestamp.json": "733ac619299515807ff7f8701465a45540486b82fc4a7333cba150d72a1905ae",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\nfl-injuries.html": "e393ff3d9134056dc5c962581b9382995410147beef45663e955ea1f64393faf",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\nfl-week-1.html": "987ba02985f76a46c54ca3a58bc85d8cd1fb96707ba98d86b63495dabd9c28bf",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\patriots-week1-injury.html": "57c4eab1147574e7067cf8c3c5288c08f11e81f985e201999a27befd1138b401",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\roster.csv.gz": "cc7a314651f6a482fcb354205b5a25c02e1943014c245e3ec4f578ad150147dc",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\rosters-release.json": "876edd7e768b9ae924b5c66d0f829b1de830b490001274a4f6fc251e7ce30414",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\rosters-timestamp.json": "457ca69edb5944723c1c2a4405513f255d109e9ece1ebe76e844ea1f12e4a384",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\schedule.csv.gz": "6f38da15c40252ce2c2efac5b8220199df1e6f957bfa05c1e2ea1df75013c59c",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\schedules-release.json": "265c24effedc722c90d669936fd627ec3a4760361e7944db0100b9e3b0047c1e",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\schedules-timestamp.json": "4cf27637eaafd91fcf52e7729d13f12b718579469da35b7161020600763f8a97",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\capture-20260909T171601Z\\seahawks-week1-injury.html": "0b79de57aa434288e14561ab92f4d0aa4d6b2109b079a543b9e8c58771acee21",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\history\\snap_counts-2025-80b02a6e511aa20283551cae622b29ba4d0a6f006c489a2d91591fcad33792e7.csv": "80b02a6e511aa20283551cae622b29ba4d0a6f006c489a2d91591fcad33792e7",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\raw\\history\\weekly_rosters-2025-c3376e135a7e62bb8b31631d7fe7501e8dd931929eaf1245a7dc6787486b0b24.csv": "c3376e135a7e62bb8b31631d7fe7501e8dd931929eaf1245a7dc6787486b0b24",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\roles.json": "5206cfcc979a8dc4e3d8918dc5e27ab7834ae81b18c86c01814f40c53a73f60e",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\docs\\evidence\\nonqb-availability-2026\\september-09\\scenario.json": "70ffc924cff5f385678df29d965b8228330acd7fdb24b51a9e981303bcc7e00f",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\research\\pgo_postseason_candidate\\adapter.py": "33bda0dd8f28d4ae71c0f34a1f777b108f61e535fc56ae48b754262cd2caa353",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\research\\pgo_postseason_candidate\\charter.md": "7d3e2a926de0f84537b765e8e13b6fedc3fa41f90161036cd1c2448a2e695b0e",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\research\\pgo_postseason_candidate\\pinned_challenger.py": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+    "D:\\CodexWorktrees\\Postgame_Outlet-publication-20260909\\research\\pgo_postseason_candidate\\train.py": "b26a8f9fec5778d3a7e2245cd46c0c52f9b41f308d379eeb63a6f25a5dba27f4",
+    "pgo_challenger.py": "0369a31a13703f2030bd930c37cd3e4087488151706968bff79f1223d9b340d8",
+    "pgo_current_strength.py": "10372fa6afe5a81e1b2db7cb7c78d46726f24ca4c40c3daacde119bd214c3bbd",
+    "pgo_forecast_snapshot.py": "c0cbfb431de960a83793abc1dc7f19f1fc7d3d7e009d88fa48ef857d4942f38b",
+    "pgo_model.py": "8bd752c6817fcac8edde360ae7561fcc101103c74e51cc076c2e9c305fbac1d5",
+    "pgo_opponent_evaluation.py": "318072774cc25140c1f36aeae8f6f4edfa87091fc04964f1301a9f7ad773fe62",
+    "pgo_sources.py": "fb04f738fe11c922f62f34ec77a5f16d793e4ccb4a488e141b04e728769ad598",
+    "pgo_strength_evaluation.py": "243b347883e295b00d7db08ddcad4292f86a0ff100e65b7a3cc196eef4132666",
+    "research/pgo_input_audit/audit_model.py": "fd98006d688497a1460be37375b77ed755c3e2a6a6e07cc18aa43ba1ba6fb40f",
+    "research/pgo_week1_corrected/train.py": "4691328c63049031147419f0960f3a51ea48c4bd0f381ea27988f0092e511074",
+    "tests/test_pgo_input_audit.py": "22755578d5309a9fe1ed57d68c9d6a7d97df7d27be46518a710da032797a331c",
+    "tests/test_pgo_postseason_candidate.py": "973596e677ba354245359054b289a8546ecc44b28bafe2d7d14355b3e46c8a39",
+    "tests/test_pgo_week1_corrected.py": "b20fcdbdbc8dfeb8da15cb3cbcd48a15814d0297915eb2276b7620fb0e904a07"
+  },
+  "completed_at": "2026-09-09T22:23:20.028476+00:00",
+  "control_parity": {
+    "games": 3407,
+    "maximum_error": 0.0,
+    "missingness": "EXACT",
+    "pinned_core_sha256": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+    "status": "PASS"
+  },
+  "corrected_manifest_sha256": "7530b3199f8a17ffec34f9e5351919ea67cb45df66e16befd655ab4e746f7a4c",
+  "environment": {
+    "numpy": "2.4.2",
+    "python": "3.14.3"
+  },
+  "evaluation_games": 2127,
+  "historical_source_vintage": "REVIEW REQUIRED",
+  "history_games": 3562,
+  "identity": "pgo-postseason-candidate-2026-09-09",
+  "kind": "FEATURE_PREPARATION_NO_FIT",
+  "model_fits": 0,
+  "postseason_games": 155,
+  "protected_sources_and_members_before_after": "PASS",
+  "sources": {
+    "injury_reports:2013": {
+      "bytes": 689228,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\b84c71cf23be81375bbca62f7d2c51d53fa75330fbcf9f598ec4ac17fea7d8be.csv",
+      "sha256": "b84c71cf23be81375bbca62f7d2c51d53fa75330fbcf9f598ec4ac17fea7d8be"
+    },
+    "injury_reports:2014": {
+      "bytes": 692574,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e675fd5d86c3451d76e7c5d530095db1641347eb3f9796c9a30dd7a75e3ba634.csv",
+      "sha256": "e675fd5d86c3451d76e7c5d530095db1641347eb3f9796c9a30dd7a75e3ba634"
+    },
+    "injury_reports:2015": {
+      "bytes": 715948,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\fbca54ef42594cc52facc0d8c8dd74802b812771b9e33032e44ae8c7e21b0360.csv",
+      "sha256": "fbca54ef42594cc52facc0d8c8dd74802b812771b9e33032e44ae8c7e21b0360"
+    },
+    "injury_reports:2016": {
+      "bytes": 674980,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\504e05968cb9c54ddc730fd9b6e7d1dd16a62db8029cc784d3d7bafcea7ff7cb.csv",
+      "sha256": "504e05968cb9c54ddc730fd9b6e7d1dd16a62db8029cc784d3d7bafcea7ff7cb"
+    },
+    "injury_reports:2017": {
+      "bytes": 665280,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0d5139fbf41b0866517bd2bd5fd85bb20dbd4dd9bc36a706fed030a88731de6f.csv",
+      "sha256": "0d5139fbf41b0866517bd2bd5fd85bb20dbd4dd9bc36a706fed030a88731de6f"
+    },
+    "injury_reports:2018": {
+      "bytes": 665119,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4724e1f37cc3076f564e997fbf269190e7dbe795a39315b903788e0a9c40065e.csv",
+      "sha256": "4724e1f37cc3076f564e997fbf269190e7dbe795a39315b903788e0a9c40065e"
+    },
+    "injury_reports:2019": {
+      "bytes": 700757,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\daddfe8e04ddc3a29bce14f362e774fbadfb274c807f1f0fde7b5bf32aaf6cdf.csv",
+      "sha256": "daddfe8e04ddc3a29bce14f362e774fbadfb274c807f1f0fde7b5bf32aaf6cdf"
+    },
+    "injury_reports:2020": {
+      "bytes": 737474,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\706cca82824214f6b73ba0c6e537d3ee39766a50c644b8974b9fc28d7518de90.csv",
+      "sha256": "706cca82824214f6b73ba0c6e537d3ee39766a50c644b8974b9fc28d7518de90"
+    },
+    "injury_reports:2021": {
+      "bytes": 737083,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\1049fb9ff0fe7cfcf3ba8bfe1f5a35d3aba985c461c8fb7bf5201735b6d34254.csv",
+      "sha256": "1049fb9ff0fe7cfcf3ba8bfe1f5a35d3aba985c461c8fb7bf5201735b6d34254"
+    },
+    "injury_reports:2022": {
+      "bytes": 752433,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\5f0d60324e597edd1a2ced8540b04e40b51dd440591dd1df11b8d96343387c9e.csv",
+      "sha256": "5f0d60324e597edd1a2ced8540b04e40b51dd440591dd1df11b8d96343387c9e"
+    },
+    "injury_reports:2023": {
+      "bytes": 738501,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\16b04e21da5aa3944cfa9c22cafcc84ed7e6d9866eaddf0344e9b8cbf2f63afe.csv",
+      "sha256": "16b04e21da5aa3944cfa9c22cafcc84ed7e6d9866eaddf0344e9b8cbf2f63afe"
+    },
+    "injury_reports:2024": {
+      "bytes": 816989,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\498bce8e13cb64b2ab9bb0ad6cb81d0a63c2ddb24016c9fc90c2de2126fae449.csv",
+      "sha256": "498bce8e13cb64b2ab9bb0ad6cb81d0a63c2ddb24016c9fc90c2de2126fae449"
+    },
+    "injury_reports:2025": {
+      "bytes": 695623,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\15ee790fef634caea988e7b6562fc393a63739dd7ee38229d1b42161427709df.csv",
+      "sha256": "15ee790fef634caea988e7b6562fc393a63739dd7ee38229d1b42161427709df"
+    },
+    "player_weekly_stats:2013": {
+      "bytes": 1134278,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\2cbbc0fed52a203c9d5c95ed6c500bdc949f3088058dc03c28c38d9a46827b1a.csv.gz",
+      "sha256": "2cbbc0fed52a203c9d5c95ed6c500bdc949f3088058dc03c28c38d9a46827b1a"
+    },
+    "player_weekly_stats:2014": {
+      "bytes": 1156548,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\24f687e3f63911bac32e5733088dab5fd558b0da08b9a3047fbfad6ad8b21a10.csv.gz",
+      "sha256": "24f687e3f63911bac32e5733088dab5fd558b0da08b9a3047fbfad6ad8b21a10"
+    },
+    "player_weekly_stats:2015": {
+      "bytes": 1161213,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\af95af6b3ef4dcc89c2b30c60d5fcbf885c89f7eb9cb2f7248899d515a360919.csv.gz",
+      "sha256": "af95af6b3ef4dcc89c2b30c60d5fcbf885c89f7eb9cb2f7248899d515a360919"
+    },
+    "player_weekly_stats:2016": {
+      "bytes": 1158077,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\36a60ff93fd4737ff73d22c0f7dea444f304050c524802bd85705222fbc47e1c.csv.gz",
+      "sha256": "36a60ff93fd4737ff73d22c0f7dea444f304050c524802bd85705222fbc47e1c"
+    },
+    "player_weekly_stats:2017": {
+      "bytes": 1153068,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e11696bbe46b409235a774a3ad2a73743fe2c8c175836ac522440e4504fb02c9.csv.gz",
+      "sha256": "e11696bbe46b409235a774a3ad2a73743fe2c8c175836ac522440e4504fb02c9"
+    },
+    "player_weekly_stats:2018": {
+      "bytes": 1152493,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\25c7a4cd4b036704594c533a11d9f402db977d5b9d05568247fb4a01315b2d3a.csv.gz",
+      "sha256": "25c7a4cd4b036704594c533a11d9f402db977d5b9d05568247fb4a01315b2d3a"
+    },
+    "player_weekly_stats:2019": {
+      "bytes": 1151599,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\cdcd329b258d63088fb2e3d9ed9def4f3267ac2271b6974437f6be8207fb581b.csv.gz",
+      "sha256": "cdcd329b258d63088fb2e3d9ed9def4f3267ac2271b6974437f6be8207fb581b"
+    },
+    "player_weekly_stats:2020": {
+      "bytes": 1172772,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\01b8a5104cbd6249fd0afde2b20b2628be8047b42047f1c1a777b8f2799058d9.csv.gz",
+      "sha256": "01b8a5104cbd6249fd0afde2b20b2628be8047b42047f1c1a777b8f2799058d9"
+    },
+    "player_weekly_stats:2021": {
+      "bytes": 1250705,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\d63df896c8ecdf83b8ad41e0de3681cc1afea67b45440f005c0890bd2bef1bb5.csv.gz",
+      "sha256": "d63df896c8ecdf83b8ad41e0de3681cc1afea67b45440f005c0890bd2bef1bb5"
+    },
+    "player_weekly_stats:2022": {
+      "bytes": 1236818,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\2c0d172b75d6241c0d9fae4e6375103d84049fa4d1fb2e5e81673528bc619cd9.csv.gz",
+      "sha256": "2c0d172b75d6241c0d9fae4e6375103d84049fa4d1fb2e5e81673528bc619cd9"
+    },
+    "player_weekly_stats:2023": {
+      "bytes": 1232988,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\57c1cc7fc687aed7f0db45ae239eefb0a0c1206244ede2455ac4fc39cfbebb06.csv.gz",
+      "sha256": "57c1cc7fc687aed7f0db45ae239eefb0a0c1206244ede2455ac4fc39cfbebb06"
+    },
+    "player_weekly_stats:2024": {
+      "bytes": 1239692,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4a517b8b66200ddc5cb00bc8b42706436ad09208dbea1cb3b5bd3e6928c0d52c.csv.gz",
+      "sha256": "4a517b8b66200ddc5cb00bc8b42706436ad09208dbea1cb3b5bd3e6928c0d52c"
+    },
+    "player_weekly_stats:2025": {
+      "bytes": 1258615,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\4d540f34138528c917b957ed3d84e4854eee082a0d4b30af57f225f7d75fe2ef.csv.gz",
+      "sha256": "4d540f34138528c917b957ed3d84e4854eee082a0d4b30af57f225f7d75fe2ef"
+    },
+    "schedule_results:None": {
+      "bytes": 2173367,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39.csv",
+      "sha256": "cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39"
+    },
+    "snap_counts:2013": {
+      "bytes": 2148056,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\9d1fdd557875b9a2c71d88e583da24a739dfca671edf8223d6171e39a421000e.csv",
+      "sha256": "9d1fdd557875b9a2c71d88e583da24a739dfca671edf8223d6171e39a421000e"
+    },
+    "snap_counts:2014": {
+      "bytes": 2156558,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\84540709d9483552185c8ca3ef30b2f66fb94b30c3e6c21e7a27205f337f21d3.csv",
+      "sha256": "84540709d9483552185c8ca3ef30b2f66fb94b30c3e6c21e7a27205f337f21d3"
+    },
+    "snap_counts:2015": {
+      "bytes": 2155797,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\841496252ada825c3c50d3ba9b4b26d3f4fabd0fedc5fb44f286ddaaa5bdb7e0.csv",
+      "sha256": "841496252ada825c3c50d3ba9b4b26d3f4fabd0fedc5fb44f286ddaaa5bdb7e0"
+    },
+    "snap_counts:2016": {
+      "bytes": 2157110,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\a778e24e9eb665ffe8f16093b03c5a263dca0250b3aa92bd6002f61f534bea59.csv",
+      "sha256": "a778e24e9eb665ffe8f16093b03c5a263dca0250b3aa92bd6002f61f534bea59"
+    },
+    "snap_counts:2017": {
+      "bytes": 2157818,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\eab2fad2df99249d4061ed9c5c34d312cdba07cf3159d027d255bdc9b6526917.csv",
+      "sha256": "eab2fad2df99249d4061ed9c5c34d312cdba07cf3159d027d255bdc9b6526917"
+    },
+    "snap_counts:2018": {
+      "bytes": 2157555,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\9a408b78a55f799110aed70de3564e157faf089ce9bed780d0368bf49ae13e0b.csv",
+      "sha256": "9a408b78a55f799110aed70de3564e157faf089ce9bed780d0368bf49ae13e0b"
+    },
+    "snap_counts:2019": {
+      "bytes": 2156311,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0cd52be8fa57f18503b670cb8263246c4f548375b768cbcad1c7a7462c98970d.csv",
+      "sha256": "0cd52be8fa57f18503b670cb8263246c4f548375b768cbcad1c7a7462c98970d"
+    },
+    "snap_counts:2020": {
+      "bytes": 2257664,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\c3b2a9aa472aca23332c030e574cfb134f885608ddf74fe0a659c38584d14358.csv",
+      "sha256": "c3b2a9aa472aca23332c030e574cfb134f885608ddf74fe0a659c38584d14358"
+    },
+    "snap_counts:2021": {
+      "bytes": 2388493,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\8e4dae054a4749cf2d4919508d9161a6068fd67509979aefa385bfb3803d0ee5.csv",
+      "sha256": "8e4dae054a4749cf2d4919508d9161a6068fd67509979aefa385bfb3803d0ee5"
+    },
+    "snap_counts:2022": {
+      "bytes": 2379719,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0018a4833fbf0f825286c1c27450c6254391b548d6c55bcde728e93e4816815a.csv",
+      "sha256": "0018a4833fbf0f825286c1c27450c6254391b548d6c55bcde728e93e4816815a"
+    },
+    "snap_counts:2023": {
+      "bytes": 2394875,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\303b61aa5c33ffda863f93a750fc14483f397f9187ad502b1ce71e9b516a64c0.csv",
+      "sha256": "303b61aa5c33ffda863f93a750fc14483f397f9187ad502b1ce71e9b516a64c0"
+    },
+    "snap_counts:2024": {
+      "bytes": 2402841,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\a2aa58efe093f8aa0ad5aadf09f81d8ec690a1183bd2dde68d20e7f109a9c335.csv",
+      "sha256": "a2aa58efe093f8aa0ad5aadf09f81d8ec690a1183bd2dde68d20e7f109a9c335"
+    },
+    "snap_counts:2025": {
+      "bytes": 2401193,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\80b02a6e511aa20283551cae622b29ba4d0a6f006c489a2d91591fcad33792e7.csv",
+      "sha256": "80b02a6e511aa20283551cae622b29ba4d0a6f006c489a2d91591fcad33792e7"
+    },
+    "team_weekly_stats:2013": {
+      "bytes": 71452,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\920bde147689f0c73bec8e4c94faef7532005152879b92451c269273ed8062da.csv.gz",
+      "sha256": "920bde147689f0c73bec8e4c94faef7532005152879b92451c269273ed8062da"
+    },
+    "team_weekly_stats:2014": {
+      "bytes": 70990,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\dc941b098e086e4a93f193ed49c5a2205f2f9b4b2617cd8e25ed66761ebd54c5.csv.gz",
+      "sha256": "dc941b098e086e4a93f193ed49c5a2205f2f9b4b2617cd8e25ed66761ebd54c5"
+    },
+    "team_weekly_stats:2015": {
+      "bytes": 71211,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\595292ef09bb23fd8bc892fa2a6741322fa6e9608c54f7327c57cefe1cc393ad.csv.gz",
+      "sha256": "595292ef09bb23fd8bc892fa2a6741322fa6e9608c54f7327c57cefe1cc393ad"
+    },
+    "team_weekly_stats:2016": {
+      "bytes": 71081,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\baf74c9dc216a709a7207a6d4e06aa5ccb7dc6574c154f27c3c4e4d689b366cc.csv.gz",
+      "sha256": "baf74c9dc216a709a7207a6d4e06aa5ccb7dc6574c154f27c3c4e4d689b366cc"
+    },
+    "team_weekly_stats:2017": {
+      "bytes": 71194,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\f2b70cb27bdb7acc6d48bcda29818f44268fe544cfae31cd037ca09d6961a2f3.csv.gz",
+      "sha256": "f2b70cb27bdb7acc6d48bcda29818f44268fe544cfae31cd037ca09d6961a2f3"
+    },
+    "team_weekly_stats:2018": {
+      "bytes": 71342,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\62d07da27c364634698ec11e17f4111d28c738f1b15ff3281fadce1ace045dea.csv.gz",
+      "sha256": "62d07da27c364634698ec11e17f4111d28c738f1b15ff3281fadce1ace045dea"
+    },
+    "team_weekly_stats:2019": {
+      "bytes": 71563,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\b82e3dd7f9e234c8ff5460c89dfe04337599c1d963443a090c9bab5a79b08631.csv.gz",
+      "sha256": "b82e3dd7f9e234c8ff5460c89dfe04337599c1d963443a090c9bab5a79b08631"
+    },
+    "team_weekly_stats:2020": {
+      "bytes": 71539,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\e4dde2d912654a429e3b76fde7bb0e75e320cd801c033c7c80a0d7df18ce2c54.csv.gz",
+      "sha256": "e4dde2d912654a429e3b76fde7bb0e75e320cd801c033c7c80a0d7df18ce2c54"
+    },
+    "team_weekly_stats:2021": {
+      "bytes": 75920,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\b5b65fdf141695c04000fe8a0ab182be00b3bfe8345dc84e76dd0627199a8815.csv.gz",
+      "sha256": "b5b65fdf141695c04000fe8a0ab182be00b3bfe8345dc84e76dd0627199a8815"
+    },
+    "team_weekly_stats:2022": {
+      "bytes": 76157,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\3462c9d16ecc28a019e3deab7361f1331f062d26c4cf4fb09a2aa38f857c23b2.csv.gz",
+      "sha256": "3462c9d16ecc28a019e3deab7361f1331f062d26c4cf4fb09a2aa38f857c23b2"
+    },
+    "team_weekly_stats:2023": {
+      "bytes": 76087,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\7b42d3b699d2ea55e77e3abe897289c12a858c573107829250d5e1b177b57415.csv.gz",
+      "sha256": "7b42d3b699d2ea55e77e3abe897289c12a858c573107829250d5e1b177b57415"
+    },
+    "team_weekly_stats:2024": {
+      "bytes": 76189,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\3dde26ba6a2beecaf65d172823b6e3a6303cca05a07c346d2725d7d9ba86e13c.csv.gz",
+      "sha256": "3dde26ba6a2beecaf65d172823b6e3a6303cca05a07c346d2725d7d9ba86e13c"
+    },
+    "team_weekly_stats:2025": {
+      "bytes": 76176,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\54a223acb26c33c706aa1b509f56323e2889110b5bbe0c2f2c1163c325bd8f80.csv.gz",
+      "sha256": "54a223acb26c33c706aa1b509f56323e2889110b5bbe0c2f2c1163c325bd8f80"
+    },
+    "weekly_rosters:2013": {
+      "bytes": 9377446,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\76c47a629075ffd75f9c4ee49fadb6dad45396be486af897078fee5722969781.csv",
+      "sha256": "76c47a629075ffd75f9c4ee49fadb6dad45396be486af897078fee5722969781"
+    },
+    "weekly_rosters:2014": {
+      "bytes": 9638161,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\331022cd3b0c69d99c581f02b6fde6853e87ac431739c4b49841ee6e02893d6c.csv",
+      "sha256": "331022cd3b0c69d99c581f02b6fde6853e87ac431739c4b49841ee6e02893d6c"
+    },
+    "weekly_rosters:2015": {
+      "bytes": 9955118,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\198904f48eeebafc1f34028a00c1b8c0fc135aba04fc4b276e636ef87709751a.csv",
+      "sha256": "198904f48eeebafc1f34028a00c1b8c0fc135aba04fc4b276e636ef87709751a"
+    },
+    "weekly_rosters:2016": {
+      "bytes": 10803214,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\ab05dfeffe6f9a1d969133cd6740f1625d135bfad672aaa916adb609ab662883.csv",
+      "sha256": "ab05dfeffe6f9a1d969133cd6740f1625d135bfad672aaa916adb609ab662883"
+    },
+    "weekly_rosters:2017": {
+      "bytes": 15945119,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\fd3fe005b676fe0ad8d88c50701d71adef4287501397c33f479c9765cd8c45d4.csv",
+      "sha256": "fd3fe005b676fe0ad8d88c50701d71adef4287501397c33f479c9765cd8c45d4"
+    },
+    "weekly_rosters:2018": {
+      "bytes": 16566753,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\c3bca1ee53e63e21b964f1bb42c251e25b7b4b8c55210730dd4ded2f9d4a709a.csv",
+      "sha256": "c3bca1ee53e63e21b964f1bb42c251e25b7b4b8c55210730dd4ded2f9d4a709a"
+    },
+    "weekly_rosters:2019": {
+      "bytes": 16588230,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\af6aa7b8aa7850c47fe307d548d66fa7c1cac88fe11e5951c781974cb6909e03.csv",
+      "sha256": "af6aa7b8aa7850c47fe307d548d66fa7c1cac88fe11e5951c781974cb6909e03"
+    },
+    "weekly_rosters:2020": {
+      "bytes": 14333971,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\0b948cca8735a2417cbda14464f4532aeee58d871e2fcd8464a23e969e45789e.csv",
+      "sha256": "0b948cca8735a2417cbda14464f4532aeee58d871e2fcd8464a23e969e45789e"
+    },
+    "weekly_rosters:2021": {
+      "bytes": 15242660,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\88adfe0fba5cbedd260d7928ad373476d4fb168d0213cb52ef1163ed5d3056b7.csv",
+      "sha256": "88adfe0fba5cbedd260d7928ad373476d4fb168d0213cb52ef1163ed5d3056b7"
+    },
+    "weekly_rosters:2022": {
+      "bytes": 14790824,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\bd6a50de334473c10f8058afa948fd0c6adc8a8b081da41c500cc0aa069c5312.csv",
+      "sha256": "bd6a50de334473c10f8058afa948fd0c6adc8a8b081da41c500cc0aa069c5312"
+    },
+    "weekly_rosters:2023": {
+      "bytes": 14612235,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\1433f1f239784dde7fcb35349d211a9b83abfc0156337b72ec4f923abf715bd3.csv",
+      "sha256": "1433f1f239784dde7fcb35349d211a9b83abfc0156337b72ec4f923abf715bd3"
+    },
+    "weekly_rosters:2024": {
+      "bytes": 14926918,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\074ecaeb9325de943c11f7bbc941425626985090ef8386f90cd837fa5cb5d4b3.csv",
+      "sha256": "074ecaeb9325de943c11f7bbc941425626985090ef8386f90cd837fa5cb5d4b3"
+    },
+    "weekly_rosters:2025": {
+      "bytes": 15385661,
+      "path": "D:\\Postgame_Outlet-pgo-model\\.cache\\pgo_v1\\c2f7a1ffebe06058400af1989d1cd2900cc5c9659f084623708a06d4e28de35b.csv",
+      "sha256": "c2f7a1ffebe06058400af1989d1cd2900cc5c9659f084623708a06d4e28de35b"
+    }
+  },
+  "started_at": "2026-09-09T22:14:43.921026+00:00",
+  "status": "EXPERIMENTAL / HOLD",
+  "training_games": 3407,
+  "validation_scope": "Reused historical seasons; diagnostic only, no scientific promotion"
+}

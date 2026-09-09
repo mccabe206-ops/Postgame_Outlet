@@ -39,3 +39,17 @@ docs/evidence/nonqb-availability-2026/** -text whitespace=cr-at-eol
 pgo_nonqb_availability.py text eol=lf
 pgo_availability_view.py text eol=lf
 tests/test_pgo_*availability*.py text eol=lf
+research/pgo_postseason_candidate/** -text whitespace=cr-at-eol
+research/pgo_postseason_candidate/pinned_challenger.py -text
+research/pgo_defensive_depth_candidate/** -text whitespace=cr-at-eol
+research/pgo_defensive_depth_candidate/source-review-20260909/*.html -whitespace
+research/pgo_defensive_depth_candidate/source-review-20260909/**/*.html -whitespace
+docs/evidence/forecast-lab-2026/september-09-postseason/** -text whitespace=cr-at-eol
+docs/evidence/forecast-lab-2026/weekly-postseason/** -text whitespace=cr-at-eol
+docs/evidence/defensive-depth-2026/** -text whitespace=cr-at-eol
+pgo_forecast_postseason.py text eol=lf
+pgo_model_updates.py text eol=lf
+tests/test_pgo_forecast_postseason.py text eol=lf
+tests/test_pgo_postseason_candidate.py text eol=lf
+tests/test_pgo_model_updates.py text eol=lf
+tests/test_pgo_defensive_fit.py text eol=lf

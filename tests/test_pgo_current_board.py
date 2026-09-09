@@ -8,6 +8,7 @@ from unittest.mock import patch
 import pgo_comparison as comparison
 import pgo_current_board as board
 import pgo_forecast_lab as lab
+from pgo_model_updates import STYLE as MODEL_UPDATE_STYLE
 from tests import test_pgo_comparison as legacy_tests
 
 
@@ -18,7 +19,9 @@ class CurrentBoardTests(unittest.TestCase):
         self.mccabe = comparison.load_mccabe_rows(comparison.MCCABE_PATH)
 
     def add(self, page=None):
-        return board.add_current_board(self.page if page is None else page, self.snapshot, self.mccabe)
+        # Keep the actual additive style boundary without loading a separate model.
+        with patch("pgo_model_updates.render_current_updates", return_value=MODEL_UPDATE_STYLE):
+            return board.add_current_board(self.page if page is None else page, self.snapshot, self.mccabe)
 
     def test_current_ratings_lead_and_archive_roundtrips_exactly(self):
         page = self.add()
@@ -96,7 +99,8 @@ class CurrentBoardTests(unittest.TestCase):
     def test_default_uses_latest_verified_registered_source(self):
         weekly = {'revisions': [{'source_edition': self.snapshot['edition']}]}
         with patch.object(lab.pgo_forecast_weekly, 'load_weekly', return_value=weekly) as load, \
-                patch.object(lab, '_load_corrected', return_value=(self.snapshot, lab.CORRECTED_DIR)) as source:
+                patch.object(lab, '_load_corrected', return_value=(self.snapshot, lab.CORRECTED_DIR)) as source, \
+                patch('pgo_model_updates.render_current_updates', return_value=MODEL_UPDATE_STYLE):
             page = board.add_current_board(self.page)
         load.assert_called_once_with(lab.WEEKLY_DIR)
         source.assert_called_once_with(None, weekly, lab.WEEKLY_DIR)

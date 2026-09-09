@@ -26,6 +26,34 @@ import pgo_prospective
 from release_ratings import atomic_write_text
 
 
+FORECAST_DISPLAY_SCRIPT = """<script>
+function updateWeeklyLocks() {
+  const now = Date.now();
+  let next = now + 60000;
+  document.querySelectorAll('[data-weekly-cutoff]').forEach(node => {
+    const cutoff = Date.parse(node.dataset.weeklyCutoff);
+    node.textContent = now >= cutoff ? 'Locked' : 'Draft';
+    if (cutoff > now) next = Math.min(next, cutoff);
+  });
+  if (document.querySelector('[data-weekly-cutoff]')) setTimeout(updateWeeklyLocks, Math.max(1, next - now));
+}
+updateWeeklyLocks();
+function openFragment(hash) {
+  const target = document.getElementById(hash.slice(1));
+  if (!target) return;
+  for (let node = target; node; node = node.parentElement) {
+    if (node.tagName === 'DETAILS') node.open = true;
+  }
+  target.scrollIntoView();
+}
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href^="#"]');
+  if (link) openFragment(link.hash);
+});
+window.addEventListener('hashchange', () => openFragment(location.hash));
+openFragment(location.hash);
+</script>"""
+
 HERE = Path(__file__).resolve().parent
 ARCHIVE_DIR = HERE / "docs" / "evidence" / "forecast-lab-2026"
 LOCK_PATH = ARCHIVE_DIR / "prospective_lock.json"
@@ -468,10 +496,11 @@ def _spread(game):
 
 def _edition_name(edition):
     return {'pgo-corrected-week1-2026-09-08': 'PGO Corrected — Sep 8',
+            'pgo-postseason-week1-2026-09-09': 'PGO postseason — Sep 9',
             'pgo-active-roster-2026-09-07': 'September 7 preseason'}.get(edition, edition)
 
 
-def _snapshot_metric_cards(metrics, label="September snapshot"):
+def _snapshot_metric_cards(metrics, label="September snapshot", *, incumbent_label="September 7 incumbent margin"):
     if metrics["count"] == 0:
         return f'<p class="empty">No finalized {html.escape(label)} results recorded yet.</p>'
     cards = []
@@ -504,7 +533,7 @@ def _snapshot_metric_cards(metrics, label="September snapshot"):
     for key, label in (
         ("pgo_v0", "PGO v0 margin"),
         ("legacy", "Original archive margin"),
-        ("incumbent", "September 7 incumbent margin"),
+        ("incumbent", incumbent_label),
         ("zero", "Zero margin"),
         ("league_mean_venue", "League mean + venue"),
     ):
@@ -619,7 +648,7 @@ def _forecast_reason(game, corrected=None):
             'not certainty about the result.</p></details></details>')
 
 
-def _forecast_weeks(games, results, *, weekly=False, corrected=None):
+def _forecast_weeks(games, results, *, weekly=False, corrected=None, reasons=None, series=None, incumbent_label="September 7"):
     result_by_id = {row["game_id"]: row for row in results}
     weeks = []
     for week in sorted({game["week"] for game in games}):
@@ -649,10 +678,10 @@ def _forecast_weeks(games, results, *, weekly=False, corrected=None):
                     f'<td><span class="weekly-status" data-weekly-cutoff="{cutoff}">{status}</span>'
                     f'<br>{_snapshot_kickoff_time(game["lock_at"])}</td>'
                 )
-            kind = "weekly" if weekly else "snapshot"
+            kind = series or ("weekly" if weekly else "snapshot")
             comparison = ""
             if weekly and "incumbent_margin" in game:
-                controls = (("September 7", "incumbent_margin"), ("PGO v0", "pgo_v0_margin"))
+                controls = ((incumbent_label, "incumbent_margin"), ("PGO v0", "pgo_v0_margin"))
                 comparison = '<details><summary>Compare forecasts</summary>' + "".join(
                     f'<p>{label}: {_spread({**game, "margin": game[key]})}</p>'
                     for label, key in controls) + '</details>'
@@ -666,7 +695,7 @@ def _forecast_weeks(games, results, *, weekly=False, corrected=None):
                 f'<td>{_snapshot_kickoff_time(game["kickoff"])}</td>'
                 f'<td>{actual}</td></tr>'
                 f'<tr class="forecast-reason-row"><td colspan="{7 if weekly else 6}">'
-                f'{_forecast_reason(game, corrected if weekly else None)}</td></tr>'
+                f'{reasons[game["game_id"]] if reasons is not None else _forecast_reason(game, corrected if weekly else None)}</td></tr>'
             )
         weeks.append(
             f'<details class="forecast-week {kind}-week"{" open" if week == min(game["week"] for game in games) else ""}>'
@@ -1242,6 +1271,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
                weekly_results=(), weekly_provenance=(), corrected=None):
     """Render a standalone, escaped, no-fetch Forecast Lab page."""
     from pgo_availability_view import render_current_scenario
+    from pgo_model_updates import render_current_updates
     css = _shared_css()
     if snapshot is None:
         lead = f'''<header class="lab-hero hero"><div class="status">Experimental &middot; frozen archive</div>
@@ -1255,6 +1285,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
         if weekly is not None:
             lead = (
                 _weekly_section(weekly, snapshot, weekly_results, weekly_provenance, corrected=corrected)
+                + render_current_updates()
                 + _corrected_section(corrected)
                 + render_current_scenario()
                 + _rating_explanations(snapshot)
@@ -1344,33 +1375,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
 <section><h2>Results provenance</h2><p>Each entry is a reviewed transcription. Its digest verifies the archived CSV, not the remote source contents.</p><ul>{sources}</ul></section>
 <section><h2>Staff Picks</h2><p>No editorial picks are published in this model archive. Staff Picks remain a separate human product.</p></section>
 {archive_close}
-</main><script>
-function updateWeeklyLocks() {{
-  const now = Date.now();
-  let next = now + 60000;
-  document.querySelectorAll('[data-weekly-cutoff]').forEach(node => {{
-    const cutoff = Date.parse(node.dataset.weeklyCutoff);
-    node.textContent = now >= cutoff ? 'Locked' : 'Draft';
-    if (cutoff > now) next = Math.min(next, cutoff);
-  }});
-  if (document.querySelector('[data-weekly-cutoff]')) setTimeout(updateWeeklyLocks, Math.max(1, next - now));
-}}
-updateWeeklyLocks();
-function openFragment(hash) {{
-  const target = document.getElementById(hash.slice(1));
-  if (!target) return;
-  for (let node = target; node; node = node.parentElement) {{
-    if (node.tagName === 'DETAILS') node.open = true;
-  }}
-  target.scrollIntoView();
-}}
-document.addEventListener('click', event => {{
-  const link = event.target.closest('a[href^="#"]');
-  if (link) openFragment(link.hash);
-}});
-window.addEventListener('hashchange', () => openFragment(location.hash));
-openFragment(location.hash);
-</script></body></html>'''
+</main>{FORECAST_DISPLAY_SCRIPT}</body></html>'''
 
 
 def main(argv=None):
