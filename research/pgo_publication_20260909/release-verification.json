@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "reviewed_integration": "0f42ba0",
+  "upstream": "951ec61",
+  "full_suite": {
+    "tests": 576,
+    "skipped": 1,
+    "seconds": 484.034,
+    "status": "OK"
+  },
+  "required_research_tests": 14,
+  "final_renderer_tests": 44,
+  "corrected_verifier": "32 teams, 16 games; HOLD",
+  "weekly_verifier": "2 revisions; 16 games",
+  "private_index_equal_except_header_render_time": true,
+  "private_lab_equal": true,
+  "private_css_equal": true,
+  "fantasy_panel_unchanged_after_stripping_current_notes": true,
+  "fantasy_players": 447,
+  "current_pgo_rows": 32,
+  "current_injury_annotations": 8,
+  "issued_docs_evidence_unchanged": true,
+  "artifacts": {
+    "docs\\index.html": "3f935b2a53d74e47535d9fb75179beeebe572b6d889afc09e2f1de3fa567dc70",
+    "docs\\forecast-lab.html": "7b1b6e1b8e74fa1afd6f2e6e5fb0fea9f57ffcdaf5cdddc837828169dbd4ede8",
+    "docs\\pgo-theme.css": "c67b5637e8b79d22338908eace202ca71e78eda5934aae2136ac1aabefff0e41",
+    "output\\pgo-publication-20260909\\full-suite.log": "8e7f7b8c3f4ca643c28cc9d2645102fb3cbaf50b42fe2a54e4043c32addc0b5f"
+  }
+}

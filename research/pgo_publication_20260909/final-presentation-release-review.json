@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "reviewed_at": "2026-09-09T16:11:42.282644+00:00",
+  "theme_commit": "c859c508fff53ab599990d9ad798170b8176057b",
+  "publication_merge": "436487b",
+  "no_conflicting_changes_in_theme_paths_between_publication_merge_and_theme_base": true,
+  "independent_theme_tests": {
+    "command": "python -B -m unittest tests.test_pgo_current_board tests.test_pgo_forecast_lab -v",
+    "passed": 44
+  },
+  "independent_publication_tests": {
+    "command": "python -B -m unittest tests.test_mccabe_opening_night tests.test_pgo_current_injury_notes -v",
+    "passed": 8
+  },
+  "theme_file_sha256": {
+    "docs/pgo-theme.css": "77c9c4df209cb9456507f0a33613891f67aef9f5b16d6e007ac8148508e390ba",
+    "pgo_current_board.py": "f6c817ec28a427527bc08dc00f93b66fe6ea025c888cc58d80d0fda3c52a7c54",
+    "pgo_forecast_lab.py": "48265cc05f0e633a87513219861c3e844336585bdfcc309c94a5902483016676",
+    "tests/test_pgo_current_board.py": "b7123ddb0c7c82865bfa0c061cbdd5f01947058ff54ff4c3f8aef7f4593a95d6",
+    "tests/test_pgo_forecast_lab.py": "132b79c3371f499cfcdaa4bf33bacd47801821572c9aaa39fc4b5390c6fc5fe9"
+  },
+  "current_and_september_rows_verified": 64,
+  "protected_forecast_files_unchanged": 50,
+  "findings_remaining": [],
+  "limits": "Source/integration review. Final combined artifact and browser QA belong to root.",
+  "publication_integrated_commit": "0f42ba08c064c89fc5eefa2530e7adcb6df94e75",
+  "integrated_theme_git_blobs_identical": true,
+  "integrated_data_and_issued_evidence_unchanged": true
+}

@@ -24,6 +24,8 @@ thead th.up,thead th.down { color:var(--highlight); }
 .lab-wrap tbody th { background:var(--panel); color:var(--ink); }
 td[data-v],.brk-v { font-variant-numeric:tabular-nums; }
 .current-pgo-table,.pgo-snapshot-table { font-variant-numeric:tabular-nums; }
+.current-pgo-table thead th:first-child,.pgo-snapshot-table thead th:first-child { text-align:center; }
+.current-pgo-table thead th:nth-child(2),.pgo-snapshot-table thead th:nth-child(2) { text-align:left; }
 .current-pgo-table th,.current-pgo-table td,
 .pgo-snapshot-table th,.pgo-snapshot-table td { padding:9px 10px; }
 .current-pgo-table tbody th,.pgo-snapshot-table tbody th {
