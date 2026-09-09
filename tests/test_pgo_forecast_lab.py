@@ -632,7 +632,7 @@ class ForecastLabTests(unittest.TestCase):
             html,
         )
         self.assertIn(
-            '</style><link rel="stylesheet" href="pgo-theme.css?v=20260909">', html
+            '</style><link rel="stylesheet" href="pgo-theme.css?v=20260909-injuries">', html
         )
 
         escaped = pgo_forecast_lab.render_lab(

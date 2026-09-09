@@ -67,6 +67,7 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
     # Lab imports comparison; defer these imports until rendering is requested.
     import pgo_comparison as comparison
     import pgo_forecast_corrected as corrected
+    from pgo_availability_view import render_current_scenario
     page = strip_current_board(page)
     if snapshot is None:
         import pgo_forecast_lab as lab
@@ -134,7 +135,7 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
         '<th scope="col" class="pgo-detail"><span class="pgo-scale-label"><span aria-hidden="true">-14</span><span>Rating scale</span><span aria-hidden="true">+14</span></span></th>'
         '<th scope="col" class="pgo-detail">Expected QB</th>'
         '<th scope="col" class="pgo-detail">McCabe #</th><th scope="col" class="pgo-detail">vs McCabe</th></tr></thead>'
-        f'<tbody>{"".join(rows)}</tbody></table></div></div>{END}')
+        f'<tbody>{"".join(rows)}</tbody></table></div>{render_current_scenario()}</div>{END}')
     panel = comparison.extract_comparison_panel(page)
     opening = panel.index('>') + 1
     closing = panel.rindex('</section>')

@@ -51,6 +51,20 @@ td[data-v],.brk-v { font-variant-numeric:tabular-nums; }
   font-weight:800; line-height:1.4; text-align:center;
 }
 .pgo-team-name { font-weight:700; }
+.pgo-availability { margin-top:28px; padding-top:24px; border-top:1px solid var(--border); }
+.pgo-availability table { min-width:900px; font-variant-numeric:tabular-nums; }
+.pgo-availability th,.pgo-availability td { white-space:normal; padding:10px 8px; }
+.pgo-availability thead th { line-height:1.5; }
+.pgo-availability tbody th {
+  min-width:220px; background:transparent; color:var(--ink); text-align:left;
+  font-size:inherit; letter-spacing:normal; text-transform:none; user-select:text;
+  border-bottom:1px solid var(--border); border-radius:0;
+}
+.pgo-availability .pgo-team-marker { display:inline-block; vertical-align:middle; }
+.pgo-availability .pgo-team-chip { display:inline-block; vertical-align:middle; }
+.pgo-availability details { margin:12px 0; }
+.pgo-availability summary { cursor:pointer; font-weight:700; }
+.pgo-availability li { margin:14px 0; overflow-wrap:anywhere; }
 .pgo-rating-value { color:var(--ink); font-size:17px; font-weight:900; text-align:right; }
 .pgo-rating-scale { min-width:170px; }
 .pgo-rating-bar,.pgo-rating-track { display:block; width:100%; }

@@ -53,12 +53,14 @@ class CurrentBoardTests(unittest.TestCase):
 
     def test_compact_board_preserves_exact_ratings_and_accessible_signed_scale(self):
         current = self.add().split(board.START, 1)[1].split(board.END, 1)[0]
+        table = current.split('<table class="current-pgo-table">', 1)[1].split('</table>', 1)[0]
         expected = sorted(self.snapshot['teams'], key=lambda row: row['rank'])
-        self.assertEqual(current.count('class="pgo-team-marker"'), 32)
-        self.assertEqual(current.count('class="pgo-team-chip"'), 32)
-        self.assertEqual(current.count('class="pgo-rating-bar" role="img"'), 32)
+        self.assertEqual(table.count('data-current-pgo-team='), 32)
+        self.assertEqual(table.count('class="pgo-team-marker"'), 32)
+        self.assertEqual(table.count('class="pgo-team-chip"'), 32)
+        self.assertEqual(table.count('class="pgo-rating-bar" role="img"'), 32)
         for team in expected:
-            row = current.split(f'data-current-pgo-team="{team["team"]}"', 1)[1].split('</tr>', 1)[0]
+            row = table.split(f'data-current-pgo-team="{team["team"]}"', 1)[1].split('</tr>', 1)[0]
             displayed = f'{team["rating"]:+.3f}'
             self.assertIn(f'data-value="{team["rating"]}">{displayed}</td>', row)
             self.assertIn(f'aria-label="PGO rating {displayed} on a -14 to +14 scale"', row)

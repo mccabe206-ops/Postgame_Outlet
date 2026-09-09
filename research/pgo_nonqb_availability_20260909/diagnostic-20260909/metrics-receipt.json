@@ -1,0 +1,299 @@
+{
+  "completed_at": "2026-09-09T17:23:46.986267+00:00",
+  "games": 2127,
+  "inputs": {
+    "research/pgo_input_audit/verify_run.py": {
+      "bytes": 16659,
+      "sha256": "366514b4259eb13355cb1fe04e257a2bd1be7a50f8b087a1399abe06fe6bf3fc"
+    },
+    "research/pgo_nonqb_availability_20260909/charter.md": {
+      "bytes": 3959,
+      "sha256": "5832240b04d722eafeb92e74187ad63cd42966561626df1db57f0016c86573d8"
+    },
+    "research/pgo_nonqb_availability_20260909/evaluate_saved.py": {
+      "bytes": 10582,
+      "sha256": "5f3b4981d97aaeda01433092c31c5f27ff4e046eaec1246bd3a21b33ee2db529"
+    },
+    "research/pgo_week1_corrected/run-20260908/fold-fits.json": {
+      "bytes": 652250,
+      "sha256": "809987da9b85aacbd34e1c2be3bb8ba7549ef419193cf532919eeb0cc79a76bc"
+    },
+    "research/pgo_week1_corrected/run-20260908/historical-features.json": {
+      "bytes": 4516418,
+      "sha256": "eb67f3de6f4257da90baff165467ce0b6fd6c72ef1c683f1b18b5ed9a706b39e"
+    },
+    "research/pgo_week1_corrected/run-20260908/manifest.json": {
+      "bytes": 1213,
+      "sha256": "7530b3199f8a17ffec34f9e5351919ea67cb45df66e16befd655ab4e746f7a4c"
+    },
+    "research/pgo_week1_corrected/run-20260908/matched-predictions.csv": {
+      "bytes": 374121,
+      "sha256": "2a5e9098b5d4b6b97ea5ce630091e4eb5d525917eaa4d427c9711e237f1453f7"
+    }
+  },
+  "limits": [
+    "Post-hoc diagnostic on already inspected 2018-2025 history; not new validation.",
+    "Historical availability includes QB lost snaps and heuristic status probabilities; this is not an isolated non-QB injury test.",
+    "Only observed offense/defense availability values are zeroed; nulls and all missingness indicators are preserved.",
+    "The same saved season-fold coefficients and preprocessing are used for both predictions; no refit, tuning, historical rebuild or promotion.",
+    "Historical feature publication vintages and historical starter identities retain their previously documented limitations.",
+    "This does not validate the new last-four-positive-snap role proxy or the new OUT/IR/PUP versus uncertain-out scenario policy.",
+    "Eight season blocks give limited uncertainty information; intervals are diagnostic, not scenario confidence ranges.",
+    "Issued forecasts and the active corrected fit remain unchanged. EXPERIMENTAL / HOLD."
+  ],
+  "maximum_saved_prediction_error": 4.440892098500626e-16,
+  "numpy": "2.4.2",
+  "preserved_null_counts": {
+    "defense_availability": 89,
+    "offense_availability": 89
+  },
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "seasons": [
+    {
+      "gain_with_availability": {
+        "mae": 0.0004887964927355881,
+        "rmse": 0.0012850587807182734
+      },
+      "season": 2018,
+      "with_availability": {
+        "count": 256,
+        "mae": 10.081264507690783,
+        "rmse": 13.166274201213552
+      },
+      "zero_observed_availability": {
+        "count": 256,
+        "mae": 10.081753304183518,
+        "rmse": 13.16755925999427
+      }
+    },
+    {
+      "gain_with_availability": {
+        "mae": -0.02266801364261184,
+        "rmse": -0.01569953642223787
+      },
+      "season": 2019,
+      "with_availability": {
+        "count": 256,
+        "mae": 10.417259804022821,
+        "rmse": 13.408948097603604
+      },
+      "zero_observed_availability": {
+        "count": 256,
+        "mae": 10.39459179038021,
+        "rmse": 13.393248561181366
+      }
+    },
+    {
+      "gain_with_availability": {
+        "mae": 0.009041450081024749,
+        "rmse": 0.009643488115465004
+      },
+      "season": 2020,
+      "with_availability": {
+        "count": 256,
+        "mae": 10.174956327319968,
+        "rmse": 13.026501646143618
+      },
+      "zero_observed_availability": {
+        "count": 256,
+        "mae": 10.183997777400993,
+        "rmse": 13.036145134259083
+      }
+    },
+    {
+      "gain_with_availability": {
+        "mae": -0.005116020034751756,
+        "rmse": -0.004322208356414947
+      },
+      "season": 2021,
+      "with_availability": {
+        "count": 272,
+        "mae": 11.059011483721978,
+        "rmse": 14.059707847380471
+      },
+      "zero_observed_availability": {
+        "count": 272,
+        "mae": 11.053895463687226,
+        "rmse": 14.055385639024056
+      }
+    },
+    {
+      "gain_with_availability": {
+        "mae": 0.000703589826365203,
+        "rmse": 0.0020939784039040177
+      },
+      "season": 2022,
+      "with_availability": {
+        "count": 271,
+        "mae": 8.821680476245845,
+        "rmse": 11.608054894463699
+      },
+      "zero_observed_availability": {
+        "count": 271,
+        "mae": 8.82238406607221,
+        "rmse": 11.610148872867603
+      }
+    },
+    {
+      "gain_with_availability": {
+        "mae": -0.004416462046906489,
+        "rmse": -0.01068315194470415
+      },
+      "season": 2023,
+      "with_availability": {
+        "count": 272,
+        "mae": 10.326789392987168,
+        "rmse": 13.459580234235375
+      },
+      "zero_observed_availability": {
+        "count": 272,
+        "mae": 10.322372930940261,
+        "rmse": 13.44889708229067
+      }
+    },
+    {
+      "gain_with_availability": {
+        "mae": 0.005748320176117261,
+        "rmse": 0.010011959820140248
+      },
+      "season": 2024,
+      "with_availability": {
+        "count": 272,
+        "mae": 9.778289322678813,
+        "rmse": 12.78487186388504
+      },
+      "zero_observed_availability": {
+        "count": 272,
+        "mae": 9.78403764285493,
+        "rmse": 12.794883823705181
+      }
+    },
+    {
+      "gain_with_availability": {
+        "mae": -0.00039768344169921477,
+        "rmse": -0.0020691031424586726
+      },
+      "season": 2025,
+      "with_availability": {
+        "count": 272,
+        "mae": 10.153763394861418,
+        "rmse": 12.73156270068942
+      },
+      "zero_observed_availability": {
+        "count": 272,
+        "mae": 10.153365711419719,
+        "rmse": 12.729493597546961
+      }
+    }
+  ],
+  "seasons_with_positive_mae_gain": 4,
+  "slices": {
+    "overall": {
+      "bootstrap": {
+        "blocks": 8,
+        "mae": {
+          "estimate": -0.0020263551768362476,
+          "lower": -0.008629912350272662,
+          "upper": 0.0033554981944519113
+        },
+        "method": "paired game-weighted season-block resampling; percentile 95% interval",
+        "positive_gain_means": "lower error with the saved availability terms",
+        "rmse": {
+          "estimate": -0.0013957965491329105,
+          "lower": -0.007184336213059694,
+          "upper": 0.004465076750002111
+        },
+        "samples": 10000,
+        "seed": 20260909
+      },
+      "metrics": {
+        "gain_with_availability": {
+          "mae": -0.0020263551768362476,
+          "rmse": -0.0013957965491329105
+        },
+        "with_availability": {
+          "count": 2127,
+          "mae": 10.099455867555735,
+          "rmse": 13.044988969614389
+        },
+        "zero_observed_availability": {
+          "count": 2127,
+          "mae": 10.097429512378898,
+          "rmse": 13.043593173065256
+        }
+      }
+    },
+    "weeks_1_4": {
+      "bootstrap": {
+        "blocks": 8,
+        "mae": {
+          "estimate": -0.0053046542219892245,
+          "lower": -0.02161388288069648,
+          "upper": 0.00907325364333964
+        },
+        "method": "paired game-weighted season-block resampling; percentile 95% interval",
+        "positive_gain_means": "lower error with the saved availability terms",
+        "rmse": {
+          "estimate": -0.0063787026753825415,
+          "lower": -0.02163055798532021,
+          "upper": 0.005565494059710649
+        },
+        "samples": 10000,
+        "seed": 20260909
+      },
+      "metrics": {
+        "gain_with_availability": {
+          "mae": -0.0053046542219892245,
+          "rmse": -0.0063787026753825415
+        },
+        "with_availability": {
+          "count": 509,
+          "mae": 9.786012267682537,
+          "rmse": 12.977127858212489
+        },
+        "zero_observed_availability": {
+          "count": 509,
+          "mae": 9.780707613460548,
+          "rmse": 12.970749155537106
+        }
+      }
+    },
+    "weeks_5_18": {
+      "bootstrap": {
+        "blocks": 8,
+        "mae": {
+          "estimate": -0.0009950484932890191,
+          "lower": -0.008188453542482321,
+          "upper": 0.005217423263587048
+        },
+        "method": "paired game-weighted season-block resampling; percentile 95% interval",
+        "positive_gain_means": "lower error with the saved availability terms",
+        "rmse": {
+          "estimate": 0.00016066129082936698,
+          "lower": -0.007923691425681056,
+          "upper": 0.007300920412030406
+        },
+        "samples": 10000,
+        "seed": 20260909
+      },
+      "metrics": {
+        "gain_with_availability": {
+          "mae": -0.0009950484932890191,
+          "rmse": 0.00016066129082936698
+        },
+        "with_availability": {
+          "count": 1618,
+          "mae": 10.198060807194462,
+          "rmse": 13.066264242494622
+        },
+        "zero_observed_availability": {
+          "count": 1618,
+          "mae": 10.197065758701173,
+          "rmse": 13.066424903785451
+        }
+      }
+    }
+  },
+  "started_at": "2026-09-09T17:23:46.668705+00:00",
+  "status": "EXPERIMENTAL / HOLD"
+}

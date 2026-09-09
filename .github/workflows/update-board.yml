@@ -8,6 +8,8 @@ on:
       - "generate_site.py"
       - "pgo_comparison.py"
       - "pgo_current_board.py"
+      - "pgo_nonqb_availability.py"
+      - "pgo_availability_view.py"
       - "pgo_forecast_lab.py"
       - "docs/pgo-theme.css"
       - "pgo_forecast_snapshot.py"
@@ -15,6 +17,8 @@ on:
       - "pgo_forecast_corrected.py"
       - "research/pgo_corrected_roster_candidate/*.py"
       - "docs/evidence/forecast-lab-2026/**"
+      - "docs/evidence/nonqb-availability-2026/**"
+      - "research/pgo_nonqb_availability_20260909/*.py"
       - "research/pgo_stability_blend/prospective_attestation.json"
       - "!data/snapshots.json"
   workflow_dispatch:

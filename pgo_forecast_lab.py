@@ -1141,6 +1141,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
                snapshot_results=(), snapshot_provenance=(), weekly=None,
                weekly_results=(), weekly_provenance=(), corrected=None):
     """Render a standalone, escaped, no-fetch Forecast Lab page."""
+    from pgo_availability_view import render_current_scenario
     css = _shared_css()
     if snapshot is None:
         lead = f'''<header class="lab-hero hero"><div class="status">Experimental &middot; frozen archive</div>
@@ -1155,6 +1156,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
             lead = (
                 _weekly_section(weekly, snapshot, weekly_results, weekly_provenance)
                 + _corrected_section(corrected)
+                + render_current_scenario()
                 + _rating_explanations(snapshot)
                 + '<details class="preseason-archive" id="preseason-baseline">'
                 '<summary>September 7 preseason baseline &middot; All 272 games and 32 team ratings</summary>'
@@ -1222,7 +1224,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
 .forecast-week tbody th{{text-transform:none;letter-spacing:normal}}
 .corrected-team thead th{{font-size:11px;letter-spacing:normal;text-transform:none}}
 .corrected-team td{{white-space:nowrap;overflow-wrap:normal;font-size:12px}}
-</style><link rel="stylesheet" href="pgo-theme.css?v=20260909"></head><body><main class="lab-wrap">
+</style><link rel="stylesheet" href="pgo-theme.css?v=20260909-injuries"></head><body><main class="lab-wrap">
 {lead}{archive_open}{archive_heading}
 <section><h2>Record so far</h2>{_metric_cards(metrics)}
 <p>The theoretical 50% winner benchmark is a reference only.</p></section>
