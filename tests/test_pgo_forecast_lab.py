@@ -620,7 +620,7 @@ class ForecastLabTests(unittest.TestCase):
         self.assertNotIn("win probability", html.lower())
         self.assertEqual(html.count('data-game-id="'), 272)
         self.assertIn('<details class="forecast-week" open>', html)
-        self.assertLess(html.index("Blend home margin"),
+        self.assertLess(html.index("Original forecast favors"),
                         html.index("Frozen kickoff"))
         self.assertIn("prospective_lock.json", html)
         self.assertIn("prospective_predictions.csv", html)
@@ -778,10 +778,10 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn("Active-roster preseason scenario", page)
         self.assertIn("ACT is an administrative roster status", page)
         self.assertIn("same September 7 state", page)
-        self.assertIn("SEA -2.5", page)
-        self.assertIn("SF -3.0", page)
-        self.assertIn("NE 21, SEA 24", page)
-        self.assertIn("SF 24, LAR 21", page)
+        self.assertIn("SEA by 2.5 points", page)
+        self.assertIn("SF by 3.0 points", page)
+        self.assertIn("NE 21.3, SEA 23.8", page)
+        self.assertIn("SF 23.5, LAR 20.5", page)
         self.assertIn("45.0", page)
         self.assertIn("44.0", page)
         self.assertIn(
@@ -789,11 +789,11 @@ class ForecastLabTests(unittest.TestCase):
             "September 9, 2026 at 8:20 PM EDT</time>", page,
         )
         self.assertIn(
-            "Scores are rounded to whole points; spreads and totals to one decimal. "
+            "Estimated scores and combined points are shown to one decimal. "
             "Evaluation uses the original unrounded projections.", page,
         )
         self.assertIn(
-            "<th>Projected total</th><th>Frozen kickoff</th><th>Actual</th>", page,
+            "<th>Combined points</th><th>Scheduled kickoff</th><th>Final score</th>", page,
         )
         self.assertIn("Week 18", page)
         self.assertIn("Week 18 times are provisional", page)
@@ -813,11 +813,43 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn("Frozen 25% stability blend", page)
         self.assertNotIn("win probability", page.lower())
         self.assertNotIn("League mean + venue", page)
-        for margin in (0.0, 0.0009, -0.0179):
+        for margin, expected in ((0.0, 'No projected edge'),
+                                 (0.0009, 'SEA by less than 0.1 point'),
+                                 (-0.0179, 'NE by less than 0.1 point')):
             self.assertEqual(
                 pgo_forecast_lab._spread({**snapshot["games"][0], "margin": margin}),
-                "Pick'em",
+                expected,
             )
+
+    def test_displayed_tie_uses_saved_decimal_scores_and_unrounded_favorite(self):
+        saved = json.loads((pgo_forecast_lab.CORRECTED_DIR / 'snapshot.json').read_bytes())
+        game = next(game for game in saved['games'] if game['game_id'] == '2026_01_BAL_IND')
+        before = copy.deepcopy(game)
+        self.assertEqual(round(game['away_points']), round(game['home_points']))
+        rendered = pgo_forecast_lab._forecast_weeks([game], [])
+        self.assertIn('BAL 25.2, IND 24.8', rendered)
+        self.assertIn('BAL by 0.4 points', rendered)
+        self.assertIn('<th>Who PGO favors</th>', rendered)
+        self.assertIn('<th>Estimated score</th>', rendered)
+        self.assertEqual(game, before)
+        self.assertEqual(pgo_forecast_lab._projected_score(25.25), '25.3')
+
+    def test_original_archive_keeps_tiny_edges_and_exact_zero_without_mutation(self):
+        lock = self.synthetic_lock()
+        lock['games'].append({**lock['games'][0], 'game_id': 'g3'})
+        for game, margin in zip(lock['games'], (0.01, -0.01, 0.0)):
+            for key in ('candidate_prediction', 'pgo_v0_prediction',
+                        'challenger_prediction', 'challenger_full_strength_prediction'):
+                game[key] = margin
+        before = copy.deepcopy(lock)
+        rendered = pgo_forecast_lab.render_lab(lock, [], [])
+        for game, expected in zip(lock['games'], ('SEA by less than 0.1 point',
+                                                  'SF by less than 0.1 point', 'No projected edge')):
+            row = rendered.split(f'data-game-id="{game["game_id"]}"', 1)[1].split('</tr>', 1)[0]
+            self.assertEqual(row.count(expected), 2)
+        self.assertNotIn('<td>+0.0</td>', rendered)
+        self.assertNotIn('<td>-0.0</td>', rendered)
+        self.assertEqual(lock, before)
 
     def test_render_snapshot_rejects_a_post_kickoff_generation_time(self):
         snapshot = self.synthetic_snapshot()
@@ -960,7 +992,7 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn('data-weekly-cutoff="2027-01-04T00:20:00Z">Draft</span>', page)
         self.assertIn("September 9, 2026 at 7:20 PM EDT", page)
         self.assertIn("60 minutes before kickoff", page)
-        self.assertIn("SEA -2.5", page)
+        self.assertIn("SEA by 2.5 points", page)
         self.assertLess(page.index("Weekly game forecasts"),
                         page.index("September 7 preseason baseline"))
         self.assertIn('<details class="preseason-archive" id="preseason-baseline">', page)

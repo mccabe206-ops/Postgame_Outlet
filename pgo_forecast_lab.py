@@ -453,18 +453,17 @@ def _snapshot_kickoff_time(value):
     return f'<time datetime="{html.escape(source, quote=True)}">{display}</time>'
 
 
-def _whole_point(value):
-    return str(int(Decimal(str(value)).quantize(Decimal("1"), rounding=ROUND_HALF_UP)))
+def _projected_score(value):
+    return str(Decimal(str(value)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
 
 
 def _spread(game):
     margin = float(game["margin"])
-    if f"{abs(margin):.1f}" == "0.0":
-        return "Pick'em"
-    if margin > 0:
-        return f'{html.escape(game["home"])} -{margin:.1f}'
-    if margin < 0:
-        return f'{html.escape(game["away"])} -{abs(margin):.1f}'
+    if margin == 0:
+        return 'No projected edge'
+    favorite = html.escape(game['home'] if margin > 0 else game['away'])
+    gap = 'less than 0.1 point' if abs(margin) < 0.1 else f'{abs(margin):.1f} points'
+    return f'{favorite} by {gap}'
 
 
 def _edition_name(edition):
@@ -550,8 +549,8 @@ def _forecast_weeks(games, results, *, weekly=False):
                     f'{html.escape(game["home"])} {result["home_score"]}'
                 )
             score = (
-                f'{html.escape(game["away"])} {_whole_point(game["away_points"])}, '
-                f'{html.escape(game["home"])} {_whole_point(game["home_points"])}'
+                f'{html.escape(game["away"])} {_projected_score(game["away_points"])}, '
+                f'{html.escape(game["home"])} {_projected_score(game["home_points"])}'
             )
             timing = ""
             if weekly:
@@ -581,10 +580,10 @@ def _forecast_weeks(games, results, *, weekly=False):
         weeks.append(
             f'<details class="forecast-week {kind}-week"{" open" if week == min(game["week"] for game in games) else ""}>'
             f'<summary>Week {week} <span>{len(rows)} games</span></summary>'
-            '<div class="table-shell"><table><thead><tr><th>Matchup</th><th>PGO spread</th>'
-            '<th>Projected score</th><th>Projected total</th>'
-            f'{"<th>Weekly lock (Eastern)</th>" if weekly else ""}'
-            f'<th>Frozen kickoff</th><th>Actual</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div></details>'
+            '<div class="table-shell"><table><thead><tr><th>Matchup</th><th>Who PGO favors</th>'
+            '<th>Estimated score</th><th>Combined points</th>'
+            f'{"<th>Prediction deadline (Eastern)</th>" if weekly else ""}'
+            f'<th>Scheduled kickoff</th><th>Final score</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div></details>'
         )
     return "".join(weeks)
 
@@ -889,16 +888,18 @@ def _weekly_section(weekly, snapshot, results, provenance):
     return f'''
 <header class="lab-hero hero"><div class="status" data-model-status="HOLD">Experimental &mdash; still being tested</div>
 <h1>PGO Forecast Lab</h1><h2>Weekly game forecasts</h2>
-<p>Each matchup locks <strong>60 minutes before kickoff</strong>. Both teams' projected scores, the spread, and the total freeze together.</p>
-<p>Drafts can change until their own cutoff. The last saved revision before that deadline becomes the locked forecast; earlier games do not lock the rest of the week.</p>
+<p>See who the model favors, its estimated scores, and how the predictions compare with final results.</p>
+<p>Each prediction becomes final <strong>60 minutes before kickoff</strong>. We keep the last saved prediction before that deadline and record its misses as well as its wins.</p>
+<p>A draft can change before its own deadline. A locked prediction cannot. An early game does not lock every other game that week.</p>
 <p><a href="index.html">Back to McCabe Ratings</a> &middot; <a href="#corrected-ratings">Why teams rank here</a> &middot; <a href="#preseason-baseline">Full-season archive</a> &middot; <a href="#forecast-process">How we track every forecast</a></p></header>
 <section><h2>Weekly predictions</h2>{sources}
-<p>The spread shows the predicted favorite with a minus sign: SEA &minus;3 means Seattle is expected to win by three. The total is both teams’ points added together.</p>
+<p>“SEA by 3.0 points” means the model favors Seattle by three. Combined points adds both teams’ estimates.</p>
+<p>Estimated scores show averages to one decimal, not a literal final score. Very close scores can still look equal after rounding; the favored team comes from the original unrounded difference. Scores and combined points are rounded separately, so the displayed sum can differ by 0.1.</p>
 <p><strong>How much should you trust the scores?</strong> In historical testing, the combined-score estimate missed by about 11 points per game on average. It did not clearly beat using a simple league average. Treat these scores as an experiment.</p>
 {_forecast_weeks(games, results, weekly=True)}</section>
 <section><h2>Weekly forecast record</h2><p>{len(results)} of {len(games)} saved weekly forecasts have final results. We will keep the misses as well as the hits. Early results alone cannot prove the model works.</p>{_snapshot_metric_cards(metrics, "weekly")}</section>
 <details class="lab-detail" id="forecast-process"><summary>How we track every forecast — saved versions and technical details</summary>
-<p>Research status: EXPERIMENTAL / HOLD. Scores are rounded to whole points; spreads and totals to one decimal. Evaluation uses unrounded values.</p>
+<p>Research status: EXPERIMENTAL / HOLD. Estimated scores and combined points are shown to one decimal. The favored team uses the original unrounded margin, including edges below 0.1 point. Evaluation uses unrounded values.</p>
 <p><a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md#game-totals-need-their-own-evidence">Historical totals test and limitations</a>.</p>
 <ol><li><strong>Review sources</strong>: verify roster, expected starters, injury coverage, and source dates. Missing formal reports remain unknown; refreshes require review.</li>
 <li><strong>Save a revision</strong>: record a dated forecast revision before the relevant game's deadline. Keep every earlier revision.</li>
@@ -959,13 +960,13 @@ def _snapshot_section(snapshot, results, provenance):
     return f'''
 <header class="lab-hero hero"><div class="status">{html.escape(str(method.get("status", "EXPERIMENTAL — HOLD")))}</div>
 <h1>PGO Forecast Lab</h1><h2>September 7 preseason snapshot</h2>
-<p><strong>{html.escape(str(method.get("name", "Active-roster preseason scenario")))}</strong>. Positive home margin means the home team is ahead; the PGO spread shows the favorite with a minus sign.</p>
+<p><strong>{html.escape(str(method.get("name", "Active-roster preseason scenario")))}</strong>. Each game shows the team the model favors and its estimated winning margin.</p>
 <p>ACT is an administrative roster status, not proof of health or game-day availability. Week 1 and the full schedule use the same September 7 state; later weeks are not weekly lineup updates.</p>
 <p><strong>Season-method check:</strong> a separate historical replay found that freezing preseason model strength all year performed worse than both weekly updates and a simpler frozen rating. That replay also uses retrospective Week 1 identities, so it cannot certify what was knowable before the season. <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md#freezing-strength-for-an-entire-season-performs-worse">Read the season test and its limits</a>.</p>
 <p><strong>{len(results)} of {len(games)} finalized results recorded.</strong> Interim tracking &mdash; not a validation result.</p>
 <p><a href="index.html">Back to McCabe Ratings</a></p></header>
 <section><h2>September snapshot record</h2>{_snapshot_metric_cards(metrics)}</section>
-<section><h2>Week 1 and full-season forecasts</h2><p>Scores are rounded to whole points; spreads and totals to one decimal. Evaluation uses the original unrounded projections.</p>{_forecast_weeks(games, results)}</section>
+<section><h2>Week 1 and full-season forecasts</h2><p>Estimated scores and combined points are shown to one decimal. Evaluation uses the original unrounded projections.</p><p>These are average point estimates, not literal final scores. Very close scores may round to the same number; the favored team uses the original unrounded difference. Scores and combined points are rounded separately, so the displayed sum can differ by 0.1.</p>{_forecast_weeks(games, results)}</section>
 <details class="lab-detail" open><summary>32-team active-roster ratings and QB assumptions</summary><div class="pgo-snapshot-board"><label class="pgo-column-toggle" for="snapshot-pgo-columns"><input id="snapshot-pgo-columns" type="checkbox"> Show QB and prior-selector comparison</label><div class="table-shell"><table class="pgo-snapshot-table"><thead><tr><th class="pgo-essential">Rank</th><th class="pgo-essential">Team</th><th class="pgo-essential">PGO rating</th><th class="pgo-detail"><span class="pgo-scale-label"><span aria-hidden="true">-14</span><span>Rating scale</span><span aria-hidden="true">+14</span></span></th><th class="pgo-detail">Expected QB1</th><th class="pgo-detail">Old QB-selector comparison</th></tr></thead><tbody>{ratings}</tbody></table></div></div></details>
 <details class="lab-detail"><summary>September method, sources, and downloads</summary><p>Generated {_display_time(generated, "UTC")}. This inference-policy change and the simple projected-score method remain experimental; through-2025 performance does not validate them.</p><ul>{method_items}</ul><p><a href="evidence/forecast-lab-2026/september-07/snapshot.json">Snapshot JSON</a> &middot; <a href="evidence/forecast-lab-2026/september-07/forecasts.csv">Forecast CSV</a> &middot; <a href="evidence/forecast-lab-2026/september-07/ratings.csv">Ratings CSV</a> &middot; <a href="evidence/forecast-lab-2026/september-07/manifest.json">Verification manifest</a></p><ul>{source_items}</ul><p>No calibrated probabilities, market claims, or retrospective promotion are attached to this snapshot.</p><h3>September results provenance</h3><ul>{result_sources}</ul></details>'''
 
@@ -1186,8 +1187,8 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
             body.append(
                 f'<tr data-game-id="{html.escape(game["game_id"], quote=True)}">'
                 f'<th scope="row">{html.escape(game["away"])} @ {html.escape(game["home"])}</th>'
-                f'<td>{_signed(game["candidate_prediction"])}</td>'
-                f'<td>{_signed(game["pgo_v0_prediction"])}</td>'
+                f'<td>{_spread({**game, "margin": game["candidate_prediction"]})}</td>'
+                f'<td>{_spread({**game, "margin": game["pgo_v0_prediction"]})}</td>'
                 f'<td>{_kickoff_time(game["kickoff"])}</td>'
                 f'<td>{actual}</td><td>{error}</td></tr>'
             )
@@ -1195,8 +1196,8 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
             f'<details class="forecast-week"{" open" if week == 1 else ""}>'
             f'<summary>Week {week} <span>{len(body)} games</span></summary>'
             '<div class="table-shell"><table><thead><tr><th>Matchup</th>'
-            '<th>Blend home margin</th><th>PGO v0 home margin</th><th>Frozen kickoff</th>'
-            f'<th>Actual</th><th>Blend absolute error</th></tr></thead><tbody>{"".join(body)}</tbody></table></div></details>'
+            '<th>Original forecast favors</th><th>PGO v0 comparison favors</th><th>Frozen kickoff</th>'
+            f'<th>Final score</th><th>Original forecast miss (points)</th></tr></thead><tbody>{"".join(body)}</tbody></table></div></details>'
         )
     sources = []
     for item in provenance:
@@ -1210,8 +1211,8 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
     sources = "".join(sources) or "<li>No result transcriptions recorded.</li>"
     diagnostic_rows = "".join(
         f'<tr><th scope="row">{html.escape(game["away"])} @ {html.escape(game["home"])}</th>'
-        f'<td>{_signed(game["challenger_prediction"])}</td>'
-        f'<td>{_signed(game["challenger_full_strength_prediction"])}</td></tr>'
+        f'<td>{_spread({**game, "margin": game["challenger_prediction"]})}</td>'
+        f'<td>{_spread({**game, "margin": game["challenger_full_strength_prediction"]})}</td></tr>'
         for game in lock["games"]
     )
     return f'''<!doctype html>
@@ -1239,7 +1240,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
 <p>Raw source cutoff: <code>{html.escape(lock["as_of"])}</code>. Raw attestation time: <code>{html.escape(ATTESTED_AT)}</code>.</p>
 <p>Partial metrics are descriptive only. The unchanged canonical grade requires all 272 exact final results and is the only path to a prospective PASS, HOLD, or BLOCKED receipt.</p></details>
 <section><h2>Frozen forecasts and observed results</h2><p>Kickoffs are the frozen schedule record and may differ from the current schedule. Original forecasts are never rewritten.</p>{"".join(weeks)}</section>
-<details><summary>Archived challenger diagnostic</summary><p>These are outputs from the archived July-cutoff fit (delta 0.75 with QB-depth uncertainty), kept separate from the public ratings-table fit.</p><div class="table-shell"><table><thead><tr><th>Matchup</th><th>Current-lineup home margin</th><th>Full-strength home margin</th></tr></thead><tbody>{diagnostic_rows}</tbody></table></div></details>
+<details><summary>Archived challenger diagnostic</summary><p>These are outputs from the archived July-cutoff fit (delta 0.75 with QB-depth uncertainty), kept separate from the public ratings-table fit.</p><div class="table-shell"><table><thead><tr><th>Matchup</th><th>Current-lineup forecast favors</th><th>Full-strength forecast favors</th></tr></thead><tbody>{diagnostic_rows}</tbody></table></div></details>
 <section><h2>Results provenance</h2><p>Each entry is a reviewed transcription. Its digest verifies the archived CSV, not the remote source contents.</p><ul>{sources}</ul></section>
 <section><h2>Staff Picks</h2><p>No editorial picks are published in this model archive. Staff Picks remain a separate human product.</p></section>
 {archive_close}

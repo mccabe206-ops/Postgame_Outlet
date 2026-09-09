@@ -38,6 +38,7 @@ class AvailabilityViewTests(unittest.TestCase):
         markup = view.render_scenario(value)
         self.assertEqual(value, before)
         for text in ['EXPERIMENTAL / HOLD', '+5.123', '-0.250', '+4.873',
+                     'Original PGO rating', 'Original home-team lead',
                      '&lt;Player &amp; one&gt;', '42.0%', '4 observations',
                      'BUF', '2026-01-04', '&lt;historical usage&gt;',
                      'not a confidence interval', 'replacement quality',
@@ -45,6 +46,7 @@ class AvailabilityViewTests(unittest.TestCase):
                      '+1.833 to +2.083']:
             self.assertIn(text, markup)
         self.assertNotIn('<Player', markup)
+        self.assertNotIn('before these injuries', markup)
         self.assertIn('href="https://example.com/report?a=1&amp;b=2"', markup)
         self.assertNotIn('<th scope="col">Rank', markup)
 
@@ -55,9 +57,10 @@ class AvailabilityViewTests(unittest.TestCase):
         row['players'][0]['role'].update(snap_share=None, source_note='Current backup listing: <prior usage>')
         value['games'][0]['status'] = 'CUTOFF_PASSED'
         markup = view.render_scenario(value)
-        self.assertIn('Partial subtotal', markup)
+        self.assertIn('Incomplete — known players only', markup)
         self.assertIn('Missing role &lt;unknown&gt;', markup)
         self.assertIn('Current backup listing: &lt;prior usage&gt;', markup)
+        self.assertIn('Past playing-time data unavailable', markup)
         self.assertNotIn('+4.873', markup)
         self.assertNotIn('+2.083', markup)
         self.assertIn('Cutoff passed', markup)
@@ -87,9 +90,10 @@ class AvailabilityViewTests(unittest.TestCase):
         unknown_game.update(home='BUF', away='MIA', status='UNKNOWN')
         value['games'].append(unknown_game)
         markup = view.render_scenario(value)
-        self.assertIn('<details><summary>1 team with unknown coverage</summary>', markup)
-        self.assertIn('<details><summary>1 matchup with unknown coverage</summary>', markup)
-        self.assertLess(markup.index('Known-out delta'), markup.index('1 team with unknown coverage'))
+        self.assertIn('<details><summary>1 team without a verified report</summary>', markup)
+        self.assertIn('<details><summary>1 matchup without enough injury information</summary>', markup)
+        self.assertIn('Not enough verified injury information', markup)
+        self.assertLess(markup.index('Estimated change: ruled out'), markup.index('1 team without a verified report'))
         self.assertIn('does not refresh automatically', markup)
 
     def test_excluded_reserve_observations_remain_named_with_their_reasons(self):
