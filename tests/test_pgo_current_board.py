@@ -51,6 +51,46 @@ class CurrentBoardTests(unittest.TestCase):
         self.assertIn('EXPERIMENTAL / HOLD', current)
         self.assertEqual(self.snapshot, before)
 
+    def test_compact_board_preserves_exact_ratings_and_accessible_signed_scale(self):
+        current = self.add().split(board.START, 1)[1].split(board.END, 1)[0]
+        expected = sorted(self.snapshot['teams'], key=lambda row: row['rank'])
+        self.assertEqual(current.count('class="pgo-team-marker"'), 32)
+        self.assertEqual(current.count('class="pgo-team-chip"'), 32)
+        self.assertEqual(current.count('class="pgo-rating-bar" role="img"'), 32)
+        for team in expected:
+            row = current.split(f'data-current-pgo-team="{team["team"]}"', 1)[1].split('</tr>', 1)[0]
+            displayed = f'{team["rating"]:+.3f}'
+            self.assertIn(f'data-value="{team["rating"]}">{displayed}</td>', row)
+            self.assertIn(f'aria-label="PGO rating {displayed} on a -14 to +14 scale"', row)
+        self.assertIn('id="current-pgo-columns" type="checkbox"', current)
+        self.assertIn('Show QB and McCabe comparison', current)
+        self.assertIn('class="pgo-essential"', current)
+        self.assertIn('class="pgo-detail"', current)
+
+    def test_signed_scale_handles_positive_negative_and_zero(self):
+        self.assertIn('class="pgo-rating-fill pos" style="left:50%;width:14.3%"',
+                      board.rating_bar(4.0))
+        self.assertIn('class="pgo-rating-fill neg" style="right:50%;width:14.3%"',
+                      board.rating_bar(-4.0))
+        self.assertIn('class="pgo-rating-fill zero" style="left:50%;width:0.0%"',
+                      board.rating_bar(0.0))
+        self.assertIn('aria-label="PGO rating +4.000 on a -14 to +14 scale"',
+                      board.rating_bar(4.0))
+        clipped = board.rating_bar(-15.0)
+        self.assertIn('width:50.0%', clipped)
+        self.assertIn('bar clipped at scale maximum', clipped)
+
+    def test_issued_snapshots_fit_the_pgo_scale(self):
+        paths = (
+            lab.SNAPSHOT_DIR / 'snapshot.json',
+            lab.CORRECTED_DIR / 'snapshot.json',
+        )
+        for path in paths:
+            snapshot = json.loads(path.read_bytes())
+            with self.subTest(edition=snapshot['edition']):
+                bars = [board.rating_bar(team['rating']) for team in snapshot['teams']]
+                self.assertTrue(all('bar clipped' not in bar for bar in bars))
+
     def test_default_uses_latest_verified_registered_source(self):
         weekly = {'revisions': [{'source_edition': self.snapshot['edition']}]}
         with patch.object(lab.pgo_forecast_weekly, 'load_weekly', return_value=weekly) as load, \

@@ -5,6 +5,8 @@ import math
 import re
 from zoneinfo import ZoneInfo
 
+import generate_site
+
 START = '<!-- PGO CURRENT BOARD START -->'
 END = '<!-- PGO CURRENT BOARD END -->'
 ARCHIVE_OPEN = ('<!-- PGO JULY ARCHIVE OPEN --><details class="pgo-july-archive">'
@@ -30,6 +32,35 @@ def _time(value):
         raise ValueError('Current board source timestamps require a timezone')
     return (f'<time datetime="{html.escape(value, quote=True)}">'
             f'{parsed.astimezone(ZoneInfo("America/New_York")):%B %d, %Y at %I:%M %p %Z}</time>')
+
+
+def team_identity(code, name=None):
+    """Render the shared team marker/chip without changing model identity."""
+    match = next(((team, colors) for team, colors in generate_site.TEAM.items()
+                  if colors[0] == code), None)
+    full_name, colors = match or (name or code, (code, "#445", "#889"))
+    label = name or full_name
+    return (
+        f'<span class="pgo-team-marker" style="--team-primary:{colors[1]};'
+        f'--team-secondary:{colors[2]}" aria-hidden="true"></span>'
+        f'<span class="pgo-team-chip" aria-hidden="true">{html.escape(code)}</span>'
+        f'<span class="pgo-team-name">{html.escape(label)}</span>'
+    )
+
+
+def rating_bar(value, scale=14.0):
+    """Render the model output on a signed scale while retaining 3-decimal text."""
+    fraction = max(-1, min(1, value / scale))
+    side = "left:50%" if fraction >= 0 else "right:50%"
+    kind = "pos" if fraction > 0 else "neg" if fraction < 0 else "zero"
+    clipping = "; bar clipped at scale maximum" if abs(value) > scale else ""
+    return (
+        f'<span class="pgo-rating-bar" role="img" '
+        f'aria-label="PGO rating {value:+.3f} on a -{scale:g} to +{scale:g} scale{clipping}">'
+        '<span class="pgo-rating-track" aria-hidden="true"><span class="pgo-rating-mid"></span>'
+        f'<span class="pgo-rating-fill {kind}" style="{side};width:{abs(fraction) * 50:.1f}%"></span>'
+        '</span></span>'
+    )
 
 
 def add_current_board(page, snapshot=None, mccabe_rows=None):
@@ -60,20 +91,15 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
         mccabe_rank = human[code]['rank']
         rows.append(
             f'<tr data-current-pgo-team="{html.escape(code, quote=True)}">'
-            f'<th scope="row"><a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#corrected-rating-{code}" '
-            f'target="_blank" rel="noopener noreferrer">{html.escape(name)}</a></th>'
-            f'<td>{rank}</td><td data-value="{team["rating"]}">{team["rating"]:+.3f}</td>'
-            f'<td>{html.escape(team["qb_name"])}</td><td>{mccabe_rank}</td><td>{rank - mccabe_rank:+d}</td></tr>')
+            f'<td class="pgo-rank pgo-essential">{rank}</td>'
+            f'<th scope="row" class="pgo-team pgo-essential"><a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#corrected-rating-{code}" '
+            f'target="_blank" rel="noopener noreferrer">{team_identity(code, name)}</a></th>'
+            f'<td class="pgo-rating-value pgo-essential" data-value="{team["rating"]}">{team["rating"]:+.3f}</td>'
+            f'<td class="pgo-rating-scale pgo-detail">{rating_bar(team["rating"])}</td>'
+            f'<td class="pgo-detail">{html.escape(team["qb_name"])}</td>'
+            f'<td class="pgo-detail">{mccabe_rank}</td><td class="pgo-detail">{rank - mccabe_rank:+d}</td></tr>')
     current = (
-        f'{START}<style>'
-        '#panel-comparison .current-pgo-table th:first-child {text-align:left;position:sticky;left:0;z-index:1;}'
-        '#panel-comparison .current-pgo-table tbody th {background:var(--panel);color:var(--ink);'
-        'font-size:inherit;letter-spacing:normal;text-transform:none;user-select:text;border-bottom:1px solid var(--border);}'
-        '#panel-comparison .current-pgo-table a {color:var(--accent);text-decoration:underline;text-underline-offset:3px;}'
-        '#panel-comparison .current-pgo-table a:hover {color:var(--accent);text-decoration:underline;}'
-        '@media(max-width:680px){#panel-comparison .current-pgo-table {font-size:12px;}'
-        '#panel-comparison .current-pgo-table th,#panel-comparison .current-pgo-table td {padding:8px 7px;}}'
-        f'</style><div class="pgo-current-board" data-edition="{corrected.EDITION}">'
+        f'{START}<div class="pgo-current-board" data-edition="{corrected.EDITION}">'
         '<div class="model-status" data-model-status="HOLD">Experimental — still being tested</div>'
         '<h2>PGO Corrected — September 8, 2026</h2>'
         '<p>Higher ratings mean the model expects a stronger team. These numbers are not betting lines. '
@@ -98,11 +124,16 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
         '<a href="https://walshja9.github.io/Postgame_Outlet/forecast-lab.html#corrected-ratings" '
         'target="_blank" rel="noopener noreferrer">Forecast Lab: explanations, source coverage, and weekly drafts</a>. '
         '</p></details>'
+        '<label class="pgo-column-toggle" for="current-pgo-columns">'
+        '<input id="current-pgo-columns" type="checkbox"> Show QB and McCabe comparison</label>'
         '<div class="table-shell"><table class="current-pgo-table">'
         '<caption class="visually-hidden">All 32 teams: corrected PGO model output and current McCabe rank</caption>'
-        '<thead><tr><th scope="col">Team</th><th scope="col">PGO #</th>'
-        '<th scope="col">PGO rating</th><th scope="col">Expected QB</th>'
-        '<th scope="col">McCabe #</th><th scope="col">vs McCabe</th></tr></thead>'
+        '<thead><tr><th scope="col" class="pgo-essential">Rank</th>'
+        '<th scope="col" class="pgo-essential">Team</th>'
+        '<th scope="col" class="pgo-essential">PGO rating</th>'
+        '<th scope="col" class="pgo-detail"><span class="pgo-scale-label"><span aria-hidden="true">-14</span><span>Rating scale</span><span aria-hidden="true">+14</span></span></th>'
+        '<th scope="col" class="pgo-detail">Expected QB</th>'
+        '<th scope="col" class="pgo-detail">McCabe #</th><th scope="col" class="pgo-detail">vs McCabe</th></tr></thead>'
         f'<tbody>{"".join(rows)}</tbody></table></div></div>{END}')
     panel = comparison.extract_comparison_panel(page)
     opening = panel.index('>') + 1

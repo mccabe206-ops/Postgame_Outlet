@@ -18,6 +18,7 @@ from zoneinfo import ZoneInfo
 
 import generate_site
 import pgo_comparison
+import pgo_current_board
 from pgo_challenger import PERFORMANCE_FEATURES, QB_FEATURES
 import pgo_forecast_snapshot
 import pgo_forecast_weekly
@@ -918,10 +919,14 @@ def _snapshot_section(snapshot, results, provenance):
         raise ValueError("September snapshot must be generated before every kickoff")
     metrics = snapshot_interim_metrics(snapshot, results)
     ratings = "".join(
-        f'<tr class="snapshot-team"><td>{team["rank"]}</td>'
-        f'<th scope="row"><a href="#rating-{html.escape(team["team"], quote=True)}">{html.escape(team["team"])}</a></th><td>{_signed(team["rating"])}</td>'
-        f'<td>{html.escape(team["qb_name"])}</td>'
-        f'<td>{html.escape(team["old_selector_qb_name"])} ({_signed(team["old_selector_rating"])})</td></tr>'
+        f'<tr class="snapshot-team" data-pgo-team="{html.escape(team["team"], quote=True)}">'
+        f'<td class="pgo-rank pgo-essential">{team["rank"]}</td>'
+        f'<th scope="row" class="pgo-team pgo-essential"><a href="#rating-{html.escape(team["team"], quote=True)}">'
+        f'{pgo_current_board.team_identity(team["team"])}</a></th>'
+        f'<td class="pgo-rating-value pgo-essential" data-value="{team["rating"]}">{_signed(team["rating"])}</td>'
+        f'<td class="pgo-rating-scale pgo-detail">{pgo_current_board.rating_bar(team["rating"])}</td>'
+        f'<td class="pgo-detail">{html.escape(team["qb_name"])}</td>'
+        f'<td class="pgo-detail">{html.escape(team["old_selector_qb_name"])} ({_signed(team["old_selector_rating"])})</td></tr>'
         for team in sorted(snapshot["teams"], key=lambda item: item["rank"])
     )
     method = snapshot.get("method", {})
@@ -961,7 +966,7 @@ def _snapshot_section(snapshot, results, provenance):
 <p><a href="index.html">Back to McCabe Ratings</a></p></header>
 <section><h2>September snapshot record</h2>{_snapshot_metric_cards(metrics)}</section>
 <section><h2>Week 1 and full-season forecasts</h2><p>Scores are rounded to whole points; spreads and totals to one decimal. Evaluation uses the original unrounded projections.</p>{_forecast_weeks(games, results)}</section>
-<details class="lab-detail" open><summary>32-team active-roster ratings and QB assumptions</summary><div class="table-shell"><table><thead><tr><th>Rank</th><th>Team</th><th>PGO rating</th><th>Expected QB1</th><th>Old QB-selector comparison</th></tr></thead><tbody>{ratings}</tbody></table></div></details>
+<details class="lab-detail" open><summary>32-team active-roster ratings and QB assumptions</summary><div class="pgo-snapshot-board"><label class="pgo-column-toggle" for="snapshot-pgo-columns"><input id="snapshot-pgo-columns" type="checkbox"> Show QB and prior-selector comparison</label><div class="table-shell"><table class="pgo-snapshot-table"><thead><tr><th class="pgo-essential">Rank</th><th class="pgo-essential">Team</th><th class="pgo-essential">PGO rating</th><th class="pgo-detail"><span class="pgo-scale-label"><span aria-hidden="true">-14</span><span>Rating scale</span><span aria-hidden="true">+14</span></span></th><th class="pgo-detail">Expected QB1</th><th class="pgo-detail">Old QB-selector comparison</th></tr></thead><tbody>{ratings}</tbody></table></div></div></details>
 <details class="lab-detail"><summary>September method, sources, and downloads</summary><p>Generated {_display_time(generated, "UTC")}. This inference-policy change and the simple projected-score method remain experimental; through-2025 performance does not validate them.</p><ul>{method_items}</ul><p><a href="evidence/forecast-lab-2026/september-07/snapshot.json">Snapshot JSON</a> &middot; <a href="evidence/forecast-lab-2026/september-07/forecasts.csv">Forecast CSV</a> &middot; <a href="evidence/forecast-lab-2026/september-07/ratings.csv">Ratings CSV</a> &middot; <a href="evidence/forecast-lab-2026/september-07/manifest.json">Verification manifest</a></p><ul>{source_items}</ul><p>No calibrated probabilities, market claims, or retrospective promotion are attached to this snapshot.</p><h3>September results provenance</h3><ul>{result_sources}</ul></details>'''
 
 

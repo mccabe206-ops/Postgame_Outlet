@@ -800,6 +800,15 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn("September results provenance", page)
         self.assertIn("https://example.com/results.csv", page)
         self.assertEqual(page.count('class="snapshot-team"'), 32)
+        self.assertEqual(page.count('class="pgo-rating-bar" role="img"'), 32)
+        self.assertEqual(page.count('class="pgo-team-marker"'), 32)
+        for team in snapshot["teams"]:
+            row = page.split(f'data-pgo-team="{team["team"]}"', 1)[1].split('</tr>', 1)[0]
+            self.assertIn(f'data-value="{team["rating"]}"', row)
+            self.assertIn(f'>{pgo_forecast_lab._signed(team["rating"])}</td>', row)
+        self.assertIn('class="pgo-snapshot-table"', page)
+        self.assertIn('class="pgo-essential"', page)
+        self.assertIn('class="pgo-detail"', page)
         self.assertIn("prospective_lock.json", page)
         self.assertIn("Frozen 25% stability blend", page)
         self.assertNotIn("win probability", page.lower())
