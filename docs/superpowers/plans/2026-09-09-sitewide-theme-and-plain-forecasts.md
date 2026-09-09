@@ -75,3 +75,28 @@ files preserve their saved values. Desktop review and a 375-pixel viewport
 check confirmed readable wrapping; the rating link opens its team disclosure
 with keyboard activation. Scores stay at the top of an expanded explanation.
 Receipts are under `output/rounded-scores-20260909/`.
+
+## Follow-up: matchup layout and defensive-depth coverage
+
+The user's screenshot showed the expanded explanation stretching one narrow
+table column. Keep each matchup's score row compact and put its native
+explanation disclosure in a separate full-width row. Four short blocks explain
+the edge, team/QB inputs, combined points, and injuries; equations and saved
+edition metadata stay in a second collapsed disclosure. Native CSS provides
+two columns on desktop and one on mobile.
+
+The user also challenged New England's rank because of EDGE/LB depth. The new
+input audit traces the saved rating, checks current official roster sources,
+and documents that current defensive starter/replacement quality is absent.
+Make this limitation explicit on the current board, the matchup explanations,
+and New England's team explanation. Publish `docs/model-depth-audit-2026-09-09.md`
+with source links and the useful next research test. The failed age/draft
+candidate is not adopted; all issued model and forecast evidence stays exact.
+
+Validation before publication: 48 Forecast Lab/current-board tests passed in
+44.081 seconds. Desktop inspection showed a 66.8-pixel score row and two
+474-pixel explanation columns. At a 375-pixel viewport the explanation uses
+one 296-pixel column within the 314-pixel table container, without page or
+card overflow. Exact equations remain accessible in the nested disclosure.
+Audit and visual receipts are under `output/ne-defense-depth-audit-20260909/`
+and `output/ne-depth-layout-20260909/`.

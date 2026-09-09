@@ -58,6 +58,10 @@ class ForecastLabTests(unittest.TestCase):
         team = panel.split('id="corrected-rating-NE">', 1)[1]
         reader, technical = team.split('<details class="technical-details">', 1)
         self.assertIn('recent game results', reader)
+        self.assertIn('current edge-rusher and linebacker depth', reader)
+        self.assertIn('not a complete assessment of the current roster', reader)
+        self.assertIn('docs/model-depth-audit-2026-09-09.md', panel)
+        self.assertIn('current edge-rusher and linebacker depth', panel.split('Choose a team below')[0])
         self.assertIn('not proof', reader)
         self.assertNotIn('Fitted contribution', reader)
         self.assertNotIn('model units', reader)
@@ -836,9 +840,17 @@ class ForecastLabTests(unittest.TestCase):
         for text in ('Why this forecast', 'NE by 1.2 points', 'adds 1.6 points for SEA',
                      'same rest', 'SEA by 0.4 points', 'Drake Maye', 'Sam Darnold',
                      '28.82', '18.82', '28.41', '17.18', '46.62',
-                     '23.53', '23.09', '#corrected-rating-NE', '#nonqb-availability'):
+                     '23.53', '23.09', '#corrected-rating-NE', '#nonqb-availability',
+                     'the quality of their backups are not rated separately'):
             self.assertIn(text, rendered)
         self.assertEqual((game, saved), before)
+        reason = pgo_forecast_lab._forecast_reason(game, saved)
+        reader, calculation = reason.split('<details class="forecast-reason-block forecast-reason-calculation">', 1)
+        self.assertEqual(reader.count('<h3>'), 4)
+        self.assertNotIn('Home = (combined points', reader)
+        self.assertIn('<summary>Full calculation and saved version</summary>', calculation)
+        self.assertIn('Home = (combined points', calculation)
+        self.assertIn('Saved edition:', calculation)
         neutral = {**game, **next(g for g in saved['games'] if g['location'] == 'Neutral')}
         self.assertIn('neutral site adds no home advantage',
                       pgo_forecast_lab._forecast_reason(neutral, saved))
@@ -865,6 +877,35 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn('Saved score calculation', archive)
         self.assertNotIn('Before the venue adjustment', archive)
         self.assertNotIn('Drake Maye', archive)
+
+    def test_forecast_reasons_have_their_own_full_width_row_for_each_game(self):
+        saved = json.loads((pgo_forecast_lab.CORRECTED_DIR / 'snapshot.json').read_bytes())
+        saved['_manifest_sha256'] = hashlib.sha256(
+            (pgo_forecast_lab.CORRECTED_DIR / 'manifest.json').read_bytes()).hexdigest()
+        games = [{**game, 'source_edition': saved['edition'],
+                  'source_generated_at': saved['generated_at'],
+                  'source_manifest_sha256': saved['_manifest_sha256'],
+                  'lock_at': '2026-09-09T23:20:00Z'} for game in saved['games'][:2]]
+        before = copy.deepcopy((games, saved))
+        for weekly, kind, columns in ((True, 'weekly', 7), (False, 'snapshot', 6)):
+            rendered = pgo_forecast_lab._forecast_weeks(games, [], weekly=weekly, corrected=saved)
+            rows = re.findall(r'<tr([^>]*)>(.*?)</tr>', rendered, re.S)[1:]
+            self.assertEqual(len(rows), 2 * len(games))
+            self.assertIn('Week 1 <span>2 games</span>', rendered)
+            for index, game in enumerate(games):
+                primary_attrs, primary = rows[index * 2]
+                reason_attrs, reason = rows[index * 2 + 1]
+                self.assertIn(f'data-{kind}-game-id="{game["game_id"]}"', primary_attrs)
+                self.assertEqual(rendered.count(f'data-{kind}-game-id="{game["game_id"]}"'), 1)
+                self.assertNotIn('Why this forecast', primary)
+                self.assertIn(pgo_forecast_lab._spread(game), primary)
+                self.assertIn('Model averages', primary)
+                self.assertIn('class="forecast-reason-row"', reason_attrs)
+                self.assertIn(f'<td colspan="{columns}">', reason)
+                self.assertIn(pgo_forecast_lab._forecast_reason(game, saved if weekly else None), reason)
+                self.assertNotIn('<details class="forecast-reason" open', reason)
+                self.assertNotIn(f'data-{kind}-game-id', reason_attrs)
+        self.assertEqual((games, saved), before)
 
     def test_whole_score_summaries_keep_decimal_averages_and_unrounded_favorite(self):
         saved = json.loads((pgo_forecast_lab.CORRECTED_DIR / 'snapshot.json').read_bytes())

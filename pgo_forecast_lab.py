@@ -585,29 +585,38 @@ def _forecast_reason(game, corrected=None):
                          f'{away} {game["away_rest"]}; the rest adjustment is {rest:+.2f} '
                          f'points to the home-team lead (the difference is capped at seven days).')
             drivers = (
+                '<div class="forecast-reason-block"><h3>How the edge is built</h3>'
                 f'<p>Before the venue adjustment: {_spread({**game, "margin": gap})}. '
-                f'{venue_text} {rest_text} That leaves {_spread(game)}.</p>'
+                f'{venue_text} {rest_text} That leaves {_spread(game)}.</p></div>'
+                '<div class="forecast-reason-block"><h3>Team and quarterback inputs</h3>'
                 '<p>The team ratings combine recent results, passing and rushing efficiency, '
                 'sacks, turnovers, and quarterback history. These are model inputs, '
-                'not a scouting explanation of how this particular game will unfold.</p>'
+                'not a scouting explanation of how this particular game will unfold. '
+                'Past team defense results are included, but current edge-rusher and linebacker depth '
+                'and the quality of their backups are not rated separately.</p>'
                 f'<p>Expected quarterbacks: {away}: {html.escape(teams[game["away"]]["qb_name"])}; '
                 f'{home}: {html.escape(teams[game["home"]]["qb_name"])}. Their history is already '
                 'in the ratings; it is not added again here. '
                 f'<a href="#corrected-rating-{away}">{away} rating explanation</a> &middot; '
-                f'<a href="#corrected-rating-{home}">{home} rating explanation</a>.</p>'
+                f'<a href="#corrected-rating-{home}">{home} rating explanation</a>.</p></div>'
+                '<div class="forecast-reason-block"><h3>Combined points</h3>'
                 '<p>Combined points uses each team’s 2025 regular-season points scored and '
                 f'allowed per game: {away} {values[0]:.2f} scored / {values[1]:.2f} allowed; '
                 f'{home} {values[2]:.2f} scored / {values[3]:.2f} allowed. '
                 f'Add those four averages and divide by two: {total:.2f}. '
-                'This is a simple scoring-history estimate.</p>'
+                'This is a simple scoring-history estimate.</p></div>'
+                '<div class="forecast-reason-block"><h3>Injury assumptions</h3>'
                 '<p>Injuries beyond the quarterback are not included in this saved forecast. '
-                '<a href="#nonqb-availability">Separate injury scenarios and missing information</a>.</p>'
+                '<a href="#nonqb-availability">Separate injury scenarios and missing information</a>.</p></div>'
             )
     edition = html.escape(str(game.get('source_edition', 'See this archive’s saved method')))
     return ('<details class="forecast-reason"><summary>Why this forecast</summary>'
-            f'<div class="forecast-reason-body">{drivers}{arithmetic}'
+            f'<div class="forecast-reason-body">{drivers}</div>'
+            '<details class="forecast-reason-block forecast-reason-calculation">'
+            '<summary>Full calculation and saved version</summary>'
+            f'{arithmetic}'
             f'<p>Saved edition: {edition}. Experimental / HOLD; this explains the calculation, '
-            'not certainty about the result.</p></div></details>')
+            'not certainty about the result.</p></details></details>')
 
 
 def _forecast_weeks(games, results, *, weekly=False, corrected=None):
@@ -647,7 +656,6 @@ def _forecast_weeks(games, results, *, weekly=False, corrected=None):
                 comparison = '<details><summary>Compare forecasts</summary>' + "".join(
                     f'<p>{label}: {_spread({**game, "margin": game[key]})}</p>'
                     for label, key in controls) + '</details>'
-            comparison += _forecast_reason(game, corrected if weekly else None)
             edition = (f'<br><small>{html.escape(_edition_name(game["source_edition"]))}</small>'
                        if weekly and game.get('source_edition') else '')
             rows.append(
@@ -657,6 +665,8 @@ def _forecast_weeks(games, results, *, weekly=False, corrected=None):
                 f'{timing}'
                 f'<td>{_snapshot_kickoff_time(game["kickoff"])}</td>'
                 f'<td>{actual}</td></tr>'
+                f'<tr class="forecast-reason-row"><td colspan="{7 if weekly else 6}">'
+                f'{_forecast_reason(game, corrected if weekly else None)}</td></tr>'
             )
         weeks.append(
             f'<details class="forecast-week {kind}-week"{" open" if week == min(game["week"] for game in games) else ""}>'
@@ -876,9 +886,15 @@ def _corrected_section(snapshot):
         if team['team'] == 'NE':
             ne_explanation = (f'<p><strong>Why does New England rank #{team["rank"]}?</strong> '
                               f'The biggest boosts in this calculation come from {html.escape(drivers)}. '
+                              '<strong>The model does not separately grade current edge-rusher and linebacker depth '
+                              'or the quality of their backups.</strong> This is not a complete assessment of the current roster. '
+                              '<a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/model-depth-audit-2026-09-09.md">'
+                              'What the model includes and misses</a>. '
                               'Several performance inputs describe the same games, so they are not separate proof '
                               'of the team’s strength. We have not established that this is the right ranking.</p>')
-        caution = ('Recent results and passing numbers partly describe the same games. This position in the ranking '
+        caution = ('The model does not separately grade current edge-rusher and linebacker depth or the quality of their backups. '
+                   'This is not a complete assessment of the current roster. '
+                   'Recent results and passing numbers partly describe the same games. This position in the ranking '
                    'is not proof that New England is the NFL’s best team.' if team['team'] == 'NE' else
                    'Several inputs describe the same games. This ranking is not proof of how the team will perform next.')
         cards.append(f'''<details class="lab-detail rating-explanation corrected-team" id="corrected-rating-{html.escape(team['team'], quote=True)}">
@@ -1303,7 +1319,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
 <title>PGO Forecast Lab</title><style>{css}
 .lab-wrap{{max-width:1180px;margin:0 auto;padding:24px 18px 60px}}.lab-wrap a{{color:var(--accent)}}.lab-hero{{max-width:none;padding:26px;border-radius:14px;color:#fff;text-align:left}}.lab-hero a{{color:var(--highlight)}}.lab-hero a:focus-visible{{outline-color:var(--highlight)}}.lab-hero .status{{border-color:var(--highlight);margin-bottom:22px}}
 .status{{display:inline-block;padding:6px 10px;border:1px solid var(--orange);border-radius:999px;font-weight:800}}.metric-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}}.metric{{padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}}.metric h3{{margin-top:0}}.forecast-week,.lab-detail,.original-archive,.preseason-archive{{margin:12px 0;border:1px solid var(--border);border-radius:10px;padding:12px}}.forecast-week summary,.lab-detail summary,.original-archive>summary,.preseason-archive>summary{{cursor:pointer;font-weight:800}}.forecast-week summary span{{color:var(--mut);font-weight:500}}table{{width:100%;border-collapse:collapse}}th,td{{padding:9px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}}th:first-child{{text-align:left}}.notice{{padding:14px;border-left:4px solid var(--orange);background:var(--panel)}}code{{overflow-wrap:anywhere}}.weekly-status{{font-weight:800}}
-.forecast-reason-body{{width:min(280px,66vw);white-space:normal;font-size:13px;font-weight:400;line-height:1.5;overflow-wrap:anywhere}}.forecast-reason-body p{{white-space:normal}}.forecast-week th,.forecast-week td{{vertical-align:top}}
+.forecast-week>.table-shell{{container-type:inline-size}}.forecast-week .forecast-reason-row>td{{text-align:left;padding:0 9px 10px;white-space:normal}}.forecast-reason{{width:min(960px,calc(100cqw - 18px));max-width:100%;font-size:13px;font-weight:400;line-height:1.5}}.forecast-reason>summary{{padding:7px 0;font-size:13px}}.forecast-reason-body{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px;padding:8px 0 4px;white-space:normal;font-size:13px;font-weight:400;line-height:1.5;overflow-wrap:anywhere}}.forecast-reason-block{{min-width:0;padding:14px;border:1px solid var(--border);border-radius:8px;background:var(--panel)}}.forecast-reason-block h3{{margin:0 0 8px;font-size:14px;color:var(--accent)}}.forecast-reason-block p{{margin:0 0 10px;white-space:normal}}.forecast-reason-block p:last-child{{margin-bottom:0}}.forecast-reason-calculation{{margin-top:12px;white-space:normal;overflow-wrap:anywhere}}.forecast-reason-calculation>summary{{margin-bottom:8px}}.forecast-week th,.forecast-week td{{vertical-align:top}}
 .rating-explanation table{{table-layout:fixed}}.rating-explanation th{{white-space:normal;user-select:text}}.rating-explanation tbody th{{background:transparent;color:inherit;font-size:inherit;letter-spacing:normal;text-transform:none}}.rating-explanation thead th:last-child{{width:110px}}.rating-summary tr:last-child{{font-weight:800}}
 .study-table{{table-layout:fixed}}.study-table th,.study-table td{{white-space:normal;overflow-wrap:anywhere}}.study-table th:first-child{{width:42%}}
 .forecast-week tbody th{{text-transform:none;letter-spacing:normal}}
