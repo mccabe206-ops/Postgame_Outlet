@@ -8,6 +8,7 @@ import json
 import math
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -29,6 +30,58 @@ class ForecastLabTests(unittest.TestCase):
         # These fixtures exercise archived/weekly Lab inputs; the real additive
         # packages and shared grading feed are covered in test_pgo_model_updates.
         self.enterContext(patch("pgo_model_updates.render_current_updates", return_value=""))
+
+    @unittest.skipUnless(shutil.which("node"), "Node is required for the fragment behavior check")
+    def test_shared_fragment_script_activates_owning_tab_after_handlers_bind(self):
+        script = pgo_forecast_lab.FORECAST_DISPLAY_SCRIPT.removeprefix('<script>').removesuffix('</script>')
+        harness = r"""
+const assert = require('node:assert/strict');
+const vm = require('node:vm');
+const events = {};
+const panel = {hidden:true, getAttribute(name) {return name === 'aria-labelledby' ? 'tab-comparison' : null;}};
+const detail = {tagName:'DETAILS', open:false, parentElement:null};
+let scrolls = 0, handlerReady = false, clicks = 0;
+const tab = {click() {clicks++; if (handlerReady) panel.hidden = false;}};
+const target = {tagName:'DIV', parentElement:detail,
+  closest(selector) {return selector === '[role="tabpanel"]' ? panel : null;},
+  scrollIntoView() {scrolls++;}};
+const document = {
+  readyState:'loading',
+  getElementById(id) {return {'reason':target, 'tab-comparison':tab}[id] || null;},
+  querySelectorAll() {return [];}, querySelector() {return null;},
+  addEventListener(name, callback) {events[name] = callback;}
+};
+const location = {hash:'#reason'};
+const window = {addEventListener(name, callback) {events[name] = callback;}};
+const context = {document, window, location, Date, setTimeout() {throw Error('No cutoff timer expected');}};
+vm.createContext(context);
+vm.runInContext(SCRIPT, context);
+// The script runs inside the PGO panel, before the page binds tab handlers.
+handlerReady = true;
+if (events.DOMContentLoaded) events.DOMContentLoaded();
+assert.equal(panel.hidden, false, 'cold deep link must activate PGO tab after its handler binds');
+assert.equal(detail.open, true);
+assert.ok(scrolls > 0);
+assert.equal(location.hash, '#reason');
+// Later hash navigation and native anchor clicks use the same owning-tab path.
+panel.hidden = true; detail.open = false;
+events.hashchange();
+assert.equal(panel.hidden, false); assert.equal(detail.open, true);
+panel.hidden = true;
+events.click({target:{closest() {return {hash:'#reason'};}}});
+assert.equal(panel.hidden, false);
+// Standalone Lab targets have no tabpanel and still open their disclosures.
+target.closest = () => null; detail.open = false;
+const before = clicks;
+events.hashchange();
+assert.equal(detail.open, true); assert.equal(clicks, before);
+location.hash = '#missing'; events.hashchange();
+console.log('fragment behavior PASS');
+""".replace('SCRIPT', json.dumps(script))
+        result = subprocess.run([shutil.which('node')], input=harness, text=True,
+                                capture_output=True, check=False)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('fragment behavior PASS', result.stdout)
 
     def test_latest_corrected_revision_drives_the_input_panel_after_refresh(self):
         weekly_root = Path('docs/evidence/forecast-lab-2026/weekly').resolve()
