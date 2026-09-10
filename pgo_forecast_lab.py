@@ -1341,10 +1341,13 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
                 + lead.replace('<h1>PGO Forecast Lab</h1>', '') + '</details>'
             )
             if selected:
+                confidence_link = ('<a href="#pgo-confidence-picks">PGO confidence picks</a>.'
+                                   if 'id="pgo-confidence-picks"' in updates else
+                                   '<a href="confidence-pool.html">Confidence pool calculator</a>.')
                 lead = ('<header class="lab-hero hero"><h1>PGO Forecast Lab</h1>'
                         '<p>September 9 predictions, explanations and grades. '
                         '<a href="index.html">Back to the ratings board</a>. '
-                        '<a href="confidence-pool.html">Confidence pool calculator</a>.</p></header>'
+                        + confidence_link + '</p></header>'
                         + updates + '<details class="lab-detail" id="previous-models">'
                         '<summary>Compare previous models</summary>' + lead + '</details>')
             else:

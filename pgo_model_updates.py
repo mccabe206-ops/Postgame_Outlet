@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parent
 DEFAULT_DIR = ROOT / 'docs/evidence/forecast-lab-2026/september-09-postseason'
 DEFENSE_TEST_DIR = ROOT / 'research/pgo_defensive_depth_candidate/run-20260909-attempt01'
 DEFENSE_TEST_MANIFEST_SHA256 = 'd23b20fb253ad13d00bd71807c89ecad5368868f06bb146418ac2eb47d422f92'
+CONFIDENCE_MANIFEST_SHA256 = '4fc0b0972bfc29b72d783fe2d3b12fd0f4b290ae4b400d8e18f7b2e24cc55437'
 
 STYLE = """<style>
 .pgo-model-updates{margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
@@ -38,6 +39,11 @@ STYLE = """<style>
 .pgo-model-updates .rating-explanation td{font-size:12px}
 .pgo-model-updates .model-update-evidence li{margin:8px 0;overflow-wrap:anywhere}
 .pgo-model-updates .model-update-columns{display:none;align-items:center;gap:8px;margin:12px 0}
+.pgo-confidence{margin:24px 0;padding:18px;border:1px solid var(--border);border-top:4px solid var(--orange);border-radius:10px;background:var(--panel)}
+.pgo-confidence .confidence-summary{display:flex;flex-wrap:wrap;gap:18px;margin:16px 0}
+.pgo-confidence .confidence-summary strong{display:block;font-size:26px;color:var(--accent)}
+.pgo-confidence .confidence-summary span{font-size:13px}.pgo-confidence .confidence-table th{white-space:normal;min-width:80px}
+.pgo-confidence .confidence-table a{font-weight:700}.pgo-confidence .confidence-note{font-size:13px;line-height:1.5}
 @media(max-width:700px){.pgo-model-updates .pgo-team-name{display:none}.pgo-model-updates .model-update-columns{display:flex}.postseason-team-table .model-update-extra{display:none}.model-update-columns:has(input:checked)+.table-shell .model-update-extra{display:table-cell}}
 </style>"""
 
@@ -118,7 +124,7 @@ def _reason(game, snapshot):
             f'<summary>Full calculation and saved version</summary>{calculation}</details></details>')
 
 
-def _candidate(snapshot, weekly=None, results=(), provenance=(), *, depth_available=False):
+def _candidate(snapshot, weekly=None, results=(), provenance=(), *, depth_available=False, confidence=None):
     from pgo_forecast_lab import _forecast_weeks, _forecast_reason, snapshot_interim_metrics, _snapshot_metric_cards, _https_url, _spread, _corrected_section
     if snapshot['edition'] != EDITION or snapshot['method']['status'] != 'EXPERIMENTAL / HOLD':
         raise ValueError('Model update requires the separate experimental postseason edition')
@@ -187,7 +193,8 @@ def _candidate(snapshot, weekly=None, results=(), provenance=(), *, depth_availa
         '<p><strong>Injury reports are shown as context, not numerical adjustments to these ratings '
         'or saved forecasts.</strong> The listed quarterback is assumed to play. '
         f'{injury_link} &middot; '
-        '<a href="#previous-models">Compare previous models</a>.</p>'
+        '<a href="#previous-models">Compare previous models</a>.'
+        + (' <a href="#pgo-confidence-picks">PGO confidence picks and expected pool points</a>.' if confidence is not None else '') + '</p>'
         f'<p><strong>This candidate {outcome}.</strong> Average margin error was '
         f'{validation["candidate_mae"]:.3f} points, compared with {validation["baseline_mae"]:.3f} '
         f'for the baseline on the same {validation["games"]} games. Lower is better. '
@@ -207,6 +214,7 @@ def _candidate(snapshot, weekly=None, results=(), provenance=(), *, depth_availa
         f'<tbody>{"".join(rows)}</tbody></table></div>'
         '<details class="model-update-evidence" id="postseason-explanations"><summary>Why teams rank here</summary>'
         f'{_corrected_section(snapshot, latest_inactive_notes=depth_available)}</details>'
+        + (render_confidence_picks(confidence, results) if confidence is not None else '') +
         '<h3>September 9 saved matchups</h3><p>Scores are rounded averages. Open Model averages '
         'for decimals. About 25 points each means both estimates round to 25, not a predicted '
         'tie. The favored team uses the unrounded margin. These September 9 records have their own grades; earlier versions remain available, '
@@ -385,11 +393,11 @@ def _load_defense_test():
                 report_url='https://github.com/walshja9/Postgame_Outlet/blob/main/docs/model-update-2026-09-09.md')
 
 
-def render_updates(snapshot=None, depth=None, *, weekly=None, results=(), provenance=(), defense_test=None):
+def render_updates(snapshot=None, depth=None, *, weekly=None, results=(), provenance=(), defense_test=None, confidence=None):
     if snapshot is None and depth is None and defense_test is None:
         return ''
     return ('<div class="pgo-model-updates" id="model-updates">' + STYLE
-            + (_candidate(snapshot, weekly, results, provenance, depth_available=depth is not None) if snapshot is not None else '')
+            + (_candidate(snapshot, weekly, results, provenance, depth_available=depth is not None, confidence=confidence) if snapshot is not None else '')
             + (render_defense_test(defense_test) if defense_test is not None else '')
             + (_depth_evidence(depth, snapshot.get('coverage') if snapshot else None) if depth is not None else '') + '</div>')
 
@@ -420,5 +428,79 @@ def render_current_updates():
     if depth_dir.exists() or depth_dir.is_symlink():
         from research.pgo_defensive_depth_candidate.validation import load_verified
         depth = load_verified(depth_dir, optional=True)
+    confidence = None
+    confidence_dir = DEFAULT_DIR.parents[1] / 'confidence-pool-2026/week1-remaining'
+    if snapshot is not None and (confidence_dir.exists() or confidence_dir.is_symlink()):
+        from pgo_confidence_picks import load_verified
+        confidence = load_verified(confidence_dir, CONFIDENCE_MANIFEST_SHA256, snapshot)
     return render_updates(snapshot, depth, weekly=weekly, results=results, provenance=provenance,
-                          defense_test=_load_defense_test())
+                          defense_test=_load_defense_test(), confidence=confidence)
+
+
+def render_confidence_picks(pool, results=()):
+    """Explain a verified, frozen model-derived pool allocation without refitting."""
+    from pgo_confidence_picks import grade
+    if pool['status'] != 'EXPERIMENTAL / HOLD':
+        raise ValueError('Confidence probabilities must retain experimental status')
+    grades = grade(pool, results)
+    games = sorted(pool['games'], key=lambda game: -game['confidence_points'])
+    rows = []
+    for game in games:
+        earned = grades['games'].get(game['game_id'])
+        rows.append(
+            f'<tr data-confidence-game-id="{_text(game["game_id"])}">'
+            f'<th scope="row"><a href="#postseason-why-{_text(game["game_id"])}">'
+            f'{_text(game["away"])} @ {_text(game["home"])}</a></th>'
+            f'<td><strong>{_text(game["selected_team"])}</strong></td>'
+            f'<td>{game["win_probability"] * 100:.1f}%</td>'
+            f'<td>{game["confidence_points"]}</td>'
+            f'<td>{game["expected_points"]:.2f}</td>'
+            f'<td>{earned["earned_points"] if earned is not None else "&mdash;"}</td></tr>')
+    excluded = '; '.join(f'{_text(row["away"])} @ {_text(row["home"])}' for row in pool['excluded'])
+    metrics = ''
+    if grades['finalized_games']:
+        metrics = '<p>Probability grades (lower is better): ' + '; '.join(
+            f'{_text(name)} log loss {value["log_loss"]:.4f}, Brier {value["brier"]:.4f}'
+            for name, value in grades['metrics'].items()) + '. Interim results, not proof of accuracy.</p>'
+    return (
+        '<div class="pgo-confidence" id="pgo-confidence-picks">'
+        '<h3>PGO confidence picks</h3><p><strong>EXPERIMENTAL / HOLD.</strong> '
+        f'Week 1 &middot; {len(games)} remaining games. These picks and win chances come from '
+        'the September 9 postseason model.</p>'
+        '<p>We give the most confidence points to PGO\'s strongest win chances. '
+        '<strong>Expected pool points = confidence points &times; the picked team\'s win chance.</strong> '
+        'These are confidence-pool points, not NFL scoreboard points.</p>'
+        '<div class="confidence-summary">'
+        f'<div><span>Expected pool points</span><strong>{pool["expected_points_total"]:.2f}</strong>'
+        f'<span>{sum(g["confidence_points"] for g in games)} points available across this slate</span></div>'
+        f'<div><span>Points earned so far</span><strong>{grades["earned_points"]}</strong>'
+        f'<span>{grades["finalized_games"]} of {len(games)} final results recorded</span></div></div>'
+        + (f'<p class="confidence-note"><strong>{excluded} was already locked when this layer was created.</strong> '
+           'It receives no new confidence allocation. Its original prediction remains in the saved matchups. '
+           'This is a remaining-games slate, not a full 16-game pool entry.</p>' if excluded else '') +
+        '<div class="table-shell" role="region" aria-label="PGO model confidence picks" tabindex="0">'
+        '<table class="confidence-table"><thead><tr><th scope="col">Matchup</th><th scope="col">PGO pick</th>'
+        '<th scope="col">Model win chance</th><th scope="col">Confidence points</th>'
+        '<th scope="col">Expected pool points</th><th scope="col">Earned points</th></tr></thead>'
+        f'<tbody>{"".join(rows)}</tbody></table></div>'
+        '<p class="confidence-note">Win chances are experimental estimates, not guarantees. '
+        'Non-QB injuries are not numerical adjustments in these saved forecasts. '
+        'The listed quarterback is assumed to play. A loss or tie earns zero pool points.</p>'
+        '<details class="model-update-evidence"><summary>How PGO calculates and grades these picks</summary>'
+        '<p>The model first predicts the home team\'s scoring margin. A probability curve fitted '
+        'to 2018&ndash;2025 historical out-of-fold forecasts converts that margin into home-win, away-win '
+        'and tie probabilities. The team with the larger win probability is the pick. '
+        'This curve preserves the model\'s favorite and its ordering by margin size.</p>'
+        f'<p>Confidence points run from 1 through {len(games)}, used once each. '
+        'Multiplying each allocation by its win chance gives its expected contribution; we add those '
+        'contributions for the total. The calculation uses full precision before display rounding. '
+        'Maximizing expected points is different from maximizing the chance of finishing first.</p>'
+        f'<p>Saved {pgo_current_board._time(pool["generated_at"])}. Allocations stay fixed as games lock. '
+        'Official final results supply earned points and probability grades; pending games are not counted as losses.</p>'
+        f'{metrics}<p>The historical test showed only a small improvement and reused previously examined seasons. '
+        'Historical source timing and calibration transfer remain limitations. Live probability accuracy '
+        'has not been established.</p><p>'
+        '<a href="evidence/confidence-pool-2026/week1-remaining/picks.json">Saved model picks and exact calculation</a> &middot; '
+        '<a href="evidence/confidence-pool-2026/week1-remaining/manifest.json">Verification record</a> &middot; '
+        '<a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/confidence-pool-study.md">Historical probability test</a> &middot; '
+        '<a href="confidence-pool.html">Try your own probability assumptions</a></p></details></div>')

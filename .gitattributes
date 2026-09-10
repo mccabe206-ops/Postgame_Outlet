@@ -54,3 +54,5 @@ tests/test_pgo_postseason_candidate.py text eol=lf
 tests/test_pgo_model_updates.py text eol=lf
 tests/test_pgo_defensive_fit.py text eol=lf
 research/pgo_confidence_pool_20260909/** -text whitespace=cr-at-eol
+docs/evidence/confidence-pool-2026/** -text whitespace=cr-at-eol
+pgo_confidence_picks.py -text

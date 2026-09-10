@@ -1,0 +1,652 @@
+{
+  "calibration": {
+    "constant_probabilities": {
+      "away": 0.45774647887323944,
+      "home": 0.5380281690140845,
+      "tie": 0.004225352112676056
+    },
+    "history_sha256": "3df4dbf26743a3686b6253bb4eb578457d0e2629dde1f0218f215c462feea0cf",
+    "method_code_sha256": "35bdbab63f77b76b9e555dfdd64d8f1b66e05de827e48fda5ca50fb157843f68",
+    "objective": "Summed non-tie negative log likelihood plus 0.5*slope^2; nonnegative scalar; no intercept",
+    "slopes": {
+      "corrected": 0.13653835182620755,
+      "postseason": 0.1363945679246637
+    },
+    "tie_probability": 0.004227336777829967,
+    "training_games": 2127,
+    "training_latest_kickoff": "2026-01-05T01:20:00+00:00",
+    "training_seasons": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ]
+  },
+  "excluded": [
+    {
+      "away": "NE",
+      "game_id": "2026_01_NE_SEA",
+      "home": "SEA",
+      "kickoff": "2026-09-10T00:20:00+00:00",
+      "lock_at": "2026-09-09T23:20:00+00:00",
+      "reason": "EXISTING_CUTOFF_ELAPSED",
+      "season": 2026,
+      "week": 1
+    }
+  ],
+  "expected_points_total": 77.00171583709786,
+  "games": [
+    {
+      "away": "DEN",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "KC",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.5097415318586956,
+            "home": 0.4860311313634745,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "DEN",
+          "win_probability": 0.5097415318586956
+        }
+      },
+      "confidence_points": 1,
+      "corrected_margin": -0.3488479111190876,
+      "expected_points": 0.5019987678486757,
+      "game_id": "2026_01_DEN_KC",
+      "home": "KC",
+      "kickoff": "2026-09-15T00:15:00+00:00",
+      "lock_at": "2026-09-14T23:15:00+00:00",
+      "margin": -0.12111885918859044,
+      "probabilities": {
+        "away": 0.5019987678486757,
+        "home": 0.49377389537349436,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "DEN",
+      "week": 1,
+      "win_probability": 0.5019987678486757
+    },
+    {
+      "away": "BAL",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "IND",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.5130850175949024,
+            "home": 0.48268764562726757,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "BAL",
+          "win_probability": 0.5130850175949024
+        }
+      },
+      "confidence_points": 2,
+      "corrected_margin": -0.44728685309533656,
+      "expected_points": 1.0191383411335075,
+      "game_id": "2026_01_BAL_IND",
+      "home": "IND",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "lock_at": "2026-09-13T16:00:00+00:00",
+      "margin": -0.3441365766271646,
+      "probabilities": {
+        "away": 0.5095691705667538,
+        "home": 0.48620349265541635,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "BAL",
+      "week": 1,
+      "win_probability": 0.5095691705667538
+    },
+    {
+      "away": "BUF",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "HOU",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.4637060306107764,
+            "home": 0.5320666326113936,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "HOU",
+          "win_probability": 0.5320666326113936
+        }
+      },
+      "confidence_points": 3,
+      "corrected_margin": 1.007174410715629,
+      "expected_points": 1.571164869169074,
+      "game_id": "2026_01_BUF_HOU",
+      "home": "HOU",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "lock_at": "2026-09-13T16:00:00+00:00",
+      "margin": 0.7615638609605188,
+      "probabilities": {
+        "away": 0.4720510401658121,
+        "home": 0.523721623056358,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "HOU",
+      "week": 1,
+      "win_probability": 0.523721623056358
+    },
+    {
+      "away": "ATL",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "PIT",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.4141067632274035,
+            "home": 0.5816658999947667,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "PIT",
+          "win_probability": 0.5816658999947667
+        }
+      },
+      "confidence_points": 4,
+      "corrected_margin": 2.488475952663037,
+      "expected_points": 2.1439107070613703,
+      "game_id": "2026_01_ATL_PIT",
+      "home": "PIT",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "lock_at": "2026-09-13T16:00:00+00:00",
+      "margin": 1.124031595894316,
+      "probabilities": {
+        "away": 0.45979498645682754,
+        "home": 0.5359776767653426,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "PIT",
+      "week": 1,
+      "win_probability": 0.5359776767653426
+    },
+    {
+      "away": "DAL",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "NYG",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.44639502036033224,
+            "home": 0.5493776428618379,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "NYG",
+          "win_probability": 0.5493776428618379
+        }
+      },
+      "confidence_points": 5,
+      "corrected_margin": 1.5203187999808454,
+      "expected_points": 2.729746045780359,
+      "game_id": "2026_01_DAL_NYG",
+      "home": "NYG",
+      "kickoff": "2026-09-14T00:20:00+00:00",
+      "lock_at": "2026-09-13T23:20:00+00:00",
+      "margin": 1.4199302021598754,
+      "probabilities": {
+        "away": 0.4498234540660982,
+        "home": 0.5459492091560718,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "NYG",
+      "week": 1,
+      "win_probability": 0.5459492091560718
+    },
+    {
+      "away": "GB",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "MIN",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.42801448880250614,
+            "home": 0.5677581744196639,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "MIN",
+          "win_probability": 0.5677581744196639
+        }
+      },
+      "confidence_points": 6,
+      "corrected_margin": 2.0692979494256125,
+      "expected_points": 3.3257956122316017,
+      "game_id": "2026_01_GB_MIN",
+      "home": "MIN",
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "lock_at": "2026-09-13T19:25:00+00:00",
+      "margin": 1.6685927007011319,
+      "probabilities": {
+        "away": 0.44147339451690315,
+        "home": 0.5542992687052669,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "MIN",
+      "week": 1,
+      "win_probability": 0.5542992687052669
+    },
+    {
+      "away": "CHI",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "CAR",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.6051733956360096,
+            "home": 0.3905992675861605,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "CHI",
+          "win_probability": 0.6051733956360096
+        }
+      },
+      "confidence_points": 7,
+      "corrected_margin": -3.2066659083493882,
+      "expected_points": 3.997692134027698,
+      "game_id": "2026_01_CHI_CAR",
+      "home": "CAR",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "lock_at": "2026-09-13T16:00:00+00:00",
+      "margin": -2.1719416580254016,
+      "probabilities": {
+        "away": 0.5710988762896712,
+        "home": 0.4246737869324989,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "CHI",
+      "week": 1,
+      "win_probability": 0.5710988762896712
+    },
+    {
+      "away": "MIA",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "LV",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.5736275288307495,
+            "home": 0.4221451343914206,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "MIA",
+          "win_probability": 0.5736275288307495
+        }
+      },
+      "confidence_points": 8,
+      "corrected_margin": -2.245750749477357,
+      "expected_points": 4.569272172900891,
+      "game_id": "2026_01_MIA_LV",
+      "home": "LV",
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "lock_at": "2026-09-13T19:25:00+00:00",
+      "margin": -2.173752189641478,
+      "probabilities": {
+        "away": 0.5711590216126113,
+        "home": 0.42461364160955867,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "MIA",
+      "week": 1,
+      "win_probability": 0.5711590216126113
+    },
+    {
+      "away": "TB",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "CIN",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.3939972290617138,
+            "home": 0.6017754341604562,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "CIN",
+          "win_probability": 0.6017754341604562
+        }
+      },
+      "confidence_points": 9,
+      "corrected_margin": 3.101989006450409,
+      "expected_points": 5.413862709055077,
+      "game_id": "2026_01_TB_CIN",
+      "home": "CIN",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "lock_at": "2026-09-13T16:00:00+00:00",
+      "margin": 3.0980196144251066,
+      "probabilities": {
+        "away": 0.3942323622160505,
+        "home": 0.6015403010061197,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "CIN",
+      "week": 1,
+      "win_probability": 0.6015403010061197
+    },
+    {
+      "away": "NYJ",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "TEN",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.3875291963282789,
+            "home": 0.6082434668938912,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "TEN",
+          "win_probability": 0.6082434668938912
+        }
+      },
+      "confidence_points": 10,
+      "corrected_margin": 3.301519634845833,
+      "expected_points": 6.107294826212196,
+      "game_id": "2026_01_NYJ_TEN",
+      "home": "TEN",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "lock_at": "2026-09-13T16:00:00+00:00",
+      "margin": 3.3820894588799484,
+      "probabilities": {
+        "away": 0.3850431806009505,
+        "home": 0.6107294826212196,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "TEN",
+      "week": 1,
+      "win_probability": 0.6107294826212196
+    },
+    {
+      "away": "SF",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "LAR",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.41268795659344837,
+            "home": 0.5830847066287217,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "LAR",
+          "win_probability": 0.5830847066287217
+        }
+      },
+      "confidence_points": 11,
+      "corrected_margin": 2.5314551641918106,
+      "expected_points": 7.026634873782614,
+      "game_id": "2026_01_SF_LA",
+      "home": "LAR",
+      "kickoff": "2026-09-11T00:35:00+00:00",
+      "lock_at": "2026-09-10T23:35:00+00:00",
+      "margin": 4.266054498387761,
+      "probabilities": {
+        "away": 0.3569876746964779,
+        "home": 0.6387849885256922,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "LAR",
+      "week": 1,
+      "win_probability": 0.6387849885256922
+    },
+    {
+      "away": "NO",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "DET",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.33247806114675266,
+            "home": 0.6632946020754175,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "DET",
+          "win_probability": 0.6632946020754175
+        }
+      },
+      "confidence_points": 12,
+      "corrected_margin": 5.058251786928585,
+      "expected_points": 7.996676705693229,
+      "game_id": "2026_01_NO_DET",
+      "home": "DET",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "lock_at": "2026-09-13T16:00:00+00:00",
+      "margin": 5.16628825525041,
+      "probabilities": {
+        "away": 0.3293829377477344,
+        "home": 0.6663897254744358,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "DET",
+      "week": 1,
+      "win_probability": 0.6663897254744358
+    },
+    {
+      "away": "WAS",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "PHI",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.30481923220068413,
+            "home": 0.6909534310214859,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "PHI",
+          "win_probability": 0.6909534310214859
+        }
+      },
+      "confidence_points": 13,
+      "corrected_margin": 5.993579806381076,
+      "expected_points": 8.876260276652884,
+      "game_id": "2026_01_WAS_PHI",
+      "home": "PHI",
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "lock_at": "2026-09-13T19:25:00+00:00",
+      "margin": 5.718967199262716,
+      "probabilities": {
+        "away": 0.31298341117194806,
+        "home": 0.6827892520502219,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "PHI",
+      "week": 1,
+      "win_probability": 0.6827892520502219
+    },
+    {
+      "away": "ARI",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "LAC",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.256470767735693,
+            "home": 0.7393018954864771,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "LAC",
+          "win_probability": 0.7393018954864771
+        }
+      },
+      "confidence_points": 14,
+      "corrected_margin": 7.753804334970602,
+      "expected_points": 9.899244473758241,
+      "game_id": "2026_01_ARI_LAC",
+      "home": "LAC",
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "lock_at": "2026-09-13T19:25:00+00:00",
+      "margin": 6.5678899543040385,
+      "probabilities": {
+        "away": 0.2886837722394385,
+        "home": 0.7070888909827315,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "LAC",
+      "week": 1,
+      "win_probability": 0.7070888909827315
+    },
+    {
+      "away": "CLE",
+      "baselines": {
+        "constant": {
+          "probabilities": {
+            "away": 0.45774647887323944,
+            "home": 0.5380281690140845,
+            "tie": 0.004225352112676056
+          },
+          "selected_team": "JAX",
+          "win_probability": 0.5380281690140845
+        },
+        "corrected": {
+          "probabilities": {
+            "away": 0.19780084020575697,
+            "home": 0.797971823016413,
+            "tie": 0.004227336777829967
+          },
+          "selected_team": "JAX",
+          "win_probability": 0.797971823016413
+        }
+      },
+      "confidence_points": 15,
+      "corrected_margin": 10.215537259193557,
+      "expected_points": 11.82302332179045,
+      "game_id": "2026_01_CLE_JAX",
+      "home": "JAX",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "lock_at": "2026-09-13T16:00:00+00:00",
+      "margin": 9.782500032185865,
+      "probabilities": {
+        "away": 0.20757110843614013,
+        "home": 0.7882015547860299,
+        "tie": 0.004227336777829967
+      },
+      "season": 2026,
+      "selected_team": "JAX",
+      "week": 1,
+      "win_probability": 0.7882015547860299
+    }
+  ],
+  "generated_at": "2026-09-10T00:28:38.475014+00:00",
+  "max_points": 120,
+  "schema_version": 1,
+  "slate_description": "Remaining Week 1 games only; frozen confidence values, not a full-week pool entry",
+  "source_edition": "pgo-postseason-week1-2026-09-09",
+  "source_snapshot_generated_at": "2026-09-09T22:26:37.633108+00:00",
+  "source_snapshot_sha256": "73ed36f3b556d17a8504b303a5a79a1da0ba01fdf0cb883c73b26226090508a7",
+  "status": "EXPERIMENTAL / HOLD"
+}
