@@ -442,8 +442,18 @@ def render_current_updates():
         from pgo_confidence_full_slate import load_verified
         confidence_archive = confidence
         confidence = load_verified(full_dir, FULL_CONFIDENCE_MANIFEST_SHA256, snapshot)
-    return render_updates(snapshot, depth, weekly=weekly, results=results, provenance=provenance,
-                          defense_test=_load_defense_test(), confidence=confidence, confidence_archive=confidence_archive)
+    earlier = render_updates(snapshot, depth, weekly=weekly, results=results, provenance=provenance,
+                             defense_test=_load_defense_test(), confidence=confidence, confidence_archive=confidence_archive)
+    from pgo_season import load_current
+    season = load_current(DEFAULT_DIR.parents[1] / 'season-2026')
+    if season is None:
+        return earlier
+    from pgo_season_view import render_season
+    return (STYLE + render_season(season)
+            + '<p><a href="#latest-inactive-notes">Opening-night final inactive lists saved September 9</a>.</p>'
+            + '<details class="model-update-evidence" id="opening-week-editions">'
+            '<summary>Original Week 1 editions and confidence allocations</summary>'
+            + earlier.replace(STYLE, '', 1) + '</details>')
 
 
 def render_confidence_picks(pool, results=(), *, archive=False):

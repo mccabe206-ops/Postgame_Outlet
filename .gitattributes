@@ -57,3 +57,6 @@ research/pgo_confidence_pool_20260909/** -text whitespace=cr-at-eol
 docs/evidence/confidence-pool-2026/** -text whitespace=cr-at-eol
 pgo_confidence_picks.py -text
 pgo_confidence_full_slate.py -text
+
+docs/evidence/season-2026/** -text whitespace=cr-at-eol
+pgo_season*.py text eol=lf

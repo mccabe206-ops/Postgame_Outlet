@@ -40,7 +40,7 @@ const vm = require('node:vm');
 const events = {};
 const panel = {hidden:true, getAttribute(name) {return name === 'aria-labelledby' ? 'tab-comparison' : null;}};
 const detail = {tagName:'DETAILS', open:false, parentElement:null};
-let scrolls = 0, handlerReady = false, clicks = 0;
+let scrolls = 0, handlerReady = false, clicks = 0, seasonPoll;
 const tab = {click() {clicks++; if (handlerReady) panel.hidden = false;}};
 const target = {tagName:'DIV', parentElement:detail,
   closest(selector) {return selector === '[role="tabpanel"]' ? panel : null;},
@@ -53,7 +53,8 @@ const document = {
 };
 const location = {hash:'#reason'};
 const window = {addEventListener(name, callback) {events[name] = callback;}};
-const context = {document, window, location, Date, setTimeout() {throw Error('No cutoff timer expected');}};
+const context = {document, window, location, Date, setTimeout() {throw Error('No cutoff timer expected');},
+  setInterval(callback, delay) {assert.equal(delay,60000); seasonPoll=callback;}};
 vm.createContext(context);
 vm.runInContext(SCRIPT, context);
 // The script runs inside the PGO panel, before the page binds tab handlers.
@@ -76,7 +77,20 @@ const before = clicks;
 events.hashchange();
 assert.equal(detail.open, true); assert.equal(clicks, before);
 location.hash = '#missing'; events.hashchange();
-console.log('fragment behavior PASS');
+(async () => {
+  let reloads=0, latest='2026-09-09T11:00:00Z', ok=true;
+  location.reload=() => reloads++;
+  const current={dataset:{seasonCheckedAt:'2026-09-09T12:00:00Z'},closest:()=>panel};
+  document.querySelector=() => current; document.hidden=false; panel.hidden=false;
+  context.fetch=async()=>({ok,json:async()=>({checked_at:latest})});
+  await seasonPoll(); assert.equal(reloads,0);
+  latest='2026-09-09T12:00:00Z'; await seasonPoll(); assert.equal(reloads,0);
+  latest='2026-09-09T12:15:00Z'; document.hidden=true; await seasonPoll(); assert.equal(reloads,0);
+  document.hidden=false; panel.hidden=true; await seasonPoll(); assert.equal(reloads,0);
+  panel.hidden=false; ok=false; await seasonPoll(); assert.equal(reloads,0);
+  ok=true; await seasonPoll(); assert.equal(reloads,1);
+  console.log('fragment behavior PASS; newer-only visible season updates PASS');
+})().catch(error=>{console.error(error);process.exitCode=1;});
 """.replace('SCRIPT', json.dumps(script))
         result = subprocess.run([shutil.which('node')], input=harness, text=True,
                                 capture_output=True, check=False)

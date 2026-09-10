@@ -58,6 +58,21 @@ document.addEventListener('click', event => {
 window.addEventListener('hashchange', () => openFragment(location.hash));
 document.addEventListener('DOMContentLoaded', () => openFragment(location.hash), {once:true});
 openFragment(location.hash);
+setInterval(async () => {
+  const current = document.querySelector('[data-season-checked-at]');
+  if (!current || document.hidden) return;
+  const panel = current.closest('[role="tabpanel"]');
+  if (panel && panel.hidden) return;
+  try {
+    const response = await fetch('evidence/season-2026/current.json', {cache:'no-store'});
+    if (!response.ok) return;
+    const latest = await response.json();
+    if (Date.parse(latest.checked_at) > Date.parse(current.dataset.seasonCheckedAt)) {
+      if (panel && !location.hash) history.replaceState(null, '', '#pgo-season');
+      location.reload();
+    }
+  } catch (_) { /* Keep the last verified page when a network check fails. */ }
+}, 60000);
 </script>"""
 
 HERE = Path(__file__).resolve().parent
@@ -270,6 +285,26 @@ def load_results(capture_root, lock):
                 raise ValueError(f"duplicate result across captures: {row['game_id']}")
             accepted[row["game_id"]] = row
         provenance.append(metadata)
+    if root.absolute() in {CAPTURE_ROOT.absolute(), (SNAPSHOT_DIR / 'results').absolute(), (WEEKLY_DIR / 'results').absolute()}:
+        from pgo_season import load_current
+        season = load_current()
+        if season:
+            known = {g['game_id'] for g in lock.get('games', ())}
+            for result in season['results']:
+                if result['game_id'] not in known:
+                    continue
+                selected = {k: result[k] for k in RESULT_COLUMNS}
+                text = io.StringIO(newline='')
+                writer = csv.DictWriter(text, fieldnames=RESULT_COLUMNS, lineterminator='\n')
+                writer.writeheader(); writer.writerow(selected)
+                checked = _accepted_results(text.getvalue().encode(), lock, season['checked_at'], 'automatic season results')[0]
+                previous = accepted.get(checked['game_id'])
+                if previous and any(previous[k] != checked[k] for k in ('home_score', 'away_score', 'actual_margin')):
+                    raise ValueError('Automatic result conflicts with archived transcription')
+                if not previous:
+                    accepted[checked['game_id']] = checked
+                    provenance.append({'captured_at': result['finalized_at'], 'rows': 1,
+                                       'source_url': result['source']['url']})
     order = {game["game_id"]: index for index, game in enumerate(lock.get("games", ()))}
     return sorted(accepted.values(), key=lambda row: order[row["game_id"]]), provenance
 
@@ -1341,11 +1376,12 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
                 + lead.replace('<h1>PGO Forecast Lab</h1>', '') + '</details>'
             )
             if selected:
-                confidence_link = ('<a href="#pgo-confidence-picks">PGO confidence picks</a>.'
+                confidence_link = ('<a href="#pgo-season">Current rankings, picks and records</a>.' if 'id="pgo-season"' in updates else
+                                   '<a href="#pgo-confidence-picks">PGO confidence picks</a>.'
                                    if 'id="pgo-confidence-picks"' in updates else
                                    '<a href="confidence-pool.html">Confidence pool calculator</a>.')
                 lead = ('<header class="lab-hero hero"><h1>PGO Forecast Lab</h1>'
-                        '<p>September 9 predictions, explanations and grades. '
+                        '<p>Dated predictions, explanations and grades throughout the season. '
                         '<a href="index.html">Back to the ratings board</a>. '
                         + confidence_link + '</p></header>'
                         + updates + '<details class="lab-detail" id="previous-models">'

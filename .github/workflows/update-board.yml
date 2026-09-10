@@ -19,6 +19,7 @@ on:
       - "pgo_model_updates.py"
       - "pgo_confidence_picks.py"
       - "pgo_confidence_full_slate.py"
+      - "pgo_season*.py"
       - "docs/evidence/confidence-pool-2026/**"
       - "research/pgo_postseason_candidate/**"
       - "research/pgo_defensive_depth_candidate/**"

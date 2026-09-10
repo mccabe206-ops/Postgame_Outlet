@@ -1,0 +1,31 @@
+# PGO weekly rankings and prediction records
+
+PGO automatically checks for verified final results every 15 minutes. GitHub runner queues and source publication delays can make an update later. The public board shows its last completed check. An open PGO board checks for a newer published edition every minute.
+
+The W/L/T record grades each model against its own saved forecast. A tie is shown separately; a missing or withheld pick is not a win or loss. Different editions can cover different numbers of games, so their pending counts can differ. The continuing weekly model and the original opening-week models are labeled separately. A corrected final score or inconsistent game identity pauses acceptance for review instead of silently changing the archived result.
+
+When all games in a week have verified finals and the required team/player statistics are available, PGO advances its existing model inputs and publishes the next weekly edition. The existing coefficients are not refitted. The [nflverse data schedule](https://nflreadr.nflverse.com/articles/nflverse_data_schedule.html) explains why detailed statistics may arrive later than scores. Missing statistics keep the last verified rankings visible with a delay notice. Bye weeks are taken from the actual schedule. After Week 18, the final rankings are updated and the regular-season process stops.
+
+Availability is checked for games within 24 hours of kickoff until their 60-minute pre-kickoff cutoff. Official injury reports and complete official inactive lists are distinct sources. Missing reports, unresolved identities and incomplete lists remain explicit. Non-QB injuries are context, not fitted numerical adjustments. If an expected QB is confirmed unavailable, the conditional pick is withheld; an unknown later report does not erase that finding. A newly sourced first-string QB may produce a new unlocked forecast. Every earlier revision stays archived. A delayed job cannot revise a locked game.
+
+## How the numbers connect
+
+- A team rating is its model strength relative to the average of the 32 teams. In this model, subtracting the opponent's saved rating gives the projected neutral-site margin at equal rest. An individual +5 rating does not describe a complete matchup.
+- Venue and rest adjustments turn that difference into the estimated game margin. Archived games explain the ratings used when that prediction was issued, even after the current rankings change.
+- The scoring-history estimate gives combined points. Half the total plus half the home margin gives the home score; the other half gives the away score. These sum back to the total and differ by the margin. Rounded equal scores mean closely matched averages, not a literal tie prediction.
+- A fixed historical probability curve converts the margin to home-win, away-win and tie probabilities that sum to one. Win probabilities remain experimental estimates.
+- Each weekly confidence slate assigns unique points once. A pre-lock QB revision may change the win probability while preserving that game's assigned points. Expected pool points equal assigned confidence points times the selected team's win probability; these are different units from NFL scoreboard points.
+
+The scoring-total heuristic still uses the frozen 2025 regular-season and playoff scoring rates. Current defensive roster depth and non-QB replacement quality are not fitted features. Overlapping team and QB inputs are influences in one formula, not independent evidence of team quality. Reported profits alone do not establish predictive accuracy; dated forecasts and an auditable record are the public evidence for any model.
+
+## Operations and evidence
+
+`python pgo_season.py --refresh` captures actual provider responses, verifies finals, checks rollover and pregame availability, and writes a new dated state plus a hashed pointer under `docs/evidence/season-2026/`. It does not overwrite earlier editions. The model seed reproduces all 320 saved team ratio values from 3,562 pinned historical games. Windows reproduces the saved opening inputs exactly; Linux floating-point library replay differs by at most one binary rounding unit in six log features.
+
+`.github/workflows/update-season.yml` runs the checks and publisher only in the canonical repository. On an input conflict it publishes the last verified edition with the reason for the delay. The original Week 1 forecast and confidence files remain byte-for-byte unchanged; Seattle's separately added full-slate confidence value remains marked after lock and excluded from probability validation.
+
+Raw captures and dated states currently live in Git and Pages. Monitor archive size as the season progresses; move future raw captures to durable object storage before hosting limits are reached, preserving existing evidence and links.
+
+Run `python -m unittest discover -s tests -p "test_pgo_season*.py"` for the season checks. They exercise full-week rollover, incomplete weeks, missing statistics, byes, end-of-season ratings, source hashes, game/provider identity, final-status conflicts, fixed confidence points, pregame QB changes, timestamp boundaries and immutable prior forecasts. A 16-game simulated completion produced 32 updated rankings and all 16 actual Week 2 fixtures; synthetic outcomes are test data and are not published as real results.
+
+Operational checks do not prove the model predicts accurately. PGO remains EXPERIMENTAL / HOLD while its prospective record accumulates.

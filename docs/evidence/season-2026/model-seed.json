@@ -1,0 +1,1441 @@
+{
+  "historical_helper_sha256": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+  "history_games": 3562,
+  "history_last_kickoff": "2026-02-08T23:30:00+00:00",
+  "kind": "pgo-2026-model-seed",
+  "ratio_states": {
+    "ARI": {
+      "explosive_play_prevention_rate": [
+        387.44954333104045,
+        414.7546030412481
+      ],
+      "explosive_play_rate_for": [
+        22.945584070932075,
+        383.1303512164929
+      ],
+      "giveaway_avoidance_rate": [
+        375.1396805744263,
+        383.1303512164929
+      ],
+      "passing_epa_per_play_against": [
+        -57.67481483641043,
+        217.86082012974137
+      ],
+      "passing_epa_per_play_for": [
+        -1.1523049398572005,
+        261.76773802496416
+      ],
+      "rushing_epa_per_play_against": [
+        -4.955257025255121,
+        196.89378291150678
+      ],
+      "rushing_epa_per_play_for": [
+        -3.7062139810104107,
+        121.36261319152865
+      ],
+      "sack_avoidance_rate": [
+        239.59785252263197,
+        261.76773802496416
+      ],
+      "sack_creation_rate": [
+        10.303878041755718,
+        217.86082012974137
+      ],
+      "takeaway_rate": [
+        5.272478780622961,
+        414.7546030412481
+      ]
+    },
+    "ATL": {
+      "explosive_play_prevention_rate": [
+        367.98103532860716,
+        396.2798382866955
+      ],
+      "explosive_play_rate_for": [
+        20.040870591830345,
+        387.9063094276402
+      ],
+      "giveaway_avoidance_rate": [
+        380.8322479083635,
+        387.9063094276402
+      ],
+      "passing_epa_per_play_against": [
+        1.207132759194605,
+        233.14563615962956
+      ],
+      "passing_epa_per_play_for": [
+        7.541361996256744,
+        207.358846598042
+      ],
+      "rushing_epa_per_play_against": [
+        -0.6415863421285671,
+        163.13420212706595
+      ],
+      "rushing_epa_per_play_for": [
+        -12.35199129163503,
+        180.5474628295983
+      ],
+      "sack_avoidance_rate": [
+        197.01761145370807,
+        207.358846598042
+      ],
+      "sack_creation_rate": [
+        21.461864922418272,
+        233.14563615962956
+      ],
+      "takeaway_rate": [
+        9.2004498007724,
+        396.2798382866955
+      ]
+    },
+    "BAL": {
+      "explosive_play_prevention_rate": [
+        365.968309887002,
+        395.50902163930317
+      ],
+      "explosive_play_rate_for": [
+        27.107217530887098,
+        365.9502800891665
+      ],
+      "giveaway_avoidance_rate": [
+        357.9790017803099,
+        365.9502800891665
+      ],
+      "passing_epa_per_play_against": [
+        -22.491520951329168,
+        246.4554466298209
+      ],
+      "passing_epa_per_play_for": [
+        11.82604197601179,
+        158.52038630850996
+      ],
+      "rushing_epa_per_play_against": [
+        24.282418114548715,
+        149.05357500948224
+      ],
+      "rushing_epa_per_play_for": [
+        26.272905755769997,
+        207.4298937806565
+      ],
+      "sack_avoidance_rate": [
+        143.98904605454004,
+        158.52038630850996
+      ],
+      "sack_creation_rate": [
+        13.342660380844702,
+        246.4554466298209
+      ],
+      "takeaway_rate": [
+        7.835520176378124,
+        395.50902163930317
+      ]
+    },
+    "BUF": {
+      "explosive_play_prevention_rate": [
+        338.09571147090287,
+        356.4889037691135
+      ],
+      "explosive_play_rate_for": [
+        27.440194878333962,
+        417.9343195875297
+      ],
+      "giveaway_avoidance_rate": [
+        408.0304965054164,
+        417.9343195875297
+      ],
+      "passing_epa_per_play_against": [
+        15.072806648156869,
+        200.47169650742865
+      ],
+      "passing_epa_per_play_for": [
+        38.3051392635205,
+        209.81103625264416
+      ],
+      "rushing_epa_per_play_against": [
+        -5.767872898344168,
+        156.01720726168486
+      ],
+      "rushing_epa_per_play_for": [
+        12.953706385513074,
+        208.12328333488557
+      ],
+      "sack_avoidance_rate": [
+        195.68570895551494,
+        209.81103625264416
+      ],
+      "sack_creation_rate": [
+        8.659268552780846,
+        200.47169650742865
+      ],
+      "takeaway_rate": [
+        7.41850816535352,
+        356.4889037691135
+      ]
+    },
+    "CAR": {
+      "explosive_play_prevention_rate": [
+        383.75632013101506,
+        401.82663948375523
+      ],
+      "explosive_play_rate_for": [
+        18.133483913236475,
+        359.37828968455824
+      ],
+      "giveaway_avoidance_rate": [
+        350.0350875872721,
+        359.37828968455824
+      ],
+      "passing_epa_per_play_against": [
+        -20.07654696467648,
+        204.7161621026769
+      ],
+      "passing_epa_per_play_for": [
+        -11.189442061979015,
+        205.77823832041307
+      ],
+      "rushing_epa_per_play_against": [
+        -2.0204460375732514,
+        197.11047738107834
+      ],
+      "rushing_epa_per_play_for": [
+        -9.768463385753446,
+        153.60005136414517
+      ],
+      "sack_avoidance_rate": [
+        194.23578036467913,
+        205.77823832041307
+      ],
+      "sack_creation_rate": [
+        12.344649246526279,
+        204.7161621026769
+      ],
+      "takeaway_rate": [
+        8.035172430192443,
+        401.82663948375523
+      ]
+    },
+    "CHI": {
+      "explosive_play_prevention_rate": [
+        387.85560457615225,
+        415.67487084182847
+      ],
+      "explosive_play_rate_for": [
+        29.489500821883613,
+        428.67036162040586
+      ],
+      "giveaway_avoidance_rate": [
+        421.4214383391943,
+        428.67036162040586
+      ],
+      "passing_epa_per_play_against": [
+        -27.78806784323533,
+        239.83375361245518
+      ],
+      "passing_epa_per_play_for": [
+        26.41047779069427,
+        241.78488186102024
+      ],
+      "rushing_epa_per_play_against": [
+        -2.1573040774430323,
+        175.84111722937325
+      ],
+      "rushing_epa_per_play_for": [
+        2.8775210794927917,
+        186.8854797593856
+      ],
+      "sack_avoidance_rate": [
+        235.30232664627738,
+        241.78488186102024
+      ],
+      "sack_creation_rate": [
+        14.376133168405346,
+        239.83375361245518
+      ],
+      "takeaway_rate": [
+        7.116009565336676,
+        415.67487084182847
+      ]
+    },
+    "CIN": {
+      "explosive_play_prevention_rate": [
+        334.82340121811023,
+        361.1995138186493
+      ],
+      "explosive_play_rate_for": [
+        22.634148816658044,
+        412.62920827024686
+      ],
+      "giveaway_avoidance_rate": [
+        404.77804204836116,
+        412.62920827024686
+      ],
+      "passing_epa_per_play_against": [
+        -17.631809817958818,
+        200.7579946992029
+      ],
+      "passing_epa_per_play_for": [
+        23.520611739228286,
+        253.84516636518114
+      ],
+      "rushing_epa_per_play_against": [
+        -6.938193812343742,
+        160.4415191194464
+      ],
+      "rushing_epa_per_play_for": [
+        6.647811842474114,
+        158.78404190506578
+      ],
+      "sack_avoidance_rate": [
+        240.62631038174518,
+        253.84516636518114
+      ],
+      "sack_creation_rate": [
+        17.631454430036026,
+        200.7579946992029
+      ],
+      "takeaway_rate": [
+        8.267178104171037,
+        361.1995138186493
+      ]
+    },
+    "CLE": {
+      "explosive_play_prevention_rate": [
+        367.88709778206146,
+        387.8461808608527
+      ],
+      "explosive_play_rate_for": [
+        14.175601071855239,
+        363.5834300000343
+      ],
+      "giveaway_avoidance_rate": [
+        352.9325850426118,
+        363.5834300000343
+      ],
+      "passing_epa_per_play_against": [
+        33.62198404127251,
+        209.81939698599274
+      ],
+      "passing_epa_per_play_for": [
+        -59.23734260232333,
+        208.02274617804602
+      ],
+      "rushing_epa_per_play_against": [
+        -3.653631466130829,
+        178.02678387486006
+      ],
+      "rushing_epa_per_play_for": [
+        -7.637212611399474,
+        155.56068382198828
+      ],
+      "sack_avoidance_rate": [
+        186.71677287131405,
+        208.02274617804602
+      ],
+      "sack_creation_rate": [
+        17.462137791674127,
+        209.81939698599274
+      ],
+      "takeaway_rate": [
+        5.777871411237205,
+        387.8461808608527
+      ]
+    },
+    "DAL": {
+      "explosive_play_prevention_rate": [
+        343.21526485812603,
+        369.9668552456315
+      ],
+      "explosive_play_rate_for": [
+        26.402179950907332,
+        417.52153712721565
+      ],
+      "giveaway_avoidance_rate": [
+        409.7419381280126,
+        417.52153712721565
+      ],
+      "passing_epa_per_play_against": [
+        -59.13552527669063,
+        208.62821599239697
+      ],
+      "passing_epa_per_play_for": [
+        31.666125033829946,
+        232.8394212514037
+      ],
+      "rushing_epa_per_play_against": [
+        -11.65258155257979,
+        161.33863925323456
+      ],
+      "rushing_epa_per_play_for": [
+        -5.018072341244948,
+        184.68211587581192
+      ],
+      "sack_avoidance_rate": [
+        219.65585493078243,
+        232.8394212514037
+      ],
+      "sack_creation_rate": [
+        13.247011264091283,
+        208.62821599239697
+      ],
+      "takeaway_rate": [
+        4.0919176991245525,
+        369.9668552456315
+      ]
+    },
+    "DEN": {
+      "explosive_play_prevention_rate": [
+        385.06313280969187,
+        405.4204046988067
+      ],
+      "explosive_play_rate_for": [
+        19.410927038506713,
+        401.27636562996895
+      ],
+      "giveaway_avoidance_rate": [
+        394.6139480009466,
+        401.27636562996895
+      ],
+      "passing_epa_per_play_against": [
+        35.37017834303872,
+        236.78601750332007
+      ],
+      "passing_epa_per_play_for": [
+        2.228276440773218,
+        238.0913782198559
+      ],
+      "rushing_epa_per_play_against": [
+        -2.1058164029401665,
+        168.6343871954866
+      ],
+      "rushing_epa_per_play_for": [
+        -11.005871362423958,
+        163.18498741011308
+      ],
+      "sack_avoidance_rate": [
+        227.67239537856156,
+        238.0913782198559
+      ],
+      "sack_creation_rate": [
+        23.40164659192468,
+        236.78601750332007
+      ],
+      "takeaway_rate": [
+        8.1399202282974,
+        405.4204046988067
+      ]
+    },
+    "DET": {
+      "explosive_play_prevention_rate": [
+        363.0718594007367,
+        389.24831398884095
+      ],
+      "explosive_play_rate_for": [
+        30.68041272907356,
+        405.5351415773487
+      ],
+      "giveaway_avoidance_rate": [
+        397.4765172177015,
+        405.5351415773487
+      ],
+      "passing_epa_per_play_against": [
+        -4.747851337830591,
+        223.5609957824696
+      ],
+      "passing_epa_per_play_for": [
+        35.49387503084283,
+        250.59634978399708
+      ],
+      "rushing_epa_per_play_against": [
+        -7.187018823664182,
+        165.6873182063713
+      ],
+      "rushing_epa_per_play_for": [
+        -18.02889086507088,
+        154.9387917933516
+      ],
+      "sack_avoidance_rate": [
+        233.9798288012744,
+        250.59634978399708
+      ],
+      "sack_creation_rate": [
+        17.359046634347635,
+        223.5609957824696
+      ],
+      "takeaway_rate": [
+        5.954913168574422,
+        389.24831398884095
+      ]
+    },
+    "GB": {
+      "explosive_play_prevention_rate": [
+        384.68052337169183,
+        411.7483799560527
+      ],
+      "explosive_play_rate_for": [
+        27.11129097645268,
+        373.2284852117331
+      ],
+      "giveaway_avoidance_rate": [
+        368.34308677882024,
+        373.2284852117331
+      ],
+      "passing_epa_per_play_against": [
+        -34.0154283056184,
+        215.6736014696984
+      ],
+      "passing_epa_per_play_for": [
+        40.9620464138889,
+        195.68716957085883
+      ],
+      "rushing_epa_per_play_against": [
+        2.0669217119473084,
+        196.07477848635432
+      ],
+      "rushing_epa_per_play_for": [
+        -11.772594736057943,
+        177.54131564087422
+      ],
+      "sack_avoidance_rate": [
+        183.96263131218845,
+        195.68716957085883
+      ],
+      "sack_creation_rate": [
+        9.711431531355306,
+        215.6736014696984
+      ],
+      "takeaway_rate": [
+        6.307551219417472,
+        411.7483799560527
+      ]
+    },
+    "HOU": {
+      "explosive_play_prevention_rate": [
+        352.5681538881527,
+        373.44111138580905
+      ],
+      "explosive_play_rate_for": [
+        19.668158058002632,
+        412.12871175609354
+      ],
+      "giveaway_avoidance_rate": [
+        401.9812934075393,
+        412.12871175609354
+      ],
+      "passing_epa_per_play_against": [
+        46.93778987230096,
+        218.1870947763737
+      ],
+      "passing_epa_per_play_for": [
+        -16.796233823425,
+        232.6634350487634
+      ],
+      "rushing_epa_per_play_against": [
+        23.391933998138395,
+        155.25401660943544
+      ],
+      "rushing_epa_per_play_for": [
+        -17.929904370567996,
+        179.46527670733008
+      ],
+      "sack_avoidance_rate": [
+        221.34159850806023,
+        232.6634350487634
+      ],
+      "sack_creation_rate": [
+        20.858838913721137,
+        218.1870947763737
+      ],
+      "takeaway_rate": [
+        12.78340850205075,
+        373.44111138580905
+      ]
+    },
+    "IND": {
+      "explosive_play_prevention_rate": [
+        390.8555525758714,
+        416.05024668664436
+      ],
+      "explosive_play_rate_for": [
+        16.86207599847605,
+        375.27676291543065
+      ],
+      "giveaway_avoidance_rate": [
+        363.95241153804994,
+        375.27676291543065
+      ],
+      "passing_epa_per_play_against": [
+        -30.402055916379915,
+        233.62488359069064
+      ],
+      "passing_epa_per_play_for": [
+        -3.8998756774712673,
+        215.26372484365825
+      ],
+      "rushing_epa_per_play_against": [
+        11.866692255499121,
+        182.42536309595374
+      ],
+      "rushing_epa_per_play_for": [
+        -1.1917394093689233,
+        160.01303807177237
+      ],
+      "sack_avoidance_rate": [
+        204.38371207574988,
+        215.26372484365825
+      ],
+      "sack_creation_rate": [
+        10.531308474914352,
+        233.62488359069064
+      ],
+      "takeaway_rate": [
+        6.435118509560776,
+        416.05024668664436
+      ]
+    },
+    "JAX": {
+      "explosive_play_prevention_rate": [
+        364.4293469123344,
+        381.36497916841574
+      ],
+      "explosive_play_rate_for": [
+        27.257010151004003,
+        388.2560646171837
+      ],
+      "giveaway_avoidance_rate": [
+        381.03198402922175,
+        388.2560646171837
+      ],
+      "passing_epa_per_play_against": [
+        31.66250952510905,
+        239.669794880526
+      ],
+      "passing_epa_per_play_for": [
+        34.98658036791856,
+        215.58177779869627
+      ],
+      "rushing_epa_per_play_against": [
+        1.638921173046731,
+        141.69518428788976
+      ],
+      "rushing_epa_per_play_for": [
+        -9.338681942053023,
+        172.67428681848733
+      ],
+      "sack_avoidance_rate": [
+        202.4306382558782,
+        215.58177779869627
+      ],
+      "sack_creation_rate": [
+        11.331121439487882,
+        239.669794880526
+      ],
+      "takeaway_rate": [
+        9.917893613484845,
+        381.36497916841574
+      ]
+    },
+    "KC": {
+      "explosive_play_prevention_rate": [
+        372.2279761905336,
+        390.232924600527
+      ],
+      "explosive_play_rate_for": [
+        16.12354793603631,
+        370.0207260945713
+      ],
+      "giveaway_avoidance_rate": [
+        363.18034530509925,
+        370.0207260945713
+      ],
+      "passing_epa_per_play_against": [
+        1.5224848081868423,
+        206.44307937705278
+      ],
+      "passing_epa_per_play_for": [
+        -30.95944072408887,
+        223.10619804204015
+      ],
+      "rushing_epa_per_play_against": [
+        20.846804179239523,
+        183.78984522347415
+      ],
+      "rushing_epa_per_play_for": [
+        -6.677262984334068,
+        146.91452805253113
+      ],
+      "sack_avoidance_rate": [
+        200.34126540524014,
+        223.10619804204015
+      ],
+      "sack_creation_rate": [
+        13.4079289619915,
+        206.44307937705278
+      ],
+      "takeaway_rate": [
+        5.4160543929559015,
+        390.232924600527
+      ]
+    },
+    "LAC": {
+      "explosive_play_prevention_rate": [
+        350.4301605711004,
+        369.29431966879577
+      ],
+      "explosive_play_rate_for": [
+        17.549068821120837,
+        397.1993169263346
+      ],
+      "giveaway_avoidance_rate": [
+        389.68287592548273,
+        397.1993169263346
+      ],
+      "passing_epa_per_play_against": [
+        16.905712749369894,
+        201.66462665780006
+      ],
+      "passing_epa_per_play_for": [
+        -39.44439397736172,
+        228.58970330657155
+      ],
+      "rushing_epa_per_play_against": [
+        22.026488182572965,
+        167.62969301099568
+      ],
+      "rushing_epa_per_play_for": [
+        -4.6716785395346605,
+        168.60961361976305
+      ],
+      "sack_avoidance_rate": [
+        203.30093557099582,
+        228.58970330657155
+      ],
+      "sack_creation_rate": [
+        18.260180737071025,
+        201.66462665780006
+      ],
+      "takeaway_rate": [
+        9.736247331342575,
+        369.29431966879577
+      ]
+    },
+    "LAR": {
+      "explosive_play_prevention_rate": [
+        381.61988444160306,
+        405.08894624544695
+      ],
+      "explosive_play_rate_for": [
+        33.32955720535801,
+        421.29410754190224
+      ],
+      "giveaway_avoidance_rate": [
+        416.2220885463109,
+        421.29410754190224
+      ],
+      "passing_epa_per_play_against": [
+        -14.544558970026976,
+        238.69261499583462
+      ],
+      "passing_epa_per_play_for": [
+        56.688303798594845,
+        247.4028408438892
+      ],
+      "rushing_epa_per_play_against": [
+        5.5175501789160535,
+        166.3963312496124
+      ],
+      "rushing_epa_per_play_for": [
+        6.178715541709085,
+        173.89126669801306
+      ],
+      "sack_avoidance_rate": [
+        237.36944613292573,
+        247.4028408438892
+      ],
+      "sack_creation_rate": [
+        14.969667123141578,
+        238.69261499583462
+      ],
+      "takeaway_rate": [
+        9.182509534868059,
+        405.08894624544695
+      ]
+    },
+    "LV": {
+      "explosive_play_prevention_rate": [
+        381.8844091506301,
+        398.2100779112994
+      ],
+      "explosive_play_rate_for": [
+        13.127222613796741,
+        345.4146014612443
+      ],
+      "giveaway_avoidance_rate": [
+        337.1875100311372,
+        345.4146014612443
+      ],
+      "passing_epa_per_play_against": [
+        -3.3017350744363902,
+        205.10005972128897
+      ],
+      "passing_epa_per_play_for": [
+        -49.77662285750124,
+        208.8345140498101
+      ],
+      "rushing_epa_per_play_against": [
+        12.457283245029068,
+        193.11001819001046
+      ],
+      "rushing_epa_per_play_for": [
+        -38.31265477809795,
+        136.58008741143414
+      ],
+      "sack_avoidance_rate": [
+        184.56792529111254,
+        208.8345140498101
+      ],
+      "sack_creation_rate": [
+        16.85090746168742,
+        205.10005972128897
+      ],
+      "takeaway_rate": [
+        5.251260875939122,
+        398.2100779112994
+      ]
+    },
+    "MIA": {
+      "explosive_play_prevention_rate": [
+        353.7367227857235,
+        379.68722826350245
+      ],
+      "explosive_play_rate_for": [
+        23.21025670332772,
+        353.04799481247704
+      ],
+      "giveaway_avoidance_rate": [
+        344.58032020464265,
+        353.04799481247704
+      ],
+      "passing_epa_per_play_against": [
+        -22.893942136930136,
+        214.38105590000615
+      ],
+      "passing_epa_per_play_for": [
+        0.5438813871500408,
+        182.09387622293812
+      ],
+      "rushing_epa_per_play_against": [
+        -6.084475158359806,
+        165.30617236349627
+      ],
+      "rushing_epa_per_play_for": [
+        -11.977235635735171,
+        170.954118589539
+      ],
+      "sack_avoidance_rate": [
+        167.29593215418504,
+        182.09387622293812
+      ],
+      "sack_creation_rate": [
+        14.698787357768076,
+        214.38105590000615
+      ],
+      "takeaway_rate": [
+        7.742888931706811,
+        379.68722826350245
+      ]
+    },
+    "MIN": {
+      "explosive_play_prevention_rate": [
+        358.3895754163899,
+        370.62486516922763
+      ],
+      "explosive_play_rate_for": [
+        15.774469593883216,
+        356.05685677135153
+      ],
+      "giveaway_avoidance_rate": [
+        346.6855943700837,
+        356.05685677135153
+      ],
+      "passing_epa_per_play_against": [
+        38.2927541594061,
+        174.81509282188105
+      ],
+      "passing_epa_per_play_for": [
+        -36.391244194973495,
+        190.75065592244212
+      ],
+      "rushing_epa_per_play_against": [
+        26.16442905745677,
+        195.80977234734655
+      ],
+      "rushing_epa_per_play_for": [
+        -1.7144222603736026,
+        165.30620084890938
+      ],
+      "sack_avoidance_rate": [
+        168.9926173166718,
+        190.75065592244212
+      ],
+      "sack_creation_rate": [
+        20.587664332932476,
+        174.81509282188105
+      ],
+      "takeaway_rate": [
+        9.544040400209342,
+        370.62486516922763
+      ]
+    },
+    "NE": {
+      "explosive_play_prevention_rate": [
+        374.14319435492604,
+        388.7757020228011
+      ],
+      "explosive_play_rate_for": [
+        31.31857232404854,
+        396.5130107956464
+      ],
+      "giveaway_avoidance_rate": [
+        387.8212187473408,
+        396.5130107956464
+      ],
+      "passing_epa_per_play_against": [
+        47.36137964575924,
+        224.05221748044812
+      ],
+      "passing_epa_per_play_for": [
+        -5.428739926382313,
+        212.99272667003729
+      ],
+      "rushing_epa_per_play_against": [
+        13.953094636870727,
+        164.723484542353
+      ],
+      "rushing_epa_per_play_for": [
+        -2.897436859405499,
+        183.52028412560904
+      ],
+      "sack_avoidance_rate": [
+        189.244359113895,
+        212.99272667003729
+      ],
+      "sack_creation_rate": [
+        15.365698690497812,
+        224.05221748044812
+      ],
+      "takeaway_rate": [
+        9.43043684766396,
+        388.7757020228011
+      ]
+    },
+    "NO": {
+      "explosive_play_prevention_rate": [
+        375.3349900707242,
+        395.1107171667061
+      ],
+      "explosive_play_rate_for": [
+        18.76893114923017,
+        396.99241332190826
+      ],
+      "giveaway_avoidance_rate": [
+        388.29219169608615,
+        396.99241332190826
+      ],
+      "passing_epa_per_play_against": [
+        29.017272356591636,
+        211.63469075176883
+      ],
+      "passing_epa_per_play_for": [
+        8.82992577832211,
+        236.83452937833943
+      ],
+      "rushing_epa_per_play_against": [
+        21.861341692635655,
+        183.47602641493722
+      ],
+      "rushing_epa_per_play_for": [
+        -16.6576879085004,
+        160.15788394356886
+      ],
+      "sack_avoidance_rate": [
+        216.65437444634213,
+        236.83452937833943
+      ],
+      "sack_creation_rate": [
+        20.083447595287364,
+        211.63469075176883
+      ],
+      "takeaway_rate": [
+        7.208465278298096,
+        395.1107171667061
+      ]
+    },
+    "NYG": {
+      "explosive_play_prevention_rate": [
+        348.08010919656834,
+        371.9555330376624
+      ],
+      "explosive_play_rate_for": [
+        22.30508875447917,
+        396.3762398873053
+      ],
+      "giveaway_avoidance_rate": [
+        390.67394141388195,
+        396.3762398873053
+      ],
+      "passing_epa_per_play_against": [
+        3.6010767878187018,
+        196.05444830309844
+      ],
+      "passing_epa_per_play_for": [
+        8.945777896792315,
+        205.1389360677074
+      ],
+      "rushing_epa_per_play_against": [
+        -11.496533888336343,
+        175.90108473456397
+      ],
+      "rushing_epa_per_play_for": [
+        11.123285996043691,
+        191.23730381959797
+      ],
+      "sack_avoidance_rate": [
+        187.38864398088938,
+        205.1389360677074
+      ],
+      "sack_creation_rate": [
+        14.420625661192348,
+        196.05444830309844
+      ],
+      "takeaway_rate": [
+        7.881479756982896,
+        371.9555330376624
+      ]
+    },
+    "NYJ": {
+      "explosive_play_prevention_rate": [
+        382.7348203088821,
+        412.04796983189533
+      ],
+      "explosive_play_rate_for": [
+        12.072318964133165,
+        369.3083043843104
+      ],
+      "giveaway_avoidance_rate": [
+        360.98228337555076,
+        369.3083043843104
+      ],
+      "passing_epa_per_play_against": [
+        -77.69665353034156,
+        204.1528260650901
+      ],
+      "passing_epa_per_play_for": [
+        -54.7316058707625,
+        208.85193298225627
+      ],
+      "rushing_epa_per_play_against": [
+        2.334718339550749,
+        207.89514376680523
+      ],
+      "rushing_epa_per_play_for": [
+        -13.14648818763064,
+        160.4563714020541
+      ],
+      "sack_avoidance_rate": [
+        188.5554910242375,
+        208.85193298225627
+      ],
+      "sack_creation_rate": [
+        8.386627946852709,
+        204.1528260650901
+      ],
+      "takeaway_rate": [
+        2.3156406637844653,
+        412.04796983189533
+      ]
+    },
+    "PHI": {
+      "explosive_play_prevention_rate": [
+        372.60764921489323,
+        391.84256829326887
+      ],
+      "explosive_play_rate_for": [
+        16.719565484393645,
+        392.3417315854268
+      ],
+      "giveaway_avoidance_rate": [
+        386.8241644992949,
+        392.3417315854268
+      ],
+      "passing_epa_per_play_against": [
+        21.25209754460991,
+        205.64357485854092
+      ],
+      "passing_epa_per_play_for": [
+        2.6684776788853046,
+        207.1127939025893
+      ],
+      "rushing_epa_per_play_against": [
+        11.407328936025271,
+        186.19899343472795
+      ],
+      "rushing_epa_per_play_for": [
+        -1.4305389322741169,
+        185.2289376828375
+      ],
+      "sack_avoidance_rate": [
+        196.64835965946827,
+        207.1127939025893
+      ],
+      "sack_creation_rate": [
+        15.662629958139162,
+        205.64357485854092
+      ],
+      "takeaway_rate": [
+        9.747057586620404,
+        391.84256829326887
+      ]
+    },
+    "PIT": {
+      "explosive_play_prevention_rate": [
+        365.60526840503337,
+        389.88024634579585
+      ],
+      "explosive_play_rate_for": [
+        20.487004351743323,
+        382.1697619576894
+      ],
+      "giveaway_avoidance_rate": [
+        376.5790837627636,
+        382.1697619576894
+      ],
+      "passing_epa_per_play_against": [
+        -11.085109156530745,
+        221.2288780543628
+      ],
+      "passing_epa_per_play_for": [
+        -15.762214992252575,
+        234.1596050377882
+      ],
+      "rushing_epa_per_play_against": [
+        0.5705166635382186,
+        168.65136829143304
+      ],
+      "rushing_epa_per_play_for": [
+        -2.183388233449218,
+        148.0101569199012
+      ],
+      "sack_avoidance_rate": [
+        220.092564993772,
+        234.1596050377882
+      ],
+      "sack_creation_rate": [
+        16.58922553003154,
+        221.2288780543628
+      ],
+      "takeaway_rate": [
+        10.179630633221365,
+        389.88024634579585
+      ]
+    },
+    "SEA": {
+      "explosive_play_prevention_rate": [
+        360.1429714467936,
+        382.12328923441765
+      ],
+      "explosive_play_rate_for": [
+        22.485621601392097,
+        392.6591554354324
+      ],
+      "giveaway_avoidance_rate": [
+        387.242233189753,
+        392.6591554354324
+      ],
+      "passing_epa_per_play_against": [
+        40.08678038413446,
+        234.7888156472993
+      ],
+      "passing_epa_per_play_for": [
+        25.592653356188862,
+        202.17983523773657
+      ],
+      "rushing_epa_per_play_against": [
+        16.863727800716752,
+        147.33447358711837
+      ],
+      "rushing_epa_per_play_for": [
+        -7.510420735464939,
+        190.4793201976958
+      ],
+      "sack_avoidance_rate": [
+        189.35682306208727,
+        202.17983523773657
+      ],
+      "sack_creation_rate": [
+        17.003958706360436,
+        234.7888156472993
+      ],
+      "takeaway_rate": [
+        11.424752766750409,
+        382.12328923441765
+      ]
+    },
+    "SF": {
+      "explosive_play_prevention_rate": [
+        362.2450875956712,
+        381.8320203320801
+      ],
+      "explosive_play_rate_for": [
+        19.15550447488032,
+        380.4727960727652
+      ],
+      "giveaway_avoidance_rate": [
+        370.6827225631256,
+        380.4727960727652
+      ],
+      "passing_epa_per_play_against": [
+        -25.40338608218801,
+        205.34757599555084
+      ],
+      "passing_epa_per_play_for": [
+        19.3522540944304,
+        208.41065520734628
+      ],
+      "rushing_epa_per_play_against": [
+        -8.16054737737923,
+        176.48444433652926
+      ],
+      "rushing_epa_per_play_for": [
+        -8.590029264464572,
+        172.06214086541894
+      ],
+      "sack_avoidance_rate": [
+        198.58333151031894,
+        208.41065520734628
+      ],
+      "sack_creation_rate": [
+        8.280344369564395,
+        205.34757599555084
+      ],
+      "takeaway_rate": [
+        3.763708995034716,
+        381.8320203320801
+      ]
+    },
+    "TB": {
+      "explosive_play_prevention_rate": [
+        334.79351203427825,
+        357.6969539695116
+      ],
+      "explosive_play_rate_for": [
+        23.412262031838466,
+        397.74178624228426
+      ],
+      "giveaway_avoidance_rate": [
+        389.9142912330415,
+        397.74178624228426
+      ],
+      "passing_epa_per_play_against": [
+        -31.419403671950917,
+        217.03632097540122
+      ],
+      "passing_epa_per_play_for": [
+        -0.6508965709204402,
+        213.6456915693445
+      ],
+      "rushing_epa_per_play_against": [
+        13.225739498641556,
+        140.6606329941103
+      ],
+      "rushing_epa_per_play_for": [
+        -2.910316694194004,
+        184.09609467293973
+      ],
+      "sack_avoidance_rate": [
+        198.74478503796144,
+        213.6456915693445
+      ],
+      "sack_creation_rate": [
+        10.941255325952845,
+        217.03632097540122
+      ],
+      "takeaway_rate": [
+        8.21866696533287,
+        357.6969539695116
+      ]
+    },
+    "TEN": {
+      "explosive_play_prevention_rate": [
+        335.6107728264697,
+        361.85985600666726
+      ],
+      "explosive_play_rate_for": [
+        20.165281730618847,
+        378.0906062399852
+      ],
+      "giveaway_avoidance_rate": [
+        372.3200429965403,
+        378.0906062399852
+      ],
+      "passing_epa_per_play_against": [
+        -48.32730202336689,
+        203.7058394598889
+      ],
+      "passing_epa_per_play_for": [
+        -44.61759468898064,
+        225.7877865276852
+      ],
+      "rushing_epa_per_play_against": [
+        6.436199137913096,
+        158.15401654677837
+      ],
+      "rushing_epa_per_play_for": [
+        -5.139148489639039,
+        152.30281971230002
+      ],
+      "sack_avoidance_rate": [
+        209.8627841148993,
+        225.7877865276852
+      ],
+      "sack_creation_rate": [
+        15.914807616266774,
+        203.7058394598889
+      ],
+      "takeaway_rate": [
+        3.939574138188134,
+        361.85985600666726
+      ]
+    },
+    "WAS": {
+      "explosive_play_prevention_rate": [
+        393.25420261952456,
+        415.70048996418643
+      ],
+      "explosive_play_rate_for": [
+        18.107146235496966,
+        361.374197990083
+      ],
+      "giveaway_avoidance_rate": [
+        352.32581405998747,
+        361.374197990083
+      ],
+      "passing_epa_per_play_against": [
+        -38.551819800537665,
+        226.13786667084756
+      ],
+      "passing_epa_per_play_for": [
+        -1.8732898562836393,
+        176.52182042687102
+      ],
+      "rushing_epa_per_play_against": [
+        -18.228116039545217,
+        189.56262329333885
+      ],
+      "rushing_epa_per_play_for": [
+        -3.3349930370038656,
+        184.85237756321197
+      ],
+      "sack_avoidance_rate": [
+        165.0415925944146,
+        176.52182042687102
+      ],
+      "sack_creation_rate": [
+        16.94082879834713,
+        226.13786667084756
+      ],
+      "takeaway_rate": [
+        4.207009151662469,
+        415.70048996418643
+      ]
+    }
+  },
+  "schema_version": 1,
+  "season": 2025,
+  "source_context_sha256": "7986f97e97a85ef9f4bfa3cb59bbefcb3fb5d3068af8f7251e6593785e6aae1e",
+  "sources": [
+    {
+      "bytes": 2173367,
+      "name": "schedule_results",
+      "sha256": "cfb9c79a28ac1187a44be0bcfa0d8ff2f5a7ca201c5183a1dbf1e6d227d72f39",
+      "url": "https://raw.githubusercontent.com/nflverse/nfldata/29102e4f32febb597750c71a27f22fb2898e3cfc/data/games.csv"
+    },
+    {
+      "bytes": 71452,
+      "name": "team_weekly_stats:2013",
+      "sha256": "920bde147689f0c73bec8e4c94faef7532005152879b92451c269273ed8062da",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2013.csv.gz"
+    },
+    {
+      "bytes": 70990,
+      "name": "team_weekly_stats:2014",
+      "sha256": "dc941b098e086e4a93f193ed49c5a2205f2f9b4b2617cd8e25ed66761ebd54c5",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2014.csv.gz"
+    },
+    {
+      "bytes": 71211,
+      "name": "team_weekly_stats:2015",
+      "sha256": "595292ef09bb23fd8bc892fa2a6741322fa6e9608c54f7327c57cefe1cc393ad",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2015.csv.gz"
+    },
+    {
+      "bytes": 71081,
+      "name": "team_weekly_stats:2016",
+      "sha256": "baf74c9dc216a709a7207a6d4e06aa5ccb7dc6574c154f27c3c4e4d689b366cc",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2016.csv.gz"
+    },
+    {
+      "bytes": 71194,
+      "name": "team_weekly_stats:2017",
+      "sha256": "f2b70cb27bdb7acc6d48bcda29818f44268fe544cfae31cd037ca09d6961a2f3",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2017.csv.gz"
+    },
+    {
+      "bytes": 71342,
+      "name": "team_weekly_stats:2018",
+      "sha256": "62d07da27c364634698ec11e17f4111d28c738f1b15ff3281fadce1ace045dea",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2018.csv.gz"
+    },
+    {
+      "bytes": 71563,
+      "name": "team_weekly_stats:2019",
+      "sha256": "b82e3dd7f9e234c8ff5460c89dfe04337599c1d963443a090c9bab5a79b08631",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2019.csv.gz"
+    },
+    {
+      "bytes": 71539,
+      "name": "team_weekly_stats:2020",
+      "sha256": "e4dde2d912654a429e3b76fde7bb0e75e320cd801c033c7c80a0d7df18ce2c54",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2020.csv.gz"
+    },
+    {
+      "bytes": 75920,
+      "name": "team_weekly_stats:2021",
+      "sha256": "b5b65fdf141695c04000fe8a0ab182be00b3bfe8345dc84e76dd0627199a8815",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2021.csv.gz"
+    },
+    {
+      "bytes": 76157,
+      "name": "team_weekly_stats:2022",
+      "sha256": "3462c9d16ecc28a019e3deab7361f1331f062d26c4cf4fb09a2aa38f857c23b2",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2022.csv.gz"
+    },
+    {
+      "bytes": 76087,
+      "name": "team_weekly_stats:2023",
+      "sha256": "7b42d3b699d2ea55e77e3abe897289c12a858c573107829250d5e1b177b57415",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2023.csv.gz"
+    },
+    {
+      "bytes": 76189,
+      "name": "team_weekly_stats:2024",
+      "sha256": "3dde26ba6a2beecaf65d172823b6e3a6303cca05a07c346d2725d7d9ba86e13c",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2024.csv.gz"
+    },
+    {
+      "bytes": 76176,
+      "name": "team_weekly_stats:2025",
+      "sha256": "54a223acb26c33c706aa1b509f56323e2889110b5bbe0c2f2c1163c325bd8f80",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2025.csv.gz"
+    }
+  ]
+}
