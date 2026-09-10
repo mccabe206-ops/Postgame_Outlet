@@ -1,0 +1,125 @@
+{
+  "status": "PASS",
+  "applied_at": "2026-09-09T14:55:03.219451+00:00",
+  "source_ledger_sha256": "4c4927b7bbb7469d2700e8c330f186fde1d108bacb1e44d9b8c0504d921645ac",
+  "reviewed_annotations_sha256": "2be624175dd3dcd82b2baaac7468fbd4079b2802025a2bc7fdbed90828f7eab0",
+  "teams": 32,
+  "formal_report_teams": [
+    "NE",
+    "SEA",
+    "SF",
+    "LAR"
+  ],
+  "unknown_formal_report_teams": 28,
+  "unchanged_approved_ratings_sha256": "3a3d88f8bbaee1d227642c27fe43a5eac101d4947dda66cc1011302a6157898d",
+  "exact_replacements": {
+    "NE": [
+      [
+        "rookie RB **TreVeyon Henderson is out for Week 1** (ankle), so Hassan Haskins leads the backfield to open the season.",
+        "**TreVeyon Henderson is out for Week 1** (ankle). The injury report does not establish a replacement starter."
+      ]
+    ],
+    "SF": [
+      [
+        "**Offense (+0.25):**",
+        "**Offense (+0.2):**"
+      ],
+      [
+        "Kittle working back from an Achilles issue (PUP, projected Week 1)",
+        "Kittle working back from an Achilles issue (limited in the captured practice report; final game status pending)"
+      ],
+      [
+        "The injuries are already priced in, and the roster still grades top-ten. Getting the skill group healthy is pure upside.",
+        "McCabe's injury discount still leaves the roster in his top ten. The latest availability report appears above; the approved grade is an editorial assessment, with no automatic injury recalculation."
+      ]
+    ],
+    "LAR": [
+      [
+        "**Nacua is working back from a psoas injury** (a hip-flexor-area strain from August; expected to play the opener), and **left tackle Alaric Jackson is banged up too** \u2014 a camp ankle injury plus an ongoing blood-clot condition he manages, and he's expected to play but hasn't been full-go.",
+        "the Rams documented **Nacua's psoas soreness on August 13**, and **Alaric Jackson was DNP in the captured Week 1 practice report**. The August report does not establish Nacua's current game status, and no final Jackson designation was captured. [Nacua's preseason update](https://www.therams.com/news/rams-puka-nacua-injury-update-cowboys-joint-practice-psoas)."
+      ],
+      [
+        "**Aaron Donald back** (though rusty after a couple of years retired, so his bump is modest)",
+        "**Aaron Donald back** for the season, though the Rams say he will miss the opener"
+      ],
+      [
+        "**Garrett is working through left knee swelling** (missed most of camp; McVay says he's good to go for Week 1), Donald is ramping up after his layoff, and Kobie Turner is questionable.",
+        "**Garrett has a knee issue** (McVay expects him to play), and Donald is still ramping up after his layoff. No current formal questionable designation for Kobie Turner was verified."
+      ]
+    ],
+    "BUF": [
+      [
+        "**Keon Coleman is working back from a sprained right foot/toe** (Aug 15; out of the walking boot and practicing, expected to play Week 1) and **Khalil Shakir is working through an ankle injury** (reported high-ankle sprain, \"week-to-week\").",
+        "McCabe's grade reflects preseason availability concerns around **Keon Coleman and Khalil Shakir**. Their current medical details and Week 1 game designations were not verified in the available formal reports."
+      ]
+    ]
+  },
+  "writeup_hashes_before": {
+    "ARI": "5d49abe407fa6d070fcfecca54c978647bcdf44a64c17b11007d31a3eb4974d1",
+    "ATL": "9393dfc495fe8480e083f2c7c5353d7d32e7fd909f25ef1c31b34b5f50a195f8",
+    "BAL": "773b73fffd242513ea4c49aba44bebaa4768f81eb32995b89bfcb984e38faeba",
+    "BUF": "a31659a8ec174e97395d1acbf4126d0b718ca21b069fb78a6ad335278adc1380",
+    "CAR": "87a22a1882d56b53d2fe6a626ab80f1481f9752d0076eb12d4504b3f2e056cd2",
+    "CHI": "6cd3b07de948113b25357ee727f9395eccb428c01186188f4a81bb8dc9e02b64",
+    "CIN": "c389d5311dcd39aa685ef9887f4f2161eea78d668500e6ee0df358a3592626d0",
+    "CLE": "2607dd67e0af2c2b38fc6a46f24280f4800d437c1314d6c0056987621f09a69e",
+    "DAL": "e1226611c383a8149e0c5eb6884b757e967324141a7b0f544bc3b714488f1ef4",
+    "DEN": "686d5cd0f7116b3ec8ddb7ff438205386d63f2342ed31fa1370433be34acd367",
+    "DET": "b6887b1a50130f33bd2246c34bb46662836e69d2eb8c1690a6cb0ce9080c8cbb",
+    "GB": "65bb0b0d6f8c79c07e7c643595b0885181d8a22e45f276f6105c4fa33b30bccb",
+    "HOU": "eae4f6c7566dabc689b6544159a2c82cb87e5e2e156f421df5e8ac04dbaddedb",
+    "IND": "67538e3f50264fb4c7faf0f3c2ed2441a05b218563a4ad6518e481a85c2db50c",
+    "JAX": "78d9afe65bf180dd4182eeaf5dacc669b9db380a156c21acb57947eba6f5ca64",
+    "KC": "a7a37ca1e1e76aeb167342c1abb134da5ef84373960b2c30c5832b4bf77c7947",
+    "LAC": "76275a6e40bc8f6c479e49a2ef9ca679f93f98bea276ef3a3918c7a4fbfa2ab3",
+    "LAR": "1badafa31b3e81b4527bdae12d15bf72779043aa4de515a37b371b2bbcb86f05",
+    "LV": "7192922a54e1d05d29004bbc4cc3762cb0c4fcafc5c297b1df59cf1cd644f3ce",
+    "MIA": "00f54039d1e81b333d1d29fee9c2341565239ca82f7aa685ed8275bef2602743",
+    "MIN": "74bd94d6509c3664d6b7405ccde6b56acc5cba3ebf60bd459e611c23d1c6d00c",
+    "NE": "953ca15fded01183cc456cac4621d4df2d55d86baa95642ca15a4a79ebb0cd7c",
+    "NO": "94b70b89c2f7546ff56d34fde6af1512ef4f1d34ef5ab9eb2ffc19c248549183",
+    "NYG": "29e10f6e7304758e9892f8ca7f0e253eb18679142617383a6021d68108bdc34b",
+    "NYJ": "66e5e2d26b2b558386abec42fa4d0cc8d280c980851eb11c424ddecb425d8e4c",
+    "PHI": "5576c9f2dd11a3ebedd4f37be63e78f649b92e0df25520a0c88f02c577bc3553",
+    "PIT": "f4518119d43e206e80c9ed406275d6536a543108153238f4f354973a7adfee16",
+    "SEA": "1fb7b1fe098db626a187aec1e5310a540bd876868e9c4bd62a5463bedc5ed6ba",
+    "SF": "4aff982ded2c0f74d2c4757634e8456d825a9ec4a04d152b9b49c5b5c762c55a",
+    "TB": "55d498911d3b8ede4bc58fbd12ec785bca0b0ba97e8ab8c04e45b2a4bb2d7fd8",
+    "TEN": "33510cd636a8081699f318164d918ba4824a72a220bb791ec23f9470512576e1",
+    "WAS": "d0d4861236707d8a6897739a1a852798626b0feea51da682786f4acbd450dd1d"
+  },
+  "writeup_hashes_after": {
+    "ARI": "43f3b676b6e6cf43c9698f0b3cdf61044ea6f714958af4cc438f64f2dc1fa529",
+    "ATL": "d5b9da8c80351cae8eab1a1e90240766ad413053c9ccb9a356efcd817edc1289",
+    "BAL": "85f2c6b17e5907b5889124b8436256f4c4b0c3c04cbfeab0ad644d4d6ea4c7bf",
+    "BUF": "cfcc35586fb6717af4d1cf0575d2bd100cade88ca102640becfdd2b1eeb13186",
+    "CAR": "0ba3912f5fd2b5791aec575cf9f7d77c5d640acb2531e684c31f6b2d2cfad5d9",
+    "CHI": "5d5cefe036e5a23e3d80e3d18776df2ae66b037d9bb0f36e9bf482dd5f44fa66",
+    "CIN": "39a012060bee510c92276c269069d84cbfd711fce674a3486790063061042f19",
+    "CLE": "bed4af0454f31123c120fd666ee190e785ba752f53c585236e968942725e65ea",
+    "DAL": "a9f101cf7982ac8b3348426b1ea8bbee8c5a650e59a311de3971fe1997a57a7e",
+    "DEN": "3a7eebe3f370deafe3a16eec51a14389fb4b3c89fdddd6a0ee562ee12219b026",
+    "DET": "834b161ed1e359df097c5b9eeeadc9dbf97eac1884f6689a81f5ca166ff17462",
+    "GB": "e179e09b5bcd14fc43d9f1ab24991c03c75535fcabd81fb03e6e524b02952f8c",
+    "HOU": "8fc20527e5617cd73394604d316b3d68fb6369759f67df0e97e982942961fbe9",
+    "IND": "23efc15766a04f5a2b14d477aaa571c2c4b174e4fcfbc9bb65bd628808e7692a",
+    "JAX": "732f73285bcd606a0138e06bc5b6ec738485b55f64e5809139f44d3d5f166c96",
+    "KC": "883a04cb6a4acede7cea3c363c06487baf410945eebf468d300b58ec0c3b4aac",
+    "LAC": "804a3f1e4fd7d50f5086439db79a4ebc0d94eb819a17f5c30c5c86414e5af30c",
+    "LAR": "6578ba4ed2093075e1a485ae6d0e63d5b60ca57adff6842b6cc9e166fe5d1ea0",
+    "LV": "09b014c505ca90cbb091d9390c1499954677021ca5f8af4dd1b4e36ccc05bb83",
+    "MIA": "4b18c43ea5a78751a475264157d4351672e17aca86a1d97e4d39321e05210c2a",
+    "MIN": "ce3368a74f7744e5c39a441d3ec024561f46067f234bc49c9573e6d5c934b3c1",
+    "NE": "f7df99965d24abd14d03b6e3f7cc69eeacf7a0e091f17c3d013f0f21bee84687",
+    "NO": "207d58fd32d5457bb4bb5025dab8cc9e470cdcc12286587ace770e616a93049a",
+    "NYG": "094c53b26da300f5066708e94769448d153330a4fe468f8552e2b69bdd1e79f3",
+    "NYJ": "d992707b9b32ba1db1d4e076361dfd3531635dd81b7c6f0845e05c3524c1d8f9",
+    "PHI": "947d898429da97c16828c8d66b86457690d8aede142374c11ec7d595c91e6bec",
+    "PIT": "f7de06702489207cc9216190f9481dd5015fc1e9509fccb25a720557017928a5",
+    "SEA": "ab8cd449376d3510db23e13b6d1a44ed00aab7cde4b25a04b3eee4faac3adbeb",
+    "SF": "2e6dd263be9963058605407344fef09f87c9729ced6cf1605e46570532f5e710",
+    "TB": "dbf3be8e3a32e658235e6120117dbfaa3499177e0d51b07070b2701a98fc31bd",
+    "TEN": "123318a70373a55107e46553d436750a031fbdc905ec06902fc8cab5a112c9cb",
+    "WAS": "70d3ea8f6ae96a43a65465e05adb03c55b228cda1fe35907942c94c281db7195"
+  }
+}

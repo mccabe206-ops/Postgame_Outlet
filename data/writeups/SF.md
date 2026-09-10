@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. **Alfred Collins will miss the season**, according to Shanahan. George Kittle was limited with an Achilles issue; no final game designation was captured. [September 8 NFL update](https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8). Collins also appears as limited in the practice table; the explicit season-ending announcement governs this note. McCabe's approved grade has no automatic adjustment for this update.
+
 ## The case for a top-ten grade
 
 San Francisco grades comfortably above the line — a good quarterback and above-average defense, with an offense the model keeps positive despite a stack of skill-position injuries.
@@ -8,9 +12,9 @@ Brock Purdy (+2.5) is an above-average grade — an efficient, well-supported pa
 
 ## What moved the number
 
-- **Offense (+0.25):** held slightly above average even through a real injury cluster — **Pearsall on IR, McCaffrey banged up, Kittle working back from an Achilles issue (PUP, projected Week 1)** — with Evans and Kirk added. There's +0.5 upside if Kittle is fully healthy. The point: even with the injuries, the model still finds this group slightly above average.
-- **Defense (+0.5):** above average, with Odighizuwa and Greenlaw as the anchors.
+- **Offense (+0.2):** held slightly above average even through a real injury cluster — **Pearsall on IR, McCaffrey's current injury designation unverified, Kittle working back from an Achilles issue (limited in the captured practice report; final game status pending)** — with Evans and Kirk added. There's +0.5 upside if Kittle is fully healthy. The point: even with the injuries, the model still finds this group slightly above average.
+- **Defense (+0.5):** above average, with Odighizuwa and Greenlaw as the anchors. Greenlaw was limited with an Achilles issue in the [September 8 NFL update](https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8); no final game designation was captured.
 
 ## Bottom line
 
-The injuries are already priced in, and the roster still grades top-ten. Getting the skill group healthy is pure upside.
+McCabe's injury discount still leaves the roster in his top ten. The latest availability report appears above; the approved grade is an editorial assessment, with no automatic injury recalculation.

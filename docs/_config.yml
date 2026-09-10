@@ -1,0 +1,7 @@
+# Keep public pages small; complete future audit files remain in the public Git repository.
+exclude:
+  - evidence/season-2026/runs-v2
+  - evidence/season-2026/availability-v2
+  - evidence/season-2026/source-archive
+optional_front_matter:
+  enabled: false

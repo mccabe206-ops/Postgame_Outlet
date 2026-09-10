@@ -1,0 +1,328 @@
+"""Explicit, hash-verified historical identity sources. Frozen defaults are untouched."""
+import argparse
+from collections import Counter, defaultdict
+import csv
+from datetime import datetime, timezone
+import hashlib
+import io
+import json
+from pathlib import Path
+import sys
+import tempfile
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[3]
+HERE = Path(__file__).resolve().parent
+PRIOR = ROOT / 'research/pgo_snap_identity_repair_20260909'
+DIAGNOSTIC = PRIOR / 'source-resolution-20260909'
+sys.path.insert(0, str(ROOT))
+from research.pgo_snap_identity_repair_20260909 import verify_sources as audit
+
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def row_hash(row):
+    return hashlib.sha256(json.dumps(row, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def apply_exact(rows, corrections, source_sha256):
+    result = [dict(row) for row in rows]
+    seen = set()
+    for correction in corrections:
+        number = correction['row_number']
+        require(type(number) is int and 1 <= number <= len(rows) and number not in seen,
+                f'Missing or duplicate exact correction row: {number}')
+        row = rows[number - 1]
+        require(correction['source_sha256'] == source_sha256, 'Original source hash differs')
+        require(row == correction['original_row'] and row_hash(row) == correction['original_row_sha256'],
+                f'Original full row differs: {number}')
+        require(row['pfr_id'] == correction['old_pfr_id'] and correction['verified_pfr_id'] and
+                correction['old_pfr_id'] != correction['verified_pfr_id'], f'Old/new PFR differs: {number}')
+        result[number - 1]['pfr_id'] = correction['verified_pfr_id']
+        seen.add(number)
+    return result
+
+
+def file_entry(path):
+    path = Path(path).resolve()
+    return dict(path=str(path), bytes=path.stat().st_size, sha256=digest(path))
+
+
+def verify_file(entry):
+    path = Path(entry['path'])
+    require(path.is_file() and path.stat().st_size == entry['bytes'] and digest(path) == entry['sha256'],
+            f'Pinned file missing or changed: {path}')
+    return path
+
+
+def load_sources(manifest_path, expected_sha256):
+    """Return {(source_name, season): Path}; caller must explicitly supply the reviewed manifest hash."""
+    manifest_path = Path(manifest_path)
+    require(digest(manifest_path) == expected_sha256, 'Explicit source manifest SHA-256 differs')
+    manifest = json.loads(manifest_path.read_bytes())
+    require(manifest['status'] == 'PASS' and manifest['scope'] == 'STRICT_HISTORICAL_IDENTITY_ONLY',
+            'Source manifest is not qualified for historical identity joins')
+    qualification = json.loads(verify_file(manifest['qualification']).read_bytes())
+    require(qualification['status'] == 'PASS' and qualification['sources'] == manifest['sources'] and
+            qualification['corrected_roster_rows'] == 219 and qualification['compared_REG_snap_rows'] == 310475,
+            'Source qualification does not cover this manifest')
+    for entry in manifest['evidence']:
+        verify_file(entry)
+    paths = {}
+    for entry in manifest['sources']:
+        key = (entry['name'], entry['season'])
+        require(key not in paths, f'Duplicate manifest source: {key}')
+        paths[key] = verify_file(entry)
+    expected = {(name, season) for name in ('weekly_rosters', 'snap_counts') for season in range(2013, 2026)}
+    require(set(paths) == expected, 'Manifest must contain exactly all 26 historical identity sources')
+    return paths
+
+
+def write_json(path, value):
+    with Path(path).open('x', encoding='utf-8') as handle:
+        handle.write(json.dumps(value, indent=2, sort_keys=True) + '\n')
+
+
+def qualify(sources, inventory, baseline, old_corrections, prior_apply):
+    report = dict(status='RUNNING', scope='STRICT_HISTORICAL_IDENTITY_ONLY', seasons={},
+                  eight_named_examples=[], resolver_conflicts=[], compared_REG_snap_rows=0,
+                  original_source_qualification='STOP', model_status='EXPERIMENTAL / HOLD',
+                  history_walks=0, model_fits=0, forecast_writes=0, source_fetches=0,
+                  corrected_roster_rows=219, additional_ACT_rows=34, additional_non_ACT_rows=70)
+    strict = audit.ch._snap_identity
+    old_by_season = defaultdict(list)
+    for correction in old_corrections:
+        old_by_season[correction['season']].append(correction)
+    for season in [2025, *range(2013, 2025)]:
+        original_source = inventory['verified_sources'][f'weekly_rosters:{season}']
+        original = audit.source_rows(original_source)
+        previous_rows = prior_apply(original, old_by_season[season], original_source['sha256'])
+        groups = defaultdict(list)
+        for row in previous_rows:
+            if row['status'].strip() == 'ACT':
+                groups[int(row['week']), audit.normalize_team(row['team'])].append(row)
+        maps = {key: audit.ch._roster_identity_maps(rows, inventory['colliding_gsis']) for key, rows in groups.items()}
+        empty = audit.ch._roster_identity_maps([], inventory['colliding_gsis'])
+
+        def compare(row, metadata):
+            key = (int(row['week']), audit.normalize_team(row['team']))
+            resolved = strict(row, metadata)
+            previous = strict(row, maps.get(key, empty))
+            require(resolved == previous, f'Assignment or missingness changed: {season}/{key}/{row["pfr_player_id"]}')
+            report['compared_REG_snap_rows'] += 1
+            return resolved
+
+        with patch.object(audit.ch, '_snap_identity', compare):
+            actual = audit.audit_season(season, sources, inventory['colliding_gsis'], report)
+        require(actual == baseline['seasons'][str(season)], f'Full season/team metrics or examples changed: {season}')
+        report['seasons'][str(season)] = actual
+        print(json.dumps(dict(season=season, status='PASS', REG_rows=actual['totals']['REG_snap_rows'])), flush=True)
+    require(report['compared_REG_snap_rows'] == 310475 and not report['resolver_conflicts'],
+            'Incomplete comparison or remaining conflict')
+    require(report['eight_named_examples'] == baseline['eight_named_examples'], 'Onwenu/Runyan examples changed')
+    report.update(status='PASS', all_seasons=baseline['all_seasons'], unexpected_reassignments=0,
+                  eight_named_examples_preserved=True, CIN_ambiguous_rows_preserved=16,
+                  extra_104_corrections_changed_no_REG_assignment=True)
+    return report
+
+
+def build_package(output):
+    require(not sys.flags.optimize, 'Original strict audit requires assertions enabled; do not use -O')
+    output = Path(output).resolve()
+    require(output.parent == HERE and not output.exists(), 'Package must be a new nonexistent directory inside identity/')
+    pins = {
+        DIAGNOSTIC / 'provider-evidence.json': 'a48acc5cd40d598a41b1a247ff6e1dbeb2af03c3ec647d4e6a59b953b0e86799',
+        DIAGNOSTIC / 'corrections.json': '03d4c415a9f2d3f83cd1a96763965f3cdfe536c8b2c2f78cf159bfb8623c5f5b',
+        DIAGNOSTIC / 'diagnostic-validation.json': '06a3c24c40358368f46dbc8d355213710f1592580b950068b5bed75ab63a5771',
+        DIAGNOSTIC / 'verify_resolution.py': 'f16f7583364bdb522198cc7ba9ccf7830e4cf67b81558deee4f6948cffb67f4e',
+        PRIOR / 'source-conflict-inventory.json': 'c3f721962886ba77fd1ff8d45637508d2050fd294c0f3185dff77f3561a66a29',
+        PRIOR / 'verify_sources.py': '332e3a632a4aaace4bd0fb224e9e3b35c98b4b65dad1d169a041a600dc00ee8d',
+        ROOT / 'pgo_challenger.py': '0369a31a13703f2030bd930c37cd3e4087488151706968bff79f1223d9b340d8',
+    }
+    for path, sha in pins.items():
+        require(digest(path) == sha, f'Previously verified input changed: {path}')
+    sys.path.insert(0, str(DIAGNOSTIC))
+    import verify_resolution as prior
+    inventory = json.loads((PRIOR / 'source-conflict-inventory.json').read_bytes())
+    baseline = json.loads((DIAGNOSTIC / 'diagnostic-validation.json').read_bytes())
+    old_ledger = json.loads((DIAGNOSTIC / 'corrections.json').read_bytes())
+    provider = json.loads((DIAGNOSTIC / 'provider-evidence.json').read_bytes())
+    mappings = {(c['gsis_id'], c['old_pfr_id']): c['verified_pfr_id'] for c in old_ledger['corrections']}
+    providers = {r['gsis_id']: r for r in provider['players_crosswalk']['selected_rows']}
+    require(len(mappings) == len(providers) == 7 and baseline['status'] == 'PASS', 'Seven verified mappings required')
+    checkpoint = ROOT / 'research/pgo_opening_night_20260909/preserved-checkpoint.json'
+    protected = json.loads(checkpoint.read_bytes())['files']
+    protected.update({str(p): digest(p) for p in PRIOR.rglob('*') if p.is_file() and '__pycache__' not in p.parts})
+    protected.update({str(p): sha for p, sha in pins.items()})
+    protected[str(Path(__file__))] = digest(Path(__file__))
+    protected[str(checkpoint)] = digest(checkpoint)
+    for entry in inventory['verified_sources'].values():
+        protected[entry['path']] = entry['sha256']
+    require(all(Path(path).is_file() and digest(path) == sha for path, sha in protected.items()),
+            'Protected original source, checkout, or prior evidence changed')
+    output.mkdir()
+    report = dict(status='STOP', started_at=datetime.now(timezone.utc).isoformat())
+    try:
+        corrections, sources, source_entries = [], {}, []
+        old_keys = {prior.row_key(c) for c in old_ledger['corrections']}
+        matched_old_keys, buckets = set(), Counter()
+        for label, original_source in sorted(inventory['verified_sources'].items()):
+            name, season_text = label.split(':')
+            season = int(season_text)
+            entry = dict(original_source)
+            local_corrections = []
+            if name == 'weekly_rosters':
+                rows = audit.source_rows(original_source)
+                for number, row in enumerate(rows, 1):
+                    verified = mappings.get((row['gsis_id'], row['pfr_id']))
+                    if not verified:
+                        continue
+                    evidence = providers[row['gsis_id']]
+                    colleges = {v.strip() for v in row['college'].split(';') if v.strip()}
+                    require(evidence['pfr_id'] == verified and row['birth_date'] == evidence['birth_date'] and
+                            colleges and colleges <= {v.strip() for v in evidence['college_name'].split(';')},
+                            f'Unverified identity among extra rows: {season}/{number}')
+                    key = prior.row_key(row)
+                    bucket = 'original_115' if key in old_keys else 'additional_ACT' if row['status'] == 'ACT' else 'additional_other'
+                    if bucket == 'original_115':
+                        require(key not in matched_old_keys, f'Duplicate old correction key: {key}')
+                        matched_old_keys.add(key)
+                    buckets[bucket] += 1
+                    correction = dict(season=season, week=int(row['week']), team=prior.audit.normalize_team(row['team']),
+                        gsis_id=row['gsis_id'], status=row['status'], row_number=number, bucket=bucket,
+                        original_row=dict(row), original_row_sha256=row_hash(row),
+                        source_sha256=original_source['sha256'], old_pfr_id=row['pfr_id'],
+                        verified_pfr_id=verified, provider_row=evidence)
+                    local_corrections.append(correction)
+                corrected = apply_exact(rows, local_corrections, original_source['sha256'])
+                require(not any((r['gsis_id'], r['pfr_id']) in mappings for r in corrected),
+                        f'Disputed mapping remains in derived roster: {season}')
+                if local_corrections:
+                    stream = io.StringIO(newline='')
+                    writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n')
+                    writer.writeheader()
+                    writer.writerows(corrected)
+                    data = stream.getvalue().encode('utf-8')
+                    derived = output / f'weekly_rosters-{season}-{hashlib.sha256(data).hexdigest()}.csv'
+                    with derived.open('xb') as handle:
+                        handle.write(data)
+                    entry = file_entry(derived)
+                    require(audit.source_rows(entry) == corrected, f'Derived CSV round-trip differs: {season}')
+                    require(sum(a != b for a, b in zip(rows, corrected)) == len(local_corrections),
+                            f'Unexpected derivative changes: {season}')
+                corrections.extend(local_corrections)
+            sources[label] = entry
+            source_entries.append(dict(name=name, season=season, **entry,
+                                       original_source=original_source, corrected_rows=len(local_corrections)))
+        require(buckets == dict(original_115=115, additional_ACT=34, additional_other=70) and matched_old_keys == old_keys,
+                f'Exact correction scope differs: {dict(buckets)}')
+        write_json(output / 'corrections.json', dict(scope='219_EXACT_ROSTER_ROWS', counts=dict(buckets),
+            provider_evidence=file_entry(DIAGNOSTIC / 'provider-evidence.json'),
+            prior_115_ledger=file_entry(DIAGNOSTIC / 'corrections.json'), corrections=corrections))
+        report.update(qualify(sources, inventory, baseline, old_ledger['corrections'], prior.apply_rows))
+        report.update(sources=source_entries, correction_counts=dict(buckets),
+                      remaining_disputed_roster_occurrences=0, row_and_manifest_self_check=self_check())
+    except Exception as error:
+        report.update(status='STOP', error=f'{type(error).__name__}: {error}')
+    finally:
+        after = {path: digest(path) if Path(path).is_file() else None for path in protected}
+        report.update(protected_hashes_before=protected, protected_hashes_after=after,
+                      protected_files_unchanged=protected == after, protected_file_count=len(protected),
+                      completed_at=datetime.now(timezone.utc).isoformat())
+        if protected != after:
+            report.update(status='STOP', error='Protected source or prior evidence changed')
+        write_json(output / 'qualification.json', report)
+    require(report['status'] == 'PASS', f'Package qualification STOP; preserved receipt: {report.get("error")}')
+    manifest = dict(status='PASS', scope='STRICT_HISTORICAL_IDENTITY_ONLY',
+                    model_status='EXPERIMENTAL / HOLD', default_source_selection='UNCHANGED',
+                    sources=report['sources'], qualification=file_entry(output / 'qualification.json'),
+                    evidence=[file_entry(output / 'corrections.json'), file_entry(Path(__file__)),
+                              *[file_entry(p) for p in pins]])
+    manifest_path = output / 'source-manifest.json'
+    write_json(manifest_path, manifest)
+    paths = load_sources(manifest_path, digest(manifest_path))
+    return dict(status='PASS', manifest=str(manifest_path), manifest_sha256=digest(manifest_path),
+                verified_sources=len(paths), corrected_rows=219)
+
+
+def self_check():
+    row = dict(season='2025', week='1', team='NO', gsis_id='example', status='DEV', pfr_id='old')
+    correction = dict(row_number=1, original_row=row, original_row_sha256=row_hash(row),
+                      source_sha256='source', old_pfr_id='old', verified_pfr_id='new')
+    assert apply_exact([row], [correction], 'source') == [{**row, 'pfr_id': 'new'}]
+    assert row['pfr_id'] == 'old'
+    cases = [([row], [correction, correction], 'source'), ([], [correction], 'source'),
+             ([{**row, 'status': 'ACT'}], [correction], 'source'),
+             ([{**row, 'pfr_id': 'unexpected'}], [correction], 'source'),
+             ([row], [correction], 'wrong-source'),
+             ([row], [{**correction, 'original_row_sha256': 'wrong'}], 'source')]
+    for args in cases:
+        try:
+            apply_exact(*args)
+        except ValueError:
+            continue
+        raise AssertionError('Expected exact-row guard rejection')
+    with tempfile.TemporaryDirectory(prefix='pgo-identity-check-') as directory:
+        folder = Path(directory)
+        source = folder / 'source.csv'
+        source.write_text('example\n', encoding='utf-8')
+        entry = file_entry(source)
+        sources = [dict(name=name, season=season, **entry)
+                   for name in ('weekly_rosters', 'snap_counts') for season in range(2013, 2026)]
+        receipt = folder / 'qualification.json'
+        write_json(receipt, dict(status='PASS', sources=sources, corrected_roster_rows=219, compared_REG_snap_rows=310475))
+        manifest = folder / 'manifest.json'
+        data = dict(status='PASS', scope='STRICT_HISTORICAL_IDENTITY_ONLY', sources=sources,
+                    qualification=file_entry(receipt), evidence=[])
+        write_json(manifest, data)
+        sha = digest(manifest)
+        assert len(load_sources(manifest, sha)) == 26
+        for mutation in ('bad_manifest_hash', 'changed_source', 'duplicate_source', 'missing_source'):
+            candidate = json.loads(json.dumps(data))
+            if mutation == 'changed_source':
+                source.write_text('changed\n', encoding='utf-8')
+            elif mutation == 'duplicate_source':
+                candidate['sources'].append(candidate['sources'][0])
+            elif mutation == 'missing_source':
+                candidate['sources'].pop()
+            trial = folder / (mutation + '.json')
+            write_json(trial, candidate)
+            try:
+                load_sources(trial, 'wrong' if mutation == 'bad_manifest_hash' else digest(trial))
+            except ValueError:
+                pass
+            else:
+                raise AssertionError(f'Expected manifest guard rejection: {mutation}')
+            source.write_text('example\n', encoding='utf-8')
+    return dict(status='PASS', positive_row_checks=1, negative_row_checks=len(cases),
+                positive_manifest_checks=1, negative_manifest_checks=4)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    modes = parser.add_mutually_exclusive_group(required=True)
+    modes.add_argument('--build', type=Path)
+    modes.add_argument('--self-check', action='store_true')
+    modes.add_argument('--verify', type=Path)
+    parser.add_argument('--expected-sha256')
+    args = parser.parse_args()
+    require(not sys.flags.optimize, 'Run without -O')
+    if args.self_check:
+        result = self_check()
+    elif args.build:
+        result = build_package(args.build)
+    else:
+        require(args.expected_sha256, 'Verification requires --expected-sha256')
+        result = dict(status='PASS', sources=len(load_sources(args.verify, args.expected_sha256)))
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == '__main__':
+    main()

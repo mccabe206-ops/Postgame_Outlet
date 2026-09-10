@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
 ## The case near the top
 
 Cincinnati's number is quarterback-and-weapons: an elite passer with the best receiver duo in football, held back only by a below-average defense.

@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-09-09T15:41:47.034022+00:00",
+  "scope": "Carry existing player age and experience when McCabe replaces the Atlanta starter; no numerical rating change",
+  "before_sha256": "3a3d88f8bbaee1d227642c27fe43a5eac101d4947dda66cc1011302a6157898d",
+  "after_sha256": "e4280a3c738fb22ad6985959f926f72739fdb41a0a0761ae81cf749a0e5adfb0",
+  "source": {
+    "path": "data\\qb_depth.csv",
+    "sha256": "82b1fdb6c5a9a9ad9f4cc70c644247a49b1482f0163724458fa257db69e42bc2",
+    "row": {
+      "team": "Atlanta Falcons",
+      "string": "2",
+      "qb_name": "Tua Tagovailoa",
+      "value": "-2.5",
+      "notes": "Startable vet behind Penix",
+      "age": "28",
+      "exp": "6"
+    }
+  },
+  "changes": [
+    {
+      "team": "Atlanta Falcons",
+      "field": "age",
+      "before": "26",
+      "after": "28"
+    },
+    {
+      "team": "Atlanta Falcons",
+      "field": "exp",
+      "before": "2",
+      "after": "6"
+    }
+  ],
+  "all_other_fields_unchanged": true
+}

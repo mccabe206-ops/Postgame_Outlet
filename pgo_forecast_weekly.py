@@ -14,8 +14,9 @@ import re
 
 import pgo_forecast_snapshot
 import pgo_forecast_corrected
+import pgo_forecast_postseason
 
-# Only the two explicitly reviewed source editions are accepted below.
+# Each explicitly reviewed source edition retains its own strict verifier.
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_SNAPSHOT = HERE / "docs" / "evidence" / "forecast-lab-2026" / "september-07"
@@ -94,6 +95,8 @@ def _verified_source(directory, expected_manifest_sha256=None):
     edition = json.loads(before).get('edition')
     if edition == pgo_forecast_corrected.EDITION:
         snapshot = pgo_forecast_corrected.load_snapshot(directory)
+    elif edition == pgo_forecast_postseason.EDITION:
+        snapshot = pgo_forecast_postseason.load_snapshot(directory)
     elif edition in (None, pgo_forecast_snapshot.EDITION):
         # Missing edition reaches the strict legacy verifier, which rejects it.
         snapshot = pgo_forecast_snapshot.load_snapshot(directory)

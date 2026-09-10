@@ -1,0 +1,45 @@
+{
+  "files": {
+    "baseline-replay.json": {
+      "bytes": 177,
+      "sha256": "8154e34d701e4130735f80c714496e6340ae7a8146a0e65fe23faa94803aeaa7"
+    },
+    "coverage.json": {
+      "bytes": 140,
+      "sha256": "aaec8dd1e36ec57747aa4fcb511df3f743ca1f3b8d57a44fe089a18c8615a790"
+    },
+    "final-fit.json": {
+      "bytes": 88384,
+      "sha256": "8fffb33ec7dc0f28615af47c225af67e047463a511f1fd2ccb185cc5bcaf8816"
+    },
+    "fold-fits.json": {
+      "bytes": 654303,
+      "sha256": "dd85f18bdd31ac6cf6cd6898936f487ee7b2b9447db6cf53b8432a136e6fe9dd"
+    },
+    "historical-features.json": {
+      "bytes": 5234024,
+      "sha256": "b0f80bbefe8ee1b0314c667aeb74233f62250c86f949b95c4f09cccd86e4fc25"
+    },
+    "matched-predictions.csv": {
+      "bytes": 334054,
+      "sha256": "e9989a9e59c3a3439b52ed86afaca9bacb8b2e4e627ca119c0643aa992a19ff3"
+    },
+    "metrics.json": {
+      "bytes": 94486,
+      "sha256": "ad5eaefe2fc17578b07efaebb6818deecfe484b76509b88b36b5d360dde056e7"
+    },
+    "penalty-seed.json": {
+      "bytes": 2415,
+      "sha256": "35bdc866024ad056f0b80160f05c785dc2a2ad955cbf065d6a7a3d5d224976ed"
+    },
+    "run-receipt.json": {
+      "bytes": 65130,
+      "sha256": "1b4f71eaf17805b23e25cf0b47a740e790e37a8f151016ee7855acdf7f25aaab"
+    },
+    "run-start.json": {
+      "bytes": 64540,
+      "sha256": "ac1d46932665b443df21c8ed4ad15455c86320afbfb11db8ef25022e8248b5f4"
+    }
+  },
+  "identity": "pgo-penalty-candidate-2026-09-10"
+}

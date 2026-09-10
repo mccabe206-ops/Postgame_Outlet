@@ -1,0 +1,18 @@
+{
+  "verified_at": "2026-09-09T22:55:59.242400+00:00",
+  "status": "PASS_ANNOTATIONS_ONLY",
+  "path": "research/pgo_defensive_depth_candidate/source-review-20260909/injury-source.json",
+  "sha256": "3470434b3ebc99a534d69bdea8947a10638ad2e370f28507212e42f2b9d65052",
+  "team_sources": 32,
+  "new_final_inactive_players": 14,
+  "other_team_sources_and_players_preserved": true,
+  "old_source_unchanged": true,
+  "exact_current_team_gsis_identity": true,
+  "milroe_emergency_third_quarterback_preserved": true,
+  "all_14_game_status_fields_blank": true,
+  "no_forecast_or_model_input_mutations": true,
+  "source_raw_hashes": {
+    "NE": "afbf0ce7d2829541ea0359e8a0d97a64e8eec09b738009f6185ed1cda8e43601",
+    "SEA": "e8525891227b8e55d30f281564fd4e3c7d5701957c368ecf826b8b4973b8fbd9"
+  }
+}

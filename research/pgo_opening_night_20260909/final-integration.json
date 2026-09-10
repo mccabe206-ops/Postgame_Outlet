@@ -1,0 +1,101 @@
+{
+  "status": "PASS_FOR_LOCAL_RELEASE_REVIEW",
+  "completed_at": "2026-09-09T15:48:01.166368+00:00",
+  "source_commit": "be46e76676453447b0f44d376d2360599f319ada",
+  "preview": {
+    "output": "D:\\CodexWorktrees\\Postgame_Outlet-opening-night-20260909\\output\\opening-night\\site\\index.html",
+    "html_sha256": "6e943b5cdc483fb8b4a55a8c17d6b31ce7477d0b7738b450474faec6ac755b23",
+    "css_sha256": "44742c8b900997fe666f04f3620a2b55db8fbec1279eb103707ddababc85f6f9",
+    "current_injury_note_count": 8,
+    "saved_fantasy_panel_unchanged_after_removing_current_annotations": true,
+    "source_commit": "be46e76676453447b0f44d376d2360599f319ada",
+    "generated_at": "2026-09-09T15:43:18.772903+00:00",
+    "public_artifact_modified": false
+  },
+  "tests": [
+    {
+      "command": "python -m unittest discover -s tests",
+      "run": 572,
+      "skipped": 1,
+      "failures": 0,
+      "seconds": 607.408,
+      "log": "reviews/task-1-tests.log"
+    },
+    {
+      "command": "python -m unittest research.pgo_corrected_roster_candidate.test_candidate research.pgo_corrected_roster_candidate.test_temporal research.pgo_corrected_roster_candidate.test_verify",
+      "run": 15,
+      "failures": 0,
+      "seconds": 0.177,
+      "log": "reviews/task-1-research-tests.log"
+    },
+    {
+      "command": "python -B -m unittest tests.test_mccabe_opening_night tests.test_ratings_release tests.test_pgo_comparison tests.test_pgo_current_injury_notes",
+      "run": 82,
+      "failures": 0,
+      "seconds": 49.571,
+      "scope": "Final affected modules after the last QB guard and metadata correction"
+    }
+  ],
+  "browser": {
+    "status": "PASS",
+    "url": "http://127.0.0.1:8769/index.html?review=be46e76",
+    "desktop_width": 1280,
+    "mobile_width": 375,
+    "embedded_width": 640,
+    "page_overflow": false,
+    "keyboard_drawer_and_focus_return": true,
+    "sorting_and_snapshots": true,
+    "full_columns_scroll_inside_table": true,
+    "final_qb_starters": 32,
+    "final_qb_backups": 18,
+    "tua_occurrences": 1,
+    "tua_age_experience": [
+      "28",
+      "6"
+    ],
+    "current_henderson_out_visible": true,
+    "current_horton_questionable_visible": true,
+    "final_console_errors_and_warnings": [],
+    "forecast_lab_row_header_background": "rgb(23, 28, 36)",
+    "forecast_lab_row_header_text": "rgb(230, 237, 243)"
+  },
+  "preservation": {
+    "original_checkout_paths": 431,
+    "protected_paths_rechecked": 476,
+    "committed_byte_pinned_files_checked": 96,
+    "pending_documentation_excluded_from_git_blob_check": [
+      "research/pgo_opening_night_20260909/README.md"
+    ],
+    "issued_evidence_files": 51,
+    "published_index_sha256": "2b2490159152dc54d77231b8f7460eb98f15deda8a29480a017a366e922cc434",
+    "prior_snapshot_entries_unchanged": 2,
+    "reference_unchanged": true,
+    "reference_sha256": "164f9b55a42064ef3107f4e089cb32cd99acec93ac8dd20342d9afd37ca8dae7",
+    "saved_fantasy_panel_exact_after_removing_annotations": true
+  },
+  "final_ratings_sha256": "e4280a3c738fb22ad6985959f926f72739fdb41a0a0761ae81cf749a0e5adfb0",
+  "approved_grades_unchanged": true,
+  "metadata_correction_receipt": "editorial-metadata-followup.json",
+  "historical_identity": {
+    "corrected_rows": 219,
+    "reg_snap_rows": 310475,
+    "unresolved_rows": 8461,
+    "manifest_sha256": "17f1dec348ad4992dbe32c6e5d54461ef8bd858e7e9d1775e37951385c492f2a",
+    "default_sources_changed": false
+  },
+  "injury_scope": {
+    "captured_through": "2026-09-09T14:46:46+00:00",
+    "formal_teams": [
+      "NE",
+      "SEA",
+      "SF",
+      "LAR"
+    ],
+    "unknown_formal_teams": 28,
+    "final_inactives": "PENDING",
+    "next_checkpoint": "2026-09-09T19:20:00-04:00"
+  },
+  "model_status": "EXPERIMENTAL / HOLD",
+  "publication": "NOT PERFORMED - explicit release approval required by HANDOFF.md",
+  "whitespace_check": "PASS excluding exact byte-pinned Bills news capture with three upstream trailing spaces"
+}

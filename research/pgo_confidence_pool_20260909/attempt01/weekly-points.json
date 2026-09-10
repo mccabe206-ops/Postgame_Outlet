@@ -1,0 +1,1821 @@
+[
+  {
+    "constant": {
+      "expected": 75.526213592233,
+      "realized": 68
+    },
+    "corrected": {
+      "expected": 93.46222862142291,
+      "realized": 93
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 92.17028607548579,
+      "realized": 94
+    },
+    "season": 2020,
+    "week": 1
+  },
+  {
+    "constant": {
+      "expected": 75.526213592233,
+      "realized": 97
+    },
+    "corrected": {
+      "expected": 92.98203419219729,
+      "realized": 128
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 92.19539046595548,
+      "realized": 129
+    },
+    "season": 2020,
+    "week": 2
+  },
+  {
+    "constant": {
+      "expected": 75.526213592233,
+      "realized": 58
+    },
+    "corrected": {
+      "expected": 87.5261620373268,
+      "realized": 66
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 87.39897581477094,
+      "realized": 78
+    },
+    "season": 2020,
+    "week": 3
+  },
+  {
+    "constant": {
+      "expected": 66.64077669902912,
+      "realized": 44
+    },
+    "corrected": {
+      "expected": 85.43281091929703,
+      "realized": 89
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 84.80979999077175,
+      "realized": 88
+    },
+    "season": 2020,
+    "week": 4
+  },
+  {
+    "constant": {
+      "expected": 58.31067961165048,
+      "realized": 74
+    },
+    "corrected": {
+      "expected": 76.58242362832648,
+      "realized": 72
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 76.18867078594224,
+      "realized": 72
+    },
+    "season": 2020,
+    "week": 5
+  },
+  {
+    "constant": {
+      "expected": 58.31067961165048,
+      "realized": 69
+    },
+    "corrected": {
+      "expected": 72.51757902342037,
+      "realized": 71
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 72.15738734863578,
+      "realized": 72
+    },
+    "season": 2020,
+    "week": 6
+  },
+  {
+    "constant": {
+      "expected": 58.31067961165048,
+      "realized": 40
+    },
+    "corrected": {
+      "expected": 72.3244931353596,
+      "realized": 77
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 71.69249258967172,
+      "realized": 78
+    },
+    "season": 2020,
+    "week": 7
+  },
+  {
+    "constant": {
+      "expected": 58.31067961165048,
+      "realized": 55
+    },
+    "corrected": {
+      "expected": 74.8965555458186,
+      "realized": 55
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 74.07450576562009,
+      "realized": 52
+    },
+    "season": 2020,
+    "week": 8
+  },
+  {
+    "constant": {
+      "expected": 58.31067961165048,
+      "realized": 28
+    },
+    "corrected": {
+      "expected": 74.37902052815004,
+      "realized": 78
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 74.07653823440315,
+      "realized": 76
+    },
+    "season": 2020,
+    "week": 9
+  },
+  {
+    "constant": {
+      "expected": 58.31067961165048,
+      "realized": 77
+    },
+    "corrected": {
+      "expected": 71.67211557115165,
+      "realized": 87
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 70.74177534604145,
+      "realized": 88
+    },
+    "season": 2020,
+    "week": 10
+  },
+  {
+    "constant": {
+      "expected": 58.31067961165048,
+      "realized": 59
+    },
+    "corrected": {
+      "expected": 70.97627070593917,
+      "realized": 62
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 70.3121636496386,
+      "realized": 61
+    },
+    "season": 2020,
+    "week": 11
+  },
+  {
+    "constant": {
+      "expected": 75.526213592233,
+      "realized": 27
+    },
+    "corrected": {
+      "expected": 90.48671992025635,
+      "realized": 108
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 89.78941624114198,
+      "realized": 109
+    },
+    "season": 2020,
+    "week": 12
+  },
+  {
+    "constant": {
+      "expected": 66.64077669902912,
+      "realized": 33
+    },
+    "corrected": {
+      "expected": 92.20070843563009,
+      "realized": 75
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 91.86067771755096,
+      "realized": 76
+    },
+    "season": 2020,
+    "week": 13
+  },
+  {
+    "constant": {
+      "expected": 75.526213592233,
+      "realized": 69
+    },
+    "corrected": {
+      "expected": 94.60095290280518,
+      "realized": 95
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 94.36109572091239,
+      "realized": 94
+    },
+    "season": 2020,
+    "week": 14
+  },
+  {
+    "constant": {
+      "expected": 75.526213592233,
+      "realized": 70
+    },
+    "corrected": {
+      "expected": 102.77144898132126,
+      "realized": 95
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 102.54162351218547,
+      "realized": 98
+    },
+    "season": 2020,
+    "week": 15
+  },
+  {
+    "constant": {
+      "expected": 75.526213592233,
+      "realized": 83
+    },
+    "corrected": {
+      "expected": 98.66506969693748,
+      "realized": 97
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 97.95183700893784,
+      "realized": 98
+    },
+    "season": 2020,
+    "week": 16
+  },
+  {
+    "constant": {
+      "expected": 75.526213592233,
+      "realized": 47
+    },
+    "corrected": {
+      "expected": 96.47321349936647,
+      "realized": 126
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 95.83423461422336,
+      "realized": 126
+    },
+    "season": 2020,
+    "week": 17
+  },
+  {
+    "constant": {
+      "expected": 72.85084306095979,
+      "realized": 52
+    },
+    "corrected": {
+      "expected": 89.27297137887699,
+      "realized": 68
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 88.01752042200273,
+      "realized": 72
+    },
+    "season": 2021,
+    "week": 1
+  },
+  {
+    "constant": {
+      "expected": 72.85084306095979,
+      "realized": 63
+    },
+    "corrected": {
+      "expected": 92.51082259550986,
+      "realized": 91
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 92.12221485582644,
+      "realized": 91
+    },
+    "season": 2021,
+    "week": 2
+  },
+  {
+    "constant": {
+      "expected": 72.85084306095979,
+      "realized": 93
+    },
+    "corrected": {
+      "expected": 92.39990785531701,
+      "realized": 108
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 91.16626823868108,
+      "realized": 110
+    },
+    "season": 2021,
+    "week": 3
+  },
+  {
+    "constant": {
+      "expected": 72.85084306095979,
+      "realized": 59
+    },
+    "corrected": {
+      "expected": 97.35349907908156,
+      "realized": 88
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 97.45434271358641,
+      "realized": 86
+    },
+    "season": 2021,
+    "week": 4
+  },
+  {
+    "constant": {
+      "expected": 72.85084306095979,
+      "realized": 68
+    },
+    "corrected": {
+      "expected": 94.64750027477244,
+      "realized": 125
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 94.43592986666519,
+      "realized": 125
+    },
+    "season": 2021,
+    "week": 5
+  },
+  {
+    "constant": {
+      "expected": 56.245136186770424,
+      "realized": 40
+    },
+    "corrected": {
+      "expected": 71.02754272709372,
+      "realized": 80
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 70.97678491093943,
+      "realized": 79
+    },
+    "season": 2021,
+    "week": 6
+  },
+  {
+    "constant": {
+      "expected": 48.74578469520104,
+      "realized": 68
+    },
+    "corrected": {
+      "expected": 68.11611028009244,
+      "realized": 82
+    },
+    "games": 13,
+    "postseason": {
+      "expected": 68.28325911360481,
+      "realized": 83
+    },
+    "season": 2021,
+    "week": 7
+  },
+  {
+    "constant": {
+      "expected": 64.28015564202335,
+      "realized": 51
+    },
+    "corrected": {
+      "expected": 87.44180110122255,
+      "realized": 71
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 87.49016717365886,
+      "realized": 68
+    },
+    "season": 2021,
+    "week": 8
+  },
+  {
+    "constant": {
+      "expected": 56.245136186770424,
+      "realized": 56
+    },
+    "corrected": {
+      "expected": 74.19373521451898,
+      "realized": 52
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 73.74866640006071,
+      "realized": 53
+    },
+    "season": 2021,
+    "week": 9
+  },
+  {
+    "constant": {
+      "expected": 56.245136186770424,
+      "realized": 62
+    },
+    "corrected": {
+      "expected": 77.77401083064338,
+      "realized": 52
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 77.68724517882993,
+      "realized": 51
+    },
+    "season": 2021,
+    "week": 10
+  },
+  {
+    "constant": {
+      "expected": 64.28015564202335,
+      "realized": 51
+    },
+    "corrected": {
+      "expected": 84.18384342475355,
+      "realized": 69
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 84.40847432787058,
+      "realized": 70
+    },
+    "season": 2021,
+    "week": 11
+  },
+  {
+    "constant": {
+      "expected": 64.28015564202335,
+      "realized": 81
+    },
+    "corrected": {
+      "expected": 74.09907312912814,
+      "realized": 67
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 73.78980506243674,
+      "realized": 66
+    },
+    "season": 2021,
+    "week": 12
+  },
+  {
+    "constant": {
+      "expected": 56.245136186770424,
+      "realized": 42
+    },
+    "corrected": {
+      "expected": 74.83309032933673,
+      "realized": 81
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 74.98616493687047,
+      "realized": 81
+    },
+    "season": 2021,
+    "week": 13
+  },
+  {
+    "constant": {
+      "expected": 56.245136186770424,
+      "realized": 54
+    },
+    "corrected": {
+      "expected": 77.33280910264808,
+      "realized": 94
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 77.34078358930991,
+      "realized": 95
+    },
+    "season": 2021,
+    "week": 14
+  },
+  {
+    "constant": {
+      "expected": 72.85084306095979,
+      "realized": 75
+    },
+    "corrected": {
+      "expected": 99.52814021938188,
+      "realized": 93
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 99.73316199826922,
+      "realized": 93
+    },
+    "season": 2021,
+    "week": 15
+  },
+  {
+    "constant": {
+      "expected": 72.85084306095979,
+      "realized": 88
+    },
+    "corrected": {
+      "expected": 96.0434695359378,
+      "realized": 102
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 96.1295233329807,
+      "realized": 102
+    },
+    "season": 2021,
+    "week": 16
+  },
+  {
+    "constant": {
+      "expected": 72.85084306095979,
+      "realized": 83
+    },
+    "corrected": {
+      "expected": 105.93102408686904,
+      "realized": 113
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 105.95947040470504,
+      "realized": 113
+    },
+    "season": 2021,
+    "week": 17
+  },
+  {
+    "constant": {
+      "expected": 72.85084306095979,
+      "realized": 45
+    },
+    "corrected": {
+      "expected": 104.34791359121446,
+      "realized": 68
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 104.35746787257416,
+      "realized": 69
+    },
+    "season": 2021,
+    "week": 18
+  },
+  {
+    "constant": {
+      "expected": 72.10738255033557,
+      "realized": 50
+    },
+    "corrected": {
+      "expected": 86.83795420983255,
+      "realized": 68
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 86.55328038161376,
+      "realized": 69
+    },
+    "season": 2022,
+    "week": 1
+  },
+  {
+    "constant": {
+      "expected": 72.10738255033557,
+      "realized": 89
+    },
+    "corrected": {
+      "expected": 90.86772585500563,
+      "realized": 106
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 90.7339721227674,
+      "realized": 94
+    },
+    "season": 2022,
+    "week": 2
+  },
+  {
+    "constant": {
+      "expected": 72.10738255033557,
+      "realized": 83
+    },
+    "corrected": {
+      "expected": 85.39602560182416,
+      "realized": 62
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 85.13729499815473,
+      "realized": 61
+    },
+    "season": 2022,
+    "week": 3
+  },
+  {
+    "constant": {
+      "expected": 72.10738255033557,
+      "realized": 65
+    },
+    "corrected": {
+      "expected": 86.30927272321614,
+      "realized": 108
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 87.20726439555625,
+      "realized": 104
+    },
+    "season": 2022,
+    "week": 4
+  },
+  {
+    "constant": {
+      "expected": 72.10738255033557,
+      "realized": 57
+    },
+    "corrected": {
+      "expected": 95.13790449863498,
+      "realized": 90
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 94.94953224044824,
+      "realized": 87
+    },
+    "season": 2022,
+    "week": 5
+  },
+  {
+    "constant": {
+      "expected": 55.671140939597315,
+      "realized": 53
+    },
+    "corrected": {
+      "expected": 69.55383612626486,
+      "realized": 57
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 70.12822801652804,
+      "realized": 58
+    },
+    "season": 2022,
+    "week": 6
+  },
+  {
+    "constant": {
+      "expected": 55.671140939597315,
+      "realized": 61
+    },
+    "corrected": {
+      "expected": 73.28285719919664,
+      "realized": 66
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 72.86976927851802,
+      "realized": 65
+    },
+    "season": 2022,
+    "week": 7
+  },
+  {
+    "constant": {
+      "expected": 63.624161073825505,
+      "realized": 51
+    },
+    "corrected": {
+      "expected": 81.23932010245407,
+      "realized": 97
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 81.55981353370561,
+      "realized": 97
+    },
+    "season": 2022,
+    "week": 8
+  },
+  {
+    "constant": {
+      "expected": 48.24832214765101,
+      "realized": 42
+    },
+    "corrected": {
+      "expected": 64.62381055632402,
+      "realized": 70
+    },
+    "games": 13,
+    "postseason": {
+      "expected": 64.61416537595031,
+      "realized": 69
+    },
+    "season": 2022,
+    "week": 9
+  },
+  {
+    "constant": {
+      "expected": 55.671140939597315,
+      "realized": 65
+    },
+    "corrected": {
+      "expected": 71.49723874673349,
+      "realized": 44
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 71.14229144185056,
+      "realized": 40
+    },
+    "season": 2022,
+    "week": 10
+  },
+  {
+    "constant": {
+      "expected": 55.671140939597315,
+      "realized": 25
+    },
+    "corrected": {
+      "expected": 71.39436924822925,
+      "realized": 92
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 71.43643753897925,
+      "realized": 91
+    },
+    "season": 2022,
+    "week": 11
+  },
+  {
+    "constant": {
+      "expected": 72.10738255033557,
+      "realized": 93
+    },
+    "corrected": {
+      "expected": 97.11065875285364,
+      "realized": 90
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 97.0710866292304,
+      "realized": 92
+    },
+    "season": 2022,
+    "week": 12
+  },
+  {
+    "constant": {
+      "expected": 63.624161073825505,
+      "realized": 73
+    },
+    "corrected": {
+      "expected": 80.8899893946916,
+      "realized": 111
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 80.93185429177856,
+      "realized": 111
+    },
+    "season": 2022,
+    "week": 13
+  },
+  {
+    "constant": {
+      "expected": 48.24832214765101,
+      "realized": 55
+    },
+    "corrected": {
+      "expected": 65.4949012267905,
+      "realized": 68
+    },
+    "games": 13,
+    "postseason": {
+      "expected": 65.38433368971695,
+      "realized": 68
+    },
+    "season": 2022,
+    "week": 14
+  },
+  {
+    "constant": {
+      "expected": 72.10738255033557,
+      "realized": 64
+    },
+    "corrected": {
+      "expected": 95.27871401548438,
+      "realized": 104
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 95.43885173647739,
+      "realized": 105
+    },
+    "season": 2022,
+    "week": 15
+  },
+  {
+    "constant": {
+      "expected": 72.10738255033557,
+      "realized": 75
+    },
+    "corrected": {
+      "expected": 92.1134783889691,
+      "realized": 102
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 92.8124578318776,
+      "realized": 102
+    },
+    "season": 2022,
+    "week": 16
+  },
+  {
+    "constant": {
+      "expected": 63.624161073825505,
+      "realized": 62
+    },
+    "corrected": {
+      "expected": 85.48114438997185,
+      "realized": 105
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 85.49886768111742,
+      "realized": 107
+    },
+    "season": 2022,
+    "week": 17
+  },
+  {
+    "constant": {
+      "expected": 72.10738255033557,
+      "realized": 101
+    },
+    "corrected": {
+      "expected": 99.68104589139541,
+      "realized": 98
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 99.77245354018883,
+      "realized": 98
+    },
+    "season": 2022,
+    "week": 18
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 34
+    },
+    "corrected": {
+      "expected": 87.53900996137955,
+      "realized": 76
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 87.61922906510586,
+      "realized": 82
+    },
+    "season": 2023,
+    "week": 1
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 47
+    },
+    "corrected": {
+      "expected": 88.70262580563343,
+      "realized": 85
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 89.4984792704024,
+      "realized": 83
+    },
+    "season": 2023,
+    "week": 2
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 70
+    },
+    "corrected": {
+      "expected": 96.01690450547474,
+      "realized": 93
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 96.25934778066892,
+      "realized": 95
+    },
+    "season": 2023,
+    "week": 3
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 67
+    },
+    "corrected": {
+      "expected": 94.2584396529154,
+      "realized": 115
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 94.90399843078858,
+      "realized": 115
+    },
+    "season": 2023,
+    "week": 4
+  },
+  {
+    "constant": {
+      "expected": 56.25570776255707,
+      "realized": 46
+    },
+    "corrected": {
+      "expected": 71.39824768100982,
+      "realized": 56
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 71.45948047436003,
+      "realized": 61
+    },
+    "season": 2023,
+    "week": 5
+  },
+  {
+    "constant": {
+      "expected": 64.29223744292237,
+      "realized": 85
+    },
+    "corrected": {
+      "expected": 88.71182793413082,
+      "realized": 89
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 89.13599986671112,
+      "realized": 91
+    },
+    "season": 2023,
+    "week": 6
+  },
+  {
+    "constant": {
+      "expected": 48.754946727549466,
+      "realized": 67
+    },
+    "corrected": {
+      "expected": 62.121118025432935,
+      "realized": 29
+    },
+    "games": 13,
+    "postseason": {
+      "expected": 61.8878625697618,
+      "realized": 29
+    },
+    "season": 2023,
+    "week": 7
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 70
+    },
+    "corrected": {
+      "expected": 96.35014917712849,
+      "realized": 104
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 96.45583294461558,
+      "realized": 106
+    },
+    "season": 2023,
+    "week": 8
+  },
+  {
+    "constant": {
+      "expected": 56.25570776255707,
+      "realized": 71
+    },
+    "corrected": {
+      "expected": 67.96535203326337,
+      "realized": 96
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 67.91505772976075,
+      "realized": 99
+    },
+    "season": 2023,
+    "week": 9
+  },
+  {
+    "constant": {
+      "expected": 56.25570776255707,
+      "realized": 66
+    },
+    "corrected": {
+      "expected": 69.90866820756374,
+      "realized": 61
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 69.91053470634239,
+      "realized": 59
+    },
+    "season": 2023,
+    "week": 10
+  },
+  {
+    "constant": {
+      "expected": 56.25570776255707,
+      "realized": 83
+    },
+    "corrected": {
+      "expected": 77.47925874216766,
+      "realized": 80
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 77.51597235036421,
+      "realized": 81
+    },
+    "season": 2023,
+    "week": 11
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 64
+    },
+    "corrected": {
+      "expected": 92.21704129403747,
+      "realized": 81
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 92.4453699607824,
+      "realized": 82
+    },
+    "season": 2023,
+    "week": 12
+  },
+  {
+    "constant": {
+      "expected": 48.754946727549466,
+      "realized": 35
+    },
+    "corrected": {
+      "expected": 63.13417350519602,
+      "realized": 64
+    },
+    "games": 13,
+    "postseason": {
+      "expected": 63.27795258603704,
+      "realized": 64
+    },
+    "season": 2023,
+    "week": 13
+  },
+  {
+    "constant": {
+      "expected": 64.29223744292237,
+      "realized": 66
+    },
+    "corrected": {
+      "expected": 84.87931594712026,
+      "realized": 62
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 85.01885739639441,
+      "realized": 57
+    },
+    "season": 2023,
+    "week": 14
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 92
+    },
+    "corrected": {
+      "expected": 94.4877479024761,
+      "realized": 99
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 95.04525490098344,
+      "realized": 100
+    },
+    "season": 2023,
+    "week": 15
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 73
+    },
+    "corrected": {
+      "expected": 94.14775597111355,
+      "realized": 76
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 94.4039496775551,
+      "realized": 77
+    },
+    "season": 2023,
+    "week": 16
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 80
+    },
+    "corrected": {
+      "expected": 98.8757032766578,
+      "realized": 109
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 99.13057772122706,
+      "realized": 109
+    },
+    "season": 2023,
+    "week": 17
+  },
+  {
+    "constant": {
+      "expected": 72.86453576864535,
+      "realized": 46
+    },
+    "corrected": {
+      "expected": 94.15644654426758,
+      "realized": 78
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 94.3680493775826,
+      "realized": 78
+    },
+    "season": 2023,
+    "week": 18
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 88
+    },
+    "corrected": {
+      "expected": 91.92259732270324,
+      "realized": 113
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 92.23187724097421,
+      "realized": 112
+    },
+    "season": 2024,
+    "week": 1
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 47
+    },
+    "corrected": {
+      "expected": 87.48130599463808,
+      "realized": 61
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 87.90923135044163,
+      "realized": 69
+    },
+    "season": 2024,
+    "week": 2
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 66
+    },
+    "corrected": {
+      "expected": 91.36980408787002,
+      "realized": 56
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 91.92429446743941,
+      "realized": 62
+    },
+    "season": 2024,
+    "week": 3
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 78
+    },
+    "corrected": {
+      "expected": 88.81520173045482,
+      "realized": 70
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 89.0237628017219,
+      "realized": 74
+    },
+    "season": 2024,
+    "week": 4
+  },
+  {
+    "constant": {
+      "expected": 56.6046658259773,
+      "realized": 67
+    },
+    "corrected": {
+      "expected": 65.33325678293744,
+      "realized": 65
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 65.88320727749822,
+      "realized": 66
+    },
+    "season": 2024,
+    "week": 5
+  },
+  {
+    "constant": {
+      "expected": 56.6046658259773,
+      "realized": 29
+    },
+    "corrected": {
+      "expected": 66.93028629753806,
+      "realized": 100
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 67.11670923505196,
+      "realized": 101
+    },
+    "season": 2024,
+    "week": 6
+  },
+  {
+    "constant": {
+      "expected": 64.69104665825978,
+      "realized": 73
+    },
+    "corrected": {
+      "expected": 81.91339349873277,
+      "realized": 101
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 82.09754076153479,
+      "realized": 101
+    },
+    "season": 2024,
+    "week": 7
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 96
+    },
+    "corrected": {
+      "expected": 96.91082037740071,
+      "realized": 105
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 97.721554139186,
+      "realized": 107
+    },
+    "season": 2024,
+    "week": 8
+  },
+  {
+    "constant": {
+      "expected": 64.69104665825978,
+      "realized": 84
+    },
+    "corrected": {
+      "expected": 81.15539341512662,
+      "realized": 105
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 81.71620881106902,
+      "realized": 105
+    },
+    "season": 2024,
+    "week": 9
+  },
+  {
+    "constant": {
+      "expected": 56.6046658259773,
+      "realized": 41
+    },
+    "corrected": {
+      "expected": 72.60687205701181,
+      "realized": 80
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 72.88824054262577,
+      "realized": 77
+    },
+    "season": 2024,
+    "week": 10
+  },
+  {
+    "constant": {
+      "expected": 56.6046658259773,
+      "realized": 52
+    },
+    "corrected": {
+      "expected": 72.94700312233512,
+      "realized": 85
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 72.86601725808391,
+      "realized": 85
+    },
+    "season": 2024,
+    "week": 11
+  },
+  {
+    "constant": {
+      "expected": 49.057377049180324,
+      "realized": 30
+    },
+    "corrected": {
+      "expected": 65.96326800317807,
+      "realized": 56
+    },
+    "games": 13,
+    "postseason": {
+      "expected": 66.36435979892507,
+      "realized": 57
+    },
+    "season": 2024,
+    "week": 12
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 63
+    },
+    "corrected": {
+      "expected": 97.45359118228077,
+      "realized": 114
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 98.20526867239772,
+      "realized": 115
+    },
+    "season": 2024,
+    "week": 13
+  },
+  {
+    "constant": {
+      "expected": 49.057377049180324,
+      "realized": 54
+    },
+    "corrected": {
+      "expected": 65.31216732479747,
+      "realized": 74
+    },
+    "games": 13,
+    "postseason": {
+      "expected": 65.19263862424953,
+      "realized": 73
+    },
+    "season": 2024,
+    "week": 14
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 49
+    },
+    "corrected": {
+      "expected": 92.06754783982981,
+      "realized": 123
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 92.57603263054358,
+      "realized": 123
+    },
+    "season": 2024,
+    "week": 15
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 117
+    },
+    "corrected": {
+      "expected": 96.1757290897374,
+      "realized": 108
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 96.6570493306044,
+      "realized": 107
+    },
+    "season": 2024,
+    "week": 16
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 65
+    },
+    "corrected": {
+      "expected": 92.61212896618181,
+      "realized": 124
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 92.77200444528924,
+      "realized": 127
+    },
+    "season": 2024,
+    "week": 17
+  },
+  {
+    "constant": {
+      "expected": 73.31651954602775,
+      "realized": 82
+    },
+    "corrected": {
+      "expected": 104.89517049446565,
+      "realized": 89
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 104.98275354953319,
+      "realized": 89
+    },
+    "season": 2024,
+    "week": 18
+  },
+  {
+    "constant": {
+      "expected": 73.19698600645856,
+      "realized": 69
+    },
+    "corrected": {
+      "expected": 89.9937960919626,
+      "realized": 111
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 90.007364202162,
+      "realized": 109
+    },
+    "season": 2025,
+    "week": 1
+  },
+  {
+    "constant": {
+      "expected": 73.19698600645856,
+      "realized": 52
+    },
+    "corrected": {
+      "expected": 94.78936528997843,
+      "realized": 114
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 93.42403455697064,
+      "realized": 120
+    },
+    "season": 2025,
+    "week": 2
+  },
+  {
+    "constant": {
+      "expected": 73.19698600645856,
+      "realized": 95
+    },
+    "corrected": {
+      "expected": 93.70415293219779,
+      "realized": 94
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 93.59431946985477,
+      "realized": 91
+    },
+    "season": 2025,
+    "week": 3
+  },
+  {
+    "constant": {
+      "expected": 73.19698600645856,
+      "realized": 92
+    },
+    "corrected": {
+      "expected": 95.22502523333195,
+      "realized": 89
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 94.88585975790895,
+      "realized": 92
+    },
+    "season": 2025,
+    "week": 4
+  },
+  {
+    "constant": {
+      "expected": 56.51237890204521,
+      "realized": 28
+    },
+    "corrected": {
+      "expected": 74.09881214911607,
+      "realized": 40
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 73.77721562461814,
+      "realized": 42
+    },
+    "season": 2025,
+    "week": 5
+  },
+  {
+    "constant": {
+      "expected": 64.58557588805166,
+      "realized": 67
+    },
+    "corrected": {
+      "expected": 85.30081227334252,
+      "realized": 79
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 85.18075735861271,
+      "realized": 79
+    },
+    "season": 2025,
+    "week": 6
+  },
+  {
+    "constant": {
+      "expected": 64.58557588805166,
+      "realized": 83
+    },
+    "corrected": {
+      "expected": 80.33529304174736,
+      "realized": 87
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 79.88430971711334,
+      "realized": 90
+    },
+    "season": 2025,
+    "week": 7
+  },
+  {
+    "constant": {
+      "expected": 48.977395048439185,
+      "realized": 59
+    },
+    "corrected": {
+      "expected": 64.49091108462713,
+      "realized": 77
+    },
+    "games": 13,
+    "postseason": {
+      "expected": 64.62100793562057,
+      "realized": 78
+    },
+    "season": 2025,
+    "week": 8
+  },
+  {
+    "constant": {
+      "expected": 56.51237890204521,
+      "realized": 30
+    },
+    "corrected": {
+      "expected": 76.12645321028182,
+      "realized": 61
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 75.98902234439285,
+      "realized": 59
+    },
+    "season": 2025,
+    "week": 9
+  },
+  {
+    "constant": {
+      "expected": 56.51237890204521,
+      "realized": 54
+    },
+    "corrected": {
+      "expected": 75.03416462444257,
+      "realized": 76
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 74.7308282962735,
+      "realized": 77
+    },
+    "season": 2025,
+    "week": 10
+  },
+  {
+    "constant": {
+      "expected": 64.58557588805166,
+      "realized": 81
+    },
+    "corrected": {
+      "expected": 83.93350527197981,
+      "realized": 99
+    },
+    "games": 15,
+    "postseason": {
+      "expected": 83.88453189291606,
+      "realized": 100
+    },
+    "season": 2025,
+    "week": 11
+  },
+  {
+    "constant": {
+      "expected": 56.51237890204521,
+      "realized": 73
+    },
+    "corrected": {
+      "expected": 78.54446476350984,
+      "realized": 93
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 78.76986093316732,
+      "realized": 92
+    },
+    "season": 2025,
+    "week": 12
+  },
+  {
+    "constant": {
+      "expected": 73.19698600645856,
+      "realized": 78
+    },
+    "corrected": {
+      "expected": 99.91870376847848,
+      "realized": 89
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 99.9105172745282,
+      "realized": 88
+    },
+    "season": 2025,
+    "week": 13
+  },
+  {
+    "constant": {
+      "expected": 56.51237890204521,
+      "realized": 36
+    },
+    "corrected": {
+      "expected": 74.60067700448363,
+      "realized": 64
+    },
+    "games": 14,
+    "postseason": {
+      "expected": 74.7055123554331,
+      "realized": 63
+    },
+    "season": 2025,
+    "week": 14
+  },
+  {
+    "constant": {
+      "expected": 73.19698600645856,
+      "realized": 88
+    },
+    "corrected": {
+      "expected": 101.84017721814108,
+      "realized": 94
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 102.45864890225283,
+      "realized": 94
+    },
+    "season": 2025,
+    "week": 15
+  },
+  {
+    "constant": {
+      "expected": 73.19698600645856,
+      "realized": 55
+    },
+    "corrected": {
+      "expected": 92.70894233255545,
+      "realized": 76
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 93.13880300451703,
+      "realized": 75
+    },
+    "season": 2025,
+    "week": 16
+  },
+  {
+    "constant": {
+      "expected": 73.19698600645856,
+      "realized": 49
+    },
+    "corrected": {
+      "expected": 93.47698026493869,
+      "realized": 74
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 93.48448613713484,
+      "realized": 75
+    },
+    "season": 2025,
+    "week": 17
+  },
+  {
+    "constant": {
+      "expected": 73.19698600645856,
+      "realized": 96
+    },
+    "corrected": {
+      "expected": 105.21183645623186,
+      "realized": 91
+    },
+    "games": 16,
+    "postseason": {
+      "expected": 105.51310445395085,
+      "realized": 90
+    },
+    "season": 2025,
+    "week": 18
+  }
+]

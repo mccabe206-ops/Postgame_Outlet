@@ -1,0 +1,115 @@
+{
+  "verified_at": "2026-09-09T14:59:22.923959+00:00",
+  "status": "PASS",
+  "raw_source_count": 13,
+  "raw_source_readback_checks": [
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\49ers-news-index.html",
+      "bytes": 477981,
+      "sha256": "507f9e4dacee911792436b2bb583b0f82352273c264102dc9e8e088dba6f7476"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\nfl-injuries.html",
+      "bytes": 332889,
+      "sha256": "e34ea66372ab635902a9a3bdab64328478be3dfd8613a441402f56aa7bb7a6ac"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\patriots-week1.html",
+      "bytes": 431813,
+      "sha256": "8f0fc571945f788d7cc12eb7c6e3c09c9536a0407413cb02decf0eee2d1fe10a"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\rams-updates-index.html",
+      "bytes": 458268,
+      "sha256": "b6171a92f35851fb84b860c49646ac808a71d3fa44c190703bc9ba10588b5d36"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909T144234Z\\seahawks-week1.html",
+      "bytes": 645117,
+      "sha256": "9609e73bf2796739dafaf1324f5035e8c6cf254ad94c524d8d7aef2c2fe146e0"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-fourth\\nfl-week1-statuses.html",
+      "bytes": 899645,
+      "sha256": "f2a12e6104b72e9e3642650d43558b9bf54eafdb7d663d3330f6efd2dd10f30b"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-fourth\\nfl-sept8-roundup.html",
+      "bytes": 893324,
+      "sha256": "3c949a3c687b3db072bf309d7a2453aa026a0c643192ce141b5e7afb27415417"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-second\\rams-donald-garrett.html",
+      "bytes": 316112,
+      "sha256": "fb76e5ca0c3f8c4e8d44d9ba45399cc86bce956835b74327fee834d88434ef81"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-second\\49ers-injury-news.html",
+      "bytes": 668511,
+      "sha256": "a371372af2a8c245e644c55dbf7c3ae0f9098015878bdc1120af1902dec42781"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-second\\bills-news-index.html",
+      "bytes": 449487,
+      "sha256": "d2b15cf769d31d19e0500a56db1248c5ba7892d5563c51a00cf01a8aec9b0d5e"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-third\\bills-preweek1-news.html",
+      "bytes": 469054,
+      "sha256": "c9a164cffbc9ba671c2c03aec82e8242f1c119d543b7f95a37d995fcc2189909"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-third\\rams-nacua-august.html",
+      "bytes": 313389,
+      "sha256": "b5a72fded316c8c7d46189fea17df5e1d2d5f317de4f3144743cc65b290ee8e7"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture-20260909-third\\49ers-roster-injuries.html",
+      "bytes": 465767,
+      "sha256": "3d2251002406202a3a140972e944a3d79355153d21d7664a33d51ab9b9e01749"
+    }
+  ],
+  "team_count": 32,
+  "player_count": 29,
+  "coverage_by_kind": {
+    "no_formal_report": 28,
+    "formal_injury_report": 4
+  },
+  "annotation_count": 8,
+  "source_conflict_count": 2,
+  "pinned_roster_sha256": "2b2c39db80f1c9d9bf68b956a475cfba9ca19d4b456eefd2b4fa045f3a757965",
+  "validation": "pgo_injury_source.load_snapshot only; no overlay, import, model, or forecast execution",
+  "final_inactives_status": "PENDING_NOT_T60_LOCKED",
+  "artifacts": [
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\injury-source.json",
+      "bytes": 32879,
+      "sha256": "4c4927b7bbb7469d2700e8c330f186fde1d108bacb1e44d9b8c0504d921645ac"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\annotations-reviewed.json",
+      "bytes": 13879,
+      "sha256": "2be624175dd3dcd82b2baaac7468fbd4079b2802025a2bc7fdbed90828f7eab0"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\evidence-manifest.json",
+      "bytes": 13780,
+      "sha256": "250c31d557ea9aad802fb5ec7c45158a409681f9db915932af57b7a6da55fa7b"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\roster-identity-check.json",
+      "bytes": 20584,
+      "sha256": "e2508c9288606fdd600355b54ed6be102aa9b7e0bf75708ced3d66fd696d50e9"
+    },
+    {
+      "path": "research\\pgo_opening_night_20260909\\injuries\\capture_injuries.py",
+      "bytes": 2815,
+      "sha256": "e7e000a41cb255be962d485f9df5b6f071234ec4074a6ac4241c30249fd1f38c"
+    },
+    {
+      "path": "output\\opening-night\\tasks\\task-3-report.md",
+      "bytes": 13473,
+      "sha256": "8a2c218ac4f69fb6771d21f1b79c197b1a19fe5d01b1fa181a34d13d4ff0b8b1"
+    }
+  ]
+}

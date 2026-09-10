@@ -8,6 +8,7 @@ import json
 import math
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -25,16 +26,89 @@ ATTESTATION = ROOT / "research/pgo_stability_blend/prospective_attestation.json"
 
 
 class ForecastLabTests(unittest.TestCase):
+    def setUp(self):
+        # These fixtures exercise archived/weekly Lab inputs; the real additive
+        # packages and shared grading feed are covered in test_pgo_model_updates.
+        self.enterContext(patch("pgo_model_updates.render_current_updates", return_value=""))
+
+    @unittest.skipUnless(shutil.which("node"), "Node is required for the fragment behavior check")
+    def test_shared_fragment_script_activates_owning_tab_after_handlers_bind(self):
+        script = pgo_forecast_lab.FORECAST_DISPLAY_SCRIPT.removeprefix('<script>').removesuffix('</script>')
+        harness = r"""
+const assert = require('node:assert/strict');
+const vm = require('node:vm');
+const events = {};
+const panel = {hidden:true, getAttribute(name) {return name === 'aria-labelledby' ? 'tab-comparison' : null;}};
+const detail = {tagName:'DETAILS', open:false, parentElement:null};
+let scrolls = 0, handlerReady = false, clicks = 0, seasonPoll;
+const tab = {click() {clicks++; if (handlerReady) panel.hidden = false;}};
+const target = {tagName:'DIV', parentElement:detail,
+  closest(selector) {return selector === '[role="tabpanel"]' ? panel : null;},
+  scrollIntoView() {scrolls++;}};
+const document = {
+  readyState:'loading',
+  getElementById(id) {return {'reason':target, 'tab-comparison':tab}[id] || null;},
+  querySelectorAll() {return [];}, querySelector() {return null;},
+  addEventListener(name, callback) {events[name] = callback;}
+};
+const location = {hash:'#reason'};
+const window = {addEventListener(name, callback) {events[name] = callback;}};
+const context = {document, window, location, Date, setTimeout() {throw Error('No cutoff timer expected');},
+  setInterval(callback, delay) {assert.equal(delay,60000); seasonPoll=callback;}};
+vm.createContext(context);
+vm.runInContext(SCRIPT, context);
+// The script runs inside the PGO panel, before the page binds tab handlers.
+handlerReady = true;
+if (events.DOMContentLoaded) events.DOMContentLoaded();
+assert.equal(panel.hidden, false, 'cold deep link must activate PGO tab after its handler binds');
+assert.equal(detail.open, true);
+assert.ok(scrolls > 0);
+assert.equal(location.hash, '#reason');
+// Later hash navigation and native anchor clicks use the same owning-tab path.
+panel.hidden = true; detail.open = false;
+events.hashchange();
+assert.equal(panel.hidden, false); assert.equal(detail.open, true);
+panel.hidden = true;
+events.click({target:{closest() {return {hash:'#reason'};}}});
+assert.equal(panel.hidden, false);
+// Standalone Lab targets have no tabpanel and still open their disclosures.
+target.closest = () => null; detail.open = false;
+const before = clicks;
+events.hashchange();
+assert.equal(detail.open, true); assert.equal(clicks, before);
+location.hash = '#missing'; events.hashchange();
+(async () => {
+  let reloads=0, latest='2026-09-09T11:00:00Z', ok=true;
+  location.reload=() => reloads++;
+  const current={dataset:{seasonCheckedAt:'2026-09-09T12:00:00Z'},closest:()=>panel};
+  document.querySelector=() => current; document.hidden=false; panel.hidden=false;
+  context.fetch=async()=>({ok,json:async()=>({checked_at:latest})});
+  await seasonPoll(); assert.equal(reloads,0);
+  latest='2026-09-09T12:00:00Z'; await seasonPoll(); assert.equal(reloads,0);
+  latest='2026-09-09T12:15:00Z'; document.hidden=true; await seasonPoll(); assert.equal(reloads,0);
+  document.hidden=false; panel.hidden=true; await seasonPoll(); assert.equal(reloads,0);
+  panel.hidden=false; ok=false; await seasonPoll(); assert.equal(reloads,0);
+  ok=true; await seasonPoll(); assert.equal(reloads,1);
+  console.log('fragment behavior PASS; newer-only visible season updates PASS');
+})().catch(error=>{console.error(error);process.exitCode=1;});
+""".replace('SCRIPT', json.dumps(script))
+        result = subprocess.run([shutil.which('node')], input=harness, text=True,
+                                capture_output=True, check=False)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('fragment behavior PASS', result.stdout)
+
     def test_latest_corrected_revision_drives_the_input_panel_after_refresh(self):
         weekly_root = Path('docs/evidence/forecast-lab-2026/weekly').resolve()
         weekly = {'revisions': [dict(source_edition='pgo-corrected-week1-2026-09-08',
             source_directory='../september-08-corrected'),
             dict(source_edition='pgo-corrected-week1-2026-09-08', source_directory='../september-09-refresh')]}
-        with patch('pgo_forecast_corrected.load_snapshot', return_value={}) as load:
+        with patch('pgo_forecast_corrected.load_snapshot', return_value={}) as load, \
+                patch.object(Path, 'read_bytes', return_value=b'verified manifest'):
             data, directory = pgo_forecast_lab._load_corrected(None, weekly, weekly_root)
         self.assertEqual(directory, weekly_root.parent / 'september-09-refresh')
         load.assert_called_once_with(directory)
         self.assertIn('september-09-refresh/snapshot.json', data['_download_url'])
+        self.assertEqual(data['_manifest_sha256'], hashlib.sha256(b'verified manifest').hexdigest())
 
     def test_corrected_panel_distinguishes_scale_and_unpriced_absences(self):
         corrected = {'generated_at': '2026-09-08T16:00:00Z', 'inputs_as_of': '2026-09-08T15:00:00Z',
@@ -56,6 +130,10 @@ class ForecastLabTests(unittest.TestCase):
         team = panel.split('id="corrected-rating-NE">', 1)[1]
         reader, technical = team.split('<details class="technical-details">', 1)
         self.assertIn('recent game results', reader)
+        self.assertIn('current edge-rusher and linebacker depth', reader)
+        self.assertIn('not a complete assessment of the current roster', reader)
+        self.assertIn('docs/model-depth-audit-2026-09-09.md', panel)
+        self.assertIn('current edge-rusher and linebacker depth', panel.split('Choose a team below')[0])
         self.assertIn('not proof', reader)
         self.assertNotIn('Fitted contribution', reader)
         self.assertNotIn('model units', reader)
@@ -620,7 +698,7 @@ class ForecastLabTests(unittest.TestCase):
         self.assertNotIn("win probability", html.lower())
         self.assertEqual(html.count('data-game-id="'), 272)
         self.assertIn('<details class="forecast-week" open>', html)
-        self.assertLess(html.index("Blend home margin"),
+        self.assertLess(html.index("Original forecast favors"),
                         html.index("Frozen kickoff"))
         self.assertIn("prospective_lock.json", html)
         self.assertIn("prospective_predictions.csv", html)
@@ -632,7 +710,7 @@ class ForecastLabTests(unittest.TestCase):
             html,
         )
         self.assertIn(
-            '</style><link rel="stylesheet" href="pgo-theme.css">', html
+            '</style><link rel="stylesheet" href="pgo-theme.css?v=20260909-injuries">', html
         )
 
         escaped = pgo_forecast_lab.render_lab(
@@ -778,10 +856,10 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn("Active-roster preseason scenario", page)
         self.assertIn("ACT is an administrative roster status", page)
         self.assertIn("same September 7 state", page)
-        self.assertIn("SEA -2.5", page)
-        self.assertIn("SF -3.0", page)
-        self.assertIn("NE 21, SEA 24", page)
-        self.assertIn("SF 24, LAR 21", page)
+        self.assertIn("SEA by 2.5 points", page)
+        self.assertIn("SF by 3.0 points", page)
+        self.assertIn("NE 21.3, SEA 23.8", page)
+        self.assertIn("SF 23.5, LAR 20.5", page)
         self.assertIn("45.0", page)
         self.assertIn("44.0", page)
         self.assertIn(
@@ -789,26 +867,166 @@ class ForecastLabTests(unittest.TestCase):
             "September 9, 2026 at 8:20 PM EDT</time>", page,
         )
         self.assertIn(
-            "Scores are rounded to whole points; spreads and totals to one decimal. "
+            "Score summaries use whole-number rounded averages; model averages and combined points use one decimal. "
             "Evaluation uses the original unrounded projections.", page,
         )
         self.assertIn(
-            "<th>Projected total</th><th>Frozen kickoff</th><th>Actual</th>", page,
+            "<th>Combined points</th><th>Scheduled kickoff</th><th>Final score</th>", page,
         )
         self.assertIn("Week 18", page)
         self.assertIn("Week 18 times are provisional", page)
         self.assertIn("September results provenance", page)
         self.assertIn("https://example.com/results.csv", page)
         self.assertEqual(page.count('class="snapshot-team"'), 32)
+        self.assertEqual(page.count('class="pgo-rating-bar" role="img"'), 32)
+        self.assertEqual(page.count('class="pgo-team-marker"'), 32)
+        for team in snapshot["teams"]:
+            row = page.split(f'data-pgo-team="{team["team"]}"', 1)[1].split('</tr>', 1)[0]
+            self.assertIn(f'data-value="{team["rating"]}"', row)
+            self.assertIn(f'>{pgo_forecast_lab._signed(team["rating"])}</td>', row)
+        self.assertIn('class="pgo-snapshot-table"', page)
+        self.assertIn('class="pgo-essential"', page)
+        self.assertIn('class="pgo-detail"', page)
         self.assertIn("prospective_lock.json", page)
         self.assertIn("Frozen 25% stability blend", page)
         self.assertNotIn("win probability", page.lower())
         self.assertNotIn("League mean + venue", page)
-        for margin in (0.0, 0.0009, -0.0179):
+        for margin, expected in ((0.0, 'No projected edge'),
+                                 (0.0009, 'SEA by less than 0.1 point'),
+                                 (-0.0179, 'NE by less than 0.1 point')):
             self.assertEqual(
                 pgo_forecast_lab._spread({**snapshot["games"][0], "margin": margin}),
-                "Pick'em",
+                expected,
             )
+
+    def test_why_forecast_uses_only_matching_saved_corrected_inputs(self):
+        saved = json.loads((pgo_forecast_lab.CORRECTED_DIR / 'snapshot.json').read_bytes())
+        saved['_manifest_sha256'] = hashlib.sha256(
+            (pgo_forecast_lab.CORRECTED_DIR / 'manifest.json').read_bytes()).hexdigest()
+        game = {**saved['games'][0], 'source_edition': saved['edition'],
+                'source_generated_at': saved['generated_at'],
+                'source_manifest_sha256': saved['_manifest_sha256'],
+                'lock_at': '2026-09-09T23:20:00Z'}
+        before = copy.deepcopy((game, saved))
+        rendered = pgo_forecast_lab._forecast_weeks([game], [], weekly=True, corrected=saved)
+        for text in ('Why this forecast', 'NE by 1.2 points', 'adds 1.6 points for SEA',
+                     'same rest', 'SEA by 0.4 points', 'Drake Maye', 'Sam Darnold',
+                     '28.82', '18.82', '28.41', '17.18', '46.62',
+                     '23.53', '23.09', '#corrected-rating-NE', '#nonqb-availability',
+                     'the quality of their backups are not rated separately'):
+            self.assertIn(text, rendered)
+        self.assertEqual((game, saved), before)
+        reason = pgo_forecast_lab._forecast_reason(game, saved)
+        reader, calculation = reason.split('<details class="forecast-reason-block forecast-reason-calculation">', 1)
+        self.assertEqual(reader.count('<h3>'), 4)
+        self.assertNotIn('Home = (combined points', reader)
+        self.assertIn('<summary>Full calculation and saved version</summary>', calculation)
+        self.assertIn('Home = (combined points', calculation)
+        self.assertIn('Saved edition:', calculation)
+        neutral = {**game, **next(g for g in saved['games'] if g['location'] == 'Neutral')}
+        self.assertIn('neutral site adds no home advantage',
+                      pgo_forecast_lab._forecast_reason(neutral, saved))
+        for key, value in (('source_manifest_sha256', 'old'), ('source_edition', 'old'),
+                           ('source_generated_at', 'old'), ('home_rest', 10),
+                           ('location', 'Neutral'), ('margin', 99), ('total', 99),
+                           ('home_points', 99), ('away_points', 99), ('kickoff', 'old')):
+            with self.subTest(field=key):
+                fallback = pgo_forecast_lab._forecast_reason({**game, key: value}, saved)
+                self.assertIn('Saved score calculation', fallback)
+                self.assertNotIn('Before the venue adjustment', fallback)
+                self.assertNotIn('Drake Maye', fallback)
+        for section in ('fit', 'scoring_rates', 'teams'):
+            altered = copy.deepcopy(saved)
+            if section == 'fit':
+                altered['fit']['coefficients'][5] += 1
+            elif section == 'scoring_rates':
+                altered['scoring_rates']['NE']['pf'] += 1
+            else:
+                altered['teams'][0]['rating'] += 1
+            self.assertNotIn('Before the venue adjustment',
+                             pgo_forecast_lab._forecast_reason(game, altered))
+        archive = pgo_forecast_lab._forecast_weeks([game], [], corrected=saved)
+        self.assertIn('Saved score calculation', archive)
+        self.assertNotIn('Before the venue adjustment', archive)
+        self.assertNotIn('Drake Maye', archive)
+
+    def test_forecast_reasons_have_their_own_full_width_row_for_each_game(self):
+        saved = json.loads((pgo_forecast_lab.CORRECTED_DIR / 'snapshot.json').read_bytes())
+        saved['_manifest_sha256'] = hashlib.sha256(
+            (pgo_forecast_lab.CORRECTED_DIR / 'manifest.json').read_bytes()).hexdigest()
+        games = [{**game, 'source_edition': saved['edition'],
+                  'source_generated_at': saved['generated_at'],
+                  'source_manifest_sha256': saved['_manifest_sha256'],
+                  'lock_at': '2026-09-09T23:20:00Z'} for game in saved['games'][:2]]
+        before = copy.deepcopy((games, saved))
+        for weekly, kind, columns in ((True, 'weekly', 7), (False, 'snapshot', 6)):
+            rendered = pgo_forecast_lab._forecast_weeks(games, [], weekly=weekly, corrected=saved)
+            rows = re.findall(r'<tr([^>]*)>(.*?)</tr>', rendered, re.S)[1:]
+            self.assertEqual(len(rows), 2 * len(games))
+            self.assertIn('Week 1 <span>2 games</span>', rendered)
+            for index, game in enumerate(games):
+                primary_attrs, primary = rows[index * 2]
+                reason_attrs, reason = rows[index * 2 + 1]
+                self.assertIn(f'data-{kind}-game-id="{game["game_id"]}"', primary_attrs)
+                self.assertEqual(rendered.count(f'data-{kind}-game-id="{game["game_id"]}"'), 1)
+                self.assertNotIn('Why this forecast', primary)
+                self.assertIn(pgo_forecast_lab._spread(game), primary)
+                self.assertIn('Model averages', primary)
+                self.assertIn('class="forecast-reason-row"', reason_attrs)
+                self.assertIn(f'<td colspan="{columns}">', reason)
+                self.assertIn(pgo_forecast_lab._forecast_reason(game, saved if weekly else None), reason)
+                self.assertNotIn('<details class="forecast-reason" open', reason)
+                self.assertNotIn(f'data-{kind}-game-id', reason_attrs)
+        self.assertEqual((games, saved), before)
+
+    def test_whole_score_summaries_keep_decimal_averages_and_unrounded_favorite(self):
+        saved = json.loads((pgo_forecast_lab.CORRECTED_DIR / 'snapshot.json').read_bytes())
+        game = next(game for game in saved['games'] if game['game_id'] == '2026_01_BAL_IND')
+        before = copy.deepcopy(game)
+        self.assertEqual(round(game['away_points']), round(game['home_points']))
+        rendered = pgo_forecast_lab._forecast_weeks([game], [])
+        self.assertIn('About 25 points each<details><summary>Model averages</summary>', rendered)
+        self.assertNotIn('BAL 25, IND 25', rendered)
+        self.assertIn('BAL 25.2, IND 24.8', rendered)
+        self.assertIn('BAL by 0.4 points', rendered)
+        self.assertIn('<th>Who PGO favors</th>', rendered)
+        self.assertIn('<th>Estimated score</th>', rendered)
+        self.assertEqual(game, before)
+        self.assertEqual(pgo_forecast_lab._projected_score(25.25), '25.3')
+        patriots = next(game for game in saved['games'] if game['game_id'] == '2026_01_NE_SEA')
+        before = copy.deepcopy(patriots)
+        rendered = pgo_forecast_lab._forecast_weeks([patriots], [])
+        self.assertIn('NE 23, SEA 24<details><summary>Model averages</summary>', rendered)
+        self.assertIn('NE 23.1, SEA 23.5', rendered)
+        self.assertIn('SEA by 0.4 points', rendered)
+        self.assertEqual(patriots, before)
+        for away, home, summary, favorite in (
+                (25.5, 25.5, 'About 26 points each', 'No projected edge'),
+                (25.49, 25.5, 'BAL 25, IND 26', 'IND by less than 0.1 point')):
+            boundary = {**game, 'away_points': away, 'home_points': home,
+                        'margin': home - away, 'total': home + away}
+            before = copy.deepcopy(boundary)
+            rendered = pgo_forecast_lab._forecast_weeks([boundary], [])
+            self.assertIn(summary + '<details><summary>Model averages</summary>', rendered)
+            self.assertIn(favorite, rendered)
+            self.assertEqual(boundary, before)
+
+    def test_original_archive_keeps_tiny_edges_and_exact_zero_without_mutation(self):
+        lock = self.synthetic_lock()
+        lock['games'].append({**lock['games'][0], 'game_id': 'g3'})
+        for game, margin in zip(lock['games'], (0.01, -0.01, 0.0)):
+            for key in ('candidate_prediction', 'pgo_v0_prediction',
+                        'challenger_prediction', 'challenger_full_strength_prediction'):
+                game[key] = margin
+        before = copy.deepcopy(lock)
+        rendered = pgo_forecast_lab.render_lab(lock, [], [])
+        for game, expected in zip(lock['games'], ('SEA by less than 0.1 point',
+                                                  'SF by less than 0.1 point', 'No projected edge')):
+            row = rendered.split(f'data-game-id="{game["game_id"]}"', 1)[1].split('</tr>', 1)[0]
+            self.assertEqual(row.count(expected), 2)
+        self.assertNotIn('<td>+0.0</td>', rendered)
+        self.assertNotIn('<td>-0.0</td>', rendered)
+        self.assertEqual(lock, before)
 
     def test_render_snapshot_rejects_a_post_kickoff_generation_time(self):
         snapshot = self.synthetic_snapshot()
@@ -951,7 +1169,7 @@ class ForecastLabTests(unittest.TestCase):
         self.assertIn('data-weekly-cutoff="2027-01-04T00:20:00Z">Draft</span>', page)
         self.assertIn("September 9, 2026 at 7:20 PM EDT", page)
         self.assertIn("60 minutes before kickoff", page)
-        self.assertIn("SEA -2.5", page)
+        self.assertIn("SEA by 2.5 points", page)
         self.assertLess(page.index("Weekly game forecasts"),
                         page.index("September 7 preseason baseline"))
         self.assertIn('<details class="preseason-archive" id="preseason-baseline">', page)

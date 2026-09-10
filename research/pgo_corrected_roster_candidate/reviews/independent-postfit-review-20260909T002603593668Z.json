@@ -1,0 +1,357 @@
+{
+  "assessment": "SHARE_WITH_CAVEATS",
+  "candidate_scientific_status": "EXPERIMENTAL / HOLD",
+  "caveats": [
+    "Historical source publication vintage remains REVIEW REQUIRED; recorded starters are not verified T-60 expectations.",
+    "2018-2025 outcomes have been repeatedly inspected; these are reused diagnostic folds, not fresh prospective confirmation.",
+    "Higher winner accuracy and lower aggregate bias do not replace the locked MAE-based decision rule.",
+    "Bootstrap interval crossing zero does not establish that the candidate is truly worse; it supplies no evidence of positive margin-MAE gain.",
+    "No coefficient, causal feature-importance, prospective, current-ranking or public-output claim is made."
+  ],
+  "cohort": {
+    "baseline_columns_preserved": true,
+    "evaluation_games": 2127,
+    "final_fits": 1,
+    "folds": 8,
+    "history_games": 3407
+  },
+  "final_fit_sha256": "324b6a01d144daf4f665dac6d2173c6113ac942febad2b3d43237930bee8f3d0",
+  "further_study_screen": {
+    "checks": {
+      "at_least_five_of_eight_seasons": false,
+      "lower_pooled_mae": false,
+      "positive_interval_lower": false
+    },
+    "early_weeks": "DESCRIPTIVE_ONLY",
+    "scientific_status": "EXPERIMENTAL / HOLD",
+    "season_wins": 3,
+    "status": "FAIL"
+  },
+  "issues": [],
+  "largest_candidate_misses": [
+    {
+      "absolute_error": 48.32480143051057,
+      "actual_margin": -45.0,
+      "away_team": "NE",
+      "candidate": 3.32480143051057,
+      "corrected": 2.871950643998278,
+      "game_id": "2020_13_NE_LAC",
+      "home_team": "LAC"
+    },
+    {
+      "absolute_error": 44.686802085995865,
+      "actual_margin": -49.0,
+      "away_team": "BAL",
+      "candidate": -4.313197914004135,
+      "corrected": -5.04999473881038,
+      "game_id": "2019_01_BAL_MIA",
+      "home_team": "MIA"
+    },
+    {
+      "absolute_error": 43.69092725289722,
+      "actual_margin": 50.0,
+      "away_team": "DEN",
+      "candidate": 6.309072747102779,
+      "corrected": 6.2359921435503916,
+      "game_id": "2023_03_DEN_MIA",
+      "home_team": "MIA"
+    },
+    {
+      "absolute_error": 43.29583272698991,
+      "actual_margin": 42.0,
+      "away_team": "LAC",
+      "candidate": -1.2958327269899073,
+      "corrected": 0.24975056454027833,
+      "game_id": "2023_15_LAC_LV",
+      "home_team": "LV"
+    },
+    {
+      "absolute_error": 42.04495489078586,
+      "actual_margin": -38.0,
+      "away_team": "DET",
+      "candidate": 4.04495489078586,
+      "corrected": 2.402580153799007,
+      "game_id": "2024_06_DET_DAL",
+      "home_team": "DAL"
+    }
+  ],
+  "manifest_member_counts": {
+    "docs\\evidence\\forecast-lab-2026\\september-07": 19,
+    "docs\\evidence\\forecast-lab-2026\\september-08-corrected": 25,
+    "research\\pgo_corrected_roster_candidate\\current-preflight-20260908": 4,
+    "research\\pgo_corrected_roster_candidate\\preflight-20260908-revised": 6,
+    "research\\pgo_corrected_roster_candidate\\run-20260908": 6,
+    "research\\pgo_current_strength\\run-20260908": 8,
+    "research\\pgo_week1_corrected\\run-20260908": 8
+  },
+  "manifests": {
+    "docs\\evidence\\forecast-lab-2026\\september-07": "43bdeee73a2d3301eedbcecc7d291dc9ebe68cf196860e7217326570e4fe2f42",
+    "docs\\evidence\\forecast-lab-2026\\september-08-corrected": "85fe35069145505410567709261663be0939b3ae2fbe05ad147da1d17fc54d83",
+    "research\\pgo_corrected_roster_candidate\\current-preflight-20260908": "0e35d51dc0bcdeb739a17b10e693d47d55e0f8b4810d59da4271dc85b6cf2200",
+    "research\\pgo_corrected_roster_candidate\\preflight-20260908-revised": "de0dcf0a80eb7daec12bd7c606a4d0f714496b782dd09d321296c9494d425a69",
+    "research\\pgo_corrected_roster_candidate\\run-20260908": "6bbd0b987d7a619a7b6ffae10c2dde43268b44a3ccb81c7ccd22afd6f51da759",
+    "research\\pgo_current_strength\\run-20260908": "6682197b16fcc0974fef19e6c704ef238d4d2a30ba0db066e3e86a6bad35ee4a",
+    "research\\pgo_week1_corrected\\run-20260908": "7530b3199f8a17ffec34f9e5351919ea67cb45df66e16befd655ab4e746f7a4c"
+  },
+  "maximum_numeric_difference": 3.552713678800501e-15,
+  "methods": "Rehashed seven manifests/member sets and pins twice. Recomputed all seven models' metric views from CSV using stdlib; bootstraps use the specified NumPy RNG only, with independent stdlib aggregation and percentile interpolation. Checked nine fit identities and chronological cohort membership.",
+  "numeric_values_verified": 2987,
+  "paired_bootstrap": {
+    "vs_active4_exposure": {
+      "blocks": 8,
+      "lower": -0.08126096781090958,
+      "mean": -0.0218584107655039,
+      "samples": 10000,
+      "seed": 20260908,
+      "upper": 0.050785840246117306
+    },
+    "vs_active4_symmetric": {
+      "blocks": 8,
+      "lower": -0.10298922002346236,
+      "mean": -0.03534116362064002,
+      "samples": 10000,
+      "seed": 20260908,
+      "upper": 0.04402106142153708
+    },
+    "vs_constant": {
+      "blocks": 8,
+      "lower": 0.7846527144613259,
+      "mean": 0.9244177119713954,
+      "samples": 10000,
+      "seed": 20260908,
+      "upper": 1.0600700359479813
+    },
+    "vs_corrected": {
+      "blocks": 8,
+      "lower": -0.10230672525946935,
+      "mean": -0.03408457563122194,
+      "samples": 10000,
+      "seed": 20260908,
+      "upper": 0.04482320794383634
+    },
+    "vs_pgo_v0": {
+      "blocks": 8,
+      "lower": 0.09601678555125397,
+      "mean": 0.13260979130199946,
+      "samples": 10000,
+      "seed": 20260908,
+      "upper": 0.17355406264929904
+    },
+    "vs_reference4": {
+      "blocks": 8,
+      "lower": -0.09570826023286952,
+      "mean": -0.013765084933707443,
+      "samples": 10000,
+      "seed": 20260908,
+      "upper": 0.07011771909196632
+    }
+  },
+  "practical_conclusion": "The fixed descriptor block does not improve the corrected margin model on the reused historical cohort. All three locked further-study criteria fail. Preserve this completed result; no variant search, refit, adoption or issuance follows from it.",
+  "preservation": {
+    "code": 23,
+    "drift": [],
+    "protected_public_data_workflow": 156,
+    "sources": 67
+  },
+  "primary_metrics": {
+    "candidate": {
+      "neutral_site": {
+        "bias_predicted_minus_actual": 0.49511765234671284,
+        "count": 37,
+        "mae": 8.541822731239474,
+        "rmse": 12.070915188557363,
+        "winner": {
+          "accuracy": 0.7297297297297297,
+          "actual_ties": 0,
+          "correct": 27,
+          "denominator": 37,
+          "predicted_ties": 0
+        }
+      },
+      "overall": {
+        "bias_predicted_minus_actual": -0.0019149840255559976,
+        "count": 2127,
+        "mae": 10.133540443186957,
+        "rmse": 13.107833808296576,
+        "winner": {
+          "accuracy": 0.661160924964606,
+          "actual_ties": 8,
+          "correct": 1401,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "week_1": {
+        "bias_predicted_minus_actual": 1.100321048045895,
+        "count": 128,
+        "mae": 10.035390354510062,
+        "rmse": 13.899695752547865,
+        "winner": {
+          "accuracy": 0.624,
+          "actual_ties": 3,
+          "correct": 78,
+          "denominator": 125,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_1_4": {
+        "bias_predicted_minus_actual": 0.2824111848749763,
+        "count": 509,
+        "mae": 9.891344603075657,
+        "rmse": 13.091048363730524,
+        "winner": {
+          "accuracy": 0.6322067594433399,
+          "actual_ties": 6,
+          "correct": 318,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "bias_predicted_minus_actual": -0.09135999018771358,
+        "count": 1618,
+        "mae": 10.209731841590328,
+        "rmse": 13.113109829811101,
+        "winner": {
+          "accuracy": 0.6701732673267327,
+          "actual_ties": 2,
+          "correct": 1083,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    },
+    "corrected": {
+      "neutral_site": {
+        "bias_predicted_minus_actual": 0.127233120138056,
+        "count": 37,
+        "mae": 8.383516223933002,
+        "rmse": 11.630287936170092,
+        "winner": {
+          "accuracy": 0.7027027027027027,
+          "actual_ties": 0,
+          "correct": 26,
+          "denominator": 37,
+          "predicted_ties": 0
+        }
+      },
+      "overall": {
+        "bias_predicted_minus_actual": 0.15271945727661818,
+        "count": 2127,
+        "mae": 10.099455867555735,
+        "rmse": 13.044988969614389,
+        "winner": {
+          "accuracy": 0.6569136385087305,
+          "actual_ties": 8,
+          "correct": 1392,
+          "denominator": 2119,
+          "predicted_ties": 0
+        }
+      },
+      "week_1": {
+        "bias_predicted_minus_actual": 1.3191180468801955,
+        "count": 128,
+        "mae": 9.891116153184468,
+        "rmse": 13.72750900128644,
+        "winner": {
+          "accuracy": 0.616,
+          "actual_ties": 3,
+          "correct": 77,
+          "denominator": 125,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_1_4": {
+        "bias_predicted_minus_actual": 0.4316003784691195,
+        "count": 509,
+        "mae": 9.786012267682537,
+        "rmse": 12.977127858212489,
+        "winner": {
+          "accuracy": 0.6381709741550696,
+          "actual_ties": 6,
+          "correct": 321,
+          "denominator": 503,
+          "predicted_ties": 0
+        }
+      },
+      "weeks_5_18": {
+        "bias_predicted_minus_actual": 0.06498744931185726,
+        "count": 1618,
+        "mae": 10.198060807194462,
+        "rmse": 13.066264242494622,
+        "winner": {
+          "accuracy": 0.6627475247524752,
+          "actual_ties": 2,
+          "correct": 1071,
+          "denominator": 1616,
+          "predicted_ties": 0
+        }
+      }
+    }
+  },
+  "recorded_at": "2026-09-09T00:26:03.593668+00:00",
+  "reviewer": "/root/fit_readiness",
+  "run_manifest_sha256": "6bbd0b987d7a619a7b6ffae10c2dde43268b44a3ccb81c7ccd22afd6f51da759",
+  "run_receipt_elapsed_seconds": 2.152231,
+  "schema_version": 1,
+  "scope": "Read-only independent audit of saved candidate results; no trainer or verifier imports, no model coefficient fitting, no preparation or current ratings.",
+  "seasons": [
+    {
+      "candidate_mae": 10.045470272419134,
+      "candidate_minus_corrected_mae": -0.03579423527164849,
+      "corrected_mae": 10.081264507690783,
+      "games": 256,
+      "season": 2018
+    },
+    {
+      "candidate_mae": 10.53358010722454,
+      "candidate_minus_corrected_mae": 0.11632030320171793,
+      "corrected_mae": 10.417259804022821,
+      "games": 256,
+      "season": 2019
+    },
+    {
+      "candidate_mae": 9.991296652716072,
+      "candidate_minus_corrected_mae": -0.18365967460389676,
+      "corrected_mae": 10.174956327319968,
+      "games": 256,
+      "season": 2020
+    },
+    {
+      "candidate_mae": 11.184666352860619,
+      "candidate_minus_corrected_mae": 0.125654869138641,
+      "corrected_mae": 11.059011483721978,
+      "games": 272,
+      "season": 2021
+    },
+    {
+      "candidate_mae": 8.926899609473425,
+      "candidate_minus_corrected_mae": 0.10521913322758003,
+      "corrected_mae": 8.821680476245845,
+      "games": 271,
+      "season": 2022
+    },
+    {
+      "candidate_mae": 10.334170256663603,
+      "candidate_minus_corrected_mae": 0.007380863676434757,
+      "corrected_mae": 10.326789392987168,
+      "games": 272,
+      "season": 2023
+    },
+    {
+      "candidate_mae": 9.937492321217391,
+      "candidate_minus_corrected_mae": 0.15920299853857856,
+      "corrected_mae": 9.778289322678813,
+      "games": 272,
+      "season": 2024
+    },
+    {
+      "candidate_mae": 10.120295658255685,
+      "candidate_minus_corrected_mae": -0.03346773660573277,
+      "corrected_mae": 10.153763394861418,
+      "games": 272,
+      "season": 2025
+    }
+  ],
+  "status": "PASS_ARITHMETIC_AND_CUSTODY"
+}

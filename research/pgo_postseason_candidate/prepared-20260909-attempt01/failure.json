@@ -1,0 +1,11 @@
+{
+  "status": "FAILED_BEFORE_ANY_FIT",
+  "observed_at": "2026-09-09T22:14:43.245184+00:00",
+  "exception": "ValueError: Conflicting snap PFR/name identity: JohnDa04",
+  "root_cause": "Current Sept9 core changed historical role identity and missing-vs-zero semantics after the frozen corrected run. The offending PFR identity is Damaris Johnson in REG source rows; not a postseason-only defect.",
+  "repair_for_distinct_attempt02": "Use the exact corrected-run historical core as a private hash-pinned module, restore all runtime aliases afterward, verify all3407REG features before constructing REG+POST history. No raw inputs or production core edited.",
+  "pinned_original_core_sha256": "f71712d88be59c1bc5f05f319277d1e9c9a76a719882455459317ecea2f28735",
+  "original_path": "D:/CodexWorktrees/Postgame_Outlet-league-profiles/pgo_challenger.py",
+  "portable_copy": "research/pgo_postseason_candidate/pinned_challenger.py",
+  "model_fits": 0
+}

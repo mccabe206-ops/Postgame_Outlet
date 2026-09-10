@@ -24,3 +24,43 @@ pgo_forecast_corrected.py text eol=lf
 tests/test_pgo_forecast_corrected.py text eol=lf
 tests/test_pgo_week1_corrected.py text eol=lf
 research/pgo_corrected_roster_candidate/** -text whitespace=cr-at-eol
+research/pgo_opening_night_20260909/** -text whitespace=cr-at-eol
+research/pgo_publication_20260909/** -text whitespace=cr-at-eol
+research/pgo_publication_20260909/update-board-34376330141-failure.log -whitespace
+research/pgo_snap_identity_repair_20260909/** -text whitespace=cr-at-eol
+research/pgo_ranking_trace_20260909/** -text whitespace=cr-at-eol
+pgo_challenger.py -text whitespace=cr-at-eol
+data/ratings.csv text eol=lf
+data/config.csv text eol=lf
+data/snapshots.json text eol=lf
+data/writeups/*.md text eol=lf
+research/pgo_nonqb_availability_20260909/** -text whitespace=cr-at-eol
+docs/evidence/nonqb-availability-2026/** -text whitespace=cr-at-eol
+pgo_nonqb_availability.py text eol=lf
+pgo_availability_view.py text eol=lf
+tests/test_pgo_*availability*.py text eol=lf
+research/pgo_postseason_candidate/** -text whitespace=cr-at-eol
+research/pgo_postseason_candidate/pinned_challenger.py -text
+research/pgo_defensive_depth_candidate/** -text whitespace=cr-at-eol
+research/pgo_defensive_depth_candidate/source-review-20260909/*.html -whitespace
+research/pgo_defensive_depth_candidate/source-review-20260909/**/*.html -whitespace
+docs/evidence/forecast-lab-2026/september-09-postseason/** -text whitespace=cr-at-eol
+docs/evidence/forecast-lab-2026/weekly-postseason/** -text whitespace=cr-at-eol
+docs/evidence/defensive-depth-2026/** -text whitespace=cr-at-eol
+pgo_forecast_postseason.py text eol=lf
+pgo_model_updates.py text eol=lf
+tests/test_pgo_forecast_postseason.py text eol=lf
+tests/test_pgo_postseason_candidate.py text eol=lf
+tests/test_pgo_model_updates.py text eol=lf
+tests/test_pgo_defensive_fit.py text eol=lf
+research/pgo_confidence_pool_20260909/** -text whitespace=cr-at-eol
+docs/evidence/confidence-pool-2026/** -text whitespace=cr-at-eol
+pgo_confidence_picks.py -text
+pgo_confidence_full_slate.py -text
+
+docs/evidence/season-2026/** -text whitespace=cr-at-eol
+pgo_season*.py text eol=lf
+research/pgo_penalty_candidate/** -text whitespace=cr-at-eol
+docs/evidence/penalty-model-2026/** -text whitespace=cr-at-eol
+pgo_penalty_monitor.py text eol=lf
+tests/test_pgo_penalty*.py text eol=lf

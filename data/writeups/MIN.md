@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
 ## The case for an above-average roster
 
 Minnesota grades above the line on the back of a loaded skill group and a scheme-lifted defense, with the quarterback spot the one thing holding the ceiling down.

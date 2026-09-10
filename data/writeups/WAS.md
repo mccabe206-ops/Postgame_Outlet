@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
 ## The case for a QB keeping it afloat
 
 Washington nets out right at the waterline — an ascending franchise quarterback offsetting two units that both grade below average, one of them dragged down by a major injury.

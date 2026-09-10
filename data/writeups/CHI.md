@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
 ## The case for above average
 
 Chicago grades above the line on the strength of a young franchise quarterback, with a skill group the model just marked down on injury concern.

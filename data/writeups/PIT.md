@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
 ## The case for a defense-carried team
 
 Pittsburgh lands right at the waterline — a strong, veteran-laden defense balanced against an aging quarterback and a merely-fine supporting cast.

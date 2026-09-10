@@ -1,0 +1,30 @@
+{
+  "files": {
+    "coverage.json": {
+      "bytes": 5683495,
+      "sha256": "9ca91b3af70c69ed47a0e3fbb22aa4342bb68a34fdd64c161595d3fe89c1bbd6"
+    },
+    "current-features.json": {
+      "bytes": 40591,
+      "sha256": "cf655d30bfc073fbece6e2b422e766ebc4da41dd0e2b63056411e23b76fde8ef"
+    },
+    "current-source-qualification.json": {
+      "bytes": 90589,
+      "sha256": "f32bf13a63c0a7a45c29546bcc4422952c1fe443156f912ae1511633454937da"
+    },
+    "historical-features.json": {
+      "bytes": 5684746,
+      "sha256": "9235eb5488c8947608d1fd6952e6d60f7e91d797a52be78feb77243baa7c885e"
+    },
+    "run-receipt.json": {
+      "bytes": 13460,
+      "sha256": "ef658ebe4bf196f8ee73c51f8d8c4317ed1ab94c0a748e2a25ce02a01f678ab7"
+    },
+    "run-start.json": {
+      "bytes": 13030,
+      "sha256": "df23f9fbf738a5b0dc4367406d6d046db48b0c95f47a15bcd7bfaf31e041de1b"
+    }
+  },
+  "identity": "pgo-defensive-production-20260909",
+  "schema_version": 1
+}

@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "command": [
+        "gh",
+        "workflow",
+        "list",
+        "--all",
+        "--json",
+        "name,state,path"
+      ],
+      "exit_code": 0,
+      "stdout": "[{\"name\":\"Publish edition\",\"path\":\".github/workflows/publish-edition.yml\",\"state\":\"active\"},{\"name\":\"Update board\",\"path\":\".github/workflows/update-board.yml\",\"state\":\"active\"},{\"name\":\"pages-build-deployment\",\"path\":\"dynamic/pages/pages-build-deployment\",\"state\":\"active\"}]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "gh",
+        "workflow",
+        "view",
+        "Update board",
+        "--yaml"
+      ],
+      "exit_code": 0,
+      "stdout": "name: Update board\n\non:\n  push:\n    branches: [main]\n    paths:\n      - \"data/**\"\n      - \"generate_site.py\"\n      - \"pgo_comparison.py\"\n      - \"pgo_current_board.py\"\n      - \"pgo_forecast_lab.py\"\n      - \"docs/pgo-theme.css\"\n      - \"pgo_forecast_snapshot.py\"\n      - \"pgo_forecast_weekly.py\"\n      - \"pgo_forecast_corrected.py\"\n      - \"research/pgo_corrected_roster_candidate/*.py\"\n      - \"docs/evidence/forecast-lab-2026/**\"\n      - \"research/pgo_stability_blend/prospective_attestation.json\"\n      - \"!data/snapshots.json\"\n  workflow_dispatch:\n\npermissions:\n  contents: write\n  pages: write\n  id-token: write\n\nconcurrency:\n  group: board-update\n  cancel-in-progress: false\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    env:\n      TZ: America/New_York\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          ref: main\n          fetch-depth: 0\n      - uses: actions/setup-python@v7\n        with:\n          python-version: \"3.12\"\n      - name: Install PGO test dependency\n        run: python -m pip install -r requirements-pgo.txt\n      - name: Run tests (includes the editorial gate)\n        run: |\n          python -m unittest discover -s tests\n          python -m unittest research.pgo_corrected_roster_candidate.test_candidate research.pgo_corrected_roster_candidate.test_temporal\n      - name: Refresh public board without replacing approved PGO panel\n        run: python pgo_comparison.py --refresh-mccabe\n      - name: Render verified Forecast Lab archive\n        run: python pgo_forecast_lab.py\n\n      # --- walshja9 (canonical / LIVE site): keep the proven commit-back deploy ---\n      # Its Pages source is \"Deploy from a branch\" (main /docs); committing docs/index.html\n      # back to main is what refreshes postgameoutlet.com. Unchanged behavior.\n      - name: \"Commit and push if changed (walshja9 only)\"\n        if: github.repository == 'walshja9/Postgame_Outlet'\n        run: |\n          git config user.name \"github-actions[bot]\"\n          git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\n          git add docs/index.html docs/forecast-lab.html\n          if git diff --cached --quiet; then\n            echo \"Board unchanged - nothing to commit.\"\n          else\n            git commit -m \"Auto-regenerate board from data change\"\n            git pull --rebase origin main\n            git push origin main\n          fi\n\n      # --- mccabe206-ops (testing mirror): publish via Pages ARTIFACT, no commit-back ---\n      # No commit is written to main, so mccabe/main stays byte-identical to walshja9/main\n      # (kills the dual-push drift). Requires: Settings > Pages > Source = \"GitHub Actions\".\n      - name: \"Upload Pages artifact (mccabe206-ops only)\"\n        if: github.repository == 'mccabe206-ops/Postgame_Outlet'\n        uses: actions/upload-pages-artifact@v3\n        with:\n          path: docs\n\n  deploy:\n    # mccabe206-ops only: deploy the uploaded artifact to its GitHub Pages testing site.\n    needs: build\n    if: github.repository == 'mccabe206-ops/Postgame_Outlet'\n    runs-on: ubuntu-latest\n    environment:\n      name: github-pages\n      url: ${{ steps.deployment.outputs.page_url }}\n    steps:\n      - name: Deploy to GitHub Pages\n        id: deployment\n        uses: actions/deploy-pages@v4\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "gh",
+        "workflow",
+        "view",
+        "Publish edition",
+        "--yaml"
+      ],
+      "exit_code": 0,
+      "stdout": "name: Publish edition\n\non:\n  workflow_dispatch:\n    inputs:\n      label:\n        description: \"Edition label (e.g. Week 3)\"\n        required: true\n        type: string\n\npermissions:\n  contents: write\n\nconcurrency:\n  group: board-update\n  cancel-in-progress: false\n\njobs:\n  publish:\n    runs-on: ubuntu-latest\n    env:\n      TZ: America/New_York\n      LABEL: ${{ inputs.label }}\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          ref: main\n          fetch-depth: 0\n      - uses: actions/setup-python@v7\n        with:\n          python-version: \"3.12\"\n      - name: Install PGO test dependency\n        run: python -m pip install -r requirements-pgo.txt\n      - name: Run tests (includes the editorial gate)\n        run: python -m unittest discover -s tests\n      - name: Snapshot the edition\n        run: python snapshot.py \"$LABEL\"\n      - name: Refresh public board without replacing approved PGO panel\n        run: python pgo_comparison.py --refresh-mccabe\n      - name: Render verified Forecast Lab archive\n        run: python pgo_forecast_lab.py\n      - name: Commit and push\n        run: |\n          git config user.name \"github-actions[bot]\"\n          git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\n          git add data/snapshots.json docs/index.html docs/forecast-lab.html\n          if git diff --cached --quiet; then\n            echo \"Nothing changed - snapshot may already exist.\"\n            exit 1\n          fi\n          git commit -m \"Publish edition: $LABEL\"\n          git pull --rebase origin main\n          git push origin main\n",
+      "stderr": ""
+    }
+  ],
+  "local_windows_task_query": "Get-ScheduledTask filtered TaskName, Actions.Execute, Actions.Arguments for pgo|postgame|mccabe|power.?ratings",
+  "matching_local_windows_tasks": 0,
+  "scope": "No automatic PGO refresh/registration found in live workflows or matching local task actions; browser cutoff timer exists independently."
+}

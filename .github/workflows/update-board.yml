@@ -8,13 +8,29 @@ on:
       - "generate_site.py"
       - "pgo_comparison.py"
       - "pgo_current_board.py"
+      - "pgo_nonqb_availability.py"
+      - "pgo_availability_view.py"
       - "pgo_forecast_lab.py"
       - "docs/pgo-theme.css"
       - "pgo_forecast_snapshot.py"
       - "pgo_forecast_weekly.py"
       - "pgo_forecast_corrected.py"
+      - "pgo_forecast_postseason.py"
+      - "pgo_model_updates.py"
+      - "pgo_confidence_picks.py"
+      - "pgo_confidence_full_slate.py"
+      - "pgo_season*.py"
+      - "pgo_penalty_monitor.py"
+      - "research/pgo_penalty_candidate/**"
+      - "docs/evidence/penalty-model-2026/**"
+      - "docs/evidence/confidence-pool-2026/**"
+      - "research/pgo_postseason_candidate/**"
+      - "research/pgo_defensive_depth_candidate/**"
+      - "docs/evidence/defensive-depth-2026/**"
       - "research/pgo_corrected_roster_candidate/*.py"
       - "docs/evidence/forecast-lab-2026/**"
+      - "docs/evidence/nonqb-availability-2026/**"
+      - "research/pgo_nonqb_availability_20260909/*.py"
       - "research/pgo_stability_blend/prospective_attestation.json"
       - "!data/snapshots.json"
   workflow_dispatch:
@@ -47,6 +63,7 @@ jobs:
         run: |
           python -m unittest discover -s tests
           python -m unittest research.pgo_corrected_roster_candidate.test_candidate research.pgo_corrected_roster_candidate.test_temporal
+          python -m unittest research.pgo_defensive_depth_candidate.test_candidate research.pgo_defensive_depth_candidate.test_evidence
       - name: Refresh public board without replacing approved PGO panel
         run: python pgo_comparison.py --refresh-mccabe
       - name: Render verified Forecast Lab archive

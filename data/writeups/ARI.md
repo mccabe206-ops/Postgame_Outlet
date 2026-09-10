@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
 ## The case for a bottom-tier grade
 
 Arizona grades near the floor on all three lines — a stopgap quarterback, a skill group missing its backfield, and a defense with no premium punch. There's a real building block or two, but nothing yet that lifts a unit above the line.

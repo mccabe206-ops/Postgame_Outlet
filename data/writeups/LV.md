@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
 ## The case for a QB-capped roster
 
 Las Vegas has two genuine stars — one on each side of the ball — dragged down by a quarterback at the floor and thin support around the edges. The talent at the top is real; the grade is what's underneath it.

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "scope": "Latest league overview and opening-team recheck; player notes retain original exact capture clocks",
+  "material_status_changes": 0,
+  "source": "injuries/capture-20260909T155722Z/capture.json",
+  "summary": "injuries/opening-night-check-20260909T155722Z.md",
+  "before_config_sha256": "39ec20b6549f96f550dd92f13e97f835b743614797396ee556c7708e38369344",
+  "after_config_sha256": "97807f8c07f49cb7f47368d5e1b0e2497ce0306be57558d8afa27fe353e661eb",
+  "injury_snapshot_and_player_notes_unchanged": true,
+  "config_columns_preserved": [
+    "key",
+    "value",
+    "description"
+  ],
+  "config_rows": 9,
+  "local_preparation_correction": "Restored full three-column config after a local two-column writer failed; no generated artifact or remote was published from that intermediate commit"
+}

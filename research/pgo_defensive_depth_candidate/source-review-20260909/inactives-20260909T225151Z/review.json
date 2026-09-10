@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-09-09T22:52:14.272959+00:00",
+  "status": "OFFICIAL_FINAL_INACTIVES_VERIFIED",
+  "comparison_inputs_as_of": "2026-09-09T21:16:09.491871+00:00",
+  "forecast_or_input_changes": false,
+  "NE": {
+    "source_url": "https://www.patriots.com/news/week-1-inactives-patriots-at-seahawks",
+    "published_site_display": "Sep 09, 2026 at 06:50 PM",
+    "inactive": [
+      "Karon Prunty",
+      "TreVeyon Henderson",
+      "Erick Hunter",
+      "Walter Rouse",
+      "Ben Brown",
+      "Efton Chism",
+      "Behren Morton"
+    ]
+  },
+  "SEA": {
+    "source_url": "https://www.seahawks.com/news/nick-emmanwori-tory-horton-inactive-for-seahawks-opener-vs-patriots",
+    "published_site_display": "Sep 09, 2026 at 03:51 PM",
+    "inactive": [
+      "Nick Emmanwori",
+      "Jalen Milroe",
+      "Tory Horton",
+      "Ty Okada",
+      "Beau Stephens",
+      "Nick Kallerup",
+      "Mike Morris"
+    ],
+    "emergency_third_quarterback": "Jalen Milroe"
+  },
+  "new_resolution_from_questionable": [
+    "Nick Emmanwori",
+    "Tory Horton"
+  ],
+  "prior_out_confirmed": [
+    "Ben Brown",
+    "TreVeyon Henderson",
+    "Ty Okada"
+  ],
+  "limits": [
+    "Inactive does not by itself establish injury reason; preserve raw position labels.",
+    "Emergency third quarterback exception is explicitly reported for Jalen Milroe.",
+    "Current quarterback forecast starters Drake Maye and Sam Darnold are absent from inactive lists.",
+    "All 14 named inactive players have matched stable IDs in captured active roster; ACT is not gameday availability."
+  ]
+}

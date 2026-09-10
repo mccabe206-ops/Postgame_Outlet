@@ -18,12 +18,62 @@ from zoneinfo import ZoneInfo
 
 import generate_site
 import pgo_comparison
-from pgo_challenger import PERFORMANCE_FEATURES, QB_FEATURES
+import pgo_current_board
+from pgo_challenger import PERFORMANCE_FEATURES, QB_FEATURES, _rest_difference
 import pgo_forecast_snapshot
 import pgo_forecast_weekly
 import pgo_prospective
 from release_ratings import atomic_write_text
 
+
+FORECAST_DISPLAY_SCRIPT = """<script>
+function updateWeeklyLocks() {
+  const now = Date.now();
+  let next = now + 60000;
+  document.querySelectorAll('[data-weekly-cutoff]').forEach(node => {
+    const cutoff = Date.parse(node.dataset.weeklyCutoff);
+    node.textContent = now >= cutoff ? 'Locked' : 'Draft';
+    if (cutoff > now) next = Math.min(next, cutoff);
+  });
+  if (document.querySelector('[data-weekly-cutoff]')) setTimeout(updateWeeklyLocks, Math.max(1, next - now));
+}
+updateWeeklyLocks();
+function openFragment(hash) {
+  const target = document.getElementById(hash.slice(1));
+  if (!target) return;
+  const panel = target.closest('[role="tabpanel"]');
+  if (panel && panel.hidden) {
+    const tab = document.getElementById(panel.getAttribute('aria-labelledby'));
+    if (tab) tab.click();
+  }
+  for (let node = target; node; node = node.parentElement) {
+    if (node.tagName === 'DETAILS') node.open = true;
+  }
+  target.scrollIntoView();
+}
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href^="#"]');
+  if (link) openFragment(link.hash);
+});
+window.addEventListener('hashchange', () => openFragment(location.hash));
+document.addEventListener('DOMContentLoaded', () => openFragment(location.hash), {once:true});
+openFragment(location.hash);
+setInterval(async () => {
+  const current = document.querySelector('[data-season-checked-at]');
+  if (!current || document.hidden) return;
+  const panel = current.closest('[role="tabpanel"]');
+  if (panel && panel.hidden) return;
+  try {
+    const response = await fetch('evidence/season-2026/current.json', {cache:'no-store'});
+    if (!response.ok) return;
+    const latest = await response.json();
+    if (Date.parse(latest.checked_at) > Date.parse(current.dataset.seasonCheckedAt)) {
+      if (panel && !location.hash) history.replaceState(null, '', '#pgo-season');
+      location.reload();
+    }
+  } catch (_) { /* Keep the last verified page when a network check fails. */ }
+}, 60000);
+</script>"""
 
 HERE = Path(__file__).resolve().parent
 ARCHIVE_DIR = HERE / "docs" / "evidence" / "forecast-lab-2026"
@@ -235,6 +285,26 @@ def load_results(capture_root, lock):
                 raise ValueError(f"duplicate result across captures: {row['game_id']}")
             accepted[row["game_id"]] = row
         provenance.append(metadata)
+    if root.absolute() in {CAPTURE_ROOT.absolute(), (SNAPSHOT_DIR / 'results').absolute(), (WEEKLY_DIR / 'results').absolute()}:
+        from pgo_season import load_current
+        season = load_current()
+        if season:
+            known = {g['game_id'] for g in lock.get('games', ())}
+            for result in season['results']:
+                if result['game_id'] not in known:
+                    continue
+                selected = {k: result[k] for k in RESULT_COLUMNS}
+                text = io.StringIO(newline='')
+                writer = csv.DictWriter(text, fieldnames=RESULT_COLUMNS, lineterminator='\n')
+                writer.writeheader(); writer.writerow(selected)
+                checked = _accepted_results(text.getvalue().encode(), lock, season['checked_at'], 'automatic season results')[0]
+                previous = accepted.get(checked['game_id'])
+                if previous and any(previous[k] != checked[k] for k in ('home_score', 'away_score', 'actual_margin')):
+                    raise ValueError('Automatic result conflicts with archived transcription')
+                if not previous:
+                    accepted[checked['game_id']] = checked
+                    provenance.append({'captured_at': result['finalized_at'], 'rows': 1,
+                                       'source_url': result['source']['url']})
     order = {game["game_id"]: index for index, game in enumerate(lock.get("games", ()))}
     return sorted(accepted.values(), key=lambda row: order[row["game_id"]]), provenance
 
@@ -452,26 +522,26 @@ def _snapshot_kickoff_time(value):
     return f'<time datetime="{html.escape(source, quote=True)}">{display}</time>'
 
 
-def _whole_point(value):
-    return str(int(Decimal(str(value)).quantize(Decimal("1"), rounding=ROUND_HALF_UP)))
+def _projected_score(value):
+    return str(Decimal(str(value)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
 
 
 def _spread(game):
     margin = float(game["margin"])
-    if f"{abs(margin):.1f}" == "0.0":
-        return "Pick'em"
-    if margin > 0:
-        return f'{html.escape(game["home"])} -{margin:.1f}'
-    if margin < 0:
-        return f'{html.escape(game["away"])} -{abs(margin):.1f}'
+    if margin == 0:
+        return 'No projected edge'
+    favorite = html.escape(game['home'] if margin > 0 else game['away'])
+    gap = 'less than 0.1 point' if abs(margin) < 0.1 else f'{abs(margin):.1f} points'
+    return f'{favorite} by {gap}'
 
 
 def _edition_name(edition):
     return {'pgo-corrected-week1-2026-09-08': 'PGO Corrected — Sep 8',
+            'pgo-postseason-week1-2026-09-09': 'PGO postseason — Sep 9',
             'pgo-active-roster-2026-09-07': 'September 7 preseason'}.get(edition, edition)
 
 
-def _snapshot_metric_cards(metrics, label="September snapshot"):
+def _snapshot_metric_cards(metrics, label="September snapshot", *, incumbent_label="September 7 incumbent margin"):
     if metrics["count"] == 0:
         return f'<p class="empty">No finalized {html.escape(label)} results recorded yet.</p>'
     cards = []
@@ -504,7 +574,7 @@ def _snapshot_metric_cards(metrics, label="September snapshot"):
     for key, label in (
         ("pgo_v0", "PGO v0 margin"),
         ("legacy", "Original archive margin"),
-        ("incumbent", "September 7 incumbent margin"),
+        ("incumbent", incumbent_label),
         ("zero", "Zero margin"),
         ("league_mean_venue", "League mean + venue"),
     ):
@@ -535,7 +605,91 @@ def _snapshot_metric_cards(metrics, label="September snapshot"):
     )
 
 
-def _forecast_weeks(games, results, *, weekly=False):
+def _forecast_reason(game, corrected=None):
+    """Explain saved arithmetic; only a matching verified source may supply drivers."""
+    home, away = (html.escape(game[key]) for key in ('home', 'away'))
+    margin, total = float(game['margin']), float(game['total'])
+    arithmetic = (
+        '<p><strong>Saved score calculation:</strong> split the combined-points estimate '
+        'in half, then give half the projected lead to the favored team and subtract it '
+        'from the other team. Home = (combined points + home-team lead) / 2; '
+        'away = (combined points - home-team lead) / 2.</p>'
+        f'<p>Combined points {total:.2f}; home-team lead {margin:+.2f}; '
+        f'{home} {float(game["home_points"]):.2f}, {away} {float(game["away_points"]):.2f}. '
+        'Numbers here are rounded for reading; the saved calculation uses full precision.</p>'
+    )
+    drivers = ''
+    source = next((row for row in (corrected or {}).get('games', [])
+                   if row['game_id'] == game['game_id']), None)
+    bindings = (('source_edition', 'edition'), ('source_generated_at', 'generated_at'),
+                ('source_manifest_sha256', '_manifest_sha256'))
+    fields = ('game_id', 'season', 'week', 'game_type', 'home', 'away', 'kickoff',
+              'location', 'home_rest', 'away_rest', 'margin', 'total', 'home_points', 'away_points')
+    matches = (source is not None and all(game.get(left) and game[left] == corrected.get(right)
+               for left, right in bindings) and all(key in game and key in source
+               and game[key] == source[key] for key in fields))
+    if matches:
+        teams = {row['team']: row for row in corrected['teams']}
+        fit = corrected['fit']
+        pp = fit['preprocessor']
+        def coefficient(name):
+            index = pp['feature_names'].index(name)
+            return fit['coefficients'][index + 1] / pp['scales'][index]
+        gap = teams[game['home']]['rating'] - teams[game['away']]['rating']
+        venue = 0.0 if game['location'] == 'Neutral' else coefficient('home_field')
+        rest_input = _rest_difference(game['home_rest'], game['away_rest'])
+        rest = None if rest_input is None else rest_input * coefficient('rest_difference')
+        rates = corrected['scoring_rates']
+        values = [rates[game[side]][kind] for side in ('away', 'home') for kind in ('pf', 'pa')]
+        expected_total = math.fsum(values) / 2
+        reconciles = rest is not None and all(math.isclose(actual, expected, rel_tol=0, abs_tol=1e-9)
+            for actual, expected in ((margin, gap + venue + rest), (total, expected_total),
+                (game['home_points'], (total + margin) / 2),
+                (game['away_points'], (total - margin) / 2)))
+        if reconciles:
+            venue_text = ('The neutral site adds no home advantage.' if game['location'] == 'Neutral'
+                          else f'Playing at home adds {venue:.1f} points for {home}.')
+            rest_text = ('Both teams have the same rest, so there is no rest adjustment.'
+                         if game['home_rest'] == game['away_rest'] else
+                         f'The saved schedule gives {home} {game["home_rest"]} days of rest and '
+                         f'{away} {game["away_rest"]}; the rest adjustment is {rest:+.2f} '
+                         f'points to the home-team lead (the difference is capped at seven days).')
+            drivers = (
+                '<div class="forecast-reason-block"><h3>How the edge is built</h3>'
+                f'<p>Before the venue adjustment: {_spread({**game, "margin": gap})}. '
+                f'{venue_text} {rest_text} That leaves {_spread(game)}.</p></div>'
+                '<div class="forecast-reason-block"><h3>Team and quarterback inputs</h3>'
+                '<p>The team ratings combine recent results, passing and rushing efficiency, '
+                'sacks, turnovers, and quarterback history. These are model inputs, '
+                'not a scouting explanation of how this particular game will unfold. '
+                'Past team defense results are included, but current edge-rusher and linebacker depth '
+                'and the quality of their backups are not rated separately.</p>'
+                f'<p>Expected quarterbacks: {away}: {html.escape(teams[game["away"]]["qb_name"])}; '
+                f'{home}: {html.escape(teams[game["home"]]["qb_name"])}. Their history is already '
+                'in the ratings; it is not added again here. '
+                f'<a href="#corrected-rating-{away}">{away} rating explanation</a> &middot; '
+                f'<a href="#corrected-rating-{home}">{home} rating explanation</a>.</p></div>'
+                '<div class="forecast-reason-block"><h3>Combined points</h3>'
+                '<p>Combined points uses each team’s 2025 regular-season points scored and '
+                f'allowed per game: {away} {values[0]:.2f} scored / {values[1]:.2f} allowed; '
+                f'{home} {values[2]:.2f} scored / {values[3]:.2f} allowed. '
+                f'Add those four averages and divide by two: {total:.2f}. '
+                'This is a simple scoring-history estimate.</p></div>'
+                '<div class="forecast-reason-block"><h3>Injury assumptions</h3>'
+                '<p>Injuries beyond the quarterback are not included in this saved forecast. '
+                '<a href="#nonqb-availability">Separate injury scenarios and missing information</a>.</p></div>'
+            )
+    edition = html.escape(str(game.get('source_edition', 'See this archive’s saved method')))
+    return ('<details class="forecast-reason"><summary>Why this forecast</summary>'
+            f'<div class="forecast-reason-body">{drivers}</div>'
+            '<details class="forecast-reason-block forecast-reason-calculation">'
+            '<summary>Full calculation and saved version</summary>'
+            f'{arithmetic}'
+            f'<p>Saved edition: {edition}. Experimental / HOLD; this explains the calculation, '
+            'not certainty about the result.</p></details></details>')
+
+
+def _forecast_weeks(games, results, *, weekly=False, corrected=None, reasons=None, series=None, incumbent_label="September 7"):
     result_by_id = {row["game_id"]: row for row in results}
     weeks = []
     for week in sorted({game["week"] for game in games}):
@@ -548,10 +702,15 @@ def _forecast_weeks(games, results, *, weekly=False):
                     f'{html.escape(game["away"])} {result["away_score"]}, '
                     f'{html.escape(game["home"])} {result["home_score"]}'
                 )
-            score = (
-                f'{html.escape(game["away"])} {_whole_point(game["away_points"])}, '
-                f'{html.escape(game["home"])} {_whole_point(game["home_points"])}'
+            averages = (
+                f'{html.escape(game["away"])} {_projected_score(game["away_points"])}, '
+                f'{html.escape(game["home"])} {_projected_score(game["home_points"])}'
             )
+            rounded = [Decimal(str(game[key])).quantize(Decimal('1'), rounding=ROUND_HALF_UP)
+                       for key in ('away_points', 'home_points')]
+            summary = (f'About {rounded[0]} points each' if rounded[0] == rounded[1] else
+                       f'{html.escape(game["away"])} {rounded[0]}, {html.escape(game["home"])} {rounded[1]}')
+            score = f'{summary}<details><summary>Model averages</summary><p>{averages}</p></details>'
             timing = ""
             if weekly:
                 cutoff = html.escape(game["lock_at"], quote=True)
@@ -560,10 +719,10 @@ def _forecast_weeks(games, results, *, weekly=False):
                     f'<td><span class="weekly-status" data-weekly-cutoff="{cutoff}">{status}</span>'
                     f'<br>{_snapshot_kickoff_time(game["lock_at"])}</td>'
                 )
-            kind = "weekly" if weekly else "snapshot"
+            kind = series or ("weekly" if weekly else "snapshot")
             comparison = ""
             if weekly and "incumbent_margin" in game:
-                controls = (("September 7", "incumbent_margin"), ("PGO v0", "pgo_v0_margin"))
+                controls = ((incumbent_label, "incumbent_margin"), ("PGO v0", "pgo_v0_margin"))
                 comparison = '<details><summary>Compare forecasts</summary>' + "".join(
                     f'<p>{label}: {_spread({**game, "margin": game[key]})}</p>'
                     for label, key in controls) + '</details>'
@@ -576,14 +735,16 @@ def _forecast_weeks(games, results, *, weekly=False):
                 f'{timing}'
                 f'<td>{_snapshot_kickoff_time(game["kickoff"])}</td>'
                 f'<td>{actual}</td></tr>'
+                f'<tr class="forecast-reason-row"><td colspan="{7 if weekly else 6}">'
+                f'{reasons[game["game_id"]] if reasons is not None else _forecast_reason(game, corrected if weekly else None)}</td></tr>'
             )
         weeks.append(
             f'<details class="forecast-week {kind}-week"{" open" if week == min(game["week"] for game in games) else ""}>'
             f'<summary>Week {week} <span>{len(rows)} games</span></summary>'
-            '<div class="table-shell"><table><thead><tr><th>Matchup</th><th>PGO spread</th>'
-            '<th>Projected score</th><th>Projected total</th>'
-            f'{"<th>Weekly lock (Eastern)</th>" if weekly else ""}'
-            f'<th>Frozen kickoff</th><th>Actual</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div></details>'
+            '<div class="table-shell"><table><thead><tr><th>Matchup</th><th>Who PGO favors</th>'
+            '<th>Estimated score</th><th>Combined points</th>'
+            f'{"<th>Prediction deadline (Eastern)</th>" if weekly else ""}'
+            f'<th>Scheduled kickoff</th><th>Final score</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div></details>'
         )
     return "".join(weeks)
 
@@ -721,9 +882,22 @@ def _rating_explanations(snapshot):
 ''' + "".join(cards) + '''<p>Full precision and all inputs: <a href="evidence/forecast-lab-2026/september-07/snapshot.json">saved snapshot JSON</a>. Ratings remain EXPERIMENTAL / HOLD.</p></details>'''
 
 
-def _corrected_section(snapshot):
+def _corrected_section(snapshot, *, latest_inactive_notes=False):
     if snapshot is None:
         return ''
+    postseason = snapshot.get('edition') == 'pgo-postseason-week1-2026-09-09'
+    prefix = 'postseason' if postseason else 'corrected'
+    container = 'div' if postseason else 'section'
+    edition_date = 'September 9, 2026' if postseason else 'September 8, 2026'
+    heading = 'Why teams rank here — September 9, 2026' if postseason else 'PGO Corrected — September 8, 2026'
+    introduction = (
+        'This edition includes regular season and playoffs in its team and quarterback history. '
+        'Historical testing did not establish an accuracy improvement.' if postseason else
+        '“Corrected” means we repaired problems in the calculation. It does not mean this version has proved more accurate.')
+    history_label = '2025 regular season and playoffs, and earlier seasons' if postseason else '2025 regular season and earlier'
+    contract = 'pgo_postseason_candidate' if postseason else 'pgo_week1_corrected'
+    audit_doc = 'model-update-2026-09-09.md' if postseason else 'model-depth-audit-2026-09-09.md'
+    default_download = f'evidence/forecast-lab-2026/september-{"09-postseason" if postseason else "08-corrected"}/snapshot.json'
     labels = _rating_labels()
     plain_labels = {
         'pgo_v0': 'recent game results',
@@ -792,21 +966,53 @@ def _corrected_section(snapshot):
         drivers = ', '.join(plain_labels.get(name, 'adjustments for missing information'
                             if name.endswith('_missing') else 'other adjustments')
                             for name, _value in upward) or 'no individual input above the league average'
+        downward_note = ''
+        if postseason:
+            downward = sorted(((name, value) for name, value in terms.items() if value < -1e-8),
+                              key=lambda item: item[1])[:3]
+            drags = ', '.join(plain_labels.get(name, 'adjustments for missing information'
+                             if name.endswith('_missing') else 'other adjustments') for name, _value in downward)
+            downward_note = ('<p><strong>What holds this rating back:</strong> the largest downward contributions come from '
+                             + html.escape(drags) + '.</p>') if drags else ''
         if team['team'] == 'NE':
             ne_explanation = (f'<p><strong>Why does New England rank #{team["rank"]}?</strong> '
                               f'The biggest boosts in this calculation come from {html.escape(drivers)}. '
+                              '<strong>The model does not separately grade current edge-rusher and linebacker depth '
+                              'or the quality of their backups.</strong> This is not a complete assessment of the current roster. '
+                              f'<a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/{audit_doc}">'
+                              'What the model includes and misses</a>. '
                               'Several performance inputs describe the same games, so they are not separate proof '
                               'of the team’s strength. We have not established that this is the right ranking.</p>')
-        caution = ('Recent results and passing numbers partly describe the same games. This position in the ranking '
+        caution = ('The model does not separately grade current edge-rusher and linebacker depth or the quality of their backups. '
+                   'This is not a complete assessment of the current roster. '
+                   'Recent results and passing numbers partly describe the same games. This position in the ranking '
                    'is not proof that New England is the NFL’s best team.' if team['team'] == 'NE' else
                    'Several inputs describe the same games. This ranking is not proof of how the team will perform next.')
-        cards.append(f'''<details class="lab-detail rating-explanation corrected-team" id="corrected-rating-{html.escape(team['team'], quote=True)}">
+        if postseason and team['team'] == 'NE':
+            caution = ('The model does not separately grade current edge-rusher and linebacker depth or the quality of their backups. '
+                       'Past team results and quarterback history partly describe the same games. This is an incomplete assessment of the current roster.')
+        report_heading = 'Report saved with this forecast' if postseason else 'Injury report'
+        report_timing = html.escape(str(coverage.get('report_date') or 'Report date unavailable'))
+        if postseason:
+            report_timing = ('Captured ' + _snapshot_kickoff_time(coverage['captured_at'])
+                             if coverage.get('captured_at') else 'Capture time unavailable')
+            report_timing += '. These are the earlier saved inputs. '
+            report_timing += ('<a href="#latest-inactive-notes">Later final-inactive notes for NE–SEA</a> '
+                             'are separate context and do not change the saved rating' if latest_inactive_notes else
+                             'Later final-inactive notes are unavailable in this view')
+        edition_comparison = (f'<p>September 8 comparison: #{team["baseline_rank"]}, '
+                              f'rating {team["baseline_rating"]:+.3f}. This edition adds playoff history; '
+                              'the change compares model editions, not movement from a newly played game.</p>'
+                              if postseason else '')
+        cards.append(f'''<details class="lab-detail rating-explanation corrected-team" id="{prefix}-rating-{html.escape(team['team'], quote=True)}">
 <summary>#{team['rank']} {html.escape(team['team'])} &middot; PGO rating {team['rating']:+.3f}</summary>
+{edition_comparison}
 <p><strong>Expected quarterback:</strong> {html.escape(team['qb_name'])}.</p>
 <p><strong>What lifts this rating:</strong> the biggest boosts in the calculation come from {html.escape(drivers)}.</p>
+{downward_note}
 <p><strong>Keep in mind:</strong> {caution} A boost from an input reflects how the formula weighs it; it is not a separate football grade.</p>
-<p><strong>Injury report:</strong> {report_status}.
-{html.escape(str(coverage.get('report_date') or 'Report date unavailable'))}. {source_link}</p>
+<p><strong>{report_heading}:</strong> {report_status}.
+{report_timing}. {source_link}</p>
 <ul>{absence_list}{observations}</ul>
 <details class="technical-details"><summary>Technical details and calculations</summary>
 <ul>{note_list}</ul>
@@ -816,34 +1022,35 @@ def _corrected_section(snapshot):
     skipped = ''.join(f'<li>{html.escape(row["game_id"])}: {html.escape(row["reason"])}</li>'
                       for row in snapshot.get('skipped_games', []))
     skipped = f'<p>Games without a new forecast in this update:</p><ul>{skipped}</ul>' if skipped else ''
-    return f'''<section id="corrected-ratings"><h2>PGO Corrected — September 8, 2026</h2>
-<p><strong>Experimental — accuracy is still being tested.</strong> “Corrected” means we repaired problems in the calculation. It does not mean this version has proved more accurate.</p>
+    return f'''<{container} id="{prefix}-ratings"><h2>{heading}</h2>
+<p><strong>Experimental — accuracy is still being tested.</strong> {introduction}</p>
 <p>Higher ratings mean the model expects a stronger team; zero is the average of these 32 teams. A +5 rating does not mean a team should be favored by five points.</p>
-<p>Roster information saved through {_snapshot_kickoff_time(snapshot['inputs_as_of'])}. Game and player performance comes from the 2025 regular season and earlier.</p>
+<p>Roster information saved through {_snapshot_kickoff_time(snapshot['inputs_as_of'])}. Game and player performance comes from the {history_label}.</p>
 <p class="notice"><strong>Injuries beyond the quarterback are not included.</strong> These ratings assume the listed quarterback plays.
-Being on the active roster does not mean a player is healthy. Reports need another review before each game locks.</p>
+Being on the active roster does not mean a player is healthy. {'Later injury updates are dated separately; issued forecasts keep their saved inputs.' if postseason else 'Reports need another review before each game locks.'}</p>
 {ne_explanation}
-<p>Choose a team below for its main reasons and injury information. <a href="#corrected-rating-NE">New England</a> &middot; <a href="#corrected-rating-JAX">Jacksonville</a></p>
+<p>Choose a team below for its main reasons and injury information. <a href="#{prefix}-rating-NE">New England</a> &middot; <a href="#{prefix}-rating-JAX">Jacksonville</a></p>
 <details class="technical-details"><summary>How the model works — technical notes and sources</summary>
-<p><strong>EXPERIMENTAL / HOLD.</strong> Model construction: September 8, 2026.
+<p><strong>EXPERIMENTAL / HOLD.</strong> Model construction: {edition_date}.
 Snapshot generated {_snapshot_kickoff_time(snapshot['generated_at'])}.
 Outputs are model units, not established neutral-field point prices or rank-confidence intervals.</p>
 <p>This version matches historical and current ACT eligibility, removes six roster/coaching transition inputs,
 uses statistic-specific QB exposure and enforces symmetric neutral-field predictions. It keeps four-game team history and a one-year QB half-life.
 Those construction repairs do not establish superior forecasting accuracy. The same historical seasons have already been examined.</p>
 <p>The results-history input responds to winning or losing margins that beat the model’s own expectation, not fans’ or media expectations.</p>
-<p><a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_week1_corrected/charter.md">Fixed construction and evaluation contract</a> &middot;
-<a href="{html.escape(snapshot.get('_download_url', 'evidence/forecast-lab-2026/september-08-corrected/snapshot.json'), quote=True)}">All inputs and source evidence</a></p></details>
-<details id="model-editions"><summary>Model versions and snapshot dates</summary>
+<p><a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/{contract}/charter.md">Fixed construction and evaluation contract</a> &middot;
+<a href="{html.escape(snapshot.get('_download_url', default_download), quote=True)}">All inputs and source evidence</a></p></details>
+<details id="{'postseason-model-editions' if postseason else 'model-editions'}"><summary>Model versions and snapshot dates</summary>
 <p><strong>July 21 — archived PGO v1 ratings:</strong> the original saved preseason board.
 <strong>September 7 — refreshed v1 construction:</strong> active expected starters with the recovered original fit.
-<strong>September 8 — PGO Corrected:</strong> the separately fitted construction described below, used by this opening-week experiment.</p>
+<strong>September 8 — PGO Corrected:</strong> the separately fitted regular-season-history construction.</p>
+{'<p><strong>September 9 — primary experimental edition:</strong> adds playoff history. Earlier editions remain available under Compare previous models; this display choice is not proof of greater accuracy.</p>' if postseason else ''}
 <p>The July/August frozen 272-game season forecast is a separate 75% v0 / 25% challenger blend.
 It is preserved as its own forecast record, not identified as the July v1 ratings board.</p>
 <p>The earlier research name <strong>PGO v2</strong> identifies a separate roster-age and draft-pedigree experiment that remained HOLD.
-It is not the name of this corrected edition. A model version describes the calculation; a snapshot date records a particular set of inputs and outputs.
+It is not the name of this {'postseason' if postseason else 'corrected'} edition. A model version describes the calculation; a snapshot date records a particular set of inputs and outputs.
 Every saved edition remains available. A newer date does not establish greater predictive accuracy.</p></details>
-{skipped}{''.join(cards)}</section>'''
+{skipped}{''.join(cards)}</{container}>'''
 
 
 def _load_corrected(directory, weekly, weekly_root):
@@ -855,11 +1062,12 @@ def _load_corrected(directory, weekly, weekly_root):
                      if revisions else CORRECTED_DIR)
     directory = Path(directory).resolve()
     snapshot = pgo_forecast_corrected.load_snapshot(directory)
+    snapshot['_manifest_sha256'] = hashlib.sha256((directory / 'manifest.json').read_bytes()).hexdigest()
     snapshot['_download_url'] = f'evidence/forecast-lab-2026/{directory.name}/snapshot.json'
     return snapshot, directory
 
 
-def _weekly_section(weekly, snapshot, results, provenance):
+def _weekly_section(weekly, snapshot, results, provenance, corrected=None):
     incumbent = {game["game_id"]: game for game in snapshot["games"]}
     games = [{**game, "incumbent_margin": game.get(
         "incumbent_margin", incumbent[game["game_id"]]["margin"])} for game in weekly["games"]]
@@ -888,16 +1096,19 @@ def _weekly_section(weekly, snapshot, results, provenance):
     return f'''
 <header class="lab-hero hero"><div class="status" data-model-status="HOLD">Experimental &mdash; still being tested</div>
 <h1>PGO Forecast Lab</h1><h2>Weekly game forecasts</h2>
-<p>Each matchup locks <strong>60 minutes before kickoff</strong>. Both teams' projected scores, the spread, and the total freeze together.</p>
-<p>Drafts can change until their own cutoff. The last saved revision before that deadline becomes the locked forecast; earlier games do not lock the rest of the week.</p>
+<p>See who the model favors, its estimated scores, and how the predictions compare with final results.</p>
+<p>Each prediction becomes final <strong>60 minutes before kickoff</strong>. We keep the last saved prediction before that deadline and record its misses as well as its wins.</p>
+<p>A draft can change before its own deadline. A locked prediction cannot. An early game does not lock every other game that week.</p>
 <p><a href="index.html">Back to McCabe Ratings</a> &middot; <a href="#corrected-ratings">Why teams rank here</a> &middot; <a href="#preseason-baseline">Full-season archive</a> &middot; <a href="#forecast-process">How we track every forecast</a></p></header>
 <section><h2>Weekly predictions</h2>{sources}
-<p>The spread shows the predicted favorite with a minus sign: SEA &minus;3 means Seattle is expected to win by three. The total is both teams’ points added together.</p>
+<p>Open &ldquo;Why this forecast&rdquo; for the saved calculation. The current model combines recent results, passing and rushing, sacks and turnovers, and quarterback history, then adjusts for venue and rest. Combined points uses 2025 scoring averages.</p>
+<p>“SEA by 3.0 points” means the model favors Seattle by three. Combined points adds both teams’ estimates.</p>
+<p>Scores are rounded to whole points. Open “Model averages” for decimal estimates. “About 25 points each” means both estimates round to 25; it does not predict a tied game. The favored team uses the unrounded numbers. Rounded scores may not add up to the combined-points estimate.</p>
 <p><strong>How much should you trust the scores?</strong> In historical testing, the combined-score estimate missed by about 11 points per game on average. It did not clearly beat using a simple league average. Treat these scores as an experiment.</p>
-{_forecast_weeks(games, results, weekly=True)}</section>
+{_forecast_weeks(games, results, weekly=True, corrected=corrected)}</section>
 <section><h2>Weekly forecast record</h2><p>{len(results)} of {len(games)} saved weekly forecasts have final results. We will keep the misses as well as the hits. Early results alone cannot prove the model works.</p>{_snapshot_metric_cards(metrics, "weekly")}</section>
 <details class="lab-detail" id="forecast-process"><summary>How we track every forecast — saved versions and technical details</summary>
-<p>Research status: EXPERIMENTAL / HOLD. Scores are rounded to whole points; spreads and totals to one decimal. Evaluation uses unrounded values.</p>
+<p>Research status: EXPERIMENTAL / HOLD. Score summaries use whole-number rounded averages; model averages and combined points use one decimal. The favored team uses the original unrounded margin, including edges below 0.1 point. Evaluation uses unrounded values.</p>
 <p><a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md#game-totals-need-their-own-evidence">Historical totals test and limitations</a>.</p>
 <ol><li><strong>Review sources</strong>: verify roster, expected starters, injury coverage, and source dates. Missing formal reports remain unknown; refreshes require review.</li>
 <li><strong>Save a revision</strong>: record a dated forecast revision before the relevant game's deadline. Keep every earlier revision.</li>
@@ -918,10 +1129,14 @@ def _snapshot_section(snapshot, results, provenance):
         raise ValueError("September snapshot must be generated before every kickoff")
     metrics = snapshot_interim_metrics(snapshot, results)
     ratings = "".join(
-        f'<tr class="snapshot-team"><td>{team["rank"]}</td>'
-        f'<th scope="row"><a href="#rating-{html.escape(team["team"], quote=True)}">{html.escape(team["team"])}</a></th><td>{_signed(team["rating"])}</td>'
-        f'<td>{html.escape(team["qb_name"])}</td>'
-        f'<td>{html.escape(team["old_selector_qb_name"])} ({_signed(team["old_selector_rating"])})</td></tr>'
+        f'<tr class="snapshot-team" data-pgo-team="{html.escape(team["team"], quote=True)}">'
+        f'<td class="pgo-rank pgo-essential">{team["rank"]}</td>'
+        f'<th scope="row" class="pgo-team pgo-essential"><a href="#rating-{html.escape(team["team"], quote=True)}">'
+        f'{pgo_current_board.team_identity(team["team"])}</a></th>'
+        f'<td class="pgo-rating-value pgo-essential" data-value="{team["rating"]}">{_signed(team["rating"])}</td>'
+        f'<td class="pgo-rating-scale pgo-detail">{pgo_current_board.rating_bar(team["rating"])}</td>'
+        f'<td class="pgo-detail">{html.escape(team["qb_name"])}</td>'
+        f'<td class="pgo-detail">{html.escape(team["old_selector_qb_name"])} ({_signed(team["old_selector_rating"])})</td></tr>'
         for team in sorted(snapshot["teams"], key=lambda item: item["rank"])
     )
     method = snapshot.get("method", {})
@@ -954,14 +1169,14 @@ def _snapshot_section(snapshot, results, provenance):
     return f'''
 <header class="lab-hero hero"><div class="status">{html.escape(str(method.get("status", "EXPERIMENTAL — HOLD")))}</div>
 <h1>PGO Forecast Lab</h1><h2>September 7 preseason snapshot</h2>
-<p><strong>{html.escape(str(method.get("name", "Active-roster preseason scenario")))}</strong>. Positive home margin means the home team is ahead; the PGO spread shows the favorite with a minus sign.</p>
+<p><strong>{html.escape(str(method.get("name", "Active-roster preseason scenario")))}</strong>. Each game shows the team the model favors and its estimated winning margin.</p>
 <p>ACT is an administrative roster status, not proof of health or game-day availability. Week 1 and the full schedule use the same September 7 state; later weeks are not weekly lineup updates.</p>
 <p><strong>Season-method check:</strong> a separate historical replay found that freezing preseason model strength all year performed worse than both weekly updates and a simpler frozen rating. That replay also uses retrospective Week 1 identities, so it cannot certify what was knowable before the season. <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md#freezing-strength-for-an-entire-season-performs-worse">Read the season test and its limits</a>.</p>
 <p><strong>{len(results)} of {len(games)} finalized results recorded.</strong> Interim tracking &mdash; not a validation result.</p>
 <p><a href="index.html">Back to McCabe Ratings</a></p></header>
 <section><h2>September snapshot record</h2>{_snapshot_metric_cards(metrics)}</section>
-<section><h2>Week 1 and full-season forecasts</h2><p>Scores are rounded to whole points; spreads and totals to one decimal. Evaluation uses the original unrounded projections.</p>{_forecast_weeks(games, results)}</section>
-<details class="lab-detail" open><summary>32-team active-roster ratings and QB assumptions</summary><div class="table-shell"><table><thead><tr><th>Rank</th><th>Team</th><th>PGO rating</th><th>Expected QB1</th><th>Old QB-selector comparison</th></tr></thead><tbody>{ratings}</tbody></table></div></details>
+<section><h2>Week 1 and full-season forecasts</h2><p>Score summaries use whole-number rounded averages; model averages and combined points use one decimal. Evaluation uses the original unrounded projections.</p><p>Open “Model averages” for decimal estimates. “About 25 points each” means both estimates round to 25; it does not predict a tied game. The favored team uses the unrounded numbers. Rounded scores may not add up to the combined-points estimate.</p>{_forecast_weeks(games, results)}</section>
+<details class="lab-detail" open><summary>32-team active-roster ratings and QB assumptions</summary><div class="pgo-snapshot-board"><label class="pgo-column-toggle" for="snapshot-pgo-columns"><input id="snapshot-pgo-columns" type="checkbox"> Show QB and prior-selector comparison</label><div class="table-shell"><table class="pgo-snapshot-table"><thead><tr><th class="pgo-essential">Rank</th><th class="pgo-essential">Team</th><th class="pgo-essential">PGO rating</th><th class="pgo-detail"><span class="pgo-scale-label"><span aria-hidden="true">-14</span><span>Rating scale</span><span aria-hidden="true">+14</span></span></th><th class="pgo-detail">Expected QB1</th><th class="pgo-detail">Old QB-selector comparison</th></tr></thead><tbody>{ratings}</tbody></table></div></div></details>
 <details class="lab-detail"><summary>September method, sources, and downloads</summary><p>Generated {_display_time(generated, "UTC")}. This inference-policy change and the simple projected-score method remain experimental; through-2025 performance does not validate them.</p><ul>{method_items}</ul><p><a href="evidence/forecast-lab-2026/september-07/snapshot.json">Snapshot JSON</a> &middot; <a href="evidence/forecast-lab-2026/september-07/forecasts.csv">Forecast CSV</a> &middot; <a href="evidence/forecast-lab-2026/september-07/ratings.csv">Ratings CSV</a> &middot; <a href="evidence/forecast-lab-2026/september-07/manifest.json">Verification manifest</a></p><ul>{source_items}</ul><p>No calibrated probabilities, market claims, or retrospective promotion are attached to this snapshot.</p><h3>September results provenance</h3><ul>{result_sources}</ul></details>'''
 
 
@@ -1124,7 +1339,7 @@ def _model_sensitivity(sensitivity, strength_study=None):
 <p><strong>Latest review:</strong> <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_input_audit/README.md">Input definitions, roster eligibility, neutral-field consistency, and separate weekly/season tests</a>. The earlier experiments below remain available as dated evidence.</p>
 <p>The completed input audit compares seven constructions on 2,127 matched games. NE ranks 1&ndash;4 and JAX 5&ndash;7 across those specific choices; these are sensitivity ranges, not confidence intervals. The symmetric arm fixes neutral-field reversal and has the lowest margin MAE (10.0982 versus 10.1198 for its reference), but none of the six new candidates passes the predeclared improvement screen. All remain HOLD.</p>
 <p><strong>EXPERIMENTAL — HOLD. Calibrated uncertainty: unavailable.</strong> The ranges below show how six specified model variants change each team's output. This is model sensitivity, not a confidence or prediction interval; it does not measure the chance that a rating or game result falls inside the range.</p>
-<p>McCabe's human ranks are compared with the September 7 preseason PGO baseline here. The main board shows September 8 corrected ratings and keeps the July board in a closed archive. Rank gap = PGO rank minus McCabe rank: positive means PGO ranks the team lower. No point-price gap is calculated.</p>
+<p>McCabe's human ranks are compared with the September 7 preseason PGO baseline here. The main board leads with the September 9 postseason edition; September 8 and July remain available for comparison. Rank gap = PGO rank minus McCabe rank: positive means PGO ranks the team lower. No point-price gap is calculated.</p>
 <p>Source freshness: McCabe source revision {html.escape(sensitivity['mccabe_as_of'])}; September baseline generated {html.escape(sensitivity['snapshot_generated_at'])}; depth snapshot {html.escape(sensitivity['depth_as_of'])}. Roster/source captures: {html.escape(captures)}. Performance history ends with the 2025 regular season; these are not current injury updates.</p>
 <div class="table-shell"><table><thead><tr><th>Team</th><th>McCabe rank</th><th>September PGO rank</th><th>Rank gap</th><th>Sensitivity: rank span</th><th>Sensitivity: model-output span</th></tr></thead><tbody>{rows}</tbody></table></div>
 <p>The six variants cross raw, opponent-adjusted team EPA, and opponent-adjusted team plus QB EPA with either the unchanged earlier results-based PGO input or 50% offseason retention of that input. Ranges are descriptive, centered model-scale outputs. Both opponent-adjustment arms remain HOLD; this retrospective study does not replace issued forecasts or validate the September inference policy.</p>
@@ -1136,6 +1351,8 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
                snapshot_results=(), snapshot_provenance=(), weekly=None,
                weekly_results=(), weekly_provenance=(), corrected=None):
     """Render a standalone, escaped, no-fetch Forecast Lab page."""
+    from pgo_availability_view import render_current_scenario
+    from pgo_model_updates import EDITION as selected_edition, render_current_updates
     css = _shared_css()
     if snapshot is None:
         lead = f'''<header class="lab-hero hero"><div class="status">Experimental &middot; frozen archive</div>
@@ -1147,14 +1364,30 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
     else:
         lead = _snapshot_section(snapshot, snapshot_results, snapshot_provenance)
         if weekly is not None:
+            updates = render_current_updates()
+            selected = f'data-edition="{selected_edition}"' in updates
             lead = (
-                _weekly_section(weekly, snapshot, weekly_results, weekly_provenance)
+                _weekly_section(weekly, snapshot, weekly_results, weekly_provenance, corrected=corrected)
                 + _corrected_section(corrected)
+                + render_current_scenario()
                 + _rating_explanations(snapshot)
                 + '<details class="preseason-archive" id="preseason-baseline">'
                 '<summary>September 7 preseason baseline &middot; All 272 games and 32 team ratings</summary>'
                 + lead.replace('<h1>PGO Forecast Lab</h1>', '') + '</details>'
             )
+            if selected:
+                confidence_link = ('<a href="#pgo-season">Current rankings, picks and records</a>.' if 'id="pgo-season"' in updates else
+                                   '<a href="#pgo-confidence-picks">PGO confidence picks</a>.'
+                                   if 'id="pgo-confidence-picks"' in updates else
+                                   '<a href="confidence-pool.html">Confidence pool calculator</a>.')
+                lead = ('<header class="lab-hero hero"><h1>PGO Forecast Lab</h1>'
+                        '<p>Dated predictions, explanations and grades throughout the season. '
+                        '<a href="index.html">Back to the ratings board</a>. '
+                        + confidence_link + '</p></header>'
+                        + updates + '<details class="lab-detail" id="previous-models">'
+                        '<summary>Compare previous models</summary>' + lead + '</details>')
+            else:
+                lead += updates
         else:
             lead += _rating_explanations(snapshot)
         archive_open = '<details class="original-archive"><summary>Original July/August archive &middot; Frozen 25% stability blend</summary>'
@@ -1179,8 +1412,8 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
             body.append(
                 f'<tr data-game-id="{html.escape(game["game_id"], quote=True)}">'
                 f'<th scope="row">{html.escape(game["away"])} @ {html.escape(game["home"])}</th>'
-                f'<td>{_signed(game["candidate_prediction"])}</td>'
-                f'<td>{_signed(game["pgo_v0_prediction"])}</td>'
+                f'<td>{_spread({**game, "margin": game["candidate_prediction"]})}</td>'
+                f'<td>{_spread({**game, "margin": game["pgo_v0_prediction"]})}</td>'
                 f'<td>{_kickoff_time(game["kickoff"])}</td>'
                 f'<td>{actual}</td><td>{error}</td></tr>'
             )
@@ -1188,8 +1421,8 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
             f'<details class="forecast-week"{" open" if week == 1 else ""}>'
             f'<summary>Week {week} <span>{len(body)} games</span></summary>'
             '<div class="table-shell"><table><thead><tr><th>Matchup</th>'
-            '<th>Blend home margin</th><th>PGO v0 home margin</th><th>Frozen kickoff</th>'
-            f'<th>Actual</th><th>Blend absolute error</th></tr></thead><tbody>{"".join(body)}</tbody></table></div></details>'
+            '<th>Original forecast favors</th><th>PGO v0 comparison favors</th><th>Frozen kickoff</th>'
+            f'<th>Final score</th><th>Original forecast miss (points)</th></tr></thead><tbody>{"".join(body)}</tbody></table></div></details>'
         )
     sources = []
     for item in provenance:
@@ -1203,8 +1436,8 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
     sources = "".join(sources) or "<li>No result transcriptions recorded.</li>"
     diagnostic_rows = "".join(
         f'<tr><th scope="row">{html.escape(game["away"])} @ {html.escape(game["home"])}</th>'
-        f'<td>{_signed(game["challenger_prediction"])}</td>'
-        f'<td>{_signed(game["challenger_full_strength_prediction"])}</td></tr>'
+        f'<td>{_spread({**game, "margin": game["challenger_prediction"]})}</td>'
+        f'<td>{_spread({**game, "margin": game["challenger_full_strength_prediction"]})}</td></tr>'
         for game in lock["games"]
     )
     return f'''<!doctype html>
@@ -1212,12 +1445,13 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
 <title>PGO Forecast Lab</title><style>{css}
 .lab-wrap{{max-width:1180px;margin:0 auto;padding:24px 18px 60px}}.lab-wrap a{{color:var(--accent)}}.lab-hero{{max-width:none;padding:26px;border-radius:14px;color:#fff;text-align:left}}.lab-hero a{{color:var(--highlight)}}.lab-hero a:focus-visible{{outline-color:var(--highlight)}}.lab-hero .status{{border-color:var(--highlight);margin-bottom:22px}}
 .status{{display:inline-block;padding:6px 10px;border:1px solid var(--orange);border-radius:999px;font-weight:800}}.metric-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}}.metric{{padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}}.metric h3{{margin-top:0}}.forecast-week,.lab-detail,.original-archive,.preseason-archive{{margin:12px 0;border:1px solid var(--border);border-radius:10px;padding:12px}}.forecast-week summary,.lab-detail summary,.original-archive>summary,.preseason-archive>summary{{cursor:pointer;font-weight:800}}.forecast-week summary span{{color:var(--mut);font-weight:500}}table{{width:100%;border-collapse:collapse}}th,td{{padding:9px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}}th:first-child{{text-align:left}}.notice{{padding:14px;border-left:4px solid var(--orange);background:var(--panel)}}code{{overflow-wrap:anywhere}}.weekly-status{{font-weight:800}}
+.forecast-week>.table-shell{{container-type:inline-size}}.forecast-week .forecast-reason-row>td{{text-align:left;padding:0 9px 10px;white-space:normal}}.forecast-reason{{width:min(960px,calc(100cqw - 18px));max-width:100%;font-size:13px;font-weight:400;line-height:1.5}}.forecast-reason>summary{{padding:7px 0;font-size:13px}}.forecast-reason-body{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px;padding:8px 0 4px;white-space:normal;font-size:13px;font-weight:400;line-height:1.5;overflow-wrap:anywhere}}.forecast-reason-block{{min-width:0;padding:14px;border:1px solid var(--border);border-radius:8px;background:var(--panel)}}.forecast-reason-block h3{{margin:0 0 8px;font-size:14px;color:var(--accent)}}.forecast-reason-block p{{margin:0 0 10px;white-space:normal}}.forecast-reason-block p:last-child{{margin-bottom:0}}.forecast-reason-calculation{{margin-top:12px;white-space:normal;overflow-wrap:anywhere}}.forecast-reason-calculation>summary{{margin-bottom:8px}}.forecast-week th,.forecast-week td{{vertical-align:top}}
 .rating-explanation table{{table-layout:fixed}}.rating-explanation th{{white-space:normal;user-select:text}}.rating-explanation tbody th{{background:transparent;color:inherit;font-size:inherit;letter-spacing:normal;text-transform:none}}.rating-explanation thead th:last-child{{width:110px}}.rating-summary tr:last-child{{font-weight:800}}
 .study-table{{table-layout:fixed}}.study-table th,.study-table td{{white-space:normal;overflow-wrap:anywhere}}.study-table th:first-child{{width:42%}}
 .forecast-week tbody th{{text-transform:none;letter-spacing:normal}}
 .corrected-team thead th{{font-size:11px;letter-spacing:normal;text-transform:none}}
 .corrected-team td{{white-space:nowrap;overflow-wrap:normal;font-size:12px}}
-</style><link rel="stylesheet" href="pgo-theme.css"></head><body><main class="lab-wrap">
+</style><link rel="stylesheet" href="pgo-theme.css?v=20260909-injuries"></head><body><main class="lab-wrap">
 {lead}{archive_open}{archive_heading}
 <section><h2>Record so far</h2>{_metric_cards(metrics)}
 <p>The theoretical 50% winner benchmark is a reference only.</p></section>
@@ -1232,37 +1466,11 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
 <p>Raw source cutoff: <code>{html.escape(lock["as_of"])}</code>. Raw attestation time: <code>{html.escape(ATTESTED_AT)}</code>.</p>
 <p>Partial metrics are descriptive only. The unchanged canonical grade requires all 272 exact final results and is the only path to a prospective PASS, HOLD, or BLOCKED receipt.</p></details>
 <section><h2>Frozen forecasts and observed results</h2><p>Kickoffs are the frozen schedule record and may differ from the current schedule. Original forecasts are never rewritten.</p>{"".join(weeks)}</section>
-<details><summary>Archived challenger diagnostic</summary><p>These are outputs from the archived July-cutoff fit (delta 0.75 with QB-depth uncertainty), kept separate from the public ratings-table fit.</p><div class="table-shell"><table><thead><tr><th>Matchup</th><th>Current-lineup home margin</th><th>Full-strength home margin</th></tr></thead><tbody>{diagnostic_rows}</tbody></table></div></details>
+<details><summary>Archived challenger diagnostic</summary><p>These are outputs from the archived July-cutoff fit (delta 0.75 with QB-depth uncertainty), kept separate from the public ratings-table fit.</p><div class="table-shell"><table><thead><tr><th>Matchup</th><th>Current-lineup forecast favors</th><th>Full-strength forecast favors</th></tr></thead><tbody>{diagnostic_rows}</tbody></table></div></details>
 <section><h2>Results provenance</h2><p>Each entry is a reviewed transcription. Its digest verifies the archived CSV, not the remote source contents.</p><ul>{sources}</ul></section>
 <section><h2>Staff Picks</h2><p>No editorial picks are published in this model archive. Staff Picks remain a separate human product.</p></section>
 {archive_close}
-</main><script>
-function updateWeeklyLocks() {{
-  const now = Date.now();
-  let next = now + 60000;
-  document.querySelectorAll('[data-weekly-cutoff]').forEach(node => {{
-    const cutoff = Date.parse(node.dataset.weeklyCutoff);
-    node.textContent = now >= cutoff ? 'Locked' : 'Draft';
-    if (cutoff > now) next = Math.min(next, cutoff);
-  }});
-  if (document.querySelector('[data-weekly-cutoff]')) setTimeout(updateWeeklyLocks, Math.max(1, next - now));
-}}
-updateWeeklyLocks();
-function openFragment(hash) {{
-  const target = document.getElementById(hash.slice(1));
-  if (!target) return;
-  for (let node = target; node; node = node.parentElement) {{
-    if (node.tagName === 'DETAILS') node.open = true;
-  }}
-  target.scrollIntoView();
-}}
-document.addEventListener('click', event => {{
-  const link = event.target.closest('a[href^="#"]');
-  if (link) openFragment(link.hash);
-}});
-window.addEventListener('hashchange', () => openFragment(location.hash));
-openFragment(location.hash);
-</script></body></html>'''
+</main>{FORECAST_DISPLAY_SCRIPT}</body></html>'''
 
 
 def main(argv=None):

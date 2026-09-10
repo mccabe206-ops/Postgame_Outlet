@@ -1,0 +1,59 @@
+.................................................................................................................................................................................................ERROR: second write failed
+......ERROR: receipt write failed
+..ERROR: offline
+.ERROR: frozen_at must be a timezone-bearing timestamp
+ERROR: Refusing to replace existing candidate output: output\pgo-fantasy-source-v2-candidate.lock.json
+................................................ERROR: Artifact output aliases frozen evidence
+ERROR: depth source was captured after prediction time
+.......ERROR: Artifact output aliases frozen evidence
+.ERROR: [Errno 17] File exists: 'C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpe90mex46\\preview.json'
+.ERROR: [Errno 17] File exists: 'C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpcs8b80fs\\fantasy_lock.json'
+ERROR: [Errno 17] File exists: 'C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpcs8b80fs\\fantasy_week_grade.json'
+ERROR: [Errno 17] File exists: 'C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpcs8b80fs\\foreign.bin'
+.ERROR: [Errno 17] File exists: 'C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpbf8v_qn3\\preview.json'
+.ERROR: [Errno 17] File exists: 'C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpwg3bffqi\\preview.json'
+.ERROR: Prospective model config is invalid
+.........................................................................................s.....................................................................................preview failed: preview output must remain under output/
+.preview failed: offline
+..........................................................................................................................................
+----------------------------------------------------------------------
+Ran 576 tests in 484.034s
+
+OK (skipped=1)
+HOLD: pgo_v1 research gate
+HOLD: pgo_v1 research gate
+Wrote D:\CodexWorktrees\Postgame_Outlet-publication-20260909\docs\index.html
+  32 teams | EXPERIMENTAL
+Wrote D:\CodexWorktrees\Postgame_Outlet-publication-20260909\output\fantasy\index.html
+  Displayed the latest verified corrected edition; preserved the July archive
+  4 fantasy players | PREVIEW / HOLD
+Wrote D:\CodexWorktrees\Postgame_Outlet-publication-20260909\output\preview.html
+  32 teams | EXPERIMENTAL
+PASS: PGO fantasy source qualification
+PASS: PGO fantasy source qualification
+PASS: PGO fantasy source qualification
+PASS: PGO fantasy source qualification
+PASS: PGO fantasy source qualification
+PASS: PGO fantasy source qualification
+PASS: accepted PGO fantasy source qualification
+PASS: PGO fantasy source qualification
+BLOCKED: PGO fantasy source qualification
+PASS: PGO fantasy source qualification
+PASS: PGO fantasy source qualification
+PASS: PGO fantasy source qualification
+usage: python.exe -m unittest [-h] {preview,lock,grade-week,grade-season} ...
+
+Build and grade local PGO fantasy prospective evidence
+
+positional arguments:
+  {preview,lock,grade-week,grade-season}
+
+options:
+  -h, --help            show this help message and exit
+Wrote C:\Users\Alex\AppData\Local\Temp\tmpzijpj43p\lab.html (0 of 2 results)
+Wrote C:\Users\Alex\AppData\Local\Temp\tmpft_0f48a\lab.html (0 of 2 results)
+Wrote C:\Users\Alex\AppData\Local\Temp\tmpakwk1fki\lab.html (0 of 2 results)
+Recorded 1 games in 20260908T120000000000Z.json
+Verified 1 weekly revisions; 1 games
+wrote private preview: C:\Users\Alex\AppData\Local\Temp\tmpqs95y6yx\output\preview.html
+wrote private preview: C:\Users\Alex\AppData\Local\Temp\tmp6bs8mhy6\output\preview.html

@@ -1,0 +1,39 @@
+{
+  "recorded_at": "2026-09-09T16:00:31.518923+00:00",
+  "reviewed_parent": "438878b0689e3738a60905c676306dac74e4c609",
+  "upstream_parent": "951ec619f8aa6fadd4d6ea854590d5f4dd9afcd3",
+  "decision": "Preserve reviewed grade precision and verified injury wording; retain compatible upstream metadata and code",
+  "upstream_notes_adopted": [
+    "Buffalo Bills",
+    "New York Jets",
+    "Baltimore Ravens",
+    "Cincinnati Bengals",
+    "Houston Texans",
+    "Indianapolis Colts",
+    "Denver Broncos",
+    "Kansas City Chiefs",
+    "Los Angeles Chargers",
+    "Dallas Cowboys",
+    "Philadelphia Eagles",
+    "Washington Commanders",
+    "Chicago Bears",
+    "Detroit Lions",
+    "Green Bay Packers",
+    "Atlanta Falcons",
+    "Carolina Panthers",
+    "New Orleans Saints",
+    "Los Angeles Rams",
+    "Seattle Seahawks"
+  ],
+  "approved_SF_offense": "0.2",
+  "writeups_preserved_exactly": 32,
+  "writeup_bodies_identical_to_upstream": 28,
+  "source_backed_injury_body_corrections_retained": [
+    "BUF",
+    "LAR",
+    "NE",
+    "SF"
+  ],
+  "upstream_KC_only_historical_injury_marker": true,
+  "upstream_injury_recovery_csv_retained_but_not_used_by_model": true
+}

@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
 ## The case for a defense-carried rebuild
 
 The Giants grade a shade below the line — a rookie quarterback and a thin, aging skill group weighing down what is genuinely the strength of this roster: the pass rush.

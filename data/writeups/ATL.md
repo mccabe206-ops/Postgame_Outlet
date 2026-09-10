@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+
 ## The case with Penix out
 
 Atlanta grades below the line for now — the quarterback spot is the weight, with **Michael Penix out and Tua Tagovailoa starting**, and the defense's pass rush is thinned through the first half.

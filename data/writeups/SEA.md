@@ -1,3 +1,7 @@
+## Week 1 availability
+
+Checked September 9, 2026, 10:42–10:46 a.m. ET. The September 8 final injury report lists **Ty Okada OUT (hamstring)**; **Nick Emmanwori (ankle)** and **Tory Horton (hamstring) are QUESTIONABLE**. Tuesday participation was estimated for a walkthrough. [Seahawks report](https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots). Final inactives are pending.
+
 ## The case for a top-five grade
 
 Seattle is one of the most complete rosters in the league — quarterback, offense, and defense all at or above the line, which is why the straight component sum keeps them near the top even without an elite-tier QB. The current number is discounted for early injuries; the healthy ceiling is higher still.

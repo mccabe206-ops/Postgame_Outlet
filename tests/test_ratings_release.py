@@ -428,9 +428,12 @@ class GeneratedDocumentTests(unittest.TestCase):
         self.assertIn(
             """  @media (max-width:960px) {
     .row-trigger {
-      display:grid; grid-template-columns:auto minmax(0,1fr); max-width:100%;
+      display:grid; grid-template-columns:auto auto minmax(0,1fr); max-width:100%;
     }
-    .row-trigger .tname, .row-trigger .div { grid-column:2; min-width:0; }
+    .row-trigger .team-marker { grid-row:1 / 4; align-self:center; }
+    .row-trigger .chip { grid-row:1 / 4; align-self:center; }
+    .row-trigger .tname, .row-trigger .mobile-qb, .row-trigger .div { grid-column:3; min-width:0; }
+    .row-trigger .mobile-qb { display:block; margin-top:2px; }
     .row-trigger .div { margin:2px 0 0; }""",
             document,
         )
@@ -470,7 +473,7 @@ class GeneratedDocumentTests(unittest.TestCase):
             with patch.object(generate_site, "DATA", temp):
                 document = generate_site.build_html(self.rows, self.config)
 
-        theme_link = '<link rel="stylesheet" href="pgo-theme.css">'
+        theme_link = '<link rel="stylesheet" href="pgo-theme.css?v=20260909-injuries">'
         self.assertEqual(document.count(theme_link), 1)
         self.assertGreater(document.index(theme_link), document.index("</style>"))
         self.assertNotIn("fonts.googleapis.com", document)
