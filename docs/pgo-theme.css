@@ -77,6 +77,9 @@ td[data-v],.brk-v { font-variant-numeric:tabular-nums; }
 .pgo-scale-label { display:flex; justify-content:space-between; gap:8px; min-width:150px; }
 .pgo-column-toggle { display:none; align-items:center; gap:8px; margin:10px 0; color:var(--mut); }
 .rating-explanation > summary { font-variant-numeric:tabular-nums; font-weight:800; }
+.season-nav { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+.season-nav a { display:inline-flex; align-items:center; min-height:44px; padding:0 14px; border:1px solid var(--border2); border-radius:6px; color:var(--ink); text-decoration:none; font-weight:700; background:var(--panel2); }
+.season-nav a:hover { border-color:var(--accent); color:var(--highlight); }
 #panel-comparison .comparison-table td { font-variant-numeric:tabular-nums; }
 .tab { min-height:44px; border-radius:7px; }
 .tab.active,

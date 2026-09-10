@@ -27,7 +27,9 @@ from release_ratings import atomic_write_text
 
 
 FORECAST_DISPLAY_SCRIPT = """<script>
+let weeklyLockTimer;
 function updateWeeklyLocks() {
+  clearTimeout(weeklyLockTimer);
   const now = Date.now();
   let next = now + 60000;
   document.querySelectorAll('[data-weekly-cutoff]').forEach(node => {
@@ -35,7 +37,7 @@ function updateWeeklyLocks() {
     node.textContent = now >= cutoff ? 'Locked' : 'Draft';
     if (cutoff > now) next = Math.min(next, cutoff);
   });
-  if (document.querySelector('[data-weekly-cutoff]')) setTimeout(updateWeeklyLocks, Math.max(1, next - now));
+  if (document.querySelector('[data-weekly-cutoff]')) weeklyLockTimer = setTimeout(updateWeeklyLocks, Math.max(1, next - now));
 }
 updateWeeklyLocks();
 function openFragment(hash) {
@@ -58,20 +60,78 @@ document.addEventListener('click', event => {
 window.addEventListener('hashchange', () => openFragment(location.hash));
 document.addEventListener('DOMContentLoaded', () => openFragment(location.hash), {once:true});
 openFragment(location.hash);
+let seasonRefreshPending = false;
 setInterval(async () => {
-  const current = document.querySelector('[data-season-checked-at]');
-  if (!current || document.hidden) return;
+  const selector = '#pgo-season[data-season-checked-at]';
+  const current = document.querySelector(selector);
+  if (seasonRefreshPending || !current || document.hidden) return;
   const panel = current.closest('[role="tabpanel"]');
   if (panel && panel.hidden) return;
+  seasonRefreshPending = true;
   try {
     const response = await fetch('evidence/season-2026/current.json', {cache:'no-store'});
     if (!response.ok) return;
     const latest = await response.json();
-    if (Date.parse(latest.checked_at) > Date.parse(current.dataset.seasonCheckedAt)) {
-      if (panel && !location.hash) history.replaceState(null, '', '#pgo-season');
-      location.reload();
+    const advertised = Date.parse(latest.checked_at);
+    const displayed = Date.parse(current.dataset.seasonCheckedAt);
+    if (!Number.isFinite(advertised) || !Number.isFinite(displayed) || advertised <= displayed) return;
+    const page = await fetch(location.href, {cache:'no-store'});
+    if (!page.ok || new URL(page.url).origin !== location.origin) return;
+    const parsed = new DOMParser().parseFromString(await page.text(), 'text/html');
+    const sections = parsed.querySelectorAll('#pgo-season');
+    if (sections.length !== 1) return;
+    const next = sections[0];
+    const checked = Date.parse(next.dataset.seasonCheckedAt);
+    if (!Number.isFinite(checked) || checked < advertised || checked <= Date.parse(current.dataset.seasonCheckedAt)) return;
+    // This fragment is generated same-origin HTML, never a script delivery path.
+    if (next.querySelector('script,style,iframe,object,embed,frame,frameset,base,link,meta,template')) return;
+    for (const node of [next, ...next.querySelectorAll('*')]) {
+      for (const attribute of Array.from(node.attributes || [])) {
+        const name = attribute.name.toLowerCase();
+        const value = attribute.value.replace(/[\\s\\u0000-\\u001f]/g, '').toLowerCase();
+        if (name.startsWith('on') || name === 'srcdoc' || value.startsWith('javascript:') || value.startsWith('vbscript:')) return;
+      }
     }
+    if (document.hidden || (panel && panel.hidden) || document.querySelector(selector) !== current) return;
+    const oldKeys = new Map(), newKeys = new Map();
+    for (const [section, keys] of [[current, oldKeys], [next, newKeys]]) {
+      for (const node of section.querySelectorAll('[data-view-key]')) {
+        const key = node.dataset.viewKey;
+        if (!key || keys.has(key)) return;
+        keys.set(key, node);
+      }
+    }
+    // Capture immediately before replacement so interactions during fetch win.
+    const active = document.activeElement;
+    const owner = current.contains(active) ? active.closest('[data-view-key]') : null;
+    const focusPath = [];
+    if (owner) {
+      for (let node = active; node !== owner; node = node.parentElement) {
+        focusPath.unshift(Array.from(node.parentElement.children).indexOf(node));
+      }
+    }
+    const scrolls = [];
+    for (const [key, old] of oldKeys) {
+      const node = newKeys.get(key);
+      if (!node || node.tagName !== old.tagName || node.type !== old.type) continue;
+      if (old.tagName === 'DETAILS') node.open = old.open;
+      if (old.tagName === 'INPUT' && old.type === 'checkbox') node.checked = old.checked;
+      scrolls.push([node, old.scrollLeft, old.scrollTop]);
+    }
+    const newOwner = owner ? newKeys.get(owner.dataset.viewKey) : null;
+    let focus = newOwner && newOwner.tagName === owner.tagName && newOwner.type === owner.type ? newOwner : null;
+    for (const index of focusPath) focus = focus && focus.children[index];
+    if (focus && (focus.tagName !== active.tagName || focus.type !== active.type || focus.getAttribute('href') !== active.getAttribute('href'))) focus = null;
+    if (!focus && newOwner && newOwner.tagName === 'DETAILS') focus = newOwner.querySelector('summary');
+    const x = window.scrollX, y = window.scrollY;
+    current.replaceWith(next);
+    // Detached elements have no layout and cannot retain nonzero scroll offsets.
+    for (const [node, left, top] of scrolls) { node.scrollLeft = left; node.scrollTop = top; }
+    if (focus) focus.focus({preventScroll:true});
+    window.scrollTo(x, y);
+    updateWeeklyLocks();
   } catch (_) { /* Keep the last verified page when a network check fails. */ }
+  finally { seasonRefreshPending = false; }
 }, 60000);
 </script>"""
 

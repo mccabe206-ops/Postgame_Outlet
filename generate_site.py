@@ -866,7 +866,7 @@ TEMPLATE = """<!DOCTYPE html>
   <header>
     <h1>NFL Power Ratings <span class="accent">{{SEASON}}</span></h1>
     <div class="sub">McCabe&#x27;s editorial ratings &middot; roster-based, points vs. a league-average team (0.0)</div>
-    <div class="updated">By {{AUTHOR}} &middot; {{EDITION}} &middot; Updated <time datetime="{{UPDATED_ISO}}">{{UPDATED}}</time></div>
+    <div class="updated">By {{AUTHOR}} &middot; {{EDITION}} &middot; Page refreshed <time datetime="{{UPDATED_ISO}}">{{UPDATED}}</time></div>
   </header>
 </div>
 <div class="wrap">

@@ -73,7 +73,7 @@ def _rankings(snapshot):
         movement = 'First edition' if prior is None else ('Unchanged' if prior == team['rank'] else f'Up {prior-team["rank"]}' if prior > team['rank'] else f'Down {team["rank"]-prior}')
         code = _text(team['team'])
         rows.append(f'<tr data-season-team="{code}"><td class="pgo-rank">{team["rank"]}</td>'
-            f'<th scope="row" class="pgo-team"><a href="#season-rating-{code}">{board.team_identity(team["team"])}</a></th>'
+            f'<th scope="row" class="pgo-team"><a href="#season-rating-{code}" data-view-key="rating-link-{code}">{board.team_identity(team["team"])}</a></th>'
             f'<td class="pgo-rating-value" data-value="{rating}">{rating:+.3f}</td><td>{movement}</td>'
             f'<td class="model-update-extra pgo-rating-scale">{board.rating_bar(rating)}</td>'
             f'<td class="model-update-extra">{_text(team["qb_name"])}</td></tr>')
@@ -93,14 +93,14 @@ def _rankings(snapshot):
             calculations.append(f'<tr><th scope="row">{_text(labels.get(name, name.replace("_", " ")))}</th>'
                                 f'<td>{shown}</td><td>{value:+.3f}</td></tr>')
         calculations = ''.join(calculations)
-        explanations.append(f'<details class="model-update-evidence rating-explanation" id="season-rating-{code}">'
+        explanations.append(f'<details class="model-update-evidence rating-explanation" id="season-rating-{code}" data-view-key="rating-{code}">'
             f'<summary>#{team["rank"]} {code}: why this rating</summary>'
             f'<p>Expected quarterback: {_text(team["qb_name"])}.</p>'
             f'<p><strong>What lifts this rating:</strong> {drivers(True)}.</p>'
             f'<p><strong>What holds this rating back:</strong> {drivers(False)}.</p>'
             '<p>These are overlapping influences in the formula, not separate player-quality grades. '
             'Current non-QB injuries and backup quality are not numerical adjustments here.</p>'
-            '<details><summary>Saved calculation</summary><div class="table-shell"><table><thead><tr>'
+            f'<details data-view-key="rating-calculation-{code}"><summary>Saved calculation</summary><div class="table-shell" data-view-key="rating-table-{code}"><table><thead><tr>'
             '<th>Input</th><th>Saved input value</th><th>Contribution to rating</th></tr></thead>'
             f'<tbody>{calculations}</tbody></table></div>'
             '<p>Input values use different scales and cannot be added together. The formula converts each into a contribution; '
@@ -109,15 +109,15 @@ def _rankings(snapshot):
             f'<p>Edition: {_text(snapshot["edition"])}. Generated {_time(snapshot["generated_at"])}.</p></details></details>')
     if teams != sorted(teams, key=lambda row: (-row['rating'], row['team'])):
         raise ValueError('Season team ranks differ from saved rating order')
-    return (f'<h3>Current power rankings</h3><p>Inputs saved through {_time(snapshot["inputs_as_of"])}. '
+    return (f'<h3 id="season-rankings">Current power rankings</h3><p>Inputs saved through {_time(snapshot["inputs_as_of"])}. '
             f'Performance history through {_time(snapshot["history_through"])}. '
             'Rank change compares this edition with the previous saved board.</p>'
-            '<label class="model-update-columns"><input type="checkbox"> Show rating scale and expected QB</label>'
-            '<div class="table-shell"><table class="postseason-team-table"><thead><tr>'
+            '<label class="model-update-columns"><input type="checkbox" data-view-key="rating-columns"> Show rating scale and expected QB</label>'
+            '<div class="table-shell" data-view-key="rankings-table"><table class="postseason-team-table"><thead><tr>'
             '<th>Rank</th><th>Team</th><th>PGO strength</th><th>Rank change</th>'
             '<th class="model-update-extra">Rating scale</th><th class="model-update-extra">Expected QB</th>'
             f'</tr></thead><tbody>{"".join(rows)}</tbody></table></div>'
-            '<details class="model-update-evidence"><summary>Why teams rank here</summary>'
+            '<details class="model-update-evidence" data-view-key="rating-reasons"><summary>Why teams rank here</summary>'
             + ''.join(explanations) + '</details>')
 
 
@@ -131,6 +131,7 @@ def _game(game, week):
     if game.get('pick') not in (None, game['home'], game['away']):
         raise ValueError('Pick must identify one of the game teams')
     home, away = _text(game['home']), _text(game['away'])
+    game_id = _text(game['game_id'])
     scores = 'Forecast unavailable'
     calculation = 'No saved numerical forecast is available for this matchup.'
     favorite = 'No pick' if game.get('pick') is None else _text(game['pick'])
@@ -140,7 +141,7 @@ def _game(game, week):
             raise ValueError('Season saved scores do not reconcile')
         whole = [Decimal(str(value)).quantize(Decimal('1'),rounding=ROUND_HALF_UP) for value in (ap,hp)]
         summary = f'About {whole[0]} points each' if whole[0] == whole[1] else f'{away} {whole[0]}, {home} {whole[1]}'
-        scores = f'{summary}<details><summary>Model averages</summary><p>{away} {_projected_score(ap)}, {home} {_projected_score(hp)}</p></details>'
+        scores = f'{summary}<details data-view-key="score-{game_id}"><summary>Model averages</summary><p>{away} {_projected_score(ap)}, {home} {_projected_score(hp)}</p></details>'
         favorite += f'<br><small>{_spread(game)}</small>'
         explanation = game.get('explanation')
         components = ''
@@ -196,11 +197,11 @@ def _game(game, week):
     status = game['forecast_status']
     if status in ('DRAFT','LOCKED'):
         status = f'<span class="weekly-status" data-weekly-cutoff="{_text(game["lock_at"])}">{status.title()}</span>'
-    return (f'<tr data-season-game-id="{_text(game["game_id"])}"><th scope="row">{away} @ {home}</th>'
+    return (f'<tr id="season-game-{game_id}" data-season-game-id="{game_id}"><th scope="row">{away} @ {home}</th>'
             f'<td>{favorite}</td><td>{scores}</td><td data-grade="{game["grade"]}">{GRADES[game["grade"]]}</td>'
             f'<td>{actual}</td><td>{pool}</td><td>{status}<br>Deadline {_time(game.get("lock_at"))}'
             f'<br>Kickoff {_time(game["kickoff"])}</td></tr>'
-            '<tr class="forecast-reason-row"><td colspan="7"><details class="forecast-reason">'
+            f'<tr class="forecast-reason-row"><td colspan="7"><details class="forecast-reason" data-view-key="reason-{game_id}">'
             '<summary>Forecast explanation and availability</summary><div class="forecast-reason-body">'
             f'<div class="forecast-reason-block"><h3>Saved calculation</h3><p>{calculation}</p>'
             f'<p>Edition: {_text(game.get("source_edition",week["source_edition"]))}.</p>{provenance}</div>'
@@ -228,11 +229,11 @@ def _week(week, current):
                     else f"{math.fsum(c['expected_points'] for c in allocations):.2f}")
         pool_summary = (f'<p>Confidence pool: {earned} earned so far; {sum(c["points"] for c in allocations)} allocated points. '
                         f'Expected pool points from the saved chances: {expected}. Late entries remain marked below.</p>')
-    return (f'<details class="forecast-week" id="season-week-{week["week"]}"{" open" if current else ""}>'
+    return (f'<details class="forecast-week" id="season-week-{week["week"]}" data-view-key="week-{week["week"]}"{" open" if current else ""}>'
             f'<summary>Week {week["week"]}: {_text(week["status"].replace("_"," "))}</summary>'
             f'<p>{counts["W"]} W / {counts["L"]} L / {counts["T"]} T; {counts["NO_PICK"]} no pick; {counts["PENDING"]} pending.</p>'
             f'<p>Saved {_time(week["generated_at"])}; inputs through {_time(week["inputs_as_of"])}.</p>{pool_summary}'
-            '<div class="table-shell"><table><thead><tr><th>Matchup</th><th>PGO pick</th><th>Estimated score</th>'
+            f'<div class="table-shell" data-view-key="week-table-{week["week"]}"><table><thead><tr><th>Matchup</th><th>PGO pick</th><th>Estimated score</th>'
             '<th>Grade</th><th>Final score</th><th>Confidence allocation</th><th>Forecast status and times</th>'
             f'</tr></thead><tbody>{rows}</tbody></table></div></details>')
 
@@ -278,9 +279,9 @@ def _penalty_shadow(shadow):
     reason = (f'<p><strong>Penalty test update blocked:</strong> {_text(shadow["blocked_reason"])}</p>'
               if shadow.get('blocked_reason') else '')
     excluded = shadow.get('excluded') or []
-    exclusions = ('<details><summary>Games excluded from this test</summary><ul>' + ''.join(
+    exclusions = ('<details data-view-key="penalty-exclusions"><summary>Games excluded from this test</summary><ul>' + ''.join(
         f'<li>{_text(item["game_id"])}: {_text(item["reason"])}</li>' for item in excluded) + '</ul></details>' if excluded else '')
-    return ('<details class="model-update-evidence" id="pgo-penalty-test"><summary>Penalty experiment and ongoing results</summary>'
+    return ('<details class="model-update-evidence" id="pgo-penalty-test" data-view-key="penalty-test"><summary>Penalty experiment and ongoing results</summary>'
             '<p><strong>Experimental comparison, separate from the main picks.</strong> '
             'This tests whether a team\'s prior penalty yards help predict its next game. Recent games receive more weight; '
             'four games later, an observation has half its original weight. Penalty counts are audited but are not another fitted input.</p>'
@@ -290,9 +291,9 @@ def _penalty_shadow(shadow):
             + history + reason + f'<h4>Future test: {paired} completed paired games</h4>'
             '<p>The two methods are scored on exactly the same saved games and inputs. A later revision of a main pick '
             'does not replace this saved comparison. Small samples are only progress updates; no automatic model promotion occurs.</p>'
-            '<div class="table-shell"><table><thead><tr><th>Test model</th><th>W / L / T</th>'
+            '<div class="table-shell" data-view-key="penalty-records"><table><thead><tr><th>Test model</th><th>W / L / T</th>'
             '<th>Average lead error (points)</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div>'
-            '<details><summary>Saved prospective test picks</summary><div class="table-shell"><table><thead>'
+            '<details data-view-key="penalty-picks"><summary>Saved prospective test picks</summary><div class="table-shell" data-view-key="penalty-picks-table"><table><thead>'
             '<tr><th>Matchup</th><th>Existing model lead</th><th>Penalty candidate lead</th>'
             '<th>Grades: existing / candidate</th><th>Saved (Eastern)</th></tr></thead><tbody>'
             + ''.join(games) + '</tbody></table></div></details>' + exclusions +
@@ -321,10 +322,16 @@ def render_season(state):
     block = f'<p><strong>Update blocked:</strong> {_text(state["blocked_reason"])}</p>' if state.get('blocked_reason') else ''
     current_weeks = ''.join(_week(w,True) for w in weeks if w['week'] == current)
     archives = ''.join(_week(w,False) for w in sorted(weeks,key=lambda w:w['week'],reverse=True) if w['week'] != current)
+    links = [(f'season-week-{current}',f'Week {current} picks')] if current_weeks else []
+    links.append(('season-records','Model records'))
+    if state.get('rankings'): links.append(('season-rankings','Rankings'))
+    if state.get('penalty_shadow'): links.append(('pgo-penalty-test','Penalty test'))
+    navigation = '<nav class="season-nav" aria-label="PGO sections">' + ''.join(
+        f'<a href="#{target}" data-view-key="nav-{target}">{label}</a>' for target,label in links) + '</nav>'
     return (f'<div class="pgo-model-updates" id="pgo-season" data-season-checked-at="{_text(state["checked_at"])}"><h2>PGO Power Rankings &mdash; Experimental</h2>'
             f'<p><strong>{season} &middot; Week {current} &middot; EXPERIMENTAL / HOLD.</strong> '
             'Accuracy is still being tested. The record below tracks saved forecasts.</p>'
-            '<details class="model-update-evidence"><summary>How the numbers connect</summary>'
+            + navigation + '<details class="model-update-evidence" data-view-key="numbers-guide"><summary>How the numbers connect</summary>'
             '<p>Team ratings measure model strength from recent results and team/quarterback history. '
             'The home rating minus the away rating is the projected home-team point advantage at a neutral site with equal rest. '
             'The saved venue and rest adjustments then give the game lead. Each individual rating is centered model strength, '
@@ -341,7 +348,7 @@ def render_season(state):
             '<p>W/L/T grades use each saved model pick and verified final scores. Missing results remain pending. '
             'Injury news is shown as context; current non-QB injuries and backup quality are not separately rated.</p>'
             + _rankings(state.get('rankings')) +
-            '<h3>Model records</h3><div class="table-shell"><table><thead><tr><th>Saved model series</th>'
+            '<h3 id="season-records">Model records</h3><div class="table-shell" data-view-key="model-records-table"><table><thead><tr><th>Saved model series</th>'
             '<th>W</th><th>L</th><th>T</th><th>No pick</th><th>Pending</th></tr></thead>'
             f'<tbody>{"".join(records)}</tbody></table></div>'
             '<p>Each record covers its own saved schedule. Weekly editions cover published weeks; '
@@ -353,7 +360,7 @@ def render_season(state):
             'After-lock confidence entries are marked separately and are not pregame probability evidence; '
             'the original score forecast keeps its own saved timing.</p>'
             + (current_weeks or '<p>No saved slate is available for this week.</p>') +
-            ('<details class="model-update-evidence"><summary>Previous weekly grades and forecasts</summary>' + archives + '</details>' if archives else '') +
+            ('<details class="model-update-evidence" data-view-key="week-archives"><summary>Previous weekly grades and forecasts</summary>' + archives + '</details>' if archives else '') +
             _penalty_shadow(state.get('penalty_shadow')) +
-            '<details class="model-update-evidence"><summary>Sources and limitations</summary>'
+            '<details class="model-update-evidence" data-view-key="season-sources"><summary>Sources and limitations</summary>'
             + _sources(state.get('sources', [])) + '<ul>' + ''.join(f'<li>{_text(item)}</li>' for item in state.get('limitations', [])) + '</ul></details></div>')

@@ -51,9 +51,13 @@ const document = {
   querySelectorAll() {return [];}, querySelector() {return null;},
   addEventListener(name, callback) {events[name] = callback;}
 };
-const location = {hash:'#reason'};
-const window = {addEventListener(name, callback) {events[name] = callback;}};
-const context = {document, window, location, Date, setTimeout() {throw Error('No cutoff timer expected');},
+const location = {hash:'#reason', href:'https://example.test/index.html?release=test#reason', origin:'https://example.test'};
+let pendingTimers = new Map(), timerID = 0;
+const window = {scrollX:0,scrollY:420, scrollTo(x,y) {this.scrollX=x;this.scrollY=y;},
+  addEventListener(name, callback) {events[name] = callback;}};
+const context = {document, window, location, Date, URL,
+  setTimeout(callback) {pendingTimers.set(++timerID,callback);return timerID;},
+  clearTimeout(id) {pendingTimers.delete(id);},
   setInterval(callback, delay) {assert.equal(delay,60000); seasonPoll=callback;}};
 vm.createContext(context);
 vm.runInContext(SCRIPT, context);
@@ -78,22 +82,106 @@ events.hashchange();
 assert.equal(detail.open, true); assert.equal(clicks, before);
 location.hash = '#missing'; events.hashchange();
 (async () => {
-  let reloads=0, latest='2026-09-09T11:00:00Z', ok=true;
+  let reloads=0, replacements=0, requests=0, latest='2026-09-09T11:00:00Z', ok=true, releaseFetch;
   location.reload=() => reloads++;
-  const current={dataset:{seasonCheckedAt:'2026-09-09T12:00:00Z'},closest:()=>panel};
-  document.querySelector=() => current; document.hidden=false; panel.hidden=false;
-  context.fetch=async()=>({ok,json:async()=>({checked_at:latest})});
-  await seasonPoll(); assert.equal(reloads,0);
-  latest='2026-09-09T12:00:00Z'; await seasonPoll(); assert.equal(reloads,0);
-  latest='2026-09-09T12:15:00Z'; document.hidden=true; await seasonPoll(); assert.equal(reloads,0);
-  document.hidden=false; panel.hidden=true; await seasonPoll(); assert.equal(reloads,0);
-  panel.hidden=false; ok=false; await seasonPoll(); assert.equal(reloads,0);
-  ok=true; await seasonPoll(); assert.equal(reloads,1);
-  console.log('fragment behavior PASS; newer-only visible season updates PASS');
+  const fantasy={value:'custom scoring',focused:false};
+  function keyed(key,tag,extra={}) {
+    const node={dataset:{viewKey:key},tagName:tag,type:'',attributes:[],children:[],scrollLeft:0,scrollTop:0,
+      ...extra, focus(options) {assert.equal(options.preventScroll,true);document.activeElement=this;},
+      closest() {return this.dataset.viewKey ? this : this.parentElement;},
+      getAttribute(name) {return name==='href' ? this.href || null : null;},
+      querySelector(selector) {return selector==='summary' ? this.children[0] : null;}};
+    if(tag==='DETAILS') {
+      const summary={tagName:'SUMMARY',parentElement:node,children:[],attributes:[],
+        closest:()=>node,getAttribute:()=>null,focus:node.focus};node.children=[summary];
+    }
+    return node;
+  }
+  function section(stamp) {
+    const nodes=[keyed('penalty','DETAILS',{open:false}),keyed('week-1','DETAILS',{open:true}),
+      keyed('columns','INPUT',{type:'checkbox',checked:false}),keyed('weekly-table','DIV'),
+      keyed('new-section','DETAILS',{open:true})];
+    const lock={dataset:{weeklyCutoff:'2020-01-01T00:00:00Z'},textContent:'Draft'};
+    return {id:'pgo-season',dataset:{seasonCheckedAt:stamp},nodes,children:nodes,lock,unsafe:false,
+      closest:()=>panel, contains(node) {return nodes.includes(node)||nodes.some(n=>n.children.includes(node));},
+      querySelectorAll(selector) {if(selector==='[data-view-key]')return nodes;
+        if(selector==='[data-weekly-cutoff]')return [lock];return nodes;},
+      querySelector() {return this.unsafe ? {} : null;},
+      replaceWith(next) {assert.equal(next.nodes[0].open,true,'restore open disclosure before insertion');
+        assert.equal(next.nodes[1].open,false,'restore explicit closed default before insertion');
+        next.nodes.forEach(node=>{node.scrollLeft=0;node.scrollTop=0;});
+        replacements++;current=next;}};
+  }
+  let current=section('2026-09-09T12:00:00Z'), next=section('2026-09-09T12:15:00Z'), parsedCount=1;
+  current.nodes[0].open=true;current.nodes[1].open=false;current.nodes[2].checked=true;
+  current.nodes[3].scrollLeft=143;current.nodes[3].scrollTop=7;
+  document.activeElement=current.nodes[0].children[0];
+  document.querySelector=()=>current;
+  document.querySelectorAll=selector=>selector==='[data-weekly-cutoff]' ? [current.lock] : [];
+  document.hidden=false;panel.hidden=false;
+  context.DOMParser=class {parseFromString() {return {querySelectorAll:()=>Array(parsedCount).fill(next)};}};
+  let htmlOK=true, finalURL=location.href;
+  context.fetch=async(url,options)=>{
+    requests++;assert.equal(options.cache,'no-store');
+    if(url==='evidence/season-2026/current.json')return {ok,json:async()=>({checked_at:latest})};
+    assert.equal(new URL(url).origin,location.origin);
+    if(releaseFetch)await new Promise(resolve=>{releaseFetch.resolve=resolve;});
+    return {ok:htmlOK,url:finalURL,text:async()=>'<html>fixture</html>'};
+  };
+  const startScrolls=scrolls,startHash=location.hash;
+  async function waitForHTML() {
+    for(let turn=0;turn<20 && !releaseFetch.resolve;turn++)await Promise.resolve();
+    assert.ok(releaseFetch.resolve,'poll must fetch new HTML');
+  }
+  await seasonPoll();assert.equal(replacements,0);
+  latest='2026-09-09T12:00:00Z';await seasonPoll();assert.equal(replacements,0);
+  latest='2026-09-09T12:15:00Z';document.hidden=true;await seasonPoll();assert.equal(replacements,0);
+  document.hidden=false;panel.hidden=true;await seasonPoll();assert.equal(replacements,0);
+  panel.hidden=false;ok=false;await seasonPoll();assert.equal(replacements,0);ok=true;
+  next.dataset.seasonCheckedAt='2026-09-09T12:05:00Z';await seasonPoll();assert.equal(replacements,0,'HTML behind advertised pointer');
+  assert.equal(reloads,0,'a refresh must never reload the page');
+  next.dataset.seasonCheckedAt=latest;next.unsafe=true;await seasonPoll();assert.equal(replacements,0);next.unsafe=false;
+  next.nodes[0].attributes=[{name:'onclick',value:'bad()'}];await seasonPoll();assert.equal(replacements,0);next.nodes[0].attributes=[];
+  next.dataset.seasonCheckedAt='invalid';await seasonPoll();assert.equal(replacements,0);next.dataset.seasonCheckedAt=latest;
+  parsedCount=0;await seasonPoll();assert.equal(replacements,0);
+  parsedCount=2;await seasonPoll();assert.equal(replacements,0);parsedCount=1;
+  next.nodes[1].dataset.viewKey='penalty';await seasonPoll();assert.equal(replacements,0);next.nodes[1].dataset.viewKey='week-1';
+  htmlOK=false;await seasonPoll();assert.equal(replacements,0);htmlOK=true;
+  finalURL='https://other.test/index.html';await seasonPoll();assert.equal(replacements,0);finalURL=location.href;
+  // Switch tabs while HTML is loading; a concurrent tick must not start another fetch.
+  releaseFetch={};const pending=seasonPoll();
+  await waitForHTML();
+  const busyRequests=requests;await seasonPoll();assert.equal(requests,busyRequests);
+  panel.hidden=true;releaseFetch.resolve();await pending;assert.equal(replacements,0);panel.hidden=false;releaseFetch=null;
+  releaseFetch={};const hidden=seasonPoll();await waitForHTML();
+  document.hidden=true;releaseFetch.resolve();await hidden;assert.equal(replacements,0);document.hidden=false;releaseFetch=null;
+  releaseFetch={};const stale=seasonPoll();await waitForHTML();
+  const saved=current;current=section(latest);releaseFetch.resolve();await stale;assert.equal(replacements,0);current=saved;releaseFetch=null;
+  // User changes controls during fetch: preserve their latest state, not an early snapshot.
+  releaseFetch={};const changed=seasonPoll();await waitForHTML();
+  current.nodes[3].scrollLeft=201;releaseFetch.resolve();await changed;releaseFetch=null;
+  assert.equal(replacements,1,'new verified section must replace only season content');
+  assert.equal(current.nodes[0].open,true);assert.equal(current.nodes[1].open,false);
+  assert.equal(current.nodes[2].checked,true);assert.equal(current.nodes[3].scrollLeft,201);
+  assert.equal(current.nodes[3].scrollTop,7);assert.equal(current.nodes[4].open,true);
+  assert.equal(document.activeElement,current.nodes[0].children[0]);
+  assert.equal(current.lock.textContent,'Locked');assert.equal(pendingTimers.size,1);
+  assert.equal(window.scrollY,420);assert.equal(scrolls,startScrolls);assert.equal(location.hash,startHash);
+  assert.equal(reloads,0);assert.equal(fantasy.value,'custom scoring');
+  // A later update neither steals focus from Fantasy nor creates another cutoff timer.
+  document.activeElement=fantasy;latest='2026-09-09T12:30:00Z';next=section(latest);
+  await seasonPoll();assert.equal(replacements,2);assert.equal(document.activeElement,fantasy);
+  assert.equal(pendingTimers.size,1);
+  // Standalone Lab refresh preserves checkbox focus without requiring a tabpanel.
+  current.closest=()=>null;document.activeElement=current.nodes[2];
+  latest='2026-09-09T12:45:00Z';next=section(latest);
+  await seasonPoll();assert.equal(replacements,3);assert.equal(document.activeElement,current.nodes[2]);
+  assert.equal(document.activeElement.checked,true);assert.equal(pendingTimers.size,1);
+  console.log('fragment behavior PASS; in-place reading continuity and race guards PASS');
 })().catch(error=>{console.error(error);process.exitCode=1;});
 """.replace('SCRIPT', json.dumps(script))
         result = subprocess.run([shutil.which('node')], input=harness, text=True,
-                                capture_output=True, check=False)
+                                capture_output=True, check=False, timeout=20)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn('fragment behavior PASS', result.stdout)
 
