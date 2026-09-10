@@ -1,4 +1,5 @@
 import copy
+from html.parser import HTMLParser
 import unittest
 
 import generate_site
@@ -37,6 +38,40 @@ def state():
 
 
 class SeasonViewTests(unittest.TestCase):
+    def test_reading_keys_and_navigation_survive_rank_and_week_changes(self):
+        class Tags(HTMLParser):
+            def __init__(self, text):
+                super().__init__(); self.items=[]; self.feed(text)
+            def handle_starttag(self, tag, attrs):
+                self.items.append((tag,dict(attrs)))
+        data=state()
+        data['penalty_shadow']={'games':[], 'metrics':{}, 'excluded':[{'game_id':'closed','reason':'Already locked'}]}
+        before=copy.deepcopy(data)
+        def inspect(data):
+            tags=Tags(view.render_season(data)).items
+            controls=[a for tag,a in tags if tag=='details' or (tag=='input' and a.get('type')=='checkbox') or 'table-shell' in a.get('class','').split()]
+            self.assertTrue(all(a.get('data-view-key') for a in controls), 'Every reading control needs a stable key')
+            keys=[a['data-view-key'] for _,a in tags if 'data-view-key' in a]
+            self.assertEqual(len(keys),len(set(keys)))
+            ids=[a['id'] for _,a in tags if 'id' in a]
+            self.assertEqual(len(ids),len(set(ids)))
+            for tag,a in tags:
+                if tag=='a' and a.get('href','').startswith('#'):
+                    self.assertIn(a['href'][1:],ids)
+            self.assertIn(('nav',{'class':'season-nav','aria-label':'PGO sections'}),tags)
+            return {a['data-view-key'] for a in controls}
+        first=inspect(data)
+        self.assertEqual(data,before)
+        empty=copy.deepcopy(data); empty['weeks']=[]; empty['rankings']=None
+        inspect(empty)
+        for team in data['rankings']['teams']:
+            team['rank']=33-team['rank']; team['rating']=-team['rating']
+            team['features']['pgo_v0']=team['rating']; team['contributions']['pgo_v0']=team['rating']
+        week=copy.deepcopy(data['weeks'][-1]); week['week']=3
+        week['games'][0].update(game_id='next',week=3)
+        data['weeks'].append(week); data['current_week']=3
+        self.assertTrue(first <= inspect(data), 'Existing reading keys must survive a new weekly edition')
+
     def test_current_rankings_week_and_archived_grades_preserve_input(self):
         data = state(); before = copy.deepcopy(data)
         page = view.render_season(data)

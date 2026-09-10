@@ -1,0 +1,19 @@
+# PGO reading continuity and navigation implementation plan
+
+**Goal:** Let readers follow current forecasts and explanations while automatic updates continue.
+
+**Design:** Replace only the verified season section when a newer published page is available. Keep the rest of the page intact. Preserve disclosure state, optional columns, keyboard focus and table scroll with stable semantic keys. Add native jump links to rankings, current picks, records and the penalty comparison. Rename the global render-time label to "Page refreshed" so it is distinct from the dated editorial ratings and source checks.
+
+**Architecture:** Reuse `FORECAST_DISPLAY_SCRIPT`, the existing pure season renderer, native DOM APIs, Python unittest and the existing Node harness. No dependencies, model changes, forecast issuance, grading changes or storage framework.
+
+Full-page reload plus session storage would require preserving unrelated Fantasy form state and iframe scroll. Deferring every update while an explanation is open would hide fresh results. Updating the existing season section directly keeps both live updates and reading controls.
+
+The user has authorized continued app improvements and publication. This work implements the existing clarity/reliability scope; it does not promote a model or revise a saved forecast.
+
+- [x] In `tests/test_pgo_forecast_lab.py`, reproduce lost disclosure state and the tab-switch-during-fetch race. Test the real shared script with the existing Node VM harness. Extend `FORECAST_DISPLAY_SCRIPT` in `pgo_forecast_lab.py` to fetch the current same-origin HTML only after a newer pointer; require one valid newer season section at least as fresh as the pointer, reject executable/embed content, recheck visibility and current DOM after awaits, and serialize concurrent polls. Restore native control state into the detached section before one replacement. Preserve hash and unrelated DOM. Failures retain the last page and retry on the normal next tick. Keep a single cutoff timer.
+- [x] In `pgo_season_view.py`, give every season disclosure, checkbox and horizontal table shell a stable `data-view-key`, derived from team/game/week identity or fixed section purpose. Give current rankings, model records and game rows stable fragment IDs. Add native quick links above the ranking table; include the penalty link only when present. Use the shared theme in `docs/pgo-theme.css`. Extend the existing season-view test to check unique/stable keys across reordered teams and new weeks, working fragment targets and input preservation.
+- [x] In `generate_site.py`, change only the render-time label to "Page refreshed". Keep the editorial edition and all actual timestamps/data unchanged.
+- [x] Run focused renderer/fragment/season tests, independent code review and browser checks at desktop and 375px. Exercise a controlled local update to confirm live replacement preserves reading controls, activates cutoff labels and retains unrelated Fantasy inputs. Keep synthetic test pages local.
+- [ ] Render both public pages, preserve every existing evidence file, publish the source and generated pages, complete existing full CI and verify live bytes plus one real scheduled refresh. Record the release, tests and remaining limitations in the ignored dated handoff; sync the clean checkout.
+
+State keys use `data-view-key` on native controls and table shells. Existing `id` attributes remain deep-link identities. Unknown/removed keys are ignored; new controls retain their new-page defaults. Capture control state immediately before replacement, including changes made while requests were pending. No reload, hash rewrite or automatic fragment jump occurs on refresh.
