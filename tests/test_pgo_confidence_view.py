@@ -35,6 +35,38 @@ class ConfidenceViewTests(unittest.TestCase):
         self.assertIn('href="#postseason-why-2026_01_BUF_NYJ"', rendered)
         self.assertEqual(pool, before)
 
+    def test_full_slate_marks_late_row_and_keeps_accuracy_grades_separate(self):
+        pool = self.fixture()
+        pool['kind'] = 'full-slate-after-lock'
+        pool['excluded'] = []
+        pool['after_lock_game_ids'] = ['2026_01_NE_SEA']
+        for game in pool['games']:
+            game['added_after_lock'] = False
+        game = dict(pool['games'][0], game_id='2026_01_NE_SEA', home='SEA', away='NE',
+                    season=2026, week=1, selected_team='SEA', confidence_points=3,
+                    win_probability=.6, expected_points=1.8, added_after_lock=True,
+                    kickoff='2026-09-10T00:20:00Z', lock_at='2026-09-09T23:20:00Z',
+                    probabilities={'home':.6,'away':.396,'tie':.004},
+                    baselines={key:{'probabilities':{'home':.6,'away':.396,'tie':.004}}
+                               for key in ('corrected','constant')})
+        pool['games'].append(game)
+        pool['expected_points_total'] = 3.75
+        pool['max_points'] = 6
+        result = dict(game_id=game['game_id'], home_team='SEA', away_team='NE',
+                      kickoff=game['kickoff'], home_score=24, away_score=21,
+                      finalized_at='2026-09-10T04:00:00Z')
+        rendered = view.render_confidence_picks(pool, [result])
+        for text in ('full slate', '3 games', 'Added after lock', '3.75',
+                     'Full-slate points earned', '1 of 3', '0 eligible final results',
+                     'not a pregame pool submission'):
+            self.assertIn(text, rendered)
+        self.assertNotIn('log loss 0.', rendered)
+        self.assertIn('data-confidence-game-id="2026_01_NE_SEA"', rendered)
+        self.assertNotIn('receives no new confidence allocation', rendered)
+        archived = view.render_confidence_picks(self.fixture(), archive=True)
+        self.assertIn('id="pgo-confidence-previous"', archived)
+        self.assertNotIn('data-confidence-game-id=', archived)
+
 
 if __name__ == '__main__':
     unittest.main()

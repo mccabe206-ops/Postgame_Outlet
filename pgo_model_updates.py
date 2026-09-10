@@ -13,6 +13,7 @@ DEFAULT_DIR = ROOT / 'docs/evidence/forecast-lab-2026/september-09-postseason'
 DEFENSE_TEST_DIR = ROOT / 'research/pgo_defensive_depth_candidate/run-20260909-attempt01'
 DEFENSE_TEST_MANIFEST_SHA256 = 'd23b20fb253ad13d00bd71807c89ecad5368868f06bb146418ac2eb47d422f92'
 CONFIDENCE_MANIFEST_SHA256 = '4fc0b0972bfc29b72d783fe2d3b12fd0f4b290ae4b400d8e18f7b2e24cc55437'
+FULL_CONFIDENCE_MANIFEST_SHA256 = 'ae8f685dd636052d428e0e2cc9b5e0d853bcaa6dfcb876daa0bd5d7a451c89b2'
 
 STYLE = """<style>
 .pgo-model-updates{margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
@@ -124,7 +125,7 @@ def _reason(game, snapshot):
             f'<summary>Full calculation and saved version</summary>{calculation}</details></details>')
 
 
-def _candidate(snapshot, weekly=None, results=(), provenance=(), *, depth_available=False, confidence=None):
+def _candidate(snapshot, weekly=None, results=(), provenance=(), *, depth_available=False, confidence=None, confidence_archive=None):
     from pgo_forecast_lab import _forecast_weeks, _forecast_reason, snapshot_interim_metrics, _snapshot_metric_cards, _https_url, _spread, _corrected_section
     if snapshot['edition'] != EDITION or snapshot['method']['status'] != 'EXPERIMENTAL / HOLD':
         raise ValueError('Model update requires the separate experimental postseason edition')
@@ -215,6 +216,9 @@ def _candidate(snapshot, weekly=None, results=(), provenance=(), *, depth_availa
         '<details class="model-update-evidence" id="postseason-explanations"><summary>Why teams rank here</summary>'
         f'{_corrected_section(snapshot, latest_inactive_notes=depth_available)}</details>'
         + (render_confidence_picks(confidence, results) if confidence is not None else '') +
+        ('<details class="model-update-evidence"><summary>Earlier 15-game confidence allocation</summary>'
+         + render_confidence_picks(confidence_archive, results, archive=True) + '</details>'
+         if confidence_archive is not None else '') +
         '<h3>September 9 saved matchups</h3><p>Scores are rounded averages. Open Model averages '
         'for decimals. About 25 points each means both estimates round to 25, not a predicted '
         'tie. The favored team uses the unrounded margin. These September 9 records have their own grades; earlier versions remain available, '
@@ -393,11 +397,11 @@ def _load_defense_test():
                 report_url='https://github.com/walshja9/Postgame_Outlet/blob/main/docs/model-update-2026-09-09.md')
 
 
-def render_updates(snapshot=None, depth=None, *, weekly=None, results=(), provenance=(), defense_test=None, confidence=None):
+def render_updates(snapshot=None, depth=None, *, weekly=None, results=(), provenance=(), defense_test=None, confidence=None, confidence_archive=None):
     if snapshot is None and depth is None and defense_test is None:
         return ''
     return ('<div class="pgo-model-updates" id="model-updates">' + STYLE
-            + (_candidate(snapshot, weekly, results, provenance, depth_available=depth is not None, confidence=confidence) if snapshot is not None else '')
+            + (_candidate(snapshot, weekly, results, provenance, depth_available=depth is not None, confidence=confidence, confidence_archive=confidence_archive) if snapshot is not None else '')
             + (render_defense_test(defense_test) if defense_test is not None else '')
             + (_depth_evidence(depth, snapshot.get('coverage') if snapshot else None) if depth is not None else '') + '</div>')
 
@@ -428,29 +432,42 @@ def render_current_updates():
     if depth_dir.exists() or depth_dir.is_symlink():
         from research.pgo_defensive_depth_candidate.validation import load_verified
         depth = load_verified(depth_dir, optional=True)
-    confidence = None
+    confidence = confidence_archive = None
     confidence_dir = DEFAULT_DIR.parents[1] / 'confidence-pool-2026/week1-remaining'
     if snapshot is not None and (confidence_dir.exists() or confidence_dir.is_symlink()):
-        from pgo_confidence_picks import load_verified
-        confidence = load_verified(confidence_dir, CONFIDENCE_MANIFEST_SHA256, snapshot)
+        from pgo_confidence_full_slate import load_remaining_verified
+        confidence = load_remaining_verified(confidence_dir, CONFIDENCE_MANIFEST_SHA256, snapshot)
+    full_dir = confidence_dir.parent / 'week1-full'
+    if snapshot is not None and (full_dir.exists() or full_dir.is_symlink()):
+        from pgo_confidence_full_slate import load_verified
+        confidence_archive = confidence
+        confidence = load_verified(full_dir, FULL_CONFIDENCE_MANIFEST_SHA256, snapshot)
     return render_updates(snapshot, depth, weekly=weekly, results=results, provenance=provenance,
-                          defense_test=_load_defense_test(), confidence=confidence)
+                          defense_test=_load_defense_test(), confidence=confidence, confidence_archive=confidence_archive)
 
 
-def render_confidence_picks(pool, results=()):
+def render_confidence_picks(pool, results=(), *, archive=False):
     """Explain a verified, frozen model-derived pool allocation without refitting."""
     from pgo_confidence_picks import grade
     if pool['status'] != 'EXPERIMENTAL / HOLD':
         raise ValueError('Confidence probabilities must retain experimental status')
     grades = grade(pool, results)
+    full = pool.get('kind') == 'full-slate-after-lock'
+    accuracy = grade({**pool, 'games': [g for g in pool['games'] if not g['added_after_lock']]}, results) if full else grades
+    section_id = 'pgo-confidence-previous' if archive else 'pgo-confidence-picks'
+    row_attribute = 'data-confidence-archive-game-id' if archive else 'data-confidence-game-id'
+    evidence_directory = 'week1-full' if full else 'week1-remaining'
+    slate_label = f'full slate &middot; {len(pool["games"])} games' if full else f'{len(pool["games"])} remaining games'
+    earned_label = 'Full-slate points earned' if full else 'Points earned so far'
     games = sorted(pool['games'], key=lambda game: -game['confidence_points'])
     rows = []
     for game in games:
         earned = grades['games'].get(game['game_id'])
         rows.append(
-            f'<tr data-confidence-game-id="{_text(game["game_id"])}">'
+            f'<tr {row_attribute}="{_text(game["game_id"])}">'
             f'<th scope="row"><a href="#postseason-why-{_text(game["game_id"])}">'
-            f'{_text(game["away"])} @ {_text(game["home"])}</a></th>'
+            f'{_text(game["away"])} @ {_text(game["home"])}</a>'
+            + ('<br><small>Added after lock</small>' if game.get('added_after_lock') else '') + '</th>'
             f'<td><strong>{_text(game["selected_team"])}</strong></td>'
             f'<td>{game["win_probability"] * 100:.1f}%</td>'
             f'<td>{game["confidence_points"]}</td>'
@@ -458,14 +475,18 @@ def render_confidence_picks(pool, results=()):
             f'<td>{earned["earned_points"] if earned is not None else "&mdash;"}</td></tr>')
     excluded = '; '.join(f'{_text(row["away"])} @ {_text(row["home"])}' for row in pool['excluded'])
     metrics = ''
-    if grades['finalized_games']:
+    if accuracy['finalized_games']:
         metrics = '<p>Probability grades (lower is better): ' + '; '.join(
             f'{_text(name)} log loss {value["log_loss"]:.4f}, Brier {value["brier"]:.4f}'
-            for name, value in grades['metrics'].items()) + '. Interim results, not proof of accuracy.</p>'
+            for name, value in accuracy['metrics'].items()) + '. Interim results, not proof of accuracy.</p>'
+    if full:
+        metrics += (f'<p>{accuracy["finalized_games"]} eligible final results in probability accuracy grades. '
+                    'Rows added after lock are excluded from these grades. The full-slate earned-point '
+                    'total above includes them for tracking only.</p>')
     return (
-        '<div class="pgo-confidence" id="pgo-confidence-picks">'
+        f'<div class="pgo-confidence" id="{section_id}">'
         '<h3>PGO confidence picks</h3><p><strong>EXPERIMENTAL / HOLD.</strong> '
-        f'Week 1 &middot; {len(games)} remaining games. These picks and win chances come from '
+        f'Week 1 &middot; {slate_label}. These picks and win chances come from '
         'the September 9 postseason model.</p>'
         '<p>We give the most confidence points to PGO\'s strongest win chances. '
         '<strong>Expected pool points = confidence points &times; the picked team\'s win chance.</strong> '
@@ -473,8 +494,11 @@ def render_confidence_picks(pool, results=()):
         '<div class="confidence-summary">'
         f'<div><span>Expected pool points</span><strong>{pool["expected_points_total"]:.2f}</strong>'
         f'<span>{sum(g["confidence_points"] for g in games)} points available across this slate</span></div>'
-        f'<div><span>Points earned so far</span><strong>{grades["earned_points"]}</strong>'
+        f'<div><span>{earned_label}</span><strong>{grades["earned_points"]}</strong>'
         f'<span>{grades["finalized_games"]} of {len(games)} final results recorded</span></div></div>'
+        + ('<p class="confidence-note"><strong>NE @ SEA is included; its confidence calculation was added after lock.</strong> '
+           'The original game forecast was saved before lock. This full-slate allocation is not a pregame pool submission; '
+           'the earlier 15-game allocation remains available below.</p>' if full else '')
         + (f'<p class="confidence-note"><strong>{excluded} was already locked when this layer was created.</strong> '
            'It receives no new confidence allocation. Its original prediction remains in the saved matchups. '
            'This is a remaining-games slate, not a full 16-game pool entry.</p>' if excluded else '') +
@@ -500,7 +524,7 @@ def render_confidence_picks(pool, results=()):
         f'{metrics}<p>The historical test showed only a small improvement and reused previously examined seasons. '
         'Historical source timing and calibration transfer remain limitations. Live probability accuracy '
         'has not been established.</p><p>'
-        '<a href="evidence/confidence-pool-2026/week1-remaining/picks.json">Saved model picks and exact calculation</a> &middot; '
-        '<a href="evidence/confidence-pool-2026/week1-remaining/manifest.json">Verification record</a> &middot; '
+        f'<a href="evidence/confidence-pool-2026/{evidence_directory}/picks.json">Saved model picks and exact calculation</a> &middot; '
+        f'<a href="evidence/confidence-pool-2026/{evidence_directory}/manifest.json">Verification record</a> &middot; '
         '<a href="https://github.com/walshja9/Postgame_Outlet/blob/main/docs/confidence-pool-study.md">Historical probability test</a> &middot; '
         '<a href="confidence-pool.html">Try your own probability assumptions</a></p></details></div>')
