@@ -1,0 +1,19 @@
+{
+  "files": {
+    "final-fit.json": {
+      "bytes": 88384,
+      "sha256": "8fffb33ec7dc0f28615af47c225af67e047463a511f1fd2ccb185cc5bcaf8816"
+    },
+    "metrics.json": {
+      "bytes": 94486,
+      "sha256": "ad5eaefe2fc17578b07efaebb6818deecfe484b76509b88b36b5d360dde056e7"
+    },
+    "penalty-seed.json": {
+      "bytes": 2415,
+      "sha256": "35bdc866024ad056f0b80160f05c785dc2a2ad955cbf065d6a7a3d5d224976ed"
+    }
+  },
+  "identity": "pgo-penalty-candidate-2026-09-10",
+  "source_run_manifest_sha256": "15291ce6b302a64733b53e3616bc37c43a3f00825b889d14ab19f0b0b916d5dc",
+  "status": "EXPERIMENTAL / HOLD"
+}

@@ -60,3 +60,7 @@ pgo_confidence_full_slate.py -text
 
 docs/evidence/season-2026/** -text whitespace=cr-at-eol
 pgo_season*.py text eol=lf
+research/pgo_penalty_candidate/** -text whitespace=cr-at-eol
+docs/evidence/penalty-model-2026/** -text whitespace=cr-at-eol
+pgo_penalty_monitor.py text eol=lf
+tests/test_pgo_penalty*.py text eol=lf

@@ -237,6 +237,73 @@ def _week(week, current):
             f'</tr></thead><tbody>{rows}</tbody></table></div></details>')
 
 
+def _penalty_shadow(shadow):
+    if not shadow:
+        return ''
+    historical = shadow.get('historical') or {}
+    history = ''
+    if historical:
+        baseline, candidate = (_number(historical[k]) for k in ('baseline_mae','candidate_mae'))
+        result = 'met' if historical['status'] == 'PASS' else 'did not meet'
+        interval = historical['interval']
+        history = (f'<h4>Past-game test: {_integer(historical["games"]):,} games</h4>'
+                   '<p>Average error in the predicted lead: '
+                   f'existing model <strong>{baseline:.4f}</strong> points; '
+                   f'penalty candidate <strong>{candidate:.4f}</strong> points. Lower error is better. '
+                   f'The candidate {result} the predeclared improvement screen. '
+                   f'It improved {_integer(historical["season_wins"])} of 8 seasons.</p>'
+                   f'<p>Estimated improvement range: {_number(interval["lower"]):+.3f} to '
+                   f'{_number(interval["upper"]):+.3f} points (95% interval). Positive means less error; '
+                   'a range spanning zero does not show a clear gain. These historical seasons have already '
+                   'been studied, so future saved predictions are the next test.</p>')
+    metrics = shadow.get('metrics') or {}
+    paired = _integer(metrics.get('paired_games',0))
+    rows = []
+    for key, label in (('control','Existing model on the same saved inputs'),('candidate','Penalty candidate')):
+        metric = metrics.get(key) or {}
+        error = 'Awaiting finals' if metric.get('mae') is None else f'{_number(metric["mae"]):.3f}'
+        record = ' / '.join(str(_integer(metric.get(k,0))) for k in ('wins','losses','ties'))
+        rows.append(f'<tr><th scope="row">{label}</th><td>{record}</td><td>{error}</td></tr>')
+    games = []
+    def lead(game, key):
+        value = _number(game[key])
+        return 'No edge' if value == 0 else f'{_text(game["home"] if value > 0 else game["away"])} by {abs(value):.3g}'
+    for game in shadow.get('games',[]):
+        grade = game.get('grade') or {}
+        labels = [GRADES[grade.get(key,'PENDING')] for key in ('control','candidate')]
+        games.append(f'<tr data-penalty-game-id="{_text(game["game_id"])}"><th scope="row">'
+                     f'Week {_integer(game["week"])}: {_text(game["away"])} @ {_text(game["home"])}</th>'
+                     f'<td>{lead(game,"control_margin")}</td><td>{lead(game,"candidate_margin")}</td>'
+                     f'<td>{labels[0]} / {labels[1]}</td><td>{_time(game["issued_at"])}</td></tr>')
+    reason = (f'<p><strong>Penalty test update blocked:</strong> {_text(shadow["blocked_reason"])}</p>'
+              if shadow.get('blocked_reason') else '')
+    excluded = shadow.get('excluded') or []
+    exclusions = ('<details><summary>Games excluded from this test</summary><ul>' + ''.join(
+        f'<li>{_text(item["game_id"])}: {_text(item["reason"])}</li>' for item in excluded) + '</ul></details>' if excluded else '')
+    return ('<details class="model-update-evidence" id="pgo-penalty-test"><summary>Penalty experiment and ongoing results</summary>'
+            '<p><strong>Experimental comparison, separate from the main picks.</strong> '
+            'This tests whether a team\'s prior penalty yards help predict its next game. Recent games receive more weight; '
+            'four games later, an observation has half its original weight. Penalty counts are audited but are not another fitted input.</p>'
+            '<p>Weights stay fixed. The scheduled updater checks new finals and prepares future test picks after the weekly '
+            'rankings update. Each candidate and comparison pick is saved before the prediction deadline. '
+            'Games already locked when the test began, including the NE–SEA opener, do not count toward its future record.</p>'
+            + history + reason + f'<h4>Future test: {paired} completed paired games</h4>'
+            '<p>The two methods are scored on exactly the same saved games and inputs. A later revision of a main pick '
+            'does not replace this saved comparison. Small samples are only progress updates; no automatic model promotion occurs.</p>'
+            '<div class="table-shell"><table><thead><tr><th>Test model</th><th>W / L / T</th>'
+            '<th>Average lead error (points)</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div>'
+            '<details><summary>Saved prospective test picks</summary><div class="table-shell"><table><thead>'
+            '<tr><th>Matchup</th><th>Existing model lead</th><th>Penalty candidate lead</th>'
+            '<th>Grades: existing / candidate</th><th>Saved (Eastern)</th></tr></thead><tbody>'
+            + ''.join(games) + '</tbody></table></div></details>' + exclusions +
+            '<p>The penalty candidate refits the existing coefficients alongside one new input. Its full prediction change '
+            'is not just the new coefficient. This tests scoring margins; it does not supply new score totals, probabilities '
+            'or injury adjustments.</p>' + _sources([{'href':shadow.get('source_href','evidence/penalty-model-2026/manifest.json'),
+            'label':'Verified weights and historical results'},
+            {'href':'https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_penalty_candidate/model-card.md',
+             'label':'Penalty test methods, findings and review rules'}]) + '</details>')
+
+
 def render_season(state):
     """Render validated saved state using the existing shared PGO styles once per page."""
     if state['schema_version'] != 1 or state['status'] not in ('READY','BLOCKED'):
@@ -287,5 +354,6 @@ def render_season(state):
             'the original score forecast keeps its own saved timing.</p>'
             + (current_weeks or '<p>No saved slate is available for this week.</p>') +
             ('<details class="model-update-evidence"><summary>Previous weekly grades and forecasts</summary>' + archives + '</details>' if archives else '') +
+            _penalty_shadow(state.get('penalty_shadow')) +
             '<details class="model-update-evidence"><summary>Sources and limitations</summary>'
             + _sources(state.get('sources', [])) + '<ul>' + ''.join(f'<li>{_text(item)}</li>' for item in state.get('limitations', [])) + '</ul></details></div>')

@@ -193,6 +193,7 @@ def save_state(state, root=DEFAULT_ROOT):
     with (directory/'state.json.gz').open('xb') as handle:
         handle.write(payload); handle.flush(); os.fsync(handle.fileno())
     durable = now()
+    prior = None
     if (root/'current.json').exists():
         prior = load_current(root)
         prior_games = {g['game_id']:g for w in prior['weeks'] for g in w['games']}
@@ -204,6 +205,9 @@ def save_state(state, root=DEFAULT_ROOT):
                 new_pick = before is None and game.get('margin') is not None
                 if changed or new_pick:
                     require(utc(durable)<utc(game['kickoff'])-timedelta(minutes=60), 'Forecast changed across durable-write lock deadline')
+    if 'penalty_shadow' in state:
+        from pgo_penalty_monitor import check_durable_shadow
+        check_durable_shadow(state, prior, durable)
     manifest = dict(schema_version=1, created_at=durable, files={'state.json.gz': {'sha256':sha(payload),'bytes':len(payload)}},
                     code_sha256=sha(Path(__file__).read_bytes()))
     previous = root/'current.json'
@@ -567,6 +571,8 @@ def refresh(root=DEFAULT_ROOT):
     state['source_captures']=[r for r in state['sources'] if 'path' in r]
     state['sources']=[r if 'href' in r else {'label':'Source captured '+r['captured_at'], 'href':archive_href(r['path'])} for r in state['sources']]
     state['sources'].append({'label':'Saved refreshes and verification record','href':'evidence/season-2026/current.json'})
+    from pgo_penalty_monitor import refresh_shadow
+    state['penalty_shadow'] = refresh_shadow(state, previous, root, state['checked_at'])
     save_state(state,root)
     return state
 
