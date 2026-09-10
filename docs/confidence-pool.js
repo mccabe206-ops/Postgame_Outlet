@@ -54,7 +54,6 @@ body.addEventListener('input', event => {
   updatePool();
 });
 sizeInput.addEventListener('change', resizePool);
-sizeInput.addEventListener('input', resizePool);
 document.getElementById('assign-points').addEventListener('click', () => {
   try {
     const points = assignPoolPoints([...body.querySelectorAll('.probability')].map(input => input.value));
