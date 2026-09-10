@@ -22,6 +22,7 @@ from release_ratings import load_release_rows
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 PICKS_DIR = os.path.join(DATA, "picks")
+LINE_OVERRIDES = os.path.join(DATA, "line_overrides.json")
 
 SCOREBOARD = ("https://site.api.espn.com/apis/site/v2/sports/football/nfl/"
               "scoreboard?dates={year}&seasontype=2&week={week}")
@@ -56,6 +57,29 @@ def load_hfa():
             else:
                 hfa[r["team"]] = float(r["home_field"])
     return hfa, default
+
+
+def load_line_overrides():
+    """Manual per-game line overrides, keyed by ESPN game_id (string).
+
+    Two purposes:
+      - "market": a home-relative market spread (neg = home favored) to use when
+        ESPN drops its odds after kickoff, or to freeze a closing/kickoff line.
+      - "neutral": force neutral-site (HFA = 0) when ESPN's own neutralSite flag
+        is missing. (ESPN usually sets it, in which case no override is needed.)
+
+    File: data/line_overrides.json — { "<game_id>": {"market": -3.5, "neutral": true, ...} }
+    Returns {} if the file is absent or unreadable.
+    """
+    if not os.path.exists(LINE_OVERRIDES):
+        return {}
+    try:
+        with open(LINE_OVERRIDES) as f:
+            raw = json.load(f)
+    except (ValueError, OSError):
+        return {}
+    # drop any documentation keys (leading underscore)
+    return {k: v for k, v in raw.items() if not k.startswith("_")}
 
 
 def load_config():
@@ -216,6 +240,7 @@ def build_sheet(week=None, year=None):
 
     payload = fetch_json(SCOREBOARD.format(year=year, week=week))
     saved = load_picks(year, week)
+    overrides = load_line_overrides()
     now = _now()
     games = []
     for e in payload.get("events", []):
@@ -224,12 +249,17 @@ def build_sheet(week=None, year=None):
         home, away = comp.get("home"), comp.get("away")
         if not home or not away:
             continue
+        gid = e.get("id")
+        ov = overrides.get(gid, {})
         kickoff_iso = e.get("date", "")
         kickoff = _parse_iso(kickoff_iso)
         locked = bool(kickoff and now >= kickoff)
 
+        # Neutral-site games get NO home-field edge. ESPN flags most of them
+        # (neutralSite); the override can force it when ESPN doesn't.
+        neutral = bool(c.get("neutralSite") or ov.get("neutral"))
         prime = _is_primetime(kickoff_iso)
-        eff_hfa = hfa.get(home, default_hfa) + (0.5 if prime else 0.0)
+        eff_hfa = 0.0 if neutral else hfa.get(home, default_hfa) + (0.5 if prime else 0.0)
         rh, ra = ratings.get(home), ratings.get(away)
         my_spread = None
         if rh is not None and ra is not None:
@@ -238,12 +268,18 @@ def build_sheet(week=None, year=None):
         odds = c.get("odds") or []
         market = odds[0].get("spread") if odds else None
         details = odds[0].get("details") if odds else None
+        market_source = "espn" if market is not None else None
+        # A manual override wins — used to freeze a kickoff/closing line once ESPN
+        # drops its odds after a game starts (post-kickoff ESPN returns no spread).
+        if ov.get("market") is not None:
+            market = ov["market"]
+            details = ov.get("market_note", details)
+            market_source = "manual"
 
         edge = None
         if my_spread is not None and market is not None:
             edge = round(market - my_spread, 1)
 
-        gid = e.get("id")
         pick = saved.get(gid)
 
         games.append({
@@ -251,9 +287,11 @@ def build_sheet(week=None, year=None):
             "kickoff": kickoff_iso,
             "kickoff_local": _fmt_local(kickoff),
             "locked": locked,
+            "neutral": neutral,
             "home": home, "away": away,
             "my_spread": my_spread,       # home-relative
             "market": market, "market_details": details,
+            "market_source": market_source,  # "espn" | "manual" | None
             "edge": edge,                 # market - mine; sign shows lean
             "pick_side": (pick or {}).get("side"),
             "pick_confidence": (pick or {}).get("confidence"),

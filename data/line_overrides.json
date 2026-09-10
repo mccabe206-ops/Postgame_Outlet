@@ -1,0 +1,7 @@
+{
+  "_comment": "Manual per-game line overrides for the weekly pick sheet, keyed by ESPN game_id. 'market' = home-relative closing/kickoff market spread (negative = home team favored); used to freeze a line once ESPN drops its odds after kickoff. 'neutral' = force neutral-site (HFA=0) when ESPN's own neutralSite flag is missing. 'market_note' documents the source.",
+  "401872656": {
+    "market": -3.5,
+    "market_note": "SEA -3.5 (market at kickoff; ESPN dropped odds after the game started Sep 9)"
+  }
+}

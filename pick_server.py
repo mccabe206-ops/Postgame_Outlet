@@ -140,10 +140,10 @@ function render(){{
     ).join('');
     tr.innerHTML=`
       <td>${{g.kickoff_local}} ${{g.locked?'<span class=lockchip>LOCKED</span>':''}}</td>
-      <td class="matchup">${{g.away}} @ ${{g.home}}</td>
+      <td class="matchup">${{g.away}} @ ${{g.home}}${{g.neutral?' <span class="sub">(neutral)</span>':''}}</td>
       <td class="num">${{fmtSpread(g.my_spread, g.home)}}</td>
-      <td class="num">${{g.market===null?'—':fmtSpread(g.market, g.home)}}</td>
-      <td class="num ${{edgeCls}}">${{g.edge===null?'—':(g.edge>0?'+':'')+g.edge}}</td>
+      <td class="num">${{g.market===null?'—':fmtSpread(g.market, g.home)}}${{g.market_source==='manual'?' <span class="lockchip" title="'+(g.market_details||'manual line')+'">KO</span>':''}}</td>
+      <td class="num ${{edgeCls}}">${{g.edge===null||g.edge===0?'—':(g.edge>0?g.home:g.away).split(' ').pop()+' '+Math.abs(g.edge)}}</td>
       <td>
         <button class="team-btn ${{g.pick_side==='away'?'sel':''}}" ${{g.pick_side==='away'?'':dis}}
           onclick="pick('${{g.game_id}}','away')">${{g.away}}</button>
