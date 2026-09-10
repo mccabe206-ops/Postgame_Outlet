@@ -1,0 +1,143 @@
+[
+  {
+    "constant_probabilities_home_away_tie": [
+      0.5553398058252427,
+      0.4368932038834951,
+      0.007766990291262136
+    ],
+    "non_tie_logistic_slopes": {
+      "corrected": 0.14465385303135908,
+      "postseason": 0.142184727372425
+    },
+    "test_first_kickoff": "2020-09-10T20:20:00-04:00",
+    "test_season": 2020,
+    "tie_probability": 0.007782101167315175,
+    "training_games": 512,
+    "training_latest_kickoff": "2019-12-29T20:20:00-05:00",
+    "training_seasons": [
+      2018,
+      2019
+    ],
+    "training_ties": 3
+  },
+  {
+    "constant_probabilities_home_away_tie": [
+      0.5356679636835279,
+      0.4578469520103761,
+      0.00648508430609598
+    ],
+    "non_tie_logistic_slopes": {
+      "corrected": 0.1457733457775634,
+      "postseason": 0.14492650858922634
+    },
+    "test_first_kickoff": "2021-09-09T20:20:00-04:00",
+    "test_season": 2021,
+    "tie_probability": 0.006493506493506494,
+    "training_games": 768,
+    "training_latest_kickoff": "2021-01-03T20:20:00-05:00",
+    "training_seasons": [
+      2018,
+      2019,
+      2020
+    ],
+    "training_ties": 4
+  },
+  {
+    "constant_probabilities_home_away_tie": [
+      0.5302013422818792,
+      0.46404602109300097,
+      0.005752636625119847
+    ],
+    "non_tie_logistic_slopes": {
+      "corrected": 0.13715487618990985,
+      "postseason": 0.1366082024830796
+    },
+    "test_first_kickoff": "2022-09-08T20:20:00-04:00",
+    "test_season": 2022,
+    "tie_probability": 0.005758157389635317,
+    "training_games": 1040,
+    "training_latest_kickoff": "2022-01-09T20:20:00-05:00",
+    "training_seasons": [
+      2018,
+      2019,
+      2020,
+      2021
+    ],
+    "training_ties": 5
+  },
+  {
+    "constant_probabilities_home_away_tie": [
+      0.5357686453576864,
+      0.4581430745814307,
+      0.0060882800608828
+    ],
+    "non_tie_logistic_slopes": {
+      "corrected": 0.13964117829241962,
+      "postseason": 0.13913952683192643
+    },
+    "test_first_kickoff": "2023-09-07T20:20:00-04:00",
+    "test_season": 2023,
+    "tie_probability": 0.006092916984006093,
+    "training_games": 1311,
+    "training_latest_kickoff": "2023-01-08T20:20:00-05:00",
+    "training_seasons": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "training_ties": 7
+  },
+  {
+    "constant_probabilities_home_away_tie": [
+      0.5390920554854981,
+      0.4558638083228247,
+      0.005044136191677175
+    ],
+    "non_tie_logistic_slopes": {
+      "corrected": 0.13491449279776146,
+      "postseason": 0.13455018032281602
+    },
+    "test_first_kickoff": "2024-09-05T20:20:00-04:00",
+    "test_season": 2024,
+    "tie_probability": 0.005047318611987382,
+    "training_games": 1583,
+    "training_latest_kickoff": "2024-01-07T20:20:00-05:00",
+    "training_seasons": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "training_ties": 7
+  },
+  {
+    "constant_probabilities_home_away_tie": [
+      0.5382131324004306,
+      0.45748116254036597,
+      0.004305705059203444
+    ],
+    "non_tie_logistic_slopes": {
+      "corrected": 0.1394269258807812,
+      "postseason": 0.13949452334145684
+    },
+    "test_first_kickoff": "2025-09-04T20:20:00-04:00",
+    "test_season": 2025,
+    "tie_probability": 0.004308023694130318,
+    "training_games": 1855,
+    "training_latest_kickoff": "2025-01-05T20:20:00-05:00",
+    "training_seasons": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "training_ties": 7
+  }
+]

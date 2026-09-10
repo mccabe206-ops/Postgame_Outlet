@@ -1,0 +1,2164 @@
+{
+  "brier_definition": "Sum of three squared class errors; range 0 to 2",
+  "evaluation_games": 1615,
+  "log_loss_probability_floor": 1e-15,
+  "metrics": {
+    "constant": {
+      "overall": {
+        "brier_sum_three_classes": 0.5015911720961947,
+        "games": 1615,
+        "log_loss": 0.71128728662337,
+        "pool_expected_points": 7034.067828287065,
+        "pool_realized_points": 6821,
+        "selected_team_reliability_ten_fixed_bins": [
+          {
+            "count": 0,
+            "lower": 0.0,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 0,
+            "lower": 0.4,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.5
+          },
+          {
+            "count": 1615,
+            "lower": 0.5,
+            "mean_probability": 0.5388912215565537,
+            "observed_win_rate": 0.5325077399380805,
+            "upper": 0.6
+          },
+          {
+            "count": 0,
+            "lower": 0.6,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.7
+          },
+          {
+            "count": 0,
+            "lower": 0.7,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.8
+          },
+          {
+            "count": 0,
+            "lower": 0.8,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 1.0
+          }
+        ]
+      },
+      "seasons": {
+        "2020": {
+          "brier_sum_three_classes": 0.5113832005844094,
+          "games": 256,
+          "log_loss": 0.7247992998144904,
+          "pool_expected_points": 1145.6660194174756,
+          "pool_realized_points": 998,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.5
+            },
+            {
+              "count": 256,
+              "lower": 0.5,
+              "mean_probability": 0.5553398058252427,
+              "observed_win_rate": 0.49609375,
+              "upper": 0.6
+            },
+            {
+              "count": 0,
+              "lower": 0.6,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.7
+            },
+            {
+              "count": 0,
+              "lower": 0.7,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.8
+            },
+            {
+              "count": 0,
+              "lower": 0.8,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2021": {
+          "brier_sum_three_classes": 0.5041211233846292,
+          "games": 272,
+          "log_loss": 0.716072872147004,
+          "pool_expected_points": 1178.4695201037614,
+          "pool_realized_points": 1131,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.5
+            },
+            {
+              "count": 272,
+              "lower": 0.5,
+              "mean_probability": 0.5356679636835279,
+              "observed_win_rate": 0.5147058823529411,
+              "upper": 0.6
+            },
+            {
+              "count": 0,
+              "lower": 0.6,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.7
+            },
+            {
+              "count": 0,
+              "lower": 0.7,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.8
+            },
+            {
+              "count": 0,
+              "lower": 0.8,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2022": {
+          "brier_sum_three_classes": 0.5014347976359143,
+          "games": 271,
+          "log_loss": 0.7259132957354912,
+          "pool_expected_points": 1159.020134228188,
+          "pool_realized_points": 1164,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.5
+            },
+            {
+              "count": 271,
+              "lower": 0.5,
+              "mean_probability": 0.5302013422818792,
+              "observed_win_rate": 0.5571955719557196,
+              "upper": 0.6
+            },
+            {
+              "count": 0,
+              "lower": 0.6,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.7
+            },
+            {
+              "count": 0,
+              "lower": 0.7,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.8
+            },
+            {
+              "count": 0,
+              "lower": 0.8,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2023": {
+          "brier_sum_three_classes": 0.49450682151470293,
+          "games": 272,
+          "log_loss": 0.6936816304334097,
+          "pool_expected_points": 1179.7625570776256,
+          "pool_realized_points": 1162,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.5
+            },
+            {
+              "count": 272,
+              "lower": 0.5,
+              "mean_probability": 0.5357686453576864,
+              "observed_win_rate": 0.5551470588235294,
+              "upper": 0.6
+            },
+            {
+              "count": 0,
+              "lower": 0.6,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.7
+            },
+            {
+              "count": 0,
+              "lower": 0.7,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.8
+            },
+            {
+              "count": 0,
+              "lower": 0.8,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2024": {
+          "brier_sum_three_classes": 0.49799388387729476,
+          "games": 272,
+          "log_loss": 0.6961664161286414,
+          "pool_expected_points": 1187.0807061790667,
+          "pool_realized_points": 1181,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.5
+            },
+            {
+              "count": 272,
+              "lower": 0.5,
+              "mean_probability": 0.5390920554854981,
+              "observed_win_rate": 0.5330882352941176,
+              "upper": 0.6
+            },
+            {
+              "count": 0,
+              "lower": 0.6,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.7
+            },
+            {
+              "count": 0,
+              "lower": 0.7,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.8
+            },
+            {
+              "count": 0,
+              "lower": 0.8,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2025": {
+          "brier_sum_three_classes": 0.5006826323498911,
+          "games": 272,
+          "log_loss": 0.711938801878868,
+          "pool_expected_points": 1184.0688912809474,
+          "pool_realized_points": 1185,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.5
+            },
+            {
+              "count": 272,
+              "lower": 0.5,
+              "mean_probability": 0.5382131324004306,
+              "observed_win_rate": 0.5367647058823529,
+              "upper": 0.6
+            },
+            {
+              "count": 0,
+              "lower": 0.6,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.7
+            },
+            {
+              "count": 0,
+              "lower": 0.7,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.8
+            },
+            {
+              "count": 0,
+              "lower": 0.8,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 1.0
+            }
+          ]
+        }
+      },
+      "week1": {
+        "brier_sum_three_classes": 0.5123701453341395,
+        "games": 96,
+        "log_loss": 0.7476324441555265,
+        "pool_expected_points": 439.86248052466004,
+        "pool_realized_points": 361,
+        "selected_team_reliability_ten_fixed_bins": [
+          {
+            "count": 0,
+            "lower": 0.0,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 0,
+            "lower": 0.4,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.5
+          },
+          {
+            "count": 96,
+            "lower": 0.5,
+            "mean_probability": 0.5390471575057109,
+            "observed_win_rate": 0.5,
+            "upper": 0.6
+          },
+          {
+            "count": 0,
+            "lower": 0.6,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.7
+          },
+          {
+            "count": 0,
+            "lower": 0.7,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.8
+          },
+          {
+            "count": 0,
+            "lower": 0.8,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 1.0
+          }
+        ]
+      },
+      "weeks1_4": {
+        "brier_sum_three_classes": 0.5085020604926309,
+        "games": 383,
+        "log_loss": 0.7347330604335439,
+        "pool_expected_points": 1750.5644852054363,
+        "pool_realized_points": 1626,
+        "selected_team_reliability_ten_fixed_bins": [
+          {
+            "count": 0,
+            "lower": 0.0,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 0,
+            "lower": 0.4,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.5
+          },
+          {
+            "count": 383,
+            "lower": 0.5,
+            "mean_probability": 0.5390046179539627,
+            "observed_win_rate": 0.5143603133159269,
+            "upper": 0.6
+          },
+          {
+            "count": 0,
+            "lower": 0.6,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.7
+          },
+          {
+            "count": 0,
+            "lower": 0.7,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.8
+          },
+          {
+            "count": 0,
+            "lower": 0.8,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 1.0
+          }
+        ]
+      }
+    },
+    "corrected": {
+      "overall": {
+        "brier_sum_three_classes": 0.44120463551980627,
+        "games": 1615,
+        "log_loss": 0.648094314076958,
+        "pool_expected_points": 9094.726715794533,
+        "pool_realized_points": 9106,
+        "selected_team_reliability_ten_fixed_bins": [
+          {
+            "count": 0,
+            "lower": 0.0,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 15,
+            "lower": 0.4,
+            "mean_probability": 0.49860229581454435,
+            "observed_win_rate": 0.4666666666666667,
+            "upper": 0.5
+          },
+          {
+            "count": 626,
+            "lower": 0.5,
+            "mean_probability": 0.5484884896835673,
+            "observed_win_rate": 0.5846645367412141,
+            "upper": 0.6
+          },
+          {
+            "count": 493,
+            "lower": 0.6,
+            "mean_probability": 0.647103048709224,
+            "observed_win_rate": 0.6531440162271805,
+            "upper": 0.7
+          },
+          {
+            "count": 329,
+            "lower": 0.7,
+            "mean_probability": 0.7446355537421435,
+            "observed_win_rate": 0.7507598784194529,
+            "upper": 0.8
+          },
+          {
+            "count": 141,
+            "lower": 0.8,
+            "mean_probability": 0.840487086212279,
+            "observed_win_rate": 0.8014184397163121,
+            "upper": 0.9
+          },
+          {
+            "count": 11,
+            "lower": 0.9,
+            "mean_probability": 0.9168641607439614,
+            "observed_win_rate": 0.8181818181818182,
+            "upper": 1.0
+          }
+        ]
+      },
+      "seasons": {
+        "2020": {
+          "brier_sum_three_classes": 0.4309348255830546,
+          "games": 256,
+          "log_loss": 0.6402798062967084,
+          "pool_expected_points": 1447.9498073447267,
+          "pool_realized_points": 1474,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 1,
+              "lower": 0.4,
+              "mean_probability": 0.49800006120256474,
+              "observed_win_rate": 1.0,
+              "upper": 0.5
+            },
+            {
+              "count": 104,
+              "lower": 0.5,
+              "mean_probability": 0.5521308680455224,
+              "observed_win_rate": 0.5288461538461539,
+              "upper": 0.6
+            },
+            {
+              "count": 64,
+              "lower": 0.6,
+              "mean_probability": 0.6525114664245933,
+              "observed_win_rate": 0.640625,
+              "upper": 0.7
+            },
+            {
+              "count": 69,
+              "lower": 0.7,
+              "mean_probability": 0.7452941317034693,
+              "observed_win_rate": 0.782608695652174,
+              "upper": 0.8
+            },
+            {
+              "count": 15,
+              "lower": 0.8,
+              "mean_probability": 0.8484662908763608,
+              "observed_win_rate": 0.8666666666666667,
+              "upper": 0.9
+            },
+            {
+              "count": 3,
+              "lower": 0.9,
+              "mean_probability": 0.9253081010505642,
+              "observed_win_rate": 0.6666666666666666,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2021": {
+          "brier_sum_three_classes": 0.4519089534827462,
+          "games": 272,
+          "log_loss": 0.6637540169377842,
+          "pool_expected_points": 1561.0372647563986,
+          "pool_realized_points": 1504,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.5
+            },
+            {
+              "count": 97,
+              "lower": 0.5,
+              "mean_probability": 0.5485797397291128,
+              "observed_win_rate": 0.5567010309278351,
+              "upper": 0.6
+            },
+            {
+              "count": 93,
+              "lower": 0.6,
+              "mean_probability": 0.6518117880579273,
+              "observed_win_rate": 0.6451612903225806,
+              "upper": 0.7
+            },
+            {
+              "count": 46,
+              "lower": 0.7,
+              "mean_probability": 0.7475888400774973,
+              "observed_win_rate": 0.717391304347826,
+              "upper": 0.8
+            },
+            {
+              "count": 33,
+              "lower": 0.8,
+              "mean_probability": 0.8429309999843417,
+              "observed_win_rate": 0.8181818181818182,
+              "upper": 0.9
+            },
+            {
+              "count": 3,
+              "lower": 0.9,
+              "mean_probability": 0.9117714158301129,
+              "observed_win_rate": 0.6666666666666666,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2022": {
+          "brier_sum_three_classes": 0.4421435799845687,
+          "games": 271,
+          "log_loss": 0.6621054338702101,
+          "pool_expected_points": 1492.1902469278723,
+          "pool_realized_points": 1538,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 5,
+              "lower": 0.4,
+              "mean_probability": 0.4987922348200204,
+              "observed_win_rate": 0.8,
+              "upper": 0.5
+            },
+            {
+              "count": 105,
+              "lower": 0.5,
+              "mean_probability": 0.5441434738444724,
+              "observed_win_rate": 0.6095238095238096,
+              "upper": 0.6
+            },
+            {
+              "count": 91,
+              "lower": 0.6,
+              "mean_probability": 0.64374611453405,
+              "observed_win_rate": 0.6373626373626373,
+              "upper": 0.7
+            },
+            {
+              "count": 52,
+              "lower": 0.7,
+              "mean_probability": 0.7464767342489419,
+              "observed_win_rate": 0.7692307692307693,
+              "upper": 0.8
+            },
+            {
+              "count": 17,
+              "lower": 0.8,
+              "mean_probability": 0.8250781045093738,
+              "observed_win_rate": 0.8235294117647058,
+              "upper": 0.9
+            },
+            {
+              "count": 1,
+              "lower": 0.9,
+              "mean_probability": 0.9177798142616006,
+              "observed_win_rate": 1.0,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2023": {
+          "brier_sum_three_classes": 0.4581326505983123,
+          "games": 272,
+          "log_loss": 0.6556409297540845,
+          "pool_expected_points": 1522.3497861669687,
+          "pool_realized_points": 1453,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 2,
+              "lower": 0.4,
+              "mean_probability": 0.49760006169490134,
+              "observed_win_rate": 0.0,
+              "upper": 0.5
+            },
+            {
+              "count": 120,
+              "lower": 0.5,
+              "mean_probability": 0.5475136627844134,
+              "observed_win_rate": 0.6416666666666667,
+              "upper": 0.6
+            },
+            {
+              "count": 68,
+              "lower": 0.6,
+              "mean_probability": 0.6468695329167709,
+              "observed_win_rate": 0.5735294117647058,
+              "upper": 0.7
+            },
+            {
+              "count": 60,
+              "lower": 0.7,
+              "mean_probability": 0.7444914390473631,
+              "observed_win_rate": 0.7,
+              "upper": 0.8
+            },
+            {
+              "count": 20,
+              "lower": 0.8,
+              "mean_probability": 0.8368272600159828,
+              "observed_win_rate": 0.75,
+              "upper": 0.9
+            },
+            {
+              "count": 2,
+              "lower": 0.9,
+              "mean_probability": 0.9080597634297023,
+              "observed_win_rate": 1.0,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2024": {
+          "brier_sum_three_classes": 0.4170535697720574,
+          "games": 272,
+          "log_loss": 0.611405317884836,
+          "pool_expected_points": 1511.8655375872197,
+          "pool_realized_points": 1629,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 3,
+              "lower": 0.4,
+              "mean_probability": 0.4984711445061277,
+              "observed_win_rate": 0.3333333333333333,
+              "upper": 0.5
+            },
+            {
+              "count": 98,
+              "lower": 0.5,
+              "mean_probability": 0.5493419820789994,
+              "observed_win_rate": 0.673469387755102,
+              "upper": 0.6
+            },
+            {
+              "count": 105,
+              "lower": 0.6,
+              "mean_probability": 0.6440152009726244,
+              "observed_win_rate": 0.7619047619047619,
+              "upper": 0.7
+            },
+            {
+              "count": 46,
+              "lower": 0.7,
+              "mean_probability": 0.745444761375644,
+              "observed_win_rate": 0.6956521739130435,
+              "upper": 0.8
+            },
+            {
+              "count": 18,
+              "lower": 0.8,
+              "mean_probability": 0.8354035339242056,
+              "observed_win_rate": 0.8333333333333334,
+              "upper": 0.9
+            },
+            {
+              "count": 2,
+              "lower": 0.9,
+              "mean_probability": 0.9201839382102691,
+              "observed_win_rate": 1.0,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2025": {
+          "brier_sum_three_classes": 0.4464535792329393,
+          "games": 272,
+          "log_loss": 0.6549722142597026,
+          "pool_expected_points": 1559.334073011347,
+          "pool_realized_points": 1508,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 4,
+              "lower": 0.4,
+              "mean_probability": 0.4991149112518281,
+              "observed_win_rate": 0.25,
+              "upper": 0.5
+            },
+            {
+              "count": 102,
+              "lower": 0.5,
+              "mean_probability": 0.5494875586266051,
+              "observed_win_rate": 0.49019607843137253,
+              "upper": 0.6
+            },
+            {
+              "count": 72,
+              "lower": 0.6,
+              "mean_probability": 0.6451798904169672,
+              "observed_win_rate": 0.6111111111111112,
+              "upper": 0.7
+            },
+            {
+              "count": 56,
+              "lower": 0.7,
+              "mean_probability": 0.7391782125534743,
+              "observed_win_rate": 0.8214285714285714,
+              "upper": 0.8
+            },
+            {
+              "count": 38,
+              "lower": 0.8,
+              "mean_probability": 0.8464427685707351,
+              "observed_win_rate": 0.7631578947368421,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 1.0
+            }
+          ]
+        }
+      },
+      "week1": {
+        "brier_sum_three_classes": 0.46374422738457194,
+        "games": 96,
+        "log_loss": 0.6945437704040184,
+        "pool_expected_points": 539.0285575861778,
+        "pool_realized_points": 529,
+        "selected_team_reliability_ten_fixed_bins": [
+          {
+            "count": 0,
+            "lower": 0.0,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 2,
+            "lower": 0.4,
+            "mean_probability": 0.49822603694133083,
+            "observed_win_rate": 0.0,
+            "upper": 0.5
+          },
+          {
+            "count": 45,
+            "lower": 0.5,
+            "mean_probability": 0.5429878035735766,
+            "observed_win_rate": 0.5777777777777777,
+            "upper": 0.6
+          },
+          {
+            "count": 31,
+            "lower": 0.6,
+            "mean_probability": 0.6475044107285616,
+            "observed_win_rate": 0.5806451612903226,
+            "upper": 0.7
+          },
+          {
+            "count": 16,
+            "lower": 0.7,
+            "mean_probability": 0.7440024894226364,
+            "observed_win_rate": 0.8125,
+            "upper": 0.8
+          },
+          {
+            "count": 2,
+            "lower": 0.8,
+            "mean_probability": 0.8446943443431282,
+            "observed_win_rate": 1.0,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 1.0
+          }
+        ]
+      },
+      "weeks1_4": {
+        "brier_sum_three_classes": 0.45853784514087237,
+        "games": 383,
+        "log_loss": 0.681090422815946,
+        "pool_expected_points": 2180.1696436774478,
+        "pool_realized_points": 2152,
+        "selected_team_reliability_ten_fixed_bins": [
+          {
+            "count": 0,
+            "lower": 0.0,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 6,
+            "lower": 0.4,
+            "mean_probability": 0.49883677847405794,
+            "observed_win_rate": 0.5,
+            "upper": 0.5
+          },
+          {
+            "count": 164,
+            "lower": 0.5,
+            "mean_probability": 0.5459323519801077,
+            "observed_win_rate": 0.5975609756097561,
+            "upper": 0.6
+          },
+          {
+            "count": 132,
+            "lower": 0.6,
+            "mean_probability": 0.6463709429510202,
+            "observed_win_rate": 0.6363636363636364,
+            "upper": 0.7
+          },
+          {
+            "count": 65,
+            "lower": 0.7,
+            "mean_probability": 0.7413447743253276,
+            "observed_win_rate": 0.7076923076923077,
+            "upper": 0.8
+          },
+          {
+            "count": 15,
+            "lower": 0.8,
+            "mean_probability": 0.8444658795998736,
+            "observed_win_rate": 0.9333333333333333,
+            "upper": 0.9
+          },
+          {
+            "count": 1,
+            "lower": 0.9,
+            "mean_probability": 0.9032998971240108,
+            "observed_win_rate": 1.0,
+            "upper": 1.0
+          }
+        ]
+      }
+    },
+    "postseason": {
+      "overall": {
+        "brier_sum_three_classes": 0.44035077915261445,
+        "games": 1615,
+        "log_loss": 0.647142497115932,
+        "pool_expected_points": 9091.826817969262,
+        "pool_realized_points": 9146,
+        "selected_team_reliability_ten_fixed_bins": [
+          {
+            "count": 0,
+            "lower": 0.0,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 12,
+            "lower": 0.4,
+            "mean_probability": 0.49859898545891257,
+            "observed_win_rate": 0.25,
+            "upper": 0.5
+          },
+          {
+            "count": 620,
+            "lower": 0.5,
+            "mean_probability": 0.5478709306732804,
+            "observed_win_rate": 0.5806451612903226,
+            "upper": 0.6
+          },
+          {
+            "count": 507,
+            "lower": 0.6,
+            "mean_probability": 0.6465208268643532,
+            "observed_win_rate": 0.6568047337278107,
+            "upper": 0.7
+          },
+          {
+            "count": 328,
+            "lower": 0.7,
+            "mean_probability": 0.7461099339845401,
+            "observed_win_rate": 0.7378048780487805,
+            "upper": 0.8
+          },
+          {
+            "count": 137,
+            "lower": 0.8,
+            "mean_probability": 0.8406951506746567,
+            "observed_win_rate": 0.8029197080291971,
+            "upper": 0.9
+          },
+          {
+            "count": 11,
+            "lower": 0.9,
+            "mean_probability": 0.916645526630679,
+            "observed_win_rate": 0.9090909090909091,
+            "upper": 1.0
+          }
+        ]
+      },
+      "seasons": {
+        "2020": {
+          "brier_sum_three_classes": 0.4298233680017036,
+          "games": 256,
+          "log_loss": 0.6395925334643208,
+          "pool_expected_points": 1438.156870881889,
+          "pool_realized_points": 1489,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 1,
+              "lower": 0.4,
+              "mean_probability": 0.4993185286708986,
+              "observed_win_rate": 1.0,
+              "upper": 0.5
+            },
+            {
+              "count": 102,
+              "lower": 0.5,
+              "mean_probability": 0.5506803585818482,
+              "observed_win_rate": 0.49019607843137253,
+              "upper": 0.6
+            },
+            {
+              "count": 73,
+              "lower": 0.6,
+              "mean_probability": 0.6511155716312226,
+              "observed_win_rate": 0.6986301369863014,
+              "upper": 0.7
+            },
+            {
+              "count": 63,
+              "lower": 0.7,
+              "mean_probability": 0.7461780252768768,
+              "observed_win_rate": 0.7777777777777778,
+              "upper": 0.8
+            },
+            {
+              "count": 14,
+              "lower": 0.8,
+              "mean_probability": 0.8421911948204108,
+              "observed_win_rate": 0.8571428571428571,
+              "upper": 0.9
+            },
+            {
+              "count": 3,
+              "lower": 0.9,
+              "mean_probability": 0.9242170371018122,
+              "observed_win_rate": 0.6666666666666666,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2021": {
+          "brier_sum_three_classes": 0.4519196267313302,
+          "games": 272,
+          "log_loss": 0.6632498859162276,
+          "pool_expected_points": 1558.0872503988724,
+          "pool_realized_points": 1507,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 6,
+              "lower": 0.4,
+              "mean_probability": 0.49863789934807645,
+              "observed_win_rate": 0.3333333333333333,
+              "upper": 0.5
+            },
+            {
+              "count": 90,
+              "lower": 0.5,
+              "mean_probability": 0.5499113799696396,
+              "observed_win_rate": 0.5888888888888889,
+              "upper": 0.6
+            },
+            {
+              "count": 91,
+              "lower": 0.6,
+              "mean_probability": 0.6463482234118307,
+              "observed_win_rate": 0.6153846153846154,
+              "upper": 0.7
+            },
+            {
+              "count": 50,
+              "lower": 0.7,
+              "mean_probability": 0.7471696753091525,
+              "observed_win_rate": 0.68,
+              "upper": 0.8
+            },
+            {
+              "count": 33,
+              "lower": 0.8,
+              "mean_probability": 0.8455053930230577,
+              "observed_win_rate": 0.7878787878787878,
+              "upper": 0.9
+            },
+            {
+              "count": 2,
+              "lower": 0.9,
+              "mean_probability": 0.9167954867173451,
+              "observed_win_rate": 1.0,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2022": {
+          "brier_sum_three_classes": 0.4420222992610242,
+          "games": 271,
+          "log_loss": 0.6616994926485489,
+          "pool_expected_points": 1493.2419547244592,
+          "pool_realized_points": 1518,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 4,
+              "lower": 0.4,
+              "mean_probability": 0.49824608992757,
+              "observed_win_rate": 0.0,
+              "upper": 0.5
+            },
+            {
+              "count": 104,
+              "lower": 0.5,
+              "mean_probability": 0.5423627292865139,
+              "observed_win_rate": 0.5576923076923077,
+              "upper": 0.6
+            },
+            {
+              "count": 95,
+              "lower": 0.6,
+              "mean_probability": 0.6452364879227124,
+              "observed_win_rate": 0.6631578947368421,
+              "upper": 0.7
+            },
+            {
+              "count": 53,
+              "lower": 0.7,
+              "mean_probability": 0.7516203345122766,
+              "observed_win_rate": 0.7547169811320755,
+              "upper": 0.8
+            },
+            {
+              "count": 14,
+              "lower": 0.8,
+              "mean_probability": 0.8306256576268686,
+              "observed_win_rate": 0.8571428571428571,
+              "upper": 0.9
+            },
+            {
+              "count": 1,
+              "lower": 0.9,
+              "mean_probability": 0.9149959099500519,
+              "observed_win_rate": 1.0,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2023": {
+          "brier_sum_three_classes": 0.45650050511483,
+          "games": 272,
+          "log_loss": 0.6538278702669669,
+          "pool_expected_points": 1526.2518068094437,
+          "pool_realized_points": 1468,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.5
+            },
+            {
+              "count": 116,
+              "lower": 0.5,
+              "mean_probability": 0.5465478302723592,
+              "observed_win_rate": 0.6379310344827587,
+              "upper": 0.6
+            },
+            {
+              "count": 76,
+              "lower": 0.6,
+              "mean_probability": 0.6441605201269405,
+              "observed_win_rate": 0.5921052631578947,
+              "upper": 0.7
+            },
+            {
+              "count": 58,
+              "lower": 0.7,
+              "mean_probability": 0.7490181806276862,
+              "observed_win_rate": 0.6896551724137931,
+              "upper": 0.8
+            },
+            {
+              "count": 20,
+              "lower": 0.8,
+              "mean_probability": 0.8391091778793731,
+              "observed_win_rate": 0.8,
+              "upper": 0.9
+            },
+            {
+              "count": 2,
+              "lower": 0.9,
+              "mean_probability": 0.9076484668186584,
+              "observed_win_rate": 1.0,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2024": {
+          "brier_sum_three_classes": 0.4132253366891489,
+          "games": 272,
+          "log_loss": 0.6072438663260304,
+          "pool_expected_points": 1518.1287509371696,
+          "pool_realized_points": 1650,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.5
+            },
+            {
+              "count": 98,
+              "lower": 0.5,
+              "mean_probability": 0.5493929048708897,
+              "observed_win_rate": 0.6428571428571429,
+              "upper": 0.6
+            },
+            {
+              "count": 104,
+              "lower": 0.6,
+              "mean_probability": 0.6443863189426648,
+              "observed_win_rate": 0.7692307692307693,
+              "upper": 0.7
+            },
+            {
+              "count": 50,
+              "lower": 0.7,
+              "mean_probability": 0.7440639597145227,
+              "observed_win_rate": 0.72,
+              "upper": 0.8
+            },
+            {
+              "count": 18,
+              "lower": 0.8,
+              "mean_probability": 0.8373036272655862,
+              "observed_win_rate": 0.8333333333333334,
+              "upper": 0.9
+            },
+            {
+              "count": 2,
+              "lower": 0.9,
+              "mean_probability": 0.9213764306266446,
+              "observed_win_rate": 1.0,
+              "upper": 1.0
+            }
+          ]
+        },
+        "2025": {
+          "brier_sum_three_classes": 0.44800042493270054,
+          "games": 272,
+          "log_loss": 0.6568507369305076,
+          "pool_expected_points": 1557.9601842174277,
+          "pool_realized_points": 1514,
+          "selected_team_reliability_ten_fixed_bins": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "mean_probability": null,
+              "observed_win_rate": null,
+              "upper": 0.4
+            },
+            {
+              "count": 1,
+              "lower": 0.4,
+              "mean_probability": 0.49905754103731387,
+              "observed_win_rate": 0.0,
+              "upper": 0.5
+            },
+            {
+              "count": 110,
+              "lower": 0.5,
+              "mean_probability": 0.5488434491825409,
+              "observed_win_rate": 0.5636363636363636,
+              "upper": 0.6
+            },
+            {
+              "count": 68,
+              "lower": 0.6,
+              "mean_probability": 0.6495160457107199,
+              "observed_win_rate": 0.5588235294117647,
+              "upper": 0.7
+            },
+            {
+              "count": 54,
+              "lower": 0.7,
+              "mean_probability": 0.7384116444026979,
+              "observed_win_rate": 0.7962962962962963,
+              "upper": 0.8
+            },
+            {
+              "count": 38,
+              "lower": 0.8,
+              "mean_probability": 0.8421177076325561,
+              "observed_win_rate": 0.7631578947368421,
+              "upper": 0.9
+            },
+            {
+              "count": 1,
+              "lower": 0.9,
+              "mean_probability": 0.9038130033566831,
+              "observed_win_rate": 1.0,
+              "upper": 1.0
+            }
+          ]
+        }
+      },
+      "week1": {
+        "brier_sum_three_classes": 0.4616876618388251,
+        "games": 96,
+        "log_loss": 0.6924110860047029,
+        "pool_expected_points": 536.5995573873444,
+        "pool_realized_points": 538,
+        "selected_team_reliability_ten_fixed_bins": [
+          {
+            "count": 0,
+            "lower": 0.0,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 1,
+            "lower": 0.4,
+            "mean_probability": 0.4998144590700438,
+            "observed_win_rate": 0.0,
+            "upper": 0.5
+          },
+          {
+            "count": 44,
+            "lower": 0.5,
+            "mean_probability": 0.543061233343293,
+            "observed_win_rate": 0.6136363636363636,
+            "upper": 0.6
+          },
+          {
+            "count": 34,
+            "lower": 0.6,
+            "mean_probability": 0.641099769822521,
+            "observed_win_rate": 0.5588235294117647,
+            "upper": 0.7
+          },
+          {
+            "count": 16,
+            "lower": 0.7,
+            "mean_probability": 0.7507295161311569,
+            "observed_win_rate": 0.8125,
+            "upper": 0.8
+          },
+          {
+            "count": 1,
+            "lower": 0.8,
+            "mean_probability": 0.8089885671339825,
+            "observed_win_rate": 1.0,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 1.0
+          }
+        ]
+      },
+      "weeks1_4": {
+        "brier_sum_three_classes": 0.4562286867386759,
+        "games": 383,
+        "log_loss": 0.67864552904675,
+        "pool_expected_points": 2176.248408869612,
+        "pool_realized_points": 2180,
+        "selected_team_reliability_ten_fixed_bins": [
+          {
+            "count": 0,
+            "lower": 0.0,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_win_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 1,
+            "lower": 0.4,
+            "mean_probability": 0.4998144590700438,
+            "observed_win_rate": 0.0,
+            "upper": 0.5
+          },
+          {
+            "count": 173,
+            "lower": 0.5,
+            "mean_probability": 0.5478189145873115,
+            "observed_win_rate": 0.5838150289017341,
+            "upper": 0.6
+          },
+          {
+            "count": 130,
+            "lower": 0.6,
+            "mean_probability": 0.6457786757670585,
+            "observed_win_rate": 0.6461538461538462,
+            "upper": 0.7
+          },
+          {
+            "count": 64,
+            "lower": 0.7,
+            "mean_probability": 0.7442256605101151,
+            "observed_win_rate": 0.6875,
+            "upper": 0.8
+          },
+          {
+            "count": 14,
+            "lower": 0.8,
+            "mean_probability": 0.8377630586812439,
+            "observed_win_rate": 0.9285714285714286,
+            "upper": 0.9
+          },
+          {
+            "count": 1,
+            "lower": 0.9,
+            "mean_probability": 0.9065442893057682,
+            "observed_win_rate": 1.0,
+            "upper": 1.0
+          }
+        ]
+      }
+    }
+  },
+  "ordering_unchanged_all_slates": true,
+  "screen": {
+    "checks": {
+      "at_least_four_season_wins": true,
+      "beats_constant_logloss": true,
+      "beats_corrected_logloss": true
+    },
+    "result": "PASS",
+    "season_wins": 5
+  },
+  "slates": 107,
+  "status": "EXPERIMENTAL / HOLD"
+}

@@ -1343,7 +1343,8 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
             if selected:
                 lead = ('<header class="lab-hero hero"><h1>PGO Forecast Lab</h1>'
                         '<p>September 9 predictions, explanations and grades. '
-                        '<a href="index.html">Back to the ratings board</a>.</p></header>'
+                        '<a href="index.html">Back to the ratings board</a>. '
+                        '<a href="confidence-pool.html">Confidence pool calculator</a>.</p></header>'
                         + updates + '<details class="lab-detail" id="previous-models">'
                         '<summary>Compare previous models</summary>' + lead + '</details>')
             else:

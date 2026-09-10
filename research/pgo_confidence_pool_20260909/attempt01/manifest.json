@@ -1,0 +1,38 @@
+{
+  "charter_sha256": "dcd012863cb315f722301f6bc8795068f474c9b1220919c702e607ed101bbefb",
+  "code_sha256": "35bdbab63f77b76b9e555dfdd64d8f1b66e05de827e48fda5ca50fb157843f68",
+  "files": {
+    "fits.json": {
+      "bytes": 3493,
+      "sha256": "f06ff5258862733002477aebb6ed4cf8e7a568e59d54fa8ba577b4499933a93c"
+    },
+    "metrics.json": {
+      "bytes": 61938,
+      "sha256": "5cbab08eaf9b94d848547872f09f3825a91247a738ce7dc049a76fa6735e238c"
+    },
+    "ordering-check.json": {
+      "bytes": 25254,
+      "sha256": "690468e4ca5140396b1e0a6096091c60fd30c4ff1647d6b97a01b4cad67121b8"
+    },
+    "predictions.csv": {
+      "bytes": 675648,
+      "sha256": "c341c7bf0f63580dd9d2a0cac2cb32fca65cf42bc8cdfaaf6c680e587b9519a5"
+    },
+    "run-start.json": {
+      "bytes": 468,
+      "sha256": "e5e1866e372001676e73763d1481e43cb388ab513a6277e6c8d7c53cde0a5361"
+    },
+    "weekly-points.json": {
+      "bytes": 33476,
+      "sha256": "529981003240bf0a17a8ce346d35817837d21deb5bba5afa4086d6960515b25f"
+    }
+  },
+  "finished_at": "2026-09-10T00:16:42.809600+00:00",
+  "fold_calibrators": 12,
+  "self_checks": "PASS",
+  "source": {
+    "path": "research\\pgo_postseason_candidate\\run-20260909-attempt01\\matched-predictions.csv",
+    "sha256": "3df4dbf26743a3686b6253bb4eb578457d0e2629dde1f0218f215c462feea0cf"
+  },
+  "status": "COMPLETE / EXPERIMENTAL / HOLD"
+}
