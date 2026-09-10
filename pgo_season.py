@@ -177,14 +177,20 @@ def revise_game(old, new, checked_at):
     return copy.deepcopy(new)
 
 
+def archive_href(relative):
+    if relative.split('/')[0] in {'runs-v2', 'availability-v2', 'source-archive'}:
+        return 'https://raw.githubusercontent.com/walshja9/Postgame_Outlet/main/docs/evidence/season-2026/' + relative
+    return 'evidence/season-2026/' + relative
+
+
 def save_state(state, root=DEFAULT_ROOT):
     root = Path(root); root.mkdir(parents=True, exist_ok=True)
     require(not root.is_symlink(), 'Season root is a symlink')
     stamp = utc(state['checked_at']).strftime('%Y%m%dT%H%M%S%fZ')
-    directory = root/'runs'/stamp
+    directory = root/'runs-v2'/stamp
     directory.mkdir(parents=True, exist_ok=False)
-    payload = canonical(state)
-    with (directory/'state.json').open('xb') as handle:
+    payload = gzip.compress(canonical(state), mtime=0)
+    with (directory/'state.json.gz').open('xb') as handle:
         handle.write(payload); handle.flush(); os.fsync(handle.fileno())
     durable = now()
     if (root/'current.json').exists():
@@ -198,14 +204,16 @@ def save_state(state, root=DEFAULT_ROOT):
                 new_pick = before is None and game.get('margin') is not None
                 if changed or new_pick:
                     require(utc(durable)<utc(game['kickoff'])-timedelta(minutes=60), 'Forecast changed across durable-write lock deadline')
-    manifest = dict(schema_version=1, created_at=durable, files={'state.json': {'sha256':sha(payload),'bytes':len(payload)}},
+    manifest = dict(schema_version=1, created_at=durable, files={'state.json.gz': {'sha256':sha(payload),'bytes':len(payload)}},
                     code_sha256=sha(Path(__file__).read_bytes()))
     previous = root/'current.json'
     if previous.exists(): manifest['previous'] = read_json(previous)
     raw = canonical(manifest)
     with (directory/'manifest.json').open('xb') as handle:
         handle.write(raw); handle.flush(); os.fsync(handle.fileno())
-    pointer = dict(path=directory.relative_to(root).as_posix(), manifest_sha256=sha(raw), checked_at=state['checked_at'])
+    relative=directory.relative_to(root).as_posix()
+    pointer = dict(path=relative, manifest_sha256=sha(raw), checked_at=state['checked_at'],
+                   state_url=archive_href(relative+'/state.json.gz'), manifest_url=archive_href(relative+'/manifest.json'))
     atomic_write_text(root/'current.json', canonical(pointer).decode())
     return directory
 
@@ -215,15 +223,17 @@ def load_current(root=DEFAULT_ROOT):
     if not (root/'current.json').exists(): return None
     require(not root.is_symlink() and not (root/'current.json').is_symlink(), 'Invalid season pointer')
     pointer = read_json(root/'current.json')
-    require(re.fullmatch(r'runs/\d{8}T\d{12}Z', pointer['path']) is not None, 'Invalid season archive path')
+    require(re.fullmatch(r'runs(?:-v2)?/\d{8}T\d{12}Z', pointer['path']) is not None, 'Invalid season archive path')
     directory = root/pointer['path']
     require(not directory.is_symlink(), 'Invalid season archive directory')
     raw = (directory/'manifest.json').read_bytes()
     require(sha(raw) == pointer['manifest_sha256'], 'Season manifest hash differs')
     manifest = json.loads(raw)
-    payload = (directory/'state.json').read_bytes(); meta = manifest['files']['state.json']
-    require(not (directory/'state.json').is_symlink() and sha(payload) == meta['sha256'] and len(payload) == meta['bytes'], 'Season state hash differs')
-    state = json.loads(payload)
+    require(set(manifest['files']) in ({'state.json'}, {'state.json.gz'}), 'Invalid season state inventory')
+    filename=next(iter(manifest['files']))
+    payload = (directory/filename).read_bytes(); meta = manifest['files'][filename]
+    require(not (directory/filename).is_symlink() and sha(payload) == meta['sha256'] and len(payload) == meta['bytes'], 'Season state hash differs')
+    state = json.loads(gzip.decompress(payload) if filename.endswith('.gz') else payload)
     require(state['schema_version'] == 1 and state['season'] == SEASON, 'Season schema differs')
     references = [*state.get('source_captures', []), *(r['source'] for r in state.get('results',[]) if 'source' in r)]
     references += state.get('rankings',{}).get('source_captures',[])
@@ -231,7 +241,7 @@ def load_current(root=DEFAULT_ROOT):
     verified = {}
     for ref in references:
         key = ref['path']
-        require(re.fullmatch(r'sources/[0-9a-f]{64}\.(?:json|csv\.gz)',key) is not None, 'Invalid captured source path')
+        require(re.fullmatch(r'(?:sources|source-archive)/[0-9a-f]{64}\.(?:json|csv\.gz)',key) is not None, 'Invalid captured source path')
         require(utc(ref['captured_at']) <= utc(state['checked_at']), 'Source captured after state')
         if key not in verified:
             source_path = root/key
@@ -241,7 +251,7 @@ def load_current(root=DEFAULT_ROOT):
         require(verified[key]==(ref['sha256'],ref['bytes']), 'Captured source hash or length differs')
     availability = {g.get('availability',{}).get('source_archive') for w in state['weeks'] for g in w['games']}
     for path in availability - {None}:
-        require(re.fullmatch(r'availability/\d{8}T\d{12}Z',path) is not None, 'Invalid availability archive path')
+        require(re.fullmatch(r'availability(?:-v2)?/\d{8}T\d{12}Z',path) is not None, 'Invalid availability archive path')
         from pgo_season_availability import load_availability
         load_availability(root/path)
     return state
@@ -282,7 +292,7 @@ def fetch_source(url, root=DEFAULT_ROOT):
         raise ValueError(f'Source unavailable: {url}: {error}')
     captured = now(); digest = sha(raw)
     suffix = '.csv.gz' if url.endswith('.gz') else '.json'
-    relative = 'sources/' + digest + suffix
+    relative = 'source-archive/' + digest + suffix
     path = Path(root)/relative; path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists(): require(path.read_bytes() == raw and not path.is_symlink(), 'Source hash collision or symlink')
     else:
@@ -451,7 +461,7 @@ def refresh_availability(state, root):
     expected={t:r['gsis_id'] for t,r in selected.items()}
     before={t['team']:t['qb_gsis_id'] for t in state['rankings']['teams']}
     changed={team for team in expected if before[team]!=expected[team]}
-    path=Path(root)/'availability'/utc(checked).strftime('%Y%m%dT%H%M%S%fZ')
+    path=Path(root)/'availability-v2'/utc(checked).strftime('%Y%m%dT%H%M%S%fZ')
     captured=capture_availability(games,roster,expected,path)
     refs=[roster_source,depth_source]
     if any(changed & {g['home'],g['away']} for g in games):
@@ -487,7 +497,7 @@ def refresh_availability(state, root):
                 g['withheld_confidence']=g['confidence'];g['confidence']=None
         # Unknown or omitted reports do not undo a previously confirmed OUT designation.
         g['availability']['source_archive']=path.relative_to(root).as_posix()
-    refs.append({'label':'Saved availability observations','href':'evidence/season-2026/'+path.relative_to(root).as_posix()+'/availability.json'})
+    refs.append({'label':'Saved availability observations','href':archive_href(path.relative_to(root).as_posix()+'/availability.json')})
     return refs
 
 
@@ -551,9 +561,11 @@ def refresh(root=DEFAULT_ROOT):
                     week['games'][index]=copy.deepcopy(before)
         decorate(state,state['results'])
         pointer=read_json(root/'current.json')
-        state['archives']=[*previous.get('archives',[]),dict(checked_at=previous['checked_at'],href='evidence/season-2026/'+pointer['path']+'/state.json')]
+        prior_manifest=read_json(root/pointer['path']/'manifest.json')
+        prior_file=next(iter(prior_manifest['files']))
+        state['archives']=[*previous.get('archives',[]),dict(checked_at=previous['checked_at'],href=archive_href(pointer['path']+'/'+prior_file))]
     state['source_captures']=[r for r in state['sources'] if 'path' in r]
-    state['sources']=[r if 'href' in r else {'label':'Source captured '+r['captured_at'], 'href':'evidence/season-2026/'+r['path']} for r in state['sources']]
+    state['sources']=[r if 'href' in r else {'label':'Source captured '+r['captured_at'], 'href':archive_href(r['path'])} for r in state['sources']]
     state['sources'].append({'label':'Saved refreshes and verification record','href':'evidence/season-2026/current.json'})
     save_state(state,root)
     return state

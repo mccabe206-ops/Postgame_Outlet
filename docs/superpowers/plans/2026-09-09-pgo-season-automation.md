@@ -10,3 +10,5 @@ Approved flow: [design](../specs/2026-09-09-pgo-season-automation-design.md). Ex
 - [ ] Integrate: run focused tests plus full repository checks, independent review, real source refresh and timing/identity checks, then commit/publish and dispatch the workflow. Verify exact public bytes and current Shopify embed, including mobile layout. Record any source-delay status honestly.
 
 The runnable lifecycle tests must use synthetic clocks and source fixtures, never fabricate a pregame timestamp in a production capture. Runtime capture uses the real clock. All publication is already authorized by the user; routine implementation choices do not require another approval.
+
+- [x] Capacity check: preserve existing files and URLs; compress new state/raw captures, retain only availability replay inputs, and link future audit folders directly from the public Git repository. Validate old/new readers, exact replay, and Pages exclusions before the final server run.

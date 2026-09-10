@@ -9,6 +9,7 @@ load_availability(directory) verifies hashes and replays offline from saved byte
 
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
+import gzip
 import hashlib
 import html
 from html.parser import HTMLParser
@@ -317,6 +318,11 @@ def capture_availability(games, roster, expected_qbs, output, *, now=None, fetch
     """Capture official reports once and discover bounded club inactive articles."""
     games, roster, expected_qbs = list(games), list(roster), dict(expected_qbs)
     _inputs(games, roster, expected_qbs, _clock(now))
+    teams={t for g in games for t in (g['home'],g['away'])}
+    games=[{k:g[k] for k in ('game_id','season','week','game_type','home','away','kickoff','lock_at')} for g in games]
+    fields=('team','gsis_id','full_name','first_name','football_name','last_name','position','status')
+    roster=[{k:r[k] for k in fields if k in r} for r in roster if normalize_team(r['team']) in teams]
+    expected_qbs={t:expected_qbs[t] for t in teams}
     directory = Path(output)
     directory.mkdir(parents=True, exist_ok=False)
     (directory / 'raw').mkdir()
@@ -364,12 +370,12 @@ def capture_availability(games, roster, expected_qbs, output, *, now=None, fetch
     try:
         for index, source in enumerate(source_rows):
             if 'body' in source:
-                source['file'] = f'raw/{index:03d}.html'
-                _write(directory/source['file'], source['body'])
+                source['file'] = f'raw/{index:03d}.html.gz'
+                _write(directory/source['file'], gzip.compress(source['body'],mtime=0))
         checked = _clock(now).isoformat()
         result = build_availability(games, roster, expected_qbs, source_rows, checked_at=checked)
         inputs = dict(games=games, roster=roster, expected_qbs=expected_qbs)
-        _write(directory/'inputs.json',_json(inputs))
+        _write(directory/'inputs.json.gz',gzip.compress(_json(inputs),mtime=0))
         _write(directory/'capture.json',_json(dict(checked_at=checked,sources=result['sources'])))
         _write(directory/'availability.json',_json(result))
         members = [dict(file=p.relative_to(directory).as_posix(),sha256=_sha(p.read_bytes()),bytes=p.stat().st_size)
@@ -402,10 +408,11 @@ def _load_availability(directory):
         if len(raw) != member['bytes'] or _sha(raw) != member['sha256']:
             raise ValueError('Availability member hash or size differs')
         payloads[name] = raw
-    inputs = json.loads(payloads['inputs.json'])
+    input_file='inputs.json.gz' if 'inputs.json.gz' in payloads else 'inputs.json'
+    inputs = json.loads(gzip.decompress(payloads[input_file]) if input_file.endswith('.gz') else payloads[input_file])
     capture = json.loads(payloads['capture.json'])
-    sources = [dict(s,body=payloads[s['file']]) if 'file' in s else dict(s) for s in capture['sources']]
-    if set(payloads) != {'inputs.json','capture.json','availability.json'} | {s['file'] for s in sources if 'file' in s}:
+    sources = [dict(s,body=gzip.decompress(payloads[s['file']]) if s['file'].endswith('.gz') else payloads[s['file']]) if 'file' in s else dict(s) for s in capture['sources']]
+    if set(payloads) != {input_file,'capture.json','availability.json'} | {s['file'] for s in sources if 'file' in s}:
         raise ValueError('Availability package member inventory differs')
     replay = build_availability(**inputs,sources=sources,checked_at=capture['checked_at'])
     if replay != json.loads(payloads['availability.json']) or replay['checked_at'] != manifest['checked_at']:

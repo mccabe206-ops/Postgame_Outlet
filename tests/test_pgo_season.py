@@ -73,7 +73,10 @@ class SeasonTests(unittest.TestCase):
             api.save_state(state,root)
             self.assertEqual(api.load_current(root),state)
             pointer=api.read_json(root/'current.json')
-            (root/pointer['path']/'state.json').write_text('{}')
+            self.assertTrue(pointer['path'].startswith('runs-v2/'))
+            self.assertTrue(pointer['state_url'].startswith('https://raw.githubusercontent.com/'))
+            self.assertTrue(pointer['state_url'].endswith('/state.json.gz'))
+            (root/pointer['path']/'state.json.gz').write_bytes(b'{}')
             with self.assertRaises(ValueError):api.load_current(root)
 
 
