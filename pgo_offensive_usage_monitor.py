@@ -15,6 +15,7 @@ from pgo_season_rollover import load_archive, verify_finals
 from pgo_sources import normalize_team
 
 PROTOCOL = Path(__file__).resolve().parent/'research/pgo_offensive_usage_20260912/charter.md'
+V2_PROTOCOL = PROTOCOL.with_name('inventory-v2-addendum.md')
 COUNTS = ('cohort_rows', 'eligible_final_rows', 'joined', 'observed_zero', 'observed_positive', 'missing_target', 'pending')
 
 
@@ -52,6 +53,8 @@ def _select(root, finals, selected, excluded):
 def link(snapshot, roster, snaps, final, target_captured_at):
     """Strict offense_snaps join; duplicate counting precedes value filtering."""
     require(len(snapshot['games']) == 1, 'Offensive usage requires one selected game')
+    version = snapshot.get('inventory_version')
+    require(type(version) is int and version in (1, 2), 'Invalid offensive snapshot version')
     game = snapshot['games'][0]; lock = utc(game['lock_at'])
     require(lock == utc(game['kickoff'])-timedelta(minutes=60), 'Invalid offensive T-60')
     require(all(final[key] == game[field] for key, field in
@@ -70,6 +73,10 @@ def link(snapshot, roster, snaps, final, target_captured_at):
         if str(row.get('season')) == '2026' and row.get('pfr_id') and re.fullmatch(r'00-\d{7}', row.get('gsis_id', '')):
             identities[normalize_team(row.get('team', '')), row['pfr_id']].add(row['gsis_id'])
             names[normalize_team(row.get('team', '')), row['gsis_id']].update(inventory.source.evidence.aliases(row))
+            if version == 2:
+                extra = row.get('_usage_identity_aliases', [])
+                require(isinstance(extra, list) and all(isinstance(name, str) for name in extra), 'Invalid qualified offensive aliases')
+                names[normalize_team(row.get('team', '')), row['gsis_id']].update(extra)
     counts = Counter(); targets = {}; invalid = []
     for number, row in enumerate(snaps, 2):
         if row.get('game_id') != game['game_id']: continue
@@ -91,8 +98,8 @@ def link(snapshot, roster, snaps, final, target_captured_at):
     rows = []; known = set(); teams = set()
     for team in snapshot['teams']:
         require(team['team'] not in teams, 'Duplicate offensive inventory team'); teams.add(team['team'])
+        require(type(team.get('inventory_version')) is int and team['inventory_version'] == version, 'Invalid offensive team version')
         if team['team'] not in (game['home'], game['away']): continue
-        require(type(team.get('inventory_version')) is int and team['inventory_version'] == 1, 'Invalid offensive team version')
         for player in team['players']:
             pid = player['gsis_id']
             require(re.fullmatch(r'00-\d{7}', pid) and pid not in known, 'Duplicate offensive player identity'); known.add(pid)
@@ -188,6 +195,9 @@ def refresh_shadow(state, previous, root, checked_at):
                            invalid_target_rows=len(invalid),
                            unresolved_target_identities=sum('UNRESOLVED_STABLE_IDENTITY' in row['exclusions'] for row in invalid))
             pinned = [PROTOCOL, Path(__file__), Path(inventory.__file__), Path(shared.__file__), Path(inventory.source.__file__)]
+            if any(snapshot['inventory_version'] == 2 for snapshot, _ in cohorts.values()):
+                import pgo_player_identity as identity
+                pinned += [V2_PROTOCOL, Path(identity.__file__)]
             payload = canonical(dict(selected_games=result['selected_games'], source=result['source'],
                                      verified_finals=[finals[key] for key in sorted(cohorts)], games=reports, metrics=metrics,
                                      rows=rows, excluded_target_rows=invalid,

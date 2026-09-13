@@ -299,7 +299,7 @@ def load_current(root=DEFAULT_ROOT):
     verified = {}
     for ref in references:
         key = ref['path']
-        require(re.fullmatch(r'(?:sources|source-archive)/[0-9a-f]{64}\.(?:json|csv\.gz)',key) is not None, 'Invalid captured source path')
+        require(re.fullmatch(r'(?:sources|source-archive)/[0-9a-f]{64}\.(?:json|csv(?:\.gz)?)',key) is not None, 'Invalid captured source path')
         require(utc(ref['captured_at']) <= utc(state['checked_at']), 'Source captured after state')
         if key not in verified:
             source_path = root/key
@@ -352,7 +352,7 @@ def fetch_source(url, root=DEFAULT_ROOT):
     else:
         raise ValueError(f'Source unavailable: {url}: {error}')
     captured = now(); digest = sha(raw)
-    suffix = '.csv.gz' if url.endswith('.gz') else '.json'
+    suffix = '.csv.gz' if url.endswith('.gz') else '.csv' if url.endswith('.csv') else '.json'
     relative = 'source-archive/' + digest + suffix
     path = Path(root)/relative; path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists(): require(path.read_bytes() == raw and not path.is_symlink(), 'Source hash collision or symlink')
@@ -744,11 +744,10 @@ def check_replacement_depth(state, previous, durable):
         require(generated<=durable<cutoff, 'Replacement durable-write deadline crossed')
 
 
-def refresh_replacement_sources(state, root):
-    """Maintain descriptive roster/depth inputs without selecting QBs or revising picks."""
-    from research.pgo_replacement_depth_20260910 import capture
+def _refresh_inventory_sources(state, root, urls, check_key, reader, label):
+    """Reuse verified archived inputs and refresh only after their 24-hour limit."""
     checked = utc(now())
-    state['replacement_source_check'] = dict(status='IDLE', checked_at=checked.isoformat(), blocked_reason=None)
+    state[check_key] = dict(status='IDLE', checked_at=checked.isoformat(), blocked_reason=None)
     finals = {row['game_id'] for row in state.get('results', [])}
     if not any(game['game_id'] not in finals and checked < utc(game['lock_at'])
                for week in state.get('weeks', []) for game in week['games']):
@@ -756,9 +755,9 @@ def refresh_replacement_sources(state, root):
     refs = [*state.get('source_captures', []), *state.get('sources', []), *state.get('rankings', {}).get('source_captures', [])]
     refs += [ref for values in state.get('edition_sources', {}).values() for ref in values]
     refs += state.get('replacement_depth', {}).get('sources', [])
+    refs += state.get('offensive_inventory', {}).get('sources', [])
     failed = []
-    for kind in ('roster', 'depth'):
-        url = URLS[kind]
+    for kind, url in urls.items():
         try:
             matches = [ref for ref in refs if ref.get('url') == url and 'path' in ref]
             require(all(utc(ref['captured_at']) <= checked for ref in matches), 'Future replacement source')
@@ -769,20 +768,34 @@ def refresh_replacement_sources(state, root):
                         'Conflicting replacement source receipts')
             latest = max(matches, key=lambda ref: utc(ref['captured_at']), default=None)
             if latest is not None:
-                capture.read_source(root, latest, checked.isoformat())
+                # Verify the selected bytes before refreshing a stale receipt.
+                reader(root, latest, checked.isoformat(), allow_stale=True) if check_key == 'offensive_identity_source_check' else reader(root, latest, checked.isoformat())
             if latest is None or checked-utc(latest['captured_at']) > timedelta(hours=24):
                 raw, ref = fetch_source(url, root)
                 observed = now()
                 require(ref['url'] == url and checked <= utc(ref['captured_at']) <= utc(observed), 'Invalid source download clock')
-                require(capture.read_source(root, ref, observed) == raw, 'Downloaded source differs from archived bytes')
+                require(reader(root, ref, observed) == raw, 'Downloaded source differs from archived bytes')
                 latest = ref
             # Carry reused receipts into normalization, including partial-failure recovery.
             if latest not in state.setdefault('sources', []):
                 state['sources'].append(latest)
         except (ValueError, KeyError, TypeError, OSError, OverflowError):
             failed.append(kind)
-    state['replacement_source_check'] = dict(status='BLOCKED' if failed else 'READY', checked_at=now(),
-        blocked_reason='Replacement source refresh unavailable: ' + ', '.join(failed) + '.' if failed else None)
+    state[check_key] = dict(status='BLOCKED' if failed else 'READY', checked_at=now(),
+        blocked_reason=label + ' source refresh unavailable: ' + ', '.join(failed) + '.' if failed else None)
+
+
+def refresh_replacement_sources(state, root):
+    """Maintain descriptive roster/depth inputs without selecting QBs or revising picks."""
+    from research.pgo_replacement_depth_20260910 import capture
+    _refresh_inventory_sources(state, root, {key:URLS[key] for key in ('roster','depth')},
+                               'replacement_source_check', capture.read_source, 'Replacement')
+
+
+def refresh_offensive_identity_source(state, root):
+    from pgo_player_identity import URL, read_source
+    _refresh_inventory_sources(state, root, {'players':URL}, 'offensive_identity_source_check',
+                               read_source, 'Player-ID')
 
 
 def refresh_experiments(state, previous, root):
@@ -802,12 +815,15 @@ def refresh_experiments(state, previous, root):
             if key in ('replacement_depth','offensive_inventory'):
                 check=state.get('replacement_source_check') or {}
                 require(check.get('status')!='BLOCKED', check.get('blocked_reason') or 'Replacement source refresh unavailable.')
+            if key == 'offensive_inventory':
+                check=state.get('offensive_identity_source_check') or {}
+                require(check.get('status')!='BLOCKED', check.get('blocked_reason') or 'Player-ID source refresh unavailable.')
             operation=getattr(importlib.import_module(module_name),method)
             arguments=[copy.deepcopy(state)]
             if key not in ('replacement_depth','offensive_inventory'):arguments.append(copy.deepcopy(previous))
             if needs_root:arguments.append(root)
             arguments.append(state['checked_at'])
-            result=operation(*arguments, inventory_version=2) if key=='replacement_depth' else operation(*arguments)
+            result=operation(*arguments, inventory_version=2) if key in ('replacement_depth','offensive_inventory') else operation(*arguments)
             require(isinstance(result,dict), 'Experiment returned no saved payload')
             if key in ('replacement_depth','offensive_inventory') and result.get('status')=='BLOCKED' and old:
                 result=dict(copy.deepcopy(old),status='BLOCKED',blocked_reason=result.get('blocked_reason'),checked_at=state['checked_at'])
@@ -852,6 +868,9 @@ def refresh(root=DEFAULT_ROOT):
     except Exception:
         # Optional source maintenance must not suppress primary grading/publication.
         state['replacement_source_check']=dict(status='BLOCKED',checked_at=now(),blocked_reason='Replacement source maintenance failed.')
+    try:refresh_offensive_identity_source(state,root)
+    except Exception:
+        state['offensive_identity_source_check']=dict(status='BLOCKED',checked_at=now(),blocked_reason='Player-ID source maintenance failed.')
     state['checked_at']=now()
     if previous:
         old={g['game_id']:g for w in previous['weeks'] for g in w['games']}

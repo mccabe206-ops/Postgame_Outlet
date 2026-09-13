@@ -38,6 +38,47 @@ class ExperimentViewTests(unittest.TestCase):
         state['offensive_usage']['forecast_adjustment'] = 1
         with self.assertRaises(ValueError): view._experiments(state)
 
+    def test_offensive_playing_time_links_distinguish_ready_missing_and_review(self):
+        players=[dict(position=position,usage_identity=dict(status=status,pfr_id=pid,reasons=[]))
+                 for position,status,pid in [('C','PROVIDER','CentEx00'),('G','ROSTER','GuarEx00'),
+                     ('LT','MISSING',None),('OL','CONFLICT',None),('WR','PROVIDER','WideEx00'),('TE','MISSING',None)]]
+        source=dict(url='https://github.com/nflverse/nflverse-data/releases/download/players/players.csv',
+                    path='source-archive/'+'a'*64+'.csv')
+        state=dict(offensive_inventory=dict(inventory_version=2,status='DESCRIPTIVE / NOT IN MODEL',
+            generated_at='2026-09-13T01:00:00Z',teams=[dict(team='NE',inventory_version=2,players=players,
+            unresolved_roster=[{'name':'Unknown identity'}])],sources=[source]))
+        before=copy.deepcopy(state);page=view._experiments(state)
+        self.assertIn('6 offensive player records across 1 teams',page)
+        self.assertIn('1 roster entries still lack a usable player identity',page)
+        self.assertIn('Playing-time ID links: 3 of 6 ready; 2 missing; 1 need review.',page)
+        self.assertIn('Offensive line: 2 of 4 ready.',page)
+        self.assertIn('connect roster identities to playing-time reports',page)
+        self.assertIn('do not establish health or change model points',page)
+        self.assertIn('Saved player-ID source',page)
+        self.assertIn(view.archive_href(source['path']),page)
+        self.assertNotIn('href="'+source['url']+'"',page)
+        self.assertEqual(state,before)
+
+    def test_offensive_line_link_count_includes_all_provider_line_positions(self):
+        positions='OL C G OG LG RG T OT LT RT'.split()
+        players=[dict(position=p,usage_identity=dict(status='MISSING',pfr_id=None,reasons=[])) for p in positions]
+        state=dict(offensive_inventory=dict(inventory_version=2,status='DESCRIPTIVE / NOT IN MODEL',
+            teams=[dict(team='NE',inventory_version=2,players=players)],sources=[]))
+        page=view._experiments(state)
+        self.assertIn('Playing-time ID links: 0 of 10 ready; 10 missing; 0 need review.',page)
+        self.assertIn('Offensive line: 0 of 10 ready.',page)
+        self.assertIn('Missing playing time is unknown, not zero',page)
+        self.assertIn('No point adjustment is applied',page)
+
+    def test_old_offensive_inventory_has_no_recorded_playing_time_link_counts(self):
+        state=dict(offensive_inventory=dict(inventory_version=1,status='DESCRIPTIVE / NOT IN MODEL',
+            teams=[dict(team='NE',inventory_version=1,players=[dict(position='OL')])]))
+        before=copy.deepcopy(state);page=view._experiments(state)
+        self.assertIn('Playing-time ID links were not recorded in this saved edition',page)
+        self.assertNotIn('Playing-time ID links:',page)
+        self.assertNotIn('Offensive line:',page)
+        self.assertEqual(state,before)
+
     def fixture(self):
         arms = ('postseason', 'without_qb_passing', 'without_team_passing')
         game = dict(game_id='2026_02_A_B', away='NE', home='SEA', issued_at='2026-09-10T20:00:00Z')

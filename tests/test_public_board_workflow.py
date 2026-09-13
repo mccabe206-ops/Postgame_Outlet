@@ -139,7 +139,8 @@ class PublicBoardWorkflowTests(unittest.TestCase):
         for module in ('test_pgo_season_accuracy','test_pgo_totals_monitor','test_pgo_weights_monitor',
                        'test_pgo_replacement_depth','test_pgo_replacement_refresh','test_pgo_defender_inventory','test_pgo_season_experiments','test_pgo_experiment_view',
                        'test_pgo_inactive_monitor','test_pgo_offensive_inventory','test_pgo_offensive_usage_monitor',
-                       'test_pgo_score_range_monitor','test_pgo_starter_capture'):
+                       'test_pgo_score_range_monitor','test_pgo_starter_capture',
+                       'test_pgo_player_identity','test_pgo_offensive_identity_refresh'):
             self.assertIn('tests.'+module,gate)
 
     def test_inactive_schedule_keeps_the_shared_lock_and_canonical_publisher(self):

@@ -78,7 +78,7 @@ def check_preserved(before, after, durable=None):
 
 
 def source_bytes(root, ref, deadline):
-    require(re.fullmatch(r'(?:sources|source-archive)/[0-9a-f]{64}\.(?:json|csv\.gz)', ref['path']) is not None, 'Invalid source path')
+    require(re.fullmatch(r'(?:sources|source-archive)/[0-9a-f]{64}\.(?:json|csv(?:\.gz)?)', ref['path']) is not None, 'Invalid source path')
     path = Path(root) / ref['path']
     require(not path.is_symlink() and path.resolve().is_relative_to(Path(root).resolve()), 'Invalid source symlink')
     raw = path.read_bytes()

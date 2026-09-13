@@ -955,10 +955,30 @@ def _experiments(state):
             if component.get('status') == 'BLOCKED':
                 validation += f'<p><strong>{label} needs review.</strong> {_text(component.get("blocked_reason") or "The latest check could not be verified.")} Earlier evidence is retained.</p>'
         teams = offense.get('teams', [])
+        players = [player for team in teams for player in team.get('players', [])]
         validation += (f'<p>List saved {_time(offense.get("generated_at"))}: '
-            f'{_integer(sum(len(t.get("players", [])) for t in teams))} offensive player records across {_integer(len(teams))} teams. '
+            f'{_integer(len(players))} offensive player records across {_integer(len(teams))} teams. '
             f'{_integer(sum(len(t.get("unresolved_roster", [])) for t in teams))} roster entries still lack a usable player identity. '
             'A list qualifies for a completed game only if its archive was saved before prediction lock.</p>')
+        if type(offense.get('inventory_version')) is int and offense['inventory_version'] == 2:
+            ready = [player for player in players if
+                (player.get('usage_identity') or {}).get('status') in ('ROSTER', 'PROVIDER')
+                and isinstance((player.get('usage_identity') or {}).get('pfr_id'), str)
+                and player['usage_identity']['pfr_id'].strip()]
+            review = sum((player.get('usage_identity') or {}).get('status') == 'CONFLICT' for player in players)
+            line_positions = {'OL', 'C', 'G', 'OG', 'LG', 'RG', 'T', 'OT', 'LT', 'RT'}
+            line_total = sum(str(player.get('position', '')).upper() in line_positions for player in players)
+            line_ready = sum(str(player.get('position', '')).upper() in line_positions for player in ready)
+            validation += (f'<p>Playing-time ID links: {_integer(len(ready))} of {_integer(len(players))} ready; '
+                f'{_integer(len(players)-len(ready)-review)} missing; {_integer(review)} need review. '
+                f'Offensive line: {_integer(line_ready)} of {_integer(line_total)} ready. '
+                'These links connect roster identities to playing-time reports; '
+                'they do not establish health or change model points.</p>'
+                + _sources([dict(href=archive_href(ref['path']), label='Saved player-ID source')
+                    for ref in offense.get('sources', []) if ref.get('path') and ref.get('url') ==
+                    'https://github.com/nflverse/nflverse-data/releases/download/players/players.csv']))
+        else:
+            validation += '<p>Playing-time ID links were not recorded in this saved edition.</p>'
         metrics = offensive_usage.get('metrics') or {}
         validation += (f'<p>Eligible completed games: {_integer(metrics.get("games", 0))}; '
             f'games awaiting finals: {_integer(offensive_usage.get("pending_games", 0))}; '

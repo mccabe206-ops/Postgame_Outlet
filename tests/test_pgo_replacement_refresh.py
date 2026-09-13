@@ -56,6 +56,8 @@ class ReplacementRefreshTests(unittest.TestCase):
         """Keep the real refresh/save/load/capture path; replace only external inputs."""
         import pgo_penalty_monitor, pgo_totals_monitor, pgo_weights_monitor, pgo_ats
         with ExitStack() as stack:
+            # These fixtures isolate roster/depth maintenance; player-ID refresh has its own integration checks.
+            stack.enter_context(patch.object(season, 'refresh_offensive_identity_source'))
             stack.enter_context(patch.object(season, 'now', side_effect=lambda: clock[0]))
             stack.enter_context(patch.object(season, 'legacy_models', return_value=[]))
             stack.enter_context(patch.object(season, 'fetch_inputs', return_value=(copy.deepcopy(before['schedule']), copy.deepcopy(before['results']), [], {})))

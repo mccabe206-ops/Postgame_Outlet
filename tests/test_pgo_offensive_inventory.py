@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from pgo_season import canonical, sha, utc
 from pgo_sources import CURRENT_TEAMS
@@ -36,6 +37,24 @@ def sources(root, roster, depth, captured=NOW):
         path = root/relative; path.parent.mkdir(exist_ok=True); path.write_bytes(raw)
         refs.append(dict(url=url, path=relative, sha256=sha(raw), bytes=len(raw), captured_at=captured))
     return refs
+
+
+IDENTITY_URL = 'https://github.com/nflverse/nflverse-data/releases/download/players/players.csv'
+
+
+def identity_rows(roster):
+    return [dict(gsis_id=row['gsis_id'], pfr_id=f'Prov{i:04d}', display_name=row['full_name'],
+                 first_name=row['first_name'], common_first_name='', football_name='', last_name=row['last_name'],
+                 birth_date=row['birth_date'], esb_id='', nfl_id='', smart_id='', espn_id='')
+            for i, row in enumerate(roster, 1)]
+
+
+def identity_source(root, rows, captured=NOW):
+    stream = io.StringIO(); writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+    writer.writeheader(); writer.writerows(rows); raw = stream.getvalue().encode()
+    relative = f'source-archive/{sha(raw)}.csv'
+    (root/'source-archive').mkdir(exist_ok=True); (root/relative).write_bytes(raw)
+    return dict(url=IDENTITY_URL, path=relative, sha256=sha(raw), bytes=len(raw), captured_at=captured)
 
 
 def archive(root, state, durable):
@@ -151,6 +170,59 @@ class OffensiveInventoryTests(unittest.TestCase):
         self.assertTrue(any(player['observations'] for team in result['teams'] for player in team['players']))
         self.assertEqual(canonical(state), before)
         with self.assertRaises(ValueError): api.load_inventory(root, pointer)
+
+    def v2_state(self):
+        for row in self.roster: row.update(birth_date='1995-01-02', pfr_id='')
+        state = self.state(); players = identity_rows(self.roster)
+        state['source_captures'].append(identity_source(self.root, players))
+        return state, players
+
+    def test_v2_replays_qualified_missing_pfr_without_changing_v1_or_original_roster(self):
+        api = self.api(); state, _ = self.v2_state(); before = copy.deepcopy(state)
+        original = copy.deepcopy(self.roster)
+        v1 = api.capture(state, self.root, NOW)
+        v2 = api.capture(state, self.root, NOW, inventory_version=2)
+        self.assertEqual(v2['inventory_version'], 2); self.assertEqual(state, before)
+        self.assertEqual(v1['inventory_version'], 1); self.assertEqual(self.roster, original)
+        for old, new in zip(v1['teams'], v2['teams']):
+            comparable = copy.deepcopy(new); comparable['inventory_version'] = 1
+            for player in comparable['players']: player.pop('usage_identity')
+            self.assertEqual(old, comparable)
+        self.assertTrue(all(p['usage_identity']['status'] == 'PROVIDER' for t in v2['teams'] for p in t['players']))
+        state['offensive_inventory'] = v2
+        pointer = archive(self.root, state, '2026-09-10T20:00:01Z')
+        loaded, derived = api.load_inventory(self.root, pointer)
+        self.assertEqual(loaded['teams'], v2['teams']); self.assertTrue(all(r['pfr_id'] for r in derived))
+        self.assertTrue(all(not r['pfr_id'] for r in original))
+        (self.root/state['source_captures'][-1]['path']).write_bytes(b'tampered')
+        with self.assertRaises(ValueError): api.load_inventory(self.root, pointer)
+
+    def test_v2_identity_reference_missing_future_stale_conflicting_or_latest_bad_blocks(self):
+        api = self.api(); state, players = self.v2_state()
+        no_identity = copy.deepcopy(state); no_identity['source_captures'].pop()
+        self.assertEqual(api.capture(no_identity, self.root, NOW, inventory_version=2)['status'], 'BLOCKED')
+        for changes in ({'captured_at': '2026-09-10T20:00:01Z'}, {'published_at': '2026-09-10T20:00:01Z'}):
+            changed = copy.deepcopy(state); changed['source_captures'][-1].update(changes)
+            with self.subTest(changes=changes), self.assertRaises(ValueError):
+                api.capture(changed, self.root, NOW, inventory_version=2)
+        stale = copy.deepcopy(state); stale['source_captures'][-1]['captured_at'] = '2026-09-09T19:59:59Z'
+        self.assertEqual(api.capture(stale, self.root, NOW, inventory_version=2)['status'], 'BLOCKED')
+        conflicting = copy.deepcopy(state); changed = copy.deepcopy(players); changed[0]['pfr_id'] = 'Other001'
+        conflicting['source_captures'].append(identity_source(self.root, changed))
+        with self.assertRaises(ValueError): api.capture(conflicting, self.root, NOW, inventory_version=2)
+        latest = copy.deepcopy(state); latest['source_captures'][-1]['captured_at'] = '2026-09-10T19:59:59Z'
+        latest['source_captures'].append(dict(state['source_captures'][-1], sha256='0'*64))
+        with self.assertRaises(ValueError): api.capture(latest, self.root, NOW, inventory_version=2)
+
+    def test_v1_does_not_consume_future_identity_source_and_keeps_missing_pfr(self):
+        api = self.api(); state, _ = self.v2_state()
+        state['source_captures'][-1]['captured_at'] = '2026-09-11T20:00:00Z'
+        with patch('pgo_player_identity.read_source', side_effect=AssertionError('v1 must ignore identity source')):
+            state['offensive_inventory'] = api.capture(state, self.root, NOW)
+            pointer = archive(self.root, state, '2026-09-10T20:00:01Z')
+            loaded, roster = api.load_inventory(self.root, pointer)
+        self.assertEqual(loaded['inventory_version'], 1)
+        self.assertTrue(all(not row['pfr_id'] and '_usage_identity_aliases' not in row for row in roster))
 
 
 if __name__ == '__main__':

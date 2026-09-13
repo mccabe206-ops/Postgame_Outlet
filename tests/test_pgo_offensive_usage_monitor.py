@@ -11,7 +11,7 @@ from unittest.mock import MagicMock, patch
 import pgo_offensive_inventory as inventory
 import pgo_injury_usage_monitor as shared
 from pgo_season import canonical, sha
-from tests.test_pgo_offensive_inventory import GAME, NOW, archive, fixture_rows, sources
+from tests.test_pgo_offensive_inventory import GAME, NOW, archive, fixture_rows, sources, identity_rows, identity_source
 
 CHECK = '2026-09-11T12:00:00+00:00'
 
@@ -162,6 +162,115 @@ class OffensiveUsageTests(unittest.TestCase):
         result, fetch = self.refresh(first)
         fetch.assert_not_called(); self.assertEqual(result['status'], 'BLOCKED')
         self.assertEqual(result['selected_games'], first['selected_games'])
+
+    def save_v2(self, mutate=None, durable='2026-09-10T22:00:01Z'):
+        for row in self.roster: row.update(pfr_id='', birth_date='1995-01-02')
+        players = identity_rows(self.roster)
+        if mutate: mutate(players)
+        state = dict(schema_version=1, season=2026, checked_at='2026-09-10T22:00:00Z',
+                     source_captures=sources(self.root, self.roster, self.depth), weeks=[dict(games=[GAME])])
+        state['source_captures'].append(identity_source(self.root, players))
+        state['offensive_inventory'] = inventory.capture(state, self.root, state['checked_at'], inventory_version=2)
+        return archive(self.root, state, durable), players
+
+    def test_v2_missing_roster_pfr_links_zero_positive_and_pins_new_protocol(self):
+        selected, players = self.save_v2()
+        rows = [dict(self.row, team=row['team'], opponent='SF' if row['team'] == 'LAR' else 'LA',
+                     pfr_player_id=next(p['pfr_id'] for p in players if p['gsis_id'] == row['gsis_id']),
+                     offense_snaps='0' if row['team'] == 'SF' else '17')
+                for row in self.roster if row['team'] in ('SF', 'LAR')]
+        result, _ = self.refresh(rows=rows)
+        self.assertEqual(result['selected_games'], {GAME['game_id']: selected})
+        self.assertEqual(result['status'], 'READY'); self.assertEqual(result['metrics']['joined'], 2)
+        self.assertEqual(result['metrics']['observed_zero'], 1); self.assertEqual(result['metrics']['observed_positive'], 1)
+        report = json.loads((self.root/result['report']['path']).read_bytes())
+        self.assertIn('pgo_player_identity.py', report['inputs'])
+        self.assertIn('research/pgo_offensive_usage_20260912/inventory-v2-addendum.md', report['inputs'])
+        self.assertTrue(all(not row['pfr_id'] for row in self.roster))
+
+    def test_v2_conflicting_identity_never_becomes_target_zero(self):
+        def conflict(players):
+            sf = next(p for p in players if p['last_name'] == 'SF'); sf['birth_date'] = '1996-01-02'
+        selected, players = self.save_v2(conflict)
+        self.row['pfr_player_id'] = next(p['pfr_id'] for p in players if p['last_name'] == 'SF')
+        result, _ = self.refresh()
+        self.assertEqual(result['status'], 'READY'); self.assertEqual(result['metrics']['joined'], 0)
+        self.assertEqual(result['metrics']['observed_zero'], 0)
+        snapshot, roster = inventory.load_inventory(self.root, selected)
+        self.assertEqual(next(r for r in roster if r['team'] == 'SF')['pfr_id'], '')
+        self.assertEqual(next(t for t in snapshot['teams'] if t['team'] == 'SF')['players'][0]['usage_identity']['status'], 'CONFLICT')
+
+    def test_v2_archive_completed_at_t60_cannot_replace_v1_cohort(self):
+        self.save_v2(durable=GAME['lock_at'])
+        result, _ = self.refresh()
+        self.assertEqual(result['selected_games'], {GAME['game_id']: self.first})
+
+    def test_v2_team_version_mismatch_rejected(self):
+        selected, _ = self.save_v2(); snapshot, roster = inventory.load_inventory(self.root, selected)
+        next(t for t in snapshot['teams'] if t['team'] == 'SF')['inventory_version'] = 1
+        with self.assertRaises(ValueError): self.api.link(snapshot, roster, [], self.final, CHECK)
+
+    def test_v2_qualified_provider_alias_is_used_only_by_v2(self):
+        def alias(players):
+            next(p for p in players if p['last_name'] == 'SF')['common_first_name'] = 'Athlete'
+        selected, players = self.save_v2(alias)
+        self.row.update(player='Athlete SF', pfr_player_id=next(p['pfr_id'] for p in players if p['last_name'] == 'SF'))
+        result, _ = self.refresh(); self.assertEqual(result['metrics']['joined'], 1)
+        v1, original = inventory.load_inventory(self.root, self.first)
+        sf = next(row for row in original if row['team'] == 'SF'); sf['_usage_identity_aliases'] = ['athlete sf']
+        result = self.api.link(v1, original, [dict(self.row, pfr_player_id=sf['pfr_id'])], self.final, CHECK)
+        self.assertEqual(result['joined'], 0)
+        v2, derived = inventory.load_inventory(self.root, selected)
+        self.assertEqual(self.api.link(v2, derived, [dict(self.row, player='Other Person')], self.final, CHECK)['joined'], 0)
+
+    def test_v2_duplicate_provider_pfr_and_auxiliary_conflict_do_not_admit(self):
+        for row in self.roster: row['esb_id'] = 'roster-esb'
+        def conflicts(players):
+            sf = next(p for p in players if p['last_name'] == 'SF')
+            lar = next(p for p in players if p['last_name'] == 'LAR')
+            sf['pfr_id'] = lar['pfr_id']; sf['esb_id'] = 'other-esb'
+        selected, players = self.save_v2(conflicts)
+        self.row['pfr_player_id'] = next(p['pfr_id'] for p in players if p['last_name'] == 'SF')
+        result, _ = self.refresh(); self.assertEqual(result['metrics']['joined'], 0)
+        snapshot, roster = inventory.load_inventory(self.root, selected)
+        for team in snapshot['teams']:
+            if team['team'] in ('SF', 'LAR'):
+                self.assertEqual(team['players'][0]['usage_identity']['status'], 'CONFLICT')
+        self.assertTrue(all(not r['pfr_id'] for r in roster if r['team'] in ('SF', 'LAR')))
+
+    def test_v2_actual_pinned_offensive_linemen_missing_ids_link_zero_and_positive(self):
+        from research.pgo_replacement_depth_20260910 import capture as source
+        repo = Path(__file__).resolve().parents[1]
+        ref = dict(path='source-archive/49de6434fb4ec3d13abb7de9906bf931fb35ea4fcb2e7ac357ca8e1d3e3d6e92.csv.gz',
+                   sha256='49de6434fb4ec3d13abb7de9906bf931fb35ea4fcb2e7ac357ca8e1d3e3d6e92', bytes=362154,
+                   url=source.ROSTER_URL, captured_at='2026-09-12T23:54:42.450271+00:00')
+        real = list(source._csv(source.read_source(repo/'docs/evidence/season-2026', ref, '2026-09-13T02:17:58Z')))
+        # Exact excerpts of full provider SHA b2fd8b7a...; observations are used in a disposable synthetic game only.
+        pairs = [('SF', '00-0027857', 'WillTr21', 'Trent Williams', 'Trenton', 'Trent', 'Williams', '1988-07-19'),
+                 ('LAR', '00-0030097', 'QuesDa00', 'David Quessenberry', 'David', 'David', 'Quessenberry', '1990-08-24')]
+        for row in self.roster: row.update(birth_date='1995-01-02', pfr_id='')
+        providers = identity_rows(self.roster)
+        for team, gsis, pfr, name, first, common, last, dob in pairs:
+            row = next(r for r in real if inventory.normalize_team(r['team']) == team and r['gsis_id'] == gsis)
+            self.assertEqual(row['pfr_id'], ''); self.assertEqual(row['position'], 'OL')
+            index = next(i for i,r in enumerate(self.roster) if r['team'] == team)
+            self.roster[index] = {key:row.get(key, '') for key in self.roster[index]}
+            self.depth[index].update(gsis_id=gsis, player_name=row['full_name'], pos_abb='LT')
+            providers[index].update(gsis_id=gsis, pfr_id=pfr, display_name=name, first_name=first,
+                                    common_first_name=common, last_name=last, birth_date=dob)
+        checked = '2026-09-13T02:17:58Z'
+        game = dict(GAME, kickoff='2026-09-14T00:35:00Z', lock_at='2026-09-13T23:35:00Z')
+        for row in self.depth: row['dt'] = checked
+        state = dict(schema_version=1, season=2026, checked_at=checked,
+                     source_captures=sources(self.root, self.roster, self.depth, checked), weeks=[dict(games=[game])])
+        state['source_captures'].append(identity_source(self.root, providers, checked))
+        state['offensive_inventory'] = inventory.capture(state, self.root, checked, inventory_version=2)
+        pointer = archive(self.root, state, '2026-09-13T02:17:59Z'); snapshot, roster = inventory.load_inventory(self.root, pointer)
+        final = dict(self.final, kickoff=game['kickoff'], finalized_at='2026-09-14T04:00:00Z')
+        snaps = [dict(self.row, team=t, opponent='SF' if t == 'LAR' else 'LA', pfr_player_id=pfr,
+                      player=name, offense_snaps='0' if t == 'SF' else '25') for t,_,pfr,name,*_ in pairs]
+        linked = self.api.link(snapshot, roster, snaps, final, '2026-09-14T05:00:00Z')
+        self.assertEqual((linked['joined'], linked['observed_zero'], linked['observed_positive']), (2,1,1))
 
 
 if __name__ == '__main__':

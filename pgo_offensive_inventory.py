@@ -5,7 +5,7 @@ from datetime import timedelta
 from pathlib import Path
 import re
 
-from pgo_season import require, sha, utc
+from pgo_season import canonical, require, sha, utc
 from pgo_season_availability import load_availability
 from pgo_season_rollover import load_archive
 from pgo_sources import CURRENT_TEAMS, normalize_team
@@ -99,10 +99,11 @@ def build_teams(roster, depth, observations, checked_at, depth_captured_at):
     return teams
 
 
-def capture(state, root, checked_at):
+def capture(state, root, checked_at, *, inventory_version=1):
     """Detached observation; eligibility requires a later verified durable archive."""
     root = Path(root); clock = utc(checked_at)
-    result = dict(inventory_version=1, status='BLOCKED', blocked_reason=None, generated_at=clock.isoformat(),
+    require(type(inventory_version) is int and inventory_version in (1, 2), 'Invalid offensive inventory version')
+    result = dict(inventory_version=inventory_version, status='BLOCKED', blocked_reason=None, generated_at=clock.isoformat(),
                   sources=[], games=[], teams=[], forecast_adjustment=None)
     refs = [*state.get('source_captures', []), *state.get('sources', []),
             *state.get('rankings', {}).get('source_captures', []),
@@ -120,6 +121,21 @@ def capture(state, root, checked_at):
         chosen[url] = copy.deepcopy(ref)
     roster = list(source._csv(source.read_source(root, chosen[source.ROSTER_URL], checked_at)))
     depth = source._csv(source.read_source(root, chosen[source.DEPTH_URL], checked_at))
+    identities = None
+    if inventory_version == 2:
+        import pgo_player_identity as identity
+        matches = [ref for ref in refs if ref.get('url') == identity.URL]
+        if not matches: return dict(result, blocked_reason='Missing archived offensive player identity source.')
+        require(all(utc(ref['captured_at']) <= clock and
+                    (not ref.get('published_at') or utc(ref['published_at']) <= utc(ref['captured_at'])) for ref in matches),
+                'Invalid offensive identity source clock')
+        latest = max(utc(ref['captured_at']) for ref in matches)
+        newest = [ref for ref in matches if utc(ref['captured_at']) == latest]
+        require(len({canonical(ref) for ref in newest}) == 1, 'Conflicting offensive identity source references')
+        if clock-latest > timedelta(hours=24):
+            return dict(result, blocked_reason='Offensive player identity source is older than 24 hours.')
+        chosen[identity.URL] = copy.deepcopy(newest[0])
+        _, identities = identity.resolve(roster, identity.parse(identity.read_source(root, newest[0], checked_at)))
     games = source.eligible_games(state, checked_at); observations = {}; packages = {}
     for game in games:
         ref = game.get('availability', {}).get('source_archive')
@@ -143,8 +159,12 @@ def capture(state, root, checked_at):
         raw = (root/ref/'manifest.json').read_bytes()
         source_refs.append(dict(path=ref+'/manifest.json', sha256=sha(raw), bytes=len(raw),
                                 captured_at=package['checked_at'], kind='verified_official_availability'))
-    return dict(result, status=STATUS, sources=source_refs,
-                teams=build_teams(roster, depth, observations, checked_at, chosen[source.DEPTH_URL]['captured_at']),
+    teams = build_teams(roster, depth, observations, checked_at, chosen[source.DEPTH_URL]['captured_at'])
+    if inventory_version == 2:
+        for team in teams:
+            team['inventory_version'] = 2
+            for player in team['players']: player['usage_identity'] = copy.deepcopy(identities[player['gsis_id']])
+    return dict(result, status=STATUS, sources=source_refs, teams=teams,
                 games=[{key: game[key] for key in ('game_id', 'season', 'week', 'game_type', 'home', 'away', 'kickoff', 'lock_at')} for game in games])
 
 
@@ -152,13 +172,19 @@ def load_inventory(root, pointer):
     state, manifest = load_archive(root, pointer)
     snapshot = copy.deepcopy(state.get('offensive_inventory') or {})
     require(state['schema_version'] == 1 and state['season'] == 2026 and
-            type(snapshot.get('inventory_version')) is int and snapshot['inventory_version'] == 1,
+            type(snapshot.get('inventory_version')) is int and snapshot['inventory_version'] in (1, 2),
             'Missing or invalid offensive inventory version')
     require(snapshot['status'] == STATUS and snapshot['forecast_adjustment'] is None and
             utc(snapshot['generated_at']) <= utc(state['checked_at']) <= utc(manifest['created_at']), 'Invalid offensive inventory clocks/status')
-    require(snapshot == capture(state, root, snapshot['generated_at']), 'Offensive inventory does not reproduce from archived sources')
+    require(snapshot == capture(state, root, snapshot['generated_at'], inventory_version=snapshot['inventory_version']),
+            'Offensive inventory does not reproduce from archived sources')
     refs = [ref for ref in snapshot['sources'] if ref.get('url') == source.ROSTER_URL]
     require(len(refs) == 1, 'Missing unique offensive roster reference')
     roster = list(source._csv(source.read_source(root, refs[0], snapshot['generated_at'])))
+    if snapshot['inventory_version'] == 2:
+        import pgo_player_identity as identity
+        refs = [ref for ref in snapshot['sources'] if ref.get('url') == identity.URL]
+        require(len(refs) == 1, 'Missing unique offensive player identity reference')
+        roster, _ = identity.resolve(roster, identity.parse(identity.read_source(root, refs[0], snapshot['generated_at'])))
     snapshot['completed_at'] = manifest['created_at']
     return snapshot, roster

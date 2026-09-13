@@ -19,7 +19,7 @@ class SeasonExperimentIntegrationTests(unittest.TestCase):
             detached['weeks'][0]['games'][0]['margin'] = 999
             raise ValueError('Target missing')
         modules = {
-            'pgo_offensive_inventory': SimpleNamespace(capture=lambda *args: copy.deepcopy(inventory)),
+            'pgo_offensive_inventory': SimpleNamespace(capture=lambda *args, **kwargs: copy.deepcopy(inventory)),
             'pgo_offensive_usage_monitor': SimpleNamespace(refresh_shadow=usage),
             'pgo_score_range_monitor': SimpleNamespace(refresh_shadow=lambda *args: dict(status='WAITING'))}
         with patch.dict('sys.modules', modules):
