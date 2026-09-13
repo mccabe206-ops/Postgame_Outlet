@@ -106,3 +106,7 @@ pgo_player_identity.py text eol=lf
 tests/test_pgo_player_identity.py text eol=lf
 tests/test_pgo_season_experiments.py text eol=lf
 tests/test_pgo_experiment_view.py text eol=lf
+pgo_inactive_nfl.py text eol=lf
+tests/test_pgo_inactive_nfl.py text eol=lf
+tests/fixtures/pgo_availability_v4_nfl.html -text
+tests/fixtures/pgo_availability_v4_nfl.json -text
