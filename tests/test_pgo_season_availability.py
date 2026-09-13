@@ -115,6 +115,84 @@ class SeasonAvailabilityTests(unittest.TestCase):
             raw=next((directory/'raw').iterdir());raw.write_bytes(raw.read_bytes()+b'x')
             with self.assertRaises(ValueError):availability.load_availability(directory)
 
+    def test_current_matchup_link_beats_four_old_or_wrong_links_and_untrusted_link(self):
+        actual='https://www.patriots.com/news/2026-week-2-inactives-patriots-at-seahawks'
+        skipped={
+            'https://www.patriots.com/news/2025-week-2-inactives-patriots-at-seahawks',
+            'https://www.patriots.com/news/2026-week-1-inactives-patriots-at-seahawks',
+            'https://www.patriots.com/news/2026-week-2-inactives-patriots-at-bills',
+        }
+        homepage=''.join([
+            '<a href="/news/2025-week-2-inactives-patriots-at-seahawks">2025 Week 2 Inactives: Patriots at Seahawks</a>',
+            '<a href="/news/2026-week-1-inactives-patriots-at-seahawks">2026 Week 1 Inactives: Patriots at Seahawks</a>',
+            '<a href="/news/2026-week-2-inactives-patriots-at-bills">2026 Week 2 Inactives: Patriots at Bills</a>',
+            '<a href="/news/inactives-archive">Patriots inactives archive</a>',
+            f'<a href="{actual}">2026 Week 2 Inactives: Patriots at Seahawks</a>',
+            '<a href="https://evil.example/news/2026-week-2-inactives-patriots-at-seahawks">Inactives: Patriots at Seahawks</a>',
+        ])
+        calls=[]
+        def fetch(url):
+            calls.append(url)
+            raw=(self.report(status='Questionable') if url==availability.REPORT_URL else
+                 homepage if url=='https://www.patriots.com/news/' else
+                 self.article() if url==actual else
+                 self.article(headline='Week 2 Inactives: Patriots at Bills')
+                 if url.startswith('https://www.patriots.com/news/') else '<html></html>')
+            return {'body':raw.encode(),'status':200,'final_url':url}
+        with tempfile.TemporaryDirectory() as tmp:
+            out=availability.capture_availability([self.game],self.roster,self.qbs,
+                Path(tmp)/'capture',now=self.now,fetch=fetch)
+        self.assertIn(actual,calls)
+        self.assertTrue(skipped.isdisjoint(calls))
+        self.assertNotIn('https://evil.example/news/2026-week-2-inactives-patriots-at-seahawks',calls)
+        self.assertLessEqual(sum(url.startswith('https://www.patriots.com/news/')
+                                 and url != 'https://www.patriots.com/news/' for url in calls),4)
+        self.assertEqual(out['games'][self.game['game_id']]['teams']['NE']['final_inactives_status'],
+                         'VERIFIED_LIST')
+
+    def test_generic_official_team_inactive_link_remains_a_fallback(self):
+        article='https://www.patriots.com/news/inactives-roster-update'
+        calls=[]
+        def fetch(url):
+            calls.append(url)
+            raw=(self.report(status='Questionable') if url==availability.REPORT_URL else
+                 '<a href="/news/inactives-roster-update">Patriots inactives</a>'
+                 if url=='https://www.patriots.com/news/' else
+                 self.article() if url==article else '<html></html>')
+            return {'body':raw.encode(),'status':200,'final_url':url}
+        with tempfile.TemporaryDirectory() as tmp:
+            out=availability.capture_availability([self.game],self.roster,self.qbs,
+                Path(tmp)/'capture',now=self.now,fetch=fetch)
+        self.assertIn(article,calls)
+        self.assertEqual(out['games'][self.game['game_id']]['teams']['NE']['final_inactives_status'],
+                         'VERIFIED_LIST')
+
+    def test_club_links_matching_another_slate_game_do_not_outrank_own_fallback(self):
+        other=dict(self.game,game_id='2026_02_ATL_BUF',home='BUF',away='ATL')
+        roster=self.roster+[
+            dict(team='ATL',gsis_id='00-0000004',full_name='Atlanta Quarterback',position='QB',status='ACT'),
+            dict(team='BUF',gsis_id='00-0000005',full_name='Buffalo Quarterback',position='QB',status='ACT'),
+        ]
+        qbs={**self.qbs,'ATL':'00-0000004','BUF':'00-0000005'}
+        generic='https://www.patriots.com/news/inactives-roster-update'
+        wrong=[f'https://www.patriots.com/news/week-2-inactives-falcons-at-bills-{i}' for i in range(4)]
+        homepage=''.join(f'<a href="{url}">Week 2 Inactives: Falcons at Bills</a>' for url in wrong)
+        homepage+='<a href="/news/inactives-roster-update">Patriots inactives</a>'
+        calls=[]
+        def fetch(url):
+            calls.append(url)
+            raw=(self.report(status='Questionable') if url==availability.REPORT_URL else
+                 homepage if url=='https://www.patriots.com/news/' else
+                 self.article() if url==generic else '<html></html>')
+            return {'body':raw.encode(),'status':200,'final_url':url}
+        with tempfile.TemporaryDirectory() as tmp:
+            out=availability.capture_availability([self.game,other],roster,qbs,
+                Path(tmp)/'capture',now=self.now,fetch=fetch)
+        self.assertIn(generic,calls)
+        self.assertTrue(set(wrong).isdisjoint(calls))
+        self.assertEqual(out['games'][self.game['game_id']]['teams']['NE']['final_inactives_status'],
+                         'VERIFIED_LIST')
+
     def test_capture_that_crosses_lock_during_write_is_failed_and_unloadable(self):
         clock=[availability._utc(self.now)]
         def fetch(url):
@@ -226,6 +304,133 @@ class SeasonAvailabilityTests(unittest.TestCase):
         for article in (nfl,club):
             with self.assertRaises(ValueError):availability.parse_final_inactives(raw(article),game,'SF',captured,parser_version=1)
 
+    def v3_articles(self):
+        fixture=Path(__file__).parent/'fixtures/pgo_availability_v3_articles.json'
+        return json.loads(fixture.read_bytes())
+
+    def v3_game(self, game_id):
+        season,week,away,home=game_id.split('_')
+        return dict(game_id=game_id,season=int(season),week=int(week),game_type='REG',home=home,away=away,
+                    kickoff='2026-09-13T17:00:00Z',lock_at='2026-09-13T16:00:00Z')
+
+    def v3_raw(self, article, list_items=()):
+        page='<script type="application/ld+json">'+json.dumps(
+            dict(article,**{'@type':'NewsArticle'}),ensure_ascii=False)+'</script>'
+        return (page+'<article><ul>'+''.join('<li>'+item+'</li>' for item in list_items)+'</ul></article>').encode('utf-8')
+
+    def test_v3_actual_club_articles_are_team_bound_and_exactly_bounded(self):
+        expected_counts={'ATL':6,'BUF':7,'CLE':7,'CIN':7,'HOU':6,'NYJ':5,
+                         'IND':6,'CAR':7,'TB':7,'PIT':6,'NO':7,'TEN':7,'JAX':6}
+        parsed={}
+        for row in self.v3_articles():
+            value=availability.parse_final_inactives(self.v3_raw(row['article'],row.get('list_items',())),self.v3_game(row['game_id']),
+                row['source_team'],row['captured_at'],parser_version=3,source_team=row['source_team'])
+            with self.subTest(team=row['source_team']):
+                self.assertEqual(len(value['observations']),expected_counts[row['source_team']])
+                self.assertEqual(value['unparsed_lines'],[])
+                self.assertTrue(all(r['position'] in availability.POSITIONS for r in value['observations']))
+            parsed[row['source_team']]=value
+        nyj=parsed['NYJ']
+        self.assertEqual([(r['position'],r['name']) for r in nyj['observations']],[
+            ('K','Blake Grupe'),('RB','Kene Nwangwu'),('EDGE','Joseph Ossai'),
+            ('CB',"D'Angelo Ponds"),('LB','Trevin Wallace')])
+        self.assertNotIn('Jason Sanders',json.dumps(nyj))
+        self.assertEqual(nyj['published_at'],'2026-09-13T15:30:00+00:00')
+        self.assertEqual(nyj['modified_at'],'2026-09-13T15:29:19.748000+00:00')
+        self.assertLess(availability._utc(nyj['modified_at']),availability._utc(nyj['published_at']))
+        jax=parsed['JAX']
+        self.assertEqual([r['name'] for r in jax['observations']],
+            ['Quinn Ewers','Tanner Koziol','Daniel Faalele','Wesley Williams','Bryan Thomas Jr.','Jalen Huskey'])
+        self.assertFalse({'LeQuint Allen Jr.','Nick Mullens'} & {r['name'] for r in jax['observations']})
+        row=next(r for r in self.v3_articles() if r['source_team']=='NYJ')
+        with self.assertRaises(ValueError):
+            availability.parse_final_inactives(self.v3_raw(row['article']),self.v3_game(row['game_id']),'NYJ',
+                row['captured_at'],parser_version=2)
+
+    def test_v3_club_admission_rejects_bad_binding_matchup_and_each_clock(self):
+        row=next(r for r in self.v3_articles() if r['source_team']=='NYJ')
+        raw=self.v3_raw(row['article']);game=self.v3_game(row['game_id'])
+        for team,source_team,candidate,captured in (
+            ('NYJ',None,game,row['captured_at']),
+            ('TEN','NYJ',game,row['captured_at']),
+            ('NYJ','NYJ',{**game,'game_id':'2026_01_NYJ_JAX','home':'JAX'},row['captured_at']),
+            ('NYJ','NYJ',game,'2026-09-13T15:29:59Z'),
+        ):
+            with self.subTest(team=team,source_team=source_team,game=candidate['game_id'],captured=captured), self.assertRaises(ValueError):
+                availability.parse_final_inactives(raw,candidate,team,captured,parser_version=3,source_team=source_team)
+        article={**row['article'],'dateModified':'2026-09-12T16:59:59Z'}
+        with self.assertRaises(ValueError):
+            availability.parse_final_inactives(self.v3_raw(article),game,'NYJ',row['captured_at'],
+                parser_version=3,source_team='NYJ')
+        article={**row['article'],'datePublished':game['kickoff'],'dateModified':game['kickoff']}
+        with self.assertRaises(ValueError):
+            availability.parse_final_inactives(self.v3_raw(article),game,'NYJ','2026-09-13T17:00:01Z',
+                parser_version=3,source_team='NYJ')
+
+    def test_v3_explicit_opponent_sections_parse_but_tba_sections_do_not(self):
+        rows={r['source_team']:r for r in self.v3_articles()}
+        for source_team,target,count in (('CAR','CAR',7),('CAR','CHI',6),('NO','NO',7),('NO','DET',5)):
+            row=rows[source_team]
+            parsed=availability.parse_final_inactives(self.v3_raw(row['article']),self.v3_game(row['game_id']),
+                target,row['captured_at'],parser_version=3,source_team=source_team)
+            with self.subTest(source=source_team,target=target):
+                self.assertEqual(len(parsed['observations']),count)
+                self.assertEqual(parsed['unparsed_lines'],[])
+        for source_team,target in (('TB','CIN'),('TEN','NYJ')):
+            row=rows[source_team]
+            with self.subTest(source=source_team,target=target), self.assertRaises(ValueError):
+                availability.parse_final_inactives(self.v3_raw(row['article']),self.v3_game(row['game_id']),
+                    target,row['captured_at'],parser_version=3,source_team=source_team)
+
+    def test_v3_own_club_list_precedes_later_opponent_supplement(self):
+        rows={r['source_team']:r for r in self.v3_articles()}
+        game=self.v3_game('2026_01_ATL_PIT')
+        roster=[dict(team='ATL',gsis_id='00-0000001',full_name='Cooper Rush',position='QB',status='ACT'),
+                dict(team='PIT',gsis_id='00-0000002',full_name='Aaron Rodgers',position='QB',status='ACT')]
+        qbs={'ATL':'00-0000001','PIT':'00-0000002'}
+        def source(team):
+            row=rows[team]
+            return dict(kind='official_inactives',team=team,url=row['url'],final_url=row['url'],status=200,
+                        started_at=row['captured_at'],captured_at=row['captured_at'],body=self.v3_raw(row['article']))
+        checked='2026-09-13T15:40:00Z'
+        opponent_only=availability.build_availability([game],roster,qbs,[source('PIT')],checked_at=checked,parser_version=3)
+        names=[r['name'] for r in opponent_only['games'][game['game_id']]['teams']['ATL']['observations']]
+        self.assertIn('Malcolm DeWalt',names)
+        both=availability.build_availability([game],roster,qbs,[source('ATL'),source('PIT')],checked_at=checked,parser_version=3)
+        names=[r['name'] for r in both['games'][game['game_id']]['teams']['ATL']['observations']]
+        self.assertIn('Malcom DeWalt IV',names)
+        self.assertNotIn('Malcolm DeWalt',names)
+
+    def test_v3_club_only_in_and_out_discovery_uses_actual_list_boundaries(self):
+        row=next(r for r in self.v3_articles() if r['source_team']=='JAX')
+        game=self.v3_game(row['game_id'])
+        players=[('JAX','QB','Trevor Lawrence'),('CLE','QB','Deshaun Watson'),
+                 *[('JAX',position,name) for position,name in (
+                     ('QB','Quinn Ewers'),('TE','Tanner Koziol'),('OL','Daniel Faalele'),
+                     ('DE','Wesley Williams'),('DE','Bryan Thomas Jr.'),('S','Jalen Huskey'))]]
+        roster=[dict(team=team,position=position,full_name=name,gsis_id=f'00-{index:07d}',status='ACT')
+                for index,(team,position,name) in enumerate(players,1)]
+        qbs={'JAX':roster[0]['gsis_id'],'CLE':roster[1]['gsis_id']}
+        league='https://www.nfl.com/news/in-and-out-2026-week-1-allen-active'
+        calls=[]
+        def fetch(url):
+            calls.append(url)
+            body=(b'<title>NFL Injury Report - Week 1 of the 2026 Season</title>' if url==availability.REPORT_URL else
+                  f'<a href="{row["url"]}">In and Out, 2026 Week 1: Allen Active for Opener</a>'.encode()
+                  if url=='https://www.jaguars.com/news/' else
+                  f'<a href="{league}">In and Out, 2026 Week 1</a>'.encode() if url==availability.NFL_NEWS_URL else
+                  self.v3_raw(row['article'],row['list_items']) if url==row['url'] else b'<html></html>')
+            return dict(body=body,status=200,final_url=url)
+        with tempfile.TemporaryDirectory() as tmp:
+            result=availability.capture_availability([game],roster,qbs,Path(tmp)/'capture',
+                now='2026-09-13T15:41:00Z',fetch=fetch)
+        self.assertIn(row['url'],calls)
+        self.assertNotIn(league,calls)
+        team=result['games'][game['game_id']]['teams']['JAX']
+        self.assertEqual(team['final_inactives_status'],'VERIFIED_LIST')
+        self.assertEqual({r['name'] for r in team['observations']},
+            {'Quinn Ewers','Tanner Koziol','Daniel Faalele','Wesley Williams','Bryan Thomas Jr.','Jalen Huskey'})
+
     def test_context_time_window_keeps_default_lock_and_pregame_article_limits(self):
         args=([self.game],self.roster,self.qbs,[])
         with self.assertRaisesRegex(ValueError,'T-60'):
@@ -265,7 +470,7 @@ class SeasonAvailabilityTests(unittest.TestCase):
             self.assertEqual(calls.count(availability.NFL_NEWS_URL),1);self.assertEqual(calls.count(url),1)
             self.assertEqual(out,availability.load_availability(directory))
             inputs=json.loads(gzip.decompress((directory/'inputs.json.gz').read_bytes()))
-            self.assertEqual((inputs['purpose'],inputs['parser_version']),('context',2))
+            self.assertEqual((inputs['purpose'],inputs['parser_version']),('context',3))
             for team in out['games'][game['game_id']]['teams'].values():
                 self.assertEqual(team['final_inactives_status'],'VERIFIED_LIST')
                 self.assertEqual(team['expected_qb_status'],'UNKNOWN')

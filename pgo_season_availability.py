@@ -121,8 +121,8 @@ def _inputs(games, roster, expected_qbs, checked_at, purpose='forecast'):
 class _Page(HTMLParser):
     def __init__(self, text):
         super().__init__(convert_charrefs=True)
-        self.scripts, self.links = [], []
-        self.script, self.link = None, None
+        self.scripts, self.links, self.list_items = [], [], []
+        self.script, self.link, self.list_item = None, None, None
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
@@ -131,6 +131,8 @@ class _Page(HTMLParser):
             self.script = []
         if tag == 'a' and attrs.get('href'):
             self.link = [attrs['href'], []]
+        if tag == 'li' and self.list_item is None:
+            self.list_item = []
 
     def handle_endtag(self, tag):
         if tag == 'script' and self.script is not None:
@@ -139,12 +141,17 @@ class _Page(HTMLParser):
         if tag == 'a' and self.link is not None:
             self.links.append((self.link[0], ' '.join(self.link[1])))
             self.link = None
+        if tag == 'li' and self.list_item is not None:
+            self.list_items.append(''.join(self.list_item))
+            self.list_item = None
 
     def handle_data(self, data):
         if self.script is not None:
             self.script.append(data)
         if self.link is not None:
             self.link[1].append(data)
+        if self.list_item is not None:
+            self.list_item.append(data)
 
 
 def _parse_final_inactives_v1(raw, game, team, captured_at):
@@ -217,12 +224,76 @@ def _matches_matchup(text, game):
     return bool(named or re.search(r'(?<![A-Za-z0-9])(?:' + tags + r')(?![A-Za-z0-9])', text, re.I))
 
 
-def parse_final_inactives(raw, game, team, captured_at, *, parser_version=2):
-    """Version 2 admits observed league headings and dated club list introductions."""
-    if type(parser_version) is not int or parser_version not in (1,2):
+def _matches_period(text, game):
+    seasons = {int(value) for value in re.findall(r'(?<!\d)(20\d{2})(?!\d)', text)}
+    weeks = {int(value) for value in re.findall(r'\bweek[\s_-]*(\d{1,2})\b', text, re.I)}
+    return (not seasons or seasons == {game['season']}) and (not weeks or weeks == {game['week']})
+
+
+def _mentions_wrong_team(text, game):
+    for team in TEAM_NAMES:
+        if team in (game['home'],game['away']):
+            continue
+        aliases = [TEAM_NAMES[team],TEAM_NAMES[team].split()[-1]]
+        if team == 'SF':
+            aliases.append('Niners')
+        if any(re.search(r'(?<![A-Za-z0-9])'+re.escape(name)+r'(?![A-Za-z0-9])',text,re.I)
+               for name in aliases):
+            return True
+    return False
+
+
+def _parse_final_inactives_v3(raw, game, team, captured_at, source_team):
+    if source_team not in (None,game['home'],game['away']):
+        raise ValueError('Inactive club source is outside the matchup')
+    text = raw.decode('utf-8')
+    page = _Page(text.split('<article',1)[0])
+    list_items = _Page(text).list_items
+    articles = []
+    for script in page.scripts:
+        value = json.loads(script)
+        for item in value if isinstance(value,list) else [value]:
+            if isinstance(item,dict) and item.get('@type') in ('NewsArticle','Article') and item.get('articleBody'):
+                articles.append(item)
+    if len(articles) != 1:
+        raise ValueError('No unique official inactive article')
+    article = articles[0]; headline = article.get('headline','')
+    body = html.unescape(article['articleBody']).replace('\\n','\n')
+    from pgo_inactive_club import is_player_row, parse_club_body
+    for item in list_items:
+        item = ' '.join(html.unescape(item).split())
+        if is_player_row(item) and item in body:
+            body = body.replace(item,item+'\n',1)
+    published = _utc(article['datePublished']); modified = _utc(article.get('dateModified',article['datePublished']))
+    kickoff, captured = _utc(game['kickoff']), _utc(captured_at)
+    lower = kickoff-timedelta(hours=24)
+    if not (lower <= published < kickoff and published <= captured
+            and lower <= modified < kickoff and modified <= captured):
+        raise ValueError('Inactive article publication/modification is outside the pregame capture window')
+    try:
+        return parse_final_inactives(raw,game,team,captured_at,parser_version=2)
+    except ValueError:
+        pass
+    if source_team is None:
+        raise ValueError('Version 3 club format requires a team-bound source')
+    parts = [part.strip() for part in body.split('\n\n') if part.strip()]
+    opening = ' '.join(parts[:3])
+    context = headline+' '+opening
+    if (not re.search(r'\binactive(?:s)?\b',context,re.I) or not _matches_matchup(context,game)
+            or not _matches_period(headline+' '+(parts[0] if parts else ''),game)):
+        raise ValueError('Inactive article does not identify this matchup and period')
+    parsed = parse_club_body(body,headline,source_team,team,game)
+    return dict(parsed,published_at=published.isoformat(),modified_at=modified.isoformat(),headline=headline)
+
+
+def parse_final_inactives(raw, game, team, captured_at, *, parser_version=2, source_team=None):
+    """Replay v1/v2 exactly; v3 adds observed, team-bound club formats."""
+    if type(parser_version) is not int or parser_version not in (1,2,3):
         raise ValueError('Unsupported availability parser version')
     if parser_version == 1:
         return _parse_final_inactives_v1(raw, game, team, captured_at)
+    if parser_version == 3:
+        return _parse_final_inactives_v3(raw,game,team,captured_at,source_team)
     if team not in (game['home'],game['away']):
         raise ValueError('Inactive source team is outside the matchup')
     articles = []
@@ -284,7 +355,7 @@ def parse_final_inactives(raw, game, team, captured_at, *, parser_version=2):
 def build_availability(games, roster, expected_qbs, sources, *, checked_at, purpose='forecast', parser_version=2):
     """Pure replay of supplied raw official captures; unknown never means healthy."""
     now = _utc(checked_at)
-    if type(parser_version) is not int or parser_version not in (1,2) or (parser_version == 1 and purpose != 'forecast'):
+    if type(parser_version) is not int or parser_version not in (1,2,3) or (parser_version == 1 and purpose != 'forecast'):
         raise ValueError('Unsupported availability parser version/purpose')
     indexed = _inputs(games, roster, expected_qbs, now, purpose)
     names = {team: _unique_roster_name_ids([r for r in indexed.values() if r['team'] == team], [])[0]
@@ -293,7 +364,7 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at, purp
     for source in sources:
         kind, team = source['kind'], source.get('team')
         legacy_source = kind in ('official_report','team_news','official_inactives') and (kind == 'official_report') == (team is None)
-        league_source = parser_version == 2 and team is None and kind in ('league_news','official_inactives')
+        league_source = parser_version in (2,3) and team is None and kind in ('league_news','official_inactives')
         if not (legacy_source or league_source):
             raise ValueError('Invalid availability source kind/team')
         if team is not None and team not in TEAM_NAMES:
@@ -322,7 +393,9 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at, purp
             observations, errors, final_lists = [], [], []
             report_status = 'UNKNOWN'
             for source, record in admitted:
-                if source.get('team') not in (None, team):
+                source_team = source.get('team')
+                if (source_team not in (None,team)
+                        and (parser_version != 3 or source_team not in (game['home'],game['away']))):
                     continue
                 if 'error' in source:
                     errors.append(source['error'])
@@ -347,13 +420,16 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at, purp
                                 source_url=source['url'], captured_at=source['captured_at'], published_at=None,
                                 source_sha256=record['sha256']))
                     else:
-                        parsed = parse_final_inactives(source['body'], game, team, source['captured_at'], parser_version=parser_version)
+                        parsed = parse_final_inactives(source['body'],game,team,source['captured_at'],
+                            parser_version=parser_version,source_team=source_team)
                         final_lists.append((parsed, source, record))
                 except (KeyError, TypeError, UnicodeError, ValueError) as error:
                     errors.append(str(error))
             final_status = 'UNKNOWN'
             if final_lists:
-                parsed, source, record = max(final_lists, key=lambda value: _utc(value[0]['modified_at']))
+                key = ((lambda value:(value[1].get('team') == team,_utc(value[0]['modified_at'])))
+                       if parser_version == 3 else (lambda value:_utc(value[0]['modified_at'])))
+                parsed, source, record = max(final_lists,key=key)
                 final_status = 'PARTIAL' if parsed['unparsed_lines'] else 'VERIFIED_LIST'
                 errors.extend('Unparsed inactive-list line: ' + line for line in parsed['unparsed_lines'])
                 observations.extend(dict(row, source_kind=source['kind'], source_url=source['url'],
@@ -388,7 +464,7 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at, purp
             summary='; '.join(f'{team}: official report {row["report_status"]}, final inactives {row["final_inactives_status"]}' for team,row in teams.items()))
     result = dict(schema_version=1, checked_at=now.isoformat(), games=output, sources=metadata,
                 policy='Official dated context only. Missing reports or inactive-list names do not establish health. Non-QB numerical adjustments are not applied. Expected quarterback must play.')
-    if parser_version == 2:
+    if parser_version in (2,3):
         result.update(purpose=purpose,parser_version=parser_version)
     return result
 
@@ -445,25 +521,43 @@ def capture_availability(games, roster, expected_qbs, output, *, purpose='foreca
     for source in source_rows:
         if source['kind'] not in ('team_news','league_news') or 'error' in source:
             continue
-        seen = set(); matched_counts = {g['game_id']:0 for g in games}
-        for href, title in _Page(source['body'].decode('utf-8', errors='replace')).links:
-            if not re.search(r'\binactive(?:s)?\b', title + ' ' + href, re.I):
+        candidates = {}
+        team_game = next((g for g in games if source['team'] in (g['home'],g['away'])),None)
+        for order,(href, title) in enumerate(_Page(source['body'].decode('utf-8', errors='replace')).links):
+            discover = title+' '+href
+            club_alias = source['kind'] == 'team_news' and re.search(r'\bin\s+and\s+out\b|/in-and-out(?:-|/)',discover,re.I)
+            if not re.search(r'\binactive(?:s)?\b',discover,re.I) and not club_alias:
                 continue
             url = urljoin(source['url'], href)
-            matched = [g for g in games if _matches_matchup(title+' '+urlsplit(url).path.replace('-',' '),g)]
-            if source['kind'] == 'league_news' and not any(matched_counts[g['game_id']]<4 for g in matched):
-                continue
             try:
                 _url(url, source['team'], 'official_inactives')
             except ValueError:
                 continue
-            if url not in seen:
-                seen.add(url)
-                links.append(('official_inactives',source['team'],url))
-                for game in matched:
+            text = title+' '+urlsplit(url).path.replace('-',' ')
+            match_games = [team_game] if team_game is not None else games
+            matched = [g for g in match_games if _matches_matchup(text,g) and _matches_period(text,g)]
+            if source['kind'] == 'league_news' and not matched:
+                continue
+            if team_game is not None and not _matches_period(text,team_game):
+                continue
+            if team_game is not None and not matched and _mentions_wrong_team(text,team_game):
+                continue
+            priority = 0 if matched else 1
+            candidate = (priority,order,url,matched)
+            if url not in candidates or candidate[:2] < candidates[url][:2]:
+                candidates[url] = candidate
+        ordered = sorted(candidates.values())
+        if source['kind'] == 'team_news':
+            links.extend(('official_inactives',source['team'],url) for _,_,url,_ in ordered[:4])
+        else:
+            matched_counts = {g['game_id']:0 for g in games}
+            for _,_,url,matched in ordered:
+                eligible = [g for g in matched if matched_counts[g['game_id']] < 4]
+                if not eligible:
+                    continue
+                links.append(('official_inactives',None,url))
+                for game in eligible:
                     matched_counts[game['game_id']] += 1
-            if source['kind'] == 'team_news' and len(seen) == 4:
-                break
     with ThreadPoolExecutor(max_workers=4) as pool:
         source_rows.extend(pool.map(capture, links))
     try:
@@ -472,8 +566,8 @@ def capture_availability(games, roster, expected_qbs, output, *, purpose='foreca
                 source['file'] = f'raw/{index:03d}.html.gz'
                 _write(directory/source['file'], gzip.compress(source['body'],mtime=0))
         checked = _clock(now).isoformat()
-        result = build_availability(games, roster, expected_qbs, source_rows, checked_at=checked, purpose=purpose, parser_version=2)
-        inputs = dict(games=games, roster=roster, expected_qbs=expected_qbs, purpose=purpose, parser_version=2)
+        result = build_availability(games,roster,expected_qbs,source_rows,checked_at=checked,purpose=purpose,parser_version=3)
+        inputs = dict(games=games,roster=roster,expected_qbs=expected_qbs,purpose=purpose,parser_version=3)
         _write(directory/'inputs.json.gz',gzip.compress(_json(inputs),mtime=0))
         _write(directory/'capture.json',_json(dict(checked_at=checked,sources=result['sources'])))
         _write(directory/'availability.json',_json(result))
