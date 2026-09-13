@@ -16,7 +16,7 @@ The separate injury experiment remains research-only; no numerical promotion.
 - [x] Verify all eight early forecasts, both completed results, locked market
   lines, and all 136 confidence points remain unchanged after the lock.
 - [x] Add and review versioned admission of NFL's new rendered full-slate lists.
-- [ ] Run final release checks, publish the NFL reader, and verify public state.
+- [x] Run final release checks, publish the NFL reader, and verify public state.
 
 Evidence lives in output/sunday-ready-20260913. Root owns publication and this
 plan; starter_capture_tool owns discovery code/tests; market_stats reviews;
@@ -84,3 +84,27 @@ All 54 official injury rows for the remaining ten Sunday teams matched the
 saved inputs in a fresh check; no contrary expected-QB announcement was found.
 Afternoon final-inactive windows begin about 18:55 UTC, Sunday night's at 22:50.
 DEN-KC enters the 24-hour capture window at September 14 00:15 UTC.
+
+Final released source is `f07aacf41f618ea216cb43619720b5aefc77282a` (feature
+`f850534`). Canonical season run `34769316311` succeeded and published
+`610b33d1632f4c7a73d8aaf0be3b9538f9098c5f` before kickoff. At 16:53:19 UTC,
+the public board, Forecast Lab, stylesheet, current pointer and actual Shopify
+iframe response matched the deployed Git bytes. All 37 early-context archive
+members passed hash checks and full offline v4 replay. Public coverage is twelve
+verified teams, four partial, zero unknown; Baltimore's seven names all resolve.
+Five name matches remain unresolved across ATL, BUF, HOU and IND.
+
+The public early context was captured at 16:47:12 UTC, after lock. All eight early
+forecasts, both accepted prior results, locked market records and all 136 fixed
+confidence points remain unchanged against the original prelock archive.
+The last independent expected-QB check at 16:41:46 UTC found no announced change.
+Canonical GitHub full-suite run `34769316298` passed all three test commands at
+16:55:59 UTC: 1,079 passed and one skipped on the exact released Git/LF source.
+
+Afternoon and Sunday-night five-minute pregame checks remain configured; base
+result/weekly refresh runs every fifteen minutes. Actual capture timing can lag
+because of runner delays, serialized jobs and verification before capture.
+The durable closeout and receipts are in the original publication worktree's
+`output/sunday-ready-20260913/final-readiness-report.md`. Current release checkout
+is `D:\CodexWorktrees\Postgame_Outlet-sunday-release-20260913`; the older local
+`b09975d` checkpoint is retained audit evidence, not current live source.

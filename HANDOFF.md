@@ -4,6 +4,8 @@ This repository owns McCabe's ratings/writeups, the independent PGO weekly model
 
 Read [README](README.md), [season operations](docs/pgo-season-operations.md) and [Shopify hosting](SHOPIFY.md). Dated handoffs describe their checkpoints; live main and the verified season pointer determine current state.
 
+September 13 Sunday inactive-reader release and verification: [readiness record](plans/2026-09-13-sunday-kickoff-readiness.md). The published reader preserves locked forecasts; four early teams still have unresolved player-name matches. Non-QB numerical adjustments remain research-only.
+
 ## Routine operation
 
 - McCabe inputs are in `data/ratings.csv`, `data/qb_depth.csv` and `data/writeups/`. Every release row must have `needs_review=N`; resolve unreviewed flags rather than bypassing them.
