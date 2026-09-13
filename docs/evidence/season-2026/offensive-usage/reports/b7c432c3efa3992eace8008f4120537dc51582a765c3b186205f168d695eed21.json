@@ -1,0 +1,3246 @@
+{
+  "excluded_target_rows": [],
+  "forecast_adjustment": null,
+  "games": [
+    {
+      "cohort_rows": 66,
+      "eligible_final_rows": 66,
+      "game_id": "2026_01_CLE_JAX",
+      "joined": 0,
+      "missing_target": 66,
+      "observed_positive": 0,
+      "observed_zero": 0,
+      "pending": 0
+    }
+  ],
+  "inputs": {
+    "pgo_injury_usage_monitor.py": "383c6a9495e189d99ca1b434dfefda84c172fb8bc0052d2ad85e4fe45c26193d",
+    "pgo_offensive_inventory.py": "e60044cfc14f089b417925890b01bcc01f438e558ed891be6f6c2f55b462a3fa",
+    "pgo_offensive_usage_monitor.py": "9450489dac8076328175c828224d02739accf0e57abd71ec35b93f793a9c0085",
+    "pgo_player_identity.py": "0ab6098449af3c83b3b4d7827c50bc6924ca338146446adf2932d455fb45cd6a",
+    "research/pgo_offensive_usage_20260912/charter.md": "6ba46560d7d64820e4d8d0601da3fcd960ce24ff6fa02bf29caef2259674a33d",
+    "research/pgo_offensive_usage_20260912/inventory-v2-addendum.md": "ab6f800c47eec39a0652748b0a89cc311f975c2082803ff725e1b696823ce490",
+    "research/pgo_replacement_depth_20260910/capture.py": "b86829d227b2b5fb33a5c15df4beec47aec03c53ab534aefea48eb67fb109121"
+  },
+  "metrics": {
+    "cohort_rows": 66,
+    "coverage": 0.0,
+    "eligible_final_rows": 66,
+    "exclusions": {
+      "NO_MATCHED_TARGET_ROW": 66
+    },
+    "games": 1,
+    "invalid_target_rows": 0,
+    "joined": 0,
+    "missing_target": 66,
+    "observed_positive": 0,
+    "observed_zero": 0,
+    "pending": 0,
+    "unresolved_target_identities": 0
+  },
+  "predictive_status": "UNAVAILABLE",
+  "rows": [
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "FB",
+          "rank": 1,
+          "slot": "12"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0031595",
+      "name": "Michael Burton",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "michael burton"
+        ],
+        "pfr_id": "BurtMi00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RT",
+          "rank": 1,
+          "slot": "7"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0035234",
+      "name": "Tytus Howard",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "tytus howard"
+        ],
+        "pfr_id": "HowaTy00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "C",
+          "rank": 1,
+          "slot": "5"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0035526",
+      "name": "Elgton Jenkins",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "elgton jenkins"
+        ],
+        "pfr_id": "JenkEl00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 1,
+          "slot": "1"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036407",
+      "name": "Jerry Jeudy",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "jerry jeudy"
+        ],
+        "pfr_id": "JeudJe00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 5,
+          "slot": "2"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036630",
+      "name": "Tylan Wallace",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "tylan wallace"
+        ],
+        "pfr_id": "WallTy00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "OUT"
+      ],
+      "confirmed_unavailable": true,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RG",
+          "rank": 1,
+          "slot": "6"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036953",
+      "name": "Teven Jenkins",
+      "observations": [
+        {
+          "captured_at": "2026-09-13T15:55:25.543472+00:00",
+          "gsis_id": "00-0036953",
+          "identity_status": "RESOLVED",
+          "injury": "Back",
+          "name": "Teven Jenkins",
+          "position": "G",
+          "practice_status": "Did Not Participate In Practice",
+          "published_at": null,
+          "source_kind": "official_report",
+          "source_sha256": "da6e8f5f804d49ccae24d99e7de96673513884b08c1ba7d9e4edbe2d1c547fa3",
+          "source_url": "https://www.nfl.com/injuries/",
+          "status": "OUT"
+        }
+      ],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "teven jenkins"
+        ],
+        "pfr_id": "JenkTe00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LG",
+          "rank": 3,
+          "slot": "4"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036983",
+      "name": "Kendrick Green",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "RES",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "kendrick green"
+        ],
+        "pfr_id": "GreeKe02",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LG",
+          "rank": 1,
+          "slot": "4"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0037818",
+      "name": "Zion Johnson",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "zion johnson"
+        ],
+        "pfr_id": "JohnZi00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "C",
+          "rank": 3,
+          "slot": "5"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0038609",
+      "name": "Luke Wypler",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "luke wypler"
+        ],
+        "pfr_id": "WyplLu00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "TE",
+          "rank": 2,
+          "slot": "10"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0038710",
+      "name": "Blake Whiteheart",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "blake whiteheart"
+        ],
+        "pfr_id": "WhitBl01",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0038794",
+      "name": "Jaleel McLaughlin",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "jaleel mclaughlin"
+        ],
+        "pfr_id": "McLaJa00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LT",
+          "rank": 2,
+          "slot": "3"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0039014",
+      "name": "Dawand Jones",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "dawand jones"
+        ],
+        "pfr_id": "JoneDa07",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0039275",
+      "name": "Messiah Swinson",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "messiah swinson"
+        ],
+        "pfr_id": "SwinMe00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LG",
+          "rank": 2,
+          "slot": "4"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0039350",
+      "name": "Zak Zinter",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "zak zinter"
+        ],
+        "pfr_id": "ZintZa00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0039386",
+      "name": "Bub Means",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "bub means",
+          "jerrod means"
+        ],
+        "pfr_id": "MeanBu00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0039650",
+      "name": "Bryce Oliver",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "bryce oliver"
+        ],
+        "pfr_id": "OlivBr02",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0039755",
+      "name": "KT Leveston",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "k.t. leveston",
+          "kaitori leveston",
+          "kt leveston"
+        ],
+        "pfr_id": "LeveKT00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 6,
+          "slot": "8"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0039920",
+      "name": "Malachi Corley",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "malachi corley"
+        ],
+        "pfr_id": "CorlMa00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RB",
+          "rank": 2,
+          "slot": "11"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040162",
+      "name": "Dylan Sampson",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "dylan sampson"
+        ],
+        "pfr_id": "SampDy00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RB",
+          "rank": 3,
+          "slot": "11"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040466",
+      "name": "Raheim Sanders",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "raheim sanders"
+        ],
+        "pfr_id": "SandRa00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "TE",
+          "rank": 1,
+          "slot": "10"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040663",
+      "name": "Harold Fannin Jr.",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "harold fannin"
+        ],
+        "pfr_id": "FannHa00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 4,
+          "slot": "1"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040782",
+      "name": "Isaiah Bond",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "isaiah bond"
+        ],
+        "pfr_id": "BondIs00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RB",
+          "rank": 1,
+          "slot": "11"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040784",
+      "name": "Quinshon Judkins",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "quinshon judkins"
+        ],
+        "pfr_id": "JudkQu00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LT",
+          "rank": 1,
+          "slot": "3"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041030",
+      "name": "Spencer Fano",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "spencer fano"
+        ],
+        "pfr_id": "FanoSp00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 3,
+          "slot": "8"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041037",
+      "name": "Denzel Boston",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "denzel boston"
+        ],
+        "pfr_id": "BostDe00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RG",
+          "rank": 2,
+          "slot": "6"
+        },
+        {
+          "group": "3WR 1TE",
+          "position": "RT",
+          "rank": 2,
+          "slot": "7"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041049",
+      "name": "Austin Barber",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "austin barber"
+        ],
+        "pfr_id": "BarbAu00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "QUESTIONABLE"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "C",
+          "rank": 2,
+          "slot": "5"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041073",
+      "name": "Parker Brailsford",
+      "observations": [
+        {
+          "captured_at": "2026-09-13T15:55:25.543472+00:00",
+          "gsis_id": "00-0041073",
+          "identity_status": "RESOLVED",
+          "injury": "Thumb",
+          "name": "Parker Brailsford",
+          "position": "C",
+          "practice_status": "Limited Participation in Practice",
+          "published_at": null,
+          "source_kind": "official_report",
+          "source_sha256": "da6e8f5f804d49ccae24d99e7de96673513884b08c1ba7d9e4edbe2d1c547fa3",
+          "source_url": "https://www.nfl.com/injuries/",
+          "status": "QUESTIONABLE"
+        }
+      ],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": true,
+      "usage_identity": {
+        "aliases": [
+          "parker brailsford"
+        ],
+        "pfr_id": "BraiPa01",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "TE",
+          "rank": 4,
+          "slot": "10"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041087",
+      "name": "Joe Royer",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "RES",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "joe royer"
+        ],
+        "pfr_id": "RoyeJo01",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "TE",
+          "rank": 3,
+          "slot": "10"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041131",
+      "name": "Carsen Ryan",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "carsen ryan"
+        ],
+        "pfr_id": "RyanCa00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041287",
+      "name": "Kole Wilson",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "kole wilson"
+        ],
+        "pfr_id": "WilsKo00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 2,
+          "slot": "2"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041547",
+      "name": "KC Concepcion",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "JAX",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "CLE",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "k.c. concepcion",
+          "kc concepcion",
+          "kevin concepcion"
+        ],
+        "pfr_id": "ConcKC00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RB",
+          "rank": 4,
+          "slot": "11"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0032104",
+      "name": "Ameer Abdullah",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "ameer abdullah"
+        ],
+        "pfr_id": "AbduAm00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0034817",
+      "name": "Geron Christian",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "geron christian"
+        ],
+        "pfr_id": "ChriGe01",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "NO_GAME_DESIGNATION"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 3,
+          "slot": "8"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0034960",
+      "name": "Jakobi Meyers",
+      "observations": [
+        {
+          "captured_at": "2026-09-13T15:55:25.543472+00:00",
+          "gsis_id": "00-0034960",
+          "identity_status": "RESOLVED",
+          "injury": "",
+          "name": "Jakobi Meyers",
+          "position": "WR",
+          "practice_status": "Limited Participation in Practice",
+          "published_at": null,
+          "source_kind": "official_report",
+          "source_sha256": "da6e8f5f804d49ccae24d99e7de96673513884b08c1ba7d9e4edbe2d1c547fa3",
+          "source_url": "https://www.nfl.com/injuries/",
+          "status": "NO_GAME_DESIGNATION"
+        }
+      ],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "jakobi meyers"
+        ],
+        "pfr_id": "MeyeJa01",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "C",
+          "rank": 3,
+          "slot": "5"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0035062",
+      "name": "Sam Mustipher",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "RES",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "sam mustipher"
+        ],
+        "pfr_id": "MustSa01",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RG",
+          "rank": 3,
+          "slot": "6"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0035112",
+      "name": "Patrick Mekari",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "RES",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "patrick mekari"
+        ],
+        "pfr_id": "MekaPa00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RG",
+          "rank": 1,
+          "slot": "6"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036327",
+      "name": "Ezra Cleveland",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "ezra cleveland"
+        ],
+        "pfr_id": "ClevEz00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036497",
+      "name": "Tim Jones",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "tim jones"
+        ],
+        "pfr_id": "JoneTi00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "TE",
+          "rank": 3,
+          "slot": "10"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036590",
+      "name": "Quintin Morris",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "quintin morris"
+        ],
+        "pfr_id": "MorrQu00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "NO_GAME_DESIGNATION"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RT",
+          "rank": 1,
+          "slot": "7"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036655",
+      "name": "Cole Van Lanen",
+      "observations": [
+        {
+          "captured_at": "2026-09-13T15:55:25.543472+00:00",
+          "gsis_id": "00-0036655",
+          "identity_status": "RESOLVED",
+          "injury": "",
+          "name": "Cole Van Lanen",
+          "position": "T",
+          "practice_status": "Limited Participation in Practice",
+          "published_at": null,
+          "source_kind": "official_report",
+          "source_sha256": "da6e8f5f804d49ccae24d99e7de96673513884b08c1ba7d9e4edbe2d1c547fa3",
+          "source_url": "https://www.nfl.com/injuries/",
+          "status": "NO_GAME_DESIGNATION"
+        }
+      ],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "cole van lanen"
+        ],
+        "pfr_id": "VanxCo00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036841",
+      "name": "Austin Trammell",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "austin trammell",
+          "stephen trammell"
+        ],
+        "pfr_id": "TramAu00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LT",
+          "rank": 2,
+          "slot": "3"
+        },
+        {
+          "group": "3WR 1TE",
+          "position": "RT",
+          "rank": 2,
+          "slot": "7"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036975",
+      "name": "Walker Little",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "walker little"
+        ],
+        "pfr_id": "LittWa00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "C",
+          "rank": 1,
+          "slot": "5"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0036985",
+      "name": "Robert Hainsey",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "robert hainsey"
+        ],
+        "pfr_id": "HainRo00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LG",
+          "rank": 2,
+          "slot": "4"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0038118",
+      "name": "Daniel Faalele",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "daniel faalele"
+        ],
+        "pfr_id": "FaalDa00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 2,
+          "slot": "2"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0038606",
+      "name": "Parker Washington",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "christopher washington",
+          "parker washington"
+        ],
+        "pfr_id": "WashPa01",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RB",
+          "rank": 2,
+          "slot": "11"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0038611",
+      "name": "Chris Rodriguez Jr.",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "chris rodriguez"
+        ],
+        "pfr_id": "RodrCh00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0038729",
+      "name": "Kilian Zierer",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "kilian zierer"
+        ],
+        "pfr_id": "ZierKi00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "NO_GAME_DESIGNATION"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LT",
+          "rank": 1,
+          "slot": "3"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0038934",
+      "name": "Anton Harrison",
+      "observations": [
+        {
+          "captured_at": "2026-09-13T15:55:25.543472+00:00",
+          "gsis_id": "00-0038934",
+          "identity_status": "RESOLVED",
+          "injury": "",
+          "name": "Anton Harrison",
+          "position": "T",
+          "practice_status": "Did Not Participate In Practice",
+          "published_at": null,
+          "source_kind": "official_report",
+          "source_sha256": "da6e8f5f804d49ccae24d99e7de96673513884b08c1ba7d9e4edbe2d1c547fa3",
+          "source_url": "https://www.nfl.com/injuries/",
+          "status": "NO_GAME_DESIGNATION"
+        }
+      ],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "anton harrison"
+        ],
+        "pfr_id": "HarrAn00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "TE",
+          "rank": 1,
+          "slot": "10"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0038935",
+      "name": "Brenton Strange",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "brenton strange"
+        ],
+        "pfr_id": "StraBr00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0039489",
+      "name": "Hayden Rucci",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "hayden rucci"
+        ],
+        "pfr_id": "RuccHa00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 1,
+          "slot": "1"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0039893",
+      "name": "Brian Thomas Jr.",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "brian thomas"
+        ],
+        "pfr_id": "ThomBr06",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RG",
+          "rank": 2,
+          "slot": "6"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040146",
+      "name": "Wyatt Milum",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "wyatt milum"
+        ],
+        "pfr_id": "MiluWy00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "C",
+          "rank": 2,
+          "slot": "5"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040227",
+      "name": "Jonah Monheim",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "jonah monheim"
+        ],
+        "pfr_id": "MonhJo00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "QUESTIONABLE"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RB",
+          "rank": 3,
+          "slot": "11"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040238",
+      "name": "LeQuint Allen Jr.",
+      "observations": [
+        {
+          "captured_at": "2026-09-13T15:55:25.543472+00:00",
+          "gsis_id": "00-0040238",
+          "identity_status": "RESOLVED",
+          "injury": "Hip",
+          "name": "LeQuint Allen Jr.",
+          "position": "RB",
+          "practice_status": "Limited Participation in Practice",
+          "published_at": null,
+          "source_kind": "official_report",
+          "source_sha256": "da6e8f5f804d49ccae24d99e7de96673513884b08c1ba7d9e4edbe2d1c547fa3",
+          "source_url": "https://www.nfl.com/injuries/",
+          "status": "QUESTIONABLE"
+        }
+      ],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": true,
+      "usage_identity": {
+        "aliases": [
+          "lequint allen"
+        ],
+        "pfr_id": "AlleLe01",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040410",
+      "name": "Eli Cox",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "eli cox"
+        ],
+        "pfr_id": "CoxxEl00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 4,
+          "slot": "1"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040718",
+      "name": "Travis Hunter",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "travis hunter"
+        ],
+        "pfr_id": "HuntTr00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "RB",
+          "rank": 1,
+          "slot": "11"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0040719",
+      "name": "Bhayshul Tuten",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "bhayshul tuten"
+        ],
+        "pfr_id": "TuteBh00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LG",
+          "rank": 1,
+          "slot": "4"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041050",
+      "name": "Emmanuel Pregnon",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "emmanuel pregnon"
+        ],
+        "pfr_id": "PregEm00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "TE",
+          "rank": 4,
+          "slot": "10"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041084",
+      "name": "Tanner Koziol",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "tanner koziol"
+        ],
+        "pfr_id": "KoziTa00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "WR",
+          "rank": 5,
+          "slot": "2"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041100",
+      "name": "Josh Cameron",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "josh cameron"
+        ],
+        "pfr_id": "CameJo01",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "NAME_MISMATCH",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041106",
+      "name": "C.J. Williams",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "c.j. williams",
+          "christian williams"
+        ],
+        "pfr_id": "WillCJ00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "LG",
+          "rank": 3,
+          "slot": "4"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041208",
+      "name": "Garrett DiGiorgio",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "OL",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "RES",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "garrett digiorgio"
+        ],
+        "pfr_id": "DiGiGa00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041216",
+      "name": "Trebor Pena",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "trebor pena"
+        ],
+        "pfr_id": "PenaTr00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041217",
+      "name": "J'Mari Taylor",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "RB",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "j'mari taylor"
+        ],
+        "pfr_id": "TaylJM00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "UNLISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041220",
+      "name": "Michael Wortham",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "WR",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "DEV",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "michael wortham"
+        ],
+        "pfr_id": "WortMi00",
+        "reasons": [],
+        "status": "PROVIDER"
+      }
+    },
+    {
+      "availability_statuses": [
+        "UNKNOWN"
+      ],
+      "confirmed_unavailable": false,
+      "depth_rows": [
+        {
+          "group": "3WR 1TE",
+          "position": "TE",
+          "rank": 2,
+          "slot": "10"
+        }
+      ],
+      "depth_snapshot_at": "2026-09-13T12:42:08+00:00",
+      "depth_status": "LISTED",
+      "exclusions": [
+        "NO_MATCHED_TARGET_ROW"
+      ],
+      "final_observed_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "gsis_id": "00-0041503",
+      "name": "Nate Boerkircher",
+      "observations": [],
+      "offensive_snaps": null,
+      "opponent": "CLE",
+      "position": "TE",
+      "pregame_completed_at": "2026-09-13T15:56:02.191488+00:00",
+      "pregame_generated_at": "2026-09-13T15:55:53.637000+00:00",
+      "roster_context": {
+        "game_type": "REG",
+        "season": "2026",
+        "week": "1"
+      },
+      "roster_status": "ACT",
+      "target_captured_at": "2026-09-13T19:48:35.543611+00:00",
+      "target_pfr_id": null,
+      "target_source_row": null,
+      "team": "JAX",
+      "uncertain": false,
+      "usage_identity": {
+        "aliases": [
+          "nate boerkircher"
+        ],
+        "pfr_id": "BoerNa00",
+        "reasons": [],
+        "status": "ROSTER"
+      }
+    }
+  ],
+  "selected_games": {
+    "2026_01_CLE_JAX": {
+      "manifest_sha256": "d287014769e4b3a259a4d15e8c7ff910de6ef275c058724d33918560b2a78fb1",
+      "path": "runs-v2/20260913T155553637000Z"
+    }
+  },
+  "source": {
+    "bytes": 1465,
+    "captured_at": "2026-09-13T19:48:35.543611+00:00",
+    "path": "injury-usage/targets/2c05f934282690b55cf606b5f0270f749c03aac5bfd58ceaab2ed205dc715fc5/receipt.json",
+    "sha256": "2c05f934282690b55cf606b5f0270f749c03aac5bfd58ceaab2ed205dc715fc5"
+  },
+  "verified_finals": [
+    {
+      "actual_margin": 24,
+      "away_score": 10,
+      "away_team": "CLE",
+      "event_id": "401872922",
+      "final_time_basis": "First captured explicit provider FINAL status",
+      "finalized_at": "2026-09-13T19:47:49.490539+00:00",
+      "game_id": "2026_01_CLE_JAX",
+      "game_type": "REG",
+      "home_score": 34,
+      "home_team": "JAX",
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "season": 2026,
+      "source": {
+        "bytes": 167080,
+        "captured_at": "2026-09-13T19:47:49.490539+00:00",
+        "path": "source-archive/54b0124a62a29a16de81659d178da4c60043b551519959955cafd763faf46782.json",
+        "sha256": "54b0124a62a29a16de81659d178da4c60043b551519959955cafd763faf46782",
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2026&seasontype=2&week=1"
+      },
+      "week": 1
+    }
+  ]
+}
