@@ -1,6 +1,6 @@
 """Append-only official availability captures for upcoming regular-season games.
 
-capture_availability(games, roster, expected_qbs, output, *, now=None, fetch=None)
+capture_availability(games, roster, expected_qbs, output, *, purpose='forecast', now=None, fetch=None)
 returns a mapping with games keyed by game_id. Inputs are normalized game dicts,
 fresh roster rows, and TEAM -> expected GSIS ID. No forecast or rating is changed.
 fetch, when supplied, returns {body: bytes, status: 200, final_url: HTTPS_URL}.
@@ -26,6 +26,7 @@ from research.pgo_postseason_candidate.sources import injury_tables
 
 
 REPORT_URL = 'https://www.nfl.com/injuries/'
+NFL_NEWS_URL = 'https://www.nfl.com/news/'
 TEAM_NAMES = {value[0]: name for name, value in generate_site.TEAM.items()}
 TEAM_DOMAINS = dict(zip(
     'ARI ATL BAL BUF CAR CHI CIN CLE DAL DEN DET GB HOU IND JAX KC LAC LAR LV MIA MIN NE NO NYG NYJ PHI PIT SEA SF TB TEN WAS'.split(),
@@ -66,13 +67,15 @@ def _url(value, team=None, kind=None):
         raise ValueError('Availability source is not an allowed official HTTPS URL')
     if kind == 'official_report' and parsed.path.rstrip('/') != '/injuries':
         raise ValueError('Official injury source path differs')
-    if kind in ('team_news', 'official_inactives') and not parsed.path.startswith('/news'):
+    if kind in ('team_news', 'league_news', 'official_inactives') and not parsed.path.startswith('/news'):
         raise ValueError('Official club source must be a news page')
     return value
 
 
-def _inputs(games, roster, expected_qbs, checked_at):
+def _inputs(games, roster, expected_qbs, checked_at, purpose='forecast'):
     now = _utc(checked_at)
+    if purpose not in ('forecast', 'context'):
+        raise ValueError('Unknown availability purpose')
     indexed, seen_games, used_teams = {}, set(), set()
     for row in roster:
         row = dict(row, team=normalize_team(row.get('team', '')))
@@ -98,8 +101,12 @@ def _inputs(games, roster, expected_qbs, checked_at):
                 or game['game_id'] in seen_games or home in used_teams or away in used_teams):
             raise ValueError('Invalid or duplicate availability game identity')
         kickoff, cutoff = _utc(game['kickoff']), _utc(game['lock_at'])
-        if cutoff != kickoff - timedelta(minutes=60) or not now < cutoff:
+        if cutoff != kickoff - timedelta(minutes=60):
+            raise ValueError('Availability cutoff differs from T-60')
+        if purpose == 'forecast' and not now < cutoff:
             raise ValueError('Availability capture must finish before the T-60 lock')
+        if purpose == 'context' and not kickoff-timedelta(hours=24) <= now <= kickoff+timedelta(hours=6):
+            raise ValueError('Availability context must finish within 24 hours before through 6 hours after kickoff')
         seen_games.add(game['game_id'])
         used_teams.update((home, away))
         for team in (home, away):
@@ -114,8 +121,8 @@ def _inputs(games, roster, expected_qbs, checked_at):
 class _Page(HTMLParser):
     def __init__(self, text):
         super().__init__(convert_charrefs=True)
-        self.scripts, self.links = [], []
-        self.script, self.link = None, None
+        self.scripts, self.links, self.list_items = [], [], []
+        self.script, self.link, self.list_item = None, None, None
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
@@ -124,6 +131,8 @@ class _Page(HTMLParser):
             self.script = []
         if tag == 'a' and attrs.get('href'):
             self.link = [attrs['href'], []]
+        if tag == 'li' and self.list_item is None:
+            self.list_item = []
 
     def handle_endtag(self, tag):
         if tag == 'script' and self.script is not None:
@@ -132,15 +141,20 @@ class _Page(HTMLParser):
         if tag == 'a' and self.link is not None:
             self.links.append((self.link[0], ' '.join(self.link[1])))
             self.link = None
+        if tag == 'li' and self.list_item is not None:
+            self.list_items.append(''.join(self.list_item))
+            self.list_item = None
 
     def handle_data(self, data):
         if self.script is not None:
             self.script.append(data)
         if self.link is not None:
             self.link[1].append(data)
+        if self.list_item is not None:
+            self.list_item.append(data)
 
 
-def parse_final_inactives(raw, game, team, captured_at):
+def _parse_final_inactives_v1(raw, game, team, captured_at):
     """Admit only a dated matchup article with a recognizable team inactive list."""
     if team not in (game['home'],game['away']):
         raise ValueError('Inactive source team is outside the matchup')
@@ -196,16 +210,162 @@ def parse_final_inactives(raw, game, team, captured_at):
                 modified_at=modified.isoformat(), headline=headline)
 
 
-def build_availability(games, roster, expected_qbs, sources, *, checked_at):
+def _team_pattern(team):
+    aliases = [TEAM_NAMES[team], TEAM_NAMES[team].split()[-1], team]
+    if team == 'SF':
+        aliases.append('Niners')
+    return '(?:' + '|'.join(re.escape(name) for name in sorted(set(aliases), key=len, reverse=True)) + ')'
+
+
+def _matches_matchup(text, game):
+    named = all(re.search(r'(?<![A-Za-z0-9])' + _team_pattern(t) + r'(?![A-Za-z0-9])', text, re.I)
+                for t in (game['home'], game['away']))
+    tags = '|'.join(re.escape(a+'vs'+b) for a,b in ((game['home'],game['away']),(game['away'],game['home'])))
+    return bool(named or re.search(r'(?<![A-Za-z0-9])(?:' + tags + r')(?![A-Za-z0-9])', text, re.I))
+
+
+def _matches_period(text, game):
+    seasons = {int(value) for value in re.findall(r'(?<!\d)(20\d{2})(?!\d)', text)}
+    weeks = {int(value) for value in re.findall(r'\bweek[\s_-]*(\d{1,2})\b', text, re.I)}
+    return (not seasons or seasons == {game['season']}) and (not weeks or weeks == {game['week']})
+
+
+def _mentions_wrong_team(text, game):
+    for team in TEAM_NAMES:
+        if team in (game['home'],game['away']):
+            continue
+        aliases = [TEAM_NAMES[team],TEAM_NAMES[team].split()[-1]]
+        if team == 'SF':
+            aliases.append('Niners')
+        if any(re.search(r'(?<![A-Za-z0-9])'+re.escape(name)+r'(?![A-Za-z0-9])',text,re.I)
+               for name in aliases):
+            return True
+    return False
+
+
+def _parse_final_inactives_v3(raw, game, team, captured_at, source_team):
+    if source_team not in (None,game['home'],game['away']):
+        raise ValueError('Inactive club source is outside the matchup')
+    text = raw.decode('utf-8')
+    page = _Page(text.split('<article',1)[0])
+    list_items = _Page(text).list_items
+    articles = []
+    for script in page.scripts:
+        value = json.loads(script)
+        for item in value if isinstance(value,list) else [value]:
+            if isinstance(item,dict) and item.get('@type') in ('NewsArticle','Article') and item.get('articleBody'):
+                articles.append(item)
+    if len(articles) != 1:
+        raise ValueError('No unique official inactive article')
+    article = articles[0]; headline = article.get('headline','')
+    body = html.unescape(article['articleBody']).replace('\\n','\n')
+    from pgo_inactive_club import is_player_row, parse_club_body
+    for item in list_items:
+        item = ' '.join(html.unescape(item).split())
+        if is_player_row(item) and item in body:
+            body = body.replace(item,item+'\n',1)
+    published = _utc(article['datePublished']); modified = _utc(article.get('dateModified',article['datePublished']))
+    kickoff, captured = _utc(game['kickoff']), _utc(captured_at)
+    lower = kickoff-timedelta(hours=24)
+    if not (lower <= published < kickoff and published <= captured
+            and lower <= modified < kickoff and modified <= captured):
+        raise ValueError('Inactive article publication/modification is outside the pregame capture window')
+    try:
+        return parse_final_inactives(raw,game,team,captured_at,parser_version=2)
+    except ValueError:
+        pass
+    if source_team is None:
+        raise ValueError('Version 3 club format requires a team-bound source')
+    parts = [part.strip() for part in body.split('\n\n') if part.strip()]
+    opening = ' '.join(parts[:3])
+    context = headline+' '+opening
+    if (not re.search(r'\binactive(?:s)?\b',context,re.I) or not _matches_matchup(context,game)
+            or not _matches_period(headline+' '+(parts[0] if parts else ''),game)):
+        raise ValueError('Inactive article does not identify this matchup and period')
+    parsed = parse_club_body(body,headline,source_team,team,game)
+    return dict(parsed,published_at=published.isoformat(),modified_at=modified.isoformat(),headline=headline)
+
+
+def parse_final_inactives(raw, game, team, captured_at, *, parser_version=2, source_team=None):
+    """Replay v1/v2 exactly; v3 adds observed, team-bound club formats."""
+    if type(parser_version) is not int or parser_version not in (1,2,3):
+        raise ValueError('Unsupported availability parser version')
+    if parser_version == 1:
+        return _parse_final_inactives_v1(raw, game, team, captured_at)
+    if parser_version == 3:
+        return _parse_final_inactives_v3(raw,game,team,captured_at,source_team)
+    if team not in (game['home'],game['away']):
+        raise ValueError('Inactive source team is outside the matchup')
+    articles = []
+    for script in _Page(raw.decode('utf-8').split('<article',1)[0]).scripts:
+        value = json.loads(script)
+        for item in value if isinstance(value,list) else [value]:
+            if isinstance(item,dict) and item.get('@type') in ('NewsArticle','Article') and item.get('articleBody'):
+                articles.append(item)
+    if len(articles) != 1:
+        raise ValueError('No unique official inactive article')
+    article = articles[0]; headline = article.get('headline','')
+    if not re.search(r'\binactive(?:s)?\b',headline,re.I) or not _matches_matchup(headline,game):
+        raise ValueError('Inactive article does not identify this matchup')
+    if any(int(week) != game['week'] for week in re.findall(r'\bweek\s+(\d+)\b',headline,re.I)):
+        raise ValueError('Inactive article identifies a different week')
+    published = _utc(article['datePublished']); modified = _utc(article.get('dateModified',article['datePublished']))
+    kickoff, captured = _utc(game['kickoff']), _utc(captured_at)
+    if not kickoff-timedelta(hours=24) <= published <= modified <= min(captured,kickoff):
+        raise ValueError('Inactive article publication/modification is outside the pregame capture window')
+    body = html.unescape(article['articleBody']).replace('\\n','\n')
+    headings = []
+    for candidate in (game['home'],game['away']):
+        other = game['away'] if candidate == game['home'] else game['home']
+        label = _team_pattern(candidate)
+        pattern = (r'^[ \t]*(?:' + label + r"(?:['\u2019]s?|')?\s*(?:inactives\s*:?)?|"
+                   r'Here are (?:the )?' + label + r' inactives for Week\s+(\d+)\s+against (?:the )?'
+                   + _team_pattern(other) + r':?)[ \t]*$')
+        for match in re.finditer(pattern,body,re.I|re.M):
+            if match[1] and int(match[1]) != game['week']:
+                raise ValueError('Inactive list heading identifies a different week')
+            headings.append((match.start(),match.end(),candidate))
+    headings.sort()
+    selected = [index for index,value in enumerate(headings) if value[2] == team]
+    if not selected:
+        # Preserve supported older club formats, including concatenated headings.
+        return _parse_final_inactives_v1(raw,game,team,captured_at)
+    if len(selected) != 1:
+        raise ValueError('Ambiguous inactive list headings')
+    index = selected[0]; start = headings[index][1]
+    end = headings[index+1][0] if index+1 < len(headings) else len(body)
+    positions = '|'.join(sorted(POSITIONS,key=len,reverse=True))
+    observations, unparsed = [], []
+    for line in (s.strip().lstrip('-*\u2022 ').strip() for s in body[start:end].splitlines()):
+        if not line:
+            continue
+        match = re.fullmatch(r'(' + positions + r')\s+([^()]+?)(?:\s*\(([^()]*)\))?',line)
+        if not match:
+            unparsed.append(line); continue
+        position, name, note = match.groups(); note = note or ''
+        observations.append(dict(name=name.strip(),position=position,
+            status='EMERGENCY_QB' if position == 'QB' and 'emergency' in note.casefold() else 'INACTIVE',
+            designation_note=note,source_text=line))
+    if not observations or len(observations)>32 or len({r['name'] for r in observations}) != len(observations):
+        raise ValueError('Missing, oversized or duplicate official inactive list')
+    return dict(observations=observations,unparsed_lines=unparsed,published_at=published.isoformat(),
+                modified_at=modified.isoformat(),headline=headline)
+
+
+def build_availability(games, roster, expected_qbs, sources, *, checked_at, purpose='forecast', parser_version=2):
     """Pure replay of supplied raw official captures; unknown never means healthy."""
     now = _utc(checked_at)
-    indexed = _inputs(games, roster, expected_qbs, now)
+    if type(parser_version) is not int or parser_version not in (1,2,3) or (parser_version == 1 and purpose != 'forecast'):
+        raise ValueError('Unsupported availability parser version/purpose')
+    indexed = _inputs(games, roster, expected_qbs, now, purpose)
     names = {team: _unique_roster_name_ids([r for r in indexed.values() if r['team'] == team], [])[0]
              for team in {t for g in games for t in (g['home'], g['away'])}}
     admitted, metadata, urls = [], [], set()
     for source in sources:
         kind, team = source['kind'], source.get('team')
-        if kind not in ('official_report', 'team_news', 'official_inactives') or (kind == 'official_report') != (team is None):
+        legacy_source = kind in ('official_report','team_news','official_inactives') and (kind == 'official_report') == (team is None)
+        league_source = parser_version in (2,3) and team is None and kind in ('league_news','official_inactives')
+        if not (legacy_source or league_source):
             raise ValueError('Invalid availability source kind/team')
         if team is not None and team not in TEAM_NAMES:
             raise ValueError('Invalid source team')
@@ -233,12 +393,14 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at):
             observations, errors, final_lists = [], [], []
             report_status = 'UNKNOWN'
             for source, record in admitted:
-                if source.get('team') not in (None, team):
+                source_team = source.get('team')
+                if (source_team not in (None,team)
+                        and (parser_version != 3 or source_team not in (game['home'],game['away']))):
                     continue
                 if 'error' in source:
                     errors.append(source['error'])
                     continue
-                if source['kind'] == 'team_news':
+                if source['kind'] in ('team_news','league_news'):
                     continue
                 try:
                     if source['kind'] == 'official_report':
@@ -258,13 +420,16 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at):
                                 source_url=source['url'], captured_at=source['captured_at'], published_at=None,
                                 source_sha256=record['sha256']))
                     else:
-                        parsed = parse_final_inactives(source['body'], game, team, source['captured_at'])
+                        parsed = parse_final_inactives(source['body'],game,team,source['captured_at'],
+                            parser_version=parser_version,source_team=source_team)
                         final_lists.append((parsed, source, record))
                 except (KeyError, TypeError, UnicodeError, ValueError) as error:
                     errors.append(str(error))
             final_status = 'UNKNOWN'
             if final_lists:
-                parsed, source, record = max(final_lists, key=lambda value: _utc(value[0]['modified_at']))
+                key = ((lambda value:(value[1].get('team') == team,_utc(value[0]['modified_at'])))
+                       if parser_version == 3 else (lambda value:_utc(value[0]['modified_at'])))
+                parsed, source, record = max(final_lists,key=key)
                 final_status = 'PARTIAL' if parsed['unparsed_lines'] else 'VERIFIED_LIST'
                 errors.extend('Unparsed inactive-list line: ' + line for line in parsed['unparsed_lines'])
                 observations.extend(dict(row, source_kind=source['kind'], source_url=source['url'],
@@ -297,8 +462,11 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at):
             qb_gate='BLOCKED_EXPECTED_QB_UNAVAILABLE' if blocked else 'CONDITIONAL',
             blocked_reason='Expected QB unavailable: ' + '; '.join(blocked) if blocked else None,
             summary='; '.join(f'{team}: official report {row["report_status"]}, final inactives {row["final_inactives_status"]}' for team,row in teams.items()))
-    return dict(schema_version=1, checked_at=now.isoformat(), games=output, sources=metadata,
+    result = dict(schema_version=1, checked_at=now.isoformat(), games=output, sources=metadata,
                 policy='Official dated context only. Missing reports or inactive-list names do not establish health. Non-QB numerical adjustments are not applied. Expected quarterback must play.')
+    if parser_version in (2,3):
+        result.update(purpose=purpose,parser_version=parser_version)
+    return result
 
 
 def _fetch(url):
@@ -314,10 +482,10 @@ def _write(path, raw):
         handle.write(raw)
 
 
-def capture_availability(games, roster, expected_qbs, output, *, now=None, fetch=None):
+def capture_availability(games, roster, expected_qbs, output, *, purpose='forecast', now=None, fetch=None):
     """Capture official reports once and discover bounded club inactive articles."""
     games, roster, expected_qbs = list(games), list(roster), dict(expected_qbs)
-    _inputs(games, roster, expected_qbs, _clock(now))
+    _inputs(games, roster, expected_qbs, _clock(now), purpose)
     teams={t for g in games for t in (g['home'],g['away'])}
     games=[{k:g[k] for k in ('game_id','season','week','game_type','home','away','kickoff','lock_at')} for g in games]
     fields=('team','gsis_id','full_name','first_name','football_name','last_name','position','status')
@@ -345,26 +513,51 @@ def capture_availability(games, roster, expected_qbs, output, *, now=None, fetch
     teams = sorted({t for game in games if _utc(game['kickoff']) - _clock(now) <= timedelta(hours=24)
                     for t in (game['home'], game['away'])})
     specs = [('official_report', None, REPORT_URL)] + [('team_news',t,'https://www.'+TEAM_DOMAINS[t]+'/news/') for t in teams]
+    if teams:
+        specs.append(('league_news',None,NFL_NEWS_URL))
     with ThreadPoolExecutor(max_workers=4) as pool:
         source_rows.extend(pool.map(capture, specs))
     links = []
     for source in source_rows:
-        if source['kind'] != 'team_news' or 'error' in source:
+        if source['kind'] not in ('team_news','league_news') or 'error' in source:
             continue
-        seen = set()
-        for href, title in _Page(source['body'].decode('utf-8', errors='replace')).links:
-            if not re.search(r'\binactive(?:s)?\b', title + ' ' + href, re.I):
+        candidates = {}
+        team_game = next((g for g in games if source['team'] in (g['home'],g['away'])),None)
+        for order,(href, title) in enumerate(_Page(source['body'].decode('utf-8', errors='replace')).links):
+            discover = title+' '+href
+            club_alias = source['kind'] == 'team_news' and re.search(r'\bin\s+and\s+out\b|/in-and-out(?:-|/)',discover,re.I)
+            if not re.search(r'\binactive(?:s)?\b',discover,re.I) and not club_alias:
                 continue
             url = urljoin(source['url'], href)
             try:
                 _url(url, source['team'], 'official_inactives')
             except ValueError:
                 continue
-            if url not in seen:
-                seen.add(url)
-                links.append(('official_inactives',source['team'],url))
-            if len(seen) == 4:
-                break
+            text = title+' '+urlsplit(url).path.replace('-',' ')
+            match_games = [team_game] if team_game is not None else games
+            matched = [g for g in match_games if _matches_matchup(text,g) and _matches_period(text,g)]
+            if source['kind'] == 'league_news' and not matched:
+                continue
+            if team_game is not None and not _matches_period(text,team_game):
+                continue
+            if team_game is not None and not matched and _mentions_wrong_team(text,team_game):
+                continue
+            priority = 0 if matched else 1
+            candidate = (priority,order,url,matched)
+            if url not in candidates or candidate[:2] < candidates[url][:2]:
+                candidates[url] = candidate
+        ordered = sorted(candidates.values())
+        if source['kind'] == 'team_news':
+            links.extend(('official_inactives',source['team'],url) for _,_,url,_ in ordered[:4])
+        else:
+            matched_counts = {g['game_id']:0 for g in games}
+            for _,_,url,matched in ordered:
+                eligible = [g for g in matched if matched_counts[g['game_id']] < 4]
+                if not eligible:
+                    continue
+                links.append(('official_inactives',None,url))
+                for game in eligible:
+                    matched_counts[game['game_id']] += 1
     with ThreadPoolExecutor(max_workers=4) as pool:
         source_rows.extend(pool.map(capture, links))
     try:
@@ -373,15 +566,15 @@ def capture_availability(games, roster, expected_qbs, output, *, now=None, fetch
                 source['file'] = f'raw/{index:03d}.html.gz'
                 _write(directory/source['file'], gzip.compress(source['body'],mtime=0))
         checked = _clock(now).isoformat()
-        result = build_availability(games, roster, expected_qbs, source_rows, checked_at=checked)
-        inputs = dict(games=games, roster=roster, expected_qbs=expected_qbs)
+        result = build_availability(games,roster,expected_qbs,source_rows,checked_at=checked,purpose=purpose,parser_version=3)
+        inputs = dict(games=games,roster=roster,expected_qbs=expected_qbs,purpose=purpose,parser_version=3)
         _write(directory/'inputs.json.gz',gzip.compress(_json(inputs),mtime=0))
         _write(directory/'capture.json',_json(dict(checked_at=checked,sources=result['sources'])))
         _write(directory/'availability.json',_json(result))
         members = [dict(file=p.relative_to(directory).as_posix(),sha256=_sha(p.read_bytes()),bytes=p.stat().st_size)
                    for p in sorted(directory.rglob('*')) if p.is_file()]
         _write(directory/'manifest.json',_json(dict(schema_version=1,checked_at=checked,members=members)))
-        _inputs(games, roster, expected_qbs, _clock(now))
+        _inputs(games, roster, expected_qbs, _clock(now), purpose)
         return result
     except Exception as error:
         _write(directory/'failure.json',_json(dict(error=f'{type(error).__name__}: {error}',failed_at=_clock(now).isoformat())))
@@ -410,6 +603,8 @@ def _load_availability(directory):
         payloads[name] = raw
     input_file='inputs.json.gz' if 'inputs.json.gz' in payloads else 'inputs.json'
     inputs = json.loads(gzip.decompress(payloads[input_file]) if input_file.endswith('.gz') else payloads[input_file])
+    inputs.setdefault('purpose','forecast')
+    inputs.setdefault('parser_version',1)
     capture = json.loads(payloads['capture.json'])
     sources = [dict(s,body=gzip.decompress(payloads[s['file']]) if s['file'].endswith('.gz') else payloads[s['file']]) if 'file' in s else dict(s) for s in capture['sources']]
     if set(payloads) != {input_file,'capture.json','availability.json'} | {s['file'] for s in sources if 'file' in s}:

@@ -102,6 +102,19 @@ class SeasonBoundaryTests(unittest.TestCase):
         self.assertNotIn('new_source_extra',restored)
         self.assertEqual(restored['forecast_status'],'LOCKED')
 
+    def test_starter_evidence_alone_cannot_change_at_durable_lock(self):
+        state=self.state([self.game()])
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            with patch.object(api,'now',return_value='2026-09-13T15:59:00Z'):
+                api.save_state(state,root)
+            pointer=(root/'current.json').read_bytes()
+            state['checked_at']='2026-09-13T16:00:00Z'
+            state['weeks'][0]['games'][0]['starter_announcements']=[{'new':'evidence'}]
+            with patch.object(api,'now',return_value=state['checked_at']), self.assertRaisesRegex(ValueError,'durable-write lock'):
+                api.save_state(state,root)
+            self.assertEqual((root/'current.json').read_bytes(),pointer)
+
     def test_week_rollover_requires_complete_finals_and_retains_grades_when_stats_missing(self):
         first=self.game(kickoff='2026-09-09T20:00:00Z');second=self.game('2026_01_BAL_BUF','BUF','BAL',points=8)
         future=self.game('2026_02_NE_SEA',kickoff='2026-09-20T17:00:00Z');future['week']=2
@@ -115,6 +128,7 @@ class SeasonBoundaryTests(unittest.TestCase):
                 with patch.object(api,'now',return_value='2026-09-14T12:00:00Z'), \
                      patch.object(api,'fetch_inputs',return_value=(schedule,results,[],{})), \
                      patch.object(api,'refresh_availability',return_value=[]),patch.object(api,'legacy_models',return_value=[]), \
+                     patch.object(api,'refresh_replacement_sources'), \
                      patch.object(api,'build_next',return_value=(new_rankings,next_week,[]),
                                   side_effect=ValueError('Completed game is missing production') if case=='missing_stats' else None)as build:
                     updated=api.refresh(root)
@@ -127,6 +141,28 @@ class SeasonBoundaryTests(unittest.TestCase):
                     self.assertEqual(updated['current_week'],1);self.assertEqual(updated['rankings']['completed_week'],0)
                     if case=='incomplete':build.assert_not_called()
                     else:self.assertEqual(updated['status'],'BLOCKED');self.assertEqual(updated['model_records'][0]['wins'],2)
+
+    def test_malformed_scoreboard_saves_blocked_state_without_changing_prior_forecasts(self):
+        game=self.game();state=self.state([game])
+        with tempfile.TemporaryDirectory() as temporary,patch.object(api,'now',return_value=state['checked_at']), \
+             patch.object(api,'legacy_models',return_value=[]):
+            root=Path(temporary);api.decorate(state,[])
+            prior=api.save_state(state,root);prior_bytes=(prior/'state.json.gz').read_bytes()
+            malformed=json.dumps({'season':None,'week':{'number':1},'events':[]}).encode()
+            with patch.object(api,'now',return_value='2026-09-13T15:01:00Z'), \
+                 patch.object(api,'parse_schedule',return_value=[game]), \
+                 patch.object(api,'fetch_source',side_effect=[(b'schedule',{}),(malformed,{'captured_at':'2026-09-13T15:01:00Z'})]), \
+                 patch.object(api,'refresh_experiments'):
+                try:
+                    updated=api.refresh(root)
+                except Exception as error:
+                    self.fail(f'Malformed provider response escaped refresh: {type(error).__name__}')
+            self.assertEqual(updated['status'],'BLOCKED')
+            self.assertIn('Automatic update needs review: Scoreboard',updated['blocked_reason'])
+            self.assertEqual(updated['weeks'],state['weeks'])
+            self.assertEqual(updated['results'],state['results'])
+            self.assertEqual((prior/'state.json.gz').read_bytes(),prior_bytes)
+            self.assertEqual(api.load_current(root),updated)
 
 
 if __name__=='__main__':unittest.main()

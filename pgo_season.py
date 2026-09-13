@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 import gzip
 import hashlib
+import importlib
 import io
 import json
 import math
@@ -65,18 +66,28 @@ def identity(left, right):
 
 def parse_scoreboard(payload, schedule, captured_at):
     """Only explicit completed FINAL statuses are results; observed time is conservative."""
-    season, week = payload['season']['year'], payload['week']['number']
-    require(type(season) is int and season == SEASON and payload['season']['type'] == 2, 'Scoreboard season/type differs')
+    require(isinstance(payload, dict) and isinstance(payload.get('season'), dict)
+            and isinstance(payload.get('week'), dict) and isinstance(payload.get('events'), list),
+            'Scoreboard requires season/week objects and an events list')
+    season, week = payload['season'].get('year'), payload['week'].get('number')
+    require(type(season) is int and season == SEASON and payload['season'].get('type') == 2, 'Scoreboard season/type differs')
     require(type(week) is int and 1 <= week <= 18, 'Scoreboard week differs')
     expected = {(g['away'], g['home']): g for g in schedule if g['season'] == season and g['week'] == week}
     require(expected, 'Scoreboard has no expected games')
     seen, event_ids, events, results = set(), set(), {}, []
     for event in payload['events']:
-        require(event['season']['year'] == season and event['season']['type'] == 2 and event['week']['number'] == week, 'Event season/week/type differs')
-        require(len(event['competitions']) == 1, 'Ambiguous competition')
+        require(isinstance(event, dict) and isinstance(event.get('season'), dict)
+                and isinstance(event.get('week'), dict), 'Scoreboard event requires season/week objects')
+        require(event['season'].get('year') == season and event['season'].get('type') == 2 and event['week'].get('number') == week, 'Event season/week/type differs')
+        require(isinstance(event.get('competitions'), list) and len(event['competitions']) == 1
+                and isinstance(event['competitions'][0], dict), 'Ambiguous competition')
         comp = event['competitions'][0]
         require(str(event['id']) not in event_ids and str(comp.get('id')) == str(event['id']), 'Duplicate or mismatched provider event ID')
         event_ids.add(str(event['id']))
+        require(isinstance(comp.get('competitors'), list) and all(isinstance(x, dict)
+                and x.get('homeAway') in ('home', 'away') and isinstance(x.get('team'), dict)
+                and isinstance(x['team'].get('abbreviation'), str) for x in comp['competitors']),
+                'Scoreboard competitors require home/away sides and team identities')
         sides = {x['homeAway']: x for x in comp['competitors']}
         require(len(comp['competitors']) == 2 and set(sides) == {'home', 'away'}, 'Invalid competitors')
         pair = tuple(pgo_sources.normalize_team({'WSH':'WAS'}.get(sides[k]['team']['abbreviation'], sides[k]['team']['abbreviation'])) for k in ('away', 'home'))
@@ -84,7 +95,12 @@ def parse_scoreboard(payload, schedule, captured_at):
         seen.add(pair); g = expected[pair]
         require(not g.get('espn_id') or str(g['espn_id']) == str(event['id']), 'Schedule provider event ID differs')
         require(utc(event['date']) == utc(g['kickoff']), 'Schedule kickoff differs; review rescheduling')
+        for container in (event, comp):
+            if 'status' in container:
+                require(isinstance(container['status'], dict) and isinstance(container['status'].get('type', {}), dict),
+                        'Scoreboard status and status type must be objects')
         status = comp.get('status', event.get('status', {})).get('type', {})
+        require(isinstance(status.get('name', 'UNKNOWN'), str), 'Scoreboard status name must be text')
         if 'status' in event and 'status' in comp:
             require(all(event['status'].get('type',{}).get(k)==status.get(k) for k in ('completed','state','name')), 'Conflicting event and competition status')
         events[g['game_id']] = {'event_id': str(event['id']), 'status': status.get('name', 'UNKNOWN')}
@@ -183,6 +199,14 @@ def archive_href(relative):
     return 'evidence/season-2026/' + relative
 
 
+def check_starter_announcements(state, root):
+    for week in state.get('weeks', []):
+        for game in week['games']:
+            if 'starter_announcements' in game:
+                from pgo_expected_starters import verify
+                verify(game, game['starter_announcements'], root)
+
+
 def save_state(state, root=DEFAULT_ROOT):
     root = Path(root); root.mkdir(parents=True, exist_ok=True)
     require(not root.is_symlink(), 'Season root is a symlink')
@@ -196,11 +220,27 @@ def save_state(state, root=DEFAULT_ROOT):
     prior = None
     if (root/'current.json').exists():
         prior = load_current(root)
+    if 'score_range_collection' in state or 'score_range_collection' in (prior or {}):
+        from pgo_score_range_monitor import check_durable_shadow
+        try:
+            check_durable_shadow(state, prior, durable)
+        except ValueError as error:
+            # This file has no manifest or public pointer yet. Discard only the
+            # new optional observations, then recheck the actual rewritten clock.
+            state['score_range_collection'] = dict(copy.deepcopy((prior or {}).get('score_range_collection', {})),
+                status='BLOCKED', blocked_reason=str(error), checked_at=state['checked_at'],
+                forecast_adjustment=None, predictive_status='UNAVAILABLE', ranges=None)
+            payload = gzip.compress(canonical(state), mtime=0)
+            with (directory/'state.json.gz').open('wb') as handle:
+                handle.write(payload); handle.flush(); os.fsync(handle.fileno())
+            durable = now()
+            check_durable_shadow(state, prior, durable)
+    if prior:
         prior_games = {g['game_id']:g for w in prior['weeks'] for g in w['games']}
         for week in state['weeks']:
             for game in week['games']:
                 before = prior_games.get(game['game_id'])
-                fields = ('margin','total','home_points','away_points','issued_at','source_edition','inputs_as_of','explanation','expected_qbs','availability','blocked_reason')
+                fields = ('margin','total','home_points','away_points','issued_at','source_edition','inputs_as_of','explanation','expected_qbs','availability','blocked_reason','starter_announcements')
                 changed = before is not None and any(before.get(k)!=game.get(k) for k in fields)
                 new_pick = before is None and game.get('margin') is not None
                 if changed or new_pick:
@@ -208,6 +248,19 @@ def save_state(state, root=DEFAULT_ROOT):
     if 'penalty_shadow' in state:
         from pgo_penalty_monitor import check_durable_shadow
         check_durable_shadow(state, prior, durable)
+    if 'totals_shadow' in state or 'totals_shadow' in (prior or {}):
+        from pgo_totals_monitor import check_durable_shadow
+        check_durable_shadow(state, prior, durable)
+    if 'weights_shadow' in state or 'weights_shadow' in (prior or {}):
+        from pgo_weights_monitor import check_durable_shadow
+        check_durable_shadow(state, prior, durable)
+    if 'replacement_depth' in state:
+        check_replacement_depth(state, prior, durable)
+    if 'ats' in state or 'ats' in (prior or {}):
+        from pgo_ats import check_durable
+        check_durable(state, prior, durable)
+    check_availability_context(state, root, durable)
+    check_starter_announcements(state, root)
     manifest = dict(schema_version=1, created_at=durable, files={'state.json.gz': {'sha256':sha(payload),'bytes':len(payload)}},
                     code_sha256=sha(Path(__file__).read_bytes()))
     previous = root/'current.json'
@@ -242,10 +295,11 @@ def load_current(root=DEFAULT_ROOT):
     references = [*state.get('source_captures', []), *(r['source'] for r in state.get('results',[]) if 'source' in r)]
     references += state.get('rankings',{}).get('source_captures',[])
     references += [ref for refs in state.get('edition_sources',{}).values() for ref in refs]
+    references += [g['source'] for g in (state.get('ats') or {}).get('games',[]) if g.get('source')]
     verified = {}
     for ref in references:
         key = ref['path']
-        require(re.fullmatch(r'(?:sources|source-archive)/[0-9a-f]{64}\.(?:json|csv\.gz)',key) is not None, 'Invalid captured source path')
+        require(re.fullmatch(r'(?:sources|source-archive)/[0-9a-f]{64}\.(?:json|csv(?:\.gz)?)',key) is not None, 'Invalid captured source path')
         require(utc(ref['captured_at']) <= utc(state['checked_at']), 'Source captured after state')
         if key not in verified:
             source_path = root/key
@@ -258,6 +312,9 @@ def load_current(root=DEFAULT_ROOT):
         require(re.fullmatch(r'availability(?:-v2)?/\d{8}T\d{12}Z',path) is not None, 'Invalid availability archive path')
         from pgo_season_availability import load_availability
         load_availability(root/path)
+    if state.get('availability_context'):
+        check_availability_context(state, root, manifest['created_at'])
+    check_starter_announcements(state, root)
     return state
 
 
@@ -295,7 +352,7 @@ def fetch_source(url, root=DEFAULT_ROOT):
     else:
         raise ValueError(f'Source unavailable: {url}: {error}')
     captured = now(); digest = sha(raw)
-    suffix = '.csv.gz' if url.endswith('.gz') else '.json'
+    suffix = '.csv.gz' if url.endswith('.gz') else '.csv' if url.endswith('.csv') else '.json'
     relative = 'source-archive/' + digest + suffix
     path = Path(root)/relative; path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists(): require(path.read_bytes() == raw and not path.is_symlink(), 'Source hash collision or symlink')
@@ -343,9 +400,10 @@ def legacy_models():
                                      ('PGO corrected - September 8', corrected, corrected.DEFAULT_OUTPUT),
                                      ('PGO - September 7 preseason', september, ROOT/'docs/evidence/forecast-lab-2026/september-07')]:
         snapshot = initial_snapshot() if module is None else module.load_snapshot(directory)
-        models.append(dict(name=name, edition=snapshot['edition'], games=snapshot['games']))
+        models.append(dict(name=name, edition=snapshot['edition'], issued_at=snapshot['generated_at'], games=snapshot['games']))
     initial = models[-1]['games']
-    models.append(dict(name='PGO v0 - saved preseason baseline', edition='pgo-v0-preseason', games=[dict(g, margin=g['pgo_v0_margin']) for g in initial]))
+    models.append(dict(name='PGO v0 - saved preseason baseline', edition='pgo-v0-preseason', issued_at=models[-1]['issued_at'],
+                       games=[dict(g, margin=g['pgo_v0_margin'], total=None, home_points=None, away_points=None) for g in initial]))
     return models
 
 
@@ -454,21 +512,143 @@ def build_next(state, schedule, results, root, *, completed=None, selected=None,
     return rankings,week,sources
 
 
+def check_availability_context(state, root, durable):
+    """Later availability is source-backed context, never a replacement forecast."""
+    if not state.get('availability_context'):
+        return
+    from pgo_season_availability import load_availability
+    games = {g['game_id']: g for w in state['weeks'] for g in w['games']}
+    loaded = {}
+    for key, observation in state.get('availability_context', {}).items():
+        require(key in games, 'Availability context game is missing')
+        game = games[key]
+        require(all(observation.get(k) == game.get(k) for k in ('game_id', 'home', 'away', 'kickoff', 'lock_at')),
+                'Availability context game identity differs')
+        require(utc(game['lock_at']) <= utc(observation['checked_at']) <= utc(state['checked_at']) <= utc(durable),
+                'Availability context clock differs')
+        path = observation.get('source_archive', '')
+        require(re.fullmatch(r'availability-v2/\d{8}T\d{12}Z', path) is not None,
+                'Invalid availability context archive path')
+        if path not in loaded:
+            loaded[path] = load_availability(Path(root)/path)
+        captured = loaded[path]
+        require(captured.get('purpose') == 'context' and
+                captured.get('games', {}).get(key) == {k:v for k,v in observation.items() if k != 'source_archive'},
+                'Availability context differs from archived evidence')
+
+
+def availability_watch(state, checked_at=None):
+    """One reader/operator definition of missing final lists and stale checks."""
+    checked = utc(checked_at or state.get('checked_at') or now())
+    finals = {r['game_id'] for r in state.get('results', [])}
+    rows = []
+    for week in state.get('weeks', []):
+        for game in week['games']:
+            kickoff = utc(game['kickoff']); remaining = kickoff - checked
+            if game['game_id'] in finals or not -timedelta(hours=6) <= remaining <= timedelta(hours=2):
+                continue
+            saved = game.get('availability') or {}
+            latest = state.get('availability_context', {}).get(game['game_id']) or saved
+            teams = latest.get('teams') or {}
+            missing = [t for t in (game['away'],game['home']) if teams.get(t,{}).get('final_inactives_status') != 'VERIFIED_LIST']
+            observed = latest.get('checked_at')
+            stale = observed is None or checked - utc(observed) > timedelta(minutes=10) or utc(observed) > checked
+            status = ('AWAITING' if missing and remaining > timedelta(minutes=75) else
+                      'MISSING' if missing else 'STALE' if remaining > timedelta(0) and stale else 'VERIFIED')
+            rows.append(dict(game_id=game['game_id'], home=game['home'], away=game['away'], kickoff=game['kickoff'],
+                             lock_at=game['lock_at'], checked_at=observed, missing_teams=missing, status=status,
+                             after_lock=checked >= utc(game['lock_at'])))
+    attempt = state.get('availability_context_check') or {}
+    reason = attempt.get('blocked_reason') if rows and attempt.get('status') == 'BLOCKED' else None
+    return dict(status='ATTENTION' if reason or any(r['status'] in ('MISSING','STALE') for r in rows) else 'READY' if rows else 'IDLE',
+                checked_at=checked.isoformat(), games=rows, blocked_reason=reason)
+
+
 def refresh_availability(state, root):
+    """Keep the existing forecast gate; collect later news outside frozen games."""
+    refs = []
+    forecast_error = None
+    try:
+        refs += refresh_forecast_availability(state, root)
+    except (ValueError, KeyError, OSError) as error:
+        forecast_error = error
+    checked = utc(now())
+    finals = {r['game_id'] for r in state.get('results', [])}
+    contexts = []
+    for week in state['weeks']:
+        for game in week['games']:
+            if game['game_id'] in finals or not utc(game['lock_at']) <= checked < utc(game['kickoff']) + timedelta(hours=6):
+                continue
+            latest = state.get('availability_context', {}).get(game['game_id']) or game.get('availability') or {}
+            complete = all(latest.get('teams', {}).get(t, {}).get('final_inactives_status') == 'VERIFIED_LIST' for t in (game['home'],game['away']))
+            if checked < utc(game['kickoff']) or not complete:
+                contexts.append(game)
+    if contexts:
+        from pgo_season_availability import capture_availability
+        try:
+            raw, roster_source = fetch_source(URLS['roster'], root); roster = csv_rows(raw)
+            raw, depth_source = fetch_source(URLS['depth'], root); depth = csv_rows(raw)
+            selected = select_roster(roster, depth, now())
+            expected = {t:r['gsis_id'] for t,r in selected.items()}
+            for game in contexts:
+                if game.get('starter_announcements'):
+                    from pgo_expected_starters import verify
+                    verify(game, game['starter_announcements'], root)
+                    expected.update({a['team']:a['gsis_id'] for a in game['starter_announcements']})
+            path = Path(root)/'availability-v2'/utc(now()).strftime('%Y%m%dT%H%M%S%fZ')
+            captured = capture_availability(contexts, roster, expected, path, purpose='context')
+            incomplete = []
+            for game in contexts:
+                observation = captured['games'][game['game_id']]
+                missing = [t for t in (game['away'],game['home']) if observation.get('teams',{}).get(t,{}).get('final_inactives_status') != 'VERIFIED_LIST']
+                prior = state.get('availability_context',{}).get(game['game_id']) or game.get('availability') or {}
+                if missing:
+                    incomplete.append(game['game_id'] + ': ' + ', '.join(missing))
+                    if all(prior.get('teams',{}).get(t,{}).get('final_inactives_status') == 'VERIFIED_LIST' for t in (game['away'],game['home'])):
+                        continue
+                state.setdefault('availability_context', {})[game['game_id']] = dict(observation, source_archive=path.relative_to(root).as_posix())
+            state['availability_context_check'] = dict(status='BLOCKED' if incomplete else 'READY', checked_at=now(),
+                blocked_reason='Latest check could not verify complete inactive lists: ' + '; '.join(incomplete) if incomplete else None)
+            refs += [roster_source, depth_source, {'label':'Latest official availability (separate from locked forecasts)',
+                     'href':archive_href(path.relative_to(root).as_posix()+'/availability.json')}]
+        except (ValueError, KeyError, OSError) as error:
+            state['availability_context_check'] = dict(status='BLOCKED', checked_at=now(), blocked_reason=str(error))
+    elif state.get('availability_context_check'):
+        state['availability_context_check'] = dict(status='IDLE', checked_at=now(), blocked_reason=None)
+    if forecast_error is not None:
+        raise forecast_error
+    return refs
+
+
+def refresh_forecast_availability(state, root):
     from pgo_season_availability import capture_availability
+    from pgo_expected_starters import apply, select_player, verify
     checked=now()
     games=[g for w in state['weeks'] for g in w['games'] if timedelta(minutes=60)<utc(g['kickoff'])-utc(checked)<=timedelta(hours=24)]
     if not games:return []
     raw, roster_source=fetch_source(URLS['roster'],root);roster=csv_rows(raw)
     raw, depth_source=fetch_source(URLS['depth'],root);depth=csv_rows(raw)
     selected=select_roster(roster,depth,now())
+    selected,announcements=apply(selected,roster,games,root,now())
+    retained_sources=[]
+    for week in state['weeks']:
+        if week['week'] != state['rankings']['completed_week']+1:continue
+        for game in week['games']:
+            if utc(now()) < utc(game['kickoff'])-timedelta(minutes=60):continue
+            saved=game.get('starter_announcements',[])
+            if saved:
+                verify(game,saved,root)
+                for announcement in saved:
+                    selected[announcement['team']]=select_player(roster,announcement,game)
+                    retained_sources.append(announcement['source'])
     expected={t:r['gsis_id'] for t,r in selected.items()}
     before={t['team']:t['qb_gsis_id'] for t in state['rankings']['teams']}
     changed={team for team in expected if before[team]!=expected[team]}
     path=Path(root)/'availability-v2'/utc(checked).strftime('%Y%m%dT%H%M%S%fZ')
     captured=capture_availability(games,roster,expected,path)
-    refs=[roster_source,depth_source]
-    if any(changed & {g['home'],g['away']} for g in games):
+    refs=[roster_source,depth_source,*retained_sources,*(a['source'] for rows in announcements.values() for a in rows)]
+    if any(changed & {g['home'],g['away']} or
+           announcements.get(g['game_id'],[]) != g.get('starter_announcements',[]) for g in games):
         rankings,revision,sources=build_next(state,state['schedule'],state['results'],root,
             completed=state['rankings']['completed_week'],selected=selected,roster_sources=refs)
         new_games={g['game_id']:g for g in revision['games']}
@@ -480,7 +660,11 @@ def refresh_availability(state, root):
                 if new.get('confidence') and assigned:
                     new['confidence']['points']=assigned['points']
                     new['confidence']['expected_points']=assigned['points']*new['confidence']['win_probability']
+                elif assigned:
+                    new['withheld_confidence']=copy.deepcopy(assigned)
                 new['expected_qbs']={t:selected[t]['full_name'] for t in (new['home'],new['away'])}
+                if announcements.get(new['game_id']):
+                    new['starter_announcements']=copy.deepcopy(announcements[new['game_id']])
                 new['availability']=old.get('availability',{})
                 if old.get('blocked_by_availability') and not changed & {old['home'],old['away']}:
                     for key in ('blocked_reason','blocked_by_availability','withheld_confidence'):
@@ -489,7 +673,7 @@ def refresh_availability(state, root):
                 week['games'][index]=revise_game(old,new,now())
             if week['week']==revision['week']:
                 week.update(source_edition=revision['source_edition'],generated_at=revision['generated_at'],inputs_as_of=revision['inputs_as_of'])
-        state['rankings']=rankings;state.setdefault('edition_sources',{})[rankings['edition']]=sources;refs=sources
+        state['rankings']=rankings;state.setdefault('edition_sources',{})[rankings['edition']]=sources;refs=list(sources)
         games=[g for w in state['weeks'] for g in w['games'] if g['game_id'] in captured['games']]
     for g in games:
         observation=captured['games'][g['game_id']]
@@ -524,7 +708,133 @@ def decorate(state, results):
                 if g['forecast_status']!='BLOCKED':g['forecast_status']='FINAL'
                 if g.get('confidence'):g['confidence']['earned_points']=g['confidence']['points'] if g['grade']=='W' else 0
         week['status']='COMPLETE' if finished==len(week['games']) else 'IN_PROGRESS' if finished or any(utc(g['kickoff'])<=utc(state['checked_at']) for g in week['games']) else 'UPCOMING'
-    state['freshness']='Checked every 15 minutes when the scheduled runner is available. Final-result grades update first; weekly rankings wait for complete game statistics.'
+    state['freshness']='Checks are scheduled every 5 minutes around kickoff and every 15 minutes otherwise; runner delays are possible. Final-result grades update first; weekly rankings wait for complete game statistics.'
+
+
+def check_replacement_depth(state, previous, durable):
+    """A new descriptive observation must be durably saved before its game locks."""
+    current=state.get('replacement_depth',{})
+    before=(previous or {}).get('replacement_depth',{})
+    # Retaining the same dated observation on a failed refresh is permitted after
+    # lock. Status/check messages cannot turn a changed observation into an old one.
+    messages={'status','blocked_reason','checked_at'}
+    if before and {k:v for k,v in current.items() if k not in messages}=={k:v for k,v in before.items() if k not in messages}:
+        return
+    generated=utc(current['generated_at']); durable=utc(durable)
+    require(generated<=utc(state['checked_at'])<=durable, 'Replacement capture clock follows its saved state')
+    if current.get('completed_at') is not None:
+        require(generated<=utc(current['completed_at'])<=durable, 'Replacement completion clock differs')
+    source_time=utc(current['source_as_of']) if current.get('source_as_of') is not None else generated
+    require(source_time<=generated, 'Replacement source is from the future')
+    for ref in current.get('sources',[]):
+        if ref.get('captured_at') is not None:
+            require(utc(ref['captured_at'])<=source_time, 'Replacement source capture follows its source clock')
+    primary={g['game_id']:g for w in state['weeks'] for g in w['games']}
+    finals={r['game_id'] for r in state['results']}
+    games=current.get('games',[]); seen=set()
+    for game in games:
+        key=game['game_id']
+        require(key not in seen and key in primary and key not in finals, 'Replacement game is duplicate, missing or already final')
+        seen.add(key); source=primary[key]
+        require(all(game[k]==source[k] for k in ('home','away'))
+                and utc(game['kickoff'])==utc(source['kickoff']), 'Replacement game identity differs')
+        cutoff=utc(game['kickoff'])-timedelta(minutes=60)
+        require(utc(game['lock_at'])==utc(source['lock_at'])==cutoff, 'Replacement game cutoff differs')
+        require(utc(game['captured_at'])==generated, 'Replacement game capture clock differs')
+        require(generated<=durable<cutoff, 'Replacement durable-write deadline crossed')
+
+
+def _refresh_inventory_sources(state, root, urls, check_key, reader, label):
+    """Reuse verified archived inputs and refresh only after their 24-hour limit."""
+    checked = utc(now())
+    state[check_key] = dict(status='IDLE', checked_at=checked.isoformat(), blocked_reason=None)
+    finals = {row['game_id'] for row in state.get('results', [])}
+    if not any(game['game_id'] not in finals and checked < utc(game['lock_at'])
+               for week in state.get('weeks', []) for game in week['games']):
+        return
+    refs = [*state.get('source_captures', []), *state.get('sources', []), *state.get('rankings', {}).get('source_captures', [])]
+    refs += [ref for values in state.get('edition_sources', {}).values() for ref in values]
+    refs += state.get('replacement_depth', {}).get('sources', [])
+    refs += state.get('offensive_inventory', {}).get('sources', [])
+    failed = []
+    for kind, url in urls.items():
+        try:
+            matches = [ref for ref in refs if ref.get('url') == url and 'path' in ref]
+            require(all(utc(ref['captured_at']) <= checked for ref in matches), 'Future replacement source')
+            captured = {}
+            for ref in matches:
+                signature = (ref['sha256'], ref['bytes'])
+                require(captured.setdefault(utc(ref['captured_at']), signature) == signature,
+                        'Conflicting replacement source receipts')
+            latest = max(matches, key=lambda ref: utc(ref['captured_at']), default=None)
+            if latest is not None:
+                # Verify the selected bytes before refreshing a stale receipt.
+                reader(root, latest, checked.isoformat(), allow_stale=True) if check_key == 'offensive_identity_source_check' else reader(root, latest, checked.isoformat())
+            if latest is None or checked-utc(latest['captured_at']) > timedelta(hours=24):
+                raw, ref = fetch_source(url, root)
+                observed = now()
+                require(ref['url'] == url and checked <= utc(ref['captured_at']) <= utc(observed), 'Invalid source download clock')
+                require(reader(root, ref, observed) == raw, 'Downloaded source differs from archived bytes')
+                latest = ref
+            # Carry reused receipts into normalization, including partial-failure recovery.
+            if latest not in state.setdefault('sources', []):
+                state['sources'].append(latest)
+        except (ValueError, KeyError, TypeError, OSError, OverflowError):
+            failed.append(kind)
+    state[check_key] = dict(status='BLOCKED' if failed else 'READY', checked_at=now(),
+        blocked_reason=label + ' source refresh unavailable: ' + ', '.join(failed) + '.' if failed else None)
+
+
+def refresh_replacement_sources(state, root):
+    """Maintain descriptive roster/depth inputs without selecting QBs or revising picks."""
+    from research.pgo_replacement_depth_20260910 import capture
+    _refresh_inventory_sources(state, root, {key:URLS[key] for key in ('roster','depth')},
+                               'replacement_source_check', capture.read_source, 'Replacement')
+
+
+def refresh_offensive_identity_source(state, root):
+    from pgo_player_identity import URL, read_source
+    _refresh_inventory_sources(state, root, {'players':URL}, 'offensive_identity_source_check',
+                               read_source, 'Player-ID')
+
+
+def refresh_experiments(state, previous, root):
+    """Run each optional comparison independently over detached verified inputs."""
+    operations=(('penalty_shadow','pgo_penalty_monitor','refresh_shadow',True),
+                ('totals_shadow','pgo_totals_monitor','refresh_shadow',False),
+                ('weights_shadow','pgo_weights_monitor','refresh_shadow',False),
+                ('replacement_depth','research.pgo_replacement_depth_20260910.capture','capture',True),
+                ('injury_usage','pgo_injury_usage_monitor','refresh_shadow',True),
+                ('offensive_inventory','pgo_offensive_inventory','capture',True),
+                ('offensive_usage','pgo_offensive_usage_monitor','refresh_shadow',True),
+                ('score_range_collection','pgo_score_range_monitor','refresh_shadow',True),
+                ('ats','pgo_ats','refresh',True))
+    for key,module_name,method,needs_root in operations:
+        old=(previous or {}).get(key,{})
+        try:
+            if key in ('replacement_depth','offensive_inventory'):
+                check=state.get('replacement_source_check') or {}
+                require(check.get('status')!='BLOCKED', check.get('blocked_reason') or 'Replacement source refresh unavailable.')
+            if key == 'offensive_inventory':
+                check=state.get('offensive_identity_source_check') or {}
+                require(check.get('status')!='BLOCKED', check.get('blocked_reason') or 'Player-ID source refresh unavailable.')
+            operation=getattr(importlib.import_module(module_name),method)
+            arguments=[copy.deepcopy(state)]
+            if key not in ('replacement_depth','offensive_inventory'):arguments.append(copy.deepcopy(previous))
+            if needs_root:arguments.append(root)
+            arguments.append(state['checked_at'])
+            result=operation(*arguments, inventory_version=2) if key in ('replacement_depth','offensive_inventory') else operation(*arguments)
+            require(isinstance(result,dict), 'Experiment returned no saved payload')
+            if key in ('replacement_depth','offensive_inventory') and result.get('status')=='BLOCKED' and old:
+                result=dict(copy.deepcopy(old),status='BLOCKED',blocked_reason=result.get('blocked_reason'),checked_at=state['checked_at'])
+            state[key]=result
+        except Exception as error:
+            # An optional study must not suppress primary grades or another study.
+            state[key]=dict(copy.deepcopy(old),status='BLOCKED',blocked_reason=str(error),checked_at=state['checked_at'])
+            if key in ('replacement_depth','offensive_inventory') and not old:
+                state[key].update(generated_at=state['checked_at'],games=[],teams=[],sources=[],forecast_adjustment=None)
+            if key in ('injury_usage','offensive_usage','score_range_collection'):
+                state[key].update(forecast_adjustment=None,predictive_status='UNAVAILABLE')
 
 
 def refresh(root=DEFAULT_ROOT):
@@ -554,6 +864,13 @@ def refresh(root=DEFAULT_ROOT):
     except (ValueError,KeyError,OSError) as error:
         state.update(status='BLOCKED',blocked_reason='Automatic update needs review: '+str(error))
         decorate(state,state['results'])
+    try:refresh_replacement_sources(state,root)
+    except Exception:
+        # Optional source maintenance must not suppress primary grading/publication.
+        state['replacement_source_check']=dict(status='BLOCKED',checked_at=now(),blocked_reason='Replacement source maintenance failed.')
+    try:refresh_offensive_identity_source(state,root)
+    except Exception:
+        state['offensive_identity_source_check']=dict(status='BLOCKED',checked_at=now(),blocked_reason='Player-ID source maintenance failed.')
     state['checked_at']=now()
     if previous:
         old={g['game_id']:g for w in previous['weeks'] for g in w['games']}
@@ -571,8 +888,7 @@ def refresh(root=DEFAULT_ROOT):
     state['source_captures']=[r for r in state['sources'] if 'path' in r]
     state['sources']=[r if 'href' in r else {'label':'Source captured '+r['captured_at'], 'href':archive_href(r['path'])} for r in state['sources']]
     state['sources'].append({'label':'Saved refreshes and verification record','href':'evidence/season-2026/current.json'})
-    from pgo_penalty_monitor import refresh_shadow
-    state['penalty_shadow'] = refresh_shadow(state, previous, root, state['checked_at'])
+    refresh_experiments(state, previous, root)
     save_state(state,root)
     return state
 

@@ -3,6 +3,7 @@ import html
 import hashlib
 import math
 import json
+import re
 from pathlib import Path
 
 import pgo_current_board
@@ -17,9 +18,11 @@ FULL_CONFIDENCE_MANIFEST_SHA256 = 'ae8f685dd636052d428e0e2cc9b5e0d853bcaa6dfcb87
 
 STYLE = """<style>
 .pgo-model-updates{margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
-.pgo-model-updates .table-shell{overflow-x:auto;container-type:inline-size}
+:is(.pgo-model-updates,.pgo-current-board,.pgo-july-archive,.lab-wrap) .table-shell{overflow-x:auto;container-type:inline-size}
 .pgo-model-updates table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 .pgo-model-updates th,.pgo-model-updates td{padding:9px;border-bottom:1px solid var(--border);text-align:right;vertical-align:top;white-space:nowrap}
+.pgo-model-updates td.game-grade-checks{min-width:12rem;max-width:16rem;white-space:normal;text-align:left}
+@container(min-width:680px){:is(.pgo-model-updates,.pgo-current-board,.pgo-july-archive,.lab-wrap) table :is(th,td){padding:8px 6px;white-space:normal;overflow-wrap:anywhere}:is(.pgo-model-updates,.pgo-current-board,.pgo-july-archive,.lab-wrap) table th{overflow-wrap:normal}.pgo-availability table{min-width:0}}
 .pgo-model-updates tbody th{text-align:left;letter-spacing:normal;text-transform:none;background:var(--panel);color:var(--ink)}
 .pgo-model-updates summary{cursor:pointer;font-weight:700}
 .pgo-model-updates .forecast-week{margin:12px 0;padding:12px;border:1px solid var(--border);border-radius:10px}
@@ -406,7 +409,17 @@ def render_updates(snapshot=None, depth=None, *, weekly=None, results=(), proven
             + (_depth_evidence(depth, snapshot.get('coverage') if snapshot else None) if depth is not None else '') + '</div>')
 
 
-def render_current_updates():
+def _original_editions_link(earlier, current):
+    ids = set(re.findall(r'\sid="([^"]+)"', earlier)) - set(re.findall(r'\sid="([^"]+)"', current))
+    ids.discard('opening-week-editions')
+    return ('<p id="opening-week-editions"><a href="forecast-lab.html#opening-week-editions">'
+            'Original Week 1 editions and confidence allocations</a> &middot; saved in the Forecast Lab archive.</p>'
+            + ''.join(f'<a class="archive-fragment" id="{_text(key)}" '
+                      f'href="forecast-lab.html#{_text(key)}" data-edition-archive="true">'
+                      'Open these saved details in the Forecast Lab archive</a>' for key in sorted(ids)))
+
+
+def render_current_updates(*, include_original=True):
     snapshot, weekly, results, provenance = None, None, [], []
     if DEFAULT_DIR.exists() or DEFAULT_DIR.is_symlink():
         from pgo_forecast_postseason import load_snapshot
@@ -449,11 +462,19 @@ def render_current_updates():
     if season is None:
         return earlier
     from pgo_season_view import render_season
-    return (STYLE + render_season(season)
-            + '<p><a href="#latest-inactive-notes">Opening-night final inactive lists saved September 9</a>.</p>'
-            + '<details class="model-update-evidence" id="opening-week-editions">'
-            '<summary>Original Week 1 editions and confidence allocations</summary>'
-            + earlier.replace(STYLE, '', 1) + '</details>')
+    from pgo_season_accuracy import load_models, summarize
+    accuracy = summarize(dict(season, accuracy_models=load_models()))
+    from pgo_comparison import load_mccabe_rows, mccabe_source_timestamp, MCCABE_PATH
+    mccabe = dict(rows=load_mccabe_rows(MCCABE_PATH),as_of=mccabe_source_timestamp(MCCABE_PATH))
+    from pgo_market_benchmark import summarize as summarize_market
+    current = render_season(season, accuracy=accuracy, mccabe=mccabe, market=summarize_market(season))
+    originals = ('<details class="model-update-evidence" id="opening-week-editions">'
+                 '<summary>Original Week 1 editions and confidence allocations</summary>'
+                 + earlier.replace(STYLE, '', 1) + '</details>' if include_original else
+                 _original_editions_link(earlier,current))
+    inactive_url = '#latest-inactive-notes' if include_original else 'forecast-lab.html#latest-inactive-notes'
+    return (STYLE + current
+            + f'<p><a href="{inactive_url}">Opening-night final inactive lists saved September 9</a>.</p>' + originals)
 
 
 def render_confidence_picks(pool, results=(), *, archive=False):

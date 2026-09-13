@@ -1,0 +1,149 @@
+{
+  "checked_at": "2026-09-13T16:26:40.686736+00:00",
+  "sources": [
+    {
+      "bytes": 363302,
+      "captured_at": "2026-09-13T16:26:39.004814+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "8906ae7be51db3cf9820b6538a09c30db7b9716f4bb08573df86b73d5b0d0912",
+      "started_at": "2026-09-13T16:26:38.912560+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 705072,
+      "captured_at": "2026-09-13T16:26:39.517917+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.azcardinals.com/news/",
+      "kind": "team_news",
+      "sha256": "3e87252896d5e8bb2e05213e0269476951306051fce89996a594d7af8b70d9aa",
+      "started_at": "2026-09-13T16:26:38.912996+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/"
+    },
+    {
+      "bytes": 496864,
+      "captured_at": "2026-09-13T16:26:39.363420+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "ac7ca3000a4ef4a4da1875da5ffe84bf52f549b1088a95237eee7db2ff57b0b0",
+      "started_at": "2026-09-13T16:26:38.913383+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 693373,
+      "captured_at": "2026-09-13T16:26:39.267552+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.packers.com/news/",
+      "kind": "team_news",
+      "sha256": "08e0143c53e6e4821eb9d885ffc059e8e27cca4d0b51733acf62abc66db4bd1c",
+      "started_at": "2026-09-13T16:26:38.913690+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/"
+    },
+    {
+      "bytes": 390607,
+      "captured_at": "2026-09-13T16:26:39.384880+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.chargers.com/news/",
+      "kind": "team_news",
+      "sha256": "e57f815250a178a59ced083e40e6d0379ba326aebb530d26022902caf3752985",
+      "started_at": "2026-09-13T16:26:39.004850+00:00",
+      "status": 200,
+      "team": "LAC",
+      "url": "https://www.chargers.com/news/"
+    },
+    {
+      "bytes": 641495,
+      "captured_at": "2026-09-13T16:26:39.735912+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.raiders.com/news/",
+      "kind": "team_news",
+      "sha256": "02bbf2d3d44e1c1096a8447726fe0a9ede414187024e74ce2907356543b21ba6",
+      "started_at": "2026-09-13T16:26:39.267586+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/"
+    },
+    {
+      "bytes": 513900,
+      "captured_at": "2026-09-13T16:26:39.698021+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.miamidolphins.com/news/",
+      "kind": "team_news",
+      "sha256": "24945f6fe95b1a797476fcfeb35cec1c1849a536071442f25a0bcd9a5c09d04c",
+      "started_at": "2026-09-13T16:26:39.363453+00:00",
+      "status": 200,
+      "team": "MIA",
+      "url": "https://www.miamidolphins.com/news/"
+    },
+    {
+      "bytes": 542448,
+      "captured_at": "2026-09-13T16:26:39.632222+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.vikings.com/news/",
+      "kind": "team_news",
+      "sha256": "2e750a34eb9df93d4ad37834f3470eb4360eb364671108b38afea11e5bcf747a",
+      "started_at": "2026-09-13T16:26:39.384900+00:00",
+      "status": 200,
+      "team": "MIN",
+      "url": "https://www.vikings.com/news/"
+    },
+    {
+      "bytes": 571087,
+      "captured_at": "2026-09-13T16:26:39.655138+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.giants.com/news/",
+      "kind": "team_news",
+      "sha256": "ca08d003a9bb39c49a175590deb0b002dd997e5f586c649f0fef4f5fde6df3b3",
+      "started_at": "2026-09-13T16:26:39.517949+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/"
+    },
+    {
+      "bytes": 529166,
+      "captured_at": "2026-09-13T16:26:40.089088+00:00",
+      "file": "raw/009.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "cadb29a53b1f51015bb7d59c95576e14c2949edaabc08af951908f00ee7003db",
+      "started_at": "2026-09-13T16:26:39.632252+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "bytes": 490462,
+      "captured_at": "2026-09-13T16:26:40.086210+00:00",
+      "file": "raw/010.html.gz",
+      "final_url": "https://www.commanders.com/news/",
+      "kind": "team_news",
+      "sha256": "bec02fabb6923098186129a9c45f74b12481547081f4b7178e28fea5bd2a0725",
+      "started_at": "2026-09-13T16:26:39.655159+00:00",
+      "status": 200,
+      "team": "WAS",
+      "url": "https://www.commanders.com/news/"
+    },
+    {
+      "bytes": 1618186,
+      "captured_at": "2026-09-13T16:26:39.888577+00:00",
+      "file": "raw/011.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "af84521dc415074a12768a00a95abe039083719a77027acc0c5b2e9ee2395cfe",
+      "started_at": "2026-09-13T16:26:39.698040+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}
