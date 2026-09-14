@@ -28,6 +28,8 @@ The scoring-total heuristic still uses the frozen 2025 regular-season and playof
 
 ## Operations and evidence
 
+The weekly player feed can contain one unnamed row pooling penalties across games. PGO separates it only when its complete fields show no other player production and its penalty counts and yards reconcile with every team in the completed cohort. It is never assigned to the displayed team or to a player. New editions retain a receipt that the archive verifier reproduces from the captured bytes; missing fields, incomplete cohorts or mismatched totals keep rollover waiting. This source repair changes no model weights or issued predictions.
+
 `python pgo_season.py --refresh` captures actual provider responses, verifies finals, checks rollover and pregame availability, and writes a new dated state plus a hashed pointer under `docs/evidence/season-2026/`. It does not overwrite earlier editions. The model seed reproduces all 320 saved team ratio values from 3,562 pinned historical games. Windows reproduces the saved opening inputs exactly; Linux floating-point library replay differs by at most one binary rounding unit in six log features.
 
 `.github/workflows/update-season.yml` runs the checks and publisher only in the canonical repository. On an input conflict it publishes the last verified edition with the reason for the delay. The original Week 1 forecast and confidence files remain byte-for-byte unchanged; Seattle's separately added full-slate confidence value remains marked after lock and excluded from probability validation.

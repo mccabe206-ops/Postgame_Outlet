@@ -3,7 +3,7 @@
 
 def grade_label(value, *, ats_choice=False, model_line=False):
     labels = {'W': 'Covered', 'L': 'Not covered', 'PUSH': 'Push', 'PENDING': 'Pending',
-              'NOPICK': 'No edge' if ats_choice else 'No winner pick', 'NOEDGE': 'No edge',
+              'NOPICK': 'No projected difference' if ats_choice else 'No winner pick', 'NOEDGE': 'No projected difference',
               'UNAVAILABLE': 'Unavailable'}
     if model_line:
         labels.update(W='Exceeded projection', L='Below projection', PUSH='Matched projection')
@@ -35,7 +35,7 @@ def render(ats):
         record = metrics.get(key, {})
         labels = ('Exceeded', 'Below', 'Matched') if key == 'model_line' else ('Wins', 'Losses', 'Pushes')
         counts = [(title, record.get(k, 0)) for title, k in zip(labels, ('wins', 'losses', 'pushes'))]
-        counts += [('No edge' if skipped == 'no_edge' else 'No pick', record.get(skipped, 0)),
+        counts += [('No projected difference' if skipped == 'no_edge' else 'No pick', record.get(skipped, 0)),
                    ('Pending', record.get('pending', 0)),
                    ('Unavailable', record.get('unavailable', 0 if key == 'model_line' else len(unavailable)))]
         records.append('<article class="game-day-card"><h4>' + label + '</h4><dl class="game-day-times">'
@@ -68,14 +68,16 @@ def render(ats):
             market += '<br><small>' + status_label + '</small>'
             pick = game.get('ats_pick')
             if pick is None:
-                choice = 'No projected ATS edge'
+                choice = 'No projected difference'
             else:
                 if pick not in (home, away):
                     raise ValueError('ATS selection is outside the matchup')
                 home_edge = _number(game['home_edge'])
                 edge = home_edge if pick == home else -home_edge
                 choice = line(pick, game['home_handicap'] if pick == home else game['away_handicap'])
-                choice += '; edge ' + signed(edge) + ' NFL points'
+                choice += '; Projected difference ' + signed(edge) + ' NFL points'
+                if 0 < abs(edge) < 1:
+                    choice += '<br><small>Less than 1 point separates the projections — a slight lean.</small>'
             su_grade = grade_label(grades.get('straight_up_ats', 'PENDING'))
             ats_grade = grade_label(grades.get('ats', 'PENDING'), ats_choice=True)
             note = '<p>' + status_label + '. ' + _text(game.get('stale_reason') or '') + '</p>'
@@ -100,6 +102,7 @@ def render(ats):
         su_pick = game.get('su_pick')
         su_covered = (_text(su_pick) + ': ' if su_pick else '') + su_grade
         model_check = (_text(su_pick) + ': ' if su_pick else '') + model_grade
+        choice = '<div style="width:16rem;white-space:normal">' + choice + '</div>'
         rows.append([f'<a href="#season-ats-game-{key}" data-view-key="ats-link-{key}">{matchup}</a>',
                      pgo_line, model_check, market, su_covered, choice, ats_grade])
         details.append(f'<details id="season-ats-game-{key}" data-view-key="ats-game-{key}">'
@@ -125,7 +128,7 @@ def render(ats):
             'No cover probability is estimated, and straight-up win chances are not cover chances.</p>'
             + status_note
             + '<div class="game-day-grid">' + ''.join(records) + '</div>'
-            + '<p>Wins and losses count only graded selections. Pushes are listed separately, as are no-edge or no-pick games, pending games and unavailable lines.</p>'
+            + '<p>Wins and losses count only graded selections. Pushes are listed separately, as are games with no projected difference or no pick, pending games and unavailable lines.</p>'
             + (_test_table('ats-games', ['Matchup', 'PGO projected line (home)', 'Winner pick vs PGO line', 'ESPN sportsbook line',
                                        'Winner pick vs sportsbook line', 'PGO ATS choice', 'ATS result'], rows) if rows else '<p>No saved spread comparisons.</p>')
             + ''.join(details)

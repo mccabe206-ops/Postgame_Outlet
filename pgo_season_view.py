@@ -676,6 +676,8 @@ def _accuracy(summary):
     return ('<h3 id="season-accuracy">Season accuracy</h3><p>Original saved picks, verified finals. '
             'A correct winner can still come with a poor score estimate. Margin error is how far the predicted winning margin was from the actual margin; '
             'combined-score error is how far the predicted total was from both teams\' final points added together. Lower error is better.</p>'
+            '<p><a href="analysis/2026-week1-20260914.html" target="_blank" rel="noopener noreferrer">'
+            'Week 1 review: September 14, 12:57 AM EDT — 15 of 16 games final</a></p>'
             '<dl class="season-freshness">' + ''.join(cards) + '</dl>'
             + f'<p><strong>How the win chances are holding up:</strong> {probability_note}</p>'
             '<p class="season-caption">These are early results, not proof of accuracy. Confidence accounting includes marked late entries; '
@@ -734,7 +736,7 @@ def _market_benchmark(summary):
     for row in summary['ats_bands']:
         results = (f'{_integer(row["wins"])} covered; {_integer(row["losses"])} not covered; '
                    f'{_integer(row["pushes"])} pushes; {_integer(row["pending"])} pending; '
-                   f'{_integer(row["no_edge"])} no edge')
+                   f'{_integer(row["no_edge"])} no projected difference')
         bands.append(f'<div><dt>{_text(row["label"])}</dt><dd>{results}</dd></div>')
     excluded = '; '.join(f'{_text(summary.get("reason_labels", {}).get(key, key.replace("_", " ")))}: {_integer(count)}'
                          for key, count in benchmark['reasons'].items()) or 'None'
@@ -749,7 +751,7 @@ def _market_benchmark(summary):
             f'<p>Pending games and exclusions: {excluded}.</p>'
             '<details data-view-key="ats-gap-study"><summary>Do larger differences from the sportsbook perform better?</summary>'
             '<p><strong>Descriptive results.</strong> The groups use the absolute difference between the saved PGO margin and sportsbook forecast: '
-            'zero, under 1 point, 1 to under 3 points, and 3 or more points. Zero means no ATS edge. '
+            'zero, under 1 point, 1 to under 3 points, and 3 or more points. Zero means no projected difference. '
             'The groups were fixed for this study; earlier outcomes were already known.</p>'
             '<dl class="season-freshness">' + ''.join(bands) + '</dl>'
             f'<p>{_integer(summary["ats"]["unavailable"])} unavailable. Pushes are separate from wins and losses. '
@@ -797,7 +799,7 @@ def _experiments(state):
             f'<a href="{base}pgo_totals_candidate_20260910/README.md">Methods, season checks and saved evidence</a>.</p></details>')
     if weights:
         from pgo_forecast_lab import _spread
-        arms = {'postseason':'Current input blocks', 'without_qb_passing':'Without QB passing block',
+        arms = {'postseason':'Saved study control', 'without_qb_passing':'Without QB passing block',
                 'without_team_passing':'Without team passing block'}
         curves = {'scalar':'same neutral midpoint','intercept':'learned midpoint'}
         historical, live = weights.get('historical',{}), weights.get('metrics',{})
@@ -829,6 +831,7 @@ def _experiments(state):
         panels.append('<details class="model-update-evidence" id="season-weights-test" data-view-key="weights-experiment"><summary>Inputs and win chances: test overlap without guessing new weights</summary>'
             '<p>Recent results, team passing and quarterback passing can describe the same games. We tested removing one passing block at a time '
             'and refitted each fixed variant using earlier seasons only. We also tested two ways to convert each lead into a win chance.</p>'
+            '<p>These comparisons preserve the assumptions from the original study issuance. They can differ from a later main forecast after a pre-lock quarterback update.</p>'
             f'<p>Monitor: {_text(weights["status"])}. {_text(weights.get("blocked_reason") or "")}</p>'
             '<p><strong>No alternative cleared the improvement screen.</strong> Removing either block made average lead error slightly worse. '
             'None of the probability alternatives met the required improvement and uncertainty checks. The main model stays unchanged.</p>'

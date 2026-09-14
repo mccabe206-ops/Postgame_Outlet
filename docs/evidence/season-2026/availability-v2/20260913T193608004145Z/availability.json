@@ -1,0 +1,249 @@
+{
+  "checked_at": "2026-09-13T19:36:11.071740+00:00",
+  "games": {
+    "2026_01_DAL_NYG": {
+      "away": "DAL",
+      "blocked_reason": null,
+      "checked_at": "2026-09-13T19:36:11.071740+00:00",
+      "game_id": "2026_01_DAL_NYG",
+      "game_type": "REG",
+      "home": "NYG",
+      "kickoff": "2026-09-14T00:20:00+00:00",
+      "lock_at": "2026-09-13T23:20:00+00:00",
+      "qb_gate": "CONDITIONAL",
+      "season": 2026,
+      "summary": "DAL: official report VERIFIED_REPORT, final inactives UNKNOWN; NYG: official report VERIFIED_REPORT, final inactives UNKNOWN",
+      "teams": {
+        "DAL": {
+          "expected_qb_gsis_id": "00-0033077",
+          "expected_qb_status": "UNKNOWN",
+          "final_inactives_status": "UNKNOWN",
+          "observations": [
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0033093",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Jonathan Bullard",
+              "position": "DT",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0040017",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Ajani Cornelius",
+              "position": "T",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0037563",
+              "identity_status": "RESOLVED",
+              "injury": "Hip",
+              "name": "Malik Davis",
+              "position": "RB",
+              "practice_status": "Limited Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "OUT"
+            },
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0038547",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Luke Schoonmaker",
+              "position": "TE",
+              "practice_status": "Did Not Participate In Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            }
+          ],
+          "report_status": "VERIFIED_REPORT",
+          "source_errors": [
+            "No unique complete target list in the NFL matchup card"
+          ]
+        },
+        "NYG": {
+          "expected_qb_gsis_id": "00-0040691",
+          "expected_qb_status": "UNKNOWN",
+          "final_inactives_status": "UNKNOWN",
+          "observations": [
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0031270",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Shelby Harris",
+              "position": "DT",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0039446",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Bryan Hudson",
+              "position": "C",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0039847",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Theo Johnson",
+              "position": "TE",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0039337",
+              "identity_status": "RESOLVED",
+              "injury": "Knee",
+              "name": "Malik Nabers",
+              "position": "WR",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "QUESTIONABLE"
+            },
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0033376",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Patrick Ricard",
+              "position": "FB",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-13T19:36:10.334919+00:00",
+              "gsis_id": "00-0036386",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Andrew Thomas",
+              "position": "T",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            }
+          ],
+          "report_status": "VERIFIED_REPORT",
+          "source_errors": [
+            "No unique complete target list in the NFL matchup card"
+          ]
+        }
+      },
+      "week": 1
+    }
+  },
+  "parser_version": 4,
+  "policy": "Official dated context only. Missing reports or inactive-list names do not establish health. Non-QB numerical adjustments are not applied. Expected quarterback must play.",
+  "purpose": "forecast",
+  "schema_version": 1,
+  "sources": [
+    {
+      "bytes": 363302,
+      "captured_at": "2026-09-13T19:36:10.334919+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "64b3a1a057503612ea19c4f3f5a7621ddda6663881c1dc1a2a36cd41fdf87a0a",
+      "started_at": "2026-09-13T19:36:10.256592+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 496864,
+      "captured_at": "2026-09-13T19:36:10.580518+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "618f5187ec9a7325ceaef3b16230beb9f0add2d08d9abc4acd3a4cc9713a0c6e",
+      "started_at": "2026-09-13T19:36:10.257000+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 571087,
+      "captured_at": "2026-09-13T19:36:10.516552+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.giants.com/news/",
+      "kind": "team_news",
+      "sha256": "c1d530ecf8004256dadf7ffd1f2f5b9c0a2a797275fe3da286cf0301f41f970d",
+      "started_at": "2026-09-13T19:36:10.257339+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/"
+    },
+    {
+      "bytes": 1612120,
+      "captured_at": "2026-09-13T19:36:10.636386+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "88795f0b83c40176348bb99a14ca0469ddd93290f73ecb3472ef5f3b31dd5e8f",
+      "started_at": "2026-09-13T19:36:10.257640+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 904961,
+      "captured_at": "2026-09-13T19:36:10.966988+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season",
+      "kind": "official_inactives",
+      "sha256": "40a82d429859b0ca158bca3aee53c9402719b04d46f46adcc16beb1d28264d39",
+      "started_at": "2026-09-13T19:36:10.746196+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season"
+    }
+  ]
+}

@@ -29,6 +29,32 @@ GAME_IDENTITY = ('game_id', 'season', 'week', 'kickoff', 'game_type', 'location'
 TEAM_COUNTS = ('attempts', 'sacks_suffered', 'carries', 'passing_interceptions',
                'fumbles_lost_total', 'passing_20', 'rushing_20')
 QB_COUNTS = ('attempts', 'sacks_suffered', 'carries', 'passing_interceptions', 'sack_fumbles_lost')
+# Version-one aggregate admission requires the complete observed player schema.
+# A missing column is unknown production, even if all remaining fields are zero.
+UNATTRIBUTED_FIELDS = frozenset('''
+air_yards_share attempts carries completions def_2pt_atts def_2pt_made def_fg_blocks
+def_fumbles def_fumbles_forced def_interception_yards def_interceptions def_pass_defended def_pat_blocks def_punt_blocks
+def_qb_hits def_sack_yards def_sacks def_safeties def_tackle_assists def_tackles_for_loss def_tackles_for_loss_yards
+def_tackles_solo def_tackles_with_assist def_tds fantasy_points fantasy_points_ppr fg_att fg_blocked
+fg_blocked_distance fg_blocked_list fg_long fg_made fg_made_0_19 fg_made_20_29 fg_made_30_39
+fg_made_40_49 fg_made_50_59 fg_made_60_ fg_made_distance fg_made_list fg_missed fg_missed_0_19
+fg_missed_20_29 fg_missed_30_39 fg_missed_40_49 fg_missed_50_59 fg_missed_60_ fg_missed_distance fg_missed_list
+fg_pct fumble_recovery_opp fumble_recovery_own fumble_recovery_tds fumble_recovery_yards_opp fumble_recovery_yards_own fumbles_forced_by_opp
+fumbles_lost_total fumbles_not_forced fumbles_out_of_bounds fumbles_total game_id gwfg_att gwfg_blocked
+gwfg_distance gwfg_made gwfg_missed headshot_url kickoff_return_yards kickoff_returns misc_yards
+opponent_team pacr passing_10 passing_16 passing_20 passing_2pt_conversions passing_40
+passing_air_yards passing_cpoe passing_epa passing_first_downs passing_interceptions passing_tds passing_yards
+passing_yards_after_catch pat_att pat_blocked pat_made pat_missed pat_pct penalties
+penalty_yards player_display_name player_id player_name position position_group pt_att
+pt_blocked pt_downed pt_fair_caught pt_inside_20 pt_long pt_net_yards pt_out_of_bounds
+pt_return_tds pt_return_yards pt_returned pt_touchback pt_yards punt_return_yards punt_returns
+racr receiving_10 receiving_16 receiving_20 receiving_2pt_conversions receiving_40 receiving_air_yards
+receiving_epa receiving_first_downs receiving_fumbles receiving_fumbles_lost receiving_tds receiving_yards receiving_yards_after_catch
+receptions rushing_10 rushing_12 rushing_20 rushing_2pt_conversions rushing_40 rushing_epa
+rushing_first_downs rushing_fumbles rushing_fumbles_lost rushing_tds rushing_yards sack_fumbles sack_fumbles_lost
+sack_yards_lost sacks_suffered season season_type special_teams_tds target_share targets
+team week wopr
+'''.split())
 
 
 def _require(ok, message):
@@ -144,6 +170,90 @@ def _period(row):
     return (_integer(row['season']), _integer(row['week']), pgo_sources.normalize_team(row['team']))
 
 
+def partition_player_rows(team_rows, player_rows, games):
+    """Separate reconciled, penalty-only unidentified cohorts; never assign a player."""
+    cohorts = {(g['season'], g['week']) for g in games}
+    labels = {'player_id', 'player_name', 'player_display_name', 'position', 'position_group', 'headshot_url'}
+    metadata = labels | {'season', 'week', 'season_type', 'game_id', 'team', 'opponent_team'}
+    penalty_fields = ('penalties', 'penalty_yards')
+    nullable = {'passing_epa', 'passing_cpoe', 'pacr', 'rushing_epa', 'receiving_epa', 'racr',
+                'fg_long', 'fg_pct', 'fg_made_list', 'fg_missed_list', 'fg_blocked_list', 'pat_pct', 'pt_long'}
+    identified, pools = [], {}
+    for row in player_rows:
+        cohort = (_integer(row['season']), _integer(row['week']))
+        if cohort not in cohorts:
+            identified.append(row)
+            continue
+        if row.get('player_id') not in ('', None):
+            _require(isinstance(row['player_id'], str) and row['player_id'].strip()
+                     and isinstance(row.get('position'), str) and row['position'].strip(), 'Player production identity missing')
+            identified.append(row)
+            continue
+        _require(cohort not in pools, 'Duplicate unidentified penalty cohort')
+        _require(UNATTRIBUTED_FIELDS <= row.keys(), 'Unidentified penalty row has incomplete fields')
+        _require(all(row[name] in ('', None) for name in labels)
+                 and row['season_type'] == 'REG', 'Unidentified penalty row has conflicting identity')
+        for name, value in row.items():
+            if name not in metadata and name not in penalty_fields:
+                _require(_number(value, nullable=name in nullable) in (None, 0.),
+                         'Unidentified row contains other production: ' + str(name))
+        _require(_integer(row.get('penalties')) > 0 and _integer(row.get('penalty_yards')) >= 0,
+                 'Invalid unidentified penalty totals')
+        pools[cohort] = row
+    receipts = []
+    for cohort, pool in sorted(pools.items()):
+        expected = {(g['season'], g['week'], team): (g, opponent)
+                    for g in games if (g['season'], g['week']) == cohort
+                    for team, opponent in ((g['home'], g['away']), (g['away'], g['home']))}
+        def matching_label(row, key):
+            _require(key in expected, 'Penalty cohort contains an unexpected team')
+            game, opponent = expected[key]
+            _require(row.get('game_id') == game['game_id']
+                     and pgo_sources.normalize_team(row.get('opponent_team')) == opponent,
+                     'Penalty cohort game labels differ')
+        matching_label(pool, _period(pool))
+        teams, totals, seen = {}, {}, set()
+        for row in team_rows:
+            key = _period(row)
+            if key[:2] != cohort:
+                continue
+            _require(key not in teams and row.get('season_type') == 'REG', 'Duplicate or invalid penalty team cohort')
+            matching_label(row, key)
+            teams[key] = [_integer(row.get(name)) for name in penalty_fields]
+            _require(all(v >= 0 for v in teams[key]), 'Negative team penalties')
+        _require(set(teams) == set(expected), 'Penalty cohort is missing team statistics')
+        for row in identified:
+            key = _period(row)
+            if key[:2] != cohort:
+                continue
+            _require(key in expected and row.get('season_type') == 'REG', 'Invalid penalty player cohort')
+            if 'game_id' in row or 'opponent_team' in row:
+                matching_label(row, key)
+            identity = (*key, row['player_id'])
+            _require(identity not in seen, 'Duplicate player production'); seen.add(identity)
+            values = [_integer(row.get(name)) for name in penalty_fields]
+            _require(all(v >= 0 for v in values), 'Negative player penalties')
+            prior = totals.setdefault(key, [0, 0])
+            for i, value in enumerate(values):
+                prior[i] += value
+        _require(set(totals) == set(expected), 'Penalty cohort is missing player statistics')
+        residuals = {key: [teams[key][i] - totals[key][i] for i in range(2)] for key in expected}
+        _require(all(all(v >= 0 for v in values) and (values[0] > 0 or values[1] == 0)
+                     for values in residuals.values()), 'Team/player penalty residuals differ')
+        unassigned = [_integer(pool[name]) for name in penalty_fields]
+        _require([sum(values[i] for values in residuals.values()) for i in range(2)] == unassigned,
+                 'Unidentified penalties do not reconcile with complete cohort')
+        receipts.append(dict(schema_version=1, kind='unattributed-penalties', season=cohort[0], week=cohort[1],
+                             source_row_sha256=_sha(_bytes(pool)),
+                             source_labels={name: pool[name] for name in ('game_id', 'team', 'opponent_team')},
+                             team_totals=dict(zip(penalty_fields, (sum(v[i] for v in teams.values()) for i in range(2)))),
+                             identified_player_totals=dict(zip(penalty_fields, (sum(v[i] for v in totals.values()) for i in range(2)))),
+                             unattributed_totals=dict(zip(penalty_fields, unassigned)),
+                             team_residuals=[dict(team=key[2], **dict(zip(penalty_fields, values)))
+                                             for key, values in sorted(residuals.items())]))
+    return identified, receipts
+
+
 def _game_identity(game, season):
     _require(all(k in game for k in GAME_IDENTITY), 'Game identity is incomplete')
     _require(_integer(game['season']) == season and game['game_type'] == 'REG', 'Wrong season or game type')
@@ -212,6 +322,7 @@ def build_week(seed, fit, completed_games, team_rows, qb_rows, selected_roster, 
             game[side + '_score'] = int(value)
             key = (season, game['week'], game[side])
             _require(key not in periods, 'Duplicate completed team period'); periods.add(key)
+    qb_rows, unattributed = partition_player_rows(team_rows, qb_rows, games)
     teams, players, seen_players = {}, defaultdict(list), set()
     for original in team_rows:
         key = _period(original)
@@ -317,6 +428,7 @@ def build_week(seed, fit, completed_games, team_rows, qb_rows, selected_roster, 
                                             total_method='Frozen 2025 regular-season plus playoff points scored/allowed rates'),
                            **({'corrected_fit_margin': scoring.score(vector, corrected_fit)} if corrected_fit is not None else {})))
     return dict(schema_version=1, status=STATUS, season=season, week=min(18, completed_week + 1),
+                **({'unattributed_penalties': unattributed} if unattributed else {}),
                 season_complete=completed_week == 18,
                 generated_at=generated.isoformat(), inputs_as_of=captured.isoformat(), teams=ranked, games=output,
                 coverage=dict(completed_games=len(games), completed_weeks=completed_week,

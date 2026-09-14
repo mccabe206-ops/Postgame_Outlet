@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-09-14T02:57:22.305909+00:00",
+  "sources": [
+    {
+      "bytes": 361361,
+      "captured_at": "2026-09-14T02:57:21.417554+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "fe85cae7acebca7d46aa7202cfd097641f336c4130949b2f80da1bf1b289095d",
+      "started_at": "2026-09-14T02:57:21.390634+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 494820,
+      "captured_at": "2026-09-14T02:57:21.551334+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "0418bceb9d03e6943978e87f9d7e39aed833129092d9aca868a02a4e529a3ad3",
+      "started_at": "2026-09-14T02:57:21.390942+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 569609,
+      "captured_at": "2026-09-14T02:57:21.683976+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.giants.com/news/",
+      "kind": "team_news",
+      "sha256": "61bc7943983881c2ea5507167d716861b5dac847729b8367908d1363daf69501",
+      "started_at": "2026-09-14T02:57:21.391276+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/"
+    },
+    {
+      "bytes": 1599033,
+      "captured_at": "2026-09-14T02:57:21.432985+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "ba984764f8f3c7892f1c0141b50fd98f3d7f06a84f3cfa98f9fafcd6fb92e23a",
+      "started_at": "2026-09-14T02:57:21.391611+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 361731,
+      "captured_at": "2026-09-14T02:57:22.184582+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/updates-september-2026",
+      "kind": "official_inactives",
+      "sha256": "3919c99a4d18fc314420ae01dbf296d76d5eae8b95ad4ee41a6fb3b1537350c6",
+      "started_at": "2026-09-14T02:57:21.821695+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/updates-september-2026"
+    },
+    {
+      "bytes": 656224,
+      "captured_at": "2026-09-14T02:57:22.117114+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.giants.com/news/sunday-night-football-inactives-nfl-week-1-malik-nabers-injury-status-update",
+      "kind": "official_inactives",
+      "sha256": "929acb3571fa972c73b324cbcf32aa19638ac166085b74b8c64714b6461e587e",
+      "started_at": "2026-09-14T02:57:21.822020+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/sunday-night-football-inactives-nfl-week-1-malik-nabers-injury-status-update"
+    },
+    {
+      "bytes": 909306,
+      "captured_at": "2026-09-14T02:57:21.846632+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season",
+      "kind": "official_inactives",
+      "sha256": "798601c6caed44c70ab7ca6c622fbb089e308e588105238165d5eec61c1a8844",
+      "started_at": "2026-09-14T02:57:21.822404+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season"
+    }
+  ]
+}

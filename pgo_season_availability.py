@@ -286,13 +286,18 @@ def _parse_final_inactives_v3(raw, game, team, captured_at, source_team):
     return dict(parsed,published_at=published.isoformat(),modified_at=modified.isoformat(),headline=headline)
 
 
-def parse_final_inactives(raw, game, team, captured_at, *, parser_version=2, source_team=None):
-    """Replay v1/v2 exactly; v3 adds observed, team-bound club formats."""
-    if type(parser_version) is not int or parser_version not in (1,2,3):
+def parse_final_inactives(raw, game, team, captured_at, *, parser_version=2, source_team=None, source_url=None):
+    """Replay v1-v3 exactly; v4 adds the canonical NFL full-slate article."""
+    if type(parser_version) is not int or parser_version not in (1,2,3,4):
         raise ValueError('Unsupported availability parser version')
     if parser_version == 1:
         return _parse_final_inactives_v1(raw, game, team, captured_at)
     if parser_version == 3:
+        return _parse_final_inactives_v3(raw,game,team,captured_at,source_team)
+    if parser_version == 4:
+        from pgo_inactive_nfl import is_nfl_full_slate_url, parse_nfl_full_slate
+        if source_team is None and source_url and is_nfl_full_slate_url(source_url,game):
+            return parse_nfl_full_slate(raw,source_url,game,team,captured_at)
         return _parse_final_inactives_v3(raw,game,team,captured_at,source_team)
     if team not in (game['home'],game['away']):
         raise ValueError('Inactive source team is outside the matchup')
@@ -355,7 +360,7 @@ def parse_final_inactives(raw, game, team, captured_at, *, parser_version=2, sou
 def build_availability(games, roster, expected_qbs, sources, *, checked_at, purpose='forecast', parser_version=2):
     """Pure replay of supplied raw official captures; unknown never means healthy."""
     now = _utc(checked_at)
-    if type(parser_version) is not int or parser_version not in (1,2,3) or (parser_version == 1 and purpose != 'forecast'):
+    if type(parser_version) is not int or parser_version not in (1,2,3,4) or (parser_version == 1 and purpose != 'forecast'):
         raise ValueError('Unsupported availability parser version/purpose')
     indexed = _inputs(games, roster, expected_qbs, now, purpose)
     names = {team: _unique_roster_name_ids([r for r in indexed.values() if r['team'] == team], [])[0]
@@ -364,7 +369,7 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at, purp
     for source in sources:
         kind, team = source['kind'], source.get('team')
         legacy_source = kind in ('official_report','team_news','official_inactives') and (kind == 'official_report') == (team is None)
-        league_source = parser_version in (2,3) and team is None and kind in ('league_news','official_inactives')
+        league_source = parser_version in (2,3,4) and team is None and kind in ('league_news','official_inactives')
         if not (legacy_source or league_source):
             raise ValueError('Invalid availability source kind/team')
         if team is not None and team not in TEAM_NAMES:
@@ -395,7 +400,7 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at, purp
             for source, record in admitted:
                 source_team = source.get('team')
                 if (source_team not in (None,team)
-                        and (parser_version != 3 or source_team not in (game['home'],game['away']))):
+                        and (parser_version not in (3,4) or source_team not in (game['home'],game['away']))):
                     continue
                 if 'error' in source:
                     errors.append(source['error'])
@@ -421,14 +426,14 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at, purp
                                 source_sha256=record['sha256']))
                     else:
                         parsed = parse_final_inactives(source['body'],game,team,source['captured_at'],
-                            parser_version=parser_version,source_team=source_team)
+                            parser_version=parser_version,source_team=source_team,source_url=source['final_url'])
                         final_lists.append((parsed, source, record))
                 except (KeyError, TypeError, UnicodeError, ValueError) as error:
                     errors.append(str(error))
             final_status = 'UNKNOWN'
             if final_lists:
                 key = ((lambda value:(value[1].get('team') == team,_utc(value[0]['modified_at'])))
-                       if parser_version == 3 else (lambda value:_utc(value[0]['modified_at'])))
+                       if parser_version in (3,4) else (lambda value:_utc(value[0]['modified_at'])))
                 parsed, source, record = max(final_lists,key=key)
                 final_status = 'PARTIAL' if parsed['unparsed_lines'] else 'VERIFIED_LIST'
                 errors.extend('Unparsed inactive-list line: ' + line for line in parsed['unparsed_lines'])
@@ -464,7 +469,7 @@ def build_availability(games, roster, expected_qbs, sources, *, checked_at, purp
             summary='; '.join(f'{team}: official report {row["report_status"]}, final inactives {row["final_inactives_status"]}' for team,row in teams.items()))
     result = dict(schema_version=1, checked_at=now.isoformat(), games=output, sources=metadata,
                 policy='Official dated context only. Missing reports or inactive-list names do not establish health. Non-QB numerical adjustments are not applied. Expected quarterback must play.')
-    if parser_version in (2,3):
+    if parser_version in (2,3,4):
         result.update(purpose=purpose,parser_version=parser_version)
     return result
 
@@ -535,7 +540,12 @@ def capture_availability(games, roster, expected_qbs, output, *, purpose='foreca
                 continue
             text = title+' '+urlsplit(url).path.replace('-',' ')
             match_games = [team_game] if team_game is not None else games
-            matched = [g for g in match_games if _matches_matchup(text,g) and _matches_period(text,g)]
+            if source['kind'] == 'league_news':
+                from pgo_inactive_nfl import is_nfl_full_slate_url
+                full_slate = [g for g in games if is_nfl_full_slate_url(url,g)]
+            else:
+                full_slate = []
+            matched = full_slate or [g for g in match_games if _matches_matchup(text,g) and _matches_period(text,g)]
             if source['kind'] == 'league_news' and not matched:
                 continue
             if team_game is not None and not _matches_period(text,team_game):
@@ -566,8 +576,8 @@ def capture_availability(games, roster, expected_qbs, output, *, purpose='foreca
                 source['file'] = f'raw/{index:03d}.html.gz'
                 _write(directory/source['file'], gzip.compress(source['body'],mtime=0))
         checked = _clock(now).isoformat()
-        result = build_availability(games,roster,expected_qbs,source_rows,checked_at=checked,purpose=purpose,parser_version=3)
-        inputs = dict(games=games,roster=roster,expected_qbs=expected_qbs,purpose=purpose,parser_version=3)
+        result = build_availability(games,roster,expected_qbs,source_rows,checked_at=checked,purpose=purpose,parser_version=4)
+        inputs = dict(games=games,roster=roster,expected_qbs=expected_qbs,purpose=purpose,parser_version=4)
         _write(directory/'inputs.json.gz',gzip.compress(_json(inputs),mtime=0))
         _write(directory/'capture.json',_json(dict(checked_at=checked,sources=result['sources'])))
         _write(directory/'availability.json',_json(result))

@@ -1,0 +1,173 @@
+{
+  "checked_at": "2026-09-13T23:30:32.238600+00:00",
+  "sources": [
+    {
+      "bytes": 361353,
+      "captured_at": "2026-09-13T23:30:30.864799+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "19087f6c5a3af4dbbc5844b3f01d32288a6ae04cd69c3820a8be944a9287c1d5",
+      "started_at": "2026-09-13T23:30:30.800426+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 494794,
+      "captured_at": "2026-09-13T23:30:30.903764+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "1159757eeebcff7470e318b28aec16d1df658097f227d003a5201b1b3066c405",
+      "started_at": "2026-09-13T23:30:30.800805+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 693684,
+      "captured_at": "2026-09-13T23:30:30.880657+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.packers.com/news/",
+      "kind": "team_news",
+      "sha256": "aa30b0f75fbc1a96b656aa67b2371cf2947cd01aa5ccb064b8faa7ace095ce5d",
+      "started_at": "2026-09-13T23:30:30.801172+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/"
+    },
+    {
+      "bytes": 543115,
+      "captured_at": "2026-09-13T23:30:31.079644+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.vikings.com/news/",
+      "kind": "team_news",
+      "sha256": "882b66803d93f7686481090054bf854087d3466fae7803bca8d524740db7bb37",
+      "started_at": "2026-09-13T23:30:30.801621+00:00",
+      "status": 200,
+      "team": "MIN",
+      "url": "https://www.vikings.com/news/"
+    },
+    {
+      "bytes": 569039,
+      "captured_at": "2026-09-13T23:30:31.034327+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.giants.com/news/",
+      "kind": "team_news",
+      "sha256": "c78696262cc5556cd7fbafe272170b5163b1906e458f9abaa7f8e394e62d8ecf",
+      "started_at": "2026-09-13T23:30:30.864826+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/"
+    },
+    {
+      "bytes": 527657,
+      "captured_at": "2026-09-13T23:30:31.116693+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "d87e7620cbc32b31fb080c5d841129290eff38b35e156b11e6a0559d5ee965db",
+      "started_at": "2026-09-13T23:30:30.880675+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "bytes": 488567,
+      "captured_at": "2026-09-13T23:30:31.075485+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.commanders.com/news/",
+      "kind": "team_news",
+      "sha256": "6f2d2198780dc3a1c51f3b1d77d70af3af9bc15a373c408a19b7baa3a947fb10",
+      "started_at": "2026-09-13T23:30:30.903790+00:00",
+      "status": 200,
+      "team": "WAS",
+      "url": "https://www.commanders.com/news/"
+    },
+    {
+      "bytes": 1600329,
+      "captured_at": "2026-09-13T23:30:31.339974+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "4b76c06bd1403207aa97733f22144fe360a1d49e28b5b388ad25ebc5a9783ae9",
+      "started_at": "2026-09-13T23:30:31.034354+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 361505,
+      "captured_at": "2026-09-13T23:30:31.674106+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/updates-september-2026",
+      "kind": "official_inactives",
+      "sha256": "140de56381ed0474f44a50b31a15c7fa4c7199932bb486542501d6702b573c1a",
+      "started_at": "2026-09-13T23:30:31.630038+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/updates-september-2026"
+    },
+    {
+      "bytes": 380378,
+      "captured_at": "2026-09-13T23:30:31.810209+00:00",
+      "file": "raw/009.html.gz",
+      "final_url": "https://www.vikings.com/news/inactives-packers-week-1-2026",
+      "kind": "official_inactives",
+      "sha256": "2b8e1e8451a87a5aec7aa4ad10855ca42b24cb090a8e179e66f0c89c402be6a9",
+      "started_at": "2026-09-13T23:30:31.630377+00:00",
+      "status": 200,
+      "team": "MIN",
+      "url": "https://www.vikings.com/news/inactives-packers-week-1-2026"
+    },
+    {
+      "bytes": 656010,
+      "captured_at": "2026-09-13T23:30:31.676784+00:00",
+      "file": "raw/010.html.gz",
+      "final_url": "https://www.giants.com/news/sunday-night-football-inactives-nfl-week-1-malik-nabers-injury-status-update",
+      "kind": "official_inactives",
+      "sha256": "af51e4faacfedec80e68af732b78a8058f7511c53f0e7da1a9969cf247799cbb",
+      "started_at": "2026-09-13T23:30:31.630726+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/sunday-night-football-inactives-nfl-week-1-malik-nabers-injury-status-update"
+    },
+    {
+      "bytes": 336852,
+      "captured_at": "2026-09-13T23:30:32.039956+00:00",
+      "file": "raw/011.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/commanders-vs-eagles-inactives-week-1-2026",
+      "kind": "official_inactives",
+      "sha256": "01db8a104a8b1c27e1c6569e90b504dcdcbf7ca889a6d37b25ff9d595ae27178",
+      "started_at": "2026-09-13T23:30:31.631065+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/commanders-vs-eagles-inactives-week-1-2026"
+    },
+    {
+      "bytes": 304261,
+      "captured_at": "2026-09-13T23:30:31.811251+00:00",
+      "file": "raw/012.html.gz",
+      "final_url": "https://www.commanders.com/news/inactives-commanders-vs-eagles-week-1-2026",
+      "kind": "official_inactives",
+      "sha256": "a815a5a50a6e074b64428683f1eca44dace7035a3049594bcbbf44f4b7a2bb50",
+      "started_at": "2026-09-13T23:30:31.674130+00:00",
+      "status": 200,
+      "team": "WAS",
+      "url": "https://www.commanders.com/news/inactives-commanders-vs-eagles-week-1-2026"
+    },
+    {
+      "bytes": 916051,
+      "captured_at": "2026-09-13T23:30:31.736406+00:00",
+      "file": "raw/013.html.gz",
+      "final_url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season",
+      "kind": "official_inactives",
+      "sha256": "9da8924880283837ce546e8d362d2df846cfafc9c963924cb7f63666049898df",
+      "started_at": "2026-09-13T23:30:31.676800+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season"
+    }
+  ]
+}

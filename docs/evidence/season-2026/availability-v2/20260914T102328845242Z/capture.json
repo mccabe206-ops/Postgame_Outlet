@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-09-14T10:23:32.564614+00:00",
+  "sources": [
+    {
+      "bytes": 361361,
+      "captured_at": "2026-09-14T10:23:31.829571+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e824a5ef590e775641966561b41f1bfb52575fe10a3408cf4a2c10edcb9cc855",
+      "started_at": "2026-09-14T10:23:31.444484+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 288817,
+      "captured_at": "2026-09-14T10:23:31.876982+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "1b0be15b7b77640353b05e6a5dccaa275a8ede02f472434eb6686826103ed327",
+      "started_at": "2026-09-14T10:23:31.444831+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 498694,
+      "captured_at": "2026-09-14T10:23:31.954168+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "34d8ad3763c8b9b5b807c49b79aaf36462c0c3b17d1b4fb4cda28c571a05ca30",
+      "started_at": "2026-09-14T10:23:31.445367+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 1599661,
+      "captured_at": "2026-09-14T10:23:31.988840+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "0a3daa7d417de320c672ad18a433e7aab6209042fa75ceb30d1dfb4dc0998a2a",
+      "started_at": "2026-09-14T10:23:31.445709+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 908656,
+      "captured_at": "2026-09-14T10:23:32.470912+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season",
+      "kind": "official_inactives",
+      "sha256": "ca4f6dda263d16977808e828471326be2d2c285c7a2cab307545b934e1dac6c9",
+      "started_at": "2026-09-14T10:23:32.085715+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season"
+    }
+  ]
+}

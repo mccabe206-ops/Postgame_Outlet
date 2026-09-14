@@ -25,7 +25,8 @@ class ATSViewTests(unittest.TestCase):
         data=fixture();before=copy.deepcopy(data);page=view.render(data)
         self.assertEqual(data,before)
         for text in ('id="season-ats"','ATS suggestion vs sportsbook line','Winner pick vs sportsbook line',
-                     'Winner pick vs PGO projected line','LAR -4.3','LAR -3.5','SF +3.5','DraftKings','LAR -3.5; edge +0.766 NFL points',
+                     'Winner pick vs PGO projected line','LAR -4.3','LAR -3.5','SF +3.5','DraftKings','LAR -3.5; Projected difference +0.766 NFL points',
+                     'Less than 1 point separates the projections — a slight lean.',
                      'Quote captured','ATS selection issued','Prediction lock','Original PGO edition',
                      'original &lt;edition&gt;','a=1&amp;b=2','T-60','Straight-up','No cover probability'):
             self.assertIn(text,page)
@@ -40,18 +41,19 @@ class ATSViewTests(unittest.TestCase):
                     home_edge=2.25,su_pick='SF',ats_pick='LAR',grade=dict(straight_up_ats='L',ats='W'))
         page=view.render(data)
         self.assertIn('LAR +1.25',page)  # Precise saved projection in details.
-        self.assertIn('LAR +3.5; edge +2.25 NFL points',page)
+        self.assertIn('LAR +3.5; Projected difference +2.25 NFL points',page)
         self.assertIn('SF: Not covered',page)
         self.assertIn('Covered',page)
         game.update(home_edge=-.25,ats_pick='SF')
-        self.assertIn('SF -3.5; edge +0.25 NFL points',view.render(data))
+        self.assertIn('SF -3.5; Projected difference +0.25 NFL points',view.render(data))
         game.update(home_edge=0.,ats_pick=None,no_edge=True,grade=dict(straight_up_ats='PUSH',ats='NOPICK'))
         data['metrics']['ats'].update(no_edge=1,pending=0)
         page=view.render(data)
-        self.assertIn('No projected ATS edge',page)
+        self.assertIn('No projected difference',page)
         self.assertIn('SF: Push',page)
-        self.assertIn('No edge',page)
+        self.assertIn('No projected difference',page)
         self.assertIn('Pushes are listed separately',page)
+        self.assertIn('games with no projected difference or no pick',page)
 
     def test_unavailable_opener_keeps_only_the_real_pgo_projection(self):
         data=fixture();data['games']=[]
@@ -109,12 +111,32 @@ class ATSViewTests(unittest.TestCase):
         game.update(pgo_margin=.0004,model_home_handicap=-.0004,home_edge=.0004)
         page=view.render(data)
         self.assertIn('LAR -0.0004',page)
-        self.assertIn('edge +0.0004 NFL points',page)
+        self.assertIn('Projected difference +0.0004 NFL points',page)
         for value in (float('nan'),float('inf'),True):
             game['model_home_handicap']=value
             with self.subTest(value=value),self.assertRaises(ValueError):view.render(data)
         data=fixture();data['games'].append(copy.deepcopy(data['games'][0]))
         with self.assertRaisesRegex(ValueError,'Duplicate'):view.render(data)
+
+    def test_slight_lean_note_uses_strict_nonzero_one_point_boundary_without_mutation(self):
+        data=fixture();game=data['games'][0]
+        game.update(home_edge=0.,ats_pick=None)
+        before=copy.deepcopy(data);page=view.render(data)
+        self.assertIn('No projected difference',page)
+        self.assertNotIn('Less than 1 point separates the projections',page)
+        self.assertEqual(data,before)
+
+        game.update(home_edge=.999,ats_pick='LAR')
+        before=copy.deepcopy(data);page=view.render(data)
+        self.assertIn('Projected difference +0.999 NFL points',page)
+        self.assertIn('Less than 1 point separates the projections — a slight lean.',page)
+        self.assertEqual(data,before)
+
+        game.update(home_edge=1.)
+        before=copy.deepcopy(data);page=view.render(data)
+        self.assertIn('Projected difference +1 NFL points',page)
+        self.assertNotIn('Less than 1 point separates the projections',page)
+        self.assertEqual(data,before)
 
 
 if __name__=='__main__':unittest.main()

@@ -507,6 +507,8 @@ def build_next(state, schedule, results, root, *, completed=None, selected=None,
     games=allocate_confidence(games,state['calibration'])
     rankings=dict(edition=edition,generated_at=generated,inputs_as_of=generated,history_through=max((r['kickoff'] for r in completed_games),default=snapshot['history']['through']),
                   teams=output['teams'],completed_week=completed,source_captures=sources)
+    if output.get('unattributed_penalties'):
+        rankings['unattributed_penalties'] = output['unattributed_penalties']
     week=dict(week=completed+1,source_edition=edition,generated_at=generated,inputs_as_of=generated,games=games)
     week['source_captures']=sources
     return rankings,week,sources
