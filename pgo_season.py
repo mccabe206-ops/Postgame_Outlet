@@ -292,6 +292,9 @@ def load_current(root=DEFAULT_ROOT):
     require(not (directory/filename).is_symlink() and sha(payload) == meta['sha256'] and len(payload) == meta['bytes'], 'Season state hash differs')
     state = json.loads(gzip.decompress(payload) if filename.endswith('.gz') else payload)
     require(state['schema_version'] == 1 and state['season'] == SEASON, 'Season schema differs')
+    if state.get('statistics_review'):
+        from pgo_statistics_review import verify_saved
+        verify_saved(state['statistics_review'],root,state['checked_at'],state=state)
     references = [*state.get('source_captures', []), *(r['source'] for r in state.get('results',[]) if 'source' in r)]
     references += state.get('rankings',{}).get('source_captures',[])
     references += [ref for refs in state.get('edition_sources',{}).values() for ref in refs]
@@ -883,6 +886,12 @@ def refresh(root=DEFAULT_ROOT):
     try:refresh_offensive_identity_source(state,root)
     except Exception:
         state['offensive_identity_source_check']=dict(status='BLOCKED',checked_at=now(),blocked_reason='Player-ID source maintenance failed.')
+    try:
+        from pgo_statistics_review import refresh_review
+        state['statistics_review']=refresh_review(state,previous,root,now())
+    except Exception as error:
+        state['statistics_review']=dict(copy.deepcopy((previous or {}).get('statistics_review',{})),
+            status='BLOCKED',checked_at=now(),blocked_reason=str(error))
     state['checked_at']=now()
     if previous:
         old={g['game_id']:g for w in previous['weeks'] for g in w['games']}

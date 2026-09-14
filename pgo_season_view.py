@@ -1032,6 +1032,38 @@ def _experiments(state):
             'No experiment automatically replaces the main model.</p>' + ''.join(panels))
 
 
+def _statistics_review(state):
+    review=state.get('statistics_review')
+    if not review:return ''
+    report=review.get('report') or {}
+    status=review['status']
+    label={'WAITING':'Waiting for a completed-week edition','CLEAR':'No changes in checked inputs',
+           'REVIEW':'Later statistics changed','BLOCKED':'Latest comparison unavailable'}[status]
+    note='<p>We compare later team and quarterback statistics with the exact data saved for a ranking edition, about every six hours and when a new edition appears. '
+    note+='This check covers the same completed games. It does not change issued picks, grades or model weights.</p>'
+    if review.get('blocked_reason'):note+=f'<p>Latest check needs review: {_text(review["blocked_reason"])}.</p>'
+    if report:
+        note+=f'<p>Last completed comparison: {_time(report["compared_at"])}. '
+        note+=f'{len(report["games"])} games through Week {_integer(report["completed_week"])}; '
+        note+=f'{len(report["changes"])} changed input values or evidence records. '
+        note+=f'Compared with edition {_text(report["basis_edition"])}.</p>'
+        if report['changes']:
+            note+='<p>A source correction may affect a future recalculation. This check does not estimate its size or direction.</p><ul>'
+            for row in report['changes'][:12]:
+                if row['kind']=='unattributed_penalties':
+                    note+='<li>Unassigned penalty evidence changed; no player was assigned these penalties.</li>'
+                else:
+                    field=row['field'].replace('_',' ')
+                    prior='Missing' if row['before'] is None else str(row['before'])
+                    current='Missing' if row['after'] is None else str(row['after'])
+                    note+=f'<li>{_text(row["game_id"])}: {_text(row["team"])} {_text(field)}: {_text(prior)} to {_text(current)}.</li>'
+            note+='</ul>'
+            if len(report['changes'])>12:note+='<p>Additional changes are retained in the saved refresh evidence.</p>'
+    else:note+='<p>No completed comparison yet. Checks begin after a ranking edition incorporates a full 2026 week.</p>'
+    return ('<details class="model-update-evidence" id="season-statistics-review" data-view-key="statistics-review">'
+            f'<summary>Later statistical corrections: {label}</summary>'+note+'</details>')
+
+
 def render_season(state, *, accuracy=None, mccabe=None, market=None):
     """Render validated saved state using the existing shared PGO styles once per page."""
     if state['schema_version'] != 1 or state['status'] not in ('READY','BLOCKED'):
@@ -1065,6 +1097,7 @@ def render_season(state, *, accuracy=None, mccabe=None, market=None):
         ('offensive_inventory', 'season-offensive-usage', 'Offensive player information'),
         ('offensive_usage', 'season-offensive-usage', 'Offensive playing-time checks'),
         ('score_range_collection', 'season-score-collection', 'Score-error collection'),
+        ('statistics_review', 'season-statistics-review', 'Later statistical corrections'),
         ('ats', 'season-ats', 'Sportsbook comparisons')) if (state.get(key) or {}).get('status') == 'BLOCKED']
     update_note = ('<p class="season-caption">Separate updates needing review: ' + ', '.join(failed_updates)
                    + '. Earlier saved information is retained.</p>') if failed_updates else ''
@@ -1112,7 +1145,7 @@ def render_season(state, *, accuracy=None, mccabe=None, market=None):
             'Injury news is shown as context; current non-QB injuries and backup quality are not separately rated.</p></details>'
             f'<p class="season-caption"><strong>Main picks and grades:</strong> {main_status}. '
             'Non-QB injuries and backup quality are context, not fitted adjustments.</p>' + block + update_note
-            + _freshness(state) + _inactive_watch(state) + _game_day(state) + _rankings(state.get('rankings'),mccabe) +
+            + _freshness(state) + _statistics_review(state) + _inactive_watch(state) + _game_day(state) + _rankings(state.get('rankings'),mccabe) +
             '<h3 id="season-records">Winner records (straight-up)</h3>'
             '<p>W: the selected team won. L: the selected team lost. T: the game ended in a tie. '
             'Sportsbook spread records are tracked separately.</p>'

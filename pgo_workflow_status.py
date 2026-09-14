@@ -23,6 +23,7 @@ def report_health(state, summary_path=None):
                   ('offensive_inventory', 'offensive_inventory', 'DESCRIPTIVE / NOT IN MODEL'),
                   ('offensive_usage', 'offensive_usage', 'READY'),
                   ('score_range_collection', 'score_range_collection', 'READY'),
+                  ('statistics_review', 'statistics_review', 'CLEAR'),
                   ('ats','ats','READY')]
     for key, prefix, _ in components:
         component = state.get(key) or {}
@@ -40,7 +41,10 @@ def report_health(state, summary_path=None):
     if status != 'READY':
         warnings.append(f'PGO {condition}: {reason or "Saved status is unavailable"}')
     for _, prefix, healthy in components:
-        if prefix in ('injury_usage','offensive_inventory','offensive_usage','score_range_collection') and report[prefix + '_status'] in ('UNKNOWN', 'WAITING'):
+        if prefix in ('injury_usage','offensive_inventory','offensive_usage','score_range_collection','statistics_review') and report[prefix + '_status'] in ('UNKNOWN', 'WAITING'):
+            continue
+        if prefix=='statistics_review' and report[prefix+'_status']=='REVIEW':
+            warnings.append('PGO statistics review: later source corrections found; issued forecasts remain unchanged')
             continue
         if report[prefix + '_status'] != healthy:
             warnings.append('PGO ' + prefix.replace('_', ' ') + ' monitor: '
