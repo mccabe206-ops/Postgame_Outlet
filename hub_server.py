@@ -234,6 +234,23 @@ def act_run(body):
         return res
     if action == "trend":
         return act_run_trend(body)
+    if action == "pff":
+        season = str(body.get("year") or "2026").strip()
+        week = str(body.get("week") or "1").strip()
+        if not week.isdigit():
+            return {"ok": False, "message": "enter a week number"}
+        argv = ["python3", "pff.py", "report", season, week]
+        game = (body.get("game") or "").strip()
+        if game:
+            argv += ["--game", game]
+        if body.get("full"):
+            argv.append("--full")
+        res = _sh(argv, timeout=120)
+        res["ok"] = True
+        if res.get("rc") and "No PFF cache" in (res.get("stdout", "") + res.get("stderr", "")):
+            res["stdout"] = (res.get("stdout", "") + "\n\nNo cache yet — PFF data is pulled via "
+                             "the browser session in Claude Code (tell it: \"fetch PFF week N\").")
+        return res
     return {"ok": False, "message": f"unknown action {action}"}
 
 
@@ -933,6 +950,8 @@ const CARDS = [
    render:c=>btn(c,"Show diff",()=>run({action:'whatchanged'},"What changed"))},
  {n:13, t:"Previous ratings", d:"Your board over time. Take an immutable snapshot now, or open a past one to see the full 32-team board as of that date, with a Δ column vs. your current numbers.",
    render:c=>snapshotCard(c)},
+ {n:14, t:"PFF player stats", d:"Per-player PFF grades + advanced stats for a week, grouped by game (passing/rushing/receiving/blocking/defense/ST). Pulled from your PFF+ subscription via Claude Code; this reads the local cache.",
+   render:c=>pffCard(c)},
  {n:10, t:"Injury report", d:"Every team's rating-relevant injuries (Sleeper). Open the dashboard, or run the CLI scan.",
    render:c=>injuryCard(c)},
  {n:12, t:"Depth charts", d:"Starter → backup order (Ourlads) with player photos + jersey numbers. List or field-diagram view; pick a team.",
@@ -1128,6 +1147,19 @@ function weekRun(c,action,title){
     r.appendChild(bf);
   }
   c.appendChild(r);
+}
+
+// ---- PFF player stats (reads local cache; fetch is a Claude Code browser step)
+function pffCard(c){
+  const r=el('div','row');
+  const wk=el('input','sm'); wk.placeholder='week'; wk.value='1';
+  const yr=el('input','sm'); yr.placeholder='year'; yr.value='2026';
+  const gm=el('input'); gm.placeholder='game (team abbr, e.g. SF — blank = all)'; gm.style.width='150px';
+  const b=el('button','go','Report'); b.onclick=()=>run({action:'pff',week:wk.value,year:yr.value,game:gm.value.trim()},'PFF player stats');
+  const bf=el('button','go alt','Full (all fields)'); bf.onclick=()=>run({action:'pff',week:wk.value,year:yr.value,game:gm.value.trim(),full:true},'PFF player stats — full');
+  [wk,yr,gm,b,bf].forEach(x=>r.appendChild(x)); c.appendChild(r);
+  const note=el('div','note','PFF abbrs: BLT=BAL, CLV=CLE, HST=HOU, ARZ=ARI, LA=LAR. Grades+advanced included.');
+  note.style.marginTop='4px'; c.appendChild(note);
 }
 
 // ---- previous ratings (snapshots / history)

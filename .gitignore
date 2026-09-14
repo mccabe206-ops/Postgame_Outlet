@@ -23,3 +23,6 @@ logs/
 
 # Anthropic API key for the hub KB chat — SECRET, never commit
 data/.anthropic_key
+
+# PFF premium player-stats cache (derived from your PFF+ subscription; private)
+data/pff/
