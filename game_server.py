@@ -185,6 +185,20 @@ def _stat_pairs(box):
             for n in order if n in a]
 
 
+def batch_report(week, year):
+    """Every final game's report in one shot — the 'run all matchups' payload."""
+    games = list_games(week, year)["games"]
+    reports = []
+    for g in games:
+        if not g["final"]:
+            continue
+        try:
+            reports.append(build_report(g["event"], week, year))
+        except Exception as e:  # noqa: BLE001
+            reports.append({"ok": False, "away": g["away"], "home": g["home"], "message": str(e)})
+    return {"week": week, "year": year, "count": len(reports), "reports": reports}
+
+
 def build_report(event, week, year):
     summary = fetch_json(SUM.format(e=event))
     hdr = summary.get("header", {}).get("competitions", [{}])[0]
@@ -347,6 +361,7 @@ PAGE = r"""<!doctype html><html><head><meta charset="utf-8"><title>Game Report</
   <span class="dim">Week</span><input id="wk" value="1" style="width:52px">
   <span class="dim">Year</span><input id="yr" value="2026" style="width:66px">
   <button onclick="loadGames()">Load week</button>
+  <button onclick="runAll()">⚡ Run all matchups</button>
   <span id="crumb" class="dim"></span>
 </header>
 <div class="wrap" id="main"></div>
@@ -384,6 +399,33 @@ async function loadGames(){
     g.appendChild(c);
   });
   m.appendChild(g);
+}
+async function runAll(){
+  const wk=$('wk').value, yr=$('yr').value;
+  $('crumb').innerHTML='<a class="back" onclick="loadGames()">← games</a>';
+  const m=$('main'); m.innerHTML='<div class="dim">running all matchups… (pulling every final game)</div>';
+  const j=await api(`/api/batch?week=${wk}&year=${yr}`);
+  m.innerHTML=`<div class="sec"><h3>All matchups — Week ${wk} ${yr} (${j.count} games)</h3>`
+    +'<div class="dim" style="font-size:12px">Suggestions are single-game signals, not auto-moves. Click a game title for the full report.</div></div>';
+  (j.reports||[]).forEach(r=>{
+    const s=el('div','sec');
+    if(!r.ok){s.innerHTML=`<b>${r.away} @ ${r.home}</b> — ${r.message||'error'}`;m.appendChild(s);return;}
+    const aw=r.away_score>r.home_score;
+    const ex=r.expected, cp=r.competitive;
+    const comp = cp.decided? ` · competitive ${r.away} ${cp.away}-${cp.home} ${r.home} (decided Q${cp.decided[0]} ${cp.decided[1]})` : '';
+    let html=`<h3 style="text-transform:none;font-size:16px;color:var(--ink)">`
+      +`<a class="back" onclick="openGame('${r.event}','${wk}','${yr}')">${r.away} ${r.away_score} @ ${r.home} ${r.home_score}</a></h3>`
+      +`<div class="dim" style="font-size:12.5px">expected ${ex.away==null?'—':ex.away.toFixed(0)}-${ex.home==null?'—':ex.home.toFixed(0)}${comp}</div>`;
+    const g=el('div','qbs'); g.style.marginTop='8px';
+    [['away',r.away,r.teams&&r.teams.away],['home',r.home,r.teams&&r.teams.home]].forEach(([sd,ab,t])=>{
+      const bx=el('div','box'); let h=`<div class="v" style="font-size:14px">${ab}`;
+      if(t&&t.rating){const rt=t.rating;h+=` <span class="dim" style="font-size:12px">${rt.qb}/${rt.off}/${rt.def}=${rt.total}</span>`;}
+      h+='</div>';
+      if(t&&t.suggest){h+='<ul style="margin:6px 0 0;padding-left:16px;font-size:12.5px">'+t.suggest.map(x=>`<li>${x}</li>`).join('')+'</ul>';}
+      bx.innerHTML=h; g.appendChild(bx);
+    });
+    s.appendChild(g); m.appendChild(s);
+  });
 }
 function cmpRow(label,a,h,better){
   // better: 'hi' higher wins, 'lo' lower wins, null none
@@ -522,6 +564,9 @@ class Handler(BaseHTTPRequestHandler):
                 ev = (q.get("event") or [""])[0]
                 wk = int((q.get("week") or ["1"])[0]); yr = int((q.get("year") or ["2026"])[0])
                 return self._send(200, json.dumps(build_report(ev, wk, yr)))
+            if u.path == "/api/batch":
+                wk = int((q.get("week") or ["1"])[0]); yr = int((q.get("year") or ["2026"])[0])
+                return self._send(200, json.dumps(batch_report(wk, yr)))
         except Exception as e:  # noqa: BLE001
             return self._send(500, json.dumps({"ok": False, "message": str(e)}))
         return self._send(404, "not found", "text/plain")
