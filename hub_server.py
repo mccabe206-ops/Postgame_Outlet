@@ -196,6 +196,8 @@ def act_run(body):
         year = str(body.get("year") or "").strip()
         if year.isdigit():
             argv.append(year)
+        if body.get("full"):
+            argv.append("--full")
         res = _sh(argv, timeout=180)
         res["ok"] = True
         return res
@@ -1118,7 +1120,14 @@ function weekRun(c,action,title){
   const r=el('div','row'); const wk=el('input','sm'); wk.placeholder='week';
   const yr=el('input','sm'); yr.placeholder='year';
   const b=el('button','go','Run'); b.onclick=()=>run({action,week:wk.value,year:yr.value},title);
-  [wk,yr,b].forEach(x=>r.appendChild(x)); c.appendChild(r);
+  [wk,yr,b].forEach(x=>r.appendChild(x));
+  if(action==='results'){
+    const bf=el('button','go alt','Full team stats');
+    bf.title='Complete ESPN box score (24 stats/side) for every final game';
+    bf.onclick=()=>run({action,week:wk.value,year:yr.value,full:true}, title+' — full team stats');
+    r.appendChild(bf);
+  }
+  c.appendChild(r);
 }
 
 // ---- previous ratings (snapshots / history)

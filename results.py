@@ -116,14 +116,26 @@ def fetch_boxscore(event_id):
         if side not in out:
             continue
         eff = _team_stat(tb, "thirdDownEff")
+        # Full team box score: every stat ESPN provides, in ESPN's order, deduped
+        # by name (ESPN occasionally repeats a key, e.g. interceptions).
+        all_stats, seen = [], set()
+        for st in tb.get("statistics", []):
+            nm = st.get("name")
+            if nm in seen:
+                continue
+            seen.add(nm)
+            all_stats.append({"name": nm, "label": st.get("label"),
+                              "value": st.get("displayValue")})
         out[side] = {
             "team": tb.get("team", {}).get("displayName"),
+            "abbr": tb.get("team", {}).get("abbreviation"),
             "total_yards": _num(_team_stat(tb, "totalYards")),
             "yards_per_play": _num(_team_stat(tb, "yardsPerPlay")),
             "turnovers": _num(_team_stat(tb, "turnovers")),
             "third_down": eff,
             "third_down_pct": _third_down_pct(eff),
             "possession": _team_stat(tb, "possessionTime"),
+            "all_stats": all_stats,
             "qb": None,
         }
 
@@ -344,6 +356,29 @@ def print_week(games, week):
         print(f"McCabe Method ATS vs market: {w}-{l}" + (f"-{pu} push" if pu else ""))
 
 
+def print_full_stats(games, week):
+    """Full team box score, away vs home, for every final game in the week."""
+    print(f"\n=== NFL Team Stats — Week {week} (full box score, away | stat | home) ===")
+    for g in games:
+        box = g.get("box") or {}
+        a, h = box.get("away") or {}, box.get("home") or {}
+        if not a.get("all_stats") or not h.get("all_stats"):
+            if not g["final"]:
+                print(f"\n{g['away']} @ {g['home']} — {g['status']} (no box score yet)")
+            continue
+        aw = f"{g['away']} {int(g['away_score'])}"
+        ho = f"{g['home']} {int(g['home_score'])}"
+        print(f"\n{aw} @ {ho}")
+        hvals = {s["name"]: s["value"] for s in h["all_stats"]}
+        awide = max([len(aw)] + [len(str(s["value"])) for s in a["all_stats"]])
+        hwide = max([len(ho)] + [len(str(v)) for v in hvals.values()])
+        lwide = max(len(s["label"] or "") for s in a["all_stats"])
+        print(f"  {aw:>{awide}}  {'':<{lwide}}  {ho:<{hwide}}")
+        for s in a["all_stats"]:
+            av = str(s["value"]); hv = str(hvals.get(s["name"], "—"))
+            print(f"  {av:>{awide}}  {(s['label'] or ''):<{lwide}}  {hv:<{hwide}}")
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     as_json = "--json" in sys.argv
@@ -358,6 +393,8 @@ def main():
     games = build_week(week, year, ratings, hfa, default_hfa, with_box=True)
     if as_json:
         print(json.dumps({"week": week, "year": year, "games": games}, indent=2))
+    elif "--full" in sys.argv or "--stats" in sys.argv:
+        print_full_stats(games, week)
     else:
         print_week(games, week)
 
