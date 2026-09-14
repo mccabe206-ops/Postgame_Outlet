@@ -112,3 +112,6 @@ pgo_inactive_nfl.py text eol=lf
 tests/test_pgo_inactive_nfl.py text eol=lf
 tests/fixtures/pgo_availability_v4_nfl.html -text
 tests/fixtures/pgo_availability_v4_nfl.json -text
+docs/analysis/weekly/** -text
+pgo_weekly_review.py text eol=lf
+tests/test_pgo_weekly_review.py text eol=lf

@@ -718,7 +718,7 @@ def _penalty_shadow(shadow):
              'label':'Penalty test methods, findings and review rules'}]) + '</details>')
 
 
-def _accuracy(summary):
+def _accuracy(summary, *, weekly_reviews=None):
     def number(value, digits=3):
         return 'Awaiting eligible finals' if value is None else f'{_number(value):.{digits}f}'
     def count(metric):
@@ -774,6 +774,7 @@ def _accuracy(summary):
     return ('<h3 id="season-accuracy">Season accuracy</h3><p>Original saved picks, verified finals. '
             'A correct winner can still come with a poor score estimate. Margin error is how far the predicted winning margin was from the actual margin; '
             'combined-score error is how far the predicted total was from both teams\' final points added together. Lower error is better.</p>'
+            + ('<p>Completed weekly reviews:</p>' + _sources(weekly_reviews) if weekly_reviews else '') +
             '<p><a href="analysis/2026-week1-20260914.html" target="_blank" rel="noopener noreferrer">'
             'Week 1 review: September 14, 12:57 AM EDT — 15 of 16 games final</a></p>'
             '<dl class="season-freshness">' + ''.join(cards) + '</dl>'
@@ -1162,7 +1163,7 @@ def _statistics_review(state):
             f'<summary>Later statistical corrections: {label}</summary>'+note+'</details>')
 
 
-def render_season(state, *, accuracy=None, mccabe=None, market=None):
+def render_season(state, *, accuracy=None, mccabe=None, market=None, weekly_reviews=None):
     """Render validated saved state using the existing shared PGO styles once per page."""
     if state['schema_version'] != 1 or state['status'] not in ('READY','BLOCKED'):
         raise ValueError('Unknown season view state')
@@ -1252,7 +1253,7 @@ def render_season(state, *, accuracy=None, mccabe=None, market=None):
             f'<tbody>{"".join(records)}</tbody></table></div>'
             '<p>Each record covers its own saved schedule. Weekly editions cover published weeks; '
             'the preseason baselines cover all 272 regular-season games, so their pending counts can be larger.</p>'
-            + _accuracy(accuracy) + (_market_benchmark(market) if market is not None else '') +
+            + _accuracy(accuracy, weekly_reviews=weekly_reviews) + (_market_benchmark(market) if market is not None else '') +
             f'<h3>Week {current} picks and grades</h3>'
             '<p>Winner grades count who won. Each game also shows how its saved picks compared with the PGO projection '
             'and sportsbook line. A correct winner can fall below the projected margin or fail to cover the spread.</p>'
