@@ -39,10 +39,16 @@ try:
 except Exception:  # noqa: BLE001
     TV = None
 
+try:
+    import snapshot as SNAP_MOD  # freeze/read historical board snapshots
+except Exception:  # noqa: BLE001
+    SNAP_MOD = None
+
 HOST = "127.0.0.1"
 PORT = 8786
 REPO = os.path.dirname(os.path.abspath(__file__))
 RATINGS = os.path.join(REPO, "data", "ratings.csv")
+SNAPSHOTS = os.path.join(REPO, "data", "snapshots.json")
 LOGDIR = "/tmp"
 
 # --- KB chat (Claude API) config ---
@@ -269,6 +275,79 @@ def act_writeup_save(body):
         f.write(content)
     return {"ok": True, "message": f"saved data/writeups/{abbr}.md ({len(content)} chars)",
             "path": f"data/writeups/{abbr}.md"}
+
+
+# ---------------------------------------------------------------- snapshots (history)
+def _load_snaps():
+    try:
+        with open(SNAPSHOTS, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _norm_snap(value):
+    """Accept the legacy bare-list form and the current object form."""
+    if isinstance(value, list):
+        return {"published_at": "", "rows": value, "corrections": []}
+    if isinstance(value, dict) and isinstance(value.get("rows"), list):
+        return {"published_at": value.get("published_at", ""), "rows": value["rows"],
+                "corrections": list(value.get("corrections", []))}
+    return {"published_at": "", "rows": [], "corrections": []}
+
+
+def act_snapshots_list():
+    """Every saved snapshot with its date + team count (newest last, as stored)."""
+    out = []
+    for label, value in _load_snaps().items():
+        e = _norm_snap(value)
+        out.append({"label": label, "published_at": e["published_at"],
+                    "teams": len(e["rows"]), "corrections": len(e["corrections"])})
+    return {"ok": True, "snapshots": out}
+
+
+def act_snapshot_get(label):
+    """One snapshot's full board, sorted best→worst, with current rating + delta."""
+    snaps = _load_snaps()
+    if label not in snaps:
+        return {"ok": False, "message": f"no snapshot named '{label}'"}
+    e = _norm_snap(snaps[label])
+    cur = {r["team"]: r["rating"] for r in _read_ratings()}
+    rows = []
+    for r in sorted(e["rows"], key=lambda x: x.get("rating", 0), reverse=True):
+        team = r.get("team", "")
+        now = cur.get(team)
+        rows.append({
+            "team": team, "qb_name": r.get("qb_name", ""),
+            "qb": r.get("qb", 0), "off": r.get("off", 0), "def": r.get("def", 0),
+            "rating": r.get("rating", 0),
+            "current": now,
+            "delta": (round(now - r.get("rating", 0), 1) if now is not None else None),
+        })
+    return {"ok": True, "label": label, "published_at": e["published_at"],
+            "rows": rows, "corrections": e["corrections"]}
+
+
+def act_snapshot_create(body):
+    """Freeze the CURRENT ratings under an immutable label (via snapshot.py).
+    Writes data/snapshots.json locally — it does NOT publish; that stays a
+    separate explicit step."""
+    label = (body.get("label") or "").strip()
+    if not label:
+        return {"ok": False, "message": "a label is required (e.g. 'Week 2 2026')"}
+    if SNAP_MOD is None:
+        return {"ok": False, "message": "snapshot module unavailable (are you on the testing branch?)"}
+    snaps = SNAP_MOD.load_snaps()
+    if label in snaps:
+        return {"ok": False, "message": f"'{label}' already exists — snapshots are immutable"}
+    try:
+        SNAP_MOD.add_snapshot(snaps, label, SNAP_MOD.snapshot_current())
+        SNAP_MOD.save_snaps(snaps)
+    except Exception as e:  # noqa: BLE001
+        return {"ok": False, "message": str(e)}
+    n = len(snaps[label]["rows"])
+    return {"ok": True, "label": label, "teams": n,
+            "message": f"saved snapshot '{label}' ({n} teams). Local only — not published."}
 
 
 # ---------------------------------------------------------------- team editor
@@ -850,6 +929,8 @@ const CARDS = [
    render:c=>{const p=el('p');p.className='note';p.textContent='Handled via the publish-edition GitHub Action; tell Claude Code the label to run it.';c.appendChild(p);}},
  {n:9, t:"What changed", d:"Everything edited in data/ since the last publish (diff --stat + ratings detail).",
    render:c=>btn(c,"Show diff",()=>run({action:'whatchanged'},"What changed"))},
+ {n:13, t:"Previous ratings", d:"Your board over time. Take an immutable snapshot now, or open a past one to see the full 32-team board as of that date, with a Δ column vs. your current numbers.",
+   render:c=>snapshotCard(c)},
  {n:10, t:"Injury report", d:"Every team's rating-relevant injuries (Sleeper). Open the dashboard, or run the CLI scan.",
    render:c=>injuryCard(c)},
  {n:12, t:"Depth charts", d:"Starter → backup order (Ourlads) with player photos + jersey numbers. List or field-diagram view; pick a team.",
@@ -1038,6 +1119,66 @@ function weekRun(c,action,title){
   const yr=el('input','sm'); yr.placeholder='year';
   const b=el('button','go','Run'); b.onclick=()=>run({action,week:wk.value,year:yr.value},title);
   [wk,yr,b].forEach(x=>r.appendChild(x)); c.appendChild(r);
+}
+
+// ---- previous ratings (snapshots / history)
+function snapshotCard(c){
+  const takeRow=el('div','row');
+  const li=el('input'); li.placeholder='label (e.g. Week 2 2026)'; li.style.flex='1';
+  const tb=el('button','go','📸 Take snapshot now'); tb.onclick=async()=>{
+    const label=li.value.trim(); if(!label)return alert('enter a label');
+    if(!confirm('Freeze the CURRENT ratings as “'+label+'”?\nSnapshots are immutable — the label can\'t be reused or edited.'))return;
+    const res=await api('/api/snapshot',{label});
+    if(!res.ok)return alert(res.message||'failed');
+    showOut('Snapshot saved',label,res.message,0,{type:'text'}); li.value=''; loadSnaps(list);
+  };
+  takeRow.appendChild(li); takeRow.appendChild(tb); c.appendChild(takeRow);
+  const lbl=el('div','note','Saved snapshots (newest first — click to view that board):'); lbl.style.marginTop='6px'; c.appendChild(lbl);
+  const list=el('div','trendgrid'); list.textContent='loading…'; c.appendChild(list);
+  loadSnaps(list);
+}
+async function loadSnaps(list){
+  try{
+    const j=await api('/api/snapshots'); list.innerHTML='';
+    if(!j.snapshots || !j.snapshots.length){ list.textContent='(no snapshots yet — take one above)'; return; }
+    j.snapshots.slice().reverse().forEach(s=>{
+      const b=el('button','go alt',s.label);
+      b.title=(s.published_at||'')+' · '+s.teams+' teams'+(s.corrections?(' · '+s.corrections+' correction(s)'):'');
+      b.onclick=()=>openSnapshot(s.label); list.appendChild(b);
+    });
+  }catch(e){ list.textContent='(snapshots unavailable)'; }
+}
+async function openSnapshot(label){
+  const j=await api('/api/snapshot?label='+encodeURIComponent(label));
+  if(!j.ok)return alert(j.message||'load failed');
+  const dlg=document.getElementById('dlg'); const b=document.getElementById('dlg-body'); b.innerHTML=''; dlg.classList.add('wide');
+  b.appendChild(el('h3',null,'Previous ratings — '+label));
+  b.appendChild(el('p','note',(j.published_at?('taken '+j.published_at+' · '):'')+j.rows.length+' teams · Δ = current − snapshot'));
+  b.appendChild(snapBoard(j.rows));
+  if(j.corrections && j.corrections.length){
+    const cw=el('div'); cw.style.marginTop='10px'; cw.appendChild(el('div','wu-hd','Disclosed corrections'));
+    j.corrections.forEach(x=>cw.appendChild(el('div','note',(x.at||'')+' — '+x.note))); b.appendChild(cw);
+  }
+  const foot=el('div','row'); foot.style.marginTop='12px';
+  const close=el('button','go alt','Close'); close.onclick=()=>{dlg.classList.remove('wide');dlg.close();};
+  foot.appendChild(close); b.appendChild(foot); dlg.showModal();
+}
+function snapBoard(rows){
+  const t=el('table','r');
+  t.innerHTML='<thead><tr><th class="l">#</th><th class="l">Team</th><th class="l">QB</th>'
+    +'<th>qb</th><th>off</th><th>def</th><th>rating</th><th>now</th><th>Δ</th></tr></thead>';
+  const tb=el('tbody');
+  const f=v=>(Number(v)||0).toFixed(1);
+  rows.forEach((r,i)=>{
+    const tr=el('tr'); const d=r.delta;
+    const dtxt=(d==null?'—':(d>0?'+'+f(d):f(d)));
+    const dcol=(d==null||d===0)?'':(d>0?' style="color:var(--good)"':' style="color:var(--bad)"');
+    tr.innerHTML=`<td class="l">${i+1}</td><td class="l">${r.team}</td><td class="l">${r.qb_name||''}</td>`
+      +`<td>${f(r.qb)}</td><td>${f(r.off)}</td><td>${f(r.def)}</td><td><b>${f(r.rating)}</b></td>`
+      +`<td>${r.current==null?'—':f(r.current)}</td><td${dcol}>${dtxt}</td>`;
+    tb.appendChild(tr);
+  });
+  t.appendChild(tb); return t;
 }
 
 // ---- actions
@@ -1302,6 +1443,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(200, json.dumps(act_kbstatus()))
         if u.path == "/api/trends":
             return self._send(200, json.dumps(act_trends_catalog()))
+        if u.path == "/api/snapshots":
+            return self._send(200, json.dumps(act_snapshots_list()))
+        if u.path == "/api/snapshot":
+            return self._send(200, json.dumps(act_snapshot_get((q.get("label") or [""])[0])))
         return self._send(404, "not found", "text/plain")
 
     def do_POST(self):
@@ -1318,6 +1463,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, json.dumps(act_writeup_save(body)))
             if u.path == "/api/rating":
                 return self._send(200, json.dumps(act_rating_save(body)))
+            if u.path == "/api/snapshot":
+                return self._send(200, json.dumps(act_snapshot_create(body)))
             if u.path == "/api/kbchat":
                 return self._send(200, json.dumps(act_kbchat(body)))
         except Exception as e:  # noqa: BLE001
