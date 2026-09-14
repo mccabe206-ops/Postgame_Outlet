@@ -1,0 +1,10 @@
+Fitting sealed candidate 2018
+Fitting sealed candidate 2019
+Fitting sealed candidate 2020
+Fitting sealed candidate 2021
+Fitting sealed candidate 2022
+Fitting sealed candidate 2023
+Fitting sealed candidate 2024
+Fitting sealed candidate 2025
+Fitting sealed candidate final
+{"output": "D:\\CodexWorktrees\\Postgame_Outlet-weight-contrast-20260914\\research\\pgo_sack_contrast_20260914\\run-attempt01", "manifest_sha256": "b402573ba466c571fd826d77c67a27fae548c6231cf0fb46c4be0ea6437f6786", "screen": {"status": "FAIL", "checks": {"improvement_at_least_005": false, "at_least_five_seasons": false, "positive_interval_lower": false}, "pooled_improvement": -0.0030970848812810203, "improved_seasons": 3, "primary_screen_passed": false, "stability_screen_passed": true, "meaning": "Further-study screen only; reused history and source vintage remain experimental"}, "stability": {"candidate_drift": 0.08543737697058786, "control_drift": 0.15745040442761368}, "interval": {"mean": -0.0030970848812806226, "lower": -0.013891734261288778, "upper": 0.010245625370492681, "blocks": 8, "samples": 10000, "seed": 20260914}}

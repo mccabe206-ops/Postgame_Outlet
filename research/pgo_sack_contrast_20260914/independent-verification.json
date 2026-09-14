@@ -1,0 +1,31 @@
+{
+  "bootstrap": {
+    "blocks": 8,
+    "lower": -0.01389173426128878,
+    "mean": -0.003097084881280623,
+    "samples": 10000,
+    "seed": 20260914,
+    "upper": 0.01024562537049268
+  },
+  "evaluation_games": 2127,
+  "final_training_predictions_checked": 3407,
+  "fit_calls_verified": 9,
+  "further_study_screen": "FAIL",
+  "historical_source_vintage": "REVIEW REQUIRED",
+  "maximum_raw_basis_prediction_error": 3.552713678800501e-15,
+  "metric_views_independently_verified": 230,
+  "model_fits": 0,
+  "model_imports": 0,
+  "primary_screen_passed": false,
+  "prospective_phase": "NOT STARTED",
+  "protected_pins_verified": 135,
+  "run_manifest_sha256": "b402573ba466c571fd826d77c67a27fae548c6231cf0fb46c4be0ea6437f6786",
+  "stability": {
+    "candidate_drift": 0.08543737697058786,
+    "control_drift": 0.15745040442761368
+  },
+  "stability_screen_passed": true,
+  "status": "PASS",
+  "verified_at": "2026-09-14T16:52:14.384542+00:00",
+  "verifier_sha256": "e597bccf926407edad51b5d476750b032fbd37fc07ecf06e80604f7455625a82"
+}

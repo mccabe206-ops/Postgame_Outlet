@@ -1,0 +1,5 @@
+{
+  "candidate_fits": 0,
+  "failed_at": "2026-09-14T16:47:15.332891+00:00",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\CodexWorktrees\\Postgame_Outlet-weight-contrast-20260914\\research\\pgo_sack_contrast_20260914\\candidate.py\", line 281, in prepare\n    result = preflight_checks()\n             ^^^^^^^^^^^^^^^^^^\n  File \"D:\\CodexWorktrees\\Postgame_Outlet-weight-contrast-20260914\\research\\pgo_sack_contrast_20260914\\candidate.py\", line 220, in preflight_checks\n    pins, packages = protected()\n                     ^^^^^^^^^^^\n  File \"D:\\CodexWorktrees\\Postgame_Outlet-weight-contrast-20260914\\research\\pgo_sack_contrast_20260914\\candidate.py\", line 194, in protected\n    require(name in old and sha(ROOT/name) == old[name], 'Inherited helper changed: ' + name)\n  File \"D:\\CodexWorktrees\\Postgame_Outlet-weight-contrast-20260914\\research\\pgo_sack_contrast_20260914\\candidate.py\", line 44, in require\n    if not condition: raise ValueError(message)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Inherited helper changed: research/pgo_postseason_candidate/pinned_challenger.py\n"
+}
