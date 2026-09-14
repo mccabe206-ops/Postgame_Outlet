@@ -68,6 +68,7 @@ TOOLS = {
     "injury": ("injury_server.py", 8789),
     "guru": ("guru_server.py", 8790),
     "depth": ("depth_server.py", 8791),
+    "game": ("game_server.py", 8792),
 }
 
 
@@ -952,6 +953,8 @@ const CARDS = [
    render:c=>snapshotCard(c)},
  {n:14, t:"PFF player stats", d:"Per-player PFF grades + advanced stats for a week, grouped by game (passing/rushing/receiving/blocking/defense/ST). Pulled from your PFF+ subscription via Claude Code; this reads the local cache.",
    render:c=>pffCard(c)},
+ {n:15, t:"Game reports", d:"Click a game to open a full visual report: score + quarter line, expected vs. actual vs. garbage-time-aware competitive score, half-by-half game shape, team-stat comparison, QB matchup, and top PFF performers.",
+   render:c=>btn(c,"Open game reports",()=>launch('game'))},
  {n:10, t:"Injury report", d:"Every team's rating-relevant injuries (Sleeper). Open the dashboard, or run the CLI scan.",
    render:c=>injuryCard(c)},
  {n:12, t:"Depth charts", d:"Starter → backup order (Ourlads) with player photos + jersey numbers. List or field-diagram view; pick a team.",
