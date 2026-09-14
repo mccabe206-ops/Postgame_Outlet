@@ -102,6 +102,7 @@ def render(ats):
         su_pick = game.get('su_pick')
         su_covered = (_text(su_pick) + ': ' if su_pick else '') + su_grade
         model_check = (_text(su_pick) + ': ' if su_pick else '') + model_grade
+        choice = '<div style="width:16rem;white-space:normal">' + choice + '</div>'
         rows.append([f'<a href="#season-ats-game-{key}" data-view-key="ats-link-{key}">{matchup}</a>',
                      pgo_line, model_check, market, su_covered, choice, ats_grade])
         details.append(f'<details id="season-ats-game-{key}" data-view-key="ats-game-{key}">'
