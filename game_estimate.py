@@ -153,6 +153,35 @@ def competitive_score(summary, garbage_lead=25, q4_lead=21, one_score=8):
     return comp["away"], comp["home"], decided_at
 
 
+def half_splits(summary):
+    """Per-team yards and points by half (and points by quarter), so a game's
+    SHAPE is visible — the first half can be better or worse than the scoreboard,
+    and a 2nd-half flip buries what happened early. Yards from drive totals
+    (attributed by the half the drive started in); points from the quarter
+    line score. Returns {abbr: {h1_yds,h2_yds,h1_pts,h2_pts,quarters:[...]}}. """
+    out = {}
+    hdr = summary.get("header", {}).get("competitions", [{}])[0]
+    for c in hdr.get("competitors", []):
+        ab = c.get("team", {}).get("abbreviation")
+        qs = []
+        for q in c.get("linescores", []):
+            try:
+                qs.append(int(float(q.get("displayValue"))))
+            except (TypeError, ValueError):
+                qs.append(0)
+        out[ab] = {"h1_yds": 0, "h2_yds": 0,
+                   "h1_pts": sum(qs[:2]), "h2_pts": sum(qs[2:]),
+                   "quarters": qs}
+    for d in summary.get("drives", {}).get("previous", []):
+        ab = d.get("team", {}).get("abbreviation")
+        if ab not in out:
+            continue
+        yds = d.get("yards", 0) or 0
+        sp = ((d.get("start", {}) or {}).get("period", {}) or {}).get("number") or 1
+        out[ab]["h1_yds" if sp <= 2 else "h2_yds"] += yds
+    return out
+
+
 def estimate_week(week, year, game=None):
     from espn_api import fetch_json
     from results import fetch_boxscore
@@ -212,6 +241,22 @@ def estimate_week(week, year, game=None):
                   f"and the leader ({(aa if lead=='away' else ha_)}) coasted after — treat its number as a floor.")
         else:
             print(f"  competitive throughout — expected vs actual is the clean read (no garbage adjustment).")
+        # game shape — half-by-half yards + points (a 2nd-half flip hides the 1st)
+        hs = half_splits(summary)
+        a, h = hs.get(aa, {}), hs.get(ha_, {})
+        if a and h:
+            print(f"  game shape (yards → pts):")
+            print(f"    Q-by-Q pts: {aa} {'/'.join(map(str, a['quarters']))}   {ha_} {'/'.join(map(str, h['quarters']))}")
+            print(f"    1st half: {aa} {a['h1_yds']} yds, {a['h1_pts']} pts | {ha_} {h['h1_yds']} yds, {h['h1_pts']} pts")
+            print(f"    2nd half: {aa} {a['h2_yds']} yds, {a['h2_pts']} pts | {ha_} {h['h2_yds']} yds, {h['h2_pts']} pts")
+            for lbl, ka, kh in (("1st half", "h1", "h1"), ("2nd half", "h2", "h2")):
+                ya, yh = a[ka + "_yds"], h[kh + "_yds"]
+                pa, ph = a[ka + "_pts"], h[kh + "_pts"]
+                # out-gained but didn't out-score → left points on the field that half
+                if ya - yh >= 60 and pa <= ph:
+                    print(f"    ⚑ {aa} out-gained {ha_} by {ya-yh} in the {lbl} but didn't lead the scoring ({pa}-{ph}) — left points")
+                if yh - ya >= 60 and ph <= pa:
+                    print(f"    ⚑ {ha_} out-gained {aa} by {yh-ya} in the {lbl} but didn't lead the scoring ({ph}-{pa}) — left points")
     return 0
 
 
