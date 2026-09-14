@@ -55,12 +55,14 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
+      - name: Install tested PGO rendering dependency
+        run: |
+          git show "$TESTED_SHA:requirements-pgo.txt" > "$RUNNER_TEMP/pgo-tested-requirements.txt"
+          python -m pip install -r "$RUNNER_TEMP/pgo-tested-requirements.txt"
       - name: Admit only tested source with newer mutable season data
         run: |
           git show "$TESTED_SHA:pgo_publication_guard.py" > "$RUNNER_TEMP/pgo_publication_guard.py"
           python "$RUNNER_TEMP/pgo_publication_guard.py" "$TESTED_SHA"
-      - name: Install PGO rendering dependency
-        run: python -m pip install -r requirements-pgo.txt
       - name: Snapshot the edition
         run: python snapshot.py "$LABEL"
       - name: Preserve newly completed weekly reviews

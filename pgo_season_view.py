@@ -934,6 +934,10 @@ def _experiments(state):
             f'<p>Monitor: {_text(weights["status"])}. {_text(weights.get("blocked_reason") or "")}</p>'
             '<p><strong>No alternative cleared the improvement screen.</strong> Removing either block made average lead error slightly worse. '
             'None of the probability alternatives met the required improvement and uncertainty checks. The main model stays unchanged.</p>'
+            '<p><a href="analysis/2026-sack-contrast-20260914.html" target="_blank" rel="noopener noreferrer">'
+            'September 14 sack-avoidance weight test: accuracy screen failed</a>. '
+            'Keeping both sack inputs while limiting how far their weights diverge made the weights steadier, '
+            'but did not improve historical predictions.</p>'
             + _test_table('weights-results',['Input choice','Historical lead error (points)','New-game lead error (points)'],rows)
             + '<p>All lead tests use the same 2,127 historical games. Probability tests use the same 1,615 later games, '
             'after allowing earlier seasons to train the probability method. Lower error, log loss and Brier are better.</p>'

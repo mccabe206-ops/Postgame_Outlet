@@ -14,6 +14,16 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PublicBoardWorkflowTests(unittest.TestCase):
+    def test_report_replay_installs_only_tested_requirements_before_guard(self):
+        for name in ('update-board.yml','publish-edition.yml'):
+            publisher=(ROOT/'.github/workflows'/name).read_text().split('\n  publish:',1)[1]
+            with self.subTest(workflow=name):
+                pinned=publisher.index('git show "$TESTED_SHA:requirements-pgo.txt"')
+                install=publisher.index('python -m pip install -r "$RUNNER_TEMP/pgo-tested-requirements.txt"')
+                guard=publisher.index('python "$RUNNER_TEMP/pgo_publication_guard.py" "$TESTED_SHA"')
+                self.assertLess(pinned,install);self.assertLess(install,guard)
+                self.assertNotIn('pip install -r requirements-pgo.txt',publisher)
+
     def test_owner_alerts_run_after_publication_and_receive_real_stage_outcomes(self):
         workflow = (ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
         alert = workflow.split('- name: Notify the PGO owner when attention is needed', 1)[1]
@@ -80,7 +90,8 @@ class PublicBoardWorkflowTests(unittest.TestCase):
         self.assertIn('ref: main',publisher)
         self.assertIn('TESTED_SHA: ${{ needs.test.outputs.tested_sha }}',publisher)
         self.assertIn('git show "$TESTED_SHA:pgo_publication_guard.py"',publisher)
-        self.assertLess(publisher.index('pgo_publication_guard.py'),publisher.index('python -m pip install'))
+        self.assertLess(publisher.index('git show "$TESTED_SHA:requirements-pgo.txt"'),publisher.index('python -m pip install'))
+        self.assertLess(publisher.index('python -m pip install'),publisher.index('python "$RUNNER_TEMP/pgo_publication_guard.py"'))
         self.assertLess(publisher.index('pgo_publication_guard.py'),publisher.index('python snapshot.py "$LABEL"'))
         self.assertIn('LABEL: ${{ inputs.label }}',publisher)
         self.assertIn('git add data/snapshots.json docs/index.html docs/forecast-lab.html',publisher)
@@ -112,7 +123,7 @@ class PublicBoardWorkflowTests(unittest.TestCase):
         self.assertIn('ref: main', publisher)
         self.assertIn('TESTED_SHA: ${{ needs.test.outputs.tested_sha }}', publisher)
         self.assertIn('git show "$TESTED_SHA:pgo_publication_guard.py"', publisher)
-        self.assertLess(publisher.index('pgo_publication_guard.py'),
+        self.assertLess(publisher.index('git show "$TESTED_SHA:requirements-pgo.txt"'),
                         publisher.index('python -m pip install'))
         self.assertNotIn('git pull', publisher)
         self.assertIn('git push origin HEAD:main', publisher)
@@ -136,7 +147,7 @@ class PublicBoardWorkflowTests(unittest.TestCase):
     def test_season_gate_covers_new_accuracy_and_experimental_integrations(self):
         workflow = (ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
         gate = workflow.split('- name: Capture verified finals',1)[0]
-        for module in ('test_pgo_season_statistics','test_pgo_statistics_review','test_pgo_season_accuracy','test_pgo_totals_monitor','test_pgo_weights_monitor',
+        for module in ('test_pgo_season_statistics','test_pgo_statistics_review','test_pgo_weekly_review','test_pgo_season_accuracy','test_pgo_totals_monitor','test_pgo_weights_monitor',
                        'test_pgo_replacement_depth','test_pgo_replacement_refresh','test_pgo_defender_inventory','test_pgo_season_experiments','test_pgo_experiment_view',
                        'test_pgo_inactive_monitor','test_pgo_offensive_inventory','test_pgo_offensive_usage_monitor',
                        'test_pgo_score_range_monitor','test_pgo_starter_capture','test_pgo_availability_scope',
