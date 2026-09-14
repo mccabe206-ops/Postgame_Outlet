@@ -12,8 +12,13 @@ Brock Purdy (+2.5) is an above-average grade — an efficient, well-supported pa
 
 ## What moved the number
 
-- **Offense (+0.2):** held slightly above average even through a real injury cluster — **Pearsall on IR, McCaffrey's current injury designation unverified, Kittle working back from an Achilles issue (limited in the captured practice report; final game status pending)** — with Evans and Kirk added. There's +0.5 upside if Kittle is fully healthy. The point: even with the injuries, the model still finds this group slightly above average.
+- **Offense (+0.7):** bumped from +0.2 after Week 1. **George Kittle was healthy and active** — the pre-set "+0.5 if Kittle plays" trigger — and the group produced **27 points on 379 yards against an above-average Rams defense** even with Pearsall on IR and McCaffrey banged up. Evans and Kirk added; Purdy ran it efficiently (3 TD, 105.6 rating). A real, if injury-caveated, above-average unit.
 - **Defense (+0.5):** above average, with Odighizuwa and Greenlaw as the anchors. Greenlaw was limited with an Achilles issue in the [September 8 NFL update](https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8); no final game designation was captured.
+
+## What changed — Week 1 2026
+
+- **Offense +0.2 → +0.7:** Kittle healthy (the pre-set trigger), and the unit put up 27/379 on an above-average defense despite the skill-position injuries. Team total 3.2 → 3.7.
+- **QB (+2.5) and Defense (+0.5) held:** Purdy was efficient (3 TD, 105.6 rating) and the D held the Rams to 7; both solid but one game, no move.
 
 ## Bottom line
 

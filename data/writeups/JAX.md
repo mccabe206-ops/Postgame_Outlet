@@ -2,19 +2,25 @@
 
 Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
 
-## The case for a QB-carried riser
+## The case for a riser
 
-Jacksonville grades above the line entirely on the strength of its quarterback, with two neutral-but-interesting units around him — a genuinely good receiver room and an elite edge rush, each held back by a real soft spot.
+Jacksonville grades as a clear riser led by its quarterback, with a receiver room and a front seven that both nudged above neutral after Week 1 — each still carrying a real soft spot.
 
 ## Quarterback
 
-Trevor Lawrence (+3.0) is an ascending top-tier grade and the whole reason the Jaguars sit above average. This is the top of his honest range: the physical tools and pedigree are real, the career arc has been uneven, and the bet here is that Liam Coen's system finally organizes it. If it clicks, this number is light; if the inconsistency returns, it's the ceiling.
+Trevor Lawrence (+3.5) just played the best game of his career and is the engine of this rating. In the Week 1 rout of Cleveland he was essentially the best quarterback in football that weekend: a 150.6 passer rating (1st of 30 qualified passers), a 93.4 QBR (2nd), an 86.0 PFF grade (2nd), and 18-of-23 for 245 with 4 touchdowns and no interceptions on just one turnover-worthy play and one sack. The bet was that Liam Coen's system would finally organize the physical tools — Week 1 was exactly that. One caveat keeps it from climbing further: it came against a Browns defense that's decent but stuck behind the league's worst quarterback situation, so he'll need to repeat it against a real secondary.
 
 ## What moved the number
 
-- **Offense (0.0):** the pass-catchers are the strength — **Brian Thomas Jr. is a legitimate ascending WR1**, **Jakobi Meyers** (back from a jammed thumb, expected to play) is a reliable veteran, Parker Washington works the slot, and two-way rookie **Travis Hunter** is a genuine chess piece when he lines up at receiver. What drags it back to neutral is the supporting cast: the backfield is a committee (Etienne gone, Tuten in a rotational role), and the **interior offensive line is banged up early — Patrick Mekari is on IR (back) for the opening month**, with more depth linemen behind him hurt. Elite weapons, shaky protection and run game — it nets to average.
-- **Defense (0.0):** the **edge is the identity — Travon Walker and Josh Hines-Allen are a top-tier rush duo**, and Hunter's coverage ability adds a two-way dimension at corner. But the middle is where it thins: they lost Devin Lloyd at linebacker, the off-ball and safety depth is unremarkable, and Orhorhoro is a rotational add rather than a difference-maker. A dangerous front, an ordinary back seven — average overall.
+- **Offense (+0.5):** nudged off neutral — the weapons produced, and against an above-average defense. Parker Washington went 5/83 with a score, the passing game spread four touchdowns around (Meyers, Cameron, Strange), two-way rookie **Travis Hunter** adds a dimension, and rookie back **Bhayshul Tuten** flashed (66 yards, 67 after contact, seven forced misses) — pushing the committee backfield toward a strength. **Brian Thomas Jr.** is still the ascending WR1, though he left Week 1 with a **shoulder injury** and was questionable before returning (finishing 3/40); Coen expects him to play Week 2, possibly limited in practice — not ideal, but not a downgrade trigger yet. The interior line is the remaining drag — **Patrick Mekari on IR (back) to open the month** — but a group this productive against a good defense grades above neutral.
+- **Defense (+0.5):** the edge is the identity — **Travon Walker and Josh Hines-Allen** combined for four sacks and a dozen pressures on Watson — but the move up is really about the **run defense**: Jacksonville finished **No. 1 in the NFL against the run in 2025 (85.6 yards a game)** and picked up where it left off, bottling up a good young back in Quinshon Judkins in Week 1. That front-seven stinginess outweighs a still-ordinary back seven (they lost Devin Lloyd; the safety depth is unremarkable).
+
+## What changed — Week 1 2026
+
+- **Lawrence +3.0 → +3.5:** career-best game — 1st in passer rating (150.6), 2nd in QBR (93.4) and PFF grade (86.0), 4 TD / 0 INT. Room for more if he repeats it against a real defense.
+- **Offense 0.0 → +0.5:** produced against an above-average defense (Washington, a spread-around four-TD day, Tuten's 67 yards after contact). Watch BTJ's shoulder.
+- **Defense 0.0 → +0.5:** run-defense trend — No. 1 vs. the run in 2025, and stuffed Judkins in Week 1.
 
 ## Bottom line
 
-Everything above the line flows through Lawrence, and there's real upside if Coen unlocks him behind that receiver group. But the flanks each carry a caveat — a hurting interior line on offense, a thin second level on defense — so until those firm up, this stays a quarterback-carried rating rather than a complete one.
+Everything starts with Lawrence, and Week 1 was the version the bet was on. The flanks still carry caveats — a hurting interior line plus BTJ's shoulder on offense, a thin second level on defense — but the run defense and the weapons did enough to make this more than a one-man rating.
