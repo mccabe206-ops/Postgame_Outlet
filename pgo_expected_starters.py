@@ -87,8 +87,10 @@ def select_player(roster, decision, game):
     return copy.deepcopy(rows[0])
 
 
-def apply(selected, roster, games, root, checked_at):
+def apply(selected, roster, games, root, checked_at, *, teams=None):
     """Return a detached selection plus source annotations for matching games only."""
+    requested = set(CURRENT_TEAMS if teams is None else teams)
+    require(requested and requested <= set(CURRENT_TEAMS), 'Invalid expected starter team scope')
     chosen = copy.deepcopy(selected)
     if not CONFIG.exists():
         return chosen, {}
@@ -109,10 +111,10 @@ def apply(selected, roster, games, root, checked_at):
             chosen[team] = select_player(roster, decision, game)
             annotations.setdefault(game['game_id'], []).append(dict(
                 team=team, gsis_id=decision['gsis_id'], full_name=decision['full_name'], source=copy.deepcopy(rule['source'])))
-        require(set(chosen) == set(CURRENT_TEAMS), 'Expected starters must cover all 32 teams')
+        require(set(chosen) == requested, 'Expected starters must cover requested teams')
         ids = [row['gsis_id'] for row in chosen.values()]
         require(all(isinstance(pid, str) and re.fullmatch(r'00-\d{7}', pid) for pid in ids)
-                and len(set(ids)) == 32 and all(normalize_team(row['team']) == team for team, row in chosen.items()),
+                and len(set(ids)) == len(requested) and all(normalize_team(row['team']) == team for team, row in chosen.items()),
                 'Expected starter identities are missing, duplicated or assigned to another team')
         return chosen, annotations
     except (KeyError, TypeError, AttributeError, OverflowError) as error:

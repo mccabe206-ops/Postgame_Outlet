@@ -446,12 +446,16 @@ def bootstrap():
                 archives=[])
 
 
-def select_roster(roster, depth, captured_at):
+def select_roster(roster, depth, captured_at, *, teams=None):
+    # A news check needs its participating teams; a ranking build still needs 32.
+    requested = set(pgo_sources.CURRENT_TEAMS if teams is None else teams)
+    require(requested and requested <= set(pgo_sources.CURRENT_TEAMS), 'Invalid expected QB team scope')
     active = {}
     for row in roster:
         if str(row.get('season')) != str(SEASON) or row.get('status') != 'ACT' or row.get('position') != 'QB': continue
         team = pgo_sources.normalize_team(row['team']); key=(team,row['gsis_id'])
-        require(key not in active, 'Duplicate current roster QB')
+        if team not in requested: continue
+        require(key not in active, f'{team}: Duplicate current roster QB')
         active[key] = dict(row,team=team)
     eligible = [r for r in depth if r.get('pos_abb') == 'QB' and str(r.get('pos_rank')) == '1' and utc(r['dt']) <= utc(captured_at)]
     require(eligible, 'No dated QB depth data')
@@ -461,9 +465,11 @@ def select_roster(roster, depth, captured_at):
     for r in eligible:
         if utc(r['dt']) != latest: continue
         team = pgo_sources.normalize_team(r['team']);key=(team,r['gsis_id'])
-        require(team not in selected and key in active, 'Expected QB is ambiguous or not on the active roster')
+        if team not in requested: continue
+        require(team not in selected and key in active, f'{team}: Expected QB is ambiguous or not on the active roster')
         selected[team] = active[key]
-    require(set(selected) == set(pgo_sources.CURRENT_TEAMS) and len({r['gsis_id'] for r in selected.values()}) == 32, 'Expected QBs must cover all 32 teams uniquely')
+    require(set(selected) == requested and len({r['gsis_id'] for r in selected.values()}) == len(requested),
+            'Expected QBs must cover requested teams uniquely; missing: ' + ', '.join(sorted(requested-set(selected))))
     return selected
 
 
@@ -590,7 +596,7 @@ def refresh_availability(state, root):
         try:
             raw, roster_source = fetch_source(URLS['roster'], root); roster = csv_rows(raw)
             raw, depth_source = fetch_source(URLS['depth'], root); depth = csv_rows(raw)
-            selected = select_roster(roster, depth, now())
+            selected = select_roster(roster, depth, now(), teams={t for g in contexts for t in (g['home'],g['away'])})
             expected = {t:r['gsis_id'] for t,r in selected.items()}
             for game in contexts:
                 if game.get('starter_announcements'):
@@ -630,27 +636,31 @@ def refresh_forecast_availability(state, root):
     if not games:return []
     raw, roster_source=fetch_source(URLS['roster'],root);roster=csv_rows(raw)
     raw, depth_source=fetch_source(URLS['depth'],root);depth=csv_rows(raw)
-    selected=select_roster(roster,depth,now())
-    selected,announcements=apply(selected,roster,games,root,now())
-    retained_sources=[]
-    for week in state['weeks']:
-        if week['week'] != state['rankings']['completed_week']+1:continue
-        for game in week['games']:
-            if utc(now()) < utc(game['kickoff'])-timedelta(minutes=60):continue
-            saved=game.get('starter_announcements',[])
-            if saved:
-                verify(game,saved,root)
-                for announcement in saved:
-                    selected[announcement['team']]=select_player(roster,announcement,game)
-                    retained_sources.append(announcement['source'])
+    teams={t for g in games for t in (g['home'],g['away'])}
+    selected=select_roster(roster,depth,now(),teams=teams)
+    selected,announcements=apply(selected,roster,games,root,now(),teams=teams)
     expected={t:r['gsis_id'] for t,r in selected.items()}
     before={t['team']:t['qb_gsis_id'] for t in state['rankings']['teams']}
     changed={team for team in expected if before[team]!=expected[team]}
     path=Path(root)/'availability-v2'/utc(checked).strftime('%Y%m%dT%H%M%S%fZ')
     captured=capture_availability(games,roster,expected,path)
-    refs=[roster_source,depth_source,*retained_sources,*(a['source'] for rows in announcements.values() for a in rows)]
+    refs=[roster_source,depth_source,*(a['source'] for rows in announcements.values() for a in rows)]
     if any(changed & {g['home'],g['away']} or
            announcements.get(g['game_id'],[]) != g.get('starter_announcements',[]) for g in games):
+        # An actual model revision remains a complete league-wide calculation.
+        # Do not fill unrelated roster conflicts with stale or invented players.
+        selected=select_roster(roster,depth,now())
+        selected,announcements=apply(selected,roster,games,root,now())
+        for week in state['weeks']:
+            if week['week'] != state['rankings']['completed_week']+1:continue
+            for game in week['games']:
+                if utc(now()) < utc(game['kickoff'])-timedelta(minutes=60):continue
+                saved=game.get('starter_announcements',[])
+                if saved:
+                    verify(game,saved,root)
+                    for announcement in saved:
+                        selected[announcement['team']]=select_player(roster,announcement,game)
+                        refs.append(announcement['source'])
         rankings,revision,sources=build_next(state,state['schedule'],state['results'],root,
             completed=state['rankings']['completed_week'],selected=selected,roster_sources=refs)
         new_games={g['game_id']:g for g in revision['games']}
