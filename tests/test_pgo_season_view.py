@@ -159,7 +159,8 @@ class SeasonViewTests(unittest.TestCase):
         page=view._market_benchmark(summary)
         for text in ('1 matched game','4.20 points','3.50 points','0.70 points closer',
                      '1 no pick', 'Under 1 point','0 covered; 1 not covered; 0 pushes',
-                     '1 pending','1 unavailable','Descriptive results','minimum ATS difference'):
+                     '1 pending','1 unavailable','Descriptive results','minimum ATS difference',
+                     '0 no projected difference','Zero means no projected difference'):
             self.assertIn(text,page)
         self.assertEqual(summary,before)
         self.assertIn('1 awaiting final score; 1 excluded',page)
@@ -203,7 +204,7 @@ class SeasonViewTests(unittest.TestCase):
                      'Margin error','0.3 points','Scoring error','21.8 points too high'):
             self.assertIn(text,card)
         self.assertEqual((game,comparison),before)
-        for grade,label in [('L','Not covered'),('PUSH','Push'),('NOEDGE','No edge'),('UNAVAILABLE','Unavailable')]:
+        for grade,label in [('L','Not covered'),('PUSH','Push'),('NOEDGE','No projected difference'),('UNAVAILABLE','Unavailable')]:
             comparison['grade']['ats']=grade
             self.assertIn(label,view._postgame_card(game,comparison))
         self.assertIn('No saved sportsbook line',view._postgame_card(game,None))
@@ -415,7 +416,7 @@ class SeasonViewTests(unittest.TestCase):
                           su_pick='NE',grade=dict(model_line='PUSH',straight_up_ats='PUSH',ats='NOPICK'),
                           ats_pick=None,home_edge=0)
         row=view.render_season(data).split('id="season-game-old"')[1].split('</tr>')[0]
-        for text in ('Earlier saved comparison','NE','Matched projection','Push','No edge','Winner:</strong> W'):
+        for text in ('Earlier saved comparison','NE','Matched projection','Push','No projected difference','Winner:</strong> W'):
             self.assertIn(text,row)
         data['ats']['games']=[]; data['ats']['unavailable']=[dict(comparison,reason='No pre-lock quote',
                                                                grade=dict(model_line='L'))]

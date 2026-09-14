@@ -120,6 +120,10 @@ class ExperimentViewTests(unittest.TestCase):
         self.assertIn('No numerical injury adjustment yet',page)
         self.assertIn('0 verified finals',page)
         self.assertIn('45.5',page)
+        self.assertIn('Saved study control',page)
+        self.assertNotIn('Current input blocks',page)
+        self.assertIn('preserve the assumptions from the original study issuance',page)
+        self.assertIn('later main forecast after a pre-lock quarterback update',page)
         state['weights_shadow']['games'][0]['margins']['postseason']=.02
         state['replacement_depth']['teams'][0]['unresolved_official_names']=['Name <unknown>']
         page=view._experiments(state)
