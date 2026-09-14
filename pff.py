@@ -19,6 +19,8 @@ Usage:
     python3 pff.py report 2026 1 --full          # every field for every player
     python3 pff.py report 2026 1 --game SF        # one game (by either team abbr)
     python3 pff.py report 2026 1 --json           # machine-readable, grouped by game
+    # 3) export CSVs (all fields) for spreadsheet verification:
+    python3 pff.py csv 2026 1                     # one CSV per facet + a combined.csv
 
 Stdlib only.
 """
@@ -274,11 +276,59 @@ def report(season, week, game=None, full=False, as_json=False):
     return 0
 
 
+# ---- csv export -------------------------------------------------------------
+
+def export_csv(season, week):
+    """Write one CSV per facet (all fields, all players) plus a combined.csv, into
+    data/pff/<season>/wk<week>/csv/. Adds `game`/`opp` columns so rows are
+    game-attributable. Openable in Excel/Numbers for hand-verification."""
+    import csv as _csv
+    games, facets = _load(season, week)
+    if not facets:
+        print(f"No PFF cache for {season} wk{week}. Fetch first.", file=sys.stderr)
+        return 1
+    idx, _order = _game_index(games or {})
+    outdir = os.path.join(_cache_dir(season, week), "csv")
+    os.makedirs(outdir, exist_ok=True)
+    combined = []
+    written = 0
+    for facet, rows in facets.items():
+        if not rows:
+            continue
+        # stable column order: identifiers first, then the rest sorted
+        head = ["facet", "game", "opp", "player", "team_name", "position", "jersey_number"]
+        rest = sorted({k for r in rows for k in r} - set(head))
+        cols = head + rest
+        path = os.path.join(outdir, f"{facet}.csv")
+        with open(path, "w", newline="") as f:
+            w = _csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+            w.writeheader()
+            for r in rows:
+                abbr = r.get("team_name")
+                label, opp, _home = idx.get(abbr, ("", "", None))
+                row = dict(r, facet=facet, game=label, opp=opp)
+                w.writerow(row)
+                combined.append(row)
+        written += 1
+        print(f"  {facet}.csv ({len(rows)} rows, {len(cols)} cols)")
+    # combined: union of all columns
+    if combined:
+        allcols = ["facet", "game", "opp", "player", "team_name", "position"]
+        allcols += sorted({k for r in combined for k in r} - set(allcols))
+        with open(os.path.join(outdir, "combined.csv"), "w", newline="") as f:
+            w = _csv.DictWriter(f, fieldnames=allcols, extrasaction="ignore")
+            w.writeheader()
+            w.writerows(combined)
+        print(f"  combined.csv ({len(combined)} rows)")
+    print(f"\nWrote {written} facet CSVs to {os.path.relpath(outdir, HERE)}/")
+    return 0
+
+
 # ---- cli --------------------------------------------------------------------
 
 def main():
     argv = sys.argv[1:]
-    if not argv or argv[0] not in ("fetch", "report"):
+    if not argv or argv[0] not in ("fetch", "report", "csv"):
         print(__doc__)
         return 1
     mode = argv[0]
@@ -287,6 +337,8 @@ def main():
     week = int(pos[1]) if len(pos) > 1 else 1
     if mode == "fetch":
         return fetch(season, week)
+    if mode == "csv":
+        return export_csv(season, week)
     game = None
     if "--game" in argv:
         i = argv.index("--game")
