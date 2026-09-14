@@ -46,6 +46,37 @@ class SeasonModelTests(unittest.TestCase):
                     completed_week=1, generated_at=generated, inputs_as_of=generated,
                     scoring_rates=self.snapshot['scoring_rates'], league_mean_total=self.snapshot['league_mean_total'])
 
+    def test_new_edition_retains_exact_previous_comparison_without_changing_ratings(self):
+        import pgo_season as season
+        previous = dict(edition=self.snapshot['edition'], generated_at=self.snapshot['generated_at'],
+                        inputs_as_of=self.snapshot['inputs_as_of'], history_through=self.snapshot['history']['through'],
+                        completed_week=0, teams=copy.deepcopy(self.snapshot['teams']),
+                        previous_edition={'edition':'older-not-recursively-copied'})
+        state = dict(rankings=previous, calibration=dict(slope=.1, tie_probability=0.))
+        before = copy.deepcopy(state)
+        generated = (model._utc(previous['generated_at']) + timedelta(minutes=1)).isoformat()
+        control = model.build_week(self.seed, self.snapshot['fit'], [], [], [], self.qualification['selected_roster'], [],
+            completed_week=0, generated_at=generated, inputs_as_of=generated,
+            scoring_rates=self.snapshot['scoring_rates'], league_mean_total=self.snapshot['league_mean_total'])
+        with patch.object(season, 'now', return_value=generated), \
+             patch.object(season, 'fetch_source', side_effect=AssertionError('No new sources needed')):
+            rankings, _, _ = season.build_next(state, self.snapshot['games'], [], None, completed=0,
+                                               selected=self.qualification['selected_roster'])
+        self.assertTrue('previous_edition' in rankings, 'New edition must retain its previous comparison')
+        captured = rankings['previous_edition']
+        self.assertEqual(captured['edition'], previous['edition'])
+        self.assertNotIn('previous_edition', captured)
+        for old, saved in zip(previous['teams'], captured['teams']):
+            for key in ('team','rank','rating','qb_name','qb_gsis_id','contributions'):
+                self.assertEqual(saved[key], old[key])
+            self.assertNotIn('features', saved)
+        for row in rankings['teams']:
+            old = next(t for t in previous['teams'] if t['team'] == row['team'])
+            self.assertEqual(row['prior_rank'], old['rank'])
+            self.assertEqual(row['rating'], next(t['rating'] for t in control['teams'] if t['team']==row['team']))
+        captured['teams'][0]['contributions']['pgo_v0'] += 1
+        self.assertEqual(state, before)
+
     def test_week_one_seed_reproduces_all_issued_features_ratings_and_margins(self):
         result = model.build_week(self.seed, self.snapshot['fit'], [], [], [], self.qualification['selected_roster'],
                                   [{k:g[k] for k in model.GAME_IDENTITY} for g in self.snapshot['games']],

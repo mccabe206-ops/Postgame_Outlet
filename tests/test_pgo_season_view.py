@@ -39,6 +39,74 @@ def state():
 
 
 class SeasonViewTests(unittest.TestCase):
+    def ranking_comparison(self):
+        snapshot = state()['rankings']
+        snapshot['completed_week'] = 1
+        for i, team in enumerate(snapshot['teams']):
+            team['qb_gsis_id'] = f'00-{i:07}'
+            team['prior_rank'] = team['rank']
+            team['contributions'] = dict(pgo_v0=team['rating']-.5, qb_epa_per_dropback=.5)
+        snapshot['previous_edition'] = dict(edition='previous-edition', generated_at='2026-09-09T21:00:00Z',
+            inputs_as_of='2026-09-09T21:00:00Z', history_through='2026-02-08T23:30:00Z',
+            completed_week=0, teams=copy.deepcopy(snapshot['teams']))
+        return snapshot
+
+    def test_rating_movement_reconciles_and_names_changed_qb_without_mutation(self):
+        snapshot = self.ranking_comparison()
+        previous = snapshot['previous_edition']['teams'][0]
+        previous.update(rating=15.1, qb_name='Old <QB>', qb_gsis_id='00-9999999',
+                        contributions=dict(pgo_v0=15.2, qb_epa_per_dropback=-.1))
+        before = copy.deepcopy(snapshot)
+        page = view._rankings(snapshot)
+        self.assertIn('Week 1 results added', page)
+        self.assertIn('1 expected quarterback changed', page)
+        self.assertIn('Rating change: +0.400', page)
+        self.assertIn('quarterback passing history: +0.600', page)
+        self.assertIn('recent game results: -0.200', page)
+        self.assertIn('Old &lt;QB&gt;', page)
+        self.assertIn('previous-edition', page)
+        self.assertIn('PGO rating points, not a predicted game margin', page)
+        self.assertEqual(snapshot, before)
+
+    def test_unchanged_rating_explains_peer_caused_rank_movement(self):
+        snapshot = self.ranking_comparison()
+        old = snapshot['previous_edition']['teams']
+        old[1].update(rating=16., contributions=dict(pgo_v0=15.5, qb_epa_per_dropback=.5))
+        old.sort(key=lambda t:(-t['rating'],t['team']))
+        for rank, team in enumerate(old, 1):
+            team['rank'] = rank
+        for team in snapshot['teams']:
+            team['prior_rank'] = next(t['rank'] for t in old if t['team']==team['team'])
+        page = view._rankings(snapshot)
+        self.assertIn('Rating unchanged; its rank moved because other teams moved around it', page)
+        self.assertIn('Up 1', page)
+
+    def test_missing_legacy_comparison_is_unavailable_and_never_zero_change(self):
+        snapshot = state()['rankings']
+        page = view._rankings(snapshot)
+        self.assertIn('Previous rating details were not saved for this edition', page)
+        self.assertNotIn('Rating change: +0.000', page)
+        snapshot = self.ranking_comparison()
+        snapshot['previous_edition']['teams'][0].pop('contributions')
+        page = view._rankings(snapshot)
+        self.assertIn('Input changes unavailable: the previous edition has no matching complete breakdown', page)
+        snapshot['previous_edition'].pop('generated_at')
+        page = view._rankings(snapshot)
+        self.assertIn('Previous rating details were not saved for this edition', page)
+        self.assertNotIn('Rating change:', page)
+
+    def test_changed_comparison_values_or_identity_fail_closed(self):
+        for index, mutate in enumerate((
+            lambda s: s['previous_edition']['teams'][0].update(rating=999.),
+            lambda s: s['previous_edition']['teams'][0].update(rank=2),
+            lambda s: s['teams'][0].update(prior_rank=2),
+            lambda s: s['previous_edition'].update(generated_at='2026-09-17T00:00:00Z'),
+            lambda s: s['previous_edition']['teams'][0]['contributions'].update(pgo_v0=float('nan')),
+        )):
+            snapshot = self.ranking_comparison(); mutate(snapshot)
+            with self.subTest(case=index), self.assertRaises(ValueError):
+                view._rankings(snapshot)
+
     def test_visible_starter_notice_links_to_explanation_with_forecast_issue_time(self):
         data = state(); week = data['weeks'][1]; game = week['games'][0]
         game['issued_at'] = '2026-09-16T21:15:00Z'

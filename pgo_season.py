@@ -516,6 +516,13 @@ def build_next(state, schedule, results, root, *, completed=None, selected=None,
     games=allocate_confidence(games,state['calibration'])
     rankings=dict(edition=edition,generated_at=generated,inputs_as_of=generated,history_through=max((r['kickoff'] for r in completed_games),default=snapshot['history']['through']),
                   teams=output['teams'],completed_week=completed,source_captures=sources)
+    previous = state['rankings']
+    rankings['previous_edition'] = {key: copy.deepcopy(previous[key]) for key in
+        ('edition', 'generated_at', 'inputs_as_of', 'history_through', 'completed_week') if key in previous}
+    rankings['previous_edition']['teams'] = [
+        {key: copy.deepcopy(team[key]) for key in
+         ('team', 'rank', 'rating', 'qb_name', 'qb_gsis_id', 'contributions') if key in team}
+        for team in previous['teams']]
     if output.get('unattributed_penalties'):
         rankings['unattributed_penalties'] = output['unattributed_penalties']
     week=dict(week=completed+1,source_edition=edition,generated_at=generated,inputs_as_of=generated,games=games)
