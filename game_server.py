@@ -15,6 +15,7 @@ Binds 127.0.0.1:8792. Stdlib only. Launched by the hub (card) or:
     python3 game_server.py --no-open
 """
 
+import csv
 import json
 import os
 import sys
@@ -27,8 +28,15 @@ from espn_api import fetch_json
 import results
 import game_estimate as GE
 
+try:
+    import team_view as TV  # abbr <-> full-name resolution
+except Exception:  # noqa: BLE001
+    TV = None
+
 HOST, PORT = "127.0.0.1", 8792
 REPO = os.path.dirname(os.path.abspath(__file__))
+RATINGS = os.path.join(REPO, "data", "ratings.csv")
+WRITEUP_ALIAS = {"WSH": "WAS"}  # ESPN abbr -> write-up filename abbr where they differ
 SB = ("https://site.api.espn.com/apis/site/v2/sports/football/nfl/"
       "scoreboard?dates={year}&seasontype=2&week={week}")
 SUM = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event={e}"
@@ -67,6 +75,72 @@ def _pff_for(pff, facet, pff_abbr, grade_key, n=4):
     rows = [r for r in pff.get(facet, []) if r.get("team_name") == pff_abbr and r.get(grade_key) is not None]
     rows.sort(key=lambda r: r[grade_key], reverse=True)
     return rows[:n]
+
+
+# ---- ratings + write-up + suggestion ---------------------------------------
+def _name_by_abbr():
+    if TV is None:
+        return {}
+    idx = TV.espn_team_index()
+    return {(m.get("abbr") or "").upper(): name for name, m in idx.items()}
+
+
+def _rating_row(abbr):
+    """Current McCabe rating row for an ESPN abbr, or None."""
+    name = _name_by_abbr().get(abbr.upper())
+    if not name:
+        return None
+    with open(RATINGS, newline="") as f:
+        for r in csv.DictReader(f):
+            if r.get("team") == name:
+                def fnum(v):
+                    try:
+                        return float(v or 0)
+                    except ValueError:
+                        return 0.0
+                qb, off, dfn = fnum(r["qb_value"]), fnum(r["off_value"]), fnum(r["def_value"])
+                return {"team": name, "qb_name": r.get("qb_name", ""),
+                        "qb": qb, "off": off, "def": dfn, "total": round(qb + off + dfn, 1),
+                        "needs_review": (r.get("needs_review") or "").strip().upper(),
+                        "notes": r.get("notes", "")}
+    return None
+
+
+def _writeup(abbr):
+    ab = WRITEUP_ALIAS.get(abbr.upper(), abbr.upper())
+    p = os.path.join(REPO, "data", "writeups", f"{ab}.md")
+    if os.path.exists(p):
+        with open(p) as f:
+            return f.read()
+    return ""
+
+
+def _suggest(abbr, won, comp_for, comp_against, score_for, exp_for, qb_grade, qb_qbr, opp_rating):
+    """Rule-based, evidence-only prompts (NOT auto-moves) — your judgment leads in
+    Update ratings. Mirrors results.py adjustment signals, tuned to this screen."""
+    s = []
+    margin = comp_for - comp_against  # competitive-time margin
+    if qb_grade is not None and qb_grade <= 45:
+        s.append(f"QB graded poorly ({qb_grade}) — consider a QB downgrade / backup-watch.")
+    elif qb_grade is not None and qb_grade >= 85:
+        s.append(f"Elite QB game ({qb_grade}) — consider a QB bump, but weigh opponent quality.")
+    if qb_qbr is not None:
+        try:
+            if float(qb_qbr) <= 30:
+                s.append(f"QBR {qb_qbr} — bottom-tier efficiency this week.")
+        except (TypeError, ValueError):
+            pass
+    if margin <= -17:
+        s.append(f"Beaten by {abs(margin)} in competitive time — look hard at whichever unit failed.")
+    elif margin >= 17 and (opp_rating is not None and opp_rating >= 2.0):
+        s.append(f"Won by {margin} in competitive time vs. a strong opponent ({opp_rating:+.1f}) — quality-win signal, consider a bump.")
+    elif margin >= 17:
+        s.append(f"Controlled the game (+{margin} competitive) — but weigh opponent quality before moving.")
+    if exp_for is not None and score_for - exp_for >= 7:
+        s.append(f"Scored {score_for - exp_for:.0f} more than the box supports — finishing spike, likely regresses; don't overreact.")
+    if not s:
+        s.append("No strong single-game signal — hold unless your read says otherwise.")
+    return s
 
 
 # ---- week + game lists -----------------------------------------------------
@@ -193,8 +267,28 @@ def build_report(event, week, year):
             if H[k + "_yds"] - A[k + "_yds"] >= 60 and H[k + "_pts"] <= A[k + "_pts"]:
                 flags.append(f"{ha} out-gained {aa} by {H[k+'_yds']-A[k+'_yds']} in the {lbl} but didn't lead the scoring — left points.")
 
+    # per-team rating + write-up + suggested move
+    rt_a, rt_h = _rating_row(aa), _rating_row(ha)
+
+    def _qbg(pabbr):
+        rows = _pff_for(pff, "passing", pabbr, "grades_offense", 1) if pff else []
+        return rows[0].get("grades_offense") if rows else None
+
+    def _qbr(side):
+        q = (box.get(side) or {}).get("qb")
+        return (q or {}).get("line", {}).get("QBR")
+    teams = {
+        "away": {"rating": rt_a, "writeup": _writeup(aa),
+                 "suggest": _suggest(aa, a_sc > h_sc, ca, ch, a_sc, a_exp, _qbg(pa), _qbr("away"),
+                                     rt_h["total"] if rt_h else None)},
+        "home": {"rating": rt_h, "writeup": _writeup(ha),
+                 "suggest": _suggest(ha, h_sc > a_sc, ch, ca, h_sc, h_exp, _qbg(ph), _qbr("home"),
+                                     rt_a["total"] if rt_a else None)},
+    }
+
     return {
         "ok": True, "event": event, "week": week, "year": year,
+        "teams": teams,
         "away": aa, "home": ha, "away_name": a_name, "home_name": h_name,
         "away_score": a_sc, "home_score": h_sc,
         "final": comp["home"].get("winner") is not None or True,
@@ -261,6 +355,20 @@ const $=(id)=>document.getElementById(id);
 function el(t,c,h){const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
 async function api(p){const r=await fetch(p);return r.json();}
 function gradeCls(g){return g==null?'':(g>=80?'g-hi':(g<=45?'g-lo':''));}
+function renderMd(src){
+  const esc=s=>(s==null?'':(''+s)).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const inl=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+  const lines=(src||'').split(/\r?\n/); let h='',inList=false;
+  const close=()=>{if(inList){h+='</ul>';inList=false;}};
+  for(const raw of lines){const line=raw.replace(/\s+$/,'');
+    if(/^###\s+/.test(line)){close();h+='<h4>'+inl(line.replace(/^###\s+/,''))+'</h4>';}
+    else if(/^##\s+/.test(line)){close();h+='<h4>'+inl(line.replace(/^##\s+/,''))+'</h4>';}
+    else if(/^\s*[-*]\s+/.test(line)){if(!inList){h+='<ul style="margin:.3em 0;padding-left:1.1em">';inList=true;}h+='<li>'+inl(line.replace(/^\s*[-*]\s+/,''))+'</li>';}
+    else if(line.trim()===''){close();}
+    else{close();h+='<p style="margin:.4em 0">'+inl(line)+'</p>';}}
+  close(); return h||'<p class="dim">—</p>';
+}
 
 async function loadGames(){
   $('crumb').textContent=''; const wk=$('wk').value, yr=$('yr').value;
@@ -322,6 +430,26 @@ async function openGame(ev,wk,yr){
   // flags
   if(j.flags&&j.flags.length){const f=el('div','sec');f.innerHTML='<h3>Read — sustainability / luck</h3>';
     j.flags.forEach(x=>f.appendChild(el('div','flag',x)));m.appendChild(f);}
+  // team analysis — rating + suggested move + write-up
+  if(j.teams){const ta=el('div','sec');
+    ta.innerHTML='<h3>Team analysis — rating, suggested move & write-up</h3>'
+      +'<div class="dim" style="font-size:12px;margin-bottom:8px">Suggestions are single-game signals, not auto-moves — your judgment leads in Update ratings.</div>';
+    const tg=el('div','qbs');
+    [['away',j.away,j.teams.away],['home',j.home,j.teams.home]].forEach(([s,ab,t])=>{
+      const bx=el('div','box'); let html=`<div class="v" style="font-size:16px">${ab}</div>`;
+      if(t.rating){const r=t.rating;
+        html+=`<div style="margin:4px 0">${r.qb_name||''} — QB ${r.qb} · Off ${r.off} · Def ${r.def} = <b>${r.total}</b>`
+          +(r.needs_review==='Y'?' <span class="pill" style="color:var(--warn);border-color:#4a4a1c">needs review</span>':'')+`</div>`;}
+      else html+='<div class="dim">rating not found</div>';
+      html+='<div style="margin-top:8px"><span class="pill">Suggested move — signals</span></div>';
+      html+='<ul style="margin:6px 0 0;padding-left:18px">'+(t.suggest||[]).map(x=>`<li>${x}</li>`).join('')+'</ul>';
+      bx.innerHTML=html;
+      if(t.writeup){const d=el('details');d.style.marginTop='10px';
+        d.innerHTML='<summary style="cursor:pointer;color:#9dc1ff">Current write-up</summary>';
+        const w=el('div');w.style.marginTop='6px';w.innerHTML=renderMd(t.writeup);d.appendChild(w);bx.appendChild(d);}
+      tg.appendChild(bx);
+    });
+    ta.appendChild(tg); m.appendChild(ta);}
   // QB matchup
   if(j.qb.away||j.qb.home){const qb=el('div','sec');qb.innerHTML='<h3>Quarterbacks</h3>';
     const g=el('div','qbs');
