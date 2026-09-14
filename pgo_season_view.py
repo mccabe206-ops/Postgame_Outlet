@@ -676,6 +676,8 @@ def _accuracy(summary):
     return ('<h3 id="season-accuracy">Season accuracy</h3><p>Original saved picks, verified finals. '
             'A correct winner can still come with a poor score estimate. Margin error is how far the predicted winning margin was from the actual margin; '
             'combined-score error is how far the predicted total was from both teams\' final points added together. Lower error is better.</p>'
+            '<p><a href="analysis/2026-week1-20260914.html" target="_blank" rel="noopener noreferrer">'
+            'Week 1 review: September 14, 12:57 AM EDT — 15 of 16 games final</a></p>'
             '<dl class="season-freshness">' + ''.join(cards) + '</dl>'
             + f'<p><strong>How the win chances are holding up:</strong> {probability_note}</p>'
             '<p class="season-caption">These are early results, not proof of accuracy. Confidence accounting includes marked late entries; '

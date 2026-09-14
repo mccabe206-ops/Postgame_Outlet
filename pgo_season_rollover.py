@@ -116,6 +116,9 @@ def verify_statistics(state, root, completed):
         require(len(matches) == 1, 'Missing or ambiguous edition ' + kind + ' statistics capture')
         feeds[kind] = season.csv_rows(source_bytes(root, matches[0], state['rankings']['inputs_as_of']))
     games = [g for g in state['schedule'] if g['week'] <= completed]
+    feeds['player'], unattributed = model.partition_player_rows(feeds['team'], feeds['player'], games)
+    require(state['rankings'].get('unattributed_penalties', []) == unattributed,
+            'Unattributed penalty receipt differs from captured statistics')
     periods = {(g['season'], g['week'], g[side]) for g in games for side in ('home', 'away')}
     teams, players, seen = {}, defaultdict(list), set()
     for original in feeds['team']:
