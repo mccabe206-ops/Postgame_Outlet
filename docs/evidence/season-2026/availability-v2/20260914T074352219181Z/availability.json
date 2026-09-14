@@ -1,0 +1,277 @@
+{
+  "checked_at": "2026-09-14T07:43:55.335812+00:00",
+  "games": {
+    "2026_01_DEN_KC": {
+      "away": "DEN",
+      "blocked_reason": null,
+      "checked_at": "2026-09-14T07:43:55.335812+00:00",
+      "game_id": "2026_01_DEN_KC",
+      "game_type": "REG",
+      "home": "KC",
+      "kickoff": "2026-09-15T00:15:00+00:00",
+      "lock_at": "2026-09-14T23:15:00+00:00",
+      "qb_gate": "CONDITIONAL",
+      "season": 2026,
+      "summary": "DEN: official report VERIFIED_REPORT, final inactives UNKNOWN; KC: official report VERIFIED_REPORT, final inactives UNKNOWN",
+      "teams": {
+        "DEN": {
+          "expected_qb_gsis_id": "00-0039732",
+          "expected_qb_status": "UNKNOWN",
+          "final_inactives_status": "UNKNOWN",
+          "observations": [
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0038976",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Marvin Mims Jr.",
+              "position": "WR",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            }
+          ],
+          "report_status": "VERIFIED_REPORT",
+          "source_errors": [
+            "NFL full-slate clocks are outside the capture window"
+          ]
+        },
+        "KC": {
+          "expected_qb_gsis_id": "00-0033873",
+          "expected_qb_status": "UNKNOWN",
+          "final_inactives_status": "UNKNOWN",
+          "observations": [
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0037208",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Jack Cochrane",
+              "position": "LB",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0038982",
+              "identity_status": "RESOLVED",
+              "injury": "Knee",
+              "name": "Chamarri Conner",
+              "position": "S",
+              "practice_status": "Did Not Participate In Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "OUT"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0040640",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Ashton Gillotte",
+              "position": "DE",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0032762",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Chris Jones",
+              "position": "DT",
+              "practice_status": "Did Not Participate In Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0033873",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Patrick Mahomes",
+              "position": "QB",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0039067",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Rashee Rice",
+              "position": "WR",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0040116",
+              "identity_status": "RESOLVED",
+              "injury": "Back",
+              "name": "Josh Simmons",
+              "position": "T",
+              "practice_status": "Did Not Participate In Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "OUT"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0036660",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Trey Smith",
+              "position": "G",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0036374",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "L'Jarius Sneed",
+              "position": "CB",
+              "practice_status": "Limited Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0041501",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "R Mason Thomas",
+              "position": "DE",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-14T07:43:54.792144+00:00",
+              "gsis_id": "00-0039894",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Xavier Worthy",
+              "position": "WR",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            }
+          ],
+          "report_status": "VERIFIED_REPORT",
+          "source_errors": [
+            "NFL full-slate clocks are outside the capture window"
+          ]
+        }
+      },
+      "week": 1
+    }
+  },
+  "parser_version": 4,
+  "policy": "Official dated context only. Missing reports or inactive-list names do not establish health. Non-QB numerical adjustments are not applied. Expected quarterback must play.",
+  "purpose": "forecast",
+  "schema_version": 1,
+  "sources": [
+    {
+      "bytes": 361361,
+      "captured_at": "2026-09-14T07:43:54.792144+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "1d8176f18a7bf4b8ae89bb9fa74a478dd14057f538155e63b8cc8aa7e1cab4cf",
+      "started_at": "2026-09-14T07:43:54.640186+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 288817,
+      "captured_at": "2026-09-14T07:43:54.855372+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "24ded54189f28eb54c9d53ae06281c11864aa7556188318ee346797dc120256e",
+      "started_at": "2026-09-14T07:43:54.640551+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 498694,
+      "captured_at": "2026-09-14T07:43:54.934620+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "02ba2ffcf2d70e8f8894249346e7ad6454bf83643e12acd399492adcd26efbc5",
+      "started_at": "2026-09-14T07:43:54.640945+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 1599661,
+      "captured_at": "2026-09-14T07:43:54.962358+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "81092993fe9ebaecf72aae73c5ec89265dd51f8172f2a7324db0979b50d6ccd8",
+      "started_at": "2026-09-14T07:43:54.641287+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 908657,
+      "captured_at": "2026-09-14T07:43:55.233439+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season",
+      "kind": "official_inactives",
+      "sha256": "de8f11c419fe1c6cfa2d46b7779f634179d0c06248123e32603954b1c0ffd5fe",
+      "started_at": "2026-09-14T07:43:55.062691+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season"
+    }
+  ]
+}
