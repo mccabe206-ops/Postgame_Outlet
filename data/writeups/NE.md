@@ -1,20 +1,28 @@
-## Week 1 availability
+## Week 1: at Seattle (L 10–13)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. The September 8 final injury report lists **TreVeyon Henderson OUT (ankle)** and **Ben Brown OUT (knee; did not travel)**. Christian Barmore has no game designation. [Patriots report](https://www.patriots.com/news/week-1-injury-report-patriots-at-seahawks). Final inactives are pending.
-
-## The case for a jump
-
-New England grades as a balanced riser — a young franchise quarterback plus above-average units on both sides of the ball.
+New England opened on the road at Seattle and lost 10–13. It cut two ways. Drake
+Maye's decision-making was a real problem — forced throws and misreads that stalled
+drives — but the offense still moved the ball, and it did so for most of the day
+**without A.J. Brown**. That's the read the model weighs: the quarterback and the
+structure are real even when the process is sloppy and the WR1 is gone.
 
 ## Quarterback
 
-Drake Maye (+3.0) is a top-tier ascending starter in this model, and the biggest reason the Patriots sit comfortably above average.
+Drake Maye (+3.0, unchanged) remains a top-tier ascending starter in this model. Week 1
+was uneven and the poor decisions were on tape, but he kept an offense missing its No. 1
+receiver moving — so the grade holds.
 
 ## What moved the number
 
-- **Offense (+0.5):** a real skill-position glow-up — A.J. Brown, Doubs, and Vera-Tucker are a big upgrade around Maye. One early dent: **TreVeyon Henderson is out for Week 1** (ankle). The injury report does not establish a replacement starter.
-- **Defense (+0.5):** Dre'Mont Jones and Byard add average-plus stability in front of a strong corner in Christian Gonzalez — who **held out the entire training camp in a contract dispute before signing a record four-year, $135M extension**; he's expected to play the opener, though the missed camp is a mild early ramp-up. Edge rusher **Harold Landry is on PUP and will miss at least the first four games** (knee), thinning the pass rush early; Barmore practiced fully and had no game designation in the September 8 final report.
+- **Offense (+0.5 → −0.5):** A.J. Brown suffered a **high-ankle sprain** in the opener at
+  Lumen Field and is **on injured reserve, reportedly expected to miss ~6 weeks** (Ian
+  Rapoport, NFL Network) — more serious than a typical high-ankle timeline. Losing the
+  WR1 for a month-plus drops the unit below average despite Maye's ability to move it.
+- **Defense (+0.5, unchanged):** Dre'Mont Jones and Byard add average-plus stability in
+  front of Christian Gonzalez; the unit held Seattle to 13 in the opener.
 
 ## Bottom line
 
-The arrow points up. With Maye supported by an actual WR1 and Gonzalez locked in long-term, this is a team the model likes to outrun its recent record — the early-season pass rush (Landry) and backfield (Henderson) are the short-term question marks.
+Still a Maye-anchored team the model likes above its recent record, but the A.J. Brown
+injury takes the offense from a modest plus to a slight minus until he's back. The
+short-term question is whether Maye's decision-making cleans up while the WR1 is out.

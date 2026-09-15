@@ -1,6 +1,9 @@
-## Week 1 availability
+## Week 1: vs Jacksonville (L 10–34)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Cleveland was routed at home by Jacksonville, and the game confirmed the profile: no
+passing game, a defense that held up in spots but got carved late. Deshaun Watson graded
+out the worst quarterback of the week; the rebuilt line and Denzel Ward gave flashes, but
+there was nothing to reward it.
 
 ## The case for a good defense, dragged down
 

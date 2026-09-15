@@ -1,6 +1,9 @@
-## Week 1 availability
+## Week 1: vs Cleveland (W 34–10)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Jacksonville routed Cleveland at home behind the best game of Trevor Lawrence's career.
+The weapons produced, the run defense picked up where its 2025 No. 1 finish left off, and
+the only scare was Brian Thomas Jr. briefly leaving with a shoulder injury before
+returning. It was the version of this team the rating was betting on.
 
 ## The case for a riser
 

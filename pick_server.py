@@ -80,6 +80,17 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
  .nav{{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:8px;
    padding:4px 11px;cursor:pointer;font-size:15px}} .nav:hover{{border-color:var(--accent)}}
  footer{{padding:14px 22px;color:var(--dim);font-size:12px;border-top:1px solid var(--line)}}
+ .records{{display:flex;flex-direction:column;gap:5px;padding:10px 22px;
+   border-bottom:1px solid var(--line);background:var(--card);font-size:13px}}
+ .records .grp{{display:flex;align-items:baseline;gap:7px}}
+ .records .lbl{{color:var(--dim);text-transform:uppercase;font-size:11px;letter-spacing:.04em;
+   display:inline-block;min-width:118px}}
+ .records b{{font-variant-numeric:tabular-nums;font-size:15px}}
+ .records .wk{{color:var(--dim)}}
+ .atpick{{font-size:11px;color:var(--dim);margin-top:3px}}
+ .gres{{font-size:11px;color:var(--dim);margin-top:3px;font-weight:400}}
+ .mk-win{{color:var(--good);font-weight:700}} .mk-loss{{color:var(--bad);font-weight:700}}
+ .mk-push{{color:var(--dim)}}
 </style></head><body>
 <header>
   <h1>McCabe Picks</h1>
@@ -91,6 +102,7 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
   <span id="status">loading…</span>
   <span id="saved"></span>
 </header>
+<div id="records" class="records"></div>
 <table id="grid"><thead><tr>
   <th>Kickoff</th><th>Matchup</th><th class="num">My line</th>
   <th class="num">Market</th><th class="num">Edge</th>
@@ -102,13 +114,52 @@ kickoff — before then you can change that pick freely. Edge = market − my li
 <script>
 const fmtSpread = (s, team) => s===null||s===undefined ? "—"
    : (s===0 ? "PK" : (s<0 ? team+" "+s : team+" +"+s));
-let SHEET=null, WK=null, YR=null;
-async function load(week,year){{
+function mark(r){{
+  if(r==='win')  return '<span class="mk-win">✓</span>';
+  if(r==='loss') return '<span class="mk-loss">✗</span>';
+  if(r==='push') return '<span class="mk-push">push</span>';
+  return '<span class="mk-push">–</span>';   // no bet / no edge
+}}
+function resultLine(g){{
+  let s = 'Final '+g.away_score+'–'+g.home_score+' · model '+mark(g.model_result);
+  if(g.pick_side) s += ' · you '+mark(g.pick_result);
+  return s;
+}}
+let SHEET=null, WK=null, YR=null, RECORDS=null;
+async function load(week,year,withRecords){{
   const qs = (week!=null&&year!=null) ? ('?week='+week+'&year='+year) : '';
   const r = await fetch('/api/sheet'+qs); SHEET = await r.json();
   WK = SHEET.week; YR = SHEET.season;
   document.getElementById('sub').textContent = 'Week '+WK+' · '+YR;
   render();
+  if(withRecords!==false) loadRecords();   // grading fetches finals — skip on the 60s poll
+}}
+function recFmt(t){{
+  let s = t.win+'-'+t.loss+(t.push?('-'+t.push):'');
+  if(t.np) s += ' <span class="wk">('+t.np+' NP)</span>';
+  return s;
+}}
+const recPct = t => {{const g=t.win+t.loss; return g? Math.round(100*t.win/g)+'%' : '—';}};
+function recRow(label, seas, wk){{
+  // seas / wk each have .open and .close win-loss-push-np tallies
+  return `<div class="grp"><span class="lbl">${{label}}</span>`
+    +`<span>vs open <b>${{recFmt(seas.open)}}</b> <span class="wk">${{recPct(seas.open)}}</span></span>`
+    +` <span class="wk">·</span> `
+    +`<span>vs close <b>${{recFmt(seas.close)}}</b> <span class="wk">${{recPct(seas.close)}}</span></span>`
+    +` <span class="wk">· season (wk${{WK}}: ${{recFmt(wk.open)}}/${{recFmt(wk.close)}})</span></div>`;
+}}
+function renderRecords(){{
+  const el=document.getElementById('records'); if(!RECORDS){{el.innerHTML='';return;}}
+  el.innerHTML =
+    recRow('My picks ATS', RECORDS.season_record.mine,  RECORDS.week_record.mine)
+    + recRow('Blind model ATS', RECORDS.season_record.model, RECORDS.week_record.model)
+    + recRow('Top 5 edge ATS', RECORDS.season_record.top5, RECORDS.week_record.top5);
+}}
+async function loadRecords(){{
+  try{{
+    const qs=(WK!=null&&YR!=null)?('?week='+WK+'&year='+YR):'';
+    const r=await fetch('/api/records'+qs); RECORDS=await r.json(); renderRecords();
+  }}catch(e){{/* keep whatever we last had */}}
 }}
 function nav(d){{
   // Step by week, wrapping across season boundaries so you can page back into
@@ -140,7 +191,8 @@ function render(){{
     ).join('');
     tr.innerHTML=`
       <td>${{g.kickoff_local}} ${{g.locked?'<span class=lockchip>LOCKED</span>':''}}</td>
-      <td class="matchup">${{g.away}} @ ${{g.home}}${{g.neutral?' <span class="sub">(neutral)</span>':''}}</td>
+      <td class="matchup">${{g.away}} @ ${{g.home}}${{g.neutral?' <span class="sub">(neutral)</span>':''}}
+        ${{g.final?'<div class="gres">'+resultLine(g)+'</div>':''}}</td>
       <td class="num">${{fmtSpread(g.my_spread, g.home)}}</td>
       <td class="num">${{g.market===null?'—':fmtSpread(g.market, g.home)}}${{g.market_source==='manual'?' <span class="lockchip" title="'+(g.market_details||'manual line')+'">KO</span>':''}}</td>
       <td class="num ${{edgeCls}}">${{g.edge===null||g.edge===0?'—':(g.edge>0?g.home:g.away).split(' ').pop()+' '+Math.abs(g.edge)}}</td>
@@ -149,6 +201,11 @@ function render(){{
           onclick="pick('${{g.game_id}}','away')">${{g.away}}</button>
         <button class="team-btn ${{g.pick_side==='home'?'sel':''}}" ${{g.pick_side==='home'?'':dis}}
           onclick="pick('${{g.game_id}}','home')">${{g.home}}</button>
+        ${{isPicked && g.pick_market_at_pick!=null
+            ? '<div class="atpick" title="market line + edge captured when you made this pick">@ mkt '
+              +fmtSpread(g.pick_market_at_pick, g.home)+' · edge '
+              +(g.pick_edge_at_pick==null?'—':g.pick_edge_at_pick)+'</div>'
+            : ''}}
       </td>
       <td><select class="conf" ${{(isPicked && !g.locked)?'':'disabled'}}
             onchange="conf('${{g.game_id}}',this.value)">${{opts}}</select></td>
@@ -192,7 +249,7 @@ function conf(id,v){{const g=SHEET.games.find(x=>x.game_id===id);
   if(!g.pick_side){{alert('Pick a side first');return;}}
   post({{game_id:id,side:g.pick_side,confidence:v||null}});}}
 function clr(id){{post({{game_id:id,side:null}});}}
-load(); setInterval(()=>load(WK,YR), 60000);  // refresh lock states / lines each minute
+load(); setInterval(()=>load(WK,YR,false), 60000);  // refresh lock states / lines each minute (no re-grade)
 </script></body></html>"""
 
 
@@ -218,6 +275,12 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, json.dumps(_sheet(_qs_int(q, "week"), _qs_int(q, "year"))))
             except Exception as e:  # noqa: BLE001
                 return self._send(502, json.dumps({"error": str(e)}))
+        if u.path == "/api/records":
+            try:
+                s = _sheet(_qs_int(q, "week"), _qs_int(q, "year"))
+                return self._send(200, json.dumps(P.records(s["week"], s["season"])))
+            except Exception as e:  # noqa: BLE001
+                return self._send(502, json.dumps({"error": str(e)}))
         if u.path == "/" or u.path.startswith("/index"):
             try:
                 s = _sheet(_qs_int(q, "week"), _qs_int(q, "year"))
@@ -238,8 +301,13 @@ class Handler(BaseHTTPRequestHandler):
         # save to the week the client is viewing (defaults to current)
         s = _sheet(body.get("week"), body.get("year"))
         idx = {g["game_id"]: g["kickoff"] for g in s["games"]}
+        # snapshot the live market line + edge for this game, so the pick records
+        # what it was made against (the "market line at the time")
+        g = next((x for x in s["games"] if x["game_id"] == body.get("game_id")), None)
+        snapshot = ({"market": g["market"], "my_line": g["my_spread"], "edge": g["edge"]}
+                    if g else None)
         ok, msg = P.save_pick(s["season"], s["week"], body.get("game_id"),
-                              body.get("side"), body.get("confidence"), idx)
+                              body.get("side"), body.get("confidence"), idx, snapshot)
         return self._send(200, json.dumps({"ok": ok, "message": msg}))
 
 
