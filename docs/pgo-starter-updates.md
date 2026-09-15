@@ -2,20 +2,22 @@
 
 Starter changes use three separate commands. Each command reloads the verified current season state and its latest saved roster. None refreshes, fits, saves, or publishes a forecast.
 
+The selected game must belong to the current scheduled week or its immediate pending week. Pending-week capture, review and activation replay the archived provider finals and require the current week to be complete. A missing final, duplicate schedule identity or unrelated future week blocks admission. A failed weekly build retains its actual captured input references in the saved blocked state, including roster timestamps and hashes, while the previous rankings and forecasts remain intact.
+
 ## 1. Capture
 
-Run before the game's T-60 cutoff with one official club news URL, the current game, the team, the player's GSIS ID, and the exact sentence from the article:
+Run before the game's T-60 cutoff with one official club news URL, an eligible scheduled game, the team, the player's GSIS ID, and the exact sentence from the article:
 
 ```powershell
 python pgo_starter_capture.py capture `
   --url "https://www.atlantafalcons.com/news/example" `
-  --game-id "2026_02_ATL_PIT" `
+  --game-id "2026_02_CAR_ATL" `
   --team "ATL" `
   --gsis-id "00-0000000" `
   --statement "Exact announcement sentence."
 ```
 
-The command validates the official team domain before making one request and does not follow redirects. It prints a hash-named file under `docs/evidence/season-2026/starter-drafts/`. The draft preserves the exact response bytes, including a partial body, status, headers, final URL, request start, and completion time. Redirects, HTTP errors, incomplete responses, request failures, and a backwards wall clock return exit code 1 but retain their draft receipt. Capture does not change `data/pgo_starter_announcements.json`.
+The command checks the saved active roster is at most 24 hours old and validates the official team domain before making one request; it does not follow redirects. It prints a hash-named file under `docs/evidence/season-2026/starter-drafts/`. The draft preserves the exact response bytes, including a partial body, status, headers, final URL, request start, and completion time. Redirects, HTTP errors, incomplete responses, request failures, a backwards wall clock, and capture reaching T-60 return exit code 1 but retain their draft receipt. Capture does not change `data/pgo_starter_announcements.json`.
 
 ## 2. Review
 
@@ -38,6 +40,10 @@ python pgo_starter_capture.py activate --review "<review-sha256>.json"
 Activation reloads the current state and current active roster, requires that roster capture to be at most 24 hours old, and replays the immutable source through `pgo_expected_starters`. An exclusive sidecar lock covers the config read, conflict checks, staging, and replacement. After staging and flushing the new bytes, activation rechecks the config hash and actual clock immediately before replacement; both activation clocks must be strictly before T-60. It rejects tampering, future or wrong-game evidence, a stale roster, configuration drift, a busy activation, or another announcement for the same game and team. It atomically appends one rule to `data/pgo_starter_announcements.json`.
 
 Activation does not run the season refresh, change a forecast, fit a model, push, or publish. Those remain separate operator actions under the existing season workflow.
+
+On the next authorized season refresh, initial issuance and pre-lock revisions resolve applicable reviewed announcements before checking default depth for the remaining teams. Numerical updates still require all 32 teams to have unique eligible quarterbacks; unrelated conflicts continue to block. Issued games retain their announcement references for save/load replay. Later revisions and inactive-list context replay already locked games' archived authority using its original clocks; their issued forecasts and confidence allocations remain fixed.
+
+An announcement applies only to its verified matchup and week. A prior Atlanta announcement against Pittsburgh cannot establish a starter for Carolina at Atlanta. Software readiness does not establish a current starter: without supported game-specific evidence or consistent provider roster/depth, the input hold remains.
 
 If the process is terminated while activating, inspect `.pgo_starter_announcements.json.activation.lock` and confirm that no activation is running before removing that stale lock and retrying.
 

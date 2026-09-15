@@ -263,6 +263,96 @@ def _rank_comparison(snapshot, mccabe):
             f'</tr></thead><tbody>{body}</tbody></table></div></details>')
 
 
+def _previous_rankings(snapshot):
+    previous = snapshot.get('previous_edition')
+    if previous is None or not previous.get('edition') or not previous.get('generated_at'):
+        note = ('<p>Previous rating details were not saved for this edition. Numeric changes will be available '
+                'with the next saved edition.</p>' if any(t.get('prior_rank') is not None for t in snapshot['teams']) else '')
+        return {}, note
+    old = previous.get('teams', [])
+    if (len(old) != 32 or {t['team'] for t in old} != {t['team'] for t in snapshot['teams']}
+            or sorted(_integer(t['rank']) for t in old) != list(range(1, 33))
+            or not previous.get('edition') or previous['edition'] == snapshot['edition']
+            or utc(previous['generated_at']) >= utc(snapshot['generated_at'])):
+        raise ValueError('Previous ranking edition identity or clock differs')
+    by_team = {t['team']: t for t in old}
+    for team in snapshot['teams']:
+        saved = by_team[team['team']]
+        if team.get('prior_rank') != saved['rank']:
+            raise ValueError('Previous rank differs from saved comparison')
+        if saved.get('rating') is not None:
+            rating = _number(saved['rating'])
+            terms = saved.get('contributions', {})
+            for value in terms.values(): _number(value)
+            if terms and not math.isclose(math.fsum(terms.values()), rating, rel_tol=0, abs_tol=1e-8):
+                raise ValueError('Previous rating contributions do not reconcile')
+    if all(t.get('rating') is not None for t in old) and (
+            sorted(old, key=lambda t:t['rank']) != sorted(old, key=lambda t:(-t['rating'],t['team']))):
+        raise ValueError('Previous ranks differ from saved rating order')
+    previous_week, current_week = previous.get('completed_week'), snapshot.get('completed_week')
+    if previous_week is None or current_week is None:
+        history = 'Previous completed-week coverage unavailable.'
+    else:
+        if not 0 <= _integer(previous_week) <= _integer(current_week) <= 18:
+            raise ValueError('Previous completed-week coverage differs')
+        history = ('No newly completed week added.' if previous_week == current_week else
+                   f'Week {current_week} results added.' if current_week == previous_week + 1 else
+                   f'Weeks {previous_week+1}\u2013{current_week} results added.')
+    known = [t for t in snapshot['teams'] if t.get('qb_gsis_id') and by_team[t['team']].get('qb_gsis_id')]
+    changed = sum(t['qb_gsis_id'] != by_team[t['team']]['qb_gsis_id'] for t in known)
+    quarterbacks = (f'{changed} expected quarterback{"s" if changed != 1 else ""} changed.'
+                    if len(known) == 32 else 'Expected-quarterback changes unavailable for some teams.')
+    return by_team, (f'<p><strong>Since the previous edition:</strong> {history} {quarterbacks} '
+        'Rank also depends on how the other teams move.</p>'
+        f'<p>Compared with {_text(previous["edition"])}; saved {_time(previous["generated_at"])}.</p>')
+
+
+def _rating_changes(team, previous, labels, plain):
+    if not previous:
+        return '', ''
+    if previous.get('rating') is None:
+        return '', '<p>Rating change unavailable: the previous rating was not saved.</p>'
+    rating, prior = _number(team['rating']), _number(previous['rating'])
+    change = rating - prior
+    unchanged = math.isclose(change, 0., rel_tol=0, abs_tol=1e-8)
+    compact = 'Rating unchanged' if unchanged else f'Rating {change:+.3f}'
+    explanation = (f'<p><strong>Rating change: {0. if unchanged else change:+.3f}</strong> '
+                   f'({prior:+.3f} to {rating:+.3f}). These are PGO rating points, not a predicted game margin.</p>')
+    if unchanged and previous['rank'] != team['rank']:
+        explanation += '<p>Rating unchanged; its rank moved because other teams moved around it.</p>'
+    old_qb, new_qb = previous.get('qb_gsis_id'), team.get('qb_gsis_id')
+    if old_qb and new_qb and old_qb != new_qb:
+        explanation += (f'<p>Expected quarterback changed from {_text(previous.get("qb_name", "Unavailable"))} '
+                        f'to {_text(team["qb_name"])}. The change below includes the updated quarterback history.</p>')
+    current_terms, old_terms = team.get('contributions', {}), previous.get('contributions', {})
+    if not old_terms or not current_terms or set(old_terms) != set(current_terms):
+        return compact, explanation + '<p>Input changes unavailable: the previous edition has no matching complete breakdown.</p>'
+    changes = {name: _number(value)-_number(old_terms[name]) for name,value in current_terms.items()}
+    if not math.isclose(math.fsum(changes.values()), change, rel_tol=0, abs_tol=1e-8):
+        raise ValueError('Rating contribution changes do not reconcile')
+    def label(name):
+        return _text(plain.get(name, 'adjustments for missing information' if name.endswith('_missing')
+                              else labels.get(name, name.replace('_', ' '))))
+    ordered = sorted(changes.items(), key=lambda pair:(-abs(pair[1]), pair[0]))
+    for positive, title in ((True, 'Largest upward change'), (False, 'Largest downward change')):
+        chosen = next(((name,value) for name,value in ordered if (value > 1e-8 if positive else value < -1e-8)), None)
+        if chosen:
+            explanation += f'<p><strong>{title}:</strong> {label(chosen[0])}: {chosen[1]:+.3f}.</p>'
+    rows = ''.join(f'<tr><th scope="row">{label(name)}</th><td>{old_terms[name]:+.3f}</td>'
+                   f'<td>{current_terms[name]:+.3f}</td><td>{value:+.3f}</td></tr>'
+                   for name,value in ordered if abs(value) > 1e-8)
+    if rows:
+        code = _text(team['team'])
+        explanation += (f'<details data-view-key="rating-changes-{code}"><summary>How the rating changed</summary>'
+            '<p>Each contribution is measured against that edition\u2019s league average, so changes also reflect movement '
+            'in that average. These are overlapping influences in the formula, not separate football grades.</p>'
+            f'<div class="table-shell"><table><thead><tr><th>Input</th><th>Previous</th><th>Current</th>'
+            f'<th>Change</th></tr></thead><tbody>{rows}<tr><th scope="row">Total rating</th><td>{prior:+.3f}</td>'
+            f'<td>{rating:+.3f}</td><td>{change:+.3f}</td></tr></tbody></table></div>'
+            '<p>Unchanged contributions are omitted. Changes reconcile using the saved full precision; displayed numbers are rounded.</p></details>')
+    return compact, explanation
+
+
 def _rankings(snapshot, mccabe=None):
     if snapshot is None:
         return '<p>Rankings unavailable.</p>'
@@ -279,7 +369,11 @@ def _rankings(snapshot, mccabe=None):
                  sack_avoidance_rate='avoiding sacks', takeaway_rate='winning turnovers',
                  giveaway_avoidance_rate='protecting the ball', qb_epa_per_dropback='quarterback passing history',
                  qb_cpoe='quarterback completion history', qb_log_dropbacks='amount of quarterback history',
-                 qb_experience_prior='quarterback experience', qb_draft_prior='quarterback draft history')
+                 qb_experience_prior='quarterback experience', qb_draft_prior='quarterback draft history',
+                 qb_sack_avoidance='quarterback history of avoiding sacks', qb_ball_security='quarterback ball security',
+                 qb_rushing_epa_per_carry='quarterback rushing history', explosive_play_rate_for='long gains on offense',
+                 explosive_play_prevention_rate='preventing long gains')
+    previous, edition_changes = _previous_rankings(snapshot)
     rows, explanations = [], []
     for team in teams:
         rating = _number(team['rating'])
@@ -287,6 +381,9 @@ def _rankings(snapshot, mccabe=None):
         if prior is not None and not 1 <= _integer(prior) <= 32:
             raise ValueError('Invalid previous rank')
         movement = 'First edition' if prior is None else ('Unchanged' if prior == team['rank'] else f'Up {prior-team["rank"]}' if prior > team['rank'] else f'Down {team["rank"]-prior}')
+        rating_movement, rating_changes = _rating_changes(team, previous.get(team['team']), labels, plain)
+        if rating_movement:
+            movement += f'<br><small>{rating_movement}</small>'
         code = _text(team['team'])
         rows.append(f'<tr data-season-team="{code}"><td class="pgo-rank">{team["rank"]}</td>'
             f'<th scope="row" class="pgo-team"><a href="#season-rating-{code}" data-view-key="rating-link-{code}">{board.team_identity(team["team"])}</a></th>'
@@ -312,6 +409,7 @@ def _rankings(snapshot, mccabe=None):
         explanations.append(f'<details class="model-update-evidence rating-explanation" id="season-rating-{code}" data-view-key="rating-{code}">'
             f'<summary>#{team["rank"]} {code}: why this rating</summary>'
             f'<p>Expected quarterback: {_text(team["qb_name"])}.</p>'
+            + rating_changes +
             f'<p><strong>What lifts this rating:</strong> {drivers(True)}.</p>'
             f'<p><strong>What holds this rating back:</strong> {drivers(False)}.</p>'
             '<p>These are overlapping influences in the formula, not separate player-quality grades. '
@@ -330,7 +428,7 @@ def _rankings(snapshot, mccabe=None):
                      else 'First saved ranking edition; rank movement starts with the next edition.')
     return (f'<h3 id="season-rankings">Current power rankings</h3><p>Ranking inputs captured {_time(snapshot["inputs_as_of"])}. '
             f'Includes completed games through {history}. This is the date of the latest included game, not a data-capture deadline. '
-            f'{movement_note}</p>'
+            f'{movement_note}</p>' + edition_changes +
             '<label class="model-update-columns"><input type="checkbox" data-view-key="rating-columns"> Show rating scale and expected QB</label>'
             '<div class="table-shell" data-view-key="rankings-table"><table class="postseason-team-table"><thead><tr>'
             '<th>Rank</th><th>Team</th><th>PGO strength</th><th>Rank change</th>'
@@ -620,7 +718,7 @@ def _penalty_shadow(shadow):
              'label':'Penalty test methods, findings and review rules'}]) + '</details>')
 
 
-def _accuracy(summary):
+def _accuracy(summary, *, weekly_reviews=None):
     def number(value, digits=3):
         return 'Awaiting eligible finals' if value is None else f'{_number(value):.{digits}f}'
     def count(metric):
@@ -676,6 +774,7 @@ def _accuracy(summary):
     return ('<h3 id="season-accuracy">Season accuracy</h3><p>Original saved picks, verified finals. '
             'A correct winner can still come with a poor score estimate. Margin error is how far the predicted winning margin was from the actual margin; '
             'combined-score error is how far the predicted total was from both teams\' final points added together. Lower error is better.</p>'
+            + ('<p>Completed weekly reviews:</p>' + _sources(weekly_reviews) if weekly_reviews else '') +
             '<p><a href="analysis/2026-week1-20260914.html" target="_blank" rel="noopener noreferrer">'
             'Week 1 review: September 14, 12:57 AM EDT — 15 of 16 games final</a></p>'
             '<dl class="season-freshness">' + ''.join(cards) + '</dl>'
@@ -835,6 +934,10 @@ def _experiments(state):
             f'<p>Monitor: {_text(weights["status"])}. {_text(weights.get("blocked_reason") or "")}</p>'
             '<p><strong>No alternative cleared the improvement screen.</strong> Removing either block made average lead error slightly worse. '
             'None of the probability alternatives met the required improvement and uncertainty checks. The main model stays unchanged.</p>'
+            '<p><a href="analysis/2026-sack-contrast-20260914.html" target="_blank" rel="noopener noreferrer">'
+            'September 14 sack-avoidance weight test: accuracy screen failed</a>. '
+            'Keeping both sack inputs while limiting how far their weights diverge made the weights steadier, '
+            'but did not improve historical predictions.</p>'
             + _test_table('weights-results',['Input choice','Historical lead error (points)','New-game lead error (points)'],rows)
             + '<p>All lead tests use the same 2,127 historical games. Probability tests use the same 1,615 later games, '
             'after allowing earlier seasons to train the probability method. Lower error, log loss and Brier are better.</p>'
@@ -1032,7 +1135,39 @@ def _experiments(state):
             'No experiment automatically replaces the main model.</p>' + ''.join(panels))
 
 
-def render_season(state, *, accuracy=None, mccabe=None, market=None):
+def _statistics_review(state):
+    review=state.get('statistics_review')
+    if not review:return ''
+    report=review.get('report') or {}
+    status=review['status']
+    label={'WAITING':'Waiting for a completed-week edition','CLEAR':'No changes in checked inputs',
+           'REVIEW':'Later statistics changed','BLOCKED':'Latest comparison unavailable'}[status]
+    note='<p>We compare later team and quarterback statistics with the exact data saved for a ranking edition, about every six hours and when a new edition appears. '
+    note+='This check covers the same completed games. It does not change issued picks, grades or model weights.</p>'
+    if review.get('blocked_reason'):note+=f'<p>Latest check needs review: {_text(review["blocked_reason"])}.</p>'
+    if report:
+        note+=f'<p>Last completed comparison: {_time(report["compared_at"])}. '
+        note+=f'{len(report["games"])} games through Week {_integer(report["completed_week"])}; '
+        note+=f'{len(report["changes"])} changed input values or evidence records. '
+        note+=f'Compared with edition {_text(report["basis_edition"])}.</p>'
+        if report['changes']:
+            note+='<p>A source correction may affect a future recalculation. This check does not estimate its size or direction.</p><ul>'
+            for row in report['changes'][:12]:
+                if row['kind']=='unattributed_penalties':
+                    note+='<li>Unassigned penalty evidence changed; no player was assigned these penalties.</li>'
+                else:
+                    field=row['field'].replace('_',' ')
+                    prior='Missing' if row['before'] is None else str(row['before'])
+                    current='Missing' if row['after'] is None else str(row['after'])
+                    note+=f'<li>{_text(row["game_id"])}: {_text(row["team"])} {_text(field)}: {_text(prior)} to {_text(current)}.</li>'
+            note+='</ul>'
+            if len(report['changes'])>12:note+='<p>Additional changes are retained in the saved refresh evidence.</p>'
+    else:note+='<p>No completed comparison yet. Checks begin after a ranking edition incorporates a full 2026 week.</p>'
+    return ('<details class="model-update-evidence" id="season-statistics-review" data-view-key="statistics-review">'
+            f'<summary>Later statistical corrections: {label}</summary>'+note+'</details>')
+
+
+def render_season(state, *, accuracy=None, mccabe=None, market=None, weekly_reviews=None):
     """Render validated saved state using the existing shared PGO styles once per page."""
     if state['schema_version'] != 1 or state['status'] not in ('READY','BLOCKED'):
         raise ValueError('Unknown season view state')
@@ -1065,6 +1200,7 @@ def render_season(state, *, accuracy=None, mccabe=None, market=None):
         ('offensive_inventory', 'season-offensive-usage', 'Offensive player information'),
         ('offensive_usage', 'season-offensive-usage', 'Offensive playing-time checks'),
         ('score_range_collection', 'season-score-collection', 'Score-error collection'),
+        ('statistics_review', 'season-statistics-review', 'Later statistical corrections'),
         ('ats', 'season-ats', 'Sportsbook comparisons')) if (state.get(key) or {}).get('status') == 'BLOCKED']
     update_note = ('<p class="season-caption">Separate updates needing review: ' + ', '.join(failed_updates)
                    + '. Earlier saved information is retained.</p>') if failed_updates else ''
@@ -1112,7 +1248,7 @@ def render_season(state, *, accuracy=None, mccabe=None, market=None):
             'Injury news is shown as context; current non-QB injuries and backup quality are not separately rated.</p></details>'
             f'<p class="season-caption"><strong>Main picks and grades:</strong> {main_status}. '
             'Non-QB injuries and backup quality are context, not fitted adjustments.</p>' + block + update_note
-            + _freshness(state) + _inactive_watch(state) + _game_day(state) + _rankings(state.get('rankings'),mccabe) +
+            + _freshness(state) + _statistics_review(state) + _inactive_watch(state) + _game_day(state) + _rankings(state.get('rankings'),mccabe) +
             '<h3 id="season-records">Winner records (straight-up)</h3>'
             '<p>W: the selected team won. L: the selected team lost. T: the game ended in a tie. '
             'Sportsbook spread records are tracked separately.</p>'
@@ -1121,7 +1257,7 @@ def render_season(state, *, accuracy=None, mccabe=None, market=None):
             f'<tbody>{"".join(records)}</tbody></table></div>'
             '<p>Each record covers its own saved schedule. Weekly editions cover published weeks; '
             'the preseason baselines cover all 272 regular-season games, so their pending counts can be larger.</p>'
-            + _accuracy(accuracy) + (_market_benchmark(market) if market is not None else '') +
+            + _accuracy(accuracy, weekly_reviews=weekly_reviews) + (_market_benchmark(market) if market is not None else '') +
             f'<h3>Week {current} picks and grades</h3>'
             '<p>Winner grades count who won. Each game also shows how its saved picks compared with the PGO projection '
             'and sportsbook line. A correct winner can fall below the projected margin or fail to cover the spread.</p>'

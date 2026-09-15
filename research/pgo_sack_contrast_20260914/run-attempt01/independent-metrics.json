@@ -1,0 +1,36 @@
+{
+  "method": "stdlib math.fsum from saved predictions",
+  "overall": {
+    "constant": {
+      "bias_predicted_minus_actual": 0.42410696210664356,
+      "count": 2127,
+      "mae": 11.057958155158353,
+      "rmse": 14.326249822306766
+    },
+    "control": {
+      "bias_predicted_minus_actual": 0.1501968644119044,
+      "count": 2127,
+      "mae": 10.102101956753824,
+      "rmse": 13.04464307381374
+    },
+    "corrected": {
+      "bias_predicted_minus_actual": 0.15271945727661818,
+      "count": 2127,
+      "mae": 10.099455867555735,
+      "rmse": 13.044988969614389
+    },
+    "pgo_v0": {
+      "bias_predicted_minus_actual": 0.9729074060311307,
+      "count": 2127,
+      "mae": 10.266150234488958,
+      "rmse": 13.229771660093688
+    },
+    "sack_contrast4": {
+      "bias_predicted_minus_actual": 0.14984812722593693,
+      "count": 2127,
+      "mae": 10.105199041635105,
+      "rmse": 13.045771645695298
+    }
+  },
+  "status": "PASS"
+}

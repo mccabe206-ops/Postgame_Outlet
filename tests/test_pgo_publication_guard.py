@@ -2,6 +2,7 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from pgo_publication_guard import check_publication
 
@@ -97,6 +98,48 @@ class PublicationGuardTests(unittest.TestCase):
             with self.subTest(value=value):
                 with self.assertRaises(ValueError):
                     self.guard(value, self.root)
+
+    def test_only_exactly_replayed_added_weekly_report_pairs_are_admitted(self):
+        import pgo_weekly_review as reviews
+        from tests.test_pgo_weekly_review import WeeklyReviewTests
+        fixture = WeeklyReviewTests()
+        fixture.archive(self.root, fixture.fixture())
+        with patch.object(reviews, 'verify_sources'):
+            paths = reviews.publish(self.root)
+            latest = self.commit()
+            self.assertEqual(self.guard(self.tested, self.root)['publication_sha'], latest)
+            # A locally rebuilt pair can replay yet still disagree with the
+            # archive bytes committed at publication HEAD.
+            import pgo_season as season
+            receipt_name = next(p for p in paths if p.endswith('.json'))
+            receipt = season.read_json(self.root/receipt_name)
+            archive = self.root/'docs/evidence/season-2026'/receipt['source_pointer']['path']
+            payload = (archive/'state.json').read_bytes() + b' '
+            (archive/'state.json').write_bytes(payload)
+            manifest = season.canonical(dict(files={'state.json':dict(sha256=season.sha(payload),bytes=len(payload))}))
+            (archive/'manifest.json').write_bytes(manifest)
+            pointer = dict(receipt['source_pointer'], manifest_sha256=season.sha(manifest))
+            raw, receipt_raw = reviews.build(self.root,pointer,1)
+            (self.root/receipt_name).write_bytes(receipt_raw)
+            (self.root/receipt_name.replace('.json','.html')).write_bytes(raw)
+            with self.assertRaisesRegex(ValueError, 'committed bytes'):
+                self.guard(self.tested, self.root)
+            self.git('restore','--worktree','.')
+            # A new report is not a free-form HTML publishing path.
+            self.git('checkout', '--detach', self.tested)
+            for path in paths: self.write(path, 'arbitrary HTML or receipt')
+            self.commit()
+            with self.assertRaises((ValueError, KeyError)):
+                self.guard(self.tested, self.root)
+
+    def test_existing_weekly_report_cannot_be_modified_or_deleted(self):
+        name = 'docs/analysis/weekly/2026-week1-final.html'
+        self.write(name, 'previous report')
+        tested = self.commit()
+        self.write(name, 'replacement report')
+        self.commit()
+        with self.assertRaisesRegex(ValueError, 'Untested changes'):
+            self.guard(tested, self.root)
 
 
 if __name__ == '__main__':

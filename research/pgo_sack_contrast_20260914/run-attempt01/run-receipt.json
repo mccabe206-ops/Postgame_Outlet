@@ -1,0 +1,27 @@
+{
+  "completed_at": "2026-09-14T16:50:07.475201+00:00",
+  "evaluation_fits": 8,
+  "evaluation_games": 2127,
+  "executed_candidate_fits": 9,
+  "final_historical_fits": 1,
+  "further_study_screen": {
+    "checks": {
+      "at_least_five_seasons": false,
+      "improvement_at_least_005": false,
+      "positive_interval_lower": false
+    },
+    "improved_seasons": 3,
+    "meaning": "Further-study screen only; reused history and source vintage remain experimental",
+    "pooled_improvement": -0.0030970848812810203,
+    "primary_screen_passed": false,
+    "stability_screen_passed": true,
+    "status": "FAIL"
+  },
+  "historical_source_vintage": "REVIEW REQUIRED",
+  "identity": "pgo-qb-team-sack-contrast4-v1-20260914",
+  "maximum_serialized_replay_error": 7.105427357601002e-15,
+  "production_changed": false,
+  "prospective_phase": "NOT STARTED",
+  "protected_source_integrity": "PASS",
+  "status": "EXPERIMENTAL / HOLD"
+}

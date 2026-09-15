@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,">
+<title>PGO weight test — September 14, 2026</title>
+<style>
+:root{--bg:#0c121b;--panel:#151f2c;--line:#30425a;--text:#f5f7fa;--muted:#b9c4d0;--orange:#f27a32;--link:#8fc7ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:32px 18px 64px}h1,h2{line-height:1.2}a{color:var(--link)}.muted{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:24px 0}.card,details{background:var(--panel);border:1px solid var(--line);padding:16px;border-radius:10px}.card strong{display:block;font-size:1.6rem;color:var(--orange)}.table{overflow:auto;border:1px solid var(--line);border-radius:10px}table{border-collapse:collapse;width:100%;background:var(--panel)}caption{text-align:left;padding:12px;color:var(--muted)}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#1d2a39}details{margin:24px 0}summary{cursor:pointer;font-weight:700}code{overflow-wrap:anywhere}@media(max-width:600px){main{padding:20px 12px 48px}h1{font-size:1.9rem}th,td{padding:8px;font-size:.875rem}}
+</style></head><body><main>
+<p><a href="../">PGO rankings and picks</a> · <a href="../forecast-lab.html">Forecast Lab</a></p>
+<h1>More stable weights did not improve the predictions</h1>
+<p class="muted">Research result · September 14, 2026 · Experimental</p>
+<p>We tested a change to how PGO balances its quarterback and team sack-avoidance measurements. Both partly describe the same plays. The test made it harder for their weights to diverge while keeping both inputs.</p>
+<p><strong>The candidate did not pass our accuracy requirements. PGO keeps its published model.</strong> The fitted weights became more stable across seasons, but the average prediction error was slightly higher.</p>
+<section class="cards" aria-label="Historical test results">
+<div class="card"><strong>2,127 games</strong>Same historical games for both models</div>
+<div class="card"><strong>10.1021 → 10.1052</strong>Average margin error in NFL points; lower is better</div>
+<div class="card"><strong>3 of 8 seasons</strong>Improved; at least 5 were required</div>
+</section>
+<h2>What the error means</h2>
+<p>If PGO predicts a team will win by 4 and it wins by 7, the margin error is 3 NFL points. We averaged that absolute difference across the same games for both versions. This test evaluated winning margins. It did not test sportsbook covers, confidence pool points or projected total scores.</p>
+<h2>Requirements fixed before the test</h2>
+<div class="table" tabindex="0" role="region" aria-label="Accuracy and stability requirements"><table><caption>All accuracy conditions and the stability condition were required.</caption><thead><tr><th scope="col">Requirement</th><th scope="col">Observed result</th><th scope="col">Passed?</th></tr></thead><tbody>
+<tr><td>Reduce average margin error by at least 0.05 points</td><td>Error increased by 0.0031 points</td><td>No</td></tr>
+<tr><td>Improve at least 5 of 8 seasons</td><td>3 seasons improved</td><td>No</td></tr>
+<tr><td>Uncertainty range entirely favors improvement</td><td>95% range: −0.0139 to +0.0102 points of improvement</td><td>No</td></tr>
+<tr><td>Do not increase the measured drift in the two weights</td><td>Drift decreased</td><td>Yes</td></tr>
+</tbody></table></div>
+<h2>Early-season performance</h2>
+<div class="table" tabindex="0" role="region" aria-label="Historical timing slices"><table><caption>Average margin error in NFL points; lower is better.</caption><thead><tr><th scope="col">Games</th><th scope="col">Saved model</th><th scope="col">Candidate</th></tr></thead><tbody>
+<tr><td>Week 1: 128 games</td><td>9.8986</td><td>9.9287</td></tr>
+<tr><td>Weeks 1–4: 509 games</td><td>9.7964</td><td>9.8146</td></tr>
+<tr><td>Weeks 5–18: 1,618 games</td><td>10.1983</td><td>10.1966</td></tr>
+</tbody></table></div>
+<p class="muted">Week 1 is included in Weeks 1–4. The slices overlap.</p>
+<h2>What we can conclude</h2>
+<p>This particular weight change did not earn a place in the public predictions. Keeping a failed test visible helps explain how PGO evaluates proposed improvements. This result does not establish the best weights or rule out other explanations for a team's ranking.</p>
+<p>Each evaluation fit used seasons before its test season, covering 2018–2025. We have studied these historical games before, so they are not untouched evidence. Historical source timing and expected-quarterback limitations also remain unresolved. No 2026 game outcomes entered this experiment.</p>
+<details><summary>Technical details and retained evidence</summary>
+<p>The fixed candidate applied four times the original penalty to the disagreement direction of the standardized QB and team sack-avoidance values. Their common direction retained its original penalty. It preserved all other inputs, missing-data flags, saved training preprocessing, fold memberships and optimizer settings.</p>
+<p>Exactly eight evaluation fits and one separate final historical fit ran once. The final fit is archived and has not issued any public predictions. The primary comparison was the saved postseason model; the regular-season corrected model, PGO v0 and training-fold constant were retained as contextual references.</p>
+<p>The uncertainty range came from 10,000 resamples of whole seasons, preserving paired games. Measured coefficient drift decreased from 0.157450 to 0.085437. These are algebraic weight diagnostics, not player grades or causal football effects.</p>
+<p>Ten no-fit tests passed. An independent checker verified all 2,127 predictions, 230 metric views, the bootstrap, coefficient conversion, decision rules and 135 protected source pins. Historical source qualification remains REVIEW REQUIRED. Prospective collection for this candidate is NOT STARTED.</p>
+<p><a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_sack_contrast_20260914/report.md">Complete report, all seasons and artifact links</a> · <a href="https://github.com/walshja9/Postgame_Outlet/blob/main/research/pgo_sack_contrast_20260914/run-attempt01/manifest.json">Frozen run manifest</a></p>
+</details>
+</main></body></html>

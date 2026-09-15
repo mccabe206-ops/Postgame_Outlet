@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-09-14T22:55:30.291389+00:00",
+  "sources": [
+    {
+      "bytes": 362958,
+      "captured_at": "2026-09-14T22:55:29.796007+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "34581c138a0a25557ceab558ae3eafe425f7d16eec2348b440c9b005c9cc90ba",
+      "started_at": "2026-09-14T22:55:29.731635+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 289925,
+      "captured_at": "2026-09-14T22:55:29.816491+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "bf1b280c3f6359fe5216f8b06bd3c3ed134ea6b38099b1233ceb4b4909687c1d",
+      "started_at": "2026-09-14T22:55:29.732135+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 500290,
+      "captured_at": "2026-09-14T22:55:29.887245+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "6e0c0c6589436ef205e43dbde33e1c2e50c026c2804b886ea2a37175b1045694",
+      "started_at": "2026-09-14T22:55:29.732437+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 1640512,
+      "captured_at": "2026-09-14T22:55:30.014346+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "c4397c299da05126f16fe9ddaffd5b88b0e5f9023684bd191dec72ebed0fc8c3",
+      "started_at": "2026-09-14T22:55:29.732749+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 308653,
+      "captured_at": "2026-09-14T22:55:30.174152+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/broncos-announce-inactives-for-week-1-game-vs-chiefs",
+      "kind": "official_inactives",
+      "sha256": "9d1aa713e3639e75cbcb341100a2a46e1692a264a8f59a8e5c911b48566c4e02",
+      "started_at": "2026-09-14T22:55:30.112937+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/broncos-announce-inactives-for-week-1-game-vs-chiefs"
+    },
+    {
+      "bytes": 913872,
+      "captured_at": "2026-09-14T22:55:30.175798+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season",
+      "kind": "official_inactives",
+      "sha256": "a76ab7bba752a679a463af3668a757a8ffc40b9c903936abc7bf1116a6be5bf5",
+      "started_at": "2026-09-14T22:55:30.113250+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/inactive-reports-sunday-week-1-2026-nfl-season"
+    }
+  ]
+}

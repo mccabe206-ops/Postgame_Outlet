@@ -98,6 +98,8 @@ pgo_starter_capture.py text eol=lf
 pgo_offensive_*.py text eol=lf
 pgo_score_range_monitor.py text eol=lf
 tests/test_pgo_starter_capture.py text eol=lf
+research/pgo_sack_contrast_20260914/** -text whitespace=cr-at-eol
+tests/test_pgo_sack_contrast.py text eol=lf
 tests/test_pgo_offensive_*.py text eol=lf
 tests/test_pgo_score_range_monitor.py text eol=lf
 research/pgo_offensive_usage_20260912/** -text whitespace=cr-at-eol
@@ -110,3 +112,6 @@ pgo_inactive_nfl.py text eol=lf
 tests/test_pgo_inactive_nfl.py text eol=lf
 tests/fixtures/pgo_availability_v4_nfl.html -text
 tests/fixtures/pgo_availability_v4_nfl.json -text
+docs/analysis/weekly/** -text
+pgo_weekly_review.py text eol=lf
+tests/test_pgo_weekly_review.py text eol=lf
