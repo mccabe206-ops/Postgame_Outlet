@@ -87,30 +87,54 @@ def select_player(roster, decision, game):
     return copy.deepcopy(rows[0])
 
 
-def apply(selected, roster, games, root, checked_at, *, teams=None):
-    """Return a detached selection plus source annotations for matching games only."""
+def apply(selected, roster, games, root, checked_at, *, teams=None, depth=None):
+    """Resolve reviewed authority before default depth; replay locked authority only."""
     requested = set(CURRENT_TEAMS if teams is None else teams)
     require(requested and requested <= set(CURRENT_TEAMS), 'Invalid expected starter team scope')
     chosen = copy.deepcopy(selected)
-    if not CONFIG.exists():
+    if depth is None and not CONFIG.exists():
         return chosen, {}
     try:
-        config = json.loads(CONFIG.read_bytes())
+        live = depth is None or any(utc(checked_at) < utc(g['kickoff'])-timedelta(minutes=60) for g in games)
+        config = json.loads(CONFIG.read_bytes()) if live and CONFIG.exists() else dict(schema_version=1, announcements=[])
         require(type(config['schema_version']) is int and config['schema_version'] == 1
                 and isinstance(config['announcements'], list), 'Invalid starter announcement configuration')
         indexed = {game['game_id']:game for game in games}
-        applicable = [rule for rule in config['announcements'] if rule['game_id'] in indexed]
-        if not applicable:
-            return chosen, {}
         require(len(indexed) == len(games), 'Duplicate starter announcement input game')
         annotations = {}; seen = set()
+        if depth is not None:
+            require(not chosen, 'Default-depth resolution requires an empty initial selection')
+            for game in games:
+                if utc(checked_at) < utc(game['kickoff'])-timedelta(minutes=60):
+                    continue
+                saved = game.get('starter_announcements', [])
+                if 'starter_announcements' in game:
+                    verify(game, saved, root)
+                for annotation in saved:
+                    team = annotation['team']
+                    require(team in requested and team not in chosen, 'Conflicting starter team scope')
+                    chosen[team] = select_player(roster, annotation, game)
+                if saved:
+                    annotations[game['game_id']] = copy.deepcopy(saved)
+                del indexed[game['game_id']]
+        applicable = [rule for rule in config['announcements'] if rule['game_id'] in indexed]
+        if not applicable and depth is None:
+            return chosen, {}
         for rule in applicable:
             game = indexed[rule['game_id']]; decision = _announcement(game, rule['source'], root, checked_at)
             team = decision['team']; key = (game['game_id'], team)
             require(key not in seen, 'Duplicate starter announcement for game and team'); seen.add(key)
+            require(team in requested and (depth is None or team not in chosen), 'Conflicting starter team scope')
             chosen[team] = select_player(roster, decision, game)
             annotations.setdefault(game['game_id'], []).append(dict(
                 team=team, gsis_id=decision['gsis_id'], full_name=decision['full_name'], source=copy.deepcopy(rule['source'])))
+        if depth is not None:
+            from pgo_season import select_roster
+            remaining = requested - set(chosen)
+            if not chosen:
+                return select_roster(roster, depth, checked_at, teams=requested), annotations
+            if remaining:
+                chosen.update(select_roster(roster, depth, checked_at, teams=remaining))
         require(set(chosen) == requested, 'Expected starters must cover requested teams')
         ids = [row['gsis_id'] for row in chosen.values()]
         require(all(isinstance(pid, str) and re.fullmatch(r'00-\d{7}', pid) for pid in ids)

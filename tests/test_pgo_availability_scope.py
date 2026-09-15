@@ -57,6 +57,8 @@ class AvailabilityScopeTests(unittest.TestCase):
         if context: self.clock='2026-09-14T23:30:00Z'
         if changed:
             next(r for r in self.state['rankings']['teams'] if r['team']=='DEN')['qb_gsis_id']='00-9999999'
+            # This case has no reviewed authority for the conflicting default.
+            self.state['weeks'][0]['games'][0].pop('starter_announcements')
         observation=dict(game_id=self.game['game_id'],checked_at=self.clock,blocked_reason=None,
                          teams={t:{'final_inactives_status':'VERIFIED_LIST'} for t in ('DEN','KC')})
         with tempfile.TemporaryDirectory() as tmp, ExitStack() as stack:
