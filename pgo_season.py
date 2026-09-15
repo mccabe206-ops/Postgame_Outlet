@@ -476,7 +476,8 @@ def select_roster(roster, depth, captured_at, *, teams=None):
     return selected
 
 
-def build_next(state, schedule, results, root, *, completed=None, selected=None, roster_sources=()):
+def build_next(state, schedule, results, root, *, completed=None, selected=None, roster_sources=(),
+               captured_sources=None, starter_announcements=None):
     from pgo_season_model import load_seed, build_week
     completed = completed_week(schedule, results) if completed is None else completed
     require(0 <= completed <= 18, 'Unsupported completed week')
@@ -484,9 +485,16 @@ def build_next(state, schedule, results, root, *, completed=None, selected=None,
     kinds = (['team','player'] if completed else []) + ([] if selected is not None else ['roster','depth'])
     for kind in kinds:
         raw, source = fetch_source(URLS[kind], root)
+        if captured_sources is not None:
+            captured_sources.append(source)
         captured[kind] = csv_rows(raw); sources.append(source)
     generated = now()
-    selected = selected or select_roster(captured['roster'], captured['depth'], generated)
+    announcements = copy.deepcopy(starter_announcements or {})
+    if selected is None:
+        from pgo_expected_starters import apply
+        selected, announcements = apply({}, captured['roster'],
+            [g for g in schedule if g['week']==completed+1], root, generated, depth=captured['depth'])
+        sources += [a['source'] for rows in announcements.values() for a in rows]
     by_id={g['game_id']:g for g in schedule}
     completed_games=[]
     for r in results:
@@ -505,6 +513,8 @@ def build_next(state, schedule, results, root, *, completed=None, selected=None,
     games=[]
     for g in output['games']:
         g=copy.deepcopy(g);g.update(issued_at=generated,source_edition=edition,inputs_as_of=generated,expected_qbs={t:selected[t]['full_name'] for t in (g['home'],g['away'])},lock_at=(utc(g['kickoff'])-timedelta(minutes=60)).isoformat(),blocked_reason=None)
+        if announcements.get(g['game_id']):
+            g['starter_announcements'] = copy.deepcopy(announcements[g['game_id']])
         if utc(generated)>=utc(g['lock_at']):
             for field in ('margin','total','home_points','away_points'): g[field]=None
             g.update(pick=None,confidence=None,blocked_reason='No forecast was issued before this game locked.')
@@ -606,13 +616,10 @@ def refresh_availability(state, root):
         try:
             raw, roster_source = fetch_source(URLS['roster'], root); roster = csv_rows(raw)
             raw, depth_source = fetch_source(URLS['depth'], root); depth = csv_rows(raw)
-            selected = select_roster(roster, depth, now(), teams={t for g in contexts for t in (g['home'],g['away'])})
+            from pgo_expected_starters import apply
+            selected, _ = apply({}, roster, contexts, root, now(), depth=depth,
+                                teams={t for g in contexts for t in (g['home'],g['away'])})
             expected = {t:r['gsis_id'] for t,r in selected.items()}
-            for game in contexts:
-                if game.get('starter_announcements'):
-                    from pgo_expected_starters import verify
-                    verify(game, game['starter_announcements'], root)
-                    expected.update({a['team']:a['gsis_id'] for a in game['starter_announcements']})
             path = Path(root)/'availability-v2'/utc(now()).strftime('%Y%m%dT%H%M%S%fZ')
             captured = capture_availability(contexts, roster, expected, path, purpose='context')
             incomplete = []
@@ -640,15 +647,14 @@ def refresh_availability(state, root):
 
 def refresh_forecast_availability(state, root):
     from pgo_season_availability import capture_availability
-    from pgo_expected_starters import apply, select_player, verify
+    from pgo_expected_starters import apply
     checked=now()
     games=[g for w in state['weeks'] for g in w['games'] if timedelta(minutes=60)<utc(g['kickoff'])-utc(checked)<=timedelta(hours=24)]
     if not games:return []
     raw, roster_source=fetch_source(URLS['roster'],root);roster=csv_rows(raw)
     raw, depth_source=fetch_source(URLS['depth'],root);depth=csv_rows(raw)
     teams={t for g in games for t in (g['home'],g['away'])}
-    selected=select_roster(roster,depth,now(),teams=teams)
-    selected,announcements=apply(selected,roster,games,root,now(),teams=teams)
+    selected,announcements=apply({},roster,games,root,now(),teams=teams,depth=depth)
     expected={t:r['gsis_id'] for t,r in selected.items()}
     before={t['team']:t['qb_gsis_id'] for t in state['rankings']['teams']}
     changed={team for team in expected if before[team]!=expected[team]}
@@ -659,20 +665,12 @@ def refresh_forecast_availability(state, root):
            announcements.get(g['game_id'],[]) != g.get('starter_announcements',[]) for g in games):
         # An actual model revision remains a complete league-wide calculation.
         # Do not fill unrelated roster conflicts with stale or invented players.
-        selected=select_roster(roster,depth,now())
-        selected,announcements=apply(selected,roster,games,root,now())
-        for week in state['weeks']:
-            if week['week'] != state['rankings']['completed_week']+1:continue
-            for game in week['games']:
-                if utc(now()) < utc(game['kickoff'])-timedelta(minutes=60):continue
-                saved=game.get('starter_announcements',[])
-                if saved:
-                    verify(game,saved,root)
-                    for announcement in saved:
-                        selected[announcement['team']]=select_player(roster,announcement,game)
-                        refs.append(announcement['source'])
+        current=[g for w in state['weeks'] if w['week']==state['rankings']['completed_week']+1 for g in w['games']]
+        selected,announcements=apply({},roster,current,root,now(),depth=depth)
+        refs=[roster_source,depth_source,*(a['source'] for rows in announcements.values() for a in rows)]
         rankings,revision,sources=build_next(state,state['schedule'],state['results'],root,
-            completed=state['rankings']['completed_week'],selected=selected,roster_sources=refs)
+            completed=state['rankings']['completed_week'],selected=selected,roster_sources=refs,
+            starter_announcements=announcements)
         new_games={g['game_id']:g for g in revision['games']}
         for week in state['weeks']:
             for index, old in enumerate(week['games']):
@@ -869,14 +867,16 @@ def refresh(root=DEFAULT_ROOT):
         state['sources']=sources;state['schedule']=schedule;state['results']=results
         completed=completed_week(schedule,results)
         if completed>state['rankings'].get('completed_week',0):
+            captured_sources=[]
             try:
-                rankings,week,refs=build_next(state,schedule,results,root)
+                rankings,week,refs=build_next(state,schedule,results,root,captured_sources=captured_sources)
                 # Replay does not mutate prior editions; one new next-week edition is installed.
                 state['rankings']=rankings;state.setdefault('edition_sources',{})[rankings['edition']]=refs;state['sources']+=refs
                 if completed<18:
                     state['current_week']=week['week'];state['weeks'].append(week)
                 else:state['season_complete']=True
             except (ValueError,KeyError,OSError) as error:
+                state['sources']+=captured_sources
                 state.update(status='BLOCKED',blocked_reason='Waiting to publish the next week: '+str(error))
         try:state['sources']+=refresh_availability(state,root)
         except (ValueError,KeyError,OSError) as error:

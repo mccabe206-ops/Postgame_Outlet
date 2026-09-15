@@ -135,6 +135,44 @@ class StarterRevisionTests(unittest.TestCase):
         (self.root / ref['path']).write_bytes(raw)
         self.inputs['depth'] = raw, ref
 
+    def inactive_default_fixture(self):
+        rows = api.csv_rows(self.inputs['roster'][0])
+        for row in rows:
+            if row['team'] == 'ATL' and row['full_name'] == 'Tua Tagovailoa':
+                row['status'] = 'INA'
+        text = io.StringIO(newline='')
+        writer = csv.DictWriter(text, fieldnames=list(rows[0]))
+        writer.writeheader(); writer.writerows(rows)
+        raw = gzip.compress(text.getvalue().encode(), mtime=0)
+        digest = api.sha(raw)
+        ref = dict(url=api.URLS['roster'], path=f'source-archive/{digest}.csv.gz', sha256=digest, bytes=len(raw))
+        (self.root / ref['path']).write_bytes(raw)
+        self.inputs['roster'] = raw, ref
+
+    def test_official_starter_precedes_inactive_default_for_revision_and_locked_context(self):
+        self.inactive_default_fixture()
+        try:
+            game = self.revise()
+        except ValueError as error:
+            self.fail('Reviewed active replacement was blocked by its inactive default: ' + str(error))
+        self.assertEqual(game['expected_qbs']['ATL'], 'Cooper Rush')
+        self.clock = '2026-09-13T16:05:00Z'
+        self.state['checked_at'] = self.clock
+        api.decorate(self.state, self.state['results'])
+        locked = copy.deepcopy(self.games(self.state)[GAME])
+        self.later_depth_fixture()
+        self.revise()
+        self.assertEqual(self.games(self.state)[GAME], locked)
+        ticks = count(1)
+        with patch.object(api, 'now', side_effect=lambda: (
+                api.utc(self.clock) + api.timedelta(microseconds=next(ticks))).isoformat()):
+            api.refresh_availability(self.state, self.root)
+        self.assertIn(GAME, self.state.get('availability_context', {}),
+                      self.state.get('availability_context_check'))
+        self.assertEqual(self.state['availability_context'][GAME]['teams']['ATL']['expected_qb_gsis_id'], RUSH)
+        self.assertEqual(self.games(self.state)[GAME], locked)
+        self.assert_protected()
+
     def test_real_model_revision_restores_four_points_and_survives_same_depth_replay(self):
         before = self.games(self.original)
         selected = api.select_roster(api.csv_rows(self.inputs['roster'][0]),

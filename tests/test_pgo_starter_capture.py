@@ -118,6 +118,24 @@ class StarterCaptureTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.review(draft)
 
+    def test_capture_refuses_stale_roster_and_t60_before_request(self):
+        for stale in (False, True):
+            with self.subTest(stale=stale):
+                if stale:
+                    self.context[2]['captured_at'] = '2026-09-11T18:00:00+00:00'
+                stamp = '2026-09-12T19:00:00+00:00' if stale else self.game['lock_at']
+                draft, fetch = self.capture(times=(stamp, stamp))
+                self.assertFalse(read_json(draft)['successful'])
+                fetch.assert_not_called()
+
+    def test_capture_that_finishes_at_t60_retains_failed_receipt(self):
+        draft, fetch = self.capture(times=('2026-09-13T15:59:59+00:00', self.game['lock_at']))
+        fetch.assert_called_once_with(URL)
+        saved = read_json(draft)
+        self.assertFalse(saved['successful'])
+        self.assertEqual(base64.b64decode(saved['body_base64']), self.real_html)
+        self.assertIn('T-60', saved['error'])
+
     def test_redirect_and_http_error_receipts_retain_exact_observations(self):
         cases = [
             (self.response(status=302, final_url='https://www.atlantafalcons.com/news/other', body=b'redirect'),

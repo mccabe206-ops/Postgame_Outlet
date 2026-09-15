@@ -14,9 +14,9 @@ from urllib.error import HTTPError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from pgo_expected_starters import _announcement, _primary_article, select_player
-from pgo_season import DEFAULT_ROOT, IDENTITY, URLS, canonical, csv_rows, identity, load_current, require, sha, utc
+from pgo_season import DEFAULT_ROOT, IDENTITY, URLS, canonical, completed_week, csv_rows, identity, load_current, require, sha, utc
 from pgo_season_availability import _url
-from pgo_season_rollover import source_bytes
+from pgo_season_rollover import source_bytes, verify_finals
 from pgo_sources import normalize_team
 
 
@@ -87,11 +87,17 @@ def _read_receipt(root, folder, value):
 
 
 def _context(root, game_id):
-    """Load the verified current game and latest saved current-roster bytes."""
+    """Load a current or verified immediate pending game and saved roster bytes."""
     root = Path(root); state = load_current(root)
     require(state is not None, 'No verified current season state')
     games = [game for game in state['schedule'] if game.get('game_id') == game_id]
-    require(len(games) == 1 and games[0]['week'] == state['current_week'], 'Starter game is not uniquely current')
+    current = state['current_week']
+    require(type(current) is int and 1 <= current <= 18 and len(games) == 1
+            and type(games[0]['week']) is int and games[0]['week'] in (current, current+1),
+            'Starter game is not uniquely current or immediately pending')
+    if games[0]['week'] != current:
+        require(completed_week(state['schedule'], state['results']) >= current
+                and not verify_finals(state, root, current), 'Pending starter week requires verified complete finals')
     refs = [ref for ref in state.get('source_captures', []) if ref.get('url') == URLS['roster']]
     require(refs, 'Current state has no saved roster source')
     roster_ref = max(refs, key=lambda ref: utc(ref['captured_at']))
@@ -134,6 +140,9 @@ def capture(url, game_id, team, gsis_id, statement, *, root=DEFAULT_ROOT, fetch=
     error = None
     try:
         require(utc(state_checked_at) <= utc(started), 'Current season state is from the future')
+        _fresh_roster(roster_ref, started)
+        require(utc(started) < utc(game['kickoff'])-timedelta(minutes=60),
+                'Starter capture must finish before T-60')
         _url(url, team, 'team_news')
         response = fetch(url)
         require(isinstance(response, dict) and type(response.get('status')) is int
@@ -147,6 +156,8 @@ def capture(url, game_id, team, gsis_id, statement, *, root=DEFAULT_ROOT, fetch=
     completed = clock()
     if error is None and utc(completed) < utc(started):
         error = 'Starter capture clock moved backwards'
+    if error is None and utc(completed) >= utc(game['kickoff'])-timedelta(minutes=60):
+        error = 'Starter capture must finish before T-60'
     status, final_url = response.get('status'), response.get('final_url')
     if error is None and status != 200:
         error = f'Starter source returned HTTP {status}'
