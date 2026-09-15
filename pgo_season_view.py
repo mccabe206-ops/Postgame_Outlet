@@ -775,8 +775,6 @@ def _accuracy(summary, *, weekly_reviews=None):
             'A correct winner can still come with a poor score estimate. Margin error is how far the predicted winning margin was from the actual margin; '
             'combined-score error is how far the predicted total was from both teams\' final points added together. Lower error is better.</p>'
             + ('<p>Completed weekly reviews:</p>' + _sources(weekly_reviews) if weekly_reviews else '') +
-            '<p><a href="analysis/2026-week1-20260914.html" target="_blank" rel="noopener noreferrer">'
-            'Week 1 review: September 14, 12:57 AM EDT — 15 of 16 games final</a></p>'
             '<dl class="season-freshness">' + ''.join(cards) + '</dl>'
             + f'<p><strong>How the win chances are holding up:</strong> {probability_note}</p>'
             '<p class="season-caption">These are early results, not proof of accuracy. Confidence accounting includes marked late entries; '
@@ -799,7 +797,11 @@ def _accuracy(summary, *, weekly_reviews=None):
             'Sample size alone does not establish calibration.</p></details></details>'
             '<details class="model-update-evidence" data-view-key="accuracy-exclusions"><summary>What is not counted?</summary><ul>'
             + ''.join(exclusions) + '</ul><p>These counts refer to the weekly model\'s saved schedule. '
-            'The source archives retain every original forecast and its timing.</p></details>')
+            'The source archives retain every original forecast and its timing.</p></details>'
+            '<details class="model-update-evidence" data-view-key="accuracy-snapshots"><summary>Earlier snapshots</summary>'
+            '<p>These dated reviews may be incomplete. Use the completed weekly reviews for final results.</p>'
+            '<p><a href="analysis/2026-week1-20260914.html" target="_blank" rel="noopener noreferrer">'
+            'Week 1 partial review: September 14, 12:57 AM EDT — 15 of 16 games final</a></p></details>')
 
 
 def _test_table(key, headings, rows):
