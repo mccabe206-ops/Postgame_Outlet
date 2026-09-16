@@ -23,6 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 PICKS_DIR = os.path.join(DATA, "picks")
 LINE_OVERRIDES = os.path.join(DATA, "line_overrides.json")
+RECORDS_JSON = os.path.join(DATA, "records.json")
 
 SCOREBOARD = ("https://site.api.espn.com/apis/site/v2/sports/football/nfl/"
               "scoreboard?dates={year}&seasontype=2&week={week}")
@@ -605,3 +606,28 @@ def records(view_week, view_year):
         "season_record": season,
         "week_record": {"mine": vw["mine"], "model": vw["model"], "top5": vw["top5"]},
     }
+
+
+def write_records_json(year=None, path=None):
+    """Compute the season records and write a compact PUBLIC JSON the board renders.
+
+    Aggregate W-L-P(-NP) only — no individual pick selections, so Sean's picks stay
+    private while the tallies go public. Model + mine + top-5, each vs opening and
+    closing line, season-to-date. Run this locally (needs the gitignored picks +
+    frozen lines); the committed file is what CI renders. Returns the payload.
+    """
+    if path is None:
+        path = RECORDS_JSON
+    cw, cy = current_week_year()
+    if year is None:
+        year = cy or 2026
+    rec = records(cw or 1, year)
+    payload = {
+        "season_year": year,
+        "through_week": rec["through_week"],
+        "generated": _now().strftime("%Y-%m-%dT%H:%MZ"),
+        "season_record": rec["season_record"],   # mine/model/top5 -> open/close tallies
+    }
+    with open(path, "w") as f:
+        json.dump(payload, f, indent=2)
+    return payload

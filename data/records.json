@@ -1,0 +1,49 @@
+{
+  "season_year": 2026,
+  "through_week": 2,
+  "generated": "2026-09-16T06:12Z",
+  "season_record": {
+    "mine": {
+      "open": {
+        "win": 2,
+        "loss": 3,
+        "push": 0,
+        "np": 0
+      },
+      "close": {
+        "win": 2,
+        "loss": 3,
+        "push": 0,
+        "np": 0
+      }
+    },
+    "model": {
+      "open": {
+        "win": 9,
+        "loss": 6,
+        "push": 0,
+        "np": 1
+      },
+      "close": {
+        "win": 7,
+        "loss": 8,
+        "push": 1,
+        "np": 0
+      }
+    },
+    "top5": {
+      "open": {
+        "win": 2,
+        "loss": 3,
+        "push": 0,
+        "np": 0
+      },
+      "close": {
+        "win": 2,
+        "loss": 3,
+        "push": 0,
+        "np": 0
+      }
+    }
+  }
+}

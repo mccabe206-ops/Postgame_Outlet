@@ -983,6 +983,15 @@ TEMPLATE = """<!DOCTYPE html>
 
       <h3>Honesty &amp; caveats</h3>
       <ul>
+        <li><b>These are just power ratings — a measure of roster strength, not a prediction
+        of who wins a given week.</b> They do <b>not</b> account for weather, travel, or the
+        psychological and motivational edges a team might carry into a particular game
+        (short weeks, revenge spots, must-win situations, letdown or look-ahead games, and
+        the like).</li>
+        <li><b>Don't use them blindly.</b> The ratings are a <em>tool</em>: a clean baseline
+        for how good each roster is, so you can weigh what the numbers say against what an
+        analyst who studies the week actually believes. The gap between the two is where the
+        thinking happens — the ratings inform your read, they don't replace it.</li>
         <li>Teams marked <span class="inj">▲inj</span> had a 2025 finish deflated by an
         injured or benched starter, so they're weighted toward roster talent rather than
         last year's record.</li>
