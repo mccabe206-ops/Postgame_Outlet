@@ -1,6 +1,11 @@
-## Week 1 availability
+## Week 1: vs Atlanta (W 20–13)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Pittsburgh opened 1–0 the way the rating draws it up: the defense won the game and the offense
+did just enough. **T.J. Watt's late pick-six** was the difference in a sluggish 20–13 win over
+an injury-riddled, third-string-quarterback Atlanta team, while **Aaron Rodgers was inefficient**
+and, by his coaches' read, needs more from his receivers (Za'Darius Smith sacked him twice).
+Beating a Cooper-Rush Falcons squad by seven is no statement — but Pittsburgh still covered the
+number, and the formula (elite defense, game-managing quarterback) held, so the rating stays put.
 
 ## The case for a defense-carried team
 
