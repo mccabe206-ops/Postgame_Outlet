@@ -1,6 +1,11 @@
-## Week 1 availability
+## Week 1: at Philadelphia (L 22–24)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Washington lost a two-point road game it nearly stole. Jayden Daniels — playing his first
+regular-season game in 11 months — was rusty (18-of-34, 164, two touchdowns) under heavy
+pressure behind a line still missing Laremy Tunsil, but he drove the Commanders to a late
+touchdown before the tying two-point conversion failed. The defense did its part, sacking
+Jalen Hurts three times. A competitive, shorthanded road effort in a loss — the rating holds,
+with Daniels' rhythm and the Tunsil-less line the things to watch.
 
 ## The case for a QB keeping it afloat
 
