@@ -1,20 +1,43 @@
-## Week 1 availability
+## Week 1: at L.A. Rams (W 27–7, in Melbourne)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. **Alfred Collins will miss the season**, according to Shanahan. George Kittle was limited with an Achilles issue; no final game designation was captured. [September 8 NFL update](https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8). Collins also appears as limited in the practice table; the explicit season-ending announcement governs this note. McCabe's approved grade has no automatic adjustment for this update.
-
-## The case for a top-ten grade
-
-San Francisco grades comfortably above the line — a good quarterback and above-average defense, with an offense the model keeps positive despite a stack of skill-position injuries.
+San Francisco opened the season in Melbourne and dismantled the Rams 27–7. The offense
+hung 379 yards and 27 points on an above-average Rams defense, the defense held Matthew
+Stafford's group to a single touchdown, and — most importantly for the number — the unit
+did it *through* its injuries. This was the game that resolved the offseason question:
+how good is this offense once the bodies show up? Answer: good enough to upgrade with
+confidence.
 
 ## Quarterback
 
-Brock Purdy (+2.5) is an above-average grade — an efficient, well-supported passer who plays up in this scheme.
+Brock Purdy (+2.5 → **+3.0**) played up to the scheme and the win — 3 touchdowns and a
+105.6 rating, efficient and in control. The half-point bump reflects a settled, above-
+average starter running a machine.
 
 ## What moved the number
 
-- **Offense (+0.2):** held slightly above average even through a real injury cluster — **Pearsall on IR, McCaffrey's current injury designation unverified, Kittle working back from an Achilles issue (limited in the captured practice report; final game status pending)** — with Evans and Kirk added. There's +0.5 upside if Kittle is fully healthy. The point: even with the injuries, the model still finds this group slightly above average.
-- **Defense (+0.5):** above average, with Odighizuwa and Greenlaw as the anchors. Greenlaw was limited with an Achilles issue in the [September 8 NFL update](https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-sept-8); no final game designation was captured.
+- **Offense (+0.2 → +1.0):** the biggest move, and a deliberate one. The pre-set
+  "Kittle healthy" trigger fired, and the group produced 27/379 against a real defense
+  **even after losing rookie WR De'Zhaun Stribling** — a left-ankle **deltoid ligament
+  sprain** (non-contact, carted off in Q2; **out at least a month, surgery still
+  possible**) — and with **Ricky Pearsall out for the season** (right-knee/PCL surgery).
+  Christian McCaffrey was fine, dealing only with in-game cramping. We'd been discounting
+  this unit for the nagging injuries; Week 1 showed the offense can carry the load without
+  the depth, so the discount comes off.
+- **Defense (+0.5 → +1.0):** the group played incredibly — Odighizuwa and Greenlaw
+  anchoring a front that held the Rams to 7. A full-point unit on this showing.
+
+## What changed — Week 1 2026
+
+- **Offense +0.2 → +1.0:** produced 27/379 vs. an above-average defense despite Stribling
+  (ankle, ~1 month) going down in Q2 and Pearsall out for the year — the injury discount
+  is removed.
+- **Defense +0.5 → +1.0:** held the Rams to 7; dominant showing up front.
+- **Purdy +2.5 → +3.0:** efficient, 3 TD / 105.6 rating in the win.
+- **New total 3.7 → 5.0.**
 
 ## Bottom line
 
-McCabe's injury discount still leaves the roster in his top ten. The latest availability report appears above; the approved grade is an editorial assessment, with no automatic injury recalculation.
+The offseason worry was whether the injuries would sink this offense. Week 1 answered it:
+the 49ers put up 27 on 379 against a good defense while short-handed at receiver, and the
+defense smothered the Rams. This is a confident top-tier grade now, with Stribling's return
+(~a month out) an upside lever rather than a drag.

@@ -1,6 +1,11 @@
-## Week 1 availability
+## Week 1: vs Washington (W 24–22)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Philadelphia opened 1–0 but had to hang on, 24–22. Jalen Hurts was efficient (14-of-25, 203,
+three touchdowns plus 46 rushing yards, including a 22-yard scramble on 3rd-and-18) and Dallas
+Goedert caught two scores, but the offense had stretches of trouble and Washington's front
+sacked Hurts three times before a late Commanders rally fell a two-point try short. The rating
+holds; the one new concern is up front — **guard Landon Dickerson went to IR (knee)**, a real
+dent to a line that had been a clear strength.
 
 ## The case for above average
 

@@ -1,20 +1,33 @@
-## Week 1 availability
+## Week 1: at Carolina (W 59–37)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Chicago opened with an offensive explosion — 59 points and 552 yards in the highest-scoring
+season opener in NFL history. **Caleb Williams was surgical** (21-of-29, 269, two passing
+touchdowns, plus 65 rushing yards and two more scores), and the ground game buried Carolina:
+**D'Andre Swift 124 and three TDs**, Kyle Monangai 100 (a 61-yard house call), 291 rushing
+yards as a team. The one asterisk is the opponent — Carolina's defense allowed the most points
+in its history — but a performance this complete moves the offense up hard. The flip side:
+the Bears' own defense gave up 37 and 361 passing to a Panthers team missing both tackles.
 
 ## The case for above average
 
-Chicago grades above the line on the strength of a young franchise quarterback, with a skill group the model just marked down on injury concern.
+Chicago grades above the line behind a young franchise quarterback and an offense that just
+announced itself — balanced now by a defense that looks like the soft spot.
 
 ## Quarterback
 
-Caleb Williams (+3.0) is a top-tier ascending grade — the biggest reason the Bears sit above average.
+Caleb Williams (+3.0) is a top-tier ascending grade and the engine of this rating. He held at
+3.0 — already priced as a riser, and the Week 1 clinic (four total touchdowns, full command)
+is exactly the arc the number bet on; the unit around him is where the jump landed.
 
 ## What moved the number
 
-- **Offense (0.0):** trimmed -0.5 with the **WR/RB group banged up** (Odunze, Burden, Swift, Monangai all questionable) — uncertain who's healthy, so the number comes down on concern. The building blocks remain (Odunze, Burden; the Wills/Bradbury line additions), with DJ Moore lost to Buffalo.
-- **Defense (-0.5):** grades just below average.
+- **Offense (0.0 → +1.0):** a full-point jump. 552 yards and 291 on the ground, with Swift
+  and Monangai punishing a defense and Williams in command, is a genuine above-average unit —
+  discounted only slightly for a historically bad Carolina defense.
+- **Defense (−0.5 → −1.0):** cut after allowing 37 points and 361 passing yards to a Panthers
+  offense playing without both starting tackles. The soft spot on the roster.
 
 ## Risk
 
-The offensive cut is health-driven and reversible — if the skill group clears up, this number goes back up. Williams is the long-term reason for optimism.
+The offense looks real, but the rating now leans on it outscoring problems — if the defense
+keeps leaking, this becomes a shootout team. Williams is the long-term reason for optimism.

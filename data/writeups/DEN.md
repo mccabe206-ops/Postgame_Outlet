@@ -1,10 +1,15 @@
-## Week 1 availability
+## Week 1: at Kansas City (L 10–31)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+A disappointing opener — a 31–10 road loss at Kansas City in which the defense, this team's
+calling card, **got run all over** (Kenneth Walker III went for a career high) amid missed
+tackles and penalties, and Bo Nix was poor in his own return from a broken ankle. Losing at
+Kansas City isn't damning on its own, but the run defense getting gashed is a real dent, so the
+defensive grade comes down. The talent is still there; the Week 1 tape wasn't.
 
 ## The case for a balanced riser
 
-Denver grades above the line on the strength of an elite defense and an ascending young quarterback, with an above-average supporting cast.
+Denver still grades above the line on an elite-talent defense and an ascending young
+quarterback — but the defense's Week 1 showing trimmed the number.
 
 ## Quarterback
 
@@ -13,8 +18,13 @@ Bo Nix (0.0) — bumped up from −0.5. A healthy, ascending second-year starter
 ## What moved the number
 
 - **Offense (+0.5):** raised from 0.0. One of the better offensive lines in football (Bolles, Meinerz, Powers, McGlinchey) fronting a Courtland Sutton + Jaylen Waddle receiver duo — an above-average non-QB group.
-- **Defense (+1.7):** trimmed from a full +2.0. The top-end talent genuinely lives in elite territory — **Pat Surtain II (best CB in the league), Bonitto, Zach Allen, Hufanga** — but two things cap the extreme: +2.0 is a stated outlier grade, and **edge rusher Jonathon Cooper is on the Commissioner's Exempt List for an indefinite stretch** (a legal matter, not an injury), which thins the pass-rush rotation behind Bonitto.
+- **Defense (+1.7 → +1.2):** cut a full half-point after Week 1. The top-end talent is still
+  elite — **Pat Surtain II (best CB in the league), Bonitto, Zach Allen, Hufanga** — but the
+  unit got run all over at Kansas City (Walker's career high) with missed tackles, and the
+  pass-rush rotation is already thin with **edge Jonathon Cooper on the Commissioner's Exempt
+  List** (a legal matter, not an injury). Still above the line, but no longer near the extreme.
 
 ## Bottom line
 
-An elite defense and a quarterback trending up. The number would push back toward +2.0 on defense if Cooper's situation resolves and he returns.
+An elite-talent defense that had a bad Week 1 and a quarterback trending up. The number climbs
+back if the run defense tightens and Cooper's situation resolves — but the opener earned the trim.

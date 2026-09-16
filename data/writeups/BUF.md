@@ -1,6 +1,11 @@
-## Week 1 availability
+## Week 1: at Houston (W 36–31)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Buffalo Week 1 report was unavailable in the league overview at this check. The club said September 1 that **Zane Durant is on injured reserve** and will miss at least four games. [Bills update](https://www.buffalobills.com/news/bills-gm-brandon-beane-provides-team-injury-updates-prior-to-week-1-of-2026-season). Current Coleman/Shakir game designations remain unverified.
+Buffalo won a road shootout, 36–31, on another Josh Allen masterpiece — 20-of-29 for 334,
+four total touchdowns and 357 total yards, capped by a game-winning drive as he solved
+Houston's vaunted defense. The caveat is protection: Allen was sacked eight times and hit
+twelve by Danielle Hunter and Jadeveon Clowney, and briefly banged his right throwing hand
+before returning. The rating holds — this is the MVP-level input the number is built on — but
+the line getting overwhelmed by an elite front is the flag to watch.
 
 ## The case near the top
 

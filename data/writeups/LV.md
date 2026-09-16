@@ -1,6 +1,11 @@
-## Week 1 availability
+## Week 1: vs Miami (W 27–13)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Las Vegas never trailed, controlling the game from a 16-play opening drive. The win was
+carried by rookie back **Ashton Jeanty** (102 rushing yards and two receiving touchdowns) —
+proof the offense can function even with Brock Bowers out, which earns back the half-point the
+model had docked for Bowers' absence. Kirk Cousins was a mixed bag: three touchdowns (his
+301st career TD pass) but two interceptions and only 160 yards. A solid home win over a
+fellow bottom-tier team, with Jeanty the reason the offense grade climbs.
 
 ## The case for a QB-capped roster
 
@@ -12,13 +17,15 @@ Kirk Cousins (-2.5) sits at the worst-starter floor. There's a mild argument up:
 
 ## What moved the number
 
-- **Offense (-1.0):** **All-Pro tight end Brock Bowers is out** for the opener after a meniscus trim (surgery Sept 8; expected back in a game or two), and the room behind him is bare — Michael Mayer is in concussion protocol, leaving only a practice-squad elevation (Albert Okwuegbunam). Rookie **Ashton Jeanty** is still a premium RB1 (low ankle sprain, expected to play), but with Bowers gone the passing game leans on a thin, unproven wide receiver corps (Tucker, Nailor, Bech) and a floor-capped Cousins. Star runner, gutted pass game, bottom-tier quarterback — and the hit **may prove even bigger than this -0.5**, since Bowers is the offense's engine and there's no one to absorb his targets.
+- **Offense (-1.0 → -0.5):** raised back after Week 1. **Brock Bowers** missed the opener (meniscus trim Sept 8; expected back in a game or two), but rookie **Ashton Jeanty** showed the unit can move without him — 102 rushing yards and two receiving scores in a 27-point day. That earns back the half-point the model had docked for Bowers' absence; the passing game still leans on a thin receiver corps (Tucker, Nailor, Bech) and a floor-capped Cousins, so it stays below the line. Restores toward neutral further if Bowers returns and the group holds.
 - **Defense (-1.0):** **Maxx Crosby anchors** a respectable front with Malcolm Koonce off the edge and Nakobe Dean and Quay Walker at linebacker. The problem is the back end — a mediocre secondary (Stokes, Porter, Chinn, Taron Johnson) that can be thrown on — which pulls a Crosby-led unit down to below average.
 
 ## Bottom line
 
 Bowers, Jeanty, and Crosby are legitimately good, and this roster is more watchable than its number. But a floor-level quarterback and thin support at receiver and in the secondary keep the whole thing below the line until Cousins proves he's more than a bridge — or Mendoza takes over.
 
-## What changed (Sept 10)
+## What changed — Week 1 2026
 
-Offense -0.5 → -1.0 with Brock Bowers ruled out for Week 1 (meniscus trim, Sept 8; back in a game or two) and Michael Mayer in concussion protocol behind him. This is a short-term, reversible move — restore toward -0.5 when Bowers is cleared. Noted that the true impact could run larger than -0.5, given he's the offense's engine and the depth behind him is bare.
+- **Offense -1.0 → -0.5:** Ashton Jeanty (102 rush, 2 receiving TDs) carried the offense to 27
+  points without Bowers, so the half-point docked pre-Week 1 for Bowers' absence comes back.
+  QB Cousins (-2.5) and defense (-1.0) held. New total -4.5 → -4.0.

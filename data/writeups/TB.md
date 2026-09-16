@@ -1,6 +1,11 @@
-## Week 1 availability
+## Week 1: at Cincinnati (L 27–33)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Tampa Bay lost 27–33 at Cincinnati, but the score is misleading: the Bucs **lost four
+fumbles**, several of which handed the Bengals short fields and points. Once they stopped
+turning it over they moved the ball fine — Bucky Irving racked up 93 scrimmage yards and
+Tampa was within a score late. This grades as a turnover-driven loss, not a talent gap, so
+the rating holds. **CB Jacob Parrish** tweaked his **back** in the second quarter and did
+not return (MRI pending; early word leaned optimistic) — a watch item, not yet a mover.
 
 ## The case for a balanced contender
 
@@ -14,6 +19,12 @@ Baker Mayfield (+2.0) is a solid above-average grade. He's coming off the best s
 
 - **Offense (+1.0):** this is a trenches-and-tempo group. The **offensive line is a genuine strength** — Tristan Wirfs anchors a unit with Goedeke and Mauch — and **Bucky Irving is a healthy, ascending RB1** who makes the run game a weekly problem. The receiver picture is the question: Chris Godwin headlines, but with **Mike Evans gone to San Francisco**, the perimeter now leans on rookie **Emeka Egbuka** (toe, questionable but trending to play) and **Jalen McMillan** (knee, questionable). Elite line plus a real back keep this a strong unit even while the pass-catchers sort themselves out.
 - **Defense (−0.5):** the middle of this defense got lighter — they **lost Lavonte David at linebacker and Haason Reddick off the edge**, and the pass rush now leans on rookie first-rounder **Rueben Bain** (AC/shoulder sprain, expected to play) alongside Anzalone. What keeps it from sliding further is the spine: **Vita Vea and Calijah Kancey** are a disruptive interior, and **Antoine Winfield Jr. and Tykee Smith** are a legitimate safety tandem. Below average, but not soft.
+
+## What changed — Week 1 2026
+
+- **Nothing moved (2.5 held).** The 27–33 loss was driven by four lost fumbles, not by being
+  outplayed — Tampa moved the ball once it protected it. Watching CB Jacob Parrish's back
+  (MRI pending) before any defensive adjustment.
 
 ## Bottom line
 

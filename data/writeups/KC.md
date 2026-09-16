@@ -1,14 +1,24 @@
-## Week 1 availability
+## Week 1: vs Denver (W 31–10)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Kansas City opened with a statement, 31–10 over Denver — and the headline is the return:
+**Patrick Mahomes looked healthy** in his first game back from a torn ACL/LCL, throwing for
+184 yards and two touchdowns and adding a rushing score, unbothered by the knee or the brace.
+He didn't have to be perfect because **Kenneth Walker III ran all over the Broncos** for a
+career-high night. A clean return and a dominant win — enough to start restoring the rust
+haircut on the quarterback grade.
 
 ## The case near the top
 
-Kansas City is a quarterback-carried contender — but the opener comes with a real asterisk, because it's Patrick Mahomes's first game back from a major knee injury.
+Kansas City is a quarterback-carried contender, and Week 1 answered the one open question —
+Mahomes' knee looks fine.
 
 ## Quarterback
 
-Mahomes (+3.5) — trimmed from +4.5. He **tore his ACL and LCL in Week 15 of last season**, missed the final three games, and played no preseason. He's cleared to start Week 1 (Monday night vs. Denver), but this is his **first live action nine months post-surgery**, so the grade carries a return-to-play/rust haircut. Get him a few games back to full speed and this climbs back toward its +4.5 ceiling — he's still the best insurance policy in football.
+Mahomes (+3.5 → +4.0) climbs after a clean, effective return from the torn ACL/LCL that ended
+his 2025 (Week 15). He looked unaffected by the injury or the brace, so the rust haircut comes
+partway off — held at +4.0 rather than the full +4.5 only because it was one 184-yard game.
+Another sharp week or two and this is back to its ceiling; he's still the best insurance policy
+in football.
 
 ## What moved the number
 

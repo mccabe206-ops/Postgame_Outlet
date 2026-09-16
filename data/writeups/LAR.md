@@ -1,20 +1,45 @@
-## Week 1 availability
+## Week 1: at San Francisco (L 7–27, in Melbourne)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. The Rams said September 8 that **Aaron Donald will miss the opener** and McVay expects **Myles Garrett to play**. [Rams update](https://www.therams.com/news/aaron-donald-will-not-play-week-1-2026-49ers-myles-garrett-ready-to-go). The captured practice report lists Alaric Jackson as DNP; final game designations are not supplied. Practice participation alone does not determine availability.
-
-## The case for #1
-
-The Rams top the board — an elite quarterback fronting above-average units on both sides, with a defense reshaped by marquee additions.
+The Rams opened the season in Melbourne and were beaten soundly by a divisional rival,
+7–27. Matthew Stafford was off — overthrowing receivers, including a couple to Puka Nacua,
+and getting stuffed on a fourth-and-goal run — and the offense never got going. The bigger
+blow was on defense: **Myles Garrett went to injured reserve after the game**. We're not
+overreacting to the result given the international travel, but the performance plus the
+Garrett loss move the number.
 
 ## Quarterback
 
-Matthew Stafford (+5.5) is a top-tier grade — veteran precision and arm talent that lift the whole offense.
+Matthew Stafford (+5.5, unchanged) is still a top-tier grade — veteran precision and arm
+talent. Week 1 was a poor one, but it's one game against a good defense on the road in
+Australia, not a reason to move an established elite quarterback.
 
 ## What moved the number
 
-- **Offense (+0.9):** Nacua and Kyren headline an above-average group, but the number is discounted for injuries: the Rams documented **Nacua's psoas soreness on August 13**, and **Alaric Jackson was DNP in the captured Week 1 practice report**. The August report does not establish Nacua's current game status, and no final Jackson designation was captured. [Nacua's preseason update](https://www.therams.com/news/rams-puka-nacua-injury-update-cowboys-joint-practice-psoas). **Fully healthy, this offense grades +1.5** — the current number is an injury-discounted read, not the ceiling.
-- **Defense (+1.2):** a genuinely reshaped unit — **Myles Garrett**, McDuffie, Watson, and **Aaron Donald back** for the season, though the Rams say he will miss the opener. On healthy talent this front is close to elite; it's trimmed toward 1.2 because **Garrett has a knee issue** (McVay expects him to play), and Donald is still ramping up after his layoff. No current formal questionable designation for Kobie Turner was verified. The **healthy ceiling here is ~1.5** as well.
+- **Offense (+0.9, unchanged):** Nacua and Kyren still headline an above-average group; the
+  number remains injury-discounted (Nacua worked back from an August psoas strain; LT Alaric
+  Jackson's status is a watch — camp ankle plus blood-clot management). **Fully healthy this
+  offense grades +1.5** — Week 1 was ugly, but it's held here rather than chased downward.
+- **Defense (+1.2 → +0.2):** a full point down, for two reasons. First, the unit played
+  poorly against San Francisco — though we've tempered that for the Melbourne travel, so it's
+  about a half-point on performance, not more. Second, and the other half-point: **Myles
+  Garrett is out.** He played through knee/lower-leg discomfort in the opener (no tackle, no
+  sack, admitted he wasn't 100%), then landed on **injured reserve for arthroscopic knee
+  surgery — out at least four games, earliest return Week 6 (Oct 18 vs. Arizona)**. Losing a
+  pass rusher of that caliber for a month-plus is the difference between a half-point and a
+  full-point drop. Aaron Donald is still ramping back from his layoff. Other Week 1 dings
+  were all minor and are expected back: **Kam Curl** (ankle soreness, returned), **Nate
+  Landman** (shoulder/thumb), **Davis Allen** (concussion), **Omar Speights** (hip pointer).
+
+## What changed — Week 1 2026
+
+- **Defense +1.2 → +0.2:** ~0.5 for a poor divisional showing (travel-tempered) and ~0.5 for
+  losing Myles Garrett to IR (knee surgery, 4+ weeks).
+- **Offense +0.9 and QB +5.5 held:** one bad road game in Australia; the talent and the
+  healthy ceiling (+1.5 offense) are unchanged.
+- **New total 7.6 → 6.6.**
 
 ## Bottom line
 
-The most complete top-tier profile in the model: elite quarterback, above-average units, and a defense that added real names. The current grade is discounted for early injuries — both the offense (+1.5) and the defense (~+1.5) have a higher healthy ceiling than what's on the board today.
+Still an elite quarterback fronting a talented roster, but the defense takes a real hit with
+Garrett on IR, and the opener showed how much of the ceiling depends on health. The offense's
++1.5 healthy ceiling and Garrett's return around Week 6 are the levers back up.

@@ -1,10 +1,17 @@
-## Week 1 availability
+## Week 1: at L.A. Chargers (W 26–14)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Arizona pulled the biggest upset of Week 1, winning 26–14 at the Chargers as a road underdog
+of roughly nine. **Jacoby Brissett was efficient and in control** (27-of-37, 277 yards, a
+touchdown, no interceptions, a 103.1 rating, getting the ball out quickly), Trey McBride led
+the way, and Mike LaFleur's offense moved it all day. The defense held Herbert to 14 with
+three sacks and a takeaway, and special teams chipped in a blocked punt. The model had Arizona
+too low; this bumps the offense and defense up off the floor — held short of a big move because
+the win got some special-teams and turnover help.
 
-## The case for a bottom-tier grade
+## The case off the floor
 
-Arizona grades near the floor on all three lines — a stopgap quarterback, a skill group missing its backfield, and a defense with no premium punch. There's a real building block or two, but nothing yet that lifts a unit above the line.
+Arizona still grades below the line, but less severely — Week 1 showed the offense and defense
+are better than a bottom-of-the-league read, even with a stopgap quarterback.
 
 ## Quarterback
 
@@ -12,8 +19,14 @@ Jacoby Brissett (-1.5) is a steady, low-end stopgap — parked between a middlin
 
 ## What moved the number
 
-- **Offense (-1.0):** **Marvin Harrison Jr. is the building block** — a true WR1 to grow around, with Michael Wilson and the Kendrick Bourne add filling out the room. What sinks the grade is the backfield: **James Conner and Trey Benson are both on IR**, gutting the position and leaving rookie Jeremiyah Love (himself banged up) and camp bodies to carry the run game. A promising receiver and a hollow backfield behind a stopgap QB nets well below average.
-- **Defense (-1.0):** Budda Baker still headlines the back end and rookie corner Will Johnson (groin — a longshot for Week 1) is a piece for the future, with Walter Nolen, Darius Robinson, and the Billings/Lopez interior adds up front. But there's **no premium pass rush** to change games and the depth is thin, so the unit grades below the line.
+- **Offense (-1.0 → -0.5):** raised after Week 1. **Marvin Harrison Jr. is the building block**
+  and **Trey McBride** is a real weapon, and Brissett ran Mike LaFleur's offense efficiently for
+  277 and a score. The backfield is still thin (**James Conner and Trey Benson on IR**), but the
+  unit clearly moved the ball better than a floor grade implied.
+- **Defense (-1.0 → -0.5):** raised. It held Justin Herbert to 14 with three sacks and a
+  takeaway. There's still **no premium pass rush** and the depth is thin — Budda Baker headlines
+  the back end, with Nolen/Robinson and the Billings/Lopez interior up front — but the Week 1
+  showing (with some special-teams help) earns it off the floor.
 
 ## Bottom line
 
