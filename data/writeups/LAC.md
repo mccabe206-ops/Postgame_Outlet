@@ -1,20 +1,36 @@
-## Week 1 availability
+## Week 1: vs Arizona (L 14–26)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+The Chargers were the biggest upset of Week 1 — a 14–26 home loss to Arizona as roughly
+nine-point favorites. Justin Herbert had a poor day (17-of-27, 209, a touchdown and an
+interception, an 83.7 rating) sacked three times behind a line that looked overwhelmed, and
+the offense never got going. Ladd McConkey was a bright spot (82 yards) before leaving injured.
+It's one game, and Herbert is still an ascending talent — but the number can't stay where it
+was after a home no-show, and the offensive line's day was as alarming as the quarterback's.
 
 ## The case near the top
 
-The Chargers are a top-tier roster on the strength of an elite quarterback and above-average units — though the offensive line took a real hit before the opener.
+The Chargers are still a good roster — a high-end quarterback and an above-average defense —
+but Week 1 pulled the offense back to the pack.
 
 ## Quarterback
 
-Justin Herbert (+4.0) is a top-tier grade — arm talent and efficiency that lift the whole offense.
+Justin Herbert (+4.0 → +3.0) drops a full point. He remains a clearly-above-average passer,
+but a flat home performance (an interception, three sacks, no rhythm) means the model won't
+keep him graded above the tier of Drake Maye and Caleb Williams (both +3.0) or Trevor Lawrence
+(+3.5). This is a measured cut, not an overreaction — one bad game against a team that just
+outplayed him.
 
 ## What moved the number
 
-- **Offense (+0.3):** trimmed from +0.5. The interior line is **compromised**: **center Tyler Biadasz is out for the season** (knee, IR — he was the team's big March signing), and **left tackle Rashawn Slater is working through a knee issue** (questionable, but tracking to play). Ladd McConkey is a rising weapon and rookie **Tre' Harris is healthy** and active, with Njoku at tight end — but protecting Herbert with a patched-up line is the concern that pulls the grade down.
-- **Defense (+0.5):** above average, anchored by Derwin James, with Khalil Mack on the edge and Tomlinson bolstering the interior.
+- **Offense (+0.3 → 0.0):** cut to neutral. The interior line is **compromised** — **center
+  Tyler Biadasz is out for the season** (knee, IR) — and it **looked horrible** in the opener,
+  giving up three sacks and no push. McConkey is a rising weapon (and was hurt Week 1); the
+  talent is fine, but the protection in front of Herbert is the problem.
+- **Defense (+0.5):** held. Above average, anchored by Derwin James, with Khalil Mack on the
+  edge and Tomlinson inside — not the reason for the loss.
 
 ## Bottom line
 
-Elite quarterback and a real defense, with the offensive line as the one soft spot after losing Biadasz for the year. If the line holds together in front of Herbert, this is a genuine contender profile.
+Still a high-end quarterback and a real defense, but the offensive line is a genuine problem
+and Week 1 was a home flop. If the line settles and Herbert bounces back, the number climbs
+again — this is a measured markdown, not a verdict.
