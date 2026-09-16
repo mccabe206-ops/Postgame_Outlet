@@ -1,6 +1,11 @@
-## Week 1 availability
+## Week 1: vs Tampa Bay (W 33–27)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Cincinnati opened at home with a 33–27 win over Tampa Bay. The offense moved the ball well
+but **settled for a lot of field goals** — points left on the board, suggesting it could
+have scored more — and the defense benefited from four Tampa Bay fumbles (variance, not a
+true-talent signal). Burrow threw a pick-six, but Tampa returned a takeaway for a score too,
+so the defensive touchdowns washed out. A win that reads a touch better for the offense than
+the box score's turnover noise implies.
 
 ## The case near the top
 
@@ -12,8 +17,14 @@ Joe Burrow (+5.0) is a top-tier pocket grade — precision and volume that lift 
 
 ## What moved the number
 
-- **Offense (+0.5):** Chase and Higgins are an elite receiver tandem and the identity of this team. Both are banged up but trending the right way for Week 1 — **Ja'Marr Chase** with a minor **knee** hyperextension (practicing, possible game-time decision) and **Tee Higgins** managing a **heel** contusion. The reason the grade isn't higher is up front and in the backfield — but note the **offensive line is better than it's been in recent seasons**: this now profiles as a **slightly-below-average unit rather than a bottom-3-to-5 line**, which is real progress for a team that used to leave Burrow exposed.
+- **Offense (+0.5 → +0.7):** bumped a notch after Week 1. Chase and Higgins are an elite receiver tandem and the identity of this team, and the group moved the ball efficiently against Tampa — the drive-stalling field goals (rather than a lack of movement) are what kept the score from being larger, which reads as a unit that left points on the field. The reason the grade isn't higher still is up front and in the backfield, but the **offensive line is better than it's been in recent seasons** — now a **slightly-below-average unit rather than a bottom-3-to-5 line**. (Chase carried a minor **knee** hyperextension and Higgins a **heel** contusion into the opener; both played.)
 - **Defense (−0.5):** a genuine offseason investment — **Dexter Lawrence, Jonathan Allen, Boye Mafe, and Dugger** — but a historically poor unit that's **still unproven together**, so it grades just below average until the new pieces gel. **Dax Hill** (hamstring) is expected to play, possibly on a snap count; rotational edge **Myles Murphy** is on IR (designated to return) and misses Week 1.
+
+## What changed — Week 1 2026
+
+- **Offense +0.5 → +0.7:** moved the ball well in the opener and settled for field goals
+  (points left on the board); a modest bump, not a result-chase. Defense held at −0.5 — the
+  four forced fumbles are variance, not evidence the retooled unit has arrived.
 
 ## Risk
 

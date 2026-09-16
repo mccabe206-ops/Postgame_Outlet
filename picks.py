@@ -301,6 +301,10 @@ def _line_for_event(e, ratings, hfa, default_hfa, overrides, now):
 
     # opening line (home-relative) if we've stored one — used for the "vs open" record
     market_open = ov.get("market_open")
+    # frozen model line (home-relative) captured at kickoff from the ratings AS THEY
+    # STOOD THEN — grading must use this, not the live (post-hoc adjusted) ratings,
+    # so a week is never graded with hindsight. Absent => fall back to live my_spread.
+    model_spread = ov.get("model_spread")
 
     status = c.get("status", {}).get("type", {})
     final = bool(status.get("completed", False))
@@ -314,7 +318,7 @@ def _line_for_event(e, ratings, hfa, default_hfa, overrides, now):
         "home_score": hs, "away_score": as_, "final": final,
         "my_spread": my_spread, "market": market, "market_details": details,
         "market_source": market_source, "edge": edge, "actual_margin": actual_margin,
-        "market_open": market_open,
+        "market_open": market_open, "model_spread": model_spread,
     }
 
 
@@ -470,7 +474,8 @@ def grade_week(week, year, ratings=None, hfa=None, default_hfa=None):
         am = L["actual_margin"]
         close = L["market"]
         opn = L["market_open"] if L["market_open"] is not None else close
-        my = L["my_spread"]
+        # model line frozen at kickoff (no hindsight); fall back to live only if unfrozen
+        my = L["model_spread"] if L["model_spread"] is not None else L["my_spread"]
         for key, line in (("open", opn), ("close", close)):
             side = _model_side(my, line)
             _record_model(model[key], side, line, am)
@@ -514,11 +519,16 @@ def freeze_week_lines(week, year, overwrite=False):
       1. the live scoreboard odds (present pre-game / near kickoff), then
       2. the per-event summary `pickcenter` (present even AFTER the game is final).
     Because of (2) this works retroactively for completed weeks, not just at
-    kickoff. `overwrite=True` replaces existing entries (e.g. to swap a proxy line
-    for the real one); otherwise frozen lines are left untouched. Sean's own picks
-    still capture their own line at pick time via save_pick. Returns count written.
+    kickoff. It ALSO freezes the model line (`model_spread`) from the ratings as they
+    stand right now, so the blind-model record is graded on the pre-game model line,
+    never on later (hindsight) rating adjustments. `overwrite=True` replaces existing
+    entries (e.g. to swap a proxy line for the real one); otherwise frozen lines are
+    left untouched. Sean's own picks still capture their line at pick time via
+    save_pick. Returns count written.
     """
     now = _now()
+    ratings = load_ratings()
+    hfa, default_hfa = load_hfa()
     payload = fetch_json(SCOREBOARD.format(year=year, week=week))
     raw = {}
     if os.path.exists(LINE_OVERRIDES):
@@ -535,6 +545,13 @@ def freeze_week_lines(week, year, overwrite=False):
             continue
         gid = e.get("id")
         existing = raw.get(gid, {})
+        # freeze the current model line once (never overwrite a frozen one — the
+        # pre-game line must not be rewritten by later rating changes)
+        if existing.get("model_spread") is None:
+            Lm = _line_for_event(e, ratings, hfa, default_hfa, {}, now)
+            if Lm and Lm["my_spread"] is not None:
+                existing["model_spread"] = Lm["my_spread"]
+                raw[gid] = existing
         if existing.get("market") is not None and not overwrite:
             continue
         odds = c.get("odds") or []
