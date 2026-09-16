@@ -1815,6 +1815,68 @@ def parse_args(argv=None):
     return parser.parse_args(argv)
 
 
+def inject_record_block(page):
+    """Insert a public 2026 ATS track-record block into the comparison panel, read
+    from data/records.json (pre-computed locally — CI can't see the private picks).
+    No-op if the file is missing/unreadable or the anchor is absent; idempotent."""
+    try:
+        data = json.loads((HERE / "data" / "records.json").read_text(encoding="utf-8"))
+        sr = data["season_record"]
+    except (OSError, ValueError, KeyError, TypeError):
+        return page
+
+    def fmt(t):
+        if not isinstance(t, dict):
+            return "&mdash;"
+        s = f'{t.get("win", 0)}-{t.get("loss", 0)}'
+        if t.get("push"):
+            s += f'-{t["push"]}'
+        if t.get("np"):
+            s += f' <span class="tr-np">({t["np"]} NP)</span>'
+        return s
+
+    def row(label, key, desc):
+        t = sr.get(key, {}) or {}
+        return (f'<tr><th scope="row">{label}<span class="tr-desc">{desc}</span></th>'
+                f'<td>{fmt(t.get("open", {}))}</td><td>{fmt(t.get("close", {}))}</td></tr>')
+
+    gen = html.escape(str(data.get("generated", ""))[:10])
+    start, end = '<!--track-record-start-->', '<!--track-record-end-->'
+    block = (
+        start +
+        '<style>#panel-comparison .track-record{margin:14px 0 6px;border:1px solid var(--border);'
+        'border-radius:10px;padding:12px 14px;background:var(--row-alt)}'
+        '#panel-comparison .track-record h3{margin:0 0 8px;font-size:15px}'
+        '#panel-comparison .track-record .tr-sub{color:var(--dim);font-weight:400;font-size:13px}'
+        '#panel-comparison .tr-table{border-collapse:collapse;width:100%;max-width:520px}'
+        '#panel-comparison .tr-table th,#panel-comparison .tr-table td{padding:6px 10px;'
+        'border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums}'
+        '#panel-comparison .tr-table thead th{color:var(--dim);font-size:12px;text-transform:uppercase;'
+        'letter-spacing:.04em}'
+        '#panel-comparison .tr-table th[scope=row]{text-align:left;font-weight:600}'
+        '#panel-comparison .tr-desc{display:block;color:var(--dim);font-weight:400;font-size:12px}'
+        '#panel-comparison .tr-np{color:var(--dim)}'
+        '#panel-comparison .tr-fine{color:var(--mut);font-size:12px;margin:10px 0 0;max-width:78ch}</style>'
+        '<div class="track-record">'
+        '<h3>2026 ATS Track Record <span class="tr-sub">&mdash; season to date</span></h3>'
+        '<table class="tr-table"><thead><tr><th></th>'
+        '<th scope="col">vs open</th><th scope="col">vs close</th></tr></thead><tbody>'
+        + row('Blind model', 'model', 'the ratings vs the market, every game')
+        + row('McCabe picks', 'mine', 'the weekly 5-game confidence pool')
+        + row('Top-5 edges', 'top5', "the model's five biggest edges each week")
+        + '</tbody></table>'
+        '<p class="tr-fine">These are power ratings, not predictions. The blind-model line '
+        'bets every game the ratings disagree with the market; NP = no play (no edge). Records '
+        f'are shown against both the opening and closing line. Updated {gen}.</p>'
+        '</div>' + end
+    )
+    page = re.sub(re.escape(start) + '.*?' + re.escape(end), '', page, flags=re.S)
+    for anchor in ('<h2>PGO vs McCabe</h2>', '<h2>PGO v1 Power Ratings</h2>'):
+        if anchor in page:
+            return page.replace(anchor, anchor + '\n' + block, 1)
+    return page
+
+
 def main(argv=None):
     args = parse_args(argv)
     try:
@@ -1873,6 +1935,7 @@ def main(argv=None):
                 )
         preview = add_rating_explanations(preview)
         preview = pgo_current_board.add_current_board(preview)
+        preview = inject_record_block(preview)
         atomic_write_text(output, preview)
     except (csv.Error, KeyError, OSError, TypeError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
