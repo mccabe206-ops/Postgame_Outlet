@@ -1,6 +1,10 @@
-## Week 1 availability
+## Week 1: at Las Vegas (L 13–27)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Miami's rebuild showed its growing pains — a 27–13 loss in which both lines were overmatched
+and the young secondary was picked apart by Kirk Cousins. Malik Willis was pressured all day
+(sacked five times, Maxx Crosby among them) but hung in for 220 yards and a rushing touchdown.
+It graded like the bottom-of-the-board number it is; nothing here argues for a change. (LB
+Ronnie Harrison — hamstring — and S Kyle Louis — knee — left the game.)
 
 ## The case for the bottom of the board
 
