@@ -1,20 +1,39 @@
-## Week 1 availability
+## Week 1: vs N.Y. Jets (L 10–23)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Robert Saleh's Tennessee debut, against his former team, went badly — a 23–10 home loss in
+which the offense managed just 195 yards (55 at halftime) and didn't reach the end zone until
+the fourth quarter. Second-year QB Cam Ward struggled (19-of-32, 140 yards, sacked three
+times, missing open receivers) and **hurt his right shoulder in the first quarter** diving
+for a touchdown, though he stayed in. The line got whipped, the defense made no impact against
+a bottom-tier Jets offense, and the fans booed. This one forced an honest admission: the
+model had Tennessee overrated coming into the season, and Week 1 corrected it downward across
+the board.
 
-## The case for a rookie-QB bet
+## The case, re-rated down
 
-Tennessee grades right around the bottom third — a rookie quarterback the model is willing to price at league-average on upside, with a below-average offense and a middling defense around him.
+Tennessee now grades near the bottom of the league — a big Week 1 recalibration of a team the
+model priced too optimistically in the preseason. The quarterback, the line, and the defense
+all read below the line.
 
 ## Quarterback
 
-Cam Ward (0.0) is the No. 1 overall pick, and 0.0 is an optimistic-but-defensible projection rather than a track record: it's the middling-starter line, generous for a Week 1 rookie behind a shaky front, and it reflects the arm talent and pedigree more than anything he's proven. The honest range skews down (rookie variance, thin protection); the bet is that the ceiling shows up early.
+Cam Ward (0.0 → −1.0) is the 2025 No. 1 overall pick, now in his **second year** — but the
+preseason 0.0 was pedigree, not production. Week 1 was a real step back: pressured, missing
+open throws, no downfield rhythm, and playing through a right-shoulder injury. The grade drops
+a full point to a below-average line; the arm talent still gives it a path back up.
 
 ## What moved the number
 
-- **Offense (-0.5):** the receiver group is actually a strength on paper — **Calvin Ridley** as the vertical WR1, **Wan'Dale Robinson** underneath, and rookie **Carnell Tate** (all trending to play). What sinks it below the line is everything else protecting and complementing the rookie: a weak, rebuilt offensive line (Dan Moore, Skoronski, JC Latham still gelling) and an unremarkable backfield. Weapons don't matter much if the QB is running for his life.
-- **Defense (0.0):** average by design. **Jermaine Johnson II** headlines the edge and the front added bodies in volume ("quantity" more than top-end talent), while the secondary is average-at-best. Starting linebacker **Cedric Gray is in concussion protocol** after a weekend UTV accident and is in doubt for Week 1 — a short-term dent, not a season-long one.
+- **Offense (−0.5 → −1.0):** the receiver group is fine on paper — **Calvin Ridley** vertical,
+  **Wan'Dale Robinson** underneath — but everything around it sank in Week 1: a rebuilt line
+  that got whipped, no run game, and 195 total yards. The weapons don't matter if the pocket
+  never holds.
+- **Defense (0.0 → −1.0):** dropped a full point. The front is built on volume more than
+  top-end talent, and it **made zero impact against a bottom-tier Jets offense** — no
+  consistent pressure, couldn't get off the field. "Average by design" didn't survive contact.
 
 ## Bottom line
 
-This is a rebuild priced on a rookie's ceiling. The receivers give Ward a real chance, but until the offensive line holds up and the defense proves it's more than warm bodies, the floor here is low — the whole rating swings on how fast the No. 1 pick arrives.
+A preseason overrate, corrected. The receivers and Ward's pedigree are the levers back up, but
+until the line holds and the defense shows it can affect a game, this is a bottom-tier rating
+— and Week 1 was the evidence that prompted the drop.
