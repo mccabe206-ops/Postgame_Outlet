@@ -1,20 +1,40 @@
-## Week 1 availability
+## Week 1: vs Green Bay (W 39–22)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Minnesota stormed back from 22–10 down with 29 unanswered — but the game turned on the
+quarterback spot. **Kyler Murray left in the first quarter with a concussion** (a hard, illegal
+hit) and is in protocol, and **Carson Wentz** stepped in and managed it cleanly (12-of-19, 133,
+three touchdowns, no turnovers). Brian Flores' fourth-quarter blitz took over from there,
+forcing the Green Bay turnovers that decided it, while Justin Jefferson went for 92 and two
+scores. With Murray out, Wentz is the quarterback going forward — a downgrade that pulls the QB
+grade to the worst-starter area until Murray clears protocol.
 
 ## The case for an above-average roster
 
-Minnesota grades above the line on the back of a loaded skill group and a scheme-lifted defense, with the quarterback spot the one thing holding the ceiling down.
+Minnesota grades right at the line — a loaded skill group and a scheme-lifted defense, now
+weighed down by a backup quarterback until Murray returns.
 
 ## Quarterback
 
-Kyler Murray (−0.5) sits just below average — and the placement is deliberate. The talent is real: a former No. 1 overall pick, a true dual-threat with a mid-tier-plus arm and game-breaking legs. What keeps him under the line is the durability and week-to-week consistency risk that has followed his career; the rating prices the flashes against the games that get away. A clean, healthy season would make this look low.
+Carson Wentz (−1.0) draws in with Kyler Murray in concussion protocol — roughly a half-point
+below Murray's −0.5. Wentz managed the Week 1 comeback efficiently (three touchdowns, no
+turnovers), but as a stopgap starter he pins the QB grade near the floor. **The grade restores
+to Murray (−0.5) once he clears protocol**; the talent around the position is what keeps the
+team afloat in the meantime.
 
 ## What moved the number
 
 - **Offense (+1.0):** this is a genuine strength. **Justin Jefferson is a top-one-or-two receiver in football**, Jordan Addison is a real WR2, and Jauan Jennings gives the slot a tough, dependable target. The line is anchored at the bookends by Christian Darrisaw and Brian O'Neill. The one soft spot is an unsettled RB1 — but with Jefferson bending coverages, this group plays up regardless of who's carrying it.
 - **Defense (+0.5):** above average, and this is where **Brian Flores' scheme earns its keep** — it has a history of overperforming its raw talent. The back seven carries it: Byron Murphy Jr., Harrison Smith, Josh Metellus, Isaiah Rodgers, and Blake Cashman. The caveat is up front — they **lost their pass rush (Greenard, Za'Darius Allen, Hargrave)** and are leaning on an unproven young line (Ritzie, Rodriguez), which is why +0.5 sits at the generous edge of the grade.
 
+## What changed — Week 1 2026
+
+- **QB Kyler Murray (−0.5) → Carson Wentz (−1.0):** Murray concussed in Q1 (protocol); Wentz is
+  the starter going forward, about a half-point worse. Offense (+1.0) and defense (+0.5) held —
+  the comeback was Flores' blitz and takeaways, not a unit re-rate. New total 1.0 → 0.5.
+  **Restore Murray (−0.5) when he clears.**
+
 ## Bottom line
 
-Jefferson and a Flores defense keep Minnesota comfortably above average; the ceiling is gated by Murray's consistency and a rebuilt pass rush. If the front holds up and Murray stays upright, this is a team that outruns its number.
+Jefferson and a Flores defense keep Minnesota around the line; the ceiling is gated now by a
+backup at quarterback and a rebuilt pass rush. Once Murray is back and if the front holds up,
+this is a team that can outrun its number again.

@@ -1,6 +1,13 @@
-## Week 1 availability
+## Week 1: at Minnesota (L 22–39)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+New season, same script: Green Bay led 22–10 late in the third and then collapsed, outscored
+29–3 the rest of the way in a 39–22 loss. Jordan Love piled up volume (21-of-42, 387 yards,
+two touchdowns, including an 81-yard strike to Christian Watson, who finished with 147 and two
+scores) but **two costly fourth-quarter turnovers** — a strip-sack and a tipped interception,
+both forced by Brian Flores' blitz — flipped the game into short-field Minnesota touchdowns. A
+failed fourth-and-1 sneak was the turning point. The Packers outplayed the Vikings for two-
+thirds of it; this was self-inflicted, not out-talented, so the rating holds — the collapse and
+Love's giveaways are the flag to watch.
 
 ## The case for an ascending team with a delayed defense
 
