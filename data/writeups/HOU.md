@@ -1,6 +1,12 @@
-## Week 1 availability
+## Week 1: vs Buffalo (L 31–36)
 
-Checked September 9, 2026, 10:42–10:46 a.m. ET. A formal Week 1 report was unavailable in the [league overview](https://www.nfl.com/injuries/) at this check. Availability remains unconfirmed; injury comments below are editorial context, not current game designations.
+Houston lost a home shootout, 31–36, and it split along the rating's fault lines. The elite
+defense generated relentless pressure — eight sacks and twelve hits on Josh Allen — but
+couldn't finish, surrendering 36 to an MVP in vintage form (quality of competition, not a
+collapse). The offense hung 31 with David Montgomery a bright spot, but C.J. Stroud struggled
+again, reinforcing the prove-it read. The rating holds: giving up points to peak Allen doesn't
+indict the defense — which validated its identity with the pressure it generated — and Stroud's
+inconsistency is already priced into the low quarterback grade.
 
 ## The case for a defense-led team
 
