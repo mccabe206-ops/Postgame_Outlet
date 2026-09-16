@@ -1,4 +1,3 @@
-import csv
 import hashlib
 import re
 import tempfile
@@ -14,6 +13,7 @@ import snapshot
 ROOT = Path(__file__).resolve().parents[1]
 REFERENCE = ROOT / "research/pgo_opening_night_20260909/mccabe-dashboard-reference.html"
 EXPECTED_REFERENCE_SHA256 = "0703d91894c1bc3c57dc7f19989e4ac231edc18162c41ca56425dbc699182da4"
+OPENING_EDITION = "Week 1 2026 Power Ratings"
 
 
 class McCabeOpeningNightTests(unittest.TestCase):
@@ -22,8 +22,17 @@ class McCabeOpeningNightTests(unittest.TestCase):
         self.assertEqual(len(starters), 32)
         self.assertEqual(len(backups), 18)
         self.assertFalse({row["name"] for row in starters} & {row["name"] for row in backups})
-        tua = next(row for row in starters if row["name"] == "Tua Tagovailoa")
-        self.assertEqual((tua["age"], tua["exp"]), ("28", "6"))
+        with tempfile.TemporaryDirectory() as temp:
+            Path(temp, "ratings.csv").write_text(
+                "team,qb_name,qb_value,age,exp\nAlpha,Starter,1.0,28,6\n", encoding="utf-8")
+            Path(temp, "qb_depth.csv").write_text(
+                "team,qb_name,string,value,age,exp\n"
+                "Alpha,Starter,1,1.0,28,6\nAlpha,Backup,2,-1.0,25,3\n", encoding="utf-8")
+            with patch.object(generate_site, "DATA", temp):
+                starters, backups = generate_site.load_qbs()
+        self.assertEqual([row["name"] for row in starters], ["Starter"])
+        self.assertEqual([row["name"] for row in backups], ["Backup"])
+        self.assertEqual((starters[0]["age"], starters[0]["exp"]), ("28", "6"))
 
     def test_comparison_uses_the_active_config_edition_snapshot(self):
         rows = [{"team": "Alpha", "rating": 1.0}]
@@ -44,7 +53,7 @@ class McCabeOpeningNightTests(unittest.TestCase):
                 metadata = pgo_comparison.load_mccabe_snapshot(path, rows)
         self.assertEqual(metadata["mccabe_edition"], "Week 1 2026 - McCabe Sep 9")
 
-    def test_supplied_grades_and_writeups_are_preserved_exactly(self):
+    def test_opening_snapshot_preserves_supplied_grades_exactly(self):
         source = REFERENCE.read_bytes()
         self.assertEqual(hashlib.sha256(source).hexdigest(), EXPECTED_REFERENCE_SHA256)
         document = source.decode("utf-8")
@@ -62,23 +71,23 @@ class McCabeOpeningNightTests(unittest.TestCase):
         supplied = list(row_pattern.finditer(document))
         self.assertEqual(len(supplied), 32)
 
-        with (ROOT / "data/ratings.csv").open(encoding="utf-8", newline="") as handle:
-            current = {row["team"]: row for row in csv.DictReader(handle)}
-        self.assertEqual(set(current), {match["team"] for match in supplied})
+        saved = snapshot.load_snaps(ROOT / "data/snapshots.json")[OPENING_EDITION]["rows"]
+        archived = {row["team"]: row for row in saved}
+        self.assertEqual(set(archived), {match["team"] for match in supplied})
         for match in supplied:
             team = match["team"]
-            row = current[team]
+            row = archived[team]
             with self.subTest(team=team):
                 self.assertEqual(row["qb_name"], match["qb_name"])
                 for field, source_field in (
-                    ("qb_value", "qb"), ("off_value", "off"), ("def_value", "defense")
+                    ("qb", "qb"), ("off", "off"), ("def", "defense")
                 ):
                     self.assertEqual(f'{float(row[field]):+.1f}', match[source_field])
-                total = sum(float(row[field]) for field in ("qb_value", "off_value", "def_value"))
+                total = sum(float(row[field]) for field in ("qb", "off", "def"))
                 self.assertEqual(f"{total:+.1f}", match["rating"])
 
     def test_generated_board_has_accessible_signed_scale_and_mobile_column_control(self):
-        rows = generate_site.load_teams(generate_site.load_prior())
+        rows = snapshot.load_snaps(ROOT / "data/snapshots.json")[OPENING_EDITION]["rows"]
         document = generate_site.build_html(
             rows,
             {"season": "2026", "edition": "Opening Night 2026", "author": "Sean McCabe"},
