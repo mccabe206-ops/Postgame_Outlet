@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-09-17T23:26:02.982815+00:00",
+  "sources": [
+    {
+      "bytes": 380064,
+      "captured_at": "2026-09-17T23:26:02.558374+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e83f9d1d5b9f27947f9cb3a6390ec4df814cbde97f7ace1ee83810b729996e25",
+      "started_at": "2026-09-17T23:26:02.516475+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 448463,
+      "captured_at": "2026-09-17T23:26:02.689298+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.buffalobills.com/news/",
+      "kind": "team_news",
+      "sha256": "a1994f2bd3497282ce0f42b0d34f7b4e2a2ef866ce2d284bb71917d20ec7aee7",
+      "started_at": "2026-09-17T23:26:02.516931+00:00",
+      "status": 200,
+      "team": "BUF",
+      "url": "https://www.buffalobills.com/news/"
+    },
+    {
+      "bytes": 437066,
+      "captured_at": "2026-09-17T23:26:02.707037+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.detroitlions.com/news/",
+      "kind": "team_news",
+      "sha256": "c2e317eb8a468ea103c13b9e4082dcec5dfbc27e7b5a8d180a2a875b7924a95e",
+      "started_at": "2026-09-17T23:26:02.517281+00:00",
+      "status": 200,
+      "team": "DET",
+      "url": "https://www.detroitlions.com/news/"
+    },
+    {
+      "bytes": 1618363,
+      "captured_at": "2026-09-17T23:26:02.582644+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "a79bfefb310391cbb64d69b43adb6149a78bb445efad978e1b9db49bd20b4f9e",
+      "started_at": "2026-09-17T23:26:02.517643+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 537073,
+      "captured_at": "2026-09-17T23:26:02.863880+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-lions-week-2",
+      "kind": "official_inactives",
+      "sha256": "560a962911535690fbc4826c942bcfaf9dde72064eeec18fd3d246efc68185d8",
+      "started_at": "2026-09-17T23:26:02.831896+00:00",
+      "status": 200,
+      "team": "BUF",
+      "url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-lions-week-2"
+    },
+    {
+      "bytes": 310840,
+      "captured_at": "2026-09-17T23:26:02.860436+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.detroitlions.com/news/inactives-lions-vs-bills-miller-mahogany-rakestraw",
+      "kind": "official_inactives",
+      "sha256": "c69fd027f59a87f155a194e51c28ee86bc1334aa8797d225b41c86be0ce6ec41",
+      "started_at": "2026-09-17T23:26:02.832230+00:00",
+      "status": 200,
+      "team": "DET",
+      "url": "https://www.detroitlions.com/news/inactives-lions-vs-bills-miller-mahogany-rakestraw"
+    },
+    {
+      "bytes": 700049,
+      "captured_at": "2026-09-17T23:26:02.868358+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/week-2-thursday-night-inactives-detroit-lions-at-buffalo-bills",
+      "kind": "official_inactives",
+      "sha256": "d1dcbc54e92a0c7504f75968bc7f8346032e89054db352be65e414fbb8970fe3",
+      "started_at": "2026-09-17T23:26:02.832601+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/week-2-thursday-night-inactives-detroit-lions-at-buffalo-bills"
+    }
+  ]
+}
