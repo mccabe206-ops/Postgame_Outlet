@@ -1,0 +1,247 @@
+{
+  "checked_at": "2026-09-17T17:19:08.142101+00:00",
+  "games": {
+    "2026_02_DET_BUF": {
+      "away": "DET",
+      "blocked_reason": null,
+      "checked_at": "2026-09-17T17:19:08.142101+00:00",
+      "game_id": "2026_02_DET_BUF",
+      "game_type": "REG",
+      "home": "BUF",
+      "kickoff": "2026-09-18T00:15:00+00:00",
+      "lock_at": "2026-09-17T23:15:00+00:00",
+      "qb_gate": "CONDITIONAL",
+      "season": 2026,
+      "summary": "DET: official report VERIFIED_REPORT, final inactives UNKNOWN; BUF: official report VERIFIED_REPORT, final inactives UNKNOWN",
+      "teams": {
+        "BUF": {
+          "expected_qb_gsis_id": "00-0034857",
+          "expected_qb_status": "UNKNOWN",
+          "final_inactives_status": "UNKNOWN",
+          "observations": [
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0037254",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Terrel Bernard",
+              "position": "LB",
+              "practice_status": "Limited Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0039872",
+              "identity_status": "RESOLVED",
+              "injury": "Knee, Groin",
+              "name": "Cole Bishop",
+              "position": "S",
+              "practice_status": "Limited Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "QUESTIONABLE"
+            },
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0034832",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Bradley Chubb",
+              "position": "LB",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0040192",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Jordan Hancock",
+              "position": "CB",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0035537",
+              "identity_status": "RESOLVED",
+              "injury": "Hamstring",
+              "name": "Ty Johnson",
+              "position": "RB",
+              "practice_status": "Limited Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "QUESTIONABLE"
+            },
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0040724",
+              "identity_status": "RESOLVED",
+              "injury": "Knee, Illness",
+              "name": "T.J. Sanders",
+              "position": "DE",
+              "practice_status": "Limited Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "QUESTIONABLE"
+            }
+          ],
+          "report_status": "VERIFIED_REPORT",
+          "source_errors": []
+        },
+        "DET": {
+          "expected_qb_gsis_id": "00-0033106",
+          "expected_qb_status": "UNKNOWN",
+          "final_inactives_status": "UNKNOWN",
+          "observations": [
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0038820",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Christian Izien",
+              "position": "S",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            },
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0039408",
+              "identity_status": "RESOLVED",
+              "injury": "Hip",
+              "name": "Christian Mahogany",
+              "position": "G",
+              "practice_status": "Did Not Participate In Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "OUT"
+            },
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0041439",
+              "identity_status": "RESOLVED",
+              "injury": "Knee",
+              "name": "Blake Miller",
+              "position": "T",
+              "practice_status": "Did Not Participate In Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "OUT"
+            },
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0034384",
+              "identity_status": "RESOLVED",
+              "injury": "Foot",
+              "name": "D.J. Reed",
+              "position": "CB",
+              "practice_status": "Limited Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "QUESTIONABLE"
+            },
+            {
+              "captured_at": "2026-09-17T17:19:07.600285+00:00",
+              "gsis_id": "00-0038936",
+              "identity_status": "RESOLVED",
+              "injury": "",
+              "name": "Juice Scruggs",
+              "position": "G",
+              "practice_status": "Full Participation in Practice",
+              "published_at": null,
+              "source_kind": "official_report",
+              "source_sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+              "source_url": "https://www.nfl.com/injuries/",
+              "status": "NO_GAME_DESIGNATION"
+            }
+          ],
+          "report_status": "VERIFIED_REPORT",
+          "source_errors": []
+        }
+      },
+      "week": 2
+    }
+  },
+  "parser_version": 4,
+  "policy": "Official dated context only. Missing reports or inactive-list names do not establish health. Non-QB numerical adjustments are not applied. Expected quarterback must play.",
+  "purpose": "forecast",
+  "schema_version": 1,
+  "sources": [
+    {
+      "bytes": 372698,
+      "captured_at": "2026-09-17T17:19:07.600285+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "848932831bf43dbbb59a62ecd0e8aa24f31e93d2720afd61a870c47620de69a4",
+      "started_at": "2026-09-17T17:19:07.459542+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 448428,
+      "captured_at": "2026-09-17T17:19:07.605361+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.buffalobills.com/news/",
+      "kind": "team_news",
+      "sha256": "0a64e5bc62fb2a7ab4193d852ca03fb19a6215189cf3e146bc9bd188ecfb5e58",
+      "started_at": "2026-09-17T17:19:07.459936+00:00",
+      "status": 200,
+      "team": "BUF",
+      "url": "https://www.buffalobills.com/news/"
+    },
+    {
+      "bytes": 437226,
+      "captured_at": "2026-09-17T17:19:07.709148+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.detroitlions.com/news/",
+      "kind": "team_news",
+      "sha256": "114c552e61d8778083b77fd5a0b50a591e21dec8c16e6911b4743c67fd75dc9c",
+      "started_at": "2026-09-17T17:19:07.460287+00:00",
+      "status": 200,
+      "team": "DET",
+      "url": "https://www.detroitlions.com/news/"
+    },
+    {
+      "bytes": 1627060,
+      "captured_at": "2026-09-17T17:19:07.947818+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "637be101c28f59669a9986b0ea9309c34f1a35bcbf3acb23891198bd657801ae",
+      "started_at": "2026-09-17T17:19:07.460590+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}
