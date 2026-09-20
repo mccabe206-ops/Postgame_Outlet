@@ -102,9 +102,38 @@ class InactiveV5Tests(unittest.TestCase):
             started_at=META['captured_at'],captured_at=META['captured_at'],status=200,body=RAW))
         result=availability.build_availability(**inputs,sources=sources,checked_at=META['captured_at'])
         teams={t:v for g in result['games'].values() for t,v in g['teams'].items()}
-        for team in ('TB','MIN','CHI','PHI'):
+        for team in ('TB','MIN','CHI','PHI','BAL'):
             self.assertEqual(teams[team]['final_inactives_status'],'VERIFIED_LIST',team)
-        for team,name in [('CAR','Pat Jones'),('HOU','Nate Thomas'),('BAL','Andrew Voorhees'),('TEN','Cor\u2019Dale Flott')]:
+        for team,name in [('CAR','Pat Jones'),('HOU','Nate Thomas'),('TEN','Cor\u2019Dale Flott')]:
             self.assertEqual(teams[team]['final_inactives_status'],'PARTIAL',team)
             self.assertIn(name,[r['name'] for r in teams[team]['observations'] if r['identity_status']=='UNRESOLVED'])
         self.assertEqual(old['parser_version'],4)
+
+    def test_baltimore_category_and_dom_boundaries_keep_period_and_clock_guards(self):
+        base=Path(__file__).resolve().parents[1]/'docs/evidence/season-2026/availability-v2/20260920T154557557012Z'
+        capture=json.loads((base/'capture.json').read_bytes())
+        source=next(s for s in capture['sources'] if s.get('team')=='BAL' and s['kind']=='official_inactives')
+        raw=gzip.decompress((base/source['file']).read_bytes())
+        candidate=game('NO','BAL')
+        def read(payload,version=5):
+            return availability.parse_final_inactives(payload,candidate,'BAL',source['captured_at'],parser_version=version,source_team='BAL',source_url=source['url'])
+        result=read(raw)
+        self.assertEqual(len(result['observations']),6)
+        self.assertIn('Andrew Vorhees',[r['name'] for r in result['observations']])
+        with self.assertRaises(ValueError): read(raw,4)
+        with self.assertRaises(ValueError): read(raw+b'<ul><li>WR Zay Flowers</li></ul>')
+        import re
+        with self.assertRaises(ValueError): read(re.sub(rb'<(/?)li\b',rb'<\1span',raw))
+        text=raw.decode()
+        for script in availability._Page(text.split('<article',1)[0]).scripts:
+            value=json.loads(script)
+            if isinstance(value,dict) and value.get('articleBody'):
+                original=value
+                break
+        else: self.fail('missing article')
+        for changes in [dict(articleSection='News'),dict(headline='Week 1 Ravens Saints Inactives'),
+                        dict(headline='Week 2 Cardinals Seahawks Inactives'),
+                        dict(dateModified='2026-09-20T16:59:00Z')]:
+            changed=dict(original,**changes)
+            payload=text.replace(script,json.dumps(changed)).encode()
+            with self.subTest(changes=changes),self.assertRaises(ValueError): read(payload)

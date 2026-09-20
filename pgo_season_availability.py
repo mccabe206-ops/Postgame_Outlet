@@ -260,10 +260,15 @@ def _parse_final_inactives_v3(raw, game, team, captured_at, source_team, *, vers
     article = articles[0]; headline = article.get('headline','')
     body = html.unescape(article['articleBody']).replace('\\n','\n')
     from pgo_inactive_club import is_player_row, parse_club_body
+    category_inactives = version == 5 and article.get('articleSection') == 'Inactives'
+    seen_items = set()
     for item in list_items:
         item = ' '.join(html.unescape(item).split())
         if is_player_row(item) and item in body:
-            body = body.replace(item,item+'\n',1)
+            if category_inactives and (body.count(item) != 1 or item in seen_items):
+                raise ValueError('Inactive DOM row is not unique in the article')
+            seen_items.add(item)
+            body = body.replace(item,('\n' if category_inactives else '')+item+'\n',1)
     published = _utc(article['datePublished']); modified = _utc(article.get('dateModified',article['datePublished']))
     kickoff, captured = _utc(game['kickoff']), _utc(captured_at)
     lower = kickoff-timedelta(hours=24)
@@ -279,6 +284,10 @@ def _parse_final_inactives_v3(raw, game, team, captured_at, source_team, *, vers
     parts = [part.strip() for part in body.split('\n\n') if part.strip()]
     opening = ' '.join(parts[:3])
     context = headline+' '+opening
+    if category_inactives:
+        if not _matches_matchup(headline,game):
+            raise ValueError('Inactive category headline does not bind the matchup')
+        context += ' Inactives'
     if (not re.search(r'\binactive(?:s)?\b',context,re.I) or not _matches_matchup(context,game)
             or not _matches_period(headline+' '+(parts[0] if parts else ''),game)):
         raise ValueError('Inactive article does not identify this matchup and period')
