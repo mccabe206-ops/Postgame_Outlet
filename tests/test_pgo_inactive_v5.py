@@ -137,3 +137,105 @@ class InactiveV5Tests(unittest.TestCase):
             changed=dict(original,**changes)
             payload=text.replace(script,json.dumps(changed)).encode()
             with self.subTest(changes=changes),self.assertRaises(ValueError): read(payload)
+
+
+class InactiveV6NamesTests(unittest.TestCase):
+    def setUp(self):
+        import pgo_inactive_names as names
+        base=Path(__file__).resolve().parents[1]/'docs/evidence/season-2026/availability-v2/20260920T154557557012Z'
+        capture=json.loads((base/'capture.json').read_bytes())
+        self.inputs=json.loads(gzip.decompress((base/'inputs.json.gz').read_bytes()))
+        self.inputs.update(parser_version=6,purpose='context')
+        self.inputs['context_identity_evidence']=names.capture_evidence(self.inputs['games'])
+        self.sources=[dict(s,body=gzip.decompress((base/s['file']).read_bytes())) if 'file' in s else s for s in capture['sources']]
+        self.sources.append(dict(kind='official_inactives',team=None,url=META['url'],final_url=META['url'],
+            started_at=META['captured_at'],captured_at=META['captured_at'],status=200,body=RAW))
+        self.now='2026-09-20T16:40:00Z'
+
+    def build(self,inputs=None):
+        return availability.build_availability(**(inputs or self.inputs),sources=self.sources,checked_at=self.now)
+
+    def test_three_exact_bindings_complete_lists_with_auditable_provenance(self):
+        result=self.build()
+        self.assertEqual(result['parser_version'],6)
+        teams={t:v for g in result['games'].values() for t,v in g['teams'].items()}
+        for team,gsis in [('CAR','00-0037007'),('HOU','00-0039422'),('TEN','00-0037758')]:
+            self.assertEqual(teams[team]['final_inactives_status'],'VERIFIED_LIST',team)
+            row=next(r for r in teams[team]['observations'] if r.get('identity_binding') and r['source_kind']=='official_inactives')
+            self.assertEqual(row['gsis_id'],gsis)
+            self.assertEqual(len(row['identity_source_sha256']),64)
+            self.assertIn('source_text',row)
+
+    def test_frozen_parsers_forecasts_tampered_evidence_and_rosters_reject(self):
+        import copy
+        cases=[]
+        for version,purpose in [(6,'forecast'),(5,'context')]:
+            case=copy.deepcopy(self.inputs);case.update(parser_version=version,purpose=purpose);cases.append(case)
+        case=copy.deepcopy(self.inputs);case['context_identity_evidence']['car-2026-week2']+='tampered';cases.append(case)
+        case=copy.deepcopy(self.inputs);del case['context_identity_evidence']['hou-2026-week2'];cases.append(case)
+        for field,value in [('position','QB'),('status','CUT'),('full_name','Different Player'),('team','ATL')]:
+            case=copy.deepcopy(self.inputs);next(r for r in case['roster'] if r['gsis_id']=='00-0037007')[field]=value;cases.append(case)
+        case=copy.deepcopy(self.inputs);case['roster'].append(dict(team='CAR',gsis_id='00-9999999',full_name='Pat Jones',position='LB',status='ACT'));cases.append(case)
+        for case in cases:
+            with self.subTest(case=str(case)[:80]),self.assertRaises(ValueError): self.build(case)
+        self.now='2026-09-20T16:04:00Z'
+        with self.assertRaisesRegex(ValueError,'captured after'):self.build()
+
+    def test_alias_row_position_conflict_stays_partial(self):
+        from unittest.mock import patch
+        original=availability.parse_final_inactives
+        def wrong_position(*args,**kwargs):
+            result=original(*args,**kwargs)
+            for row in result['observations']:
+                if row['name']=='Pat Jones':row['position']='RB'
+            return result
+        with patch.object(availability,'parse_final_inactives',side_effect=wrong_position):
+            result=self.build()
+        team=result['games']['2026_02_CAR_ATL']['teams']['CAR']
+        self.assertEqual(team['final_inactives_status'],'PARTIAL')
+        row=next(r for r in team['observations'] if r['name']=='Pat Jones')
+        self.assertEqual(row['identity_status'],'POSITION_CONFLICT')
+        self.assertIsNone(row['gsis_id'])
+
+    def test_bindings_do_not_apply_to_other_games_or_names(self):
+        import pgo_inactive_names as names
+        other=game('CAR','ATL');other.update(game_id='2026_03_CAR_ATL',week=3)
+        self.assertEqual(names.capture_evidence([other]),{})
+        self.assertEqual(names.apply_context_names([other],{}, {'CAR':{},'ATL':{}},{},availability._utc(self.now)),{})
+
+    def test_v6_capture_embeds_evidence_and_replays_without_reading_live_files(self):
+        import tempfile
+        from unittest.mock import patch
+        import pgo_inactive_names as names
+        wanted={'2026_02_CAR_ATL','2026_02_CIN_HOU','2026_02_PHI_TEN'}
+        games=[g for g in self.inputs['games'] if g['game_id'] in wanted]
+        bodies={source['url']:source.get('body',b'<html></html>') for source in self.sources}
+        def fetch(url):
+            raw=(f'<a href="{META["url"]}">NFL Week 2 inactives</a>'.encode() if url==availability.NFL_NEWS_URL
+                 else RAW if url==META['url'] else bodies.get(url,b'<html></html>'))
+            return dict(body=raw,status=200,final_url=url)
+        with tempfile.TemporaryDirectory() as tmp:
+            directory=Path(tmp)/'capture'
+            result=availability.capture_availability(games,self.inputs['roster'],self.inputs['expected_qbs'],directory,
+                purpose='context',now=self.now,fetch=fetch)
+            saved=json.loads(gzip.decompress((directory/'inputs.json.gz').read_bytes()))
+            self.assertEqual(saved['parser_version'],6)
+            self.assertEqual(set(saved['context_identity_evidence']),{'car-2026-week2','hou-2026-week2','ten-2026-week2'})
+            with patch.object(names,'capture_evidence',side_effect=AssertionError('must replay captured evidence')):
+                self.assertEqual(result,availability.load_availability(directory))
+        self.assertEqual(json.loads((names.EVIDENCE_ROOT/'bindings.json').read_text('utf8')),names.BINDINGS)
+
+    def test_unlisted_suffix_is_not_an_authorized_alias(self):
+        from unittest.mock import patch
+        original=availability.parse_final_inactives
+        def suffix(*args,**kwargs):
+            result=original(*args,**kwargs)
+            for row in result['observations']:
+                if row['name']=='Pat Jones':row['name']='Pat Jones Jr'
+            return result
+        with patch.object(availability,'parse_final_inactives',side_effect=suffix):result=self.build()
+        team=result['games']['2026_02_CAR_ATL']['teams']['CAR']
+        self.assertEqual(team['final_inactives_status'],'PARTIAL')
+        row=next(r for r in team['observations'] if r['name']=='Pat Jones Jr')
+        self.assertIsNone(row['gsis_id'])
+        self.assertEqual(row['identity_status'],'UNRESOLVED')

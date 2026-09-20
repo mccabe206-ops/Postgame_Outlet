@@ -1,0 +1,62 @@
+[
+  {
+    "id": "car-2026-week2",
+    "game_id": "2026_02_CAR_ATL",
+    "team": "CAR",
+    "names": [
+      "Pat Jones"
+    ],
+    "canonical_name": "Patrick Jones II",
+    "gsis_id": "00-0037007",
+    "roster_position": "LB",
+    "file": "car-patrick-jones.html.gz",
+    "sha256": "68dc56ece6d7c0a83a888d99fa885a226d047344dac6a2e868debe4fa15e4d3b",
+    "source_url": "https://www.panthers.com/news/week-2-inactives-at-atlanta-pat-jones-out-for-falcons-game-bobby-brown-panthers-falcons",
+    "captured_at": "2026-09-20T15:46:03.327453+00:00",
+    "evidence": "Same official inactive article list says OLB Pat Jones; narrative says Outside linebacker Patrick Jones II, who was questionable with a back injury, was among the inactives for Week 2; full name links exact official Patrick Jones II roster profile.",
+    "source_positions": [
+      "OLB",
+      "LB"
+    ]
+  },
+  {
+    "id": "hou-2026-week2",
+    "game_id": "2026_02_CIN_HOU",
+    "team": "HOU",
+    "names": [
+      "Nate Thomas"
+    ],
+    "canonical_name": "Nathan Thomas",
+    "gsis_id": "00-0039422",
+    "roster_position": "OL",
+    "file": "hou-nathan-thomas.html.gz",
+    "sha256": "7d9ec1e702d4db78178e3e3f3cd62cd387eac341273314e2293a706c0f31b16c",
+    "source_url": "https://www.houstontexans.com/team/players-roster/nathan-thomas/",
+    "captured_at": "2026-09-20T16:14:54.336690+00:00",
+    "evidence": "Same official roster profile /nathan-thomas/: HTML title and roster selector use Nate Thomas; H1 and JSON-LD Person use Nathan Thomas; position T jersey78 matches inactive list T No.78.",
+    "source_positions": [
+      "T",
+      "OT"
+    ]
+  },
+  {
+    "id": "ten-2026-week2",
+    "game_id": "2026_02_PHI_TEN",
+    "team": "TEN",
+    "names": [
+      "Cor’Dale Flott",
+      "Cor'Dale Flott"
+    ],
+    "canonical_name": "Cordale Flott",
+    "gsis_id": "00-0037758",
+    "roster_position": "DB",
+    "file": "ten-cordale-flott.html.gz",
+    "sha256": "8b29ee4fd843aee4569f9c6609a8ecd9aef796fc46bd22ab4d037f6790ffb488",
+    "source_url": "https://www.tennesseetitans.com/team/players-roster/cor-dale-flott/",
+    "captured_at": "2026-09-20T16:15:55.574739+00:00",
+    "evidence": "Same official /cor-dale-flott/ profile H1 and JSON-LD Person name Cordale Flott; biography states Born Cor'Dale Flott on Aug. 24, 2001 in Saraland, Ala.; position CB matches inactive row.",
+    "source_positions": [
+      "CB"
+    ]
+  }
+]
