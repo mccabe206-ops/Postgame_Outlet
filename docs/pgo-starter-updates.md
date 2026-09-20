@@ -29,6 +29,8 @@ python pgo_starter_capture.py review --draft "<capture-sha256>.json"
 
 Review reloads the current matchup and an active roster captured within 24 hours, checks the receipt hash, exact statement and player name, article matchup and week, publication and modification dates, source bytes, redirect status, and all capture/review clocks. A valid review writes the existing immutable `official_starter_announcement` envelope under `source-archive/` and prints a hash-named receipt under `starter-reviews/`. It also pins the current starter configuration hash. Review does not activate the rule.
 
+If the article discusses earlier games, review may add repeatable `--historical-context "Exact full sentence."` arguments. Inspect each sentence as historical context first: it is recorded in the hash-bound decision, must occur exactly once in the primary article, must mention only earlier numbered weeks, and cannot overlap the reviewed starter statement. Headline, starter statement and all unselected text retain the strict week check. No historical context is inferred automatically; without these explicit annotations the original strict check remains.
+
 ## 3. Activate
 
 Activate only the reviewed receipt that was just inspected:

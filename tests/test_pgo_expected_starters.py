@@ -182,6 +182,36 @@ class ExpectedStarterTests(unittest.TestCase):
             value = copy.deepcopy(self.envelope); self.body(value, article); self.save(value)
             with self.subTest(article=article), self.assertRaises(ValueError): self.apply()
 
+    def test_prior_week_performance_does_not_change_reviewed_starter_week(self):
+        self.game.update(game_id='2026_02_PIT_ATL', week=2)
+        self.envelope['decision']['game'].update(game_id=self.game['game_id'], week=2)
+        historical = 'Rush will carry the good the offense showed in Week 1 into Sunday.'
+        article = dict(self.article, articleBody=self.article['articleBody']+' '+historical)
+        self.envelope['decision']['historical_context'] = [historical]
+        self.body(self.envelope, article); self.save()
+        self.assertEqual(self.apply()[0]['ATL'], self.player)
+        for extra in (' This is Week 1.', ' Cooper Rush will start in Week 1.',
+                      ' The offense showed in Week 3 what it can do.'):
+            with self.subTest(extra=extra):
+                self.body(self.envelope, dict(article, articleBody=article['articleBody']+extra)); self.save()
+                with self.assertRaises(ValueError): self.apply()
+        self.body(self.envelope, dict(article, headline='Week 1: Falcons vs. Steelers')); self.save()
+        with self.assertRaises(ValueError): self.apply()
+        for contexts in ([historical, historical], ['showed in Week 1'], ['Not present in Week 1.'],
+                         [self.statement], [historical.replace('Week 1', 'Week 2')], 'not a list', [None]):
+            with self.subTest(contexts=contexts):
+                self.envelope['decision']['historical_context'] = contexts
+                self.body(self.envelope, article); self.save()
+                with self.assertRaises(ValueError): self.apply()
+        for span in (historical.replace('Week 1', 'Week 2'), historical.replace('Week 1', 'Week 3')):
+            with self.subTest(nonhistorical=span):
+                self.envelope['decision']['historical_context'] = [span]
+                self.body(self.envelope, dict(article, articleBody=self.article['articleBody']+' '+span)); self.save()
+                with self.assertRaisesRegex(ValueError, 'only earlier weeks'): self.apply()
+        self.envelope['decision']['historical_context'] = [historical]
+        self.body(self.envelope, dict(article, articleBody=article['articleBody']+' '+historical)); self.save()
+        with self.assertRaisesRegex(ValueError, 'unique full sentence'): self.apply()
+
 
 if __name__ == '__main__':
     unittest.main()
