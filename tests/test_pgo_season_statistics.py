@@ -13,6 +13,7 @@ from unittest.mock import patch
 import pgo_season as season
 import pgo_season_model as model
 import pgo_season_rollover as rollover
+import pgo_expected_starters as starters
 from tests import test_pgo_season_model as fixtures
 from tests import test_pgo_season_boundaries as boundaries
 
@@ -182,6 +183,7 @@ class StatisticsTests(unittest.TestCase):
             if not target.exists(): target.write_bytes(raw)
             return raw, dict(url=url, path=path, sha256=season.sha(raw), bytes=len(raw), captured_at=stamp)
         with ExitStack() as stack:
+            stack.enter_context(patch.object(starters, 'CONFIG', root / 'starter-config.json'))
             stack.enter_context(patch.object(season, 'now', return_value=stamp))
             stack.enter_context(patch.object(season, 'fetch_source', side_effect=fetch))
             stack.enter_context(patch.object(season, 'legacy_models', return_value=[]))
