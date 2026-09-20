@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-09-20T20:39:16.450596+00:00",
+  "sources": [
+    {
+      "bytes": 380035,
+      "captured_at": "2026-09-20T20:39:15.600318+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "443f9c89d37a987bd19aa490eceff32b240e6db730e81ca42d79f876108a7eba",
+      "started_at": "2026-09-20T20:39:15.461018+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 290485,
+      "captured_at": "2026-09-20T20:39:15.736036+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "1230b6b51278a60514fc2673320aa7b2d3137f02005a31754f1667d9c46fb52f",
+      "started_at": "2026-09-20T20:39:15.461326+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 387847,
+      "captured_at": "2026-09-20T20:39:16.004694+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.jaguars.com/news/",
+      "kind": "team_news",
+      "sha256": "044b30d4ebd38d92a51bd1a08aacf249034aacd2218aec4c61b4eb1ce0b63d82",
+      "started_at": "2026-09-20T20:39:15.461679+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/"
+    },
+    {
+      "bytes": 1596874,
+      "captured_at": "2026-09-20T20:39:15.734846+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "199d128685a66304be10d435996eda019a73380840a1045934fd8b089d19bda0",
+      "started_at": "2026-09-20T20:39:15.461985+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 309701,
+      "captured_at": "2026-09-20T20:39:16.237066+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/rb-rj-harvey-among-broncos-inactives-for-week-2-game-vs-jaguars",
+      "kind": "official_inactives",
+      "sha256": "dc2d424d057faeda6ef992a0b92e6d6ac4a808c9e17e99edb4cbf0b5a0b5f82d",
+      "started_at": "2026-09-20T20:39:16.107460+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/rb-rj-harvey-among-broncos-inactives-for-week-2-game-vs-jaguars"
+    },
+    {
+      "bytes": 450511,
+      "captured_at": "2026-09-20T20:39:16.338089+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.jaguars.com/news/in-and-out-2026-week-2-mullens-active",
+      "kind": "official_inactives",
+      "sha256": "fb874556f2e01a4ed6319544d2cc5f848ca2f1c5d66e89bcc2f8943bdd7e693d",
+      "started_at": "2026-09-20T20:39:16.107811+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/in-and-out-2026-week-2-mullens-active"
+    },
+    {
+      "bytes": 911939,
+      "captured_at": "2026-09-20T20:39:16.257479+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "d3fd2281b38fde772ae30a23b0deb76013e7030016500aa80931dc9263ec2786",
+      "started_at": "2026-09-20T20:39:16.108157+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
