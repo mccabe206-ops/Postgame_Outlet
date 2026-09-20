@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-09-20T22:20:35.461156+00:00",
+  "sources": [
+    {
+      "bytes": 380174,
+      "captured_at": "2026-09-20T22:20:35.042158+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "d168db3f634ac354e0156112ba8a5ebe66efce9b8dd4bb7998b73d7afb8681b5",
+      "started_at": "2026-09-20T22:20:34.919133+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 413571,
+      "captured_at": "2026-09-20T22:20:35.085274+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.colts.com/news/",
+      "kind": "team_news",
+      "sha256": "c681319e1d0e515ee5fb1dc6627b6a673879c468aa76cea11c5367eb5efdd395",
+      "started_at": "2026-09-20T22:20:34.919439+00:00",
+      "status": 200,
+      "team": "IND",
+      "url": "https://www.colts.com/news/"
+    },
+    {
+      "bytes": 500054,
+      "captured_at": "2026-09-20T22:20:35.079632+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "1c07284fa8852f2833b4aa0780449d566cc0377372302ecca844edf84ee6e44a",
+      "started_at": "2026-09-20T22:20:34.919691+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 1599746,
+      "captured_at": "2026-09-20T22:20:35.274255+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "b1f1b35218793bedc17fc2804ceadc3c1487abe930476cca52382e731e9cdb40",
+      "started_at": "2026-09-20T22:20:34.919911+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 917472,
+      "captured_at": "2026-09-20T22:20:35.381005+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "34c42afecc1e1f8fd043175e711eef6b29c44451ad42593f780b105eccb14100",
+      "started_at": "2026-09-20T22:20:35.357304+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
