@@ -106,15 +106,26 @@ def assess(state, *, outcomes, run_refresh=True, checked_at=None, refresh_starte
                 add('inactive:' + game['game_id'], game['away'] + ' at ' + game['home'] + ': ' + reason
                     + '. Kickoff ' + utc(game['kickoff']).isoformat() + '.', utc(game['kickoff']) > checked)
         finals = {result['game_id'] for result in state.get('results', [])}
+        availability_pending = False
         for game in games:
             remaining = (utc(game['kickoff']) - checked).total_seconds()
             if game['game_id'] in finals or not 3600 < remaining <= 86400:
                 continue
             observed = (game.get('availability') or {}).get('checked_at')
+            # Collection may precede the 24-hour boundary that rendering crosses.
+            # Defer only an absent first check in this short, successful run; it
+            # cannot clear an existing incident or excuse stale observed evidence.
+            if (observed is None and state['status'] == 'READY' and refresh_started_at
+                    and all(outcomes.get(stage) == 'success' for stage in STAGES)
+                    and utc(refresh_started_at) <= saved <= checked
+                    and (checked - utc(refresh_started_at)).total_seconds() <= 30 * 60
+                    and (utc(game['kickoff']) - utc(refresh_started_at)).total_seconds() > 86400):
+                availability_pending = True
+                continue
             if not observed or not 0 <= (checked - utc(observed)).total_seconds() <= 30 * 60:
                 add('availability:' + game['game_id'], game['away'] + ' at ' + game['home']
                     + ': the pre-lock availability check is missing or more than 30 minutes old.', remaining <= 75 * 60)
-        report['can_resolve'] = (public_ready and not report['conditions'] and all(outcomes.get(stage) == 'success' for stage in STAGES)
+        report['can_resolve'] = (public_ready and not availability_pending and not report['conditions'] and all(outcomes.get(stage) == 'success' for stage in STAGES)
             and bool(refresh_started_at) and utc(refresh_started_at) <= saved <= checked
             and (checked - saved).total_seconds() <= 45 * 60)
     except (ValueError, TypeError, KeyError, AttributeError):

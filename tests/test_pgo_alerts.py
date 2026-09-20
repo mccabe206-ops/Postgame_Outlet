@@ -158,6 +158,41 @@ class AlertTests(unittest.TestCase):
         state.update(status='BLOCKED', blocked_reason='Waiting to publish the next week: new data pending')
         self.assertEqual(self.report(state)['conditions'], [])
 
+    def test_new_24_hour_window_waits_only_for_a_short_successful_inflight_refresh(self):
+        state = self.state()
+        game = state['weeks'][0]['games'][0]
+        game['kickoff'] = '2026-09-14T15:30:00Z'
+        game['availability'].pop('checked_at')
+        before = copy.deepcopy(state)
+        report = self.report(state)
+        self.assertEqual(report['conditions'], [])
+        self.assertFalse(report['can_resolve'])
+        self.assertEqual(state, before)
+        for started, observed, outcome, status in [
+            ('2026-09-13T15:30:00Z', None, 'success', 'READY'),
+            ('2026-09-13T15:31:00Z', None, 'success', 'READY'),
+            ('2026-09-13T15:00:00Z', None, 'success', 'READY'),
+            ('2026-09-13T15:29:00Z', '2026-09-13T14:00:00Z', 'success', 'READY'),
+            ('2026-09-13T15:29:00Z', '2026-09-13T16:00:00Z', 'success', 'READY'),
+            ('2026-09-13T15:29:00Z', 'bad', 'success', 'READY'),
+            ('2026-09-13T15:29:00Z', None, 'failure', 'READY'),
+            ('2026-09-13T15:29:00Z', None, 'success', 'BLOCKED'),
+            (None, None, 'success', 'READY'),
+            ('bad', None, 'success', 'READY'),
+        ]:
+            with self.subTest(started=started, observed=observed, outcome=outcome, status=status):
+                case = copy.deepcopy(state)
+                case['status'] = status
+                if observed is not None:
+                    case['weeks'][0]['games'][0]['availability']['checked_at'] = observed
+                outcomes = dict.fromkeys(alerts.STAGES, 'success')
+                outcomes['refresh'] = outcome
+                report = alerts.assess(case, outcomes=outcomes,
+                    checked_at='2026-09-13T15:31:00Z', refresh_started_at=started,
+                    public_pointer=self.pointer())
+                self.assertTrue({'availability:' + game['game_id'], 'state-unverified'}
+                                & {row['key'] for row in report['conditions']})
+                self.assertFalse(report['can_resolve'])
     def test_stale_future_invalid_state_and_failed_pipeline_cannot_resolve(self):
         state = self.state()
         state['checked_at'] = '2026-09-13T13:00:00Z'
