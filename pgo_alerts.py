@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import time
 import urllib.request
 import uuid
 
@@ -326,9 +327,40 @@ def main():
             state = load_current(args.root)
         except (OSError, ValueError, KeyError, TypeError, ImportError):
             pass
-    report = assess(state, outcomes={stage: getattr(args, stage + '_outcome') for stage in STAGES},
+    outcomes = {stage: getattr(args, stage + '_outcome') for stage in STAGES}
+    public_pointer = fetch_public_pointer() if args.check_public and args.run_refresh != 'false' else NOT_CHECKED
+    report = assess(state, outcomes=outcomes,
                     run_refresh=args.run_refresh != 'false', refresh_started_at=args.refresh_started_at,
-                    public_pointer=fetch_public_pointer() if args.check_public and args.run_refresh != 'false' else NOT_CHECKED)
+                    public_pointer=public_pointer)
+    # Pages builds asynchronously after publication. Confirm an otherwise healthy
+    # run before notifying; never postpone another condition or extend freshness.
+    deadline = time.monotonic() + 90
+    waited = False
+    while (args.check_public and args.run_refresh == 'true'
+           and [row['key'] for row in report['conditions']] == ['public-update']
+           and all(outcomes.get(stage) == 'success' for stage in STAGES)):
+        try:
+            checked, saved = utc(report['checked_at']), utc(report['state_checked_at'])
+            if not (utc(args.refresh_started_at) <= saved <= checked
+                    and (checked - saved).total_seconds() <= 45 * 60):
+                break
+        except (ValueError, TypeError, AttributeError):
+            break
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            break
+        waited = True
+        time.sleep(min(10, remaining))
+        if time.monotonic() >= deadline:
+            break
+        # Each GET retains its existing 20-second bound; one in-flight request
+        # may finish after the 90-second polling deadline.
+        public_pointer = fetch_public_pointer()
+        report = assess(state, outcomes=outcomes, refresh_started_at=args.refresh_started_at,
+                        public_pointer=public_pointer)
+    if waited:
+        report = assess(state, outcomes=outcomes, refresh_started_at=args.refresh_started_at,
+                        public_pointer=public_pointer)
     print(json.dumps(report, indent=2))
     if args.deliver:
         if os.environ.get('GITHUB_REPOSITORY') != REPOSITORY:
