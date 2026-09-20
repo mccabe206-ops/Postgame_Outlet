@@ -470,7 +470,7 @@ class SeasonAvailabilityTests(unittest.TestCase):
             self.assertEqual(calls.count(availability.NFL_NEWS_URL),1);self.assertEqual(calls.count(url),1)
             self.assertEqual(out,availability.load_availability(directory))
             inputs=json.loads(gzip.decompress((directory/'inputs.json.gz').read_bytes()))
-            self.assertEqual((inputs['purpose'],inputs['parser_version']),('context',4))
+            self.assertEqual((inputs['purpose'],inputs['parser_version']),('context',5))
             for team in out['games'][game['game_id']]['teams'].values():
                 self.assertEqual(team['final_inactives_status'],'VERIFIED_LIST')
                 self.assertEqual(team['expected_qb_status'],'UNKNOWN')

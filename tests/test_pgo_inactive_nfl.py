@@ -138,11 +138,11 @@ class NflInactiveTests(unittest.TestCase):
             result=availability.capture_availability([candidate],roster,qbs,directory,
                 now='2026-09-13T15:55:00Z',fetch=fetch)
             self.assertEqual(calls.count(URL),1)
-            self.assertEqual(result['parser_version'],4)
+            self.assertEqual(result['parser_version'],5)
             self.assertEqual(len(result['games'][candidate['game_id']]['teams']['BAL']['observations']),7)
             self.assertEqual(result,availability.load_availability(directory))
             saved=json.loads(gzip.decompress((directory/'inputs.json.gz').read_bytes()))
-            self.assertEqual(saved['parser_version'],4)
+            self.assertEqual(saved['parser_version'],5)
 
 
 if __name__=='__main__': unittest.main()
