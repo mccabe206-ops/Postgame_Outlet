@@ -1,0 +1,137 @@
+{
+  "checked_at": "2026-09-20T19:13:45.698097+00:00",
+  "sources": [
+    {
+      "bytes": 381631,
+      "captured_at": "2026-09-20T19:13:45.270083+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "f00015858c3a07a3afa3114de275fe3c237051e2e3e7dbfda0f800ec16d4f86a",
+      "started_at": "2026-09-20T19:13:45.246208+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 291673,
+      "captured_at": "2026-09-20T19:13:45.370785+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "24cbf8f54957448aab274049c3eecdc43225fd08017866b5221286dc48fb94df",
+      "started_at": "2026-09-20T19:13:45.246445+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 389099,
+      "captured_at": "2026-09-20T19:13:45.353990+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.jaguars.com/news/",
+      "kind": "team_news",
+      "sha256": "e16636dcddabb1a6bbe8b56abdb900e35909b53ebfe385d510c53c677266b05f",
+      "started_at": "2026-09-20T19:13:45.246702+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/"
+    },
+    {
+      "bytes": 392172,
+      "captured_at": "2026-09-20T19:13:45.297140+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.chargers.com/news/",
+      "kind": "team_news",
+      "sha256": "b270d2defe9b6a31b940e2bcb641e00ae9eabdf724acd90b4d6029dd33ad9060",
+      "started_at": "2026-09-20T19:13:45.246947+00:00",
+      "status": 200,
+      "team": "LAC",
+      "url": "https://www.chargers.com/news/"
+    },
+    {
+      "bytes": 641305,
+      "captured_at": "2026-09-20T19:13:45.378150+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.raiders.com/news/",
+      "kind": "team_news",
+      "sha256": "af36ef30df7e5412f3503f690fe20ee3043e365279b42b4699888f36ad881701",
+      "started_at": "2026-09-20T19:13:45.270108+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/"
+    },
+    {
+      "bytes": 1603703,
+      "captured_at": "2026-09-20T19:13:45.346596+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "9e0c9fcea714062b9cf98d262338c63c3d6733a38c2fcccc4dc2fb8da5601dac",
+      "started_at": "2026-09-20T19:13:45.297162+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 310993,
+      "captured_at": "2026-09-20T19:13:45.528422+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/rb-rj-harvey-among-broncos-inactives-for-week-2-game-vs-jaguars",
+      "kind": "official_inactives",
+      "sha256": "155de0fb2eec4e33934605fa08e20aca724b571548a8bea0348e44646415a164",
+      "started_at": "2026-09-20T19:13:45.502725+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/rb-rj-harvey-among-broncos-inactives-for-week-2-game-vs-jaguars"
+    },
+    {
+      "bytes": 451512,
+      "captured_at": "2026-09-20T19:13:45.534149+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.jaguars.com/news/in-and-out-2026-week-2-mullens-active",
+      "kind": "official_inactives",
+      "sha256": "17b8e7cfaafc49d22aed631549f57a2f2689e00e73f920361d0c0541a879c14e",
+      "started_at": "2026-09-20T19:13:45.502962+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/in-and-out-2026-week-2-mullens-active"
+    },
+    {
+      "bytes": 314445,
+      "captured_at": "2026-09-20T19:13:45.536506+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.chargers.com/news/raiders-inactives-ladd-mcconkey-fantasy-week-2",
+      "kind": "official_inactives",
+      "sha256": "9b26e2e6245099a49bf40a507eaef99415de51b5961f138453b673fc4f5d1353",
+      "started_at": "2026-09-20T19:13:45.503243+00:00",
+      "status": 200,
+      "team": "LAC",
+      "url": "https://www.chargers.com/news/raiders-inactives-ladd-mcconkey-fantasy-week-2"
+    },
+    {
+      "bytes": 336119,
+      "captured_at": "2026-09-20T19:13:45.534099+00:00",
+      "file": "raw/009.html.gz",
+      "final_url": "https://www.raiders.com/news/las-vegas-raiders-week-2-inactives-vs-los-angeles-chargers-092026",
+      "kind": "official_inactives",
+      "sha256": "8ccd4624b51d8817a5cf0b10bf6360aa843c08811578145153f07e978f805fc4",
+      "started_at": "2026-09-20T19:13:45.503482+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/las-vegas-raiders-week-2-inactives-vs-los-angeles-chargers-092026"
+    },
+    {
+      "bytes": 914325,
+      "captured_at": "2026-09-20T19:13:45.563395+00:00",
+      "file": "raw/010.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "fce98b3eaf7ff33eb4c0104135321da374e79089ece3de1965fbcd2e5ec8e291",
+      "started_at": "2026-09-20T19:13:45.528452+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
