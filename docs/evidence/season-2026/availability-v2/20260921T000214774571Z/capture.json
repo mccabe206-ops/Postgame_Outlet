@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-09-21T00:02:15.601883+00:00",
+  "sources": [
+    {
+      "bytes": 380158,
+      "captured_at": "2026-09-21T00:02:14.956388+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "6720772f4b26988fea4c042e0d9d81d561ed0b3f536fdc20812f59d556124bd8",
+      "started_at": "2026-09-21T00:02:14.784438+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 413690,
+      "captured_at": "2026-09-21T00:02:15.000121+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.colts.com/news/",
+      "kind": "team_news",
+      "sha256": "d2e820d2f64afdc154d31dfa5e441364660ff9836a26839357eaa9146db6cf29",
+      "started_at": "2026-09-21T00:02:14.784826+00:00",
+      "status": 200,
+      "team": "IND",
+      "url": "https://www.colts.com/news/"
+    },
+    {
+      "bytes": 500296,
+      "captured_at": "2026-09-21T00:02:15.032149+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "124e461caff13de08ac8f7f078a21c48a4578a1676d979658da6756ca135345d",
+      "started_at": "2026-09-21T00:02:14.785238+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 1598609,
+      "captured_at": "2026-09-21T00:02:15.206203+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "c96169efd84f1f8f603e1aee91d74351fcac613a09dc96c616a7e0504aad03c4",
+      "started_at": "2026-09-21T00:02:14.785547+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 311379,
+      "captured_at": "2026-09-21T00:02:15.479375+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.colts.com/news/colts-announce-6-inactive-players-for-week-2-game-vs-kansas-city-chiefs",
+      "kind": "official_inactives",
+      "sha256": "f2769db3a5c75c512cfc940de0cfaf7209110ede6b14a036d3607a69ac9cd767",
+      "started_at": "2026-09-21T00:02:15.326388+00:00",
+      "status": 200,
+      "team": "IND",
+      "url": "https://www.colts.com/news/colts-announce-6-inactive-players-for-week-2-game-vs-kansas-city-chiefs"
+    },
+    {
+      "bytes": 480703,
+      "captured_at": "2026-09-21T00:02:15.478734+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.chiefs.com/news/week-2-inactive-players-colts-vs-chiefs",
+      "kind": "official_inactives",
+      "sha256": "979979cd8dfdc4f0403d18b54eb8d1e4ab478b3ee14e363e70c2520c53242564",
+      "started_at": "2026-09-21T00:02:15.326702+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/week-2-inactive-players-colts-vs-chiefs"
+    },
+    {
+      "bytes": 920935,
+      "captured_at": "2026-09-21T00:02:15.483289+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "969c204db0c22a8482c18d18bad0ae9a6ed45f054f306aeb6e0e09cca7678a99",
+      "started_at": "2026-09-21T00:02:15.327086+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
