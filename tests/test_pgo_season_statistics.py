@@ -93,6 +93,49 @@ class StatisticsTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             model.partition_player_rows(args['team_rows'], args['qb_rows'], args['completed_games'])
 
+    def safety_inputs(self):
+        args = self.inputs()
+        for row in args['team_rows'] + args['qb_rows']:
+            row['def_safeties'] = 0
+        args['qb_rows'][-1]['def_safeties'] = 1
+        next(r for r in args['team_rows'] if r['team'] == 'NE')['def_safeties'] = 1
+        return args
+
+    def test_reconciled_uncredited_safety_is_evidence_only_and_replays(self):
+        args = self.safety_inputs(); before = copy.deepcopy(args)
+        reference = model.build_week(**{**args, 'qb_rows': args['qb_rows'][:-1]})
+        actual = model.build_week(**args)
+        receipts = actual.pop('unattributed_penalties')
+        self.assertEqual(actual, reference)
+        self.assertEqual(args, before)
+        self.assertEqual(receipts[0]['schema_version'], 2)
+        self.assertEqual(receipts[0]['unattributed_totals']['def_safeties'], 1)
+        residuals = {r['team']: r for r in receipts[0]['team_residuals']}
+        self.assertEqual(residuals['SEA']['def_safeties'], 0)
+        self.assertEqual(residuals['NE']['def_safeties'], 1)
+        self.verify(args, receipts)
+        altered = copy.deepcopy(receipts)
+        altered[0]['unattributed_totals']['def_safeties'] = 2
+        with self.assertRaisesRegex(ValueError, 'receipt'):
+            self.verify(args, altered)
+
+    def test_uncredited_safety_requires_complete_integer_reconciliation(self):
+        for where, field, value in [('pool', 'def_safeties', v) for v in (-1, .5, '', None, True, 'nan', 2)] + [
+                ('team', 'def_safeties', v) for v in (-1, .5, '', None, True, 'nan', 0)] + [
+                ('player', 'def_safeties', v) for v in (-1, .5, '', None, True, 'nan', 1)] + [
+                ('pool', 'def_sacks', 1), ('pool', 'new_production_field', 1)]:
+            args = self.safety_inputs()
+            row = (args['qb_rows'][-1] if where == 'pool' else
+                   next(r for r in args['team_rows'] if r['team'] == 'NE') if where == 'team' else
+                   next(r for r in args['qb_rows'] if r['team'] == 'SEA' and r['player_id']))
+            row[field] = value
+            with self.subTest(where=where, field=field, value=value), self.assertRaises(ValueError):
+                model.partition_player_rows(args['team_rows'], args['qb_rows'], args['completed_games'])
+        for where in ('team_rows', 'qb_rows'):
+            args = self.safety_inputs(); del args[where][0]['def_safeties']
+            with self.subTest(missing=where), self.assertRaises(ValueError):
+                model.partition_player_rows(args['team_rows'], args['qb_rows'], args['completed_games'])
+
     def test_missing_extra_duplicate_and_unreconciled_records_fail(self):
         for change in ('missing_team', 'extra_team', 'missing_players', 'duplicate_team',
                        'duplicate_player', 'duplicate_pool', 'changed_pool', 'wrong_player_team'):
