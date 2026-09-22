@@ -43,7 +43,7 @@ def is_player_row(text):
     return isinstance(text,str) and _row(text) is not None
 
 
-def parse_club_body(body, headline, source_team, team, game):
+def parse_club_body(body, headline, source_team, team, game, *, version=3):
     """Return one complete explicit club list, or reject unsupported/ambiguous text.
 
     This supplies rows only. The caller must bind the official club source,
@@ -84,6 +84,7 @@ def parse_club_body(body, headline, source_team, team, game):
             if (re.search(r'\b(?:elevated|practice squad|download)\b',line,re.I)
                     or re.match(r"\\?Editor's Note:",line,re.I)
                     or re.search(r'\b(?:was ruled out|are out due to injury)\b',line,re.I)
+                    or (version == 5 and any(line == r['name'].split()[-1]+' is out due to injury.' for r in rows))
                     or (line.endswith(('.', '!', '?')) and ',' in line
                         and re.search(r'\b(?:who|was|is|are|will|has|have)\b',line))):
                 break

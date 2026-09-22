@@ -1360,14 +1360,16 @@ def inject_fantasy_preview(existing_html, panel_html):
     panel_class = '<section class="panel" id="panel-comparison"'
     panel_label = 'aria-labelledby="tab-comparison" hidden>'
     from pgo_model_updates import STYLE as model_update_style
-    model_style_count = existing_html.count(model_update_style)
+    styles = (model_update_style, TRACK_RECORD_STYLE)
+    style_counts = [existing_html.count(style) for style in styles]
     markers = ("</body>", COMPARISON_TAB, comparison_panel)
     if (
         any(existing_html.count(marker) != 1 for marker in markers)
-        or model_style_count > 1
-        or comparison_panel.count(model_update_style) != model_style_count
-        or existing_html.count("</style>") != 1 + model_style_count
-        or (model_style_count and existing_html.index(model_update_style) < existing_html.index("</style>"))
+        or any(count > 1 or comparison_panel.count(style) != count
+               or (count and existing_html.index(style) < existing_html.index("</style>"))
+               for style, count in zip(styles, style_counts))
+        or existing_html.count("</style>") != 1 + sum(style_counts)
+        or len(re.findall(r"<style\b", existing_html, re.I)) != 1 + sum(style_counts)
         or existing_html.count(FANTASY_AVAILABILITY_CSS) != 0
         or comparison_panel.count(panel_class) != 1
         or comparison_panel.count(panel_label) != 1
@@ -1815,6 +1817,23 @@ def parse_args(argv=None):
     return parser.parse_args(argv)
 
 
+TRACK_RECORD_STYLE = (
+    '<style>#panel-comparison .track-record{margin:14px 0 6px;border:1px solid var(--border);'
+    'border-radius:10px;padding:12px 14px;background:var(--row-alt)}'
+    '#panel-comparison .track-record h3{margin:0 0 8px;font-size:15px}'
+    '#panel-comparison .track-record .tr-sub{color:var(--dim);font-weight:400;font-size:13px}'
+    '#panel-comparison .tr-table{border-collapse:collapse;width:100%;max-width:520px}'
+    '#panel-comparison .tr-table th,#panel-comparison .tr-table td{padding:6px 10px;'
+    'border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums}'
+    '#panel-comparison .tr-table thead th{color:var(--dim);font-size:12px;text-transform:uppercase;'
+    'letter-spacing:.04em}'
+    '#panel-comparison .tr-table th[scope=row]{text-align:left;font-weight:600}'
+    '#panel-comparison .tr-desc{display:block;color:var(--dim);font-weight:400;font-size:12px}'
+    '#panel-comparison .tr-np{color:var(--dim)}'
+    '#panel-comparison .tr-fine{color:var(--mut);font-size:12px;margin:10px 0 0;max-width:78ch}</style>'
+)
+
+
 def inject_record_block(page):
     """Insert a public 2026 ATS track-record block into the comparison panel, read
     from data/records.json (pre-computed locally — CI can't see the private picks).
@@ -1843,20 +1862,7 @@ def inject_record_block(page):
     gen = html.escape(str(data.get("generated", ""))[:10])
     start, end = '<!--track-record-start-->', '<!--track-record-end-->'
     block = (
-        start +
-        '<style>#panel-comparison .track-record{margin:14px 0 6px;border:1px solid var(--border);'
-        'border-radius:10px;padding:12px 14px;background:var(--row-alt)}'
-        '#panel-comparison .track-record h3{margin:0 0 8px;font-size:15px}'
-        '#panel-comparison .track-record .tr-sub{color:var(--dim);font-weight:400;font-size:13px}'
-        '#panel-comparison .tr-table{border-collapse:collapse;width:100%;max-width:520px}'
-        '#panel-comparison .tr-table th,#panel-comparison .tr-table td{padding:6px 10px;'
-        'border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums}'
-        '#panel-comparison .tr-table thead th{color:var(--dim);font-size:12px;text-transform:uppercase;'
-        'letter-spacing:.04em}'
-        '#panel-comparison .tr-table th[scope=row]{text-align:left;font-weight:600}'
-        '#panel-comparison .tr-desc{display:block;color:var(--dim);font-weight:400;font-size:12px}'
-        '#panel-comparison .tr-np{color:var(--dim)}'
-        '#panel-comparison .tr-fine{color:var(--mut);font-size:12px;margin:10px 0 0;max-width:78ch}</style>'
+        start + TRACK_RECORD_STYLE +
         '<div class="track-record">'
         '<h3>2026 ATS Track Record <span class="tr-sub">&mdash; season to date</span></h3>'
         '<table class="tr-table"><thead><tr><th></th>'

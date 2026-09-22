@@ -2,6 +2,7 @@ import copy
 import io
 import json
 import unittest
+from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 
 import pgo_alerts as alerts
@@ -9,6 +10,31 @@ from tests import test_pgo_season_boundaries as fixtures
 
 
 class AlertTests(unittest.TestCase):
+    def test_publication_completion_is_rechecked_without_hiding_persistent_staleness(self):
+        for recovers in (True, False):
+            with self.subTest(recovers=recovers):
+                elapsed = [0]
+                fetches = []
+                def fetch():
+                    fetches.append(elapsed[0])
+                    return self.pointer() if recovers and elapsed[0] >= 40 else self.pointer('2026-09-13T14:00:00Z')
+                def sleep(seconds):
+                    elapsed[0] += seconds
+                argv = ['pgo_alerts.py', '--check-public', '--refresh-started-at', '2026-09-13T15:29:00Z']
+                for stage in alerts.STAGES:
+                    argv += ['--' + stage + '-outcome', 'success']
+                with patch('sys.argv', argv), patch.object(alerts, 'load_current', return_value=self.state()), \
+                     patch.object(alerts, 'fetch_public_pointer', side_effect=fetch), \
+                     patch.object(alerts, 'now', side_effect=lambda: (datetime(2026, 9, 13, 15, 31, tzinfo=timezone.utc) + timedelta(seconds=elapsed[0])).isoformat()), \
+                     patch('time.monotonic', side_effect=lambda: elapsed[0]), \
+                     patch('time.sleep', side_effect=sleep), patch('builtins.print') as printed:
+                    alerts.main()
+                report = json.loads(printed.call_args.args[0])
+                self.assertGreater(len(fetches), 1)
+                self.assertLessEqual(elapsed[0], 90)
+                self.assertEqual([row['key'] for row in report['conditions']], [] if recovers else ['public-update'])
+                self.assertEqual(report['can_resolve'], recovers)
+
     def test_missing_dependency_keeps_safe_failure_notification_reachable(self):
         with patch('sys.argv', ['pgo_alerts.py', '--deliver', '--verify-outcome', 'failure',
                                '--refresh-outcome', 'skipped', '--render-outcome', 'skipped',
@@ -23,6 +49,72 @@ class AlertTests(unittest.TestCase):
         self.assertFalse(report['can_resolve'])
         self.assertEqual({row['key'] for row in report['conditions']}, {'failed-verify', 'state-unverified'})
         self.assertNotIn('private dependency detail', str(printed.call_args_list))
+
+    def test_publication_recheck_never_delays_other_conditions_or_unbound_refreshes(self):
+        for case in ('failure', 'other-condition', 'old-state', 'bad-start', 'future-start', 'no-public', 'skip'):
+            with self.subTest(case=case):
+                state = self.state()
+                argv = ['pgo_alerts.py', '--refresh-started-at',
+                        'bad' if case == 'bad-start' else '2026-09-13T15:32:00Z' if case == 'future-start' else '2026-09-13T15:29:00Z']
+                if case != 'no-public':
+                    argv += ['--check-public']
+                if case == 'skip':
+                    argv += ['--run-refresh', 'false']
+                if case == 'other-condition':
+                    state['ats'] = {'status': 'BLOCKED'}
+                if case == 'old-state':
+                    state['checked_at'] = '2026-09-13T14:00:00Z'
+                for stage in alerts.STAGES:
+                    argv += ['--' + stage + '-outcome', 'failure' if case == 'failure' and stage == 'publish' else 'success']
+                with patch('sys.argv', argv), patch.object(alerts, 'load_current', return_value=state), \
+                     patch.object(alerts, 'fetch_public_pointer', return_value=self.pointer('2026-09-13T14:00:00Z')) as fetch, \
+                     patch.object(alerts, 'now', return_value='2026-09-13T15:31:00Z'), \
+                     patch('time.sleep') as sleep, patch('builtins.print'):
+                    alerts.main()
+                sleep.assert_not_called()
+                self.assertLessEqual(fetch.call_count, 1)
+
+    def test_publication_recheck_stops_immediately_when_inactive_alert_becomes_urgent(self):
+        state = self.state()
+        state['checked_at'] = '2026-09-13T15:44:00Z'
+        state['weeks'][0]['games'][0]['availability']['checked_at'] = state['checked_at']
+        elapsed = [0]
+        argv = ['pgo_alerts.py', '--check-public', '--refresh-started-at', '2026-09-13T15:43:00Z']
+        for stage in alerts.STAGES:
+            argv += ['--' + stage + '-outcome', 'success']
+        with patch('sys.argv', argv), patch.object(alerts, 'load_current', return_value=state), \
+             patch.object(alerts, 'fetch_public_pointer', return_value=self.pointer('2026-09-13T14:00:00Z')) as fetch, \
+             patch.object(alerts, 'now', side_effect=lambda: (datetime(2026, 9, 13, 15, 44, 55, tzinfo=timezone.utc) + timedelta(seconds=elapsed[0])).isoformat()), \
+             patch('time.monotonic', side_effect=lambda: elapsed[0]), \
+             patch('time.sleep', side_effect=lambda seconds: elapsed.__setitem__(0, elapsed[0] + seconds)), \
+             patch('builtins.print') as printed:
+            alerts.main()
+        report = json.loads(printed.call_args.args[0])
+        self.assertEqual(fetch.call_count, 2)
+        self.assertEqual(elapsed[0], 10)
+        self.assertTrue(any(row['urgent'] for row in report['conditions']))
+        self.assertFalse(report['can_resolve'])
+
+    def test_publication_deadline_reassesses_urgency_without_an_extra_get(self):
+        state = self.state()
+        state['checked_at'] = '2026-09-13T15:43:00Z'
+        state['weeks'][0]['games'][0]['availability']['checked_at'] = state['checked_at']
+        elapsed = [0]
+        argv = ['pgo_alerts.py', '--check-public', '--refresh-started-at', '2026-09-13T15:42:00Z']
+        for stage in alerts.STAGES:
+            argv += ['--' + stage + '-outcome', 'success']
+        with patch('sys.argv', argv), patch.object(alerts, 'load_current', return_value=state), \
+             patch.object(alerts, 'fetch_public_pointer', return_value=self.pointer('2026-09-13T14:00:00Z')) as fetch, \
+             patch.object(alerts, 'now', side_effect=lambda: (datetime(2026, 9, 13, 15, 43, 35, tzinfo=timezone.utc) + timedelta(seconds=elapsed[0])).isoformat()), \
+             patch('time.monotonic', side_effect=lambda: elapsed[0]), \
+             patch('time.sleep', side_effect=lambda seconds: elapsed.__setitem__(0, elapsed[0] + seconds)), \
+             patch('builtins.print') as printed:
+            alerts.main()
+        report = json.loads(printed.call_args.args[0])
+        self.assertEqual(fetch.call_count, 9)
+        self.assertEqual(elapsed[0], 90)
+        self.assertEqual(report['checked_at'], '2026-09-13T15:45:05+00:00')
+        self.assertTrue(any(row['urgent'] for row in report['conditions']))
 
     def state(self):
         fixture = fixtures.SeasonBoundaryTests()
@@ -158,6 +250,41 @@ class AlertTests(unittest.TestCase):
         state.update(status='BLOCKED', blocked_reason='Waiting to publish the next week: new data pending')
         self.assertEqual(self.report(state)['conditions'], [])
 
+    def test_new_24_hour_window_waits_only_for_a_short_successful_inflight_refresh(self):
+        state = self.state()
+        game = state['weeks'][0]['games'][0]
+        game['kickoff'] = '2026-09-14T15:30:00Z'
+        game['availability'].pop('checked_at')
+        before = copy.deepcopy(state)
+        report = self.report(state)
+        self.assertEqual(report['conditions'], [])
+        self.assertFalse(report['can_resolve'])
+        self.assertEqual(state, before)
+        for started, observed, outcome, status in [
+            ('2026-09-13T15:30:00Z', None, 'success', 'READY'),
+            ('2026-09-13T15:31:00Z', None, 'success', 'READY'),
+            ('2026-09-13T15:00:00Z', None, 'success', 'READY'),
+            ('2026-09-13T15:29:00Z', '2026-09-13T14:00:00Z', 'success', 'READY'),
+            ('2026-09-13T15:29:00Z', '2026-09-13T16:00:00Z', 'success', 'READY'),
+            ('2026-09-13T15:29:00Z', 'bad', 'success', 'READY'),
+            ('2026-09-13T15:29:00Z', None, 'failure', 'READY'),
+            ('2026-09-13T15:29:00Z', None, 'success', 'BLOCKED'),
+            (None, None, 'success', 'READY'),
+            ('bad', None, 'success', 'READY'),
+        ]:
+            with self.subTest(started=started, observed=observed, outcome=outcome, status=status):
+                case = copy.deepcopy(state)
+                case['status'] = status
+                if observed is not None:
+                    case['weeks'][0]['games'][0]['availability']['checked_at'] = observed
+                outcomes = dict.fromkeys(alerts.STAGES, 'success')
+                outcomes['refresh'] = outcome
+                report = alerts.assess(case, outcomes=outcomes,
+                    checked_at='2026-09-13T15:31:00Z', refresh_started_at=started,
+                    public_pointer=self.pointer())
+                self.assertTrue({'availability:' + game['game_id'], 'state-unverified'}
+                                & {row['key'] for row in report['conditions']})
+                self.assertFalse(report['can_resolve'])
     def test_stale_future_invalid_state_and_failed_pipeline_cannot_resolve(self):
         state = self.state()
         state['checked_at'] = '2026-09-13T13:00:00Z'

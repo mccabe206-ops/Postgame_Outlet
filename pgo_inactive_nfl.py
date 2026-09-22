@@ -2,6 +2,7 @@
 
 from datetime import timedelta
 from html.parser import HTMLParser
+from html import escape
 import json
 import re
 from urllib.parse import urlsplit
@@ -19,11 +20,13 @@ def nfl_game_url(game):
     return f'https://www.nfl.com/games/{nick(game["away"])}-at-{nick(game["home"])}-{game["season"]}-reg-{game["week"]}'
 
 
-def is_nfl_full_slate_url(url, game):
+def is_nfl_full_slate_url(url, game, *, version=4):
     parsed = urlsplit(url)
     expected = f'/news/inactive-reports-sunday-week-{game["week"]}-{game["season"]}-nfl-season'
     return (parsed.scheme == 'https' and parsed.netloc in ('nfl.com','www.nfl.com')
-            and parsed.path.rstrip('/') == expected and not parsed.query and not parsed.fragment)
+            and (parsed.path.rstrip('/') == expected or (version == 5 and re.fullmatch(
+                rf'/news/nfl-week-{game["week"]}-inactives-players-ruled-out-sunday-(?:[1-9]|1[0-6])-games-{game["season"]}',
+                parsed.path.rstrip('/')) is not None)) and not parsed.query and not parsed.fragment)
 
 
 class _Cards(HTMLParser):
@@ -139,11 +142,96 @@ class _Cards(HTMLParser):
             self.errors.append('NFL full-slate team section is duplicate')
 
 
-def parse_nfl_full_slate(raw, url, game, team, captured_at):
+class _Tree(HTMLParser):
+    """DOM boundaries for the v5 sibling layout; never used by frozen parsers."""
+    def __init__(self, text):
+        super().__init__(convert_charrefs=True)
+        self.root = ['root', {}, []]
+        self.stack = [self.root]
+        self.feed(text)
+
+    def handle_starttag(self, tag, attrs):
+        node = [tag, dict(attrs), []]
+        self.stack[-1][2].append(node)
+        if tag not in ('area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'):
+            self.stack.append(node)
+
+    def handle_endtag(self, tag):
+        for i in range(len(self.stack)-1, 0, -1):
+            if self.stack[i][0] == tag:
+                del self.stack[i:]
+                break
+
+    def handle_data(self, data):
+        self.stack[-1][2].append(data)
+
+
+def _nodes(node):
+    yield node
+    for child in node[2]:
+        if isinstance(child,list):
+            yield from _nodes(child)
+
+
+def _markup(node):
+    if isinstance(node,str):
+        return escape(node)
+    tag,attrs,children = node
+    return '<'+tag+''.join(' '+k+'="'+escape(v or '',quote=True)+'"' for k,v in attrs.items())+'>'+''.join(map(_markup,children))+'</'+tag+'>'
+
+
+def _children(node):
+    return [child for child in node[2] if not isinstance(child,str) or child.strip()]
+
+
+class _SiblingCards:
+    def __init__(self, text, game, target):
+        self.sections, self.errors = [], []
+        tree = _Tree(text).root
+        stories = [n for n in _nodes(tree) if n[0]=='section' and n[1].get('id')=='Story-1' and n[1].get('data-testid')=='Story-1']
+        if len(stories) != 1:
+            return
+        layout = {'flex','flex-col','gap-6','col-span-full','lg:col-span-8','lg:col-start-3'}
+        containers = [n for n in _nodes(stories[0]) if n[0]=='div' and set(n[1].get('class','').split())==layout]
+        if len(containers) != 1:
+            return
+        blocks = _children(containers[0])
+        expected = [TEAM_NAMES[t].split()[-1].casefold() for t in (game['away'],game['home'])]
+        for card,following in zip(blocks,blocks[1:]):
+            if not isinstance(card,list) or not isinstance(following,list):
+                continue
+            # Only the immediately following content sibling can supply the list.
+            node = following
+            while node[0]=='div' and len(_children(node))==1 and isinstance(_children(node)[0],list):
+                node = _children(node)[0]
+            if node[0]!='div' or node[1].get('class')!='story-part-rich-text-editor-wrapper':
+                continue
+            children = _children(node)
+            if len(children)!=4 or [n[0] if isinstance(n,list) else None for n in children]!=['h3','ul','h3','ul']:
+                continue
+            labels = [' '.join(''.join(c for c in n[2] if isinstance(c,str)).split()).casefold() for n in children[::2]]
+            if labels != expected or any(any(isinstance(c,list) for c in n[2]) for n in children[::2]):
+                continue
+            if any(any(not isinstance(c,list) or c[0]!='li' for c in _children(n)) for n in children[1::2]):
+                continue
+            lists = [li for ul in children[1::2] for li in _children(ul)]
+            if any(any(not isinstance(c,str) for c in li[2]) or not is_player_row(' '.join(''.join(li[2]).split())) for li in lists):
+                continue
+            paired_rows = [[_row(' '.join(''.join(li[2]).split())) for li in _children(ul)] for ul in children[1::2]]
+            if any(not 1 <= len(rows) <= 32 or len({r['name'].casefold() for r in rows}) != len(rows) for rows in paired_rows):
+                continue
+            synthetic = '<section id="Story-1" data-testid="Story-1"><div class="flex flex-col gap-6">'+_markup(card)+_markup(following)+'</div></section>'
+            # Existing exact tile/game-link and strict player-row gates remain authoritative.
+            parsed = _Cards(synthetic,game,target)
+            self.sections.extend(parsed.sections)
+            self.errors.extend(parsed.errors)
+
+
+def parse_nfl_full_slate(raw, url, game, team, captured_at, *, version=4):
     """Return an existing-shape parsed list from one exact NFL matchup card."""
     if team not in (game['home'],game['away']):
         raise ValueError('Target team is outside the matchup')
-    if not is_nfl_full_slate_url(url,game):
+    if not is_nfl_full_slate_url(url,game,version=version):
         raise ValueError('NFL full-slate URL does not bind the season and week')
     text = raw.decode('utf-8')
     articles = []
@@ -173,7 +261,7 @@ def parse_nfl_full_slate(raw, url, game, team, captured_at):
     if not (lower <= published < kickoff and published <= captured
             and lower <= modified < kickoff and modified <= captured):
         raise ValueError('NFL full-slate clocks are outside the capture window')
-    cards = _Cards(text,game,team)
+    cards = (_SiblingCards if version == 5 and not is_nfl_full_slate_url(url,game) else _Cards)(text,game,team)
     if cards.errors:
         raise ValueError(cards.errors[0])
     if len(cards.sections) != 1:

@@ -69,7 +69,24 @@ def _announcement(game, source, root, checked_at):
             'Reviewed starter statement is absent from the primary article')
     text = str(article.get('headline', ''))+'\n'+body
     require(_matches_matchup(text, game), 'Starter article matchup differs')
-    require(all(int(week) == game['week'] for week in re.findall(r'\bweek\s+(\d+)\b', text, re.I)),
+    historical = decision.get('historical_context', [])
+    require(isinstance(historical, list) and all(isinstance(span, str) and span for span in historical),
+            'Invalid reviewed historical context')
+    require(len(set(historical)) == len(historical), 'Duplicate reviewed historical context')
+    remaining = body
+    for span in historical:
+        require(span in re.split(r'(?<=[.!?])\s+|\n\s*\n', body) and span[-1] in '.!?'
+                and body.count(span) == 1, 'Historical context must be one exact unique full sentence')
+        start = body.index(span); end = start + len(span)
+        require(all(end <= match.start() or start >= match.end()
+                    for match in re.finditer(re.escape(statement), body)),
+                'Historical context overlaps the reviewed starter statement')
+        weeks = re.findall(r'\bweek\s+(\d+)\b', span, re.I)
+        require(weeks and all(1 <= int(week) < game['week'] for week in weeks),
+                'Historical context must identify only earlier weeks')
+        remaining = remaining.replace(span, '', 1)
+    week_text = str(article.get('headline', ''))+'\n'+statement+'\n'+remaining
+    require(all(int(week) == game['week'] for week in re.findall(r'\bweek\s+(\d+)\b', week_text, re.I)),
             'Starter article identifies a different week')
     require(article['datePublished'] == record['published_at']
             and article.get('dateModified', article['datePublished']) == record['modified_at'],

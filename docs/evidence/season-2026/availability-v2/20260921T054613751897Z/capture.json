@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-09-21T05:46:16.610088+00:00",
+  "sources": [
+    {
+      "bytes": 380158,
+      "captured_at": "2026-09-21T05:46:16.034484+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "d22c2f4a2a425cd3899fb24fd88d9ac1151d00c046b48188cb8530f71a889866",
+      "started_at": "2026-09-21T05:46:16.003995+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 363992,
+      "captured_at": "2026-09-21T05:46:16.117981+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "41b24f4fdf40d6018f88dece11ed4580407608f5706e64d19b7941446ae5cc5a",
+      "started_at": "2026-09-21T05:46:16.004342+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 571334,
+      "captured_at": "2026-09-21T05:46:16.039295+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.giants.com/news/",
+      "kind": "team_news",
+      "sha256": "d1f1f48a9dab2da0fec43060396449fed2734d20f5a469a7535c4e46146cb62e",
+      "started_at": "2026-09-21T05:46:16.004694+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/"
+    },
+    {
+      "bytes": 1598539,
+      "captured_at": "2026-09-21T05:46:16.183448+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "b70806a98ce5d91810775eb91b6a2ccc664d98789428b6bb06c25e234c0d8daa",
+      "started_at": "2026-09-21T05:46:16.004961+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 922314,
+      "captured_at": "2026-09-21T05:46:16.516402+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "5d58eccfb2c6a6815be0248645d4027fccd7e0f079121321ed077bb77949292f",
+      "started_at": "2026-09-21T05:46:16.296566+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}

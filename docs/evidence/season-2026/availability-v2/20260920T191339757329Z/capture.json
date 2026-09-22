@@ -1,0 +1,173 @@
+{
+  "checked_at": "2026-09-20T19:13:42.602696+00:00",
+  "sources": [
+    {
+      "bytes": 381631,
+      "captured_at": "2026-09-20T19:13:41.630483+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "f00015858c3a07a3afa3114de275fe3c237051e2e3e7dbfda0f800ec16d4f86a",
+      "started_at": "2026-09-20T19:13:41.600868+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 706040,
+      "captured_at": "2026-09-20T19:13:41.708679+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.azcardinals.com/news/",
+      "kind": "team_news",
+      "sha256": "489fd92bb1c298c1261f5faa0622a4a772c6d9a2ac436b9e4881b627c35a6b2e",
+      "started_at": "2026-09-20T19:13:41.601186+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/"
+    },
+    {
+      "bytes": 498865,
+      "captured_at": "2026-09-20T19:13:41.636114+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "618d79ed8d7319d5533c881377e5452952201f20cc3cd63e09e304e2e5fd4f70",
+      "started_at": "2026-09-20T19:13:41.601481+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 414805,
+      "captured_at": "2026-09-20T19:13:41.971658+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.colts.com/news/",
+      "kind": "team_news",
+      "sha256": "e8ea9b30c028425a1feb37fd4cf2c2e2607e0aef9a67972fa106e7ac12746985",
+      "started_at": "2026-09-20T19:13:41.601739+00:00",
+      "status": 200,
+      "team": "IND",
+      "url": "https://www.colts.com/news/"
+    },
+    {
+      "bytes": 501288,
+      "captured_at": "2026-09-20T19:13:41.831190+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "ba76aa43325153763067172e6f8088a99ab16ca8a0b8e75ca13005e93a8c89cf",
+      "started_at": "2026-09-20T19:13:41.630514+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 515935,
+      "captured_at": "2026-09-20T19:13:41.771560+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.miamidolphins.com/news/",
+      "kind": "team_news",
+      "sha256": "18471d0dfe72ed74f936f03bd56cc324b15783e22db9d20053be6995baa302ca",
+      "started_at": "2026-09-20T19:13:41.636131+00:00",
+      "status": 200,
+      "team": "MIA",
+      "url": "https://www.miamidolphins.com/news/"
+    },
+    {
+      "bytes": 675168,
+      "captured_at": "2026-09-20T19:13:41.826217+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.seahawks.com/news/",
+      "kind": "team_news",
+      "sha256": "9b4729932a22bdcdbec45175245d99d16351f0547bfec198983f7987cdb983aa",
+      "started_at": "2026-09-20T19:13:41.708713+00:00",
+      "status": 200,
+      "team": "SEA",
+      "url": "https://www.seahawks.com/news/"
+    },
+    {
+      "bytes": 519825,
+      "captured_at": "2026-09-20T19:13:41.870825+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.49ers.com/news/",
+      "kind": "team_news",
+      "sha256": "8d48e65463b28d084a67bc5d3c9a56e5c7344b71651a80eb0c3dda7fd37d88bd",
+      "started_at": "2026-09-20T19:13:41.771588+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/"
+    },
+    {
+      "bytes": 493458,
+      "captured_at": "2026-09-20T19:13:41.906727+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.commanders.com/news/",
+      "kind": "team_news",
+      "sha256": "1e516608da073e00751517c6c4b4db0bc834d14238534bc0e65918e220da0ac0",
+      "started_at": "2026-09-20T19:13:41.826240+00:00",
+      "status": 200,
+      "team": "WAS",
+      "url": "https://www.commanders.com/news/"
+    },
+    {
+      "bytes": 1603703,
+      "captured_at": "2026-09-20T19:13:42.111645+00:00",
+      "file": "raw/009.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "9e0c9fcea714062b9cf98d262338c63c3d6733a38c2fcccc4dc2fb8da5601dac",
+      "started_at": "2026-09-20T19:13:41.831208+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 456774,
+      "captured_at": "2026-09-20T19:13:42.422275+00:00",
+      "file": "raw/010.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/updates-september-2026",
+      "kind": "official_inactives",
+      "sha256": "e5aa94654dc8433ebbd6c6c5070b06a0e350e2346bf08eb68eee35ba1fe2f28e",
+      "started_at": "2026-09-20T19:13:42.370730+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/updates-september-2026"
+    },
+    {
+      "bytes": 449808,
+      "captured_at": "2026-09-20T19:13:42.399998+00:00",
+      "file": "raw/011.html.gz",
+      "final_url": "https://www.49ers.com/news/eddy-pineiro-kaelon-black-available-vs-dolphins-inactives-for-week-2-miavssf",
+      "kind": "official_inactives",
+      "sha256": "5151121be36c06771975d2ec51160f2b5b12c95908624c4691b1f8c9dbd24913",
+      "started_at": "2026-09-20T19:13:42.371008+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/eddy-pineiro-kaelon-black-available-vs-dolphins-inactives-for-week-2-miavssf"
+    },
+    {
+      "bytes": 308265,
+      "captured_at": "2026-09-20T19:13:42.394246+00:00",
+      "file": "raw/012.html.gz",
+      "final_url": "https://www.commanders.com/news/inactives-commanders-vs-cowboys-week-2-2026",
+      "kind": "official_inactives",
+      "sha256": "4d92bdf5f2d764b431179aed62c6868f10b49e2e223433cc012f7f0ede2079f7",
+      "started_at": "2026-09-20T19:13:42.371316+00:00",
+      "status": 200,
+      "team": "WAS",
+      "url": "https://www.commanders.com/news/inactives-commanders-vs-cowboys-week-2-2026"
+    },
+    {
+      "bytes": 914325,
+      "captured_at": "2026-09-20T19:13:42.399196+00:00",
+      "file": "raw/013.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "fce98b3eaf7ff33eb4c0104135321da374e79089ece3de1965fbcd2e5ec8e291",
+      "started_at": "2026-09-20T19:13:42.371589+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}

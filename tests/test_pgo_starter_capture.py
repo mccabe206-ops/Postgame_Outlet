@@ -84,6 +84,27 @@ class StarterCaptureTests(unittest.TestCase):
     def review(self, draft, when='2026-09-12T19:01:00+00:00'):
         return self.api.review(draft, root=self.root, config=self.config, clock=Clock(when))
 
+    def test_review_binds_explicit_historical_context_and_replays_it(self):
+        self.game.update(game_id='2026_02_ATL_PIT', week=2)
+        self.context[0].update(self.game)
+        historical = 'The quarterback played in Week 1.'
+        article = {'@type':'NewsArticle', 'headline':'Week 2: Falcons vs. Steelers',
+                   'articleBody':self.statement+'\n\n'+historical,
+                   'datePublished':'2026-09-11T18:12:22.097Z'}
+        raw = ('<script type="application/ld+json">'+json.dumps(article)+'</script><article>').encode()
+        draft, _ = self.capture(response=self.response(body=raw))
+        with self.assertRaisesRegex(ValueError, 'different week'): self.review(draft)
+        reviewed = self.api.review(draft, root=self.root, config=self.config,
+            clock=Clock('2026-09-12T19:01:00+00:00'), historical_context=[historical])
+        source = read_json(reviewed)['source']
+        self.assertEqual(read_json(self.root/source['path'])['decision']['historical_context'], [historical])
+        self.assertFalse(self.config.exists())
+        self.api.activate(reviewed, root=self.root, config=self.config,
+            clock=Clock('2026-09-12T19:02:00+00:00', '2026-09-12T19:02:01+00:00'))
+        parsed = self.api._parser().parse_args(['review', '--draft', draft.name,
+            '--historical-context', historical, '--historical-context', 'Another sentence.'])
+        self.assertEqual(parsed.historical_context, [historical, 'Another sentence.'])
+
     def test_real_falcons_html_captures_reviews_and_activates_without_forecast_mutation(self):
         draft, fetch = self.capture()
         captured = read_json(draft)

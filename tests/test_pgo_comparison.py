@@ -127,7 +127,7 @@ class RatingExplanationTests(unittest.TestCase):
             result = pgo_comparison.add_rating_explanations(refreshed)
             panel = pgo_comparison.extract_comparison_panel(result)
             self.assertNotIn("Rating gap", panel)
-            self.assertEqual(len(re.findall(r'<td\b', panel)), 32 * 8)
+            self.assertEqual(len(re.findall(r'<td data-sort=', panel)), 32 * 8)
             self.assertIn('data-sort="-20.0">-20.0</td>', panel)
             highlights = re.search(r'<div class="pgo-rank-highlights">.*?</div>', panel, re.S).group(0)
             before = re.search(r'<div class="pgo-rank-highlights">.*?</div>',
@@ -162,7 +162,7 @@ class RatingExplanationTests(unittest.TestCase):
 
     def test_rejects_mismatched_and_duplicate_public_rows(self):
         panel = pgo_comparison.extract_comparison_panel(self.page)
-        row = re.search(r'<tr><th scope="row".*?</tr>', panel, re.S).group(0)
+        row = re.search(r'<tr><th scope="row" data-sort=.*?</tr>', panel, re.S).group(0)
         for changed in (re.sub(r'<td data-sort="[^"]+">', '<td data-sort="999">', row, count=1),
                         row + row):
             with self.subTest(changed=changed[:70]), self.assertRaises(ValueError):
@@ -1104,6 +1104,52 @@ class ComparisonTests(unittest.TestCase):
                       STYLE.replace('margin-top:28px', 'margin-top:29px')):
             with self.subTest(extra=extra[:30]), self.assertRaisesRegex(ValueError, 'markers changed'):
                 pgo_comparison.inject_fantasy_preview(with_style(extra), fantasy)
+
+    def test_track_record_survives_repeated_fantasy_refresh_with_strict_styles(self):
+        from pgo_model_updates import STYLE
+        plain = pgo_comparison.inject_comparison(self._base_html(),
+            pgo_comparison.render_comparison_panel(self._saved_comparison_rows(), self._held_receipt()))
+        fantasy = pgo_comparison.render_fantasy_panel(self._fantasy_preview())
+        published = pgo_comparison.inject_fantasy_preview(plain, fantasy)
+        panel = pgo_comparison.extract_comparison_panel(published)
+        published = published.replace(panel, panel.replace('</section>', STYLE + '</section>', 1), 1)
+        with tempfile.TemporaryDirectory() as temporary:
+            records = Path(temporary) / 'data' / 'records.json'
+            records.parent.mkdir()
+            records.write_text(json.dumps({'generated': '2026-09-16', 'season_record': {
+                'model': {'open': {'win': 10, 'loss': 6}, 'close': {'win': 9, 'loss': 7}}}}))
+            with patch.object(pgo_comparison, 'HERE', Path(temporary)):
+                published = pgo_comparison.inject_record_block(published)
+            block = re.search(r'<!--track-record-start-->.*?<!--track-record-end-->', published, re.S).group(0)
+            style = re.search(r'<style>.*?</style>', block, re.S).group(0)
+            for refresh in range(2):
+                if refresh:
+                    records.unlink()
+                try:
+                    published = pgo_comparison.refresh_mccabe_page(self._base_html(), published)
+                    with patch.object(pgo_comparison, 'HERE', Path(temporary)):
+                        published = pgo_comparison.inject_record_block(published)
+                except ValueError as error:
+                    self.fail('Known track-record style blocked refresh: ' + str(error))
+                self.assertEqual(published.count(block), 1)
+                self.assertIn(block, pgo_comparison.extract_comparison_panel(published))
+                self.assertEqual(published.count(STYLE), 1)
+                self.assertEqual(published.count(pgo_comparison.FANTASY_SCRIPT), 1)
+                self.assertEqual(pgo_comparison._extract_published_fantasy_panel(published),
+                                 pgo_comparison._extract_published_fantasy_panel(
+                                     pgo_comparison.inject_fantasy_preview(plain, fantasy)))
+
+        panel = pgo_comparison.extract_comparison_panel(plain)
+        for extra in (style, STYLE + style):
+            styled = plain.replace(panel, panel.replace('</section>', extra + '</section>', 1), 1)
+            self.assertEqual(pgo_comparison.inject_fantasy_preview(styled, fantasy).count(style), 1)
+        for invalid in (style * 2, style + '<style>unknown</style>',
+                        style.replace('margin:14px', 'margin:15px'), style.replace('</style>', '')):
+            broken = plain.replace(panel, panel.replace('</section>', invalid + '</section>', 1), 1)
+            with self.subTest(style=invalid[:80]), self.assertRaisesRegex(ValueError, 'markers changed'):
+                pgo_comparison.inject_fantasy_preview(broken, fantasy)
+        with self.assertRaisesRegex(ValueError, 'markers changed'):
+            pgo_comparison.inject_fantasy_preview(plain.replace('</body>', style + '</body>', 1), fantasy)
 
     def test_injection_without_fantasy_remains_byte_identical(self):
         output = pgo_comparison.inject_comparison(

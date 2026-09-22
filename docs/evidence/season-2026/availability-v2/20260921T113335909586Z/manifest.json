@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-09-21T11:33:39.097341+00:00",
+  "members": [
+    {
+      "bytes": 15303,
+      "file": "availability.json",
+      "sha256": "48b68d2d969964b8ab4cac51e4bb7e789382ae0d85e4bbf62ca2ccc397aaa032"
+    },
+    {
+      "bytes": 2348,
+      "file": "capture.json",
+      "sha256": "32a3dc3aa7d752cc8a6f3f1d4c560ac580960ebdaf5a98746e499bc42939bc11"
+    },
+    {
+      "bytes": 4990,
+      "file": "inputs.json.gz",
+      "sha256": "e348b98edcdadf461369196bfd70af01626b3eecda35a4cc41ee751ab776dbc9"
+    },
+    {
+      "bytes": 64267,
+      "file": "raw/000.html.gz",
+      "sha256": "4891a01ace58314c9ae3132f09b0639896326d218d65dbc794696644e35cd5f7"
+    },
+    {
+      "bytes": 66708,
+      "file": "raw/001.html.gz",
+      "sha256": "17b34fcc55630a1f6b53e3285def8b8d52e62f180385e0193513b2edf1b8db6b"
+    },
+    {
+      "bytes": 82100,
+      "file": "raw/002.html.gz",
+      "sha256": "68b937dc5b44702c1c6b357a7c9173afc81c079fc577026920090c8deeee160c"
+    },
+    {
+      "bytes": 177068,
+      "file": "raw/003.html.gz",
+      "sha256": "d651d1a96f58c982f8114e60f3ddc1dd23c28b364d9259ea8fc12b3234b18f15"
+    },
+    {
+      "bytes": 107453,
+      "file": "raw/004.html.gz",
+      "sha256": "75a85620b56adce8513e9270cb6b3d0079c34189ad309ee2d917f45c8a829497"
+    }
+  ],
+  "schema_version": 1
+}

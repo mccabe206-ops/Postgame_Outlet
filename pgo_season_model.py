@@ -171,7 +171,7 @@ def _period(row):
 
 
 def partition_player_rows(team_rows, player_rows, games):
-    """Separate reconciled, penalty-only unidentified cohorts; never assign a player."""
+    """Separate reconciled unidentified penalties/safeties; never assign a player."""
     cohorts = {(g['season'], g['week']) for g in games}
     labels = {'player_id', 'player_name', 'player_display_name', 'position', 'position_group', 'headshot_url'}
     metadata = labels | {'season', 'week', 'season_type', 'game_id', 'team', 'opponent_team'}
@@ -194,14 +194,19 @@ def partition_player_rows(team_rows, player_rows, games):
         _require(all(row[name] in ('', None) for name in labels)
                  and row['season_type'] == 'REG', 'Unidentified penalty row has conflicting identity')
         for name, value in row.items():
-            if name not in metadata and name not in penalty_fields:
+            if name not in metadata and name not in (*penalty_fields, 'def_safeties'):
                 _require(_number(value, nullable=name in nullable) in (None, 0.),
                          'Unidentified row contains other production: ' + str(name))
         _require(_integer(row.get('penalties')) > 0 and _integer(row.get('penalty_yards')) >= 0,
                  'Invalid unidentified penalty totals')
+        _require(_integer(row['def_safeties']) >= 0, 'Invalid unidentified safety count')
         pools[cohort] = row
     receipts = []
     for cohort, pool in sorted(pools.items()):
+        # Preserve exact v1 receipts for earlier penalty-only archives. A v2
+        # safety pool must also reconcile complete team/player safety counts.
+        fields = penalty_fields + (('def_safeties',) if _integer(pool['def_safeties']) else ())
+        columns = range(len(fields))
         expected = {(g['season'], g['week'], team): (g, opponent)
                     for g in games if (g['season'], g['week']) == cohort
                     for team, opponent in ((g['home'], g['away']), (g['away'], g['home']))}
@@ -219,7 +224,7 @@ def partition_player_rows(team_rows, player_rows, games):
                 continue
             _require(key not in teams and row.get('season_type') == 'REG', 'Duplicate or invalid penalty team cohort')
             matching_label(row, key)
-            teams[key] = [_integer(row.get(name)) for name in penalty_fields]
+            teams[key] = [_integer(row.get(name)) for name in fields]
             _require(all(v >= 0 for v in teams[key]), 'Negative team penalties')
         _require(set(teams) == set(expected), 'Penalty cohort is missing team statistics')
         for row in identified:
@@ -231,25 +236,26 @@ def partition_player_rows(team_rows, player_rows, games):
                 matching_label(row, key)
             identity = (*key, row['player_id'])
             _require(identity not in seen, 'Duplicate player production'); seen.add(identity)
-            values = [_integer(row.get(name)) for name in penalty_fields]
+            values = [_integer(row.get(name)) for name in fields]
             _require(all(v >= 0 for v in values), 'Negative player penalties')
-            prior = totals.setdefault(key, [0, 0])
+            prior = totals.setdefault(key, [0] * len(fields))
             for i, value in enumerate(values):
                 prior[i] += value
         _require(set(totals) == set(expected), 'Penalty cohort is missing player statistics')
-        residuals = {key: [teams[key][i] - totals[key][i] for i in range(2)] for key in expected}
+        residuals = {key: [teams[key][i] - totals[key][i] for i in columns] for key in expected}
         _require(all(all(v >= 0 for v in values) and (values[0] > 0 or values[1] == 0)
                      for values in residuals.values()), 'Team/player penalty residuals differ')
-        unassigned = [_integer(pool[name]) for name in penalty_fields]
-        _require([sum(values[i] for values in residuals.values()) for i in range(2)] == unassigned,
+        unassigned = [_integer(pool[name]) for name in fields]
+        _require([sum(values[i] for values in residuals.values()) for i in columns] == unassigned,
                  'Unidentified penalties do not reconcile with complete cohort')
-        receipts.append(dict(schema_version=1, kind='unattributed-penalties', season=cohort[0], week=cohort[1],
+        receipts.append(dict(schema_version=2 if 'def_safeties' in fields else 1,
+                             kind='unattributed-penalties', season=cohort[0], week=cohort[1],
                              source_row_sha256=_sha(_bytes(pool)),
                              source_labels={name: pool[name] for name in ('game_id', 'team', 'opponent_team')},
-                             team_totals=dict(zip(penalty_fields, (sum(v[i] for v in teams.values()) for i in range(2)))),
-                             identified_player_totals=dict(zip(penalty_fields, (sum(v[i] for v in totals.values()) for i in range(2)))),
-                             unattributed_totals=dict(zip(penalty_fields, unassigned)),
-                             team_residuals=[dict(team=key[2], **dict(zip(penalty_fields, values)))
+                             team_totals=dict(zip(fields, (sum(v[i] for v in teams.values()) for i in columns))),
+                             identified_player_totals=dict(zip(fields, (sum(v[i] for v in totals.values()) for i in columns))),
+                             unattributed_totals=dict(zip(fields, unassigned)),
+                             team_residuals=[dict(team=key[2], **dict(zip(fields, values)))
                                              for key, values in sorted(residuals.items())]))
     return identified, receipts
 

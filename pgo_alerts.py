@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import time
 import urllib.request
 import uuid
 
@@ -106,15 +107,26 @@ def assess(state, *, outcomes, run_refresh=True, checked_at=None, refresh_starte
                 add('inactive:' + game['game_id'], game['away'] + ' at ' + game['home'] + ': ' + reason
                     + '. Kickoff ' + utc(game['kickoff']).isoformat() + '.', utc(game['kickoff']) > checked)
         finals = {result['game_id'] for result in state.get('results', [])}
+        availability_pending = False
         for game in games:
             remaining = (utc(game['kickoff']) - checked).total_seconds()
             if game['game_id'] in finals or not 3600 < remaining <= 86400:
                 continue
             observed = (game.get('availability') or {}).get('checked_at')
+            # Collection may precede the 24-hour boundary that rendering crosses.
+            # Defer only an absent first check in this short, successful run; it
+            # cannot clear an existing incident or excuse stale observed evidence.
+            if (observed is None and state['status'] == 'READY' and refresh_started_at
+                    and all(outcomes.get(stage) == 'success' for stage in STAGES)
+                    and utc(refresh_started_at) <= saved <= checked
+                    and (checked - utc(refresh_started_at)).total_seconds() <= 30 * 60
+                    and (utc(game['kickoff']) - utc(refresh_started_at)).total_seconds() > 86400):
+                availability_pending = True
+                continue
             if not observed or not 0 <= (checked - utc(observed)).total_seconds() <= 30 * 60:
                 add('availability:' + game['game_id'], game['away'] + ' at ' + game['home']
                     + ': the pre-lock availability check is missing or more than 30 minutes old.', remaining <= 75 * 60)
-        report['can_resolve'] = (public_ready and not report['conditions'] and all(outcomes.get(stage) == 'success' for stage in STAGES)
+        report['can_resolve'] = (public_ready and not availability_pending and not report['conditions'] and all(outcomes.get(stage) == 'success' for stage in STAGES)
             and bool(refresh_started_at) and utc(refresh_started_at) <= saved <= checked
             and (checked - saved).total_seconds() <= 45 * 60)
     except (ValueError, TypeError, KeyError, AttributeError):
@@ -315,9 +327,40 @@ def main():
             state = load_current(args.root)
         except (OSError, ValueError, KeyError, TypeError, ImportError):
             pass
-    report = assess(state, outcomes={stage: getattr(args, stage + '_outcome') for stage in STAGES},
+    outcomes = {stage: getattr(args, stage + '_outcome') for stage in STAGES}
+    public_pointer = fetch_public_pointer() if args.check_public and args.run_refresh != 'false' else NOT_CHECKED
+    report = assess(state, outcomes=outcomes,
                     run_refresh=args.run_refresh != 'false', refresh_started_at=args.refresh_started_at,
-                    public_pointer=fetch_public_pointer() if args.check_public and args.run_refresh != 'false' else NOT_CHECKED)
+                    public_pointer=public_pointer)
+    # Pages builds asynchronously after publication. Confirm an otherwise healthy
+    # run before notifying; never postpone another condition or extend freshness.
+    deadline = time.monotonic() + 90
+    waited = False
+    while (args.check_public and args.run_refresh == 'true'
+           and [row['key'] for row in report['conditions']] == ['public-update']
+           and all(outcomes.get(stage) == 'success' for stage in STAGES)):
+        try:
+            checked, saved = utc(report['checked_at']), utc(report['state_checked_at'])
+            if not (utc(args.refresh_started_at) <= saved <= checked
+                    and (checked - saved).total_seconds() <= 45 * 60):
+                break
+        except (ValueError, TypeError, AttributeError):
+            break
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            break
+        waited = True
+        time.sleep(min(10, remaining))
+        if time.monotonic() >= deadline:
+            break
+        # Each GET retains its existing 20-second bound; one in-flight request
+        # may finish after the 90-second polling deadline.
+        public_pointer = fetch_public_pointer()
+        report = assess(state, outcomes=outcomes, refresh_started_at=args.refresh_started_at,
+                        public_pointer=public_pointer)
+    if waited:
+        report = assess(state, outcomes=outcomes, refresh_started_at=args.refresh_started_at,
+                        public_pointer=public_pointer)
     print(json.dumps(report, indent=2))
     if args.deliver:
         if os.environ.get('GITHUB_REPOSITORY') != REPOSITORY:

@@ -175,7 +175,7 @@ def capture(url, game_id, team, gsis_id, statement, *, root=DEFAULT_ROOT, fetch=
     return _write_hashed(root, 'starter-drafts', receipt)
 
 
-def review(draft, *, root=DEFAULT_ROOT, config=CONFIG, clock=None):
+def review(draft, *, root=DEFAULT_ROOT, config=CONFIG, clock=None, historical_context=None):
     """Validate a successful capture and save an immutable reviewed source envelope."""
     clock = clock or _clock
     draft_path, draft_raw, captured = _read_receipt(root, 'starter-drafts', draft)
@@ -196,6 +196,8 @@ def review(draft, *, root=DEFAULT_ROOT, config=CONFIG, clock=None):
     player = _player(roster, game, captured['team'], captured['gsis_id'])
     decision = dict(game={key:game[key] for key in IDENTITY}, team=captured['team'],
                     gsis_id=captured['gsis_id'], full_name=player['full_name'], statement=captured['statement'])
+    if historical_context is not None:
+        decision['historical_context'] = copy.deepcopy(historical_context)
     envelope = dict(schema_version=1, kind='official_starter_announcement', url=captured['url'],
                     final_url=captured['final_url'], status=captured['status'], headers=captured['headers'],
                     started_at=captured['started_at'], captured_at=captured['captured_at'],
@@ -298,6 +300,7 @@ def _parser():
     for name in ('url','game-id','team','gsis-id','statement'):
         command.add_argument('--'+name, required=True)
     command = commands.add_parser('review'); command.add_argument('--draft', required=True)
+    command.add_argument('--historical-context', action='append', help='Exact full sentence reviewed as earlier-week historical context; repeat as needed')
     command = commands.add_parser('activate'); command.add_argument('--review', required=True)
     return parser
 
@@ -310,7 +313,7 @@ def main(argv=None):
             print(path)
             return 0 if json.loads(path.read_bytes())['successful'] else 1
         if args.command == 'review':
-            print(review(args.draft, root=args.root))
+            print(review(args.draft, root=args.root, historical_context=args.historical_context))
             return 0
         print(activate(args.review, root=args.root))
         return 0
