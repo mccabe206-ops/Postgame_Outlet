@@ -1,0 +1,113 @@
+{
+  "checked_at": "2026-09-22T00:12:16.169921+00:00",
+  "sources": [
+    {
+      "bytes": 357909,
+      "captured_at": "2026-09-22T00:12:14.874611+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "93f13bf63da7e7d7f3b6fa40153f842d25046f3762504b73676c557a80df5711",
+      "started_at": "2026-09-22T00:12:14.673853+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 341585,
+      "captured_at": "2026-09-22T00:12:14.960391+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "73625317e18778de917106290b245d4441fabce5968df195f0784feb1921ecc8",
+      "started_at": "2026-09-22T00:12:14.674295+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 549358,
+      "captured_at": "2026-09-22T00:12:14.806427+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.giants.com/news/",
+      "kind": "team_news",
+      "sha256": "2032cf6b871ec1793ff8747ca324db414aaa20fff5261931367f4bdda8d2cec0",
+      "started_at": "2026-09-22T00:12:14.674692+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/"
+    },
+    {
+      "bytes": 1619939,
+      "captured_at": "2026-09-22T00:12:15.264346+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "51fa8d8c3000ad1b632f374407ec9243e2ec177dbdedc7c33c013a0bf73a8f84",
+      "started_at": "2026-09-22T00:12:14.675149+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 536071,
+      "captured_at": "2026-09-22T00:12:15.535212+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.therams.com/news/puka-nacua-among-rams-inactives-for-monday-night-football-vs-giants-week-2-2026",
+      "kind": "official_inactives",
+      "sha256": "1358141eee0489eb51b2c1a7d37c3c2c721809ae6655105a1007dfc4192a80fd",
+      "started_at": "2026-09-22T00:12:15.379696+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/puka-nacua-among-rams-inactives-for-monday-night-football-vs-giants-week-2-2026"
+    },
+    {
+      "bytes": 417012,
+      "captured_at": "2026-09-22T00:12:15.524263+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.giants.com/news/inactives-who-s-in-who-s-out-for-monday-night-football-deonte-banks-micah-mcfadden-puka-nacua-week-2",
+      "kind": "official_inactives",
+      "sha256": "75d1ff50413bb986431cffd77a262639603ab079590ad286150a47f8bc6b77ee",
+      "started_at": "2026-09-22T00:12:15.380097+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/inactives-who-s-in-who-s-out-for-monday-night-football-deonte-banks-micah-mcfadden-puka-nacua-week-2"
+    },
+    {
+      "bytes": 703332,
+      "captured_at": "2026-09-22T00:12:15.667054+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/week-2-monday-night-inactives-new-york-giants-at-los-angeles-rams",
+      "kind": "official_inactives",
+      "sha256": "cdc2efd03680ba536eaad7b6b8001c60175b4262c312641553742f678a6b64ba",
+      "started_at": "2026-09-22T00:12:15.380490+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/week-2-monday-night-inactives-new-york-giants-at-los-angeles-rams"
+    },
+    {
+      "bytes": 721851,
+      "captured_at": "2026-09-22T00:12:15.663602+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.nfl.com/news/rams-wr-puka-nacua-hip-inactive-monday-giants",
+      "kind": "official_inactives",
+      "sha256": "a50106bf4e86bdcdb712bd9d881e7e8b1dd9de713c93328cc36ddab8c41199f4",
+      "started_at": "2026-09-22T00:12:15.380896+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/rams-wr-puka-nacua-hip-inactive-monday-giants"
+    },
+    {
+      "bytes": 910660,
+      "captured_at": "2026-09-22T00:12:16.018862+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "3ca7b17f6e4070ff79fb2e638f2334eb7e6047efd30f10847cc886a1fdc85efe",
+      "started_at": "2026-09-22T00:12:15.524297+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-2-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
