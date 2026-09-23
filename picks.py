@@ -138,7 +138,17 @@ def current_week_year():
     yr = sb.get("season", {}).get("year")
     stype = sb.get("season", {}).get("type")
     if stype != 2:
-        wk = 1
+        return 1, yr
+    # ESPN keeps its "current week" on the just-finished week for a day or two
+    # after Monday night before rolling forward. For picking/ratings we want the
+    # UPCOMING slate, so once every game of ESPN's reported week is final, advance
+    # to the next week. (Mid-week — e.g. after only TNF — not all are complete, so
+    # we stay put.)
+    events = sb.get("events", [])
+    if events and all(
+        (e.get("status", {}).get("type", {}) or {}).get("completed") for e in events
+    ):
+        wk += 1
     return wk, yr
 
 
