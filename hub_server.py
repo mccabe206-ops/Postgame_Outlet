@@ -956,6 +956,8 @@ PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
  .close{cursor:pointer;color:var(--dim);border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:var(--card)}
  .rc-ok{color:var(--good)} .rc-bad{color:var(--bad)}
  .toggle button.act{background:#193253;color:var(--ink)}
+ .subhd{margin:12px 0 5px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);border-top:1px solid var(--line);padding-top:9px}
+ .subhd:first-child{border-top:0;padding-top:0;margin-top:2px}
  .qbwrap{overflow:auto;max-height:70vh}
  .qbt{width:100%;border-collapse:collapse;font-size:12.5px}
  .qbt th,.qbt td{padding:4px 9px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
@@ -1018,41 +1020,34 @@ PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
 
 <script>
 const CARDS = [
- {n:1, t:"Open pick sheet", d:"Your editable weekly pick sheet (matchups, market vs. your line, edge; pick 5 with confidence).",
+ {n:1, t:"Weekly picks", d:"Your editable weekly pick sheet — matchups, market vs. your line, edge; pick 5 with confidence.",
    render:c=>btn(c,"Open pick sheet",()=>launch('pick'))},
- {n:2, t:"Update ratings & write-up", d:"One view: edit QB/Off/Def (gated save, or hand to Claude Code) AND the write-up with live preview. See current numbers + league context before you change anything.",
+ {n:2, t:"Update ratings & write-up", d:"Edit QB/Off/Def (gated save, or hand to Claude Code) AND the write-up with live preview — current numbers + league context in view.",
    render:c=>teamEditorCard(c)},
- {n:3, t:"Show current ratings", d:"The full 32-team board from your ratings, best to worst.",
-   render:c=>btn(c,"Show board",()=>run({action:'ratings'},"Current ratings"))},
- {n:16, t:"QB rankings", d:"All 32 active starting QBs ranked 1–32, each with the team's backup (QB2) and third-string + ratings. Toggle to a week-to-week view of how each starter's rating has moved.",
-   render:c=>btn(c,"Open QB rankings",()=>openQbBoard())},
- {n:5, t:"Results & grading", d:"ESPN final scores + stats, picks graded vs. market, luck/quality read, rating signals.",
-   render:c=>weekRun(c,'results',"Results & grading")},
- {n:6, t:"Preview locally", d:"Regenerate the site to a private local file — no publish.",
-   render:c=>btn(c,"Build preview",()=>run({action:'preview'},"Local preview"))},
- {n:7, t:"Publish (preflight)", d:"Run the gate + tests and show exactly what would go live. To go live, say “publish” to Claude Code.",
-   render:c=>btn(c,"Run preflight",()=>publishCheck(),"alt")},
- {n:8, t:"Publish an edition", d:"Named board snapshot (e.g. “Week 3”). Triggered as a manual GitHub Action — confirm the label with Claude Code.",
-   render:c=>{const p=el('p');p.className='note';p.textContent='Handled via the publish-edition GitHub Action; tell Claude Code the label to run it.';c.appendChild(p);}},
- {n:9, t:"What changed", d:"Everything edited in data/ since the last publish (diff --stat + ratings detail).",
-   render:c=>btn(c,"Show diff",()=>run({action:'whatchanged'},"What changed"))},
- {n:13, t:"Previous ratings", d:"Your board over time. Take an immutable snapshot now, or open a past one to see the full 32-team board as of that date, with a Δ column vs. your current numbers.",
-   render:c=>snapshotCard(c)},
- {n:14, t:"PFF player stats", d:"Per-player PFF grades + advanced stats for a week, grouped by game (passing/rushing/receiving/blocking/defense/ST). Pulled from your PFF+ subscription via Claude Code; this reads the local cache.",
-   render:c=>pffCard(c)},
- {n:15, t:"Game reports", d:"Click a game to open a full visual report: score + quarter line, expected vs. actual vs. garbage-time-aware competitive score, half-by-half game shape, team-stat comparison, QB matchup, and top PFF performers.",
-   render:c=>btn(c,"Open game reports",()=>launch('game'))},
- {n:10, t:"Injury report", d:"Every team's rating-relevant injuries (Sleeper). Open the dashboard, or run the CLI scan.",
-   render:c=>injuryCard(c)},
- {n:12, t:"Depth charts", d:"Starter → backup order (Ourlads) with player photos + jersey numbers. List or field-diagram view; pick a team.",
-   render:c=>depthCard(c)},
- {n:11, t:"NFL knowledge base", wide:true, d:"Chat in plain English — “turnover differential per team last year”, “spot the trends this week”. Model writes read-only SQL, cites the numbers. One-click trends + a raw SQL box work with no key.",
+ {n:3, t:"Ratings board", wide:true, d:"View the ratings — the full 32-team board, QB rankings, and past editions.",
+   render:c=>{ sub(c,'Board — 32 teams, best to worst'); btn(c,"Show board",()=>run({action:'ratings'},"Current ratings"));
+     sub(c,'QB rankings — starters 1–32 + backups, week-to-week'); btn(c,"Open QB rankings",()=>openQbBoard());
+     sub(c,'Editions — snapshot now, or open a past board (Δ vs current)'); snapshotCard(c); }},
+ {n:4, t:"Game analysis", wide:true, d:"What happened in the games — scores + graded picks, visual game reports, per-player PFF grades.",
+   render:c=>{ sub(c,'Results & grading — scores, picks vs market, rating signals'); weekRun(c,'results',"Results & grading");
+     sub(c,'Game reports — full visual report per game'); btn(c,"Open game reports",()=>launch('game'));
+     sub(c,'PFF player stats — grades by game (reads local cache)'); pffCard(c); }},
+ {n:5, t:"Roster & health", wide:true, d:"Who's healthy and who's starting — rating-relevant injuries (Sleeper) and depth-chart order (Ourlads).",
+   render:c=>{ sub(c,'Injury report — rating-relevant injuries'); injuryCard(c);
+     sub(c,'Depth charts — starter → backup order'); depthCard(c); }},
+ {n:6, t:"Publish center", wide:true, d:"Preview, preflight the gate, see what changed, and publish a named edition.",
+   render:c=>{ sub(c,'Preview — regenerate to a private local file (no publish)'); btn(c,"Build preview",()=>run({action:'preview'},"Local preview"));
+     sub(c,'What changed — data/ diff since last publish'); btn(c,"Show diff",()=>run({action:'whatchanged'},"What changed"));
+     sub(c,'Preflight — gate + tests; shows exactly what would go live'); btn(c,"Run preflight",()=>publishCheck(),"alt");
+     sub(c,'Publish an edition'); {const p=el('p','note','Named board snapshot via the publish-edition Action — tell Claude Code the label. To go live, say “publish” to Claude Code.'); c.appendChild(p);} }},
+ {n:7, t:"NFL knowledge base", wide:true, d:"Chat in plain English — model writes read-only SQL and cites the numbers. One-click trends + a raw SQL box, no key needed.",
    render:c=>kbCard(c)},
 ];
 
 function el(t,cls,txt){const e=document.createElement(t);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
 function btn(c,label,fn,cls){const b=el('button',(cls?'go '+cls:'go'),label);b.onclick=fn;
   const r=el('div','row');r.appendChild(b);c.appendChild(r);return b;}
+function sub(c,label){const s=el('div','subhd',label);c.appendChild(s);return s;}
 
 function buildCards(){
   const g=document.getElementById('cards'); g.innerHTML='';
