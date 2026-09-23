@@ -1,3 +1,15 @@
+## Week 2: vs Philadelphia (L 20–24)
+
+A step forward in a loss — Tennessee **"won the tape"** and fell only on a Jalen Hurts
+last-second touchdown, after leading 20–17 late (Marcus Harris interception). **Cam Ward was
+efficient** (13/20, 183, no turnovers, 70.8 PFF — a clear jump from Week 1), the offense moved the
+ball and out-gained Philadelphia in the second half, and **Jeffery Simmons was dominant** (83.4, 6
+pressures) on a defense that graded well in 157°F heat.
+
+**What moved:** **Offense −1.0 → −0.9** — a very slight bump for a more competent showing than the
+Week 1 dud. QB and Defense held (the defense graded well here; watching whether it earns a bump as
+the sample grows).
+
 ## Week 1: vs N.Y. Jets (L 10–23)
 
 Robert Saleh's Tennessee debut, against his former team, went badly — a 23–10 home loss in

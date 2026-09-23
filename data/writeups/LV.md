@@ -1,3 +1,23 @@
+## Week 2: at LA Chargers (W 26–14)
+
+Las Vegas went on the road and won a competitive game by doing the unglamorous things: it
+protected the ball (one turnover to the Chargers' three) and finished drives. The yardage was
+nearly even — 305 to 310 — so this wasn't a case of the Raiders imposing their will as much as
+Los Angeles giving the game away, but a road win over a division rival is a road win. Kirk Cousins
+played well, giving the offense the steady veteran hand it needs while Ashton Jeanty and the run
+game set the terms, and the defense held the Chargers to 14. The expected-score model had it far
+tighter (LV by ~3, not 12) — Las Vegas over-performed its box by about seven points — but the
+result and the way Cousins handled it earn him a real step up off the floor. No new injuries of
+note.
+
+## What changed — Week 2 2026
+
+- **QB Cousins −2.5 → −1.5 (+1.0):** played well in a road win, keying a two-score result. A
+  genuine climb off the worst-starter floor for a veteran doing his job.
+- **Defense −1.0 → −0.7 (+0.3):** solid — held the Chargers to 14 and forced three turnovers.
+- **Offense held −0.5:** Jeanty and the run game carried it again; no change.
+- New total: **−4.0 → −2.7.**
+
 ## Week 1: vs Miami (W 27–13)
 
 Las Vegas never trailed, controlling the game from a 16-play opening drive. The win was

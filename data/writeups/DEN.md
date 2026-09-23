@@ -1,3 +1,18 @@
+## Week 2: vs Jacksonville (W 20–13)
+
+The response the rating was waiting for. A week after the run defense got gashed at Kansas
+City, Denver's defense controlled this one — holding Jacksonville to 13 points and shutting
+down the Jaguars' second half (just 3 points and 128 yards allowed after the break). The
+offense did enough (392 yards, 22 first downs) and the fourth quarter belonged to Denver, which
+scored all 14 of its final-frame points to pull away. Bo Nix was still unimpressive and holds;
+the move is defensive, nudging the grade back toward where it opened the season.
+
+- **Defense +1.2 → +1.5 (+0.3):** back toward the preseason number. Looked good, held
+  Jacksonville to 13, and shut down their second half — the run-defense concern from Week 1
+  didn't repeat.
+- **QB Nix held 0.0:** unimpressive again, but the win keeps the ascending-starter grade in place.
+- **Offense held +0.5.**
+
 ## Week 1: at Kansas City (L 10–31)
 
 A disappointing opener — a 31–10 road loss at Kansas City in which the defense, this team's

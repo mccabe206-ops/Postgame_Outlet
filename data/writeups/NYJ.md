@@ -1,3 +1,21 @@
+## Week 2: vs Green Bay (L 17–20, OT)
+
+A loss on the scoreboard, but a genuinely encouraging game for the defense — and evidence the unit
+is legit. The Jets out-gained Green Bay (285 to 199), piled up a +97 yardage edge in the first
+half, and led 17–7 into the fourth quarter; the expected-score model had **New York by about nine**,
+and by any process read they should have won. Instead a punt-return that flipped the field, a tying
+Green Bay field goal, and an OT possession that stalled after the Jets elected to receive handed the
+game away 17–20. None of that is on the defense, which dominated the box against the Packers'
+offense. That's enough to move the defense grade up while the quarterback and offense hold — the D
+did its job and then some. (LB depth took minor dings — Marcelino McCrary-Ball, ankle; Kiko Mauigoa,
+quad — special-teams tacklers, nothing structural.)
+
+## What changed — Week 2 2026
+
+- **Defense −0.2 → +0.3 (+0.5):** dominated the box, out-gained Green Bay, and by the model should
+  have won — the unit is legit. Nudged up to the average line.
+- **QB Geno Smith (−2.0) and Offense (−0.5) held.**
+
 ## Week 1: at Tennessee (W 23–10)
 
 The Jets went into Nashville and controlled it wire-to-wire — a 23–10 win in which the

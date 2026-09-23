@@ -1,3 +1,20 @@
+## Week 2: at Baltimore (W 24–17)
+
+New Orleans walked into Baltimore as roughly an 8.5-point road underdog and won outright,
+24–17 — a genuine upset over a top-tier roster. And it wasn't a fluke: the model saw a
+near-even game and had the Saints winning by ~1.5. New Orleans trailed 14–6 at the half, then
+took over — 18 second-half points while Baltimore managed 64 yards and 3 points after the
+break. Tyler Shough was the engine again: 27-of-34 for 252, 1 TD, 0 INT, 76.8 QBR, and he now
+**leads the NFL in passing yards** through two weeks. Two straight weeks of real quarterback
+play from a shorthanded, ascending second-year passer.
+
+- **Shough -0.5 → 0.0 (+0.5):** leads the league in passing yards (27/34, 252, 1 TD, 0 INT,
+  76.8 QBR) and just won on the road in Baltimore — no longer below the line.
+- **Offense 0.0 → 0.3 (+0.3):** an impressive road win over a top team; the group is moving the
+  ball even with the injuries around it.
+- **Defense held -0.3:** the thin, IR-riddled unit did its part in a road upset, but the price
+  already reflects the bodies it's missing.
+
 ## Week 1: at Detroit (L 30–31, OT)
 
 New Orleans lost a 31–30 overtime heartbreaker at Detroit, but the story was the fight:

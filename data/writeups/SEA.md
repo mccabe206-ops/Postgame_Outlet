@@ -1,3 +1,19 @@
+## Week 2: at Arizona (W 31–7)
+
+This is the game that says the QB hole was overpriced and the defense underpriced. Filling in
+for the injured Sam Darnold, **Drew Lock played great** — good enough that the backup grade
+climbs to neutral — and the defense turned in another smothering afternoon. After a 7–7 first
+half in which Seattle out-gained Arizona but didn't lead the scoreboard, the Seahawks poured on
+24 unanswered second-half points while holding the Cardinals to 44 yards and a shutout after the
+break. Seattle has now allowed **just 17 points across two games**. It's a high defensive
+number to sign off on, but the tape backs it.
+
+- **QB Lock −1.0 → 0.0 (+1.0):** one of the better backups in the league; played great and no
+  longer profiles below a replacement starter.
+- **Defense +2.0 → +3.0 (+1.0):** elite — 17 points allowed across two games, and a second-half
+  shutout of Arizona. Reluctant to go this high, but warranted.
+- **Offense held +1.5.**
+
 ## Week 1 availability
 
 Checked September 9, 2026, 10:42–10:46 a.m. ET. The September 8 final injury report lists **Ty Okada OUT (hamstring)**; **Nick Emmanwori (ankle)** and **Tory Horton (hamstring) are QUESTIONABLE**. Tuesday participation was estimated for a walkthrough. [Seahawks report](https://www.seahawks.com/news/2026-week-1-injury-report-seahawks-vs-patriots). Final inactives are pending.

@@ -1,3 +1,21 @@
+## Week 2: at Denver (L 13–20)
+
+Jacksonville's win streak stopped in Denver. The box was close — the Jaguars moved the
+ball (268 yards, 21 first downs) and the model had this as a one-score game the right way —
+but the second half got away from them on both sides. After a competitive first half,
+Jacksonville managed just 3 points and 128 yards after the break while Denver piled up 224
+yards and 17, scoring all 14 of its fourth-quarter points as the Jaguars faded. Trevor
+Lawrence's grade held after his career Week 1, and the offense held too — the second-half lag
+came against a good Denver defense, so it reads as opponent quality, not a unit slipping. The
+change is on defense: the front seven that carried the Week 1 riser story couldn't get off the
+field late.
+
+- **Defense +0.5 → 0.0 (−0.5):** faded in the second half — couldn't hold Denver's late
+  surge, which turned a tight game into a two-score loss.
+- **Offense held +0.5:** there was a second-half stall, but it came against a good Denver
+  defense; the grade is opponent-based, so no cut.
+- **QB Lawrence held +3.5.**
+
 ## Week 1: vs Cleveland (W 34–10)
 
 Jacksonville routed Cleveland at home behind the best game of Trevor Lawrence's career.

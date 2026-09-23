@@ -1,3 +1,17 @@
+## Week 2: vs Pittsburgh (W 20–3)
+
+The defense carried this one — a near-shutout of a veteran QB (held Pittsburgh's *offense* to 13;
+**Barmore strip-sack**, **Ponder's 35-yard scoop-and-score**, Woodson and Dean tight in
+coverage), with **TreVeyon Henderson** (76 yards, TD) the offensive spark in his debut. But the
+win came at a real cost, and Maye was quiet again.
+
+**What moved:** **Maye +3.0 → +2.5** — he's been poor two straight weeks (1 TD, 4 INT), even
+granting Week 2 came against an elite defense; the last stretch dating to late 2025 has been
+shaky. **Offense −0.5 → −0.7** — **RG Mike Onwenu (ankle, reported likely season-ending)** is a
+real interior-line loss, stacked on no A.J. Brown (IR) and no Carlton Davis. **Defense +0.5 →
++0.7** — a slight nudge for smothering Pittsburgh, tempered by the box (the Steelers projected to
+~13); the unit also lost S Craig Woodson and Dre'Mont Jones in-game.
+
 ## Week 1: at Seattle (L 10–13)
 
 New England opened on the road at Seattle and lost 10–13. It cut two ways. Drake

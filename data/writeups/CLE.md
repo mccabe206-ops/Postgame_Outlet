@@ -1,3 +1,21 @@
+## Week 2: at Tampa Bay (W 23–19)
+
+Cleveland won a genuine coin-flip in Tampa, 23–19 — the model actually favored the Bucs by
+about a point, and both teams finished inside their expected range. The Browns were dormant
+early (51 yards, 6 points at the half) and won it after the break, outscoring Tampa 17–10 on
+223 second-half yards; a 2+ hour rain delay right before the final two minutes stalled
+whatever Tampa had left. The headline is that the quarterback and the passing game finally
+gave the defense something to work with. Deshaun Watson turned in his best game back from the
+Achilles — 24-of-30 for 238, 2 TD, 0 INT, 69.1 QBR/PFF — competent and clean, which is all
+this rating needed to see. Rookie WR **Denzel Boston** was the spark, now with 2 touchdowns in
+his first 2 career games.
+
+- **Watson -3.0 → -2.5:** proved at least competent (24/30, 238, 2 TD, 0 INT); climbs back off
+  the below-worst-starter floor after grading dead last in Week 1.
+- **Offense -1.0 → -0.8 (+0.2):** rookie WR Denzel Boston looks like a real piece (2 TD in his
+  first 2 games) — the passing game showed a pulse.
+- **Defense held +0.5:** held a Baker-led offense to 19 in a game the box saw as a toss-up.
+
 ## Week 1: vs Jacksonville (L 10–34)
 
 Cleveland was routed at home by Jacksonville, and the game confirmed the profile: no

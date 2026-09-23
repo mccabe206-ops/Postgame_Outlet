@@ -1,3 +1,20 @@
+## Week 2: vs Cleveland (L 19–23)
+
+Tampa Bay dropped a home game it was favored to win, 23–19 to Cleveland. It was a weird one —
+a 2+ hour rain delay hit right before the final two minutes and killed the Bucs' momentum —
+but the box doesn't bail Tampa out this time the way the four-fumble loss in Week 1 did. Baker
+Mayfield was flat all day (21-of-34, 182 yards, 1 TD, 1 INT, 53.1 QBR), and the defense got
+toasted by a bottom-tier Cleveland offense, surrendering 23 points and 17 over the final two
+quarters. Two straight losses to open the year, and this one lands on the roster, not on
+variance.
+
+- **Baker 2.0 → 1.5:** looked bad — 21/34, 182, 1 TD, 1 INT, 53.1 QBR. Off the best stretch of
+  his career, this was a step back.
+- **Defense -0.5 → -1.0 (-0.5):** got toasted, allowing 23 to a bottom-tier Cleveland offense —
+  the thinner middle (no Lavonte David, no Haason Reddick) is starting to show.
+- **Offense held 1.0:** the line and Bucky Irving still travel; the loss was on execution, not
+  the offensive unit's talent.
+
 ## Week 1: at Cincinnati (L 27–33)
 
 Tampa Bay lost 27–33 at Cincinnati, but the score is misleading: the Bucs **lost four

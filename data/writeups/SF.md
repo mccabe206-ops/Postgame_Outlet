@@ -1,3 +1,17 @@
+## Week 2: vs Miami (W 35–13)
+
+San Francisco kept rolling with a comfortable 35–13 win over Miami, and it was **Brock Purdy's
+day** — 20-of-22 for 287 yards and 2 touchdowns, a 99.7 PFF passing grade, a genuinely surgical
+performance. The defense did its part too, squeezing a Miami offense that moved the ball between
+the 20s into a garbage-time 13 (the game was decided in Q3). Nothing here demands a big move —
+the profile is already top-tier — so both changes are slight.
+
+- **QB Purdy +3.0 → +3.2 (+0.2, slight):** 20/22, 287, 2 TD, 99.7 grade — surgical and
+  efficient.
+- **Defense +1.0 → +1.2 (+0.2, slight):** held Miami to a garbage-time 13.
+- **Offense +1.0 held:** dominant, but the grade is already where it should be.
+- **New total 5.0 → 5.4.**
+
 ## Week 1: at L.A. Rams (W 27–7, in Melbourne)
 
 San Francisco opened the season in Melbourne and dismantled the Rams 27–7. The offense

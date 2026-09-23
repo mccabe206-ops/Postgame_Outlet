@@ -1,3 +1,19 @@
+## Week 2: at Kansas City (L 30–33)
+
+A 33–30 loss in Kansas City that reads far better than the Week 1 blowout — Indianapolis went
+into Arrowhead and traded blows, putting up 30 points on 329 yards against a real defense. The
+headline is **Daniel Jones' health**: the rust and inaccuracy from his first game back off the
+December Achilles tear are gone, and he looked genuinely mobile and in command moving the
+offense to 30 on the road. That lifts both the quarterback and the surrounding offense.
+
+- **QB Daniel Jones −0.5 → +0.5 (+1.0):** looks pretty healthy now; moved the ball to 30 in
+  Kansas City.
+- **Offense +0.5 → +0.8 (+0.3):** the above-average non-QB group (Taylor, the line, Pierce /
+  Keenan Allen / Downs, Warren) produced a sustainable 30-point, 329-yard day on the road.
+- **Defense −0.5 held:** still below the line, but that's fair against the caliber of offenses
+  faced — no further cut.
+- **New total −0.5 → +0.8.**
+
 ## Week 1: vs Baltimore (L 23–41)
 
 Indianapolis opened fast on a Jonathan Taylor touchdown drive, then got run off its own

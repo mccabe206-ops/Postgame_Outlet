@@ -1,18 +1,18 @@
 team,string,qb_name,value,notes,age,exp
-Minnesota Vikings,2,J.J. McCarthy,-2.5,Near-startable; former 1st-rounder,23,2
+Minnesota Vikings,3,J.J. McCarthy,-3.0,"QB3 now — sprained ankle (multi-week), trade chatter; dropped to -3.0",23,2
 Atlanta Falcons,2,Tua Tagovailoa,-2.5,Startable vet behind Penix,28,6
 Indianapolis Colts,2,Anthony Richardson Sr.,-2.5,Former starter; high upside,24,3
 Kansas City Chiefs,2,Justin Fields,-2.5,Former starter,27,5
 Cincinnati Bengals,2,Joe Flacco,-3.0,Proven veteran,41,18
-Washington Commanders,2,Marcus Mariota,-3.0,Solid vet backup,33,11
+Washington Commanders,2,Jayden Daniels,2.0,"INJURED (dislocated left elbow, out multiple games/poss IR) franchise starter — Mariota (ratings QB1) starting in relief; restore to QB1 when healthy",26,2
 San Francisco 49ers,2,Mac Jones,-3.0,Former starter,28,5
 Cleveland Browns,2,Shedeur Sanders,-3.0,Rookie; Watson now starter,24,1
-New York Giants,2,Jameis Winston,-3.0,Veteran starting experience,32,11
+New York Giants,2,Jaxson Dart,-0.5,"INJURED (severe left knee, out extended / potentially season-ending) — Jameis Winston (ratings QB1, dropped to -4.0) starting; restore Dart if/when he returns",23,1
 Baltimore Ravens,2,Tyler Huntley,-3.5,Mobile; has started games,28,6
 Carolina Panthers,2,Kenny Pickett,-3.5,Former 1st-rounder,28,4
 Detroit Lions,2,Teddy Bridgewater,-3.5,Veteran,34,12
 Green Bay Packers,2,Tyrod Taylor,-3.5,Veteran,37,15
-Seattle Seahawks,2,Drew Lock,-3.5,Veteran,30,7
+Seattle Seahawks,2,Sam Darnold,2.0,"INJURED (glute, not serious) franchise starter — out since Wk1; Drew Lock (ratings QB1) starting in relief 2-0; restore to QB1 when healthy. Value = his pre-injury starter grade, adjustable",28,8
 New Orleans Saints,2,Spencer Rattler,-3.5,Developing,26,2
 Pittsburgh Steelers,2,Mason Rudolph,-3.5,Veteran,31,8
 Arizona Cardinals,2,Gardner Minshew II,-3.5,Veteran spot-starter,30,7
@@ -28,15 +28,15 @@ New York Jets,2,Cade Klubnik,-4.0,Rookie,,
 Miami Dolphins,2,Quinn Ewers,-4.0,Rookie,,
 Las Vegas Raiders,2,Fernando Mendoza,-3.0,Rookie; raised per your read,22,0
 Los Angeles Rams,2,Ty Simpson,-4.0,Rookie,,
-Chicago Bears,2,Tyson Bagent,-4.5,UDFA backup,,
+Chicago Bears,2,Caleb Williams,3.0,"INJURED (right hamstring, week-to-week) franchise starter — out since Wk2 Q4, ruled out Wk3; Bagent (concussion protocol)/Keenum starting in relief; restore to QB1 when healthy",24,2
 Buffalo Bills,2,Kyle Allen,-4.5,Deep journeyman,,
 New England Patriots,2,Tommy DeVito,-4.5,Deep journeyman,,
 Las Vegas Raiders,3,Aidan O'Connell,-4.5,Real starting experience,,
 Tennessee Titans,3,Will Levis,-4.5,Former 2nd-round starter,,
-Minnesota Vikings,3,Carson Wentz,-4.5,Former MVP-candidate vet,,
+Minnesota Vikings,2,Carson Wentz,-1.0,"QB2 now (McCarthy ankle/multi-week); rated -1.0 = his value as the current fill-in starter — started Wk2, 9-3 W vs CHI for concussed Murray",33,11
 Dallas Cowboys,3,Sam Howell,-4.5,Has starting experience,,
 Philadelphia Eagles,3,Andy Dalton,-4.5,Proven veteran,,
-Chicago Bears,3,Case Keenum,-4.5,Proven veteran,,
+Chicago Bears,3,Tyson Bagent,-4.5,"UDFA backup; in concussion protocol Wk2 — QB3 behind starter Keenum while Caleb (hamstring) is out",,
 New Orleans Saints,3,Zach Wilson,-5.0,Former #2 overall,,
 Cincinnati Bengals,3,Josh Johnson,-5.0,Career journeyman,,
 Baltimore Ravens,3,Skylar Thompson,-5.0,Spot backup,,
@@ -63,3 +63,5 @@ Jacksonville Jaguars,3,Carter Bradley,-6.0,Deep backup,,
 Washington Commanders,3,Athan Kaliakmanis,-6.0,Raw rookie,,
 Detroit Lions,3,Luke Altmyer,-6.0,Raw rookie,,
 Tampa Bay Buccaneers,3,Connor Bazelak,-6.0,Raw rookie,,
+Atlanta Falcons,3,Cooper Rush,-4.5,"QB3 behind Penix/Tua; downgraded -3.5->-4.5 Wk2 — awful in the 34-3 loss (pick-6, 26.7 PFF) vs a CAR D that had allowed 59 the week before",31,10
+Atlanta Falcons,4,Jack Strand,-5.5,"Rookie UDFA; pick-6 in Wk2 relief debut",23,1

@@ -1,3 +1,16 @@
+## Week 2: at Minnesota (L 3–9)
+
+A weather-suppressed rock-fight the Bears couldn't finish — Chicago moved the ball (297 yards, 17
+first downs) but turned it over twice and scored just 3 in a 9–3 loss. The bigger blow came late:
+**Caleb Williams tore off a non-contact right hamstring in the fourth quarter** and is **out Week
+3 (week-to-week)**, with backup Tyson Bagent also in concussion protocol.
+
+**What moved:** **QB +3.0 → −4.5.** With Caleb out, the board shows the *active* starter — veteran
+**Case Keenum (−4.5)** — until Caleb returns (his +3.0 is held in the QB list as the injured
+starter). **Defense −1.0 → −0.8** — a small credit for holding Minnesota to 9, tempered because
+the Vikings were QB-limited (Wentz) and the weather smothered both offenses. Offense **held at
++1.0** (the 3 points was finishing/turnovers + the injury, not the unit).
+
 ## Week 1: at Carolina (W 59–37)
 
 Chicago opened with an offensive explosion — 59 points and 552 yards in the highest-scoring

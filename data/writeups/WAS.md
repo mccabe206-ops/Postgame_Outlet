@@ -1,3 +1,21 @@
+## Week 2: at Dallas (L 20–37) — and a QB blow
+
+A costly afternoon in Dallas that got worse than the box. Washington actually out-gained the
+Cowboys (389 yards to 332, 24 first downs to 20) and the process model even had the Commanders
+as the nominal winner — but they couldn't finish, stalling for a 20-point day while Dak Prescott
+carved them up. The bigger loss was at quarterback: **Jayden Daniels (+2.0) dislocated his left
+(non-throwing) elbow, was ruled out for Week 3, and is projected to miss multiple games with a
+possible IR stint.** The active starter is now **Marcus Mariota (−3.0)**, a steep drop from the
+franchise passer; Daniels gets restored to QB1 when he's healthy. On top of the QB hit, the
+defense was awful — and the note is explicit that it looked bad *even with Daniels still in the
+lineup*, so this isn't an injury alibi.
+
+- **QB: Jayden Daniels (+2.0) OUT (dislocated left elbow, multiple games, possible IR)** →
+  active starter **Marcus Mariota −3.0**. Restore Daniels when healthy.
+- **Defense −1.0 → −1.5 (−0.5):** awful, and it looked bad even before Daniels left — there's
+  no unit-carrying strength here to slow anyone down.
+- **Offense held −1.0.**
+
 ## Week 1: at Philadelphia (L 22–24)
 
 Washington lost a two-point road game it nearly stole. Jayden Daniels — playing his first

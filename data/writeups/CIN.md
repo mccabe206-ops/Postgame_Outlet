@@ -1,3 +1,20 @@
+## Week 2: at Houston (W 20–6)
+
+Cincinnati won 20–6 in Houston, and the defense is the reason the number moves — but the box
+demands an honest caveat. The Bengals landed right on their expected total (20 vs ~18), while
+Houston "should have" scored close to 28 on its process stats and managed 6, a huge
+positive-regression flag. **Houston out-gained Cincinnati 374–267 and won first downs 22–12**;
+the model actually expected the Texans to win by ~10. So the retooled Cincinnati defense
+looked great on the scoreboard, but it was helped by Houston repeatedly stalling before the
+end zone and by the Texans playing **without WR1 Nico Collins**. Joe Burrow was efficient and
+clean — 20-of-31 for 207, 2 TD, 0 INT — cashing the drives that mattered.
+
+- **Defense -0.5 → 0.0 (+0.5):** looked great, holding Houston to 6. Tempered by the fact that
+  HOU out-gained the Bengals and was missing Nico Collins — the scoreboard flatters the unit
+  more than the yardage does, but the retooled group is trending the right way.
+- **QB Burrow and Offense held** (5.0 / 0.7): Burrow 20/31, 207, 2 TD, 0 INT — no reason to
+  move a top-tier passer and elite weapons off a clean, efficient road win.
+
 ## Week 1: vs Tampa Bay (W 33–27)
 
 Cincinnati opened at home with a 33–27 win over Tampa Bay. The offense moved the ball well

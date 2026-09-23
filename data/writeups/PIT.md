@@ -1,3 +1,16 @@
+## Week 2: at New England (L 3–20)
+
+A 3-point dud, but read the box before the scoreboard: Pittsburgh moved the ball (235 yards, 16
+first downs — the model expected **~13 points**) and lost by 17 partly because a **Ponder
+fumble-return TD** gave New England 7 of its 20. The defense didn't lose this — **Nick Herbig
+(93.9), Keeanu Benton (90.6), Patrick Queen (83.7) and T.J. Watt (two sacks)** held the Patriots'
+*offense* to 13. The offense stalled in the red zone (threatening at the NE 17 late) and was
+**without WR Michael Pittman Jr.**
+
+**What moved:** **Rodgers −1.0 → −1.5** — awful (26.8 QBR, 51.5 PFF, 0 TD/1 INT). Offense **held
+at 0.0** (the box says it moved the ball; Pittman was out — if he stays out we drop it 0.2, and
+another 0.1 if Rico Dowdle is out too). Defense **held at +1.0** — it's playing to the grade.
+
 ## Week 1: vs Atlanta (W 20–13)
 
 Pittsburgh opened 1–0 the way the rating draws it up: the defense won the game and the offense

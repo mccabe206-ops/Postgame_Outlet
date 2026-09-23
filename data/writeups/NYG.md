@@ -1,3 +1,20 @@
+## Week 2: at L.A. Rams (L 6–28)
+
+The Week 1 optimism ran straight into the worst kind of Week 2: **Jaxson Dart went down on the
+opening drive with a severe left knee injury** — an extended absence that is potentially
+season-ending — and the Giants never recovered, losing 28–6 in Los Angeles. **Jameis Winston**
+is the active starter now, and he looked horrible in relief: 11-of-27 for 111 yards, no
+touchdowns, an interception, and a 17.2 QBR. The non-QB units held where they were; this week
+is entirely a quarterback story.
+
+- **QB — Dart (−0.5) is OUT** (severe left knee, extended / potentially season-ending). The
+  active starter and ratings QB1 is now **Jameis Winston**, whose personal grade drops **−3.0 →
+  −4.0** (11/27, 111, 0 TD, 1 INT, 17.2 QBR). **Restore Dart if/when he returns.**
+- **Offense 0.0 and Defense +0.5 held:** the rest of the roster graded as it was; the pass rush
+  and the group around the quarterback weren't the problem.
+- **New total 0.0 → −3.5** — almost entirely the quarterback change (Dart's injury plus
+  Winston's poor grade), not a re-rating of the roster.
+
 ## Week 1: vs Dallas (W 28–20)
 
 The Giants opened with a statement on Sunday night, beating Dallas 28–20. **Jaxson Dart looked
