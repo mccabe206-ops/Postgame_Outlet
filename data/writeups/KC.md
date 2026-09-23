@@ -1,3 +1,18 @@
+## Week 2: vs Indianapolis (W 33–30)
+
+Kansas City survived a 33–30 shootout with the Colts, and the one open question from the
+offseason is now fully answered: **Mahomes looks great.** He went 32-of-47 for 382 yards and 3
+touchdowns with no interceptions (78.6 QBR) — a complete restore, no lingering effects from the
+torn ACL/LCL or the brace. The offense also has more life around him, with Kelce playing well
+and Ken Walker III looking excellent, so the unit finally comes off zero.
+
+- **QB Mahomes +4.0 → +4.5:** looks great (32/47, 382, 3 TD, 0 INT, 78.6 QBR) — the rust
+  haircut comes fully off, back to his ceiling.
+- **Offense 0.0 → +0.5:** Kelce playing well and Ken Walker III looking great — no longer just
+  an average group.
+- **Defense −0.5 held:** no change.
+- **New total 3.5 → 4.5.**
+
 ## Week 1: vs Denver (W 31–10)
 
 Kansas City opened with a statement, 31–10 over Denver — and the headline is the return:

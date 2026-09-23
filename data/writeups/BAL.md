@@ -1,3 +1,20 @@
+## Week 2: vs New Orleans (L 17–24)
+
+Baltimore lost outright at home as an ~8.5-point favorite to New Orleans — the kind of result
+that isn't acceptable at this price. The Ravens led 14–6 at the half on 223 yards, then went
+quiet: 64 yards and 3 points over the final two quarters while the Saints hung 18. The box
+backs the disappointment — Baltimore left points on the floor (roughly 4 under its expected
+total) and the model already saw this as a near-even game it slightly favored New Orleans to
+win. Lamar Jackson didn't close it out (21-of-31, 235, 1 TD, 1 INT), and the turnover was a
+terrible game-sealing INT at the end. A collective flop — offense stalled after halftime, and
+a defense priced near the top let a thin, banged-up group win in Baltimore.
+
+- **Lamar 4.5 → 4.0 (-0.5):** terrible game-sealing INT at the end and didn't close (21/31,
+  235, 1 TD, 1 INT) — a rare down week for the MVP-caliber grade.
+- **Defense 1.0 → 0.5 (-0.5):** let a thin, banged-up New Orleans offense score 24 and win in
+  Baltimore as big favorites — the Minter-scheme optimism takes a hit until it shows up.
+- **Offense held 0.8.**
+
 ## Week 1: at Indianapolis (W 41–23)
 
 Baltimore rolled — 41–23 at Indianapolis, 28 unanswered after the Colts' opening drive, a

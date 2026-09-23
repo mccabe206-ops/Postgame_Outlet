@@ -1,3 +1,19 @@
+## Week 2: vs Washington (W 37–20)
+
+A get-right game keyed by the quarterback. The final says blowout; the box says a coin flip —
+Dallas was actually out-gained (332 yards to 389, 20 first downs to 24) and the process model
+had Washington as the nominal winner. What separated them was **Dak Prescott finishing
+everything**: 26-of-31 for 279, 4 touchdowns, no interceptions, an 89.8 QBR. Dallas scored in
+every quarter and turned a roughly even yardage day into a 17-point win on red-zone efficiency
+alone. Because the edge was quarterback play rather than a unit stepping forward, the move is
+confined to Dak — the offense and defense grades held, and the scoreboard-vs-box gap is logged
+as a watch item.
+
+- **QB Prescott +1.5 → +2.0 (+0.5):** sharp — 26/31, 279, 4 TD, 0 INT, 89.8 QBR; the finishing
+  that turned an even box into a comfortable win.
+- **Offense held +1.0** and **Defense held −1.0:** the box says the units were about even with
+  Washington; this win was Dak's, not a unit step-change.
+
 ## Week 1: at N.Y. Giants (L 20–28)
 
 An ugly Sunday-night opener — a 20–28 loss in which Jaxson Dart's Giants shredded the Dallas

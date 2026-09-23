@@ -1,3 +1,19 @@
+## Week 2: vs N.Y. Giants (W 28–6)
+
+A bounce-back 28–6 win over the Giants, and the encouraging part is that the Rams **looked
+great without Puka Nacua** — 481 yards and 28 points, a well-rounded performance on both sides.
+Two caveats keep the moves measured. First, the defensive showing came against **Jameis
+Winston in relief of Jaxson Dart**, who went down with a knee injury on New York's opening
+drive — so we credit it but temper it rather than overreact. Second, Nacua's return is a lever,
+not a given.
+
+- **Offense +0.9 → +1.4 (+0.5):** produced 481 yards and 28 points *without* Nacua.
+- **Defense +0.2 → +0.5:** upgraded but tempered — impressive, but it came against NYG's backup
+  after Dart's Q1 injury.
+- **QB Matthew Stafford +5.5 held:** no change; still the elite grade.
+- **WATCH:** if **Puka Nacua** plays next week, another **+0.5 Off** is on the table.
+- **New total 6.6 → 7.4.**
+
 ## Week 1: at San Francisco (L 7–27, in Melbourne)
 
 The Rams opened the season in Melbourne and were beaten soundly by a divisional rival,

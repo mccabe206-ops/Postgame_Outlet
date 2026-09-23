@@ -1,3 +1,17 @@
+## Week 2: at Tennessee (W 24–20)
+
+Unimpressive again, but Philadelphia **keeps finding ways to win** — Jalen Hurts hit Darius
+Cooper for a 3-yard touchdown with **nine seconds left** to steal one in 157°F Nashville heat.
+Hurts graded well (80.2) despite two interceptions, and **DeVonta Smith (93.2) carried the
+offense** with A.J. Brown out. Tennessee "won the tape" (led late, out-gained Philly in the
+second half) but couldn't close.
+
+**What moved:** **Offense +0.5 → +0.2.** TE **Dallas Goedert** left with a knee injury (out a few
+weeks) — the No. 2 receiving option gone behind an already Brown-less group. QB and Defense
+held; the result doesn't move the overall grade. **Watch:** Saquon Barkley took a stinger on the
+opening play (returned, precautionary MRI) — if he's limited going forward, another small offense
+trim.
+
 ## Week 1: vs Washington (W 24–22)
 
 Philadelphia opened 1–0 but had to hang on, 24–22. Jalen Hurts was efficient (14-of-25, 203,

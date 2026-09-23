@@ -26,3 +26,8 @@ data/.anthropic_key
 
 # PFF premium player-stats cache (derived from your PFF+ subscription; private)
 data/pff/
+
+# Claude Code local settings + PFF cookie (never commit / never publish)
+.claude/settings.local.json
+data/pff_cookie.txt
+data/game_reports/

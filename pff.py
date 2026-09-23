@@ -71,11 +71,26 @@ def _cache_dir(season, week):
 
 # ---- fetch ------------------------------------------------------------------
 
+# Optional path to a file holding the full browser Cookie header, set by
+# --cookie-file. Preferred for the hands-off weekly flow: the agent reads the
+# cookie from the logged-in `pff` browser session and drops it here, so the
+# token never has to be materialized on the shell command line.
+_COOKIE_FILE = ""
+
+
 def _cookie_header():
-    """Prefer the full browser cookie (PFF_COOKIE) — the advanced/grade fields
-    unlock only with the full cookie set; a bare __session downgrades to the
-    restricted (counting-stats) view. Fall back to PFF_SESSION if that's all
-    we have."""
+    """Prefer the full browser cookie — the advanced/grade fields unlock only
+    with the full cookie set; a bare __session downgrades to the restricted
+    (counting-stats) view. Resolution order: --cookie-file, then PFF_COOKIE,
+    then PFF_SESSION."""
+    if _COOKIE_FILE:
+        try:
+            val = open(os.path.expanduser(_COOKIE_FILE)).read().strip()
+            if val:
+                return val
+        except OSError as e:
+            print(f"WARN: could not read --cookie-file {_COOKIE_FILE}: {e}",
+                  file=sys.stderr)
     full = os.environ.get("PFF_COOKIE", "").strip()
     if full:
         return full
@@ -332,7 +347,13 @@ def main():
         print(__doc__)
         return 1
     mode = argv[0]
-    pos = [a for a in argv[1:] if not a.startswith("--")]
+    rest = argv[1:]
+    if "--cookie-file" in rest:
+        global _COOKIE_FILE
+        i = rest.index("--cookie-file")
+        _COOKIE_FILE = rest[i + 1] if i + 1 < len(rest) else ""
+        del rest[i:i + 2]
+    pos = [a for a in rest if not a.startswith("--")]
     season = int(pos[0]) if len(pos) > 0 else 2026
     week = int(pos[1]) if len(pos) > 1 else 1
     if mode == "fetch":

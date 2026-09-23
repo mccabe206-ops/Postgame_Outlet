@@ -26,6 +26,7 @@ Stdlib only (http.server). Stop with Ctrl-C.
 import csv
 import json
 import os
+import re
 import socket
 import subprocess
 import sys
@@ -49,6 +50,7 @@ PORT = 8786
 REPO = os.path.dirname(os.path.abspath(__file__))
 RATINGS = os.path.join(REPO, "data", "ratings.csv")
 SNAPSHOTS = os.path.join(REPO, "data", "snapshots.json")
+QB_DEPTH = os.path.join(REPO, "data", "qb_depth.csv")
 LOGDIR = "/tmp"
 
 # --- KB chat (Claude API) config ---
@@ -147,6 +149,79 @@ def _ratings_raw(rows):
         out.append(f"{r['team']:<5} {r['qb']:>6.1f} {r['off']:>6.1f} "
                    f"{r['def']:>6.1f} {r['rating']:>7.1f}  {r['qb_name']}{flag}")
     return "\n".join(out)
+
+
+# ---------------------------------------------------------------- QB board
+def _string_num(s):
+    """Leading integer of a qb_depth 'string' cell ('2','3'…); high if blank."""
+    m = re.match(r"\s*(\d+)", s or "")
+    return int(m.group(1)) if m else 99
+
+
+def _qb_depth_by_team():
+    """Backups per team from qb_depth.csv, ordered by depth-chart string (QB2,
+    QB3, …), then by value within a string."""
+    depth = {}
+    try:
+        with open(QB_DEPTH, newline="") as f:
+            for r in csv.DictReader(f):
+                t = r.get("team", "")
+                try:
+                    v = float(r.get("value") or 0)
+                except ValueError:
+                    v = 0.0
+                depth.setdefault(t, []).append({
+                    "name": r.get("qb_name", ""), "v": v,
+                    "string": (r.get("string") or "").strip(),
+                    "notes": r.get("notes", ""),
+                })
+    except OSError:
+        pass
+    for t in depth:
+        depth[t].sort(key=lambda x: (_string_num(x["string"]), -x["v"]))
+    return depth
+
+
+def act_qb_board():
+    """32 teams ranked by their ACTIVE STARTER's QB rating, with the backup
+    (QB2) and third-string (QB3) + values alongside."""
+    depth = _qb_depth_by_team()
+    board = []
+    for r in _read_ratings():
+        d = depth.get(r["team"], [])
+        board.append({
+            "team": r["team"],
+            "starter": {"name": r["qb_name"], "v": r["qb"],
+                        "review": r["needs_review"] == "Y"},
+            "backup": d[0] if len(d) > 0 else None,
+            "third": d[1] if len(d) > 1 else None,
+        })
+    board.sort(key=lambda x: x["starter"]["v"], reverse=True)
+    for i, b in enumerate(board, 1):
+        b["rank"] = i
+    return {"ok": True, "board": board}
+
+
+def act_qb_history():
+    """Starter QB rating per team across saved snapshots (Preseason, Week N…)
+    plus the live 'Current' column — for the week-to-week view. Teams ordered
+    by current starter rating."""
+    labels, per_team = [], {}
+    for label, value in _load_snaps().items():
+        e = _norm_snap(value)
+        labels.append(label)
+        for row in e["rows"]:
+            per_team.setdefault(row.get("team", ""), {})[label] = {
+                "name": row.get("qb_name", ""), "v": row.get("qb")}
+    cur_rows = _read_ratings()
+    cur = {r["team"]: r["qb"] for r in cur_rows}
+    for r in cur_rows:
+        per_team.setdefault(r["team"], {})["Current"] = {"name": r["qb_name"], "v": r["qb"]}
+    labels.append("Current")
+    teams = sorted(per_team.keys(), key=lambda t: cur.get(t, -99), reverse=True)
+    out = [{"team": t, "current_qb": next((r["qb_name"] for r in cur_rows if r["team"] == t), ""),
+            "cells": [per_team[t].get(l) for l in labels]} for t in teams]
+    return {"ok": True, "labels": labels, "teams": out}
 
 
 # ---------------------------------------------------------------- actions
@@ -880,6 +955,16 @@ PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
  tr.flag td{background:#2a2f0e}
  .close{cursor:pointer;color:var(--dim);border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:var(--card)}
  .rc-ok{color:var(--good)} .rc-bad{color:var(--bad)}
+ .toggle button.act{background:#193253;color:var(--ink)}
+ .qbwrap{overflow:auto;max-height:70vh}
+ .qbt{width:100%;border-collapse:collapse;font-size:12.5px}
+ .qbt th,.qbt td{padding:4px 9px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+ .qbt th{color:var(--dim);font-weight:600;position:sticky;top:0;background:var(--card);z-index:1}
+ .qbt td.rk{color:var(--dim);text-align:right;width:26px}
+ .qbt td.num{text-align:right;font-variant-numeric:tabular-nums}
+ .qbt .dim{color:var(--dim)}
+ .qbt .pos{color:#3fb950} .qbt .neg{color:#f85149}
+ .qbt tbody tr:hover{background:#1c2431}
  dialog{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;
    padding:18px;max-width:560px;width:92%}
  dialog.wide{max-width:1000px}
@@ -939,6 +1024,8 @@ const CARDS = [
    render:c=>teamEditorCard(c)},
  {n:3, t:"Show current ratings", d:"The full 32-team board from your ratings, best to worst.",
    render:c=>btn(c,"Show board",()=>run({action:'ratings'},"Current ratings"))},
+ {n:16, t:"QB rankings", d:"All 32 active starting QBs ranked 1–32, each with the team's backup (QB2) and third-string + ratings. Toggle to a week-to-week view of how each starter's rating has moved.",
+   render:c=>btn(c,"Open QB rankings",()=>openQbBoard())},
  {n:5, t:"Results & grading", d:"ESPN final scores + stats, picks graded vs. market, luck/quality read, rating signals.",
    render:c=>weekRun(c,'results',"Results & grading")},
  {n:6, t:"Preview locally", d:"Regenerate the site to a private local file — no publish.",
@@ -1393,6 +1480,52 @@ function openTeamEditor(j){
   foot.appendChild(close); b.appendChild(foot);
   dlg.showModal();
 }
+async function openQbBoard(){
+  const dlg=document.getElementById('dlg'); const b=document.getElementById('dlg-body');
+  b.innerHTML=''; dlg.classList.add('wide');
+  b.appendChild(el('h3',null,'QB rankings'));
+  const note=el('p','note','Ranked by each team’s ACTIVE starter (injured starters sit as backups). Toggle for week-to-week.');
+  b.appendChild(note);
+  const tg=el('div','toggle'); const bBoard=el('button',null,'Board (1–32)'); const bHist=el('button',null,'Week to week');
+  tg.appendChild(bBoard); tg.appendChild(bHist); b.appendChild(tg);
+  const wrap=el('div','qbwrap'); wrap.style.marginTop='10px'; b.appendChild(wrap);
+  const foot=el('div','row'); foot.style.marginTop='10px';
+  const close=el('span','close','Close'); close.onclick=()=>{dlg.classList.remove('wide');dlg.close();};
+  foot.appendChild(close); b.appendChild(foot);
+  const esc=s=>String(s==null?'':s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+  const val=v=>{ if(v==null||v==='')return '—'; const n=Number(v); return (n>=0?'+':'')+n.toFixed(1); };
+  const vcls=v=>v==null?'':(Number(v)>=0?'pos':'neg');
+  async function showBoard(){
+    bBoard.className='act'; bHist.className='';
+    const j=await api('/api/qbboard'); if(!j.ok){wrap.textContent='load failed';return;}
+    let h='<table class="qbt"><thead><tr><th>#</th><th>Team</th><th>Starter</th><th>Rtg</th><th>Backup</th><th>Rtg</th><th>3rd string</th><th>Rtg</th></tr></thead><tbody>';
+    for(const r of j.board){ const s=r.starter,bk=r.backup,th=r.third;
+      h+=`<tr><td class="rk">${r.rank}</td><td>${esc(r.team)}</td>`+
+         `<td>${esc(s.name)}${s.review?' <span title="needs_review">⚠</span>':''}</td><td class="num ${vcls(s.v)}">${val(s.v)}</td>`+
+         `<td class="dim">${bk?esc(bk.name):'—'}</td><td class="num dim ${bk?vcls(bk.v):''}">${bk?val(bk.v):'—'}</td>`+
+         `<td class="dim">${th?esc(th.name):'—'}</td><td class="num dim ${th?vcls(th.v):''}">${th?val(th.v):'—'}</td></tr>`;
+    }
+    wrap.innerHTML=h+'</tbody></table>';
+  }
+  async function showHist(){
+    bHist.className='act'; bBoard.className='';
+    const j=await api('/api/qbhistory'); if(!j.ok){wrap.textContent='load failed';return;}
+    let h='<table class="qbt"><thead><tr><th>Team · QB</th>';
+    for(const l of j.labels) h+=`<th>${esc(l)}</th>`;
+    h+='</tr></thead><tbody>';
+    for(const t of j.teams){ h+=`<tr><td>${esc(t.team)} <span class="dim">${esc(t.current_qb)}</span></td>`; let prev=null;
+      for(const c of t.cells){ if(c==null){h+='<td class="dim">—</td>';prev=null;continue;}
+        const d=(prev!=null&&c.v!=null)?(c.v-prev):null;
+        const arr=d?(d>0?` <span class="pos">▲${Math.abs(d).toFixed(1)}</span>`:(d<0?` <span class="neg">▼${Math.abs(d).toFixed(1)}</span>`:'')):'';
+        h+=`<td class="num" title="${esc(c.name)}">${val(c.v)}${arr}</td>`; prev=c.v;
+      }
+      h+='</tr>';
+    }
+    wrap.innerHTML=h+'</tbody></table>';
+  }
+  bBoard.onclick=showBoard; bHist.onclick=showHist;
+  await showBoard(); dlg.showModal();
+}
 function openWriteupEditor(j){
   const dlg=document.getElementById('dlg'); const b=document.getElementById('dlg-body'); b.innerHTML='';
   dlg.classList.add('wide');
@@ -1487,6 +1620,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(200, json.dumps(act_kbstatus()))
         if u.path == "/api/trends":
             return self._send(200, json.dumps(act_trends_catalog()))
+        if u.path == "/api/qbboard":
+            return self._send(200, json.dumps(act_qb_board()))
+        if u.path == "/api/qbhistory":
+            return self._send(200, json.dumps(act_qb_history()))
         if u.path == "/api/snapshots":
             return self._send(200, json.dumps(act_snapshots_list()))
         if u.path == "/api/snapshot":

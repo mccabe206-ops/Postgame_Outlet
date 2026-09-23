@@ -115,6 +115,18 @@ def _writeup(abbr):
     return ""
 
 
+def _narrative(aa, ha, week, year):
+    """Optional written game-report draft shown at the top of the report view.
+    Lives at data/game_reports/<year>_wk<week>_<AWAY>-<HOME>.md (gitignored WIP);
+    written by Claude Code so Sean can read the report in the UI without asking."""
+    p = os.path.join(REPO, "data", "game_reports", f"{year}_wk{week}_{aa.upper()}-{ha.upper()}.md")
+    try:
+        with open(p, encoding="utf-8") as f:
+            return f.read()
+    except OSError:
+        return ""
+
+
 def _suggest(abbr, won, comp_for, comp_against, score_for, exp_for, qb_grade, qb_qbr, opp_rating):
     """Rule-based, evidence-only prompts (NOT auto-moves) — your judgment leads in
     Update ratings. Mirrors results.py adjustment signals, tuned to this screen."""
@@ -302,6 +314,7 @@ def build_report(event, week, year):
 
     return {
         "ok": True, "event": event, "week": week, "year": year,
+        "narrative": _narrative(aa, ha, week, year),
         "teams": teams,
         "away": aa, "home": ha, "away_name": a_name, "home_name": h_name,
         "away_score": a_sc, "home_score": h_sc,
@@ -452,6 +465,11 @@ async function openGame(ev,wk,yr){
     +`<tbody><tr><td class="l">${j.away}</td>`+qa.map(v=>`<td>${v}</td>`).join('')+`<td><b>${j.away_score}</b></td></tr>`
     +`<tr><td class="l">${j.home}</td>`+qh.map(v=>`<td>${v}</td>`).join('')+`<td><b>${j.home_score}</b></td></tr></tbody>`;
   q.style.marginTop='10px'; sh.appendChild(q); m.appendChild(sh);
+  // McCabe written report (if drafted)
+  if(j.narrative){const nr=el('div','sec');
+    nr.innerHTML='<h3>McCabe game report</h3>';
+    const nb=el('div'); nb.style.lineHeight='1.5'; nb.innerHTML=renderMd(j.narrative);
+    nr.appendChild(nb); m.appendChild(nr);}
   // score analysis
   const sa=el('div','sec'); sa.innerHTML='<h3>Score analysis</h3>';
   const three=el('div','three');

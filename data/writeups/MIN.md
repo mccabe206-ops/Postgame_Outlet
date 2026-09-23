@@ -1,3 +1,15 @@
+## Week 2: vs Chicago (W 9–3)
+
+A takeaway-driven, weather-suppressed 9–3 win with Carson Wentz filling in for the concussed Kyler
+Murray. Minnesota's defense forced the mistakes that decided it — two Chicago turnovers, pressure
+from Andrew Van Ginkel and a Dallas Turner sack — while heavy weather held both offenses down (the
+Vikings stalled to 9 themselves, Jefferson quiet).
+
+**What moved:** **Defense +0.5 → +0.7** — credit for a takeaway-led near-shutout, tempered because
+Chicago moved the ball (297 yards) and left points on the field. Offense **held at +1.0**. QB
+**unchanged** — Wentz managed the win, and **Kyler Murray (−0.5) returns as the starter in Week
+3**, a slight upgrade over Wentz's fill-in value already baked into the rating.
+
 ## Week 1: vs Green Bay (W 39–22)
 
 Minnesota stormed back from 22–10 down with 29 unanswered — but the game turned on the

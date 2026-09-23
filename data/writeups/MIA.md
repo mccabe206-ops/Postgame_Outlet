@@ -1,3 +1,18 @@
+## Week 2: at San Francisco (L 13–35)
+
+A 35–13 loss in San Francisco that, on the tape, "didn't feel *that* bad" even though the
+scoreboard was ugly — and the box backs that up. Miami actually moved the ball (284 yards, 13
+first downs), and 7 of its 13 points came in garbage time after the game was decided in Q3; the
+competitive score was closer to 6–35. The problem was finishing, not a total collapse. Malik
+Willis was bad, though, and the two-week look says he'd been priced a touch high, so the
+quarterback number ticks to the floor while the two line grades hold.
+
+- **QB Malik Willis −1.5 → −2.0:** bad again; may have had him too high, so the number moves to
+  the extreme.
+- **Offense −1.5 and Defense −1.5 held:** the offense generated yards but stalled, and both
+  units grade where a gutted-roster rebuild should.
+- **New total −4.5 → −5.0.**
+
 ## Week 1: at Las Vegas (L 13–27)
 
 Miami's rebuild showed its growing pains — a 27–13 loss in which both lines were overmatched
