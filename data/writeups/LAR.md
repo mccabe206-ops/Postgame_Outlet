@@ -1,3 +1,15 @@
+## Week 3 availability — at Denver (Sunday night)
+
+**Puka Nacua is out again.** He's doubtful and not expected to play with a hip/groin injury
+(described by Sean McVay as groin soreness) that has kept him out of practice since Sept. 17.
+This will be his second straight missed game. The Rams are erring on the side of caution, and
+McVay expects him back in Week 4 against Philadelphia, barring a setback.
+
+- **Offense held at +1.4:** the number already assumes no Nacua. It was raised after the Rams
+  put up 481 yards and 28 points without him against the Giants. The extra **+0.5** for his
+  return waits until he's actually on the field.
+- **QB Stafford +5.5 and Defense +0.5 held.** Total stays **+7.4**.
+
 ## Week 2: vs N.Y. Giants (W 28–6)
 
 A bounce-back 28–6 win over the Giants, and the encouraging part is that the Rams **looked

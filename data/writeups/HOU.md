@@ -1,3 +1,16 @@
+## What changed — Week 3 2026 (at Indianapolis)
+
+**Nico Collins is out again.** A Grade 1 hamstring strain kept him out of practice all week,
+and he misses his second straight game. The Week 2 loss at Cincinnati showed what that costs
+this offense: C.J. Stroud threw for 353 yards, and Houston still scored just 6 points with no
+touchdowns. Collins is the one receiver who turns yards into points, and the rest of the room is
+thin (Tank Dell and Jayden Higgins are on IR).
+
+- **Offense +0.3 → −0.7 (−1.0):** a full point, because the passing game has no WR1 without
+  him. This was the pre-set plan if Collins sat, and it comes back when he returns.
+- **QB Stroud +0.5 and Defense +2.0 held.** The defense is still elite.
+- **New total +2.8 → +1.8.**
+
 ## Week 1: vs Buffalo (L 31–36)
 
 Houston lost a home shootout, 31–36, and it split along the rating's fault lines. The elite
