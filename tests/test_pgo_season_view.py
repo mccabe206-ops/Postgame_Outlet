@@ -298,6 +298,60 @@ class SeasonViewTests(unittest.TestCase):
         mccabe['rows']=rows[:-1]
         with self.assertRaisesRegex(ValueError,'32'):view.render_season(data,mccabe=mccabe)
 
+    def test_current_rank_comparison_discloses_qb_mismatches_and_saved_check(self):
+        data = state()
+        pgo_qbs = {'SEA': 'Sam Darnold', 'CHI': 'Caleb Williams',
+                   'NYG': 'Jaxson Dart', 'WAS': 'Jayden Daniels'}
+        mccabe_qbs = {'SEA': 'Drew Lock', 'CHI': 'Case Keenum',
+                      'NYG': 'Jameis Winston', 'WAS': 'Marcus Mariota'}
+        for team in data['rankings']['teams']:
+            team['qb_name'] = pgo_qbs.get(team['team'], 'QB <source>')
+        rows = [dict(abbr=team['team'], rank=33-team['rank'],
+                     qb_name=mccabe_qbs.get(team['team'], 'QB <source>'))
+                for team in data['rankings']['teams']]
+        before = copy.deepcopy((data, rows))
+
+        page = view.render_season(data, mccabe=dict(rows=rows, as_of='2026-09-10T20:00:00Z'))
+        card = page.split('id="season-rank-comparison"', 1)[1].split('</details>', 1)[0]
+        for code, pgo_qb in pgo_qbs.items():
+            row = card.split(f'data-rank-compare="{code}"', 1)[1].split('</tr>', 1)[0]
+            self.assertIn(pgo_qb, row)
+            self.assertIn(mccabe_qbs[code], row)
+            self.assertIn('Different QB assumptions', row)
+        self.assertEqual(card.count('Different QB assumptions'), 4)
+        self.assertIn('QB &lt;source&gt;', card)
+        self.assertNotIn('QB <source>', card)
+        self.assertIn('2026-09-16T21:00:00Z', card)
+        self.assertIn('1 of 1 game has a saved forecast availability check', card)
+        self.assertIn('24 hours before kickoff', card)
+        self.assertIn('T-60', card)
+        self.assertIn('not a confirmed game-day lineup', card)
+        self.assertEqual((data, rows), before)
+
+    def test_current_rank_comparison_names_partial_week_check_coverage(self):
+        data = state()
+        second = copy.deepcopy(data['weeks'][1]['games'][0])
+        second.update(game_id='another-current-game', availability=None)
+        second['confidence']['points'] = 2
+        second['confidence']['expected_points'] = 1.02
+        data['weeks'][1]['games'].append(second)
+        rows = [dict(abbr=team['team'], rank=team['rank'], qb_name='QB <source>')
+                for team in data['rankings']['teams']]
+        card = view.render_season(data, mccabe=dict(rows=rows, as_of='2026-09-10T20:00:00Z'))
+        card = card.split('id="season-rank-comparison"', 1)[1].split('</details>', 1)[0]
+        self.assertIn('Latest saved check for a current-week game:', card)
+        self.assertIn('1 of 2 games have a saved forecast availability check', card)
+
+    def test_current_rank_comparison_handles_no_saved_availability_check(self):
+        data = state()
+        data['weeks'][1]['games'][0]['availability'] = None
+        rows = [dict(abbr=team['team'], rank=team['rank'], qb_name='QB <source>')
+                for team in data['rankings']['teams']]
+        card = view.render_season(data, mccabe=dict(rows=rows, as_of='2026-09-10T20:00:00Z'))
+        card = card.split('id="season-rank-comparison"', 1)[1].split('</details>', 1)[0]
+        self.assertIn('No current-week forecast check saved', card)
+        self.assertIn('Same QB assumption', card)
+
     def test_compact_navigation_and_disclosures_preserve_visible_warnings_and_all_evidence(self):
         data=state();data.update(status='BLOCKED',blocked_reason='Source conflict needs review')
         data['penalty_shadow']={'games':[], 'metrics':{}, 'excluded':[]}
@@ -312,9 +366,9 @@ class SeasonViewTests(unittest.TestCase):
         self.assertIn('<details class="season-nav-more" data-view-key="nav-more">',nav)
         primary,more=nav.split('<details',1)
         self.assertEqual(primary.count('<a '),4)
-        for target in ('season-game-day','season-week-2','season-rankings','season-records'):
+        for target in ('season-game-day','season-week-2','season-rankings','season-accuracy'):
             self.assertIn(f'href="#{target}"',primary)
-        for target in ('season-accuracy','pgo-penalty-test'):
+        for target in ('season-records','pgo-penalty-test'):
             self.assertIn(f'href="#{target}"',more)
         self.assertIn('<summary>More</summary>',more)
         intro=page.split('<h3 id="season-game-day">')[0]
@@ -336,6 +390,29 @@ class SeasonViewTests(unittest.TestCase):
         self.assertIn('https://example.com/inactives',full)
         self.assertIn('It does not change the original prediction or its grade',full)
         self.assertEqual(data,before)
+
+    def test_latest_completed_review_is_visible_and_older_reviews_remain_available(self):
+        data=state()
+        reviews=[dict(href=f'analysis/weekly/2026-week{week}-final.html',
+                      label=f'Week {week}: completed <review>') for week in (1,2)]
+        before=copy.deepcopy((data,reviews))
+        page=view.render_season(data,weekly_reviews=reviews)
+        intro=page.split('data-view-key="numbers-guide"')[0]
+        self.assertIn('Latest completed weekly review:',intro)
+        self.assertIn(reviews[1]['href'],intro)
+        self.assertIn('Week 2: completed &lt;review&gt;',intro)
+        self.assertNotIn(reviews[0]['href'],intro)
+        accuracy=page.split('<h3 id="season-accuracy">')[1]
+        self.assertLess(accuracy.index(reviews[1]['href']),accuracy.index(reviews[0]['href']))
+        self.assertEqual(page.count(f'href="{reviews[1]["href"]}" target="_top"'),2)
+        self.assertEqual(page.count(f'href="{reviews[0]["href"]}" target="_top"'),1)
+        self.assertIn('href="evidence/season-2026/week2.json">Saved &lt;source&gt;</a>',page)
+        self.assertEqual((data,reviews),before)
+        for empty in (None,[]):
+            self.assertNotIn('Latest completed weekly review:',view.render_season(data,weekly_reviews=empty))
+        for href in ('javascript:alert(1)','//example.com','../secret'):
+            with self.subTest(href=href),self.assertRaisesRegex(ValueError,'safe relative or HTTPS'):
+                view.render_season(data,weekly_reviews=[dict(href=href,label='Unsafe')])
 
     def test_week_cells_keep_accessible_headers_and_card_labels(self):
         class Table(HTMLParser):
