@@ -1,3 +1,16 @@
+## What changed — Week 3 2026 (at New Orleans)
+
+**Brock Bowers is expected to make his season debut.** He's listed questionable with the knee
+that needed a meniscus trim on Sept. 8, which cost him the first two games. Reports have him
+playing Sunday in New Orleans, barring a surprise. The Raiders have been winning on Ashton
+Jeanty's legs, and getting their best pass-catcher back gives Kirk Cousins a real target over
+the middle of a thin receiver room.
+
+- **Offense −0.5 → −0.2 (+0.3):** Bowers returns. It's a measured bump rather than a full
+  restore, since he's coming off knee surgery and may be managed early.
+- **QB Cousins −1.5 and Defense −0.7 held.**
+- **New total −2.7 → −2.4.**
+
 ## Week 2: at LA Chargers (W 26–14)
 
 Las Vegas went on the road and won a competitive game by doing the unglamorous things: it

@@ -1,3 +1,16 @@
+## What changed — Week 3 2026 (at Washington)
+
+**Sam Darnold is back.** He hurt his glute (a soft-tissue strain) early in the opener and
+missed the Week 2 win at Arizona, but he's off the injury report and cleared to start Sunday at
+Washington. The quarterback component goes back to the starter.
+
+- **QB Lock 0.0 → Darnold +2.0 (+2.0):** Darnold returns at his pre-injury starter grade. Lock
+  moves back to QB2. His grade stays at 0.0, which makes him one of the league's best insurance
+  policies.
+- **Offense +1.5 and Defense +3.0 held.** Safety Julian Love has been ruled out for this one,
+  another hit to a safety room that has been banged up all month.
+- **New total +4.5 → +6.5.**
+
 ## Week 2: at Arizona (W 31–7)
 
 This is the game that says the QB hole was overpriced and the defense underpriced. Filling in
@@ -20,15 +33,15 @@ Checked September 9, 2026, 10:42–10:46 a.m. ET. The September 8 final injury r
 
 ## The current rating
 
-Seattle's current rating pairs Drew Lock at a neutral QB value with a +1.5 offense and +3.0
-defense. Lock's Week 2 play lifted the quarterback component from its Week 1 value.
+Seattle's current rating pairs Sam Darnold (+2.0) with a +1.5 offense and +3.0 defense for a
++6.5 total. Darnold's return from the glute injury restores the quarterback grade he carried
+into the season.
 
 ## Quarterback
 
-Drew Lock (0.0) is the selected quarterback with Sam Darnold unavailable. Lock's grade rose
-from −1.0 after his Week 2 start; his Week 1 relief line (16-of-22, 187 yards, a touchdown,
-no interceptions) is earlier context. Seattle's receivers and scheme remain in the offense
-component rather than Lock's grade.
+Sam Darnold (+2.0) is the starter again after missing Week 2 with a glute strain suffered in
+the opener. Drew Lock (0.0) is back to QB2 after a strong two-game stretch in relief: the Week 1
+relief line (16-of-22, 187 yards, a touchdown, no interceptions) and the Week 2 win at Arizona.
 
 ## Week 1 rating notes (historical)
 
@@ -42,6 +55,6 @@ component rather than Lock's grade.
 
 ## Risk
 
-The current +3.0 defense and receiver group carry the rating, while a thin backfield remains a
-concern. Lock's neutral QB value reflects the current selection; future changes depend on play
-and availability, not an assumed recovery timeline.
+The current +3.0 defense and receiver group carry the rating, while a thin backfield and a
+banged-up safety room remain concerns. Darnold is coming off a soft-tissue injury, but with Lock
+graded at 0.0 behind him, a setback costs less here than it would almost anywhere else.
