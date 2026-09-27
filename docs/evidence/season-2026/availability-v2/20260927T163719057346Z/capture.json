@@ -1,0 +1,161 @@
+{
+  "checked_at": "2026-09-27T16:37:23.166249+00:00",
+  "sources": [
+    {
+      "bytes": 390874,
+      "captured_at": "2026-09-27T16:37:21.828274+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "c2d4805d09f24d49c45e35f250de0ba6957cbefe8b79e0c63b405bbe71c4ec80",
+      "started_at": "2026-09-27T16:37:21.746018+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 703692,
+      "captured_at": "2026-09-27T16:37:21.999466+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.azcardinals.com/news/",
+      "kind": "team_news",
+      "sha256": "ac754ce20a4fd6f1f62ae1169a32757805e2ee9b27d5073d1a034e1f61a9e31d",
+      "started_at": "2026-09-27T16:37:21.746510+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/"
+    },
+    {
+      "bytes": 657805,
+      "captured_at": "2026-09-27T16:37:21.854342+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/",
+      "kind": "team_news",
+      "sha256": "47c5d0986951e29013ea4df73c1cb41cf1949a4d35b159e5d43b1b4a925f259f",
+      "started_at": "2026-09-27T16:37:21.746835+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/"
+    },
+    {
+      "bytes": 499092,
+      "captured_at": "2026-09-27T16:37:22.080396+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "ab961ce1a19b682fd8b69512029117021ab35611bc253d4769bcbb9786afedb5",
+      "started_at": "2026-09-27T16:37:21.747215+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 291238,
+      "captured_at": "2026-09-27T16:37:22.262753+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "c88bad0390a0ea996934eae839f8d0c63b6bfdc9b4ef12c2ecf8a263e7d45af7",
+      "started_at": "2026-09-27T16:37:21.828317+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 363585,
+      "captured_at": "2026-09-27T16:37:22.135677+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "7a0bd85a89775152c9bf60ac214682266d559d0d5a70ad60787c6a1ecb504f0b",
+      "started_at": "2026-09-27T16:37:21.854371+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 639903,
+      "captured_at": "2026-09-27T16:37:22.194497+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.raiders.com/news/",
+      "kind": "team_news",
+      "sha256": "5fa01ba95d8b4d4bc50ea3bac7520b4298cf7b80e29b096d76086cb107d1964d",
+      "started_at": "2026-09-27T16:37:21.999509+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/"
+    },
+    {
+      "bytes": 542601,
+      "captured_at": "2026-09-27T16:37:22.280146+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.vikings.com/news/",
+      "kind": "team_news",
+      "sha256": "f5e978786c689ab79b81340d844ed933f36583338415990e897ac7450f5831c6",
+      "started_at": "2026-09-27T16:37:22.080433+00:00",
+      "status": 200,
+      "team": "MIN",
+      "url": "https://www.vikings.com/news/"
+    },
+    {
+      "bytes": 384590,
+      "captured_at": "2026-09-27T16:37:22.344105+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/",
+      "kind": "team_news",
+      "sha256": "6c84f9454830409c1176a24cc2162afab149d16af622fe031cb63d9b6861cd2b",
+      "started_at": "2026-09-27T16:37:22.135708+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/"
+    },
+    {
+      "bytes": 517953,
+      "captured_at": "2026-09-27T16:37:22.400361+00:00",
+      "file": "raw/009.html.gz",
+      "final_url": "https://www.49ers.com/news/",
+      "kind": "team_news",
+      "sha256": "20de4339d05a810e3492c1b60fad4d32c23d6d0535acaac20206e55502110c72",
+      "started_at": "2026-09-27T16:37:22.194529+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/"
+    },
+    {
+      "bytes": 350751,
+      "captured_at": "2026-09-27T16:37:22.434730+00:00",
+      "file": "raw/010.html.gz",
+      "final_url": "https://www.buccaneers.com/news/",
+      "kind": "team_news",
+      "sha256": "d50de0217f8cf8195a871d0f4e92fd5becfbc5100f1bf7fd619e017e88aebc9d",
+      "started_at": "2026-09-27T16:37:22.262789+00:00",
+      "status": 200,
+      "team": "TB",
+      "url": "https://www.buccaneers.com/news/"
+    },
+    {
+      "bytes": 1614651,
+      "captured_at": "2026-09-27T16:37:22.470147+00:00",
+      "file": "raw/011.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "34d177a00ffa5d94e5b027c2136577368fdc9257b7bf03b90a151ed014a8ca01",
+      "started_at": "2026-09-27T16:37:22.280179+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 907414,
+      "captured_at": "2026-09-27T16:37:22.976116+00:00",
+      "file": "raw/012.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "6fd4532977705fe8c77d7adfcfdff8aa49c1813d186c4daa2d951da5cb984a5c",
+      "started_at": "2026-09-27T16:37:22.880580+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
