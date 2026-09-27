@@ -1,0 +1,173 @@
+{
+  "checked_at": "2026-09-27T23:42:16.123049+00:00",
+  "sources": [
+    {
+      "bytes": 391293,
+      "captured_at": "2026-09-27T23:42:15.020043+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "54517d05ea7a39a6b314525a7282286c084a050efa9ca52d1516ab46b8ca576b",
+      "started_at": "2026-09-27T23:42:14.946483+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 657614,
+      "captured_at": "2026-09-27T23:42:15.359970+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/",
+      "kind": "team_news",
+      "sha256": "6d3af78d37cbf07a8a6c024dcdc8ecd0cace030c1e84da23246bc35dbf1ccd0f",
+      "started_at": "2026-09-27T23:42:14.946822+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/"
+    },
+    {
+      "bytes": 500167,
+      "captured_at": "2026-09-27T23:42:15.090238+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "de2086f505968618fd4bed2b68dc3b238c1f13f0b6fb55747309e608e7006cf5",
+      "started_at": "2026-09-27T23:42:14.947161+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 291112,
+      "captured_at": "2026-09-27T23:42:15.250791+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "5925364dc8babecf5e250d0e94ba6c8ac3be769183917e932fd39050990bc119",
+      "started_at": "2026-09-27T23:42:14.947572+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 363546,
+      "captured_at": "2026-09-27T23:42:15.193147+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "32273307091a899e936a4ce085433f89d7c7bde9d762350f1e9d511d3a7854e7",
+      "started_at": "2026-09-27T23:42:15.020087+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 640246,
+      "captured_at": "2026-09-27T23:42:15.445947+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.raiders.com/news/",
+      "kind": "team_news",
+      "sha256": "5a5e2b3cea4e6eaa70ecedc8adcd2be7d5fde6dbf000e46105590f15e3505fbb",
+      "started_at": "2026-09-27T23:42:15.090269+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/"
+    },
+    {
+      "bytes": 384885,
+      "captured_at": "2026-09-27T23:42:15.571191+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/",
+      "kind": "team_news",
+      "sha256": "4d279bdcc410627ea08a519d655044e699a26c1890f9c49183b65eef50f7fd11",
+      "started_at": "2026-09-27T23:42:15.193178+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/"
+    },
+    {
+      "bytes": 1609679,
+      "captured_at": "2026-09-27T23:42:15.547109+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "9b51029139aaf27a594e757b0d88ff4d37e289118287d8552d1c098ca3799eaf",
+      "started_at": "2026-09-27T23:42:15.250825+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 319190,
+      "captured_at": "2026-09-27T23:42:15.871332+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/zay-flowers-active-nnamdi-madubuike-will-play-ravens-cowboys-brazil-rio-inactives",
+      "kind": "official_inactives",
+      "sha256": "f7b9c0cb1972ebb69a09f7c0da925ad5f9f65da10db1378a2eadcf6f01989122",
+      "started_at": "2026-09-27T23:42:15.815287+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/zay-flowers-active-nnamdi-madubuike-will-play-ravens-cowboys-brazil-rio-inactives"
+    },
+    {
+      "bytes": 310723,
+      "captured_at": "2026-09-27T23:42:15.870941+00:00",
+      "file": "raw/009.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/wr-marvin-mims-jr-among-broncos-inactives-for-week-3-game-vs-rams",
+      "kind": "official_inactives",
+      "sha256": "52c2b3a287a1755c0f05494b3d30d1dfd348a935aa8006ad5f9789fab4a072a1",
+      "started_at": "2026-09-27T23:42:15.815596+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/wr-marvin-mims-jr-among-broncos-inactives-for-week-3-game-vs-rams"
+    },
+    {
+      "bytes": 562873,
+      "captured_at": "2026-09-27T23:42:15.871659+00:00",
+      "file": "raw/010.html.gz",
+      "final_url": "https://www.therams.com/news/puka-nacua-and-tutu-atwell-among-rams-inactives-for-sunday-night-football-at-broncos-in-week-3-2026",
+      "kind": "official_inactives",
+      "sha256": "798374a3ecd45d2fa689b47c5c0f1b3e582900f8fca76c9e33f2ad532a14d7bf",
+      "started_at": "2026-09-27T23:42:15.815949+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/puka-nacua-and-tutu-atwell-among-rams-inactives-for-sunday-night-football-at-broncos-in-week-3-2026"
+    },
+    {
+      "bytes": 339302,
+      "captured_at": "2026-09-27T23:42:15.869950+00:00",
+      "file": "raw/011.html.gz",
+      "final_url": "https://www.raiders.com/news/las-vegas-raiders-week-3-inactives-vs-new-orleans-saints-092726",
+      "kind": "official_inactives",
+      "sha256": "fc48378f890e619662bb35f2b69d4d453b6220b0e523a8afdbe0c579b0f361cd",
+      "started_at": "2026-09-27T23:42:15.816306+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/las-vegas-raiders-week-3-inactives-vs-new-orleans-saints-092726"
+    },
+    {
+      "bytes": 321416,
+      "captured_at": "2026-09-27T23:42:15.919109+00:00",
+      "file": "raw/012.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/new-orleans-saints-inactives-las-vegas-raiders-2026-nfl-week-3-gameday",
+      "kind": "official_inactives",
+      "sha256": "5221a114950d87ea72d9efccb9348218d80feaffcbfc9cf5b3c93628f525742d",
+      "started_at": "2026-09-27T23:42:15.869977+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/new-orleans-saints-inactives-las-vegas-raiders-2026-nfl-week-3-gameday"
+    },
+    {
+      "bytes": 938939,
+      "captured_at": "2026-09-27T23:42:15.929480+00:00",
+      "file": "raw/013.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "44eada95c2c51ea493c97b26caa7c7d1e11145fd4051ac45fc922b413f3d3dd4",
+      "started_at": "2026-09-27T23:42:15.870957+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
