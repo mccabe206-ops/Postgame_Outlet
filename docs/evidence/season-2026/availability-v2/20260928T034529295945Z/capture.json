@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-09-28T03:45:29.819625+00:00",
+  "sources": [
+    {
+      "bytes": 391293,
+      "captured_at": "2026-09-28T03:45:29.392327+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "25b449e5903619f525674d192dbe3279ba4e5ec3ac07e463bac3bf83a048f52a",
+      "started_at": "2026-09-28T03:45:29.304650+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 290964,
+      "captured_at": "2026-09-28T03:45:29.499480+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "b91af910b2f38e9480bcaac37369ba1db48d10b745cade7dea292a70554e80e6",
+      "started_at": "2026-09-28T03:45:29.304940+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 363650,
+      "captured_at": "2026-09-28T03:45:29.470297+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "e2ad530e42b63c503ffb92f9285596811088ee6b98de5108d12d394c2adff5c1",
+      "started_at": "2026-09-28T03:45:29.305301+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 1608707,
+      "captured_at": "2026-09-28T03:45:29.504488+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "d1d91bba690303f2f95b95627f27db5d2ef20637e71434069b436cd80c9d6dba",
+      "started_at": "2026-09-28T03:45:29.305647+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 310858,
+      "captured_at": "2026-09-28T03:45:29.701805+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/wr-marvin-mims-jr-among-broncos-inactives-for-week-3-game-vs-rams",
+      "kind": "official_inactives",
+      "sha256": "a3eaf399e253ccf9a98d3a45df044535e495cca04e10e4652dd5587aa2a1e4b5",
+      "started_at": "2026-09-28T03:45:29.580459+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/wr-marvin-mims-jr-among-broncos-inactives-for-week-3-game-vs-rams"
+    },
+    {
+      "bytes": 562977,
+      "captured_at": "2026-09-28T03:45:29.692201+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.therams.com/news/puka-nacua-and-tutu-atwell-among-rams-inactives-for-sunday-night-football-at-broncos-in-week-3-2026",
+      "kind": "official_inactives",
+      "sha256": "11966844b68b7f15fa56fd2515a75f9dd9a1da3274f3bc36bd69e5b8bf535f54",
+      "started_at": "2026-09-28T03:45:29.580768+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/puka-nacua-and-tutu-atwell-among-rams-inactives-for-sunday-night-football-at-broncos-in-week-3-2026"
+    },
+    {
+      "bytes": 934960,
+      "captured_at": "2026-09-28T03:45:29.676604+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "7fbb2627b9059439422915fcfe0f2a758d4bba655d211d8648a7fabac0d45310",
+      "started_at": "2026-09-28T03:45:29.581152+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}

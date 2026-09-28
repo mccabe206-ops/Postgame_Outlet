@@ -1,0 +1,173 @@
+{
+  "checked_at": "2026-09-27T21:34:02.885965+00:00",
+  "sources": [
+    {
+      "bytes": 391293,
+      "captured_at": "2026-09-27T21:34:01.376266+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "f7e062be98f067e40430fad26df59f551f9d134c71a6cc878c951f286b2486b9",
+      "started_at": "2026-09-27T21:34:01.222859+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 704296,
+      "captured_at": "2026-09-27T21:34:01.514880+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.azcardinals.com/news/",
+      "kind": "team_news",
+      "sha256": "06ec5acd7ff4744c0b516420b7bbed0d2d9804d728e73a194aacbac59c5c96ee",
+      "started_at": "2026-09-27T21:34:01.223146+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/"
+    },
+    {
+      "bytes": 657864,
+      "captured_at": "2026-09-27T21:34:01.644188+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/",
+      "kind": "team_news",
+      "sha256": "3f25625ce374f9f63fc2fe885b8a5f07ab25a26cc6e9acd5caa58f18ee5bfedd",
+      "started_at": "2026-09-27T21:34:01.223476+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/"
+    },
+    {
+      "bytes": 500167,
+      "captured_at": "2026-09-27T21:34:01.465260+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "5dcbbe23edec339c2e7a9ce534557d6f8ee7c7e62dcefe3278ccb1940cae0e3b",
+      "started_at": "2026-09-27T21:34:01.223797+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 640246,
+      "captured_at": "2026-09-27T21:34:01.913106+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.raiders.com/news/",
+      "kind": "team_news",
+      "sha256": "f66972960741a07c44a2cb30ec13368165eb66fdfa143554b6077a5576b5f6e4",
+      "started_at": "2026-09-27T21:34:01.376316+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/"
+    },
+    {
+      "bytes": 384926,
+      "captured_at": "2026-09-27T21:34:01.834580+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/",
+      "kind": "team_news",
+      "sha256": "27aaafaa7fb2f5adea4c1520d841012eb20869e8000b189e73e2a1d1389ca011",
+      "started_at": "2026-09-27T21:34:01.465294+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/"
+    },
+    {
+      "bytes": 519022,
+      "captured_at": "2026-09-27T21:34:01.917434+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.49ers.com/news/",
+      "kind": "team_news",
+      "sha256": "b947bd880dd8986d8e75122e302da58b795ede945257cc898d3bf4942375a814",
+      "started_at": "2026-09-27T21:34:01.514949+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/"
+    },
+    {
+      "bytes": 1608420,
+      "captured_at": "2026-09-27T21:34:01.892437+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "7745678cad3e099abcf6bb2862b868997dcde09f139ccef4fbd18b5e9a3b8cb8",
+      "started_at": "2026-09-27T21:34:01.644233+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 302023,
+      "captured_at": "2026-09-27T21:34:02.687857+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.azcardinals.com/news/garrett-williams-set-to-make-season-debut-against-49ers",
+      "kind": "official_inactives",
+      "sha256": "05c5b6d14db4f169e073d7af97aa5beeadbc9458b7fa9c4d9fcb7522d83ead14",
+      "started_at": "2026-09-27T21:34:02.227440+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/garrett-williams-set-to-make-season-debut-against-49ers"
+    },
+    {
+      "bytes": 319180,
+      "captured_at": "2026-09-27T21:34:02.388799+00:00",
+      "file": "raw/009.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/zay-flowers-active-nnamdi-madubuike-will-play-ravens-cowboys-brazil-rio-inactives",
+      "kind": "official_inactives",
+      "sha256": "9c229812db36af9e7c395ec9f549f7fddd6eb489949f3ea9ab6243019d779cc5",
+      "started_at": "2026-09-27T21:34:02.227803+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/zay-flowers-active-nnamdi-madubuike-will-play-ravens-cowboys-brazil-rio-inactives"
+    },
+    {
+      "bytes": 337511,
+      "captured_at": "2026-09-27T21:34:02.402573+00:00",
+      "file": "raw/010.html.gz",
+      "final_url": "https://www.raiders.com/news/las-vegas-raiders-week-3-inactives-vs-new-orleans-saints-092726",
+      "kind": "official_inactives",
+      "sha256": "bf2025fb451e8453aedee7cf70ed319b6f739688a866e26a5390f3f0d8e4ab69",
+      "started_at": "2026-09-27T21:34:02.228210+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/las-vegas-raiders-week-3-inactives-vs-new-orleans-saints-092726"
+    },
+    {
+      "bytes": 321562,
+      "captured_at": "2026-09-27T21:34:02.346987+00:00",
+      "file": "raw/011.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/new-orleans-saints-inactives-las-vegas-raiders-2026-nfl-week-3-gameday",
+      "kind": "official_inactives",
+      "sha256": "898a098e59ad5d83338cd60033bf9aa3d63656a5685f287ecfea4ff6b57b9422",
+      "started_at": "2026-09-27T21:34:02.228519+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/new-orleans-saints-inactives-las-vegas-raiders-2026-nfl-week-3-gameday"
+    },
+    {
+      "bytes": 451086,
+      "captured_at": "2026-09-27T21:34:02.515954+00:00",
+      "file": "raw/012.html.gz",
+      "final_url": "https://www.49ers.com/news/romello-height-and-nick-bosa-out-mike-evans-available-vs-cardinals-inactives-for-week-3-azvssf",
+      "kind": "official_inactives",
+      "sha256": "b69dbee765e4a3dbcf726c1e970aa5baf7943957af18a946e16a04d450f37ca6",
+      "started_at": "2026-09-27T21:34:02.347023+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/romello-height-and-nick-bosa-out-mike-evans-available-vs-cardinals-inactives-for-week-3-azvssf"
+    },
+    {
+      "bytes": 934978,
+      "captured_at": "2026-09-27T21:34:02.557715+00:00",
+      "file": "raw/013.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "354fa7dcc94b71fa550b23bdd6d21f52060d9bf28ee07711018d07bd69446926",
+      "started_at": "2026-09-27T21:34:02.388828+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}

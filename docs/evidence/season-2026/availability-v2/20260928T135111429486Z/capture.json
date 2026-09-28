@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-09-28T13:51:14.498281+00:00",
+  "sources": [
+    {
+      "bytes": 391289,
+      "captured_at": "2026-09-28T13:51:13.934204+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "53e152d96b8c91e433b80cc0c2e721f934109bab79c5bc208cb27f543c73e9c6",
+      "started_at": "2026-09-28T13:51:13.748073+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 533401,
+      "captured_at": "2026-09-28T13:51:13.992840+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chicagobears.com/news/",
+      "kind": "team_news",
+      "sha256": "b75b41fc057d1c04324c134ca661dce59d1be241d4019319fa2da424c7a8c4df",
+      "started_at": "2026-09-28T13:51:13.748439+00:00",
+      "status": 200,
+      "team": "CHI",
+      "url": "https://www.chicagobears.com/news/"
+    },
+    {
+      "bytes": 529939,
+      "captured_at": "2026-09-28T13:51:13.864013+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "f2379e00ce6999ad7a5b00fe1a306384ae90db675a6de34b1199a95c184cbecc",
+      "started_at": "2026-09-28T13:51:13.749243+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "bytes": 1605541,
+      "captured_at": "2026-09-28T13:51:14.132178+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "8910c208b166b6999053733aff6a1739127bdd6780bd53b9ce38c57cb2e81767",
+      "started_at": "2026-09-28T13:51:13.749527+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 919587,
+      "captured_at": "2026-09-28T13:51:14.400380+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "3e305171bac5478935f8b414cca57a7464fa34335605b278f4da7489bec32b1b",
+      "started_at": "2026-09-28T13:51:14.254707+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
