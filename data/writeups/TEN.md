@@ -16,10 +16,14 @@ an ankle injury in the second half.
 **What changed:**
 - **Defense −1.0 → −0.7 (+0.3):** two straight good defensive games (Week 2 vs Philadelphia, and
   zero TDs allowed here). Tempered because it came against Jameis Winston in rain and wind.
-- **Offense −0.9 → −1.0 (−0.1):** a second first-half no-show in three weeks, now without a starting
-  guard. Small, because the weather mutes the read — it comes back if Carmona does.
-- **QB Cam Ward held at −1.0:** a poor day, but his three-game sample sits right on the number.
-- **New total −2.9 → −2.7.**
+- **Offense −0.9 → −1.5 (−0.6):** a second first-half no-show in three weeks (34 yards before
+  halftime), now without starting RG Fernando Carmona (ankle) and with Tyjae Spears (ankle)
+  banged up. It has been bottom-tier for three weeks, and the rating now says so. It comes back
+  up only if the line holds and the run game shows up.
+- **QB Cam Ward −1.0 → −2.0 (−1.0):** three straight below-average games. At New York he went
+  23-of-36 for 181 with 1 TD, 1 INT, a 49.9 PFF grade and a 46.8 QBR. The No. 1-pick pedigree is
+  real, but the production isn't there yet, so he sits near the bottom of the starter tier.
+- **New total −2.9 → −4.2.**
 
 ## Week 2: vs Philadelphia (L 20–24)
 
@@ -52,14 +56,14 @@ all read below the line.
 
 ## Quarterback
 
-Cam Ward (0.0 → −1.0) is the 2025 No. 1 overall pick, now in his **second year** — but the
-preseason 0.0 was pedigree, not production. Week 1 was a real step back: pressured, missing
-open throws, no downfield rhythm, and playing through a right-shoulder injury. The grade drops
-a full point to a below-average line; the arm talent still gives it a path back up.
+Cam Ward (−2.0) is the 2025 No. 1 overall pick, now in his **second year**, but three games in he
+hasn't produced like it. He's been pressured and inaccurate, with no downfield rhythm. After a
+poor Week 1 (while playing through a right-shoulder injury) and two more below-average starts, he
+drops to near the bottom of the starter tier. The arm talent still gives him a way back up.
 
 ## What moved the number
 
-- **Offense (−0.5 → −1.0):** the receiver group is fine on paper — **Calvin Ridley** vertical,
+- **Offense (−1.5; −0.5 → −1.0 after Week 1, −1.5 after Week 3):** the receiver group is fine on paper — **Calvin Ridley** vertical,
   **Wan'Dale Robinson** underneath — but everything around it sank in Week 1: a rebuilt line
   that got whipped, no run game, and 195 total yards. The weapons don't matter if the pocket
   never holds.
@@ -69,6 +73,6 @@ a full point to a below-average line; the arm talent still gives it a path back 
 
 ## Bottom line
 
-A preseason overrate, corrected. The receivers and Ward's pedigree are the levers back up, but
-until the line holds and the defense shows it can affect a game, this is a bottom-tier rating
-— and Week 1 was the evidence that prompted the drop.
+A preseason overrate, corrected twice. The defense has been the one bright spot for two weeks.
+Ward and an offense that can't function in the first half keep this near the bottom of the league
+until the line holds and the young quarterback shows real progress.
