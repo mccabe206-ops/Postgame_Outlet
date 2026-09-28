@@ -1,3 +1,38 @@
+## Week 3: vs Arizona (W 36–30)
+
+San Francisco moved to 3–0, but this was the first game where the injury pile showed. The box had
+it **dead even** (~30–30). Arizona out-snapped them and held the ball for nearly 39 minutes, and
+the 49ers needed an **80-yard lateral touchdown** (a 2-yard Purdy-to-Evans completion that Deebo
+Samuel took the distance) plus two fourth-quarter **George Kittle** touchdowns to hold on.
+**Brock Purdy** was lethal on the plays he got (15/27, 297, **4 TD**, 0 INT, 11.0 yards per
+attempt, 133.8 rating). The defense, playing without **Nick Bosa**, gave up 30 points and 27 first
+downs to a Brissett-led offense.
+
+**Injuries:**
+- WR **Mike Evans** took a hard hit to the sternum in the second quarter and was carted off with a
+  **ribs/oblique** injury. The team didn't know postgame whether the rib is broken; **imaging
+  Monday**, likely multi-week.
+- LT **Trent Williams** left in the second half with a **neck stinger** and didn't return. His
+  status is TBD, and his replacement graded 35.
+- DE **Nick Bosa** (**calf**, pulled in warmups before Thursday's practice) sat out. Shanahan
+  expects him to miss **"a few weeks,"** and he wasn't placed on IR.
+- DE **Mykel Williams** (recovering from a Nov. 2025 **torn ACL**) is still on PUP. His activation
+  timing is uncertain (around Weeks 4–5).
+- LB **Dre Greenlaw** (**quad**) played through it and graded 86. CB **Deommodore Lenoir** was
+  checked for a concussion and returned.
+- On IR: **De'Zhaun Stribling** (ankle, had surgery), **Christian Kirk** (calf), and Ricky
+  Pearsall (knee, season).
+- Shanahan noted the team has lost six of its 10 defensive linemen in two weeks.
+
+**What changed:**
+- **Offense +1.0 → +0.7 (−0.3):** Evans and Trent Williams are the two biggest pieces, and
+  Williams's backup struggled. Kittle's two-touchdown day and a healthy Christian McCaffrey (75 rush
+  yards and a TD) keep the drop small. We'll re-check after Monday's imaging.
+- **Defense +1.2 → +0.7 (−0.5):** Bosa out a few weeks on top of the defensive-line attrition, and
+  the unit got carved for 30. Fred Warner and Greenlaw at linebacker keep it above average.
+- **Purdy held +3.2:** four touchdowns and 11.0 yards per attempt, with his efficiency intact.
+- **New total 5.4 → 4.6.**
+
 ## Week 2: vs Miami (W 35–13)
 
 San Francisco kept rolling with a comfortable 35–13 win over Miami, and it was **Brock Purdy's
@@ -23,7 +58,10 @@ confidence.
 
 ## Quarterback
 
-Brock Purdy (+3.2) is the selected quarterback after a small Week 2 increase from +3.0. He went 20-of-22 for 287 yards and two touchdowns against Miami; the earlier Week 1 increase from +2.5 remains historical context.
+Brock Purdy (+3.2, held) is the selected quarterback. Through three games he's 60-of-83 for 789
+yards with 9 touchdowns and 1 interception, including a near-perfect Week 2 (20-of-22, 99.7 PFF)
+and a 4-touchdown Week 3 (133.8 rating, 2nd-best of the week). He's a settled, above-average
+starter running a machine. The question now is how much of the machine is healthy around him.
 
 ## Quarterback: through Week 1 2026 (historical)
 
@@ -55,7 +93,7 @@ average starter running a machine.
 
 ## Bottom line
 
-The offseason worry was whether the injuries would sink this offense. Week 1 answered it:
-the 49ers put up 27 on 379 against a good defense while short-handed at receiver, and the
-defense smothered the Rams. This is a confident top-tier grade now, with Stribling's return
-(~a month out) an upside lever rather than a drag.
+Still a top-tier team, but it's getting there on fumes. The receiver room is down to Deebo Samuel
+and young depth if Evans misses time, Trent Williams's neck is the swing factor for the line, and
+the defense is playing without Bosa. The quarterback and the linebackers are carrying it for now.
+The number climbs back as Bosa, Williams, and Evans return.

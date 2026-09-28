@@ -1,3 +1,35 @@
+## Week 3: at Detroit (L 24–31)
+
+Another one-score loss, and another game the Jets were right in. New York trailed 24–10 early in
+the fourth, then **Geno Smith** led two touchdown drives to tie it 24–24 with four minutes left
+(Garrett Wilson from 23, then a two-point pass to Sterling Shepard). Jahmyr Gibbs won it for
+Detroit with 2:25 to go. Geno was the best he's been all year: **31-of-37, 321 yards, 3 TD, 0
+INT** (79.3 QBR, a 78.7 PFF passing grade, a 129.8 passer rating), with Wilson (10-107-TD) and
+rookie TE **Kenyon Sadiq** (7-105-TD) doing the damage. The expected-score model had Detroit by
+about six, and it finished Detroit by seven, so this was a fair result against one of the
+league's best offenses on the road. The problem was the ground game (58 yards) and five sacks
+taken.
+
+**Injuries:**
+- **RB Breece Hall** left early in the fourth with a **right thigh injury** and was ruled out.
+  He's getting an MRI, and Aaron Glenn says there's no update until Wednesday.
+- **G Dylan Parham** (starting guard) left with a **knee injury**. His update is also due
+  Wednesday.
+- **S Minkah Fitzpatrick** (groin strain, from Week 1) was inactive again.
+- **DT David Onyemata** is on IR (groin).
+
+## What changed — Week 3 2026
+
+- **QB Geno Smith −2.0 → −1.5 (+0.5):** three straight competent-to-good starts, no
+  interceptions all season, and his best game at Detroit. −2.0 priced him like a bottom-three
+  starter, and he's playing better than that. Still well below the line.
+- **Offense −0.5 held (pending Hall/Parham):** the passing game is real, and the run game
+  wasn't. If Hall misses time the offense drops to −0.8, and it drops another 0.1 if Parham
+  is out too.
+- **Defense +0.3 held:** 31 allowed, but to an elite Detroit offense and without Fitzpatrick
+  and Onyemata. The run defense (131 allowed) is the crack to watch.
+- **New total −2.2 → −1.7.**
+
 ## Week 2: vs Green Bay (L 17–20, OT)
 
 A loss on the scoreboard, but a genuinely encouraging game for the defense — and evidence the unit
@@ -33,8 +65,9 @@ anchor, while the units around him are better than replacement-level and climbin
 
 ## Quarterback
 
-Geno Smith (−2.0) holds — a capable veteran who managed Week 1 efficiently behind a dominant
-run game, but the rating still reflects a limited situation and caps the ceiling here.
+Geno Smith (−1.5) moves up from −2.0 after three weeks of mistake-free football, capped by a
+31-of-37, 321-yard, three-touchdown day at Detroit. He's still a below-the-line starter, since
+the ceiling is limited, but he's no longer being priced near the floor.
 
 ## What moved the number
 

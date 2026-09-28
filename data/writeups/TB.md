@@ -1,3 +1,36 @@
+## Week 3: vs Minnesota (L 16–23)
+
+Tampa Bay fell to 0–3, and the loss got worse at the end. **Baker Mayfield dislocated his right
+(throwing) thumb** on an interception under pressure with 1:54 left, when his hand hit Blake
+Cashman. X-rays showed no fracture, and an MRI showed no major ligament or tendon damage, but Todd
+Bowles says he'll **miss at least three weeks**, targeting a return around **Week 7 vs. Carolina**.
+**Undrafted rookie Jalon Daniels** (who won the backup job in camp) starts Week 4 against Green Bay.
+
+The game itself was a rock fight. The Bucs managed **243 yards and 11 first downs**, went
+**2-of-17 on third down**, and took **six sacks**. Baker went 17/34 for 217, 1 TD, 1 INT with a
+17.0 QBR, and **Bucky Irving** was held to 46 yards on 15 carries. The defense deserved better. It
+held Minnesota to 230 yards and 9 first downs, and **A'Shawn Robinson** (interception) and
+**Antoine Winfield Jr.** played well. But Minnesota's 86-yard punt-return touchdown and two
+long field goals were the difference.
+
+**Injuries:**
+- **Baker Mayfield**: **thumb dislocation**, out 3+ weeks.
+- Rookie edge **Rueben Bain Jr.** (**groin**, from Week 2) and rookie LB **Josiah Trotter**
+  (**low-grade left shoulder sprain**) were both out. Both are starters and week-to-week.
+- WR **Jalen McMillan** (**knee**) is questionable.
+- CB **Jacob Parrish** (**back**, Week 1) remains a watch item.
+
+**What changed:**
+- **QB Baker +1.5 → Jalon Daniels −4.5:** by the active-starter rule, the rating uses the man
+  actually starting. Daniels is an undrafted rookie with three regular-season passes (0-for-3, one
+  interception). **Baker's +1.5 returns when he's back, around Week 7.**
+- **Offense +1.0 → +0.5 (−0.5):** a second straight game with no sustained offense. Six sacks
+  allowed, 3.1 yards per carry, 2-of-17 on third down. The line hasn't been the strength the grade
+  assumed. The quarterback change is priced separately.
+- **Defense −1.0 → −0.7 (+0.3):** held Minnesota's offense to roughly 13 points' worth of work
+  without two rookie starters (Bain, Trotter), which earns back part of the Week 2 cut.
+- **New total 1.5 → −4.7.**
+
 ## Week 2: vs Cleveland (L 19–23)
 
 Tampa Bay dropped a home game it was favored to win, 23–19 to Cleveland. It was a weird one —
@@ -30,7 +63,12 @@ Tampa Bay grades above the line as a genuinely balanced team — a proven quarte
 
 ## Quarterback
 
-Baker Mayfield (+1.5) is the selected quarterback after a half-point cut following the Week 2 loss to Cleveland. His earlier +2.0 grade preceded that game.
+Jalon Daniels (−4.5) is the selected quarterback while Baker Mayfield (+1.5) recovers from a
+dislocated right thumb (out at least three weeks, targeting ~Week 7). Daniels is an undrafted
+rookie out of Kansas who beat out Jake Browning for the QB2 job in camp (Browning was released
+Aug. 30). His only regular-season action is three late throws against Minnesota. He sits at the
+bottom of the backup band until he shows more. Baker had been flat before the injury: 17-of-34
+with a 17.0 QBR in Week 3, after a 21-of-34 Week 2 against Cleveland.
 
 ## Quarterback: through Week 1 2026 (historical)
 
@@ -49,4 +87,7 @@ Baker Mayfield (+2.0) is a solid above-average grade. He's coming off the best s
 
 ## Bottom line
 
-A well-rounded roster with a quarterback playing his best football and a line that wins on both sides of the ball. The ceiling depends on whether the young receivers replace Evans's production and the rookie edge holds up — but the floor here, with Mayfield and those trenches, is a playoff-caliber one.
+This is rock bottom for the moment: 0–3, the starting quarterback out for a month, two rookie
+defensive starters hurt, and an offense that hasn't moved the ball in two weeks. The defense is
+better than the record, and Baker's return around Week 7 restores six points to the rating. Until
+then, Tampa Bay grades as one of the league's weakest teams.

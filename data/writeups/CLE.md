@@ -1,3 +1,23 @@
+## Week 3: vs Carolina (W 21–18)
+
+A second straight comeback win, though the box score says Cleveland was fortunate: Carolina
+out-gained the Browns 360–259 and "should" have scored about 26. The defense held where it counted —
+three first-half stops that included a **Mason Graham fourth-down sack** (Graham had two), and
+Carolina went 1-of-3 in the red zone. **Deshaun Watson** was 10-of-21 for 67 yards through three
+quarters, then 6-of-9 for 77 in the fourth — and after a would-be game-sealing end-zone interception
+was wiped out by a roughing-the-passer call, he hit **Harold Fannin Jr.** (7/51, **two touchdowns**)
+for the winner with 1:48 left and found Denzel Boston for the two-point conversion. His final line
+(16-of-30, 144, 2 TD, 0 INT, 60.5 QBR) flatters the day: PFF graded it **39.1, 29th of 30**, with
+three turnover-worthy plays.
+
+**Injuries:** no new injuries reported. CB **Tyson Campbell** was inactive (hip + ankle, aggravated
+in Week 2) and RG **Teven Jenkins** (back) missed his third straight game. Watson took a hard hit and
+returned.
+
+**What changed:** nothing — **all three held (total −2.8)**. Watson's results were fine and the
+process wasn't; the defense's red-zone stops were real but it gave up 360 yards; the offense (4.1
+yards a play, 12 penalties) did just enough.
+
 ## Week 2: at Tampa Bay (W 23–19)
 
 Cleveland won a genuine coin-flip in Tampa, 23–19 — the model actually favored the Bucs by

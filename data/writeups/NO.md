@@ -1,3 +1,30 @@
+## Week 3: vs Las Vegas (L 27–35)
+
+New Orleans beat itself. The Saints **out-gained the Raiders 381–340**, went a perfect
+**4-for-4 in the red zone**, and led 27–16 midway through the third quarter. Then they gave the
+ball away, and Las Vegas scored the last 19 points. **Four turnovers**: Tyler Shough was
+**strip-sacked twice** (Koonce, Chinn), Juwan Johnson fumbled after a catch, and Shough threw
+an interception. The box-score model had this as roughly a three-point Raiders game, so the
+Saints' offense wasn't the problem. Ball security was. Shough's line (29-of-42, 255 yards,
+**4 TD**, 1 INT, 106.7 rating) looks great until you count the three giveaways. **Chris Olave**
+(9 catches, 107 yards) and **Noah Fant** (two TDs) were excellent.
+
+The bigger issue is who isn't playing. **Left tackle Kelvin Banks Jr.** suffered a **severe high
+ankle sprain** in the Week 2 win at Baltimore and **needed surgery. He's out indefinitely,
+likely for months.** That's a starting left tackle, and it wasn't reflected in last week's
+number. **Travis Etienne Jr.** aggravated his **left hamstring** on a long run in the second
+half (the same leg he managed all week) and is questionable. On defense, **DE Carl Granderson
+(ankle)** and **LB Pete Werner (neck)** both left the game, and **CB Martin Emerson Jr.
+(shoulder)** was already out. That's on top of the IR sheet (DT Bresee, LB Ford, CB Long, and
+rookie WR Jordyn Tyson). Alvin Kamara, at least, is back and playing.
+
+- **Offense +0.3 → 0.0 (−0.3):** this is about the injuries, not the result. **Banks is out
+  for months (−0.2)**, and **Etienne's hamstring (−0.1)** comes back if he's fine for Week 4.
+- **QB Shough held 0.0:** four TD passes and three giveaways net out. He's still a real starter.
+- **Defense held −0.3:** it held for now, but it drops to −0.5 if Granderson or Werner misses
+  time.
+- **New total 0.0 → −0.3.**
+
 ## Week 2: at Baltimore (W 24–17)
 
 New Orleans walked into Baltimore as roughly an 8.5-point road underdog and won outright,

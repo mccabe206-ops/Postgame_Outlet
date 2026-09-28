@@ -1,3 +1,30 @@
+## Week 3: vs NY Jets (W 31–24)
+
+Detroit got back in the win column, 31–24, but it needed a late answer. The Lions led 24–10
+early in the fourth, watched the Jets tie it with 4:06 left, then **Jahmyr Gibbs** won it on
+an 11-yard touchdown catch with 2:25 to go. That was his third score of the day, after 99
+rushing yards and two rushing touchdowns. **Jared Goff** was efficient (25-of-32, 269, 2 TD, 0
+INT, 76.4 QBR), and the line was dominant: **Penei Sewell** graded 92, with Tate Ratledge and
+Juice Scruggs both over 80. **LG Christian Mahogany** was back from his hip injury. The
+defense was better than in the first two weeks. It held the Jets to 58 rushing yards, sacked
+Geno Smith five times (Hutchinson 1, Alim McNeill 2), and allowed 24, but it still gave up 17
+fourth-quarter points to blow a 14-point lead.
+
+**Injuries:** no new significant injuries came out of the game. The safety room got worse
+anyway:
+- **Thomas Harper**, the promoted starter, went on IR with an **ankle** injury and is out at
+  least four games (Week 7 at the earliest).
+- **Kerby Joseph (knee)** remains on PUP indefinitely, with no fix procedure.
+- **Brian Branch (Achilles)** is eligible and is the closer of the two to returning.
+- **CB Avonte Maddox** is on IR after **foot** surgery.
+
+## What changed — Week 3 2026
+
+- **Nothing moved (1.5 held).** Goff (+2.0) and the offense (+1.0) played exactly to their
+  grades. The defense (−1.5) had its best week, but it came against a below-average offense,
+  the unit still leaked late, and it lost yet another starting safety. The improvement and
+  the new injury roughly cancel. The safeties returning remains the path back up.
+
 ## Week 2: at Buffalo (L 31–41)
 
 Detroit was beaten clearly in Buffalo — down 27–10 at half and never within one score after a

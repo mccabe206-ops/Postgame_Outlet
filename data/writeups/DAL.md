@@ -1,3 +1,29 @@
+## Week 3: vs Baltimore in Rio de Janeiro (L 31–34)
+
+A heartbreaker in Brazil. Brandon Aubrey tied it at 31 with seven seconds left, and Baltimore
+answered with a 56-yard walk-off field goal. The game itself was dead even: the box-score
+model actually had Dallas by about a point, and the offense did its part with 415 yards and 27
+first downs. **CeeDee Lamb** (7 catches, 112 yards, plus a two-point conversion) and **George
+Pickens** (7 for 82) worked Baltimore's corners, **Javonte Williams** ran for 98 and a score,
+and **Dak Prescott** was steady: 25-of-40 for 276, a TD, and no interceptions. The difference
+was a defense that forced nothing (zero takeaways) and **kept losing bodies**.
+
+The secondary is now in crisis. **Safety Jalen Thompson** injured his **hamstring** in the second
+quarter and is expected to miss **at least four weeks (4–6)**. **Cornerback Shavon Revel Jr.**,
+starting as an injury fill-in and coming off a 2025 ACL tear, hurt his **right knee** in the second
+half. Tests are pending. **DT Jonathan Bullard** left with a **calf** injury. They join
+**Malik Hooker** (fractured forearm, second straight missed game), **LB DeMarvion Overshown**
+(hamstring), **CB Cobie Durant** (hamstring), and **S P.J. Locke** (foot, IR). The backups
+playing in their place graded poorly. All-Pro **LG Tyler Smith** (thumb surgery, IR) remains
+out as well, with an earliest return around Weeks 5–6.
+
+- **Defense −1.0 → −1.3 (−0.3):** an availability move more than a performance one. Four-plus
+  secondary starters are out, plus Overshown, and there's no timetable relief for weeks. The
+  number comes back as the back end gets healthy.
+- **QB Prescott held +2.0:** clean and steady, with nothing to move.
+- **Offense held +1.0:** it moved the ball as rated, still without Tyler Smith.
+- **New total 2.0 → 1.7.**
+
 ## Week 2: vs Washington (W 37–20)
 
 A get-right game keyed by the quarterback. The final says blowout; the box says a coin flip —

@@ -1,22 +1,22 @@
 team,string,qb_name,value,notes,age,exp
-Minnesota Vikings,3,J.J. McCarthy,-3.0,"QB3 now — sprained ankle (multi-week), trade chatter; dropped to -3.0",23,2
+Minnesota Vikings,3,Max Brosmer,-5.0,"Practice squad; QB3 after McCarthy trade 9/28 — value placeholder, verify",25,2
 Atlanta Falcons,2,Tua Tagovailoa,-2.5,Startable vet behind Penix,28,6
 Indianapolis Colts,2,Anthony Richardson Sr.,-2.5,Former starter; high upside,24,3
 Kansas City Chiefs,2,Justin Fields,-2.5,Former starter,27,5
 Cincinnati Bengals,2,Joe Flacco,-3.0,Proven veteran,41,18
-Washington Commanders,2,Jayden Daniels,2.0,"INJURED (dislocated left elbow, out multiple games/poss IR) franchise starter — Mariota (ratings QB1) starting in relief; restore to QB1 when healthy",26,2
+Washington Commanders,2,Jayden Daniels,2.0,"INJURED (dislocated left elbow) franchise starter — no surgery/IR, expected back within ~3 weeks (Rapoport 9/27); Mariota (ratings QB1, -2.5) starting; restore to QB1 when healthy",26,2
 San Francisco 49ers,2,Mac Jones,-3.0,Former starter,28,5
 Cleveland Browns,2,Shedeur Sanders,-3.0,Rookie; Watson now starter,24,1
-New York Giants,2,Jaxson Dart,-0.5,"INJURED (severe left knee, out extended / potentially season-ending) — Jameis Winston (ratings QB1, dropped to -4.0) starting; restore Dart if/when he returns",23,1
+New York Giants,2,Jaxson Dart,-0.5,"INJURED (left knee surgery, meniscus) — IR, out at least rest of regular season (AP); Winston (ratings QB1, -4.0) starting; restore Dart if/when he returns",23,1
 Baltimore Ravens,2,Tyler Huntley,-3.5,Mobile; has started games,28,6
 Carolina Panthers,2,Kenny Pickett,-3.5,Former 1st-rounder,28,4
-Detroit Lions,2,Teddy Bridgewater,-3.5,Veteran,34,12
+Detroit Lions,2,Joshua Dobbs,-3.5,Veteran QB2 (Bridgewater not on roster),31,9
 Green Bay Packers,2,Tyrod Taylor,-3.5,Veteran,37,15
-Seattle Seahawks,2,Drew Lock,0.0,Backup — started Wk1 relief + Wk2 (W 31-7 at ARI) for injured Darnold; grade raised to 0.0 in Wk2 (one of the best backups in the NFL),29,8
+Seattle Seahawks,2,Drew Lock,0.0,Back to QB2 (Darnold returned Wk3); started Wk1 relief + Wk2 (W 31-7 at ARI); grade 0.0 — one of the best backups in the NFL,29,8
 New Orleans Saints,2,Spencer Rattler,-3.5,Developing,26,2
 Pittsburgh Steelers,2,Mason Rudolph,-3.5,Veteran,31,8
 Arizona Cardinals,2,Gardner Minshew II,-3.5,Veteran spot-starter,30,7
-Tampa Bay Buccaneers,2,Jake Browning,-3.5,Has shown competence,30,7
+Tampa Bay Buccaneers,2,Baker Mayfield,1.5,"INJURED (dislocated R thumb Wk3, no fracture/ligament damage) franchise starter — out 3+ wks (~Wk7); Jalon Daniels (ratings QB1, -4.5) starting; restore Baker to QB1 when healthy",31,9
 Denver Broncos,2,Jarrett Stidham,-4.0,Journeyman,,
 Los Angeles Chargers,2,Trey Lance,-4.0,Former 1st-rounder; unproven,,
 Houston Texans,2,Davis Mills,-4.0,Replacement-level,,
@@ -24,29 +24,28 @@ Tennessee Titans,2,Mitchell Trubisky,-4.0,Journeyman,,
 Jacksonville Jaguars,2,Nick Mullens,-4.0,Journeyman,,
 Dallas Cowboys,2,Joe Milton III,-4.0,Strong arm; raw,,
 Philadelphia Eagles,2,Tanner McKee,-4.0,Developmental,,
-New York Jets,2,Cade Klubnik,-4.0,Rookie,,
-Miami Dolphins,2,Quinn Ewers,-4.0,Rookie,,
+New York Jets,2,Will Levis,-3.5,"Veteran backup (on ESPN + Sleeper roster); value placeholder, verify",27,4
+Miami Dolphins,2,Brady Cook,-4.5,"QB2 (Ewers not on roster; Sleeper lists Cook Out) — value placeholder, verify",24,2
 Las Vegas Raiders,2,Fernando Mendoza,-3.0,Rookie; raised per your read,22,0
 Los Angeles Rams,2,Ty Simpson,-4.0,Rookie,,
-Chicago Bears,2,Caleb Williams,3.0,"INJURED (right hamstring, week-to-week) franchise starter — out since Wk2 Q4, ruled out Wk3; Bagent (concussion protocol)/Keenum starting in relief; restore to QB1 when healthy",24,2
+Chicago Bears,2,Caleb Williams,3.0,"INJURED (Grade 2 right hamstring strain, 3-4 weeks per ESPN 9/27) franchise starter — Keenum starting; restore to QB1 when healthy",24,2
 Buffalo Bills,2,Kyle Allen,-4.5,Deep journeyman,,
 New England Patriots,2,Tommy DeVito,-4.5,Deep journeyman,,
 Las Vegas Raiders,3,Aidan O'Connell,-4.5,Real starting experience,,
-Tennessee Titans,3,Will Levis,-4.5,Former 2nd-round starter,,
-Minnesota Vikings,2,Carson Wentz,-1.0,"QB2 now (McCarthy ankle/multi-week); rated -1.0 = his value as the current fill-in starter — started Wk2, 9-3 W vs CHI for concussed Murray",33,11
+Tennessee Titans,3,Hendon Hooker,-5.5,"Practice squad (Levis now on NYJ) - value placeholder, verify",,
+Minnesota Vikings,2,Carson Wentz,-1.0,"QB2 behind Murray; rated -1.0 = his value as a fill-in starter (started Wk2, 9-3 W vs CHI for concussed Murray). McCarthy traded to NYG 9/28",33,11
 Dallas Cowboys,3,Sam Howell,-4.5,Has starting experience,,
 Philadelphia Eagles,3,Andy Dalton,-4.5,Proven veteran,,
-Chicago Bears,3,Tyson Bagent,-4.5,"UDFA backup; in concussion protocol Wk2 — QB3 behind starter Keenum while Caleb (hamstring) is out",,
+Chicago Bears,3,Tyson Bagent,-4.5,UDFA backup; cleared concussion protocol 9/27 — backup behind starter Keenum while Caleb (hamstring) is out,,
 New Orleans Saints,3,Zach Wilson,-5.0,Former #2 overall,,
 Cincinnati Bengals,3,Josh Johnson,-5.0,Career journeyman,,
 Baltimore Ravens,3,Skylar Thompson,-5.0,Spot backup,,
-New York Giants,3,Brandon Allen,-5.0,Journeyman,,
-Atlanta Falcons,3,Trevor Siemian,-5.0,Veteran,,
+New York Giants,3,J.J. McCarthy,-3.0,"Acquired from MIN 9/28 for a 2027 5th; Harbaugh: Winston stays starter, McCarthy learns the offense as backup. Value carried from MIN (-3.0); sprained ankle earlier in Sept",23,3
 Cleveland Browns,3,Dillon Gabriel,-5.0,Rookie,,
 Green Bay Packers,3,Kyle McCord,-5.0,Rookie,,
 Arizona Cardinals,3,Carson Beck,-5.0,Rookie,,
 Pittsburgh Steelers,3,Will Howard,-5.5,Rookie,,
-Houston Texans,3,Graham Mertz,-5.5,Rookie,,
+Houston Texans,3,Graham Mertz,-5.5,"Rookie — IR (ACL, season)",,
 Indianapolis Colts,3,Riley Leonard,-5.5,Rookie,,
 Kansas City Chiefs,3,Garrett Nussmeier,-5.5,Rookie,,
 Seattle Seahawks,3,Jalen Milroe,-5.5,Raw rookie,,
@@ -55,13 +54,14 @@ Denver Broncos,3,Sam Ehlinger,-5.5,Deep backup,,
 Los Angeles Chargers,3,DJ Uiagalelei,-5.5,Rookie,,
 Los Angeles Rams,3,Stetson Bennett IV,-5.5,Deep backup,,
 San Francisco 49ers,3,Adrian Martinez,-5.5,Deep backup,,
-Miami Dolphins,3,Cam Miller,-5.5,Rookie,,
+Miami Dolphins,3,Kyle McCord,-5.5,"QB3 (Miller not on roster) — value placeholder, verify",24,1
 Buffalo Bills,3,Shane Buechele,-6.0,Camp arm,,
 New England Patriots,3,Behren Morton,-6.0,Raw rookie,,
-New York Jets,3,Brady Cook,-6.0,Raw rookie,,
+New York Jets,3,Cade Klubnik,-4.0,Rookie; QB3 behind Levis (string order vs Levis unverified — Sleeper lists Klubnik 3rd),22,0
 Jacksonville Jaguars,3,Carter Bradley,-6.0,Deep backup,,
 Washington Commanders,3,Athan Kaliakmanis,-6.0,Raw rookie,,
-Detroit Lions,3,Luke Altmyer,-6.0,Raw rookie,,
-Tampa Bay Buccaneers,3,Connor Bazelak,-6.0,Raw rookie,,
+Detroit Lions,3,Luke Altmyer,-6.0,"Raw rookie, practice squad",,
+Tampa Bay Buccaneers,3,Easton Stick,-4.5,"Practice-squad veteran (Bazelak no longer on roster) — emergency QB behind rookie Daniels; value placeholder, verify",31,7
 Atlanta Falcons,3,Cooper Rush,-4.5,"QB3 behind Penix/Tua; downgraded -3.5->-4.5 Wk2 — awful in the 34-3 loss (pick-6, 26.7 PFF) vs a CAR D that had allowed 59 the week before",31,10
-Atlanta Falcons,4,Jack Strand,-5.5,"Rookie UDFA; pick-6 in Wk2 relief debut",23,1
+Atlanta Falcons,4,Jack Strand,-5.5,Rookie UDFA; pick-6 in Wk2 relief debut,23,1
+New York Giants,4,Jake Haener,-4.5,"Backup (Brandon Allen no longer on roster); behind McCarthy after 9/28 trade — value placeholder, verify",27,3

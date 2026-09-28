@@ -1,4 +1,32 @@
-## What changed — Week 3 2026 (at Indianapolis)
+## Week 3: at Indianapolis (L 17–19)
+
+Houston dropped to 0–3 on a 53-yard field goal with 16 seconds left, and it's hard to lose a
+game like this. The Texans **won the turnover battle 3–0**, got another dominant game from
+**Will Anderson Jr.** (a 93 PFF grade, 2.5 sacks), and still lost, because the offense
+couldn't move without Nico Collins: 223 yards, 4.4 per play, 4-of-11 on third down. **C.J.
+Stroud** was clean (16-of-27, 167, 1 TD, 0 INT, a 75.7 PFF grade) but had nobody to push the
+ball to. Woody Marks' 1-yard touchdown put Houston up 17–16 with 1:48 left, and DeMeco Ryans
+took the blame for the late-game timeout management. The expected-score model actually had
+Houston winning narrowly. This one was a coin flip decided by the offense's lack of
+firepower, not a talent verdict.
+
+**Injuries:**
+- **WR Nico Collins (hamstring, Grade 1)** missed his second straight game. Reports give him
+  a *decent chance* to return in Week 4 against Dallas.
+- **LB Henry To'oTo'o** (shoulder, IR) and **LB E.J. Speed** (quad surgery, PUP) leave a
+  two-starter hole at linebacker.
+- **DE Jadeveon Clowney** is out (knee).
+
+## What changed — Week 3 2026
+
+- **Nothing moved (1.8 held).** The offense stays at −0.7 while Collins is out. The plan is
+  unchanged: +1.0 back (to +0.3) the week he returns.
+- **QB Stroud +0.5 held:** clean, low-impact football with no WR1. The watch item: his QBR
+  has slid three straight weeks, and if that continues with Collins back, the number moves.
+- **Defense +2.0 held:** elite again, with three takeaways and one touchdown allowed, even
+  with the linebacker injuries.
+
+## Week 3: at Indianapolis (L 17–19) — availability going in
 
 **Nico Collins is out again.** A Grade 1 hamstring strain kept him out of practice all week,
 and he misses his second straight game. The Week 2 loss at Cincinnati showed what that costs

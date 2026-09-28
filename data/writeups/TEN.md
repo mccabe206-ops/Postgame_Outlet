@@ -1,3 +1,26 @@
+## Week 3: at N.Y. Giants (L 7–12)
+
+An ugly one in a nor'easter at MetLife. Tennessee managed **34 yards and no points in the first
+half**, fumbled the opening kickoff (Chimere Dike), and lost 12–7 to a Giants team playing its
+first game without Jaxson Dart. **Cam Ward** (23-of-36, 181, 1 TD, 1 INT; 49.9 PFF, 46.8 QBR) found
+a rhythm late but **missed a wide-open Carnell Tate in the end zone** and was **picked off in the
+end zone with 17 seconds left**. The box says Tennessee "should have" scored ~15 — this offense
+left points on the field again. The bright side was the defense: **no touchdowns allowed**, four
+field goals, and **Jeffery Simmons was the best player on the field** (10 tackles, a sack, 2 TFL;
+80.0 PFF), with CB Marcus Harris (87.1) close behind.
+
+**Injuries:** starting **RG Fernando Carmona left on the first offensive play with an ankle
+injury** and is still being evaluated (Jackson Slater replaced him). **RB Tyjae Spears** aggravated
+an ankle injury in the second half.
+
+**What changed:**
+- **Defense −1.0 → −0.7 (+0.3):** two straight good defensive games (Week 2 vs Philadelphia, and
+  zero TDs allowed here). Tempered because it came against Jameis Winston in rain and wind.
+- **Offense −0.9 → −1.0 (−0.1):** a second first-half no-show in three weeks, now without a starting
+  guard. Small, because the weather mutes the read — it comes back if Carmona does.
+- **QB Cam Ward held at −1.0:** a poor day, but his three-game sample sits right on the number.
+- **New total −2.9 → −2.7.**
+
 ## Week 2: vs Philadelphia (L 20–24)
 
 A step forward in a loss — Tennessee **"won the tape"** and fell only on a Jalen Hurts

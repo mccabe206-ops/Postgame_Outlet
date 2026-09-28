@@ -1,4 +1,30 @@
-## What changed — Week 3 2026 (at Washington)
+## Week 3: at Washington (L 31–33)
+
+Seattle's 12-game winning streak ended on turnovers, not football. The Seahawks **out-gained
+Washington 437 to 258** and the box had them winning by about a touchdown — but they turned it
+over **three times to Washington's zero**: rookie RB **Jadarian Price fumbled at the Seattle 21**
+(short-field TD), **Sonny Styles** intercepted Sam Darnold, and **Kain Medrano's 50-yard pick-six**
+with 3:57 left decided it. **Darnold was otherwise excellent in his return from the glute strain**
+— 31-of-45, 379 yards, four touchdowns (83.1 PFF, second-best in the league this week) — and
+**Jaxon Smith-Njigba** (10-128-2) became only the second player ever, with Jerry Rice, to post 120+
+yards and a TD in each of his team's first three games. The defense held Washington to **4.0 yards
+a play** (Ernest Jones 92, DeMarcus Lawrence 91, Byron Murphy II 85 on PFF). The problem spots
+were the run game (~2 yards a carry from the backs) and fill-in safeties.
+
+**Injuries:** S **Nick Emmanwori** hurt his **hamstring** in the first half but returned. S
+**Julian Love (calf)** and S **Ty Okada (hamstring)** were out, with **Bud Clark** on IR (ankle
+fracture) — the safety room is down to its depth. Starting **RG Anthony Bradford** went on **IR
+(knee and hip)** Sept. 23 and misses at least four games. **Zach Charbonnet** (ACL, PUP) could open
+his practice window as soon as next week.
+
+**What changed:**
+- **Offense +1.5 → +1.3 (−0.2):** the passing game is elite, but the backfield is broken and a
+  starting guard is on IR. Restore as Charbonnet returns and the run game shows up.
+- **QB Darnold (+2.0) and Defense (+3.0) held:** Darnold graded as a top-two QB this week; the
+  defense's 33 allowed is short field plus a pick-six, not the unit getting moved.
+- **New total +6.5 → +6.3.**
+
+## Week 3 availability (pre-game)
 
 **Sam Darnold is back.** He hurt his glute (a soft-tissue strain) early in the opener and
 missed the Week 2 win at Arizona, but he's off the injury report and cleared to start Sunday at
@@ -33,8 +59,8 @@ Checked September 9, 2026, 10:42–10:46 a.m. ET. The September 8 final injury r
 
 ## The current rating
 
-Seattle's current rating pairs Sam Darnold (+2.0) with a +1.5 offense and +3.0 defense for a
-+6.5 total. Darnold's return from the glute injury restores the quarterback grade he carried
+Seattle's current rating pairs Sam Darnold (+2.0) with a +1.3 offense and +3.0 defense for a
++6.3 total. Darnold's return from the glute injury restores the quarterback grade he carried
 into the season.
 
 ## Quarterback

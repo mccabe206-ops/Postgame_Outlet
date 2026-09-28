@@ -1,3 +1,31 @@
+## Week 3: at Tampa Bay (W 23–16)
+
+Minnesota is 3–0, and once again the **defense and special teams** did it. The offense managed
+**230 yards and 9 first downs** and went **2-of-15 on third down**. The box had this as a 13–12
+coin flip. The margin came from **Myles Price's 86-yard punt-return touchdown** and Will Reichard's
+leg (field goals of 54, 56, and 43). Brian Flores's defense was relentless: **six sacks** from
+seven different players, interceptions by **Andrew Van Ginkel** and **Isaiah Rodgers**, and a
+Tampa offense held to 2-of-17 on third down. Kyler Murray's first game back from the concussion
+was rough (15/29, 168, 1 TD, 1 INT, 25.4 QBR). The one highlight was a 41-yard strike to **Jordan
+Addison** (5/90).
+
+**Injuries:** **Justin Jefferson** hurt his **ankle** late in the first quarter and was ruled out.
+Kevin O'Connell said he "got close" to returning, and an **MRI is set for Monday**. Early
+reporting suggests he isn't expected to miss much time, but the severity isn't confirmed. TE
+**Josh Oliver** (**biceps**) is doubtful. Backup center **Nick Samac** (**knee**) went on IR
+before the game, and punter Brett Thorson (hamstring) is out. **Murray** came through clean.
+
+**What changed:**
+- **Defense +0.7 → +1.0 (+0.3):** a second straight dominant game. Six sacks, two interceptions,
+  243 yards allowed. Flores is outrunning the talent read again, tempered only by a Tampa offense
+  that has been poor all year.
+- **Offense +1.0 → +0.8 (−0.2):** the offense hasn't produced in two weeks (9 points, then 23
+  helped by a special-teams TD), and Jefferson's ankle is a question mark. **If the MRI shows he'll
+  miss games, this drops further.**
+- **Murray held −0.5:** a poor game (21st of 30 in PFF pass grade), but it was his first game back
+  from a concussion and he lost his top receiver in the first quarter.
+- **New total 1.2 → 1.3.**
+
 ## Week 2: vs Chicago (W 9–3)
 
 A takeaway-driven, weather-suppressed 9–3 win with Carson Wentz filling in for the concussed Kyler
@@ -27,9 +55,10 @@ defense. Carson Wentz's Week 1–2 appearances remain historical context.
 
 ## Quarterback
 
-Kyler Murray (−0.5) is the selected quarterback in the current edition after the Week 1–2
-Wentz fill-in. Wentz's −1.0 grade and his Week 1 comeback are earlier lineup context; the
-current team number already uses Murray's value.
+Kyler Murray (−0.5, held) is the selected quarterback, back from the Week 1 concussion. His return
+at Tampa was rough: 15-of-29, 168, 1 TD, 1 INT, 55.8 PFF grade, 25.4 QBR, a 66.5 rating. It came
+with Justin Jefferson out after the first quarter. Carson Wentz (−1.0) managed the Week 1–2
+fill-in and is the QB2. If Murray doesn't settle in, his grade drifts toward that level.
 
 ## What moved the number
 
@@ -45,6 +74,7 @@ current team number already uses Murray's value.
 
 ## Bottom line
 
-Jefferson and a Flores defense keep Minnesota around the line; the ceiling is gated now by a
-backup at quarterback and a rebuilt pass rush. Once Murray is back and if the front holds up,
-this is a team that can outrun its number again.
+Minnesota is 3–0 on defense and special teams. Flores's unit has become the best thing about this
+roster, and it's covering for an offense that has sputtered with a quarterback working back from a
+concussion. Jefferson's ankle is the swing factor: if he's back soon, the offense should rebound
+toward its talent.

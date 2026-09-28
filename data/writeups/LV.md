@@ -1,3 +1,31 @@
+## Week 3: at New Orleans (W 35–27)
+
+**The Raiders are 3–0.** The way they got there says to be careful not to overreact. Las Vegas
+trailed 27–16 midway through the third quarter and was **out-gained 381–340**, then scored the
+game's final **19 points**. The swing came from takeaways: the defense forced **four turnovers**,
+three of them fumbles. **Malcolm Koonce** and **Jeremy Chinn** stripped Tyler Shough on sacks,
+**Nakobe Dean** punched the ball out of Juwan Johnson's hands, and Hamsah Masses added an
+interception. The box-score model had the Raiders winning by about three, not eight. Some of
+that margin is fumble luck, but the pressure behind it was real. Dean (90), Koonce (85), and
+**Maxx Crosby** all graded well.
+
+**Kirk Cousins** was the steady hand again: 22-of-33, 248 yards, **3 TD and 0 INT** (119.3
+rating). That's three touchdown passes in all three games (9 TD, 3 INT on the season). **Brock
+Bowers** made his season debut off the September meniscus trim and was the best player on the
+field: **10 catches, 116 yards, and the clinching touchdown.** The costly news is **WR Jack
+Bech**, who **broke his forearm** late in the first half and is headed to IR (typically 6–10
+weeks). That's a real hit to an already thin receiver room. Ashton Jeanty was bottled up (19 for
+56).
+
+- **QB Cousins −1.5 → −1.0 (+0.5):** three straight weeks of starter-level play, capped by a
+  clean road game and a 19–0 closing run. He's no longer playing like a floor quarterback.
+- **Offense −0.2 → −0.1 (+0.1 net):** Bowers is all the way back, which completes his return
+  (+0.2), offset by losing Bech to a broken forearm (−0.1).
+- **Defense −0.7 → −0.5 (+0.2):** four takeaways and two strip-sacks, tempered because the unit
+  still allowed 381 yards and let New Orleans go 4-for-4 in the red zone, and fumble recoveries are partly
+  luck.
+- **New total −2.4 → −1.6.**
+
 ## What changed — Week 3 2026 (at New Orleans)
 
 **Brock Bowers is expected to make his season debut.** He's listed questionable with the knee
@@ -46,7 +74,7 @@ Las Vegas has two genuine stars — one on each side of the ball — dragged dow
 
 ## Quarterback
 
-Kirk Cousins (-1.5) is the selected quarterback after a one-point increase following the Week 2 road win over the Chargers. The earlier -2.5 value described the Week 1 edition.
+Kirk Cousins (-1.0) is the selected quarterback after another half-point increase following the Week 3 win at New Orleans (3 TD, 0 INT). He has now thrown three touchdown passes in all three games. The -1.5 value followed Week 2, and -2.5 was the Week 1 edition.
 
 ## Quarterback: through Week 1 2026 (historical)
 

@@ -1,3 +1,37 @@
+## Week 3: at Denver (L 26–30, Sunday night)
+
+The Rams were the better team and lost anyway. They led **16–0 at halftime** on a 256–72
+yardage edge, **out-gained Denver 482–257** for the night, and the box-score model had them
+winning by about 13. Three things flipped it:
+1. A **66-yard Talanoa Hufanga pick-six** with 4:49 left turned a 19–16 lead into a deficit.
+2. Denver converted **two two-point tries** on its third-quarter touchdown drives.
+3. The Rams went **1-for-4 in the red zone** and settled for four Harrison Mevis field goals.
+
+Matthew Stafford answered the pick-six with a 48-yard touchdown to Konata Mumpfield. Bo Nix
+drove for the winning score with 47 seconds left, and Stafford's last-play heave was intercepted.
+Stafford finished 30-of-55 for 390 yards with 2 TD and 2 INT. That was volume more than
+efficiency, but not a reason to move an elite grade. **Davante Adams** (7 catches, 137 yards)
+and **Kyren Williams** (158 scrimmage yards) carried the offense, again **without Puka Nacua**.
+
+The turning point was an injury. **Cornerback Jaylen Watson**, who had two pass breakups in 20
+snaps, hurt his **right shoulder** late in the second quarter and was **carted off**. Once he was
+gone, Nix got hot. His timeline is pending. **TE Terrance Ferguson** left in the fourth with an
+**ankle** injury, and **S Kamren Kinchens** (hamstring) didn't play. **Nacua (hip/groin)**
+missed a second straight game. McVay is targeting Week 4 at Philadelphia, but one report says
+surgery is "not entirely off the table," so his return is hopeful, not certain. **Myles
+Garrett** (knee, IR) is still on track for about Week 6.
+
+- **Defense +0.5 → +0.3 (−0.2):** this is about availability, not performance. The unit held
+  Denver to 72 first-half yards while whole. It moves because **Watson** (shoulder) and
+  **Kinchens** (hamstring) join Garrett on the sideline. It comes back if Watson's shoulder
+  checks out.
+- **Offense held +1.4:** 482 yards without Nacua, and the red-zone stalls are a
+  positive-regression candidate, not a talent problem. **Nacua's return is still the +0.5
+  lever.**
+- **QB Stafford held +5.5:** 390 yards and a late go-ahead drive against the pick-six and a few
+  loose throws. A wash for an established elite grade.
+- **New total 7.4 → 7.2.**
+
 ## Week 3 availability — at Denver (Sunday night)
 
 **Puka Nacua is out again.** He's doubtful and not expected to play with a hip/groin injury

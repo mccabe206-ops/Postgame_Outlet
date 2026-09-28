@@ -1,3 +1,26 @@
+## Week 3: vs New England (W 35–6)
+
+Jacksonville bounced back with a 35–6 rout, and it came from **finishing and taking the ball away**
+more than from moving it. The yards were even (JAX 315, NE 317). But the Jaguars went **5-for-5 in
+the red zone**, converted 8-of-12 on third down, and forced **three turnovers** (INTs by
+**Jarrian Jones** and **Travis Hunter**, plus a fumble recovery). They led 28–3 before the fourth
+quarter. **Trevor Lawrence** was efficient (19/29, 182, 3 TD, 1 INT, 102.9 rating, 79.8 QBR), and
+RT **Anton Harrison** (89.0 PFF) controlled his side. **DaVon Hamilton** (sack) and **Josh
+Hines-Allen** won up front.
+
+**Injuries:** none to starters. Jacksonville came out clean. **Brian Thomas Jr.** played but was
+quiet (1 catch). The **shoulder** issue from Week 1 isn't limiting him. **Patrick Mekari** (IR,
+**back surgery**) remains the interior-line hole.
+
+**What changed:**
+- **Defense 0.0 → +0.3 (+0.3):** three takeaways and a red-zone wall (New England went 0-for-3),
+  which gets back most of the Week 2 cut. It's +0.3, not a full half-point, because the opponent was
+  a depleted Patriots offense and the box still projected New England for ~16.
+- **Lawrence held +3.5:** efficient, three touchdowns. Not a Week 1 repeat, but no step back either.
+- **Offense held +0.5:** a perfect red-zone day on only 315 yards. The box says ~23 points of
+  offense, not 35, so we don't bank the scoreboard.
+- **New total 4.0 → 4.3.**
+
 ## Week 2: at Denver (L 13–20)
 
 Jacksonville's win streak stopped in Denver. The box was close — the Jaguars moved the
@@ -29,7 +52,11 @@ Jacksonville grades as a clear riser led by its quarterback, with a receiver roo
 
 ## Quarterback
 
-Trevor Lawrence (+3.5) just played the best game of his career and is the engine of this rating. In the Week 1 rout of Cleveland he was essentially the best quarterback in football that weekend: a 150.6 passer rating (1st of 30 qualified passers), a 93.4 QBR (2nd), an 86.0 PFF grade (2nd), and 18-of-23 for 245 with 4 touchdowns and no interceptions on just one turnover-worthy play and one sack. The bet was that Liam Coen's system would finally organize the physical tools — Week 1 was exactly that. One caveat keeps it from climbing further: it came against a Browns defense that's decent but stuck behind the league's worst quarterback situation, so he'll need to repeat it against a real secondary.
+Trevor Lawrence (+3.5, held) is the engine of this rating. Through three games he has a
+career-best Week 1 (18-of-23, 4 TD, 150.6 rating, 87.1 PFF grade), a Week 2 that faded late at
+Denver (17-of-29, 0 TD, 1 INT), and an efficient Week 3 (19-of-29, 3 TD, 1 INT, 102.9 rating,
+79.8 QBR, 68.1 PFF). The Coen system is organizing the tools. The next step is repeating the
+Week 1 version against a real secondary.
 
 ## What moved the number
 
@@ -44,4 +71,7 @@ Trevor Lawrence (+3.5) just played the best game of his career and is the engine
 
 ## Bottom line
 
-Everything starts with Lawrence, and Week 1 was the version the bet was on. The flanks still carry caveats — a hurting interior line plus BTJ's shoulder on offense, a thin second level on defense — but the run defense and the weapons did enough to make this more than a one-man rating.
+Jacksonville is 2–1 with a quarterback grading like a top-10 starter and a defense that just
+reminded everyone what its front can do. The caveat after Week 3 is sustainability: 35 points on
+315 yards means the finishing and the takeaways did a lot of the work. Still, this is a clear
+riser, with Lawrence and the front seven carrying it.

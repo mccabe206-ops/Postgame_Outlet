@@ -1,3 +1,26 @@
+## Week 3: vs Tennessee (W 12–7)
+
+The Giants won an ugly one in a nor'easter, and it cost them their best defender. **Jameis
+Winston** (14-of-22, 118, no TDs, no turnovers; 47.3 PFF) did only what was asked, the offense ran
+for 138 yards and never turned it over, and **Dominic Zvada kicked four field goals** — New York
+didn't score a touchdown, but it didn't need one. The defense carried it: **Arvell Reese** (13
+tackles, 85 PFF) and **DJ Reader** (81) controlled the middle, and **Jevon Holland's end-zone
+interception with 17 seconds left** (his third pick in three games) sealed it.
+
+**Injuries:** **EDGE Brian Burns injured his right knee (non-contact) in the fourth quarter and is
+believed to have torn his ACL** (Rapoport/Schefter, Sept. 28) — season-ending if confirmed. He had
+played through an ankle injury to start the game. CB **Deonte Banks** and S **Tyler Nubin** (both
+calf) were inactive, and CBs **Paulson Adebo** (knee) and **Korie Black** are on IR — four
+secondary starters out. And **Jaxson Dart had surgery on his left knee** (meniscus, per the
+injury feed) and is **out at least the rest of the regular season** (AP).
+
+**What changed:**
+- **Defense +0.5 → +0.1 (−0.4):** Burns was the headliner of the edge trio (second in the NFL in
+  sacks last season). Losing him for the year is the move. The unit played well here (no TDs
+  allowed), which keeps the cut at −0.4 rather than more; revisit if the MRI is better than feared.
+- **QB Winston (−4.0) and Offense (0.0) held:** mistake-free in bad weather; no real read either way.
+- **New total −3.5 → −3.9.**
+
 ## Week 2: at L.A. Rams (L 6–28)
 
 The Week 1 optimism ran straight into the worst kind of Week 2: **Jaxson Dart went down on the
@@ -45,5 +68,6 @@ Dart's earlier −0.5 grade belongs to the Week 1 lineup.
 
 ## Bottom line
 
-The front remains a strength, but the current −3.5 team rating reflects Winston at quarterback.
+The front was the strength — until Brian Burns' torn ACL in Week 3. The current −3.9 team
+rating reflects Winston at quarterback and a Burns-less edge group behind a depleted secondary.
 The Week 1 optimism with Dart is historical context for this edition.

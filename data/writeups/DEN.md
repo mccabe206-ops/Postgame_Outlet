@@ -1,3 +1,30 @@
+## Week 3: vs L.A. Rams (W 30–26, Sunday night)
+
+A win Denver will take, but not one the rating should chase. The Broncos were **out-gained
+482–257**, trailed **16–0 at halftime** after just 72 first-half yards, and the box-score model
+had them losing by about 13. They won on **Talanoa Hufanga**: two interceptions, including a
+**66-yard pick-six** with 4:49 left, plus a sack. They also converted **two two-point tries** on
+their third-quarter touchdown drives, and the Rams stalled in the red zone (1-for-4). Credit
+the defense for shutting the Rams out of the end zone for most of the night and making the
+plays that won it. But it also gave up 482 yards, and **Pat Surtain II** had a rare off night
+against Davante Adams (7 catches, 137 yards).
+
+The concern is at quarterback. **Bo Nix** went 17-of-34 for 186 yards, 2 TD and 1 INT (46.4
+QBR). He had PFF's second-lowest passing grade among the week's starters, and the offense did
+next to nothing until the Rams lost their starting corner. He made the final drive, a
+length-of-the-field march capped by his own 1-yard touchdown run, but that's now **two poor
+games in three**. No significant new injuries. **WR Marvin Mims Jr.** (foot) missed a second
+straight game, with Payton hopeful for next week, and **edge Jonathon Cooper** remains on the
+Commissioner's Exempt List.
+
+- **QB Nix 0.0 → −0.5 (−0.5):** two poor games out of three (13.3 QBR in Week 1, 46.4 here).
+  He's playing below a middling starter right now. One late drive doesn't outweigh the rest of
+  the tape.
+- **Defense held +1.5:** Hufanga's big night and the second-half stops are real, but so are 482
+  yards allowed. They roughly cancel.
+- **Offense held +0.5:** the dip was mostly the quarterback, and Mims may be back.
+- **New total 2.0 → 1.5.**
+
 ## Week 2: vs Jacksonville (W 20–13)
 
 The response the rating was waiting for. A week after the run defense got gashed at Kansas
@@ -28,12 +55,12 @@ quarterback — but the defense's Week 1 showing trimmed the number.
 
 ## Quarterback
 
-Bo Nix (0.0) — bumped up from −0.5. A healthy, ascending second-year starter in Sean Payton's system with upgraded weapons and a strong line profiles at least at league-average, not below it.
+Bo Nix (−0.5) — back down a half-point after Week 3 (17-of-34, 186, 46.4 QBR against the Rams), his second poor game in three. He opened at 0.0 as an ascending second-year starter in Sean Payton's system, with upgraded weapons and a strong line. The tools are still there, but the play hasn't matched the grade.
 
 ## What moved the number
 
 - **Offense (+0.5):** raised from 0.0. One of the better offensive lines in football (Bolles, Meinerz, Powers, McGlinchey) fronting a Courtland Sutton + Jaylen Waddle receiver duo — an above-average non-QB group.
-- **Defense (+1.7 → +1.2):** cut a full half-point after Week 1. The top-end talent is still
+- **Defense (+1.5):** cut from +1.7 to +1.2 after Week 1, then back up to +1.5 after Week 2 (held JAX to 13). The top-end talent is still
   elite — **Pat Surtain II (best CB in the league), Bonitto, Zach Allen, Hufanga** — but the
   unit got run all over at Kansas City (Walker's career high) with missed tackles, and the
   pass-rush rotation is already thin with **edge Jonathon Cooper on the Commissioner's Exempt
