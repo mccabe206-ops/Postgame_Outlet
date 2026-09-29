@@ -229,11 +229,47 @@ def fit(year, through_week, weights=None, lam=0.3, n_weeks=None):
                     "needs_review": review[t]})
     for i, r in enumerate(out, 1):
         r["rank"] = i
+    pff_meta = _attach_pff(out, year)
     return {"season": year, "through_week": through_week, "lam": lam,
             "weeks": used, "games_used": len(games), "adjustments": adjustments,
             "draft": any(review.values()), "mean": round(mean_mine, 2),
             "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
-            "teams": out}
+            "pff": pff_meta, "teams": out}
+
+
+def _attach_pff(out, year):
+    """Add the PFF team-grade layer (pff_team.py) to each row when a cache exists,
+    plus a consensus tag: when Market and PFF both sit ≥1.0 on the same side of
+    Mine, 'others agree: you're high/low'. Graceful no-op without a cache."""
+    try:
+        import pff_team
+        rows, meta = pff_team.by_team(year)
+    except Exception:  # noqa: BLE001 — optional layer
+        rows, meta = {}, None
+    for r in out:
+        p = rows.get(r["team"])
+        r["pff_total"] = p["pff_total"] if p else None
+        r["pff_off"] = p["pff_off"] if p else None
+        r["pff_def"] = p["pff_def"] if p else None
+        r["pff_qb"] = p["pff_qb"] if p else None
+        r["pff_qb_comparable"] = p["qb_comparable"] if p else None
+        r["gap_pff"] = p["gap_pff"] if p else None
+        r["pff_units"] = p["units"] if p else None
+        r["mine_off"] = p["mine_off"] if p else None
+        r["mine_def"] = p["mine_def"] if p else None
+        r["consensus"] = consensus(r["gap"], r["gap_pff"])
+    return meta
+
+
+def consensus(gap_market, gap_pff, threshold=1.0):
+    """'high' / 'low' when both other reads disagree with Mine the same way by ≥threshold."""
+    if gap_market is None or gap_pff is None:
+        return None
+    if gap_market >= threshold and gap_pff >= threshold:
+        return "high"
+    if gap_market <= -threshold and gap_pff <= -threshold:
+        return "low"
+    return None
 
 
 def _default_week_year():

@@ -1580,14 +1580,29 @@ async function openMarketBoard(refresh){
     `Older lines re-based to today’s starting QB using your QB values. Ridge fit (λ ${j.lam}) centered on your mean (${val(j.mean)}) — `+
     `it shrinks the extremes a bit, so gaps under ~1 pt are noise. <span style="background:#12301c;padding:0 4px">green</span> = you’re ≥1.5 higher than the market, `+
     `<span style="background:#3a1616;padding:0 4px">red</span> = you’re ≥1.5 lower. Updated ${esc(j.generated_at)}.`;
-  let h='<table class="qbt"><thead><tr><th>#</th><th>Team</th><th>QB</th><th>Market</th><th>Mine</th><th>Gap (mine − mkt)</th></tr></thead><tbody>';
+  const hasPff=!!j.pff;
+  const gcls=g=>g==null?'':(g>=1.5?' style="background:#12301c"':(g<=-1.5?' style="background:#3a1616"':''));
+  let h='<table class="qbt"><thead><tr><th>#</th><th>Team</th><th>QB</th><th>Market</th>'+
+    (hasPff?'<th title="PFF unit grades on your scale, around YOUR QB value">PFF</th>':'')+
+    '<th>Mine</th><th>Gap (mine − mkt)</th>'+(hasPff?'<th>Gap (mine − PFF)</th><th>Read</th>':'')+'</tr></thead><tbody>';
   for(const r of j.teams){
     const hl=r.gap>=1.5?' style="background:#12301c"':(r.gap<=-1.5?' style="background:#3a1616"':'');
-    h+=`<tr${hl}><td class="rk">${r.rank}</td><td>${esc(r.team)}${r.needs_review?' <span title="needs_review">⚠</span>':''}</td>`+
+    const tag=r.consensus==='high'?'<span class="pill" style="background:#12301c;color:#7ee2a8">others agree: you’re high</span>'
+      :(r.consensus==='low'?'<span class="pill" style="background:#3a1616;color:#ff9b9b">others agree: you’re low</span>':'');
+    const u=r.pff_units;
+    const ul=u?`<details><summary class="dim" style="cursor:pointer;font-size:11px">units</summary><div style="font-size:11px;white-space:nowrap">`+
+      `OFF ${u.off} · pass ${u.pass} · pblk ${u.pblk} · recv ${u.recv} · run ${u.run} · rblk ${u.rblk}<br>`+
+      `DEF ${u.def} · rdef ${u.rdef} · tack ${u.tack} · prsh ${u.prsh} · cov ${u.cov} · ST ${u.spec}<br>`+
+      `PFF O ${val(r.pff_off)} / D ${val(r.pff_def)} vs yours O ${val(r.mine_off)} / D ${val(r.mine_def)} · PFF QB grade ${val(r.pff_qb)}${r.pff_qb_comparable===false?' (different QB — not comparable)':''}</div></details>`:'';
+    h+=`<tr${hl}><td class="rk">${r.rank}</td><td>${esc(r.team)}${r.needs_review?' <span title="needs_review">⚠</span>':''}${ul}</td>`+
        `<td class="dim">${esc(r.qb)}</td><td class="num ${vcls(r.market)}">${val(r.market)}</td>`+
-       `<td class="num ${vcls(r.mine)}">${val(r.mine)}</td><td class="num"><b>${val(r.gap)}</b></td></tr>`;
+       (hasPff?`<td class="num ${vcls(r.pff_total)}">${val(r.pff_total)}</td>`:'')+
+       `<td class="num ${vcls(r.mine)}">${val(r.mine)}</td><td class="num"><b>${val(r.gap)}</b></td>`+
+       (hasPff?`<td class="num"${gcls(r.gap_pff)}><b>${val(r.gap_pff)}</b></td><td>${tag}</td>`:'')+`</tr>`;
   }
-  wrap.innerHTML=h+'</tbody></table>';
+  wrap.innerHTML=h+'</tbody></table>'+(hasPff?
+    `<p class="note" style="margin-top:6px">PFF column: PFF season unit grades (through Week ${esc(j.pff.through_week)}, fetched ${esc(j.pff.fetched)}) z-scored onto your Off/Def spread and added to <b>your</b> QB value — i.e. PFF’s read of the roster around your quarterback. PFF components use your QB value; PFF QB grade shown separately; not comparable where the starter changed. “Others agree” = Market and PFF both ≥1.0 on the same side of yours.</p>`
+    :'<p class="note" style="margin-top:6px">No PFF team-grade cache found (data/pff/&lt;season&gt;/team_overview_wk&lt;N&gt;.json) — ask Claude to pull it.</p>');
   adj.innerHTML='<summary class="dim" style="cursor:pointer">QB re-basing applied ('+j.adjustments.length+')</summary>'+
     (j.adjustments.length?'<ul style="margin:6px 0 0;padding-left:18px;font-size:12px">'+j.adjustments.map(a=>
       `<li>Wk${a.week} ${esc(a.team)}: ${esc(a.from)} → ${esc(a.to)} ${a.shift==null?'(skipped: '+esc(a.note)+')':val(a.shift)}</li>`).join('')+'</ul>'
