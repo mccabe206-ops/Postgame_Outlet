@@ -18,8 +18,10 @@ injury feed) and is **out at least the rest of the regular season** (AP).
 - **Defense +0.5 → +0.1 (−0.4):** Burns was the headliner of the edge trio (second in the NFL in
   sacks last season). Losing him for the year is the move. The unit played well here (no TDs
   allowed), which keeps the cut at −0.4 rather than more; revisit if the MRI is better than feared.
-- **QB Winston (−4.0) and Offense (0.0) held:** mistake-free in bad weather; no real read either way.
-- **New total −3.5 → −3.9.**
+- **QB Winston −4.0 → −3.5 (+0.5):** mistake-free in bad weather, and a long-time starter now graded
+  on the updated backup scale (backups had been underrated). He keeps the job after the J.J. McCarthy
+  trade. **Offense (0.0) held.**
+- **New total −3.5 → −3.4.**
 
 ## Week 2: at L.A. Rams (L 6–28)
 
@@ -54,8 +56,10 @@ dangerous pass rush. Week 2 changed the quarterback component.
 
 ## Quarterback
 
-Jameis Winston (−4.0) is the selected quarterback in the current rating after replacing the
-injured Jaxson Dart. Winston's grade fell from −3.0 following his Week 2 relief appearance.
+Jameis Winston (−3.5) is the selected quarterback in the current rating after replacing the
+injured Jaxson Dart. Winston's grade fell from −3.0 to −4.0 after his Week 2 relief appearance and
+was lifted to −3.5 after Week 3, when the backup scale was re-set. The Giants traded for J.J.
+McCarthy on 9/28, but Harbaugh has kept Winston as the starter.
 Dart's earlier −0.5 grade belongs to the Week 1 lineup.
 
 ## What moved the number
