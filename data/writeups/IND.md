@@ -1,3 +1,32 @@
+## Week 3: vs Houston (W 19–17)
+
+Indianapolis snapped a nine-game losing streak on **Spencer Shrader's 53-yard field goal with
+16 seconds left**, his fourth of the day (39, 58, 37, 53). The Colts out-gained Houston 300–223
+and held the ball for 35 minutes, but made it hard on themselves with **three turnovers**.
+**Daniel Jones** was the problem: 24-of-36 for 235 yards, 1 TD, 1 INT, with a 36.1 QBR and a
+50.6 PFF grade on four turnover-worthy plays. Jonathan Taylor was bottled up (23 carries, 68
+yards) by an elite Houston front. Josh Downs (5-77), Keenan Allen (a touchdown), and Tyler
+Warren (9 catches) kept the chains moving. The defense did its job against a Collins-less
+offense, with DeForest Buckner and Grover Stewart winning inside.
+
+**Injuries:**
+- **WR Alec Pierce** is on IR after re-aggravating the **left heel** he had surgically
+  repaired in March (hurt in Week 2 at Kansas City). He's rehabbing rather than having
+  surgery, and he's out at least four games (Week 7 at the earliest).
+- **DE Laiatu Latu** left in the first quarter with a **chest** injury but returned. X-rays
+  were negative (a bruise), and he expects to play in Week 4.
+
+## What changed — Week 3 2026
+
+- **QB Daniel Jones held +0.5:** a poor Week 3 (36.1 QBR, four turnover-worthy plays) after the
+  healthy-looking Week 2 at Kansas City. One rough game isn't enough to take back the Week 2 read
+  on his health, so the grade holds — but he's on notice.
+- **Offense +0.8 → +0.6 (−0.2):** Alec Pierce's heel costs the receiver trio its vertical
+  threat for at least a month. The rest of the group is intact and above average.
+- **Defense −0.5 held:** a good day, but against an offense missing its WR1, after allowing
+  41 and 33 the first two weeks.
+- **New total +0.8 → +0.6.**
+
 ## Week 2: at Kansas City (L 30–33)
 
 A 33–30 loss in Kansas City that reads far better than the Week 1 blowout — Indianapolis went
@@ -30,7 +59,7 @@ skill group is above average, but Week 1 pulled the quarterback and defense belo
 
 ## Quarterback
 
-Daniel Jones (+0.5) is the selected quarterback after moving up from -0.5 in Week 2. Indianapolis scored 30 at Kansas City, a better showing than his Week 1 return.
+Daniel Jones (+0.5) holds his Week 2 grade despite a turnover-prone Week 3 (four turnover-worthy plays, 36.1 QBR). The mobility is back from the Achilles; the consistency is the question for the next few weeks.
 
 ## Quarterback: through Week 1 2026 (historical)
 

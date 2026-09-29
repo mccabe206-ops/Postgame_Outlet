@@ -1,3 +1,32 @@
+## Week 3: vs Seattle (W 33–31)
+
+Washington handed the defending champs their first loss since November — and did it with a
+backup quarterback and a backup linebacker. **Marcus Mariota** threw three touchdowns
+(19-of-31, 183, no turnovers, 110.0 rating; 64.8 PFF) and iced it with a 9-yard run on
+third-and-7, and **Kain Medrano** — in the lineup because **Leo Chenal** had been carted off —
+returned a Darnold interception 50 yards for the winning points. **Sonny Styles** (92 PFF) added
+an interception. Honest read, though: Seattle **out-gained Washington 437 to 258**, and the
+process model had the Seahawks by ~8. Washington's 33 came from **three takeaways, zero giveaways,
+a short field and a pick-six** — the offense itself produced about what 258 yards buys (~20).
+
+**Injuries:** **LB Leo Chenal suffered a neck injury** late in the second quarter, was taken off
+on a backboard, and went to the hospital — **he has feeling in his extremities** and is undergoing
+further testing (Dan Quinn). He was starting for **Frankie Luvu (groin, out)**, and **Jordan
+Magee** is on IR (hamstring) — the linebacker room is thin. OL **Lucas Patrick (ankle)** left in the
+first half and **Sam Cosmi (concussion)** was out, on top of **Laremy Tunsil (IR, triceps)**. S
+**Percy Butler** is in the concussion protocol. **Jayden Daniels (dislocated left elbow)** avoided
+surgery and IR and is **expected back within three weeks, if not sooner** (Rapoport).
+
+**What changed:**
+- **QB Mariota −3.0 → −2.0 (+1.0):** two efficient, turnover-free relief outings — one of the best
+  backups in the league, and graded that way. Daniels (+2.0) comes back in as QB1 when he's cleared.
+- **Offense −1.0 → −0.8 (+0.2):** a slight upgrade — the group around Mariota has functioned in
+  both relief games (three touchdown passes here), though it gained only 258 yards behind a
+  thinning line, so the bump is modest.
+- **Defense (−1.5) held:** the takeaways were real, but the defense allowed 437 yards and is now
+  missing three linebackers.
+- **New total −5.5 → −4.3.**
+
 ## Week 2: at Dallas (L 20–37) — and a QB blow
 
 A costly afternoon in Dallas that got worse than the box. Washington actually out-gained the
@@ -31,14 +60,14 @@ units. Daniels's earlier grade describes a different lineup.
 
 ## Quarterback
 
-Marcus Mariota (−3.0) is the selected quarterback for the current team rating while Jayden
-Daniels is unavailable. Daniels's +2.0 player grade remains separate; using Mariota changes the
-team's quarterback component by five points from that earlier lineup.
+Marcus Mariota (−2.0) is the selected quarterback — up from −3.0 after Week 3, one of the best
+backups in the league — for the current team rating while Jayden Daniels is unavailable. Daniels's +2.0 player grade remains separate;
+using Mariota changes the team's quarterback component by 4.0 points from that earlier lineup.
 
 ## What moved the number
 
-- **Offense (−1.0):** cut to below average, and it's protection-driven. **Laremy Tunsil is on IR — a huge blow to the blindside and the whole offensive line**, the kind of loss that reshapes how an offense can operate. There's talent to throw to — Terry McLaurin headlines with Stefon Diggs added to the room — but a compromised front in front of a still-developing passer is what pulls this into the red.
-- **Defense (−1.0):** below average and thinning. **Jer'Zhan Newton is on IR (torn pec, out roughly a month)**, and edge Dorance Armstrong is suspended for Week 1 on top of coming back from a torn ACL — so the pass rush opens the season short-handed. Frankie Luvu, Rasul Douglas, Mike Sainristil, and Nick Cross keep it from bottoming out, but there's no unit-carrying strength here yet.
+- **Offense (−0.8, up from −1.0 after Week 3):** below average, and it's protection-driven. **Laremy Tunsil is on IR — a huge blow to the blindside and the whole offensive line**, the kind of loss that reshapes how an offense can operate. There's talent to throw to — Terry McLaurin headlines with Stefon Diggs added to the room — but a compromised front in front of a still-developing passer is what pulls this into the red.
+- **Defense (−1.5, cut from −1.0 after Week 2):** below average and thinning. **Jer'Zhan Newton is on IR (torn pec, out roughly a month)**, and edge Dorance Armstrong is suspended for Week 1 on top of coming back from a torn ACL — so the pass rush opens the season short-handed. Frankie Luvu, Rasul Douglas, Mike Sainristil, and Nick Cross keep it from bottoming out, but there's no unit-carrying strength here yet.
 
 ## Bottom line
 

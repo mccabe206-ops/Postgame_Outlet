@@ -1,3 +1,27 @@
+## Week 3: vs L.A. Chargers (W 24–16)
+
+3–0, but not pretty: Buffalo won **despite five turnovers** (three lost fumbles, two interceptions)
+to the Chargers' one. It was dead even on yardage (350–348), and the box score says the Chargers
+"should" have won by about eight — the Bills' defense rescued the offense. Down 10–0 after the
+first two giveaways, Buffalo tied it by halftime; the turning point was **C.J. Gardner-Johnson's
+goal-line interception** of Justin Herbert three plays after an Allen fumble, which set up Allen's
+second 1-yard touchdown run. James Cook iced it (24 carries, **154 yards**, TD). **Josh Allen** had
+his worst game of the year — 16-of-26 for 204, no touchdown passes, two interceptions and a lost
+fumble (a **62.3 PFF grade, 19th of 30**; 51.4 QBR) — but still scored twice on the ground. DJ Moore
+(6/67, PFF 84) showed no sign of the shoulder. Rookie CB **Davison Igbinosun (91)** was excellent in
+relief.
+
+**Injuries:** CB1 **Christian Benford** went down with a **toe injury** late in the third quarter,
+was ruled out and left in a **walking boot**; no timeline yet. DT **T.J. Sanders** missed the game
+after an **appendectomy** (Sept. 22) and is out indefinitely. DJ Moore's AC-joint sprain from Week 2
+is behind him.
+
+**What changed:** nothing — **all three components held (total 7.1)**. Allen's one sloppy game
+doesn't move a ceiling grade after 70.6 and 90.6; the offense's fumbles are high-variance and the
+run game was strong; the defense's good day (Chargers 1-of-4 in the red zone) came against a
+struggling offense and is offset by losing Sanders and possibly Benford. If Benford misses time,
+the defense comes down 0.2.
+
 ## Week 2: vs Detroit (W 41–31)
 
 Buffalo controlled this more than the score suggests — up 27–10 at halftime and 34–17 into

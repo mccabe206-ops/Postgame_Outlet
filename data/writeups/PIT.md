@@ -1,3 +1,30 @@
+## Week 3: vs Cincinnati (W 30–27)
+
+The bounce-back the Week 2 box hinted at. **Aaron Rodgers** threw for 292 yards and three
+touchdowns (19-of-34, 101.6 rating, 63.0 PFF), hit nine different receivers, and set up **Chris
+Boswell's go-ahead 33-yarder with 2:18 left** with a 47-yard catch-and-run to Darnell Washington.
+**Jaylen Warren** (127 rushing, 49 receiving; 91 PFF), playing through a shoulder injury, was the
+engine, and the line — with rookie first-rounder **Max Iheanachor promoted at right tackle** (81)
+and **RG Mason McCormick** (90) — looked physical after allowing four sacks in New England.
+**WR Michael Pittman Jr. was back.** The defense bent against Burrow, Chase and Higgins but won it:
+**Derrick Harmon's strip-sack** in the final minute (recovered by Sebastian Joseph-Day). Pittsburgh
+played to its box (~28 expected, 30 scored) — a legit win.
+
+**Injuries:** CB **Brandin Echols** was evaluated for a **concussion** after the botched punt
+return — if he's in protocol he's very unlikely for Thursday. **Jalen Ramsey** reportedly suffered
+an **apparent upper-body injury** (details not yet reported). CB **Joey Porter Jr.** was inactive
+for the third straight game and S **DeShon Elliott** is on IR — the secondary is thinning. RB
+**Rico Dowdle (toe)** remains out.
+
+**What changed:**
+- **QB Rodgers −1.5 → −1.2 (+0.3):** a real bounce-back, but PFF's 63.0 keeps it modest — not a full
+  reversal of the Week 2 cut off one game.
+- **Offense 0.0 → +0.2 (+0.2):** Pittman's return (last week's watch item resolved the good way),
+  Iheanachor's physicality at RT, and Warren running like a lead back — 411 yards and 7.0 a play.
+- **Defense held at +1.0:** 27 allowed to an elite QB/WR trio isn't alarming, and it made the
+  game-winning play. If Ramsey and Echols both miss Thursday at Cleveland, it drops 0.2.
+- **New total −0.5 → 0.0.**
+
 ## Week 2: at New England (L 3–20)
 
 A 3-point dud, but read the box before the scoreboard: Pittsburgh moved the ball (235 yards, 16
@@ -26,7 +53,7 @@ Pittsburgh lands right at the waterline — a strong, veteran-laden defense bala
 
 ## Quarterback
 
-Aaron Rodgers (-1.5) is the selected quarterback after a half-point cut following the Week 2 loss at New England. The prior -1.0 value belonged to the Week 1 rating.
+Aaron Rodgers (−1.2) is the selected quarterback — cut to −1.5 after the Week 2 loss at New England, then back up 0.3 after the Week 3 bounce-back against Cincinnati. The prior −1.0 value belonged to the Week 1 rating.
 
 ## Quarterback: through Week 1 2026 (historical)
 
