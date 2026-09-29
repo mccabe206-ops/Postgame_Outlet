@@ -24,6 +24,7 @@ Commissioner's Exempt List.
   yards allowed. They roughly cancel.
 - **Offense held +0.5:** the dip was mostly the quarterback, and Mims may be back.
 - **New total 2.0 → 1.5.**
+- **Post-Week 3 re-grade:** Nix restored to **0.0** — one poor game against a top Rams defense isn't enough to hold him below a middling starter. **Total back to 2.0.**
 
 ## Week 2: vs Jacksonville (W 20–13)
 
