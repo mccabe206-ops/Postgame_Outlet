@@ -14,13 +14,15 @@ early and is questionable. **Caleb Williams** (Grade 2 right hamstring) is out 3
 Johnson hasn't named the Week 4 starter, but Keenum is the likely call with Tyson Bagent cleared.
 
 **What changed:**
-- **QB Keenum −4.5 → −3.5 (+1.0):** a clean, quick first start against a good defense. PFF says
-  competent rather than special, so he moves to the upper half of the backup band, not beyond it.
+- **QB Keenum −4.5 → −2.5 (+2.0):** a clean, quick first start against a good defense. He had been
+  graded like a third-stringer; he's really a backup-level veteran with real NFL success, and Ben
+  Johnson's game-planning makes the drop from Caleb smaller than the name suggests. If Tyson Bagent
+  gets the Week 4 start instead, the rating moves to him.
 - **Defense −0.8 → −0.5 (+0.3):** held an above-average offense to 248 yards and 7 points with three
   takeaways. Tempered because Philadelphia was missing Goedert, Hollywood Brown and a tackle.
 - **Offense held at +1.0:** the scheme and skill group functioned without Caleb; −0.1 if Braxton
   Jones misses time.
-- **New total −4.3 → −3.0.**
+- **New total −4.3 → −2.0.**
 
 ## Week 2: at Minnesota (L 3–9)
 
@@ -52,7 +54,7 @@ offensive showing. The defense remains below average.
 
 ## Quarterback
 
-Case Keenum (−3.5) is the selected quarterback while Caleb Williams is unavailable — up from −4.5 after a clean Week 3 start. Williams's
+Case Keenum (−2.5) is the selected quarterback while Caleb Williams is unavailable — up from −4.5 after a clean Week 3 start and a re-grade to backup level (proven veteran in Ben Johnson's offense). Williams's
 earlier +3.0 grade remains his own player value; it is not the quarterback component in the
 current Chicago team rating. Keenum is a bridge option, and the gap between the two drives the
 drop from the Week 1 team number.

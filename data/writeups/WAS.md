@@ -18,14 +18,14 @@ first half and **Sam Cosmi (concussion)** was out, on top of **Laremy Tunsil (IR
 surgery and IR and is **expected back within three weeks, if not sooner** (Rapoport).
 
 **What changed:**
-- **QB Mariota −3.0 → −2.5 (+0.5):** two efficient, turnover-free relief outings — top of the
-  backup band. Daniels (+2.0) comes back in as QB1 when he's cleared.
+- **QB Mariota −3.0 → −2.0 (+1.0):** two efficient, turnover-free relief outings — one of the best
+  backups in the league, and graded that way. Daniels (+2.0) comes back in as QB1 when he's cleared.
 - **Offense −1.0 → −0.8 (+0.2):** a slight upgrade — the group around Mariota has functioned in
   both relief games (three touchdown passes here), though it gained only 258 yards behind a
   thinning line, so the bump is modest.
 - **Defense (−1.5) held:** the takeaways were real, but the defense allowed 437 yards and is now
   missing three linebackers.
-- **New total −5.5 → −4.8.**
+- **New total −5.5 → −4.3.**
 
 ## Week 2: at Dallas (L 20–37) — and a QB blow
 
@@ -60,9 +60,9 @@ units. Daniels's earlier grade describes a different lineup.
 
 ## Quarterback
 
-Marcus Mariota (−2.5) is the selected quarterback — up from −3.0 after Week 3 — for the
-current team rating while Jayden Daniels is unavailable. Daniels's +2.0 player grade remains separate;
-using Mariota changes the team's quarterback component by 4.5 points from that earlier lineup.
+Marcus Mariota (−2.0) is the selected quarterback — up from −3.0 after Week 3, one of the best
+backups in the league — for the current team rating while Jayden Daniels is unavailable. Daniels's +2.0 player grade remains separate;
+using Mariota changes the team's quarterback component by 4.0 points from that earlier lineup.
 
 ## What moved the number
 
