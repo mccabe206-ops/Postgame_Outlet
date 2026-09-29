@@ -48,7 +48,7 @@ def parse_args(argv=None):
 
 # Teams whose 2025 ending rating was deflated by a hurt/benched starter —
 # trust the talent build more for these.
-INJURY_DEFLATED = {"Kansas City Chiefs"}
+INJURY_DEFLATED = set()  # KC tag removed 2026-09-29 (Mahomes fully back) — add teams here to show ▲inj
 
 # Primary / secondary brand colors + abbreviation per team.
 TEAM = {
@@ -998,9 +998,6 @@ TEMPLATE = """<!DOCTYPE html>
         for how good each roster is, so you can weigh what the numbers say against what an
         analyst who studies the week actually believes. The gap between the two is where the
         thinking happens — the ratings inform your read, they don't replace it.</li>
-        <li>Teams marked <span class="inj">▲inj</span> had a 2025 finish deflated by an
-        injured or benched starter, so they're weighted toward roster talent rather than
-        last year's record.</li>
       </ul>
     </div>
   </section><!-- /panel-method -->

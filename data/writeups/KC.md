@@ -52,12 +52,12 @@ Mahomes' knee looks fine.
 Patrick Mahomes (+4.5) is the selected quarterback after his Week 2 performance (32-of-47,
 382 yards, three touchdowns, no interceptions) raised his grade from +4.0. The earlier Week 1
 return from injury moved him from +3.5 to +4.0; those were prior edition values. The current
-team rating also includes +0.5 offense and −0.5 defense.
+team rating also includes +0.5 offense and an average (0.0) defense. His knee is no longer a factor in the grade.
 
 ## What moved the number
 
 - **Offense (+0.5):** up from average after Week 2 — **Ken Walker III, Rashee Rice, and Kelce** give Mahomes a functional, productive group. The catch is still up front: rookie left tackle **Josh Simmons (back) has missed the first three games**, so the blindside is patched together.
-- **Defense (−0.5):** just below the line; Karlaftis and Bolton anchor it, with Sneed and Elam the notable pieces.
+- **Defense (0.0, up from −0.5 after Week 3):** back to league average. Three weeks in, the unit has held its own — 10 points allowed at Miami, and PFF grades the defense 71.7 with a 75.2 coverage grade. Karlaftis and Bolton anchor it, with Sneed and Elam the notable pieces.
 
 ## Bottom line
 
