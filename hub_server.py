@@ -45,6 +45,11 @@ try:
 except Exception:  # noqa: BLE001
     SNAP_MOD = None
 
+try:
+    import market_ratings as MKT  # market-implied ratings (Market vs Mine view)
+except Exception:  # noqa: BLE001
+    MKT = None
+
 HOST = "127.0.0.1"
 PORT = 8786
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -222,6 +227,32 @@ def act_qb_history():
     out = [{"team": t, "current_qb": next((r["qb_name"] for r in cur_rows if r["team"] == t), ""),
             "cells": [per_team[t].get(l) for l in labels]} for t in teams]
     return {"ok": True, "labels": labels, "teams": out}
+
+
+_MARKET_CACHE = {"at": 0.0, "key": None, "data": None}
+MARKET_TTL = 600  # seconds — ESPN lines + one git lookup per older game
+
+
+def act_market(week=None, year=None, refresh=False):
+    """Market-implied ratings vs Sean's (market_ratings.fit), cached ~10 min.
+    Read-only; works while rows are needs_review=Y (flags draft)."""
+    import time
+    if MKT is None:
+        return {"ok": False, "message": "market_ratings.py not available on this branch"}
+    try:
+        if not week or not year:
+            dw, dy = MKT._default_week_year()
+            week, year = int(week or dw), int(year or dy)
+        # ratings.csv mtime in the key so an edit shows up without waiting out the TTL
+        key = (int(week), int(year), os.path.getmtime(RATINGS))
+        now = time.time()
+        c = _MARKET_CACHE
+        if refresh or c["key"] != key or now - c["at"] > MARKET_TTL or c["data"] is None:
+            c["data"] = MKT.fit(int(year), int(week))
+            c["key"], c["at"] = key, now
+        return {"ok": True, **c["data"]}
+    except Exception as e:  # noqa: BLE001
+        return {"ok": False, "message": str(e)}
 
 
 # ---------------------------------------------------------------- actions
@@ -1026,6 +1057,7 @@ const CARDS = [
    render:c=>teamEditorCard(c)},
  {n:3, t:"Ratings board", wide:true, d:"View the ratings — the full 32-team board, QB rankings, and past editions.",
    render:c=>{ sub(c,'Board — 32 teams, best to worst'); btn(c,"Show board",()=>run({action:'ratings'},"Current ratings"));
+     sub(c,'Market vs Mine — market-implied ratings next to yours, with the gap'); btn(c,"Open Market vs Mine",()=>openMarketBoard());
      sub(c,'QB rankings — starters 1–32 + backups, week-to-week'); btn(c,"Open QB rankings",()=>openQbBoard());
      sub(c,'Editions — snapshot now, or open a past board (Δ vs current)'); snapshotCard(c); }},
  {n:4, t:"Game analysis", wide:true, d:"What happened in the games — scores + graded picks, visual game reports, per-player PFF grades.",
@@ -1042,6 +1074,8 @@ const CARDS = [
      sub(c,'Publish an edition'); {const p=el('p','note','Named board snapshot via the publish-edition Action — tell Claude Code the label. To go live, say “publish” to Claude Code.'); c.appendChild(p);} }},
  {n:7, t:"NFL knowledge base", wide:true, d:"Chat in plain English — model writes read-only SQL and cites the numbers. One-click trends + a raw SQL box, no key needed.",
    render:c=>kbCard(c)},
+ {n:8, t:"Market vs Mine", d:"What the betting market thinks each team is worth (fit from recent lines, QB-adjusted) next to your rating — and where you disagree.",
+   render:c=>btn(c,"Open Market vs Mine",()=>openMarketBoard())},
 ];
 
 function el(t,cls,txt){const e=document.createElement(t);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
@@ -1521,6 +1555,44 @@ async function openQbBoard(){
   bBoard.onclick=showBoard; bHist.onclick=showHist;
   await showBoard(); dlg.showModal();
 }
+async function openMarketBoard(refresh){
+  const dlg=document.getElementById('dlg'); const b=document.getElementById('dlg-body');
+  b.innerHTML=''; dlg.classList.add('wide');
+  const hd=el('h3',null,'Market vs Mine'); b.appendChild(hd);
+  const note=el('p','note','Loading market lines…'); b.appendChild(note);
+  const wrap=el('div','qbwrap'); wrap.style.marginTop='8px'; b.appendChild(wrap);
+  const adj=el('details'); adj.style.marginTop='10px'; b.appendChild(adj);
+  const foot=el('div','row'); foot.style.marginTop='10px';
+  const rf=el('button','go alt','↻ Refresh lines'); rf.onclick=()=>openMarketBoard(true);
+  const close=el('span','close','Close'); close.onclick=()=>{dlg.classList.remove('wide');dlg.close();};
+  foot.appendChild(rf); foot.appendChild(close); b.appendChild(foot);
+  if(!dlg.open) dlg.showModal();
+  const esc=s=>String(s==null?'':s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+  const val=v=>{ if(v==null||v==='')return '—'; const n=Number(v); return (n>=0?'+':'')+n.toFixed(1); };
+  const vcls=v=>v==null?'':(Number(v)>=0?'pos':'neg');
+  const j=await api('/api/market'+(refresh?'?refresh=1':''));
+  if(!j.ok){ note.textContent='Load failed: '+(j.message||'unknown'); return; }
+  if(j.draft){ const d=el('span','pill','DRAFT — '+j.teams.filter(t=>t.needs_review).length+' rows needs_review=Y');
+    d.style.cssText='margin-left:8px;background:#3a2a0e;color:#e3b341;border-color:#5a4212'; hd.appendChild(d); }
+  const wk=j.weeks.map(u=>`Wk${u.week}×${u.weight} (${u.games})`).join(', ');
+  note.innerHTML=`${j.season} through Week ${j.through_week} · ${j.games_used} games (${esc(wk)}). `+
+    `Closing lines for played games, live ESPN odds for the upcoming week; your HFA (+0.5 primetime, 0 neutral). `+
+    `Older lines re-based to today’s starting QB using your QB values. Ridge fit (λ ${j.lam}) centered on your mean (${val(j.mean)}) — `+
+    `it shrinks the extremes a bit, so gaps under ~1 pt are noise. <span style="background:#12301c;padding:0 4px">green</span> = you’re ≥1.5 higher than the market, `+
+    `<span style="background:#3a1616;padding:0 4px">red</span> = you’re ≥1.5 lower. Updated ${esc(j.generated_at)}.`;
+  let h='<table class="qbt"><thead><tr><th>#</th><th>Team</th><th>QB</th><th>Market</th><th>Mine</th><th>Gap (mine − mkt)</th></tr></thead><tbody>';
+  for(const r of j.teams){
+    const hl=r.gap>=1.5?' style="background:#12301c"':(r.gap<=-1.5?' style="background:#3a1616"':'');
+    h+=`<tr${hl}><td class="rk">${r.rank}</td><td>${esc(r.team)}${r.needs_review?' <span title="needs_review">⚠</span>':''}</td>`+
+       `<td class="dim">${esc(r.qb)}</td><td class="num ${vcls(r.market)}">${val(r.market)}</td>`+
+       `<td class="num ${vcls(r.mine)}">${val(r.mine)}</td><td class="num"><b>${val(r.gap)}</b></td></tr>`;
+  }
+  wrap.innerHTML=h+'</tbody></table>';
+  adj.innerHTML='<summary class="dim" style="cursor:pointer">QB re-basing applied ('+j.adjustments.length+')</summary>'+
+    (j.adjustments.length?'<ul style="margin:6px 0 0;padding-left:18px;font-size:12px">'+j.adjustments.map(a=>
+      `<li>Wk${a.week} ${esc(a.team)}: ${esc(a.from)} → ${esc(a.to)} ${a.shift==null?'(skipped: '+esc(a.note)+')':val(a.shift)}</li>`).join('')+'</ul>'
+      :'<p class="note">none</p>');
+}
 function openWriteupEditor(j){
   const dlg=document.getElementById('dlg'); const b=document.getElementById('dlg-body'); b.innerHTML='';
   dlg.classList.add('wide');
@@ -1619,6 +1691,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(200, json.dumps(act_qb_board()))
         if u.path == "/api/qbhistory":
             return self._send(200, json.dumps(act_qb_history()))
+        if u.path == "/api/market":
+            return self._send(200, json.dumps(act_market(
+                (q.get("week") or [None])[0], (q.get("year") or [None])[0],
+                refresh=bool((q.get("refresh") or [""])[0]))))
         if u.path == "/api/snapshots":
             return self._send(200, json.dumps(act_snapshots_list()))
         if u.path == "/api/snapshot":
