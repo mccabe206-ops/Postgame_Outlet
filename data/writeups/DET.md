@@ -18,6 +18,8 @@ anyway:
 - **Brian Branch (Achilles)** is eligible and is the closer of the two to returning.
 - **CB Avonte Maddox** is on IR after **foot** surgery.
 
+**Post-Week 3 re-grade:** **Offense +1.0 → +1.5** — this is one of the league's best non-QB groups (PFF offense 80.0; Sewell, Gibbs, St. Brown, Jameson Williams), and it was underrated. **Defense −1.5 → −2.0** — the secondary is still without both starting safeties (Branch on PUP, Joseph indefinite) and now Thomas Harper (IR, ankle), and PFF's coverage grade is 53.7. The total holds at +1.5: the same team, graded more precisely — elite offense, one of the league's worst defenses.
+
 ## What changed — Week 3 2026
 
 - **Nothing moved (1.5 held).** Goff (+2.0) and the offense (+1.0) played exactly to their
@@ -54,8 +56,8 @@ Jared Goff (+2.0) is an above-average grade — a precise, high-volume passer pe
 
 ## What moved the number
 
-- **Offense (+1.0):** elite — Gibbs, St. Brown, and Jameson Williams headline, behind a Sewell-anchored line. Pacheco (offseason RB add) is on IR, but Gibbs is the workhorse, so the depth loss is minor.
-- **Defense (preseason −1.0; now −1.5 after Week 2 — see below):** cut from 0.0. **Both All-Pro safeties open the season out** — **Brian Branch** on PUP with a ruptured Achilles (from last December) and **Kerby Joseph** with a chronic knee that may cost him the season (latest reports have him headed to IR). That's a gutting blow at the position, layered on the offseason losses of DT DJ Reader and LB Anzalone. Aidan Hutchinson returning healthy at edge is the anchor that keeps this from cratering.
+- **Offense (+1.5, up from +1.0 after Week 3):** elite — Gibbs, St. Brown, and Jameson Williams headline, behind a Sewell-anchored line. Pacheco (offseason RB add) is on IR, but Gibbs is the workhorse, so the depth loss is minor.
+- **Defense (−2.0; preseason −1.0, −1.5 after Week 2, −2.0 after Week 3 — see below):** cut from 0.0. **Both All-Pro safeties open the season out** — **Brian Branch** on PUP with a ruptured Achilles (from last December) and **Kerby Joseph** with a chronic knee that may cost him the season (latest reports have him headed to IR). That's a gutting blow at the position, layered on the offseason losses of DT DJ Reader and LB Anzalone. Aidan Hutchinson returning healthy at edge is the anchor that keeps this from cratering.
 
 ## What changed — Week 1 2026
 

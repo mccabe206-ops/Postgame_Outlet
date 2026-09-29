@@ -24,6 +24,7 @@ Commissioner's Exempt List.
   yards allowed. They roughly cancel.
 - **Offense held +0.5:** the dip was mostly the quarterback, and Mims may be back.
 - **New total 2.0 → 1.5.**
+- **Post-Week 3 re-grade:** Nix restored to **0.0** — one poor game against a top Rams defense isn't enough to hold him below a middling starter. **Total back to 2.0.**
 
 ## Week 2: vs Jacksonville (W 20–13)
 
@@ -55,7 +56,7 @@ quarterback — but the defense's Week 1 showing trimmed the number.
 
 ## Quarterback
 
-Bo Nix (−0.5) — back down a half-point after Week 3 (17-of-34, 186, 46.4 QBR against the Rams), his second poor game in three. He opened at 0.0 as an ascending second-year starter in Sean Payton's system, with upgraded weapons and a strong line. The tools are still there, but the play hasn't matched the grade.
+Bo Nix (0.0) — back at his opening grade. He dipped to −0.5 after Week 3 (17-of-34, 186, 46.4 QBR against the Rams), but one poor game against a top defense shouldn't hold a second-year starter below the middle of the league. He opened at 0.0 as an ascending second-year starter in Sean Payton's system, with upgraded weapons and a strong line. The tools are still there, but the play hasn't matched the grade.
 
 ## What moved the number
 
