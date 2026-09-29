@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-09-28T23:55:08.476850+00:00",
+  "sources": [
+    {
+      "bytes": 391315,
+      "captured_at": "2026-09-28T23:55:08.068604+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "8eb563059b40ca569f67dea9dbb720a1a74f18305ffc64aca65e3717262e7365",
+      "started_at": "2026-09-28T23:55:08.038141+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 534025,
+      "captured_at": "2026-09-28T23:55:08.195417+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chicagobears.com/news/",
+      "kind": "team_news",
+      "sha256": "61437901b3bb49370bf23bacfce2ab993db6ec73d23b384b7f4788740316c79f",
+      "started_at": "2026-09-28T23:55:08.038512+00:00",
+      "status": 200,
+      "team": "CHI",
+      "url": "https://www.chicagobears.com/news/"
+    },
+    {
+      "bytes": 529583,
+      "captured_at": "2026-09-28T23:55:08.096238+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "bde2dcfef8d1eb86825e089719ae25b7e400d9e6325217252bcf7f741b4a59ac",
+      "started_at": "2026-09-28T23:55:08.038886+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "bytes": 1625232,
+      "captured_at": "2026-09-28T23:55:08.110582+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "7499b5771e8195ecd89bca549c3a6589d2cd357cebd078589705c317dc0df833",
+      "started_at": "2026-09-28T23:55:08.039205+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 385196,
+      "captured_at": "2026-09-28T23:55:08.337804+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/eagles-at-bears-inactives-week-3-2026-nfl-regular-season-monday-night-football-caleb-williams",
+      "kind": "official_inactives",
+      "sha256": "806df3c2967764a9d8adc5d949ad45e49bbbda7e0401f603ee8b5eaeac1b8cb4",
+      "started_at": "2026-09-28T23:55:08.315676+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/eagles-at-bears-inactives-week-3-2026-nfl-regular-season-monday-night-football-caleb-williams"
+    },
+    {
+      "bytes": 714414,
+      "captured_at": "2026-09-28T23:55:08.347389+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.nfl.com/news/week-3-monday-night-inactives-philadelphia-eagles-at-chicago-bears",
+      "kind": "official_inactives",
+      "sha256": "235a77a6b6d9374565c885033b232913e5d62f4d3eee8597c73cbcc2fc529b7b",
+      "started_at": "2026-09-28T23:55:08.315988+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/week-3-monday-night-inactives-philadelphia-eagles-at-chicago-bears"
+    },
+    {
+      "bytes": 922874,
+      "captured_at": "2026-09-28T23:55:08.349348+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "e0eaca4b8fc2c5b7fcbb9feffb1b2d3607302e4585f64c69f24b9e7014dce683",
+      "started_at": "2026-09-28T23:55:08.316767+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-3-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
