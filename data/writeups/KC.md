@@ -1,3 +1,23 @@
+## Week 3: at Miami (W 24–10)
+
+Kansas City moved to 3–0 with a controlled 24–10 win in Miami, and **Patrick Mahomes** was
+close to flawless: **20-of-24, 246 yards, 2 TD, 1 INT**, an 82.4 PFF grade, and no sacks taken.
+Kenneth Walker III scored twice (a 10-yard run and a 5-yard catch), and Travis Kelce iced it
+with an 11-yard touchdown with 2:55 left. The box says the game was closer than the score:
+Miami matched KC in yards (329–334) and left points on the field, while the Chiefs landed right
+on their expected number. This was a professional road win, not a blowout. The one soft spot
+is up front, where the interior line graded poorly with rookie LT Josh Simmons still out.
+
+**Injuries:**
+- **No new injuries**, per Andy Reid.
+- **LT Josh Simmons** (back) has missed three straight games and is "making progress."
+- **S Chamarri Conner** (knee, from the preseason) is practicing but was deactivated.
+
+## What changed — Week 3 2026
+
+- **Nothing moved (4.5 held).** Mahomes (+4.5) is playing to his grade, and the offense
+  (+0.5) and defense (−0.5) played to theirs. Simmons' return would help the protection.
+
 ## Week 2: vs Indianapolis (W 33–30)
 
 Kansas City survived a 33–30 shootout with the Colts, and the one open question from the
@@ -36,7 +56,7 @@ team rating also includes +0.5 offense and −0.5 defense.
 
 ## What moved the number
 
-- **Offense (0.0):** average as built, and we're comfortable there with **Ken Walker III and Rashee Rice starting** alongside Xavier Worthy — a solid, functional group. The catch is up front: rookie left tackle **Josh Simmons is likely out for Week 1** (back), so Mahomes's blindside protection is patched together for the opener.
+- **Offense (+0.5):** up from average after Week 2 — **Ken Walker III, Rashee Rice, and Kelce** give Mahomes a functional, productive group. The catch is still up front: rookie left tackle **Josh Simmons (back) has missed the first three games**, so the blindside is patched together.
 - **Defense (−0.5):** just below the line; Karlaftis and Bolton anchor it, with Sneed and Elam the notable pieces.
 
 ## Bottom line

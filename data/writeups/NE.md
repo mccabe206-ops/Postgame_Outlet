@@ -1,3 +1,32 @@
+## Week 3: at Jacksonville (L 6–35)
+
+The worst loss of the Vrabel era, but the box says it wasn't as lopsided as 35–6 looks. The yards
+were even (NE 317, JAX 315), and the model had it as a ~7-point Jacksonville win. New England lost
+it on **turnovers** (two Drake Maye interceptions plus a lost fumble) and in the **red zone**, where
+it went **0-for-3** while Jacksonville went 5-for-5. It was 28–3 before the fourth quarter. Mack
+Hollins (6/87) was the only receiver who got going, and the backs managed 45 rushing yards.
+
+**Injuries:** RG **Greg Van Roten** (**thigh**) left in the first half and didn't return, so
+New England is on its third right guard behind **Mike Onwenu** (**ankle fracture, on IR,
+reportedly season-ending**). CB **Carlton Davis III** left with a **head injury** (early word is
+encouraging), and DT **Christian Barmore** hurt his **shoulder** but returned. S **Craig Woodson**
+and edge **Dre'Mont Jones** (both **shoulder**, week-to-week) were inactive. **A.J. Brown**
+(high-ankle sprain, IR) is still about two-plus weeks away, and edge **Harold Landry** (PUP) is
+eligible around Week 5.
+
+**What changed:**
+- **Maye +2.5 → +1.0 (−1.5):** a third straight poor game, and the cut is now a big one. His **28.1 PFF pass grade and 48.6
+  passer rating were both last among the 30 qualifying Week 3 QBs**, with five turnover-worthy plays
+  and a lost fumble. He's at **1 TD / 6 INT** on the year. The WR1 is missing, but the
+  decision-making is now a three-game trend, and it's priced as one: he drops from top-tier
+  starter to just above a middling one.
+- **Offense −0.7 → −0.9 (−0.2):** third-string right guard, no run game, and 0-for-3 in the red
+  zone. It gets the points back when Brown returns.
+- **Defense +0.7 → +0.5 (−0.2):** Jacksonville scored on all five red-zone trips and converted
+  8-of-12 on third down against a unit already missing Woodson and Dre'Mont Jones. The yardage (315)
+  and the short fields off turnovers keep the cut small.
+- **New total 2.5 → 0.6.**
+
 ## Week 2: vs Pittsburgh (W 20–3)
 
 The defense carried this one — a near-shutout of a veteran QB (held Pittsburgh's *offense* to 13;
@@ -22,7 +51,11 @@ structure are real even when the process is sloppy and the WR1 is gone.
 
 ## Quarterback
 
-Drake Maye (+2.5) is the selected quarterback after a half-point reduction following two uneven games. His Week 2 performance against Pittsburgh extended the concern already visible in Week 1.
+Drake Maye (+1.0) is the selected quarterback after a half-point cut in Week 2 and a full 1.5-point cut in Week 3. He has 1
+touchdown against 6 interceptions through three games. His Week 3 at Jacksonville (28.1 PFF grade,
+48.6 rating, 20.0 QBR, a lost fumble) ranked last in the league that week. The talent that made
+him the centerpiece is still there, and he's working without A.J. Brown. But the grade now prices
+in a real, three-game decision-making problem rather than a one-off.
 
 ## Quarterback: through Week 1 2026 (historical)
 
@@ -41,6 +74,7 @@ receiver moving — so the grade holds.
 
 ## Bottom line
 
-Still a Maye-anchored team the model likes above its recent record, but the A.J. Brown
-injury takes the offense from a modest plus to a slight minus until he's back. The
-short-term question is whether Maye's decision-making cleans up while the WR1 is out.
+New England is below its preseason number now. Maye's decision-making is the main problem, and a
+roster missing its WR1, two right guards, and a starting safety makes it worse. The path back is
+clear: A.J. Brown returns in a few weeks, and the defense gets Woodson and Dre'Mont Jones back.
+Until then this is a slightly-above-average team that has to clean up the turnovers to win.

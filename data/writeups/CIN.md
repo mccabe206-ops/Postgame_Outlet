@@ -1,3 +1,28 @@
+## Week 3: at Pittsburgh (L 27–30)
+
+**Joe Burrow was the best quarterback in football this week and Cincinnati lost anyway.** He went
+28-of-37 for 282 yards and three touchdowns (84.2 PFF — No. 1 among qualifying QBs; 92.2 QBR), and
+**Ja'Marr Chase (9-98-1) and Tee Higgins (TD) both graded near 90** — healthy and elite. The loss
+came on the margins: a **roughing-the-punter penalty** that extended a Steelers touchdown drive, a
+**muffed punt** by Ke'Shawn Williams that set up the tying field goal, and Derrick Harmon's
+**strip-sack of Burrow in the final minute**. The real concern is the defense: Pittsburgh — which
+scored three points the week before — rolled up **411 yards at 7.0 a play**, Jaylen Warren ran for
+127, and **no Bengals defender graded above 63** on PFF.
+
+**Injuries:** DT **B.J. Hill (Achilles soreness)** was inactive for the second straight week; DT
+**Jonathan Allen (knee)** played through it. LB **Demetrius Knight Jr.** and S **Bryan Cook
+(ankle)** were both banged up on one drive and **both returned**. WR **Colbie Young** left with a
+knee injury (questionable for Week 4), on top of WR3 **Andrei Iosivas (IR, thumb surgery)** — thin
+behind Chase and Higgins.
+
+**What changed:**
+- **Defense 0.0 → −0.3 (−0.3):** hands back most of the Week 2 bump. That one leaned on a Houston
+  offense that stalled on its own (and was missing Nico Collins); this was the retooled unit
+  getting pushed around by a Rodgers offense.
+- **QB Burrow (+5.0) and Offense (+0.7) held:** Burrow was superb and the top two receivers are
+  healthy; the offense beat its box by ~6 points.
+- **New total +5.7 → +5.4.**
+
 ## Week 2: at Houston (W 20–6)
 
 Cincinnati won 20–6 in Houston, and the defense is the reason the number moves — but the box

@@ -1,3 +1,29 @@
+## Week 3: at San Francisco (L 30–36)
+
+Arizona lost by six, but it played the 3–0 49ers to a draw on the box. Both teams projected to
+~30 points. The Cardinals turned it over **zero times**, piled up **27 first downs**, and held the
+ball for **38:44**. They outscored San Francisco 24–19 in the second half and got within two
+(27–29) with under three minutes left. San Francisco's edge was an **80-yard lateral touchdown**
+and a pair of Kittle scores late. **Jacoby Brissett** was excellent (38/52, 280, 2 TD, no INT,
+plus a rushing TD). Rookie back **Jeremiyah Love** ran for 90, and **Michael Wilson** caught 11
+passes for 89. The defense couldn't get off the field: it allowed 36 points and 437 yards, with the
+linebackers overwhelmed.
+
+**Injuries:** no new injuries to starters in the game. The big one landed in Week 2: starting CB
+**Will Johnson** (**neck**) went on **IR 9/23**, and Mike LaFleur says he **could miss the rest
+of the season**. **James Conner** (**foot**, IR with a designation to return) is eligible around
+Week 5 and reportedly isn't far off. **Trey Benson** (**knee**) is on IR.
+
+**What changed:**
+- **Brissett −1.5 → −1.0 (+0.5):** his second strong game in three. He ranked **6th of 30 in Week
+  3 PFF pass grade (76.6)** with a 98.2 rating, 73.0 QBR, and no turnovers, on the road against a
+  good team. The Seattle dud was against an elite defense.
+- **Offense −0.5 → −0.3 (+0.2):** 27 first downs, no turnovers, and a line (Paris Johnson Jr.,
+  Isaac Seumalo) that kept Brissett clean, all without Conner or Benson.
+- **Defense −0.5 → −0.8 (−0.3):** losing the CB1 for what looks like the season, and giving up 36
+  and 437 to San Francisco.
+- **New total −2.5 → −2.1.**
+
 ## Week 1: at L.A. Chargers (W 26–14)
 
 Arizona pulled the biggest upset of Week 1, winning 26–14 at the Chargers as a road underdog
@@ -15,7 +41,11 @@ are better than a bottom-of-the-league read, even with a stopgap quarterback.
 
 ## Quarterback
 
-Jacoby Brissett (-1.5) is a steady, low-end stopgap — parked between a middling starter and the worst-starter floor. He's a professional who won't sink a game on his own, but he's a bridge, not a lever, and the rating reflects a passing operation that needs the pieces around him to carry it rather than the other way around.
+Jacoby Brissett (−1.0) is the selected quarterback after a half-point increase. He's a steady,
+low-end starter who has now played well in two of three games: 27-of-37 with no picks in the Week 1
+upset at the Chargers, and 38-of-52 for 280 with 2 TD and no turnovers at San Francisco (6th in
+Week 3 PFF pass grade). He won't win a game by himself, but he has been a better bridge than the
+floor grade assumed.
 
 ## What moved the number
 
@@ -30,4 +60,7 @@ Jacoby Brissett (-1.5) is a steady, low-end stopgap — parked between a middlin
 
 ## Bottom line
 
-Harrison and a young secondary are the reasons for optimism down the road, but for now every unit sits under average — a stopgap at quarterback, an IR-thinned backfield, and a rush that can't tilt a game. This is a rebuild reading its floor, not its ceiling.
+Arizona is still below average, but the offense has a real floor now: Brissett is protecting the
+ball, Paris Johnson Jr. anchors the line, and rookie Jeremiyah Love is carrying the backfield until
+Conner returns. The worry has shifted to the defense. Without Will Johnson the secondary is thin,
+and there's still no pass rush to cover for it.

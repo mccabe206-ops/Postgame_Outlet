@@ -1,3 +1,27 @@
+## Week 3: at Buffalo (L 16–24)
+
+0–3, and the same story: the Chargers moved the ball and couldn't finish. They matched Buffalo in
+yardage (348–350), **forced five turnovers**, and still lost — six drives ended inside the Buffalo 30
+and produced one touchdown and three Cameron Dicker field goals (1-of-4 in the red zone). The box
+score says the Chargers "should" have won by about eight. The killer was **Justin Herbert's
+goal-line interception** to C.J. Gardner-Johnson three plays after a Josh Allen fumble; Buffalo
+scored on the next drive and never trailed again. Herbert finished 20-of-34 for 226, a touchdown
+and an interception — a **45.7 PFF grade (26th of 30)** and a 29.2 QBR, his third poor start in a
+row. The defense was the bright side: rookie **S Genesis Smith (95) picked off Allen twice**, Tony
+Jefferson (81) and Tarheeb Still (76) were strong, and the unit held Allen to 204 passing yards
+with four sacks. LT Joe Alt (84) was excellent; LG Cole Strange (30) was not.
+
+**Injuries:** CB **Donte Jackson** left with a **concussion** in the first half (protocol). The
+Chargers were already without four starters: FS **Elijah Molden** (hamstring), DT **Dalvin
+Tomlinson** (hamstring, expected to miss time), G **Trey Pipkins III** (knee — MCL sprain) and TE
+**David Njoku** (injured reserve with a knee/leg injury; reports differ on the specifics; eligible
+to return Week 7). C Tyler Biadasz remains out for the season.
+
+**What changed:** **Herbert +1.5 → +1.0** — three straight poor games is a real sample.
+**Defense −1.0 → −0.7** — five takeaways and four sacks while short-handed; kept to +0.3 because
+fumble recoveries are partly luck and James Cook still ran for 154. **Offense held at −0.5** — it
+moved the ball; finishing is the part most likely to improve. **Total 0.0 → −0.2.**
+
 ## Week 2: vs Las Vegas (L 14–26)
 
 A second straight home loss, and this one forces a serious rethink — not an overreaction, but a
@@ -36,7 +60,7 @@ but Week 1 pulled the offense back to the pack.
 
 ## Quarterback
 
-Justin Herbert (+1.5) is the selected quarterback after two difficult games. His grade fell from +3.0 following Week 2 against Las Vegas; the +4.0 to +3.0 move was the earlier Week 1 assessment.
+Justin Herbert (+1.0) is the selected quarterback after three difficult games. His grade fell from +1.5 after Week 3 at Buffalo, from +3.0 after Week 2 against Las Vegas, and from +4.0 after Week 1.
 
 ## Quarterback: through Week 1 2026 (historical)
 
@@ -48,12 +72,13 @@ outplayed him.
 
 ## What moved the number
 
-- **Offense (+0.3 → 0.0):** cut to neutral. The interior line is **compromised** — **center
+- **Offense (now −0.5; +0.3 → 0.0 in Week 1, −0.5 in Week 2, held Week 3):** The interior line is **compromised** — **center
   Tyler Biadasz is out for the season** (knee, IR) — and it **looked horrible** in the opener,
   giving up three sacks and no push. McConkey is a rising weapon (and was hurt Week 1); the
   talent is fine, but the protection in front of Herbert is the problem.
-- **Defense (+0.5):** held. Above average, anchored by Derwin James, with Khalil Mack on the
-  edge and Tomlinson inside — not the reason for the loss.
+- **Defense (now −0.7):** held at +0.5 in Week 1, cut to −1.0 after Week 2, and back up to −0.7
+  after a five-takeaway day in Buffalo. Derwin James and Khalil Mack anchor it; the secondary is now
+  thin with Molden (hamstring) and Donte Jackson (concussion) hurt, and Tomlinson (hamstring) is out inside.
 
 ## Bottom line
 
