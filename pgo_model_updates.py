@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 import pgo_current_board
+from pgo_render_state import SEASON_UNLOADED
 
 EDITION = 'pgo-postseason-week1-2026-09-09'
 ROOT = Path(__file__).resolve().parent
@@ -419,7 +420,10 @@ def _original_editions_link(earlier, current):
                       'Open these saved details in the Forecast Lab archive</a>' for key in sorted(ids)))
 
 
-def render_current_updates(*, include_original=True):
+def render_current_updates(*, include_original=True, season_state=SEASON_UNLOADED):
+    from pgo_season import load_current
+    season = (load_current(DEFAULT_DIR.parents[1] / 'season-2026')
+              if season_state is SEASON_UNLOADED else season_state)
     snapshot, weekly, results, provenance = None, None, [], []
     if DEFAULT_DIR.exists() or DEFAULT_DIR.is_symlink():
         from pgo_forecast_postseason import load_snapshot
@@ -437,7 +441,8 @@ def render_current_updates(*, include_original=True):
                 if prior and any(game.get(key) != prior.get(key) for key in identity):
                     raise ValueError('Candidate result identity differs from the original ledger')
                 union[game['game_id']] = game
-            accepted, provenance = lab.load_results(lab.WEEKLY_DIR / 'results', {'games': list(union.values())})
+            accepted, provenance = lab.load_results(lab.WEEKLY_DIR / 'results', {'games': list(union.values())},
+                                                     season_state=season)
             candidate_ids = {game['game_id'] for game in weekly['games']}
             results = [result for result in accepted if result['game_id'] in candidate_ids]
     depth = None
@@ -457,8 +462,6 @@ def render_current_updates(*, include_original=True):
         confidence = load_verified(full_dir, FULL_CONFIDENCE_MANIFEST_SHA256, snapshot)
     earlier = render_updates(snapshot, depth, weekly=weekly, results=results, provenance=provenance,
                              defense_test=_load_defense_test(), confidence=confidence, confidence_archive=confidence_archive)
-    from pgo_season import load_current
-    season = load_current(DEFAULT_DIR.parents[1] / 'season-2026')
     if season is None:
         return earlier
     from pgo_season_view import render_season

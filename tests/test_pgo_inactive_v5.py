@@ -203,7 +203,7 @@ class InactiveV6NamesTests(unittest.TestCase):
         self.assertEqual(names.capture_evidence([other]),{})
         self.assertEqual(names.apply_context_names([other],{}, {'CAR':{},'ATL':{}},{},availability._utc(self.now)),{})
 
-    def test_v6_capture_embeds_evidence_and_replays_without_reading_live_files(self):
+    def test_current_capture_embeds_legacy_evidence_and_replays_without_reading_live_files(self):
         import tempfile
         from unittest.mock import patch
         import pgo_inactive_names as names
@@ -219,7 +219,7 @@ class InactiveV6NamesTests(unittest.TestCase):
             result=availability.capture_availability(games,self.inputs['roster'],self.inputs['expected_qbs'],directory,
                 purpose='context',now=self.now,fetch=fetch)
             saved=json.loads(gzip.decompress((directory/'inputs.json.gz').read_bytes()))
-            self.assertEqual(saved['parser_version'],6)
+            self.assertEqual(saved['parser_version'],7)
             self.assertEqual(set(saved['context_identity_evidence']),{'car-2026-week2','hou-2026-week2','ten-2026-week2'})
             with patch.object(names,'capture_evidence',side_effect=AssertionError('must replay captured evidence')):
                 self.assertEqual(result,availability.load_availability(directory))

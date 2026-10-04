@@ -6,6 +6,7 @@ import re
 from zoneinfo import ZoneInfo
 
 import generate_site
+from pgo_render_state import SEASON_UNLOADED
 
 START = '<!-- PGO CURRENT BOARD START -->'
 END = '<!-- PGO CURRENT BOARD END -->'
@@ -63,7 +64,7 @@ def rating_bar(value, scale=14.0):
     )
 
 
-def add_current_board(page, snapshot=None, mccabe_rows=None):
+def add_current_board(page, snapshot=None, mccabe_rows=None, *, season_state=SEASON_UNLOADED):
     # Lab imports comparison; defer these imports until rendering is requested.
     import pgo_comparison as comparison
     import pgo_forecast_corrected as corrected
@@ -100,7 +101,7 @@ def add_current_board(page, snapshot=None, mccabe_rows=None):
             f'<td class="pgo-rating-scale pgo-detail">{rating_bar(team["rating"])}</td>'
             f'<td class="pgo-detail">{html.escape(team["qb_name"])}</td>'
             f'<td class="pgo-detail">{mccabe_rank}</td><td class="pgo-detail">{rank - mccabe_rank:+d}</td></tr>')
-    updates = render_current_updates(include_original=False)
+    updates = render_current_updates(include_original=False, season_state=season_state)
     selected = 'id="pgo-season"' in updates or f'data-edition="{selected_edition}"' in updates
     if updates:
         from pgo_forecast_lab import FORECAST_DISPLAY_SCRIPT
