@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-04T16:50:44.974726+00:00",
+  "sources": [
+    {
+      "bytes": 397518,
+      "captured_at": "2026-10-04T16:50:43.847100+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e527ba8d54bc0b7e451102f1b185377a2de5d0b0a17c538364dc7227ea7e6fba",
+      "started_at": "2026-10-04T16:50:43.765936+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 738242,
+      "captured_at": "2026-10-04T16:50:44.367900+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.bengals.com/news/",
+      "kind": "team_news",
+      "sha256": "61b715f41a1c8ddfe88cfadfcd06ac91fd1867aaf772f2064345ab96db90bc35",
+      "started_at": "2026-10-04T16:50:43.766194+00:00",
+      "status": 200,
+      "team": "CIN",
+      "url": "https://www.bengals.com/news/"
+    },
+    {
+      "bytes": 389860,
+      "captured_at": "2026-10-04T16:50:44.006144+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.jaguars.com/news/",
+      "kind": "team_news",
+      "sha256": "9a681e91c7df6742c479f423f8e52a110eeaeeeaf7d1b021def4a99de6db3378",
+      "started_at": "2026-10-04T16:50:43.766476+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/"
+    },
+    {
+      "bytes": 1588736,
+      "captured_at": "2026-10-04T16:50:43.912674+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "1a6f92e14da31ede30f284bbc615b090c1565c20709544e09ba53c0f5310d741",
+      "started_at": "2026-10-04T16:50:43.766684+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 357940,
+      "captured_at": "2026-10-04T16:50:44.897016+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.bengals.com/news/bengals-jaguars-inactives-week-4-2026",
+      "kind": "official_inactives",
+      "sha256": "f599b0dd9ab4601f7773be1ca73ca358dfdedafaef26c619b02d808d7e11ba10",
+      "started_at": "2026-10-04T16:50:44.437151+00:00",
+      "status": 200,
+      "team": "CIN",
+      "url": "https://www.bengals.com/news/bengals-jaguars-inactives-week-4-2026"
+    },
+    {
+      "bytes": 318498,
+      "captured_at": "2026-10-04T16:50:44.653508+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.jaguars.com/news/in-and-out-2026-week-4-montaric-brown-inactive-for-jaguars-vs-bengals",
+      "kind": "official_inactives",
+      "sha256": "13a9b5f15670b4a8e076de4bb18e28ce68f76e880d3be3b25f89d5d4601187f9",
+      "started_at": "2026-10-04T16:50:44.437409+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/in-and-out-2026-week-4-montaric-brown-inactive-for-jaguars-vs-bengals"
+    },
+    {
+      "bytes": 899485,
+      "captured_at": "2026-10-04T16:50:44.515747+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "fafdb8619c8ad36370dddc2b562d520834167d68173c8332a5eb6d30ad258ce6",
+      "started_at": "2026-10-04T16:50:44.437660+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
