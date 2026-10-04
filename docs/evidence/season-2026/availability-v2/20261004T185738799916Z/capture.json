@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-04T18:57:39.342761+00:00",
+  "sources": [
+    {
+      "bytes": 397762,
+      "captured_at": "2026-10-04T18:57:38.835718+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "ce33062c6994e12a53f61aa24dfe1392a67642e26f5baed34cfd831722d30682",
+      "started_at": "2026-10-04T18:57:38.808548+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 705799,
+      "captured_at": "2026-10-04T18:57:39.119609+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.azcardinals.com/news/",
+      "kind": "team_news",
+      "sha256": "eabc75470dd544930d0fddb6001451a60f3a0c22b592dfcd15d5ab3fe2990ab2",
+      "started_at": "2026-10-04T18:57:38.808789+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/"
+    },
+    {
+      "bytes": 573018,
+      "captured_at": "2026-10-04T18:57:38.951259+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.giants.com/news/",
+      "kind": "team_news",
+      "sha256": "b1ac4e659e6dcd864edc218db8b4fb8184aadc6b753166e770bd464c458c49b5",
+      "started_at": "2026-10-04T18:57:38.809025+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/"
+    },
+    {
+      "bytes": 1603298,
+      "captured_at": "2026-10-04T18:57:38.858355+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "32b5831d5dda1295b1cab1a850f325b7bdf6f74e4a3196b175937097ef21725d",
+      "started_at": "2026-10-04T18:57:38.809278+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 542611,
+      "captured_at": "2026-10-04T18:57:39.248395+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.giants.com/news/nfl-week-4-inactive-list-who-s-in-who-s-out-for-giants-vs-cardinals",
+      "kind": "official_inactives",
+      "sha256": "8a5b5297f5a228a05ec067b20460cd9bf587331be561b7f49aa6081ed0ed9681",
+      "started_at": "2026-10-04T18:57:39.215549+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/nfl-week-4-inactive-list-who-s-in-who-s-out-for-giants-vs-cardinals"
+    },
+    {
+      "bytes": 914325,
+      "captured_at": "2026-10-04T18:57:39.246052+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "a85096a0ad2d23b5e678a8d18a6e522d2f6f82bc9fb27ad41e85fc29e96cca69",
+      "started_at": "2026-10-04T18:57:39.215830+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
