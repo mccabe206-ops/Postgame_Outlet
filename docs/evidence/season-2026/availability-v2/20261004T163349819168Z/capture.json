@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-04T16:33:50.331228+00:00",
+  "sources": [
+    {
+      "bytes": 397630,
+      "captured_at": "2026-10-04T16:33:49.857765+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "03316d3a09960f307e42e94edd8d843629bd61a3b4d352f45e5dd5a8272ff4cc",
+      "started_at": "2026-10-04T16:33:49.828840+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 696042,
+      "captured_at": "2026-10-04T16:33:50.054211+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.packers.com/news/",
+      "kind": "team_news",
+      "sha256": "f4dd729ffd6db40e271c0a5908c2923f568cb9dc2f77d879465105e48137ff24",
+      "started_at": "2026-10-04T16:33:49.829138+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/"
+    },
+    {
+      "bytes": 352939,
+      "captured_at": "2026-10-04T16:33:49.947645+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.buccaneers.com/news/",
+      "kind": "team_news",
+      "sha256": "f8ae9fe4851e2a0d14bfe110b2aeb21845684300972f3fe392ebe4cb4223b8cd",
+      "started_at": "2026-10-04T16:33:49.829466+00:00",
+      "status": 200,
+      "team": "TB",
+      "url": "https://www.buccaneers.com/news/"
+    },
+    {
+      "bytes": 1588990,
+      "captured_at": "2026-10-04T16:33:49.875537+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "c4040f539d11b62b22b0a2c0bd4b357c965e914fb0b734fe474c3b4bad366dd5",
+      "started_at": "2026-10-04T16:33:49.829747+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 312240,
+      "captured_at": "2026-10-04T16:33:50.206142+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.packers.com/news/packers-buccaneers-week-4-inactives-oct-4-2026",
+      "kind": "official_inactives",
+      "sha256": "95e897bff26e37c5788ffa7f7ac1b4f78bef21224ced9523bdca40382a92bbc1",
+      "started_at": "2026-10-04T16:33:50.182577+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/packers-buccaneers-week-4-inactives-oct-4-2026"
+    },
+    {
+      "bytes": 393134,
+      "captured_at": "2026-10-04T16:33:50.214417+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.buccaneers.com/news/packers-bucs-inactives-jacob-parrish-sirvocea-dennis-cleared-play",
+      "kind": "official_inactives",
+      "sha256": "9ec508457ea38ec990141c3407c6101af00f849646b085a13e20f173f8bdae5b",
+      "started_at": "2026-10-04T16:33:50.182896+00:00",
+      "status": 200,
+      "team": "TB",
+      "url": "https://www.buccaneers.com/news/packers-bucs-inactives-jacob-parrish-sirvocea-dennis-cleared-play"
+    },
+    {
+      "bytes": 899618,
+      "captured_at": "2026-10-04T16:33:50.206683+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "676fa9784350a4cc26bf1ed7c95204e70dbe8242fcff70853149175917d7807b",
+      "started_at": "2026-10-04T16:33:50.183251+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
