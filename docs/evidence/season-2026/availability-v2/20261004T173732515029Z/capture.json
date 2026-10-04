@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-04T17:37:33.541046+00:00",
+  "sources": [
+    {
+      "bytes": 397686,
+      "captured_at": "2026-10-04T17:37:32.546492+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "7a7a7be121faff81c1f2de85c29cf1b374cd36f23fd34465a2aacb3a3c49f422",
+      "started_at": "2026-10-04T17:37:32.526085+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 536768,
+      "captured_at": "2026-10-04T17:37:33.056489+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chicagobears.com/news/",
+      "kind": "team_news",
+      "sha256": "359fa043da117062cf66ca271b0309f9f06141d5cb75b37c4f91efb80613f312",
+      "started_at": "2026-10-04T17:37:32.526425+00:00",
+      "status": 200,
+      "team": "CHI",
+      "url": "https://www.chicagobears.com/news/"
+    },
+    {
+      "bytes": 392216,
+      "captured_at": "2026-10-04T17:37:32.836026+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.newyorkjets.com/news/",
+      "kind": "team_news",
+      "sha256": "978049e25ddb8c3fbe9b0b2b3d7188e185af32f85b23ec4a949e2c5bc51f08c6",
+      "started_at": "2026-10-04T17:37:32.526724+00:00",
+      "status": 200,
+      "team": "NYJ",
+      "url": "https://www.newyorkjets.com/news/"
+    },
+    {
+      "bytes": 1599839,
+      "captured_at": "2026-10-04T17:37:32.559310+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "15fb7118076e1ea488fb64ad2a8c0c15cb4eb1d7a5ec84c0c21b97615aeab275",
+      "started_at": "2026-10-04T17:37:32.526991+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 387637,
+      "captured_at": "2026-10-04T17:37:33.434667+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.newyorkjets.com/news/jets-vs-bears-game-inactives-10-04-2026",
+      "kind": "official_inactives",
+      "sha256": "61f29ac9a3de9aa699ada4a0b6e7595e04d0662cbb2fab62c9ba8eb048770236",
+      "started_at": "2026-10-04T17:37:33.172899+00:00",
+      "status": 200,
+      "team": "NYJ",
+      "url": "https://www.newyorkjets.com/news/jets-vs-bears-game-inactives-10-04-2026"
+    },
+    {
+      "bytes": 909657,
+      "captured_at": "2026-10-04T17:37:33.195965+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "688531a7ff6f61c5e0fd73baac41659395732eaca18e97d229c8fdf8b2383780",
+      "started_at": "2026-10-04T17:37:33.173216+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
