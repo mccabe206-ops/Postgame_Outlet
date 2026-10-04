@@ -219,7 +219,7 @@ class InactiveV6NamesTests(unittest.TestCase):
             result=availability.capture_availability(games,self.inputs['roster'],self.inputs['expected_qbs'],directory,
                 purpose='context',now=self.now,fetch=fetch)
             saved=json.loads(gzip.decompress((directory/'inputs.json.gz').read_bytes()))
-            self.assertEqual(saved['parser_version'],8)
+            self.assertEqual(saved['parser_version'],9)
             self.assertEqual(set(saved['context_identity_evidence']),{'car-2026-week2','hou-2026-week2','ten-2026-week2'})
             with patch.object(names,'capture_evidence',side_effect=AssertionError('must replay captured evidence')):
                 self.assertEqual(result,availability.load_availability(directory))
