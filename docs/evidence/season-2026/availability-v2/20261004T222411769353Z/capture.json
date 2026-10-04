@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-04T22:24:12.277529+00:00",
+  "sources": [
+    {
+      "bytes": 397800,
+      "captured_at": "2026-10-04T22:24:11.821937+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "30ed4d05564c3f2126d2ae0d5a3c983829a9184319d352416972ebabb8de8d2b",
+      "started_at": "2026-10-04T22:24:11.779355+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 518556,
+      "captured_at": "2026-10-04T22:24:11.883167+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.miamidolphins.com/news/",
+      "kind": "team_news",
+      "sha256": "af81d40f6e6dec81300bc2d5f314a783d813b89fa6d6c997d06f2ab7264ee2df",
+      "started_at": "2026-10-04T22:24:11.779649+00:00",
+      "status": 200,
+      "team": "MIA",
+      "url": "https://www.miamidolphins.com/news/"
+    },
+    {
+      "bytes": 548263,
+      "captured_at": "2026-10-04T22:24:11.854350+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.vikings.com/news/",
+      "kind": "team_news",
+      "sha256": "79cfd9a3eef63dc4c8cc7d31ef18ecace1fc708a4c1a1ebae980c529b6edac54",
+      "started_at": "2026-10-04T22:24:11.779990+00:00",
+      "status": 200,
+      "team": "MIN",
+      "url": "https://www.vikings.com/news/"
+    },
+    {
+      "bytes": 1610796,
+      "captured_at": "2026-10-04T22:24:12.018260+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "42aede1448b128b237530a84e21c79b7a62d1aa2c9ceb8a1670f58cc93065308",
+      "started_at": "2026-10-04T22:24:11.780992+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 437528,
+      "captured_at": "2026-10-04T22:24:12.164091+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.vikings.com/news/vikings-dolphins-inactives-week-4-2026-nfl-season",
+      "kind": "official_inactives",
+      "sha256": "744d4b7fd41b3a9d372f65ac138c313ac1fcf7552420c4b59e74a4560e2380f2",
+      "started_at": "2026-10-04T22:24:12.139818+00:00",
+      "status": 200,
+      "team": "MIN",
+      "url": "https://www.vikings.com/news/vikings-dolphins-inactives-week-4-2026-nfl-season"
+    },
+    {
+      "bytes": 922712,
+      "captured_at": "2026-10-04T22:24:12.169117+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "8198bb6bd2f99b565c8444993944ed7285ff5fafc0968ebd4a2f278b8a6be5dd",
+      "started_at": "2026-10-04T22:24:12.140140+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
