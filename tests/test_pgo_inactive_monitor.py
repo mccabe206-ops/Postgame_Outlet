@@ -1,5 +1,6 @@
 """Final lists remain visible without rewriting the prediction they arrived after."""
 import copy
+import json
 from pathlib import Path
 import tempfile
 import unittest
@@ -20,6 +21,105 @@ class InactiveMonitorTests(unittest.TestCase):
                     summary='Official inactive lists', blocked_reason=None,
                     teams={t: dict(final_inactives_status='VERIFIED_LIST' if complete else 'UNKNOWN')
                            for t in (game['home'], game['away'])})
+
+    def assert_context_failure_isolated(self, failure, failed_index=1, forecast_error=None):
+        fixture = fixtures.SeasonBoundaryTests()
+        games = [fixture.game(),
+                 fixture.game('2026_01_WAS_DAL', home='DAL', away='WAS'),
+                 fixture.game('2026_01_BAL_BUF', home='BUF', away='BAL')]
+        state = fixture.state(games)
+        failed = games[failed_index]
+        previous = dict(self.observation(failed, checked='2026-09-13T16:10:00Z'),
+                        source_archive='availability-v2/20260913T161000000000Z')
+        state['availability_context'] = {failed['game_id']: copy.deepcopy(previous)}
+        frozen = copy.deepcopy(state)
+        clock = [api.utc('2026-09-13T16:30:00Z')]
+        observed = {}
+
+        def now():
+            checked = clock[0].isoformat()
+            clock[0] += api.timedelta(microseconds=1)
+            return checked
+
+        def resolve(inputs, roster, requested, root, checked, **kwargs):
+            if failure == 'starter' and any(g['game_id'] == failed['game_id'] for g in requested):
+                raise ValueError('Roster and depth chart disagree about starting quarterback')
+            return ({t: dict(gsis_id=t + '-old')
+                     for g in requested for t in (g['home'], g['away'])}, {})
+
+        def capture(requested, roster, expected, path, *, purpose):
+            has_failed = any(g['game_id'] == failed['game_id'] for g in requested)
+            if failure == 'source' and has_failed:
+                raise OSError('Official inactive source unavailable')
+            checked = now()
+            observations = {g['game_id']: self.observation(
+                g, checked=checked,
+                complete=not (failure == 'incomplete' and g['game_id'] == failed['game_id']))
+                for g in requested}
+            payload = dict(purpose=purpose, games=observations)
+            observed.update(copy.deepcopy(observations))
+            # Model the archive's refusal to overwrite existing evidence.
+            path.mkdir(parents=True, exist_ok=False)
+            (path / 'availability.json').write_text(json.dumps(payload), encoding='utf-8')
+            return payload
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            previous_path = root / previous['source_archive'] / 'availability.json'
+            previous_path.parent.mkdir(parents=True)
+            previous_bytes = json.dumps(dict(purpose='context', games={
+                failed['game_id']: {k: v for k, v in previous.items() if k != 'source_archive'}
+            })).encode()
+            previous_path.write_bytes(previous_bytes)
+            with patch.object(api, 'now', side_effect=now), \
+                 patch.object(api, 'refresh_forecast_availability', return_value=[],
+                              side_effect=forecast_error), \
+                 patch.object(api, 'fetch_source', return_value=(b'', {})) as fetch, \
+                 patch.object(api, 'csv_rows', return_value=[]), \
+                 patch('pgo_expected_starters.apply', side_effect=resolve), \
+                 patch('pgo_season_availability.capture_availability', side_effect=capture):
+                if forecast_error is None:
+                    api.refresh_availability(state, root)
+                else:
+                    with self.assertRaises(type(forecast_error)) as raised:
+                        api.refresh_availability(state, root)
+                    self.assertIs(raised.exception, forecast_error)
+
+            # A failure cannot rewrite forecasts, rankings, prior evidence, or its clock.
+            self.assertEqual(state['availability_context'][failed['game_id']], previous)
+            self.assertEqual(previous_path.read_bytes(), previous_bytes)
+            for key, value in frozen.items():
+                if key != 'availability_context':
+                    self.assertEqual(state[key], value, key)
+            for game in games:
+                if game['game_id'] == failed['game_id']:
+                    continue
+                self.assertIn(game['game_id'], state['availability_context'],
+                              'An unrelated game must still receive its context observation')
+                actual = state['availability_context'][game['game_id']]
+                archive = root / actual['source_archive'] / 'availability.json'
+                self.assertEqual({k: v for k, v in actual.items() if k != 'source_archive'},
+                                 observed[game['game_id']])
+                self.assertEqual(json.loads(archive.read_text(encoding='utf-8'))['games'][game['game_id']],
+                                 observed[game['game_id']])
+            check = state['availability_context_check']
+            self.assertEqual(check['status'], 'BLOCKED')
+            self.assertIn(failed['game_id'], check['blocked_reason'])
+            self.assertEqual(fetch.call_count, 2, 'Roster and depth are shared across context games')
+
+    def test_starter_conflict_in_first_or_middle_game_does_not_stop_other_contexts(self):
+        for failed_index in (0, 1):
+            with self.subTest(failed_index=failed_index):
+                self.assert_context_failure_isolated('starter', failed_index)
+
+    def test_source_failure_or_incomplete_list_does_not_stop_other_contexts(self):
+        for failure in ('source', 'incomplete'):
+            with self.subTest(failure=failure):
+                self.assert_context_failure_isolated(failure)
+
+    def test_prelock_error_is_rethrown_after_independent_context_attempts(self):
+        error = ValueError('Prelock availability remains blocked')
+        self.assert_context_failure_isolated('starter', forecast_error=error)
 
     def test_crossing_lock_during_either_forecast_outcome_captures_context_same_run(self):
         for failed in (False, True):

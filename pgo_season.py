@@ -634,25 +634,31 @@ def refresh_availability(state, root):
             raw, roster_source = fetch_source(URLS['roster'], root); roster = csv_rows(raw)
             raw, depth_source = fetch_source(URLS['depth'], root); depth = csv_rows(raw)
             from pgo_expected_starters import apply
-            selected, _ = apply({}, roster, contexts, root, now(), depth=depth,
-                                teams={t for g in contexts for t in (g['home'],g['away'])})
-            expected = {t:r['gsis_id'] for t,r in selected.items()}
-            path = Path(root)/'availability-v2'/utc(now()).strftime('%Y%m%dT%H%M%S%fZ')
-            captured = capture_availability(contexts, roster, expected, path, purpose='context')
             incomplete = []
+            refs += [roster_source, depth_source]
             for game in contexts:
-                observation = captured['games'][game['game_id']]
-                missing = [t for t in (game['away'],game['home']) if observation.get('teams',{}).get(t,{}).get('final_inactives_status') != 'VERIFIED_LIST']
-                prior = state.get('availability_context',{}).get(game['game_id']) or game.get('availability') or {}
-                if missing:
-                    incomplete.append(game['game_id'] + ': ' + ', '.join(missing))
-                    if all(prior.get('teams',{}).get(t,{}).get('final_inactives_status') == 'VERIFIED_LIST' for t in (game['away'],game['home'])):
-                        continue
-                state.setdefault('availability_context', {})[game['game_id']] = dict(observation, source_archive=path.relative_to(root).as_posix())
+                # A game's unresolved starter or source must not block other
+                # games' later context. Keep every identity and capture gate.
+                try:
+                    selected, _ = apply({}, roster, [game], root, now(), depth=depth,
+                                        teams={game['home'], game['away']})
+                    expected = {t:r['gsis_id'] for t,r in selected.items()}
+                    path = Path(root)/'availability-v2'/utc(now()).strftime('%Y%m%dT%H%M%S%fZ')
+                    captured = capture_availability([game], roster, expected, path, purpose='context')
+                    refs.append({'label':'Latest official availability (separate from locked forecasts)',
+                                 'href':archive_href(path.relative_to(root).as_posix()+'/availability.json')})
+                    observation = captured['games'][game['game_id']]
+                    missing = [t for t in (game['away'],game['home']) if observation.get('teams',{}).get(t,{}).get('final_inactives_status') != 'VERIFIED_LIST']
+                    prior = state.get('availability_context',{}).get(game['game_id']) or game.get('availability') or {}
+                    if missing:
+                        incomplete.append(game['game_id'] + ': ' + ', '.join(missing))
+                        if all(prior.get('teams',{}).get(t,{}).get('final_inactives_status') == 'VERIFIED_LIST' for t in (game['away'],game['home'])):
+                            continue
+                    state.setdefault('availability_context', {})[game['game_id']] = dict(observation, source_archive=path.relative_to(root).as_posix())
+                except (ValueError, KeyError, OSError) as error:
+                    incomplete.append(game['game_id'] + ': ' + str(error))
             state['availability_context_check'] = dict(status='BLOCKED' if incomplete else 'READY', checked_at=now(),
                 blocked_reason='Latest check could not verify complete inactive lists: ' + '; '.join(incomplete) if incomplete else None)
-            refs += [roster_source, depth_source, {'label':'Latest official availability (separate from locked forecasts)',
-                     'href':archive_href(path.relative_to(root).as_posix()+'/availability.json')}]
         except (ValueError, KeyError, OSError) as error:
             state['availability_context_check'] = dict(status='BLOCKED', checked_at=now(), blocked_reason=str(error))
     elif state.get('availability_context_check'):
