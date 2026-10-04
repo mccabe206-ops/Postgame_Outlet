@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-01T13:29:55.833410+00:00",
+  "sources": [
+    {
+      "bytes": 379375,
+      "captured_at": "2026-10-01T13:29:55.387849+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "64464e408725f6626867a7fc286f42ef8c1c5fee152d0892e005c6fdcd445cc5",
+      "started_at": "2026-10-01T13:29:55.264245+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 579812,
+      "captured_at": "2026-10-01T13:29:55.574837+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.clevelandbrowns.com/news/",
+      "kind": "team_news",
+      "sha256": "04c62961ef48a610aa9ba88af70f04e329de279af09d3e434c65ddfc12bf8226",
+      "started_at": "2026-10-01T13:29:55.264654+00:00",
+      "status": 200,
+      "team": "CLE",
+      "url": "https://www.clevelandbrowns.com/news/"
+    },
+    {
+      "bytes": 395488,
+      "captured_at": "2026-10-01T13:29:55.486787+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.steelers.com/news/",
+      "kind": "team_news",
+      "sha256": "763c4f49a4fe41b21e5ea55f13c09e6208022345918e5ca552b3a011eb2bbaea",
+      "started_at": "2026-10-01T13:29:55.264984+00:00",
+      "status": 200,
+      "team": "PIT",
+      "url": "https://www.steelers.com/news/"
+    },
+    {
+      "bytes": 1613067,
+      "captured_at": "2026-10-01T13:29:55.643919+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "04fc1b5ca78a89661e97fefa2fbd0792169cf65666d2244e865a976d4650b308",
+      "started_at": "2026-10-01T13:29:55.265302+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}

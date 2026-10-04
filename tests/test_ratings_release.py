@@ -144,6 +144,14 @@ class ReleaseGateTests(unittest.TestCase):
 
 
 class SnapshotTests(unittest.TestCase):
+    def test_new_snapshot_preserves_current_human_injury_annotations(self):
+        current = generate_site.load_teams(generate_site.load_prior())
+        frozen = snapshot.snapshot_current()
+        self.assertEqual(
+            {row['team']: row['injury'] for row in frozen},
+            {row['team']: row['injury'] for row in current},
+        )
+
     def test_legacy_snapshot_list_is_preserved(self):
         rows = [{"team": "Alpha", "rating": 1.0}]
         entry = snapshot.normalize_snapshot_entry(rows)

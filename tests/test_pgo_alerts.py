@@ -139,7 +139,8 @@ class AlertTests(unittest.TestCase):
                                         ('injury_usage', 'monitor-injury-usage', 'WAITING'),
                                         ('offensive_inventory', 'monitor-offensive-inventory', 'DESCRIPTIVE / NOT IN MODEL'),
                                         ('offensive_usage', 'monitor-offensive-usage', 'WAITING'),
-                                        ('score_range_collection', 'monitor-score-range-collection', 'WAITING')]:
+                                        ('score_range_collection', 'monitor-score-range-collection', 'WAITING'),
+                                        ('mccabe_forecasts', 'monitor-mccabe-forecasts', 'READY')]:
             with self.subTest(component=key):
                 state = self.state()
                 state[key] = dict(status='BLOCKED', blocked_reason='private provider failure', historical_admission='BLOCKED FOR FITTING')
@@ -159,6 +160,27 @@ class AlertTests(unittest.TestCase):
                 self.assertTrue(recovered['can_resolve'])
                 self.assertEqual(alerts.deliver(recovered, fake, alerts.RUN_URL)['action'], 'resolved')
                 self.assertEqual(sum(method == 'POST' for method, _, _ in fake.calls), 1)
+
+    def test_mccabe_collection_alert_is_bounded_and_keeps_expected_waits_quiet(self):
+        for component in (None, {}, {'status': 'WAITING'}, {'status': 'READY'}):
+            with self.subTest(component=component):
+                state = self.state()
+                state['mccabe_forecasts'] = component
+                report = self.report(state)
+                self.assertEqual(report['conditions'], [])
+                self.assertTrue(report['can_resolve'])
+        state = self.state()
+        state['mccabe_forecasts'] = dict(status='BLOCKED', blocked_reason='private input detail')
+        before = copy.deepcopy(state)
+        report = self.report(state)
+        self.assertEqual(len(report['conditions']), 1)
+        condition = report['conditions'][0]
+        self.assertEqual(condition['key'], 'monitor-mccabe-forecasts')
+        self.assertIn('McCabe forecast collection', condition['message'])
+        self.assertNotIn('private input detail', json.dumps(report))
+        self.assertFalse(condition['urgent'])
+        self.assertFalse(report['can_resolve'])
+        self.assertEqual(state, before)
 
     def test_absent_optional_components_and_expected_research_holds_do_not_alert(self):
         for component in (None, {}, {'status': 'EXPERIMENTAL / HOLD'}, {'status': 'BLOCKED FOR FITTING'},

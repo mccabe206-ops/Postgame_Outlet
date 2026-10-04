@@ -23,7 +23,8 @@ from release_ratings import atomic_write_text, load_release_rows
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 SNAP = os.path.join(DATA, "snapshots.json")
-INJURY_DEFLATED = {"Kansas City Chiefs", "Cincinnati Bengals", "Baltimore Ravens"}
+# Match the current human board's annotations; stored snapshots retain their flags.
+INJURY_DEFLATED = set()
 
 
 def load_prior():

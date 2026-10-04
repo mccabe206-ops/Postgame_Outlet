@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-01T23:59:19.165833+00:00",
+  "sources": [
+    {
+      "bytes": 397604,
+      "captured_at": "2026-10-01T23:59:18.559147+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "9985371e48c4e5d12b853cc66fe487ff91dc3db4a96de79d71ddba572d013ecb",
+      "started_at": "2026-10-01T23:59:18.515177+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 580365,
+      "captured_at": "2026-10-01T23:59:18.700080+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.clevelandbrowns.com/news/",
+      "kind": "team_news",
+      "sha256": "9e0c8218b376c7f0f7ea19f54367e889da9ed97f7e4eda21ff94fca7f82c0449",
+      "started_at": "2026-10-01T23:59:18.515584+00:00",
+      "status": 200,
+      "team": "CLE",
+      "url": "https://www.clevelandbrowns.com/news/"
+    },
+    {
+      "bytes": 396017,
+      "captured_at": "2026-10-01T23:59:18.676843+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.steelers.com/news/",
+      "kind": "team_news",
+      "sha256": "97a2438cfb9f16f493e5160761ca5e8491aa1c5dc0b33cc7a320d9651979683e",
+      "started_at": "2026-10-01T23:59:18.516494+00:00",
+      "status": 200,
+      "team": "PIT",
+      "url": "https://www.steelers.com/news/"
+    },
+    {
+      "bytes": 1626209,
+      "captured_at": "2026-10-01T23:59:18.904778+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "20127cf977a7262557a71bf2ee516986dbe14b9a055e66d3b5e743c96dc59895",
+      "started_at": "2026-10-01T23:59:18.516790+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 315692,
+      "captured_at": "2026-10-01T23:59:19.049805+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.clevelandbrowns.com/news/browns-announce-inactives-for-week-4-vs-steelers",
+      "kind": "official_inactives",
+      "sha256": "7db40ef990df831a8076537b6c2ad8b5a6233f2402184127c6cce8408ffff7ef",
+      "started_at": "2026-10-01T23:59:19.023198+00:00",
+      "status": 200,
+      "team": "CLE",
+      "url": "https://www.clevelandbrowns.com/news/browns-announce-inactives-for-week-4-vs-steelers"
+    },
+    {
+      "bytes": 338160,
+      "captured_at": "2026-10-01T23:59:19.045286+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.steelers.com/news/steelers-inactives-for-week-4-vs-browns",
+      "kind": "official_inactives",
+      "sha256": "990e3df6cc0e704668b5c523e10746aa05674b987c0e8991e1e37c6ac1e5eb39",
+      "started_at": "2026-10-01T23:59:19.023549+00:00",
+      "status": 200,
+      "team": "PIT",
+      "url": "https://www.steelers.com/news/steelers-inactives-for-week-4-vs-browns"
+    },
+    {
+      "bytes": 701434,
+      "captured_at": "2026-10-01T23:59:19.051571+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/week-4-thursday-night-inactives-pittsburgh-steelers-at-cleveland-browns",
+      "kind": "official_inactives",
+      "sha256": "b61ff223bdd9f79ab5d5fee886fc1434e3e012e235f485110052b13521c6bddf",
+      "started_at": "2026-10-01T23:59:19.023878+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/week-4-thursday-night-inactives-pittsburgh-steelers-at-cleveland-browns"
+    }
+  ]
+}

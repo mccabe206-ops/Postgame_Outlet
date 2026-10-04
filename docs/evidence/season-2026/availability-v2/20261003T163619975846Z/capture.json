@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-03T16:36:22.842590+00:00",
+  "sources": [
+    {
+      "bytes": 404322,
+      "captured_at": "2026-10-03T16:36:22.444974+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "dd1bbfd40b0cedb800239a23a623d940b45552ccf4704ad791c75de5cee6d237",
+      "started_at": "2026-10-03T16:36:22.413121+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 423270,
+      "captured_at": "2026-10-03T16:36:22.580265+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.colts.com/news/",
+      "kind": "team_news",
+      "sha256": "4485fc3fde159d35eebe1524e4bd102479b126b90517cb482439e6ba78d72a3a",
+      "started_at": "2026-10-03T16:36:22.413468+00:00",
+      "status": 200,
+      "team": "IND",
+      "url": "https://www.colts.com/news/"
+    },
+    {
+      "bytes": 499944,
+      "captured_at": "2026-10-03T16:36:22.652812+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.commanders.com/news/",
+      "kind": "team_news",
+      "sha256": "024138785e1e10c146e2654a614a624a121b701907bfdaeff0ad6a6a831dc699",
+      "started_at": "2026-10-03T16:36:22.413791+00:00",
+      "status": 200,
+      "team": "WAS",
+      "url": "https://www.commanders.com/news/"
+    },
+    {
+      "bytes": 1576120,
+      "captured_at": "2026-10-03T16:36:22.664405+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "13ee78162202b37f9940c2fe7aa4f4cdf7ee26b5584d272cdf40eb442e6633a8",
+      "started_at": "2026-10-03T16:36:22.414129+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}

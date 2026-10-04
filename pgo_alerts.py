@@ -93,7 +93,8 @@ def assess(state, *, outcomes, run_refresh=True, checked_at=None, refresh_starte
                               ('injury_usage', 'postgame defender usage'),
                               ('offensive_inventory', 'offensive player inventory'),
                               ('offensive_usage', 'postgame offensive usage'),
-                              ('score_range_collection', 'future score-error collection')]:
+                              ('score_range_collection', 'future score-error collection'),
+                              ('mccabe_forecasts', 'McCabe forecast collection')]:
             if health[prefix + '_status'] == 'BLOCKED':
                 add('monitor-' + prefix.replace('_', '-'), 'The independent ' + label
                     + ' update is blocked. Main picks and grades are checked separately.')
