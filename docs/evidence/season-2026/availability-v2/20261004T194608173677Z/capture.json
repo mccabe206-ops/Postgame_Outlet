@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-04T19:46:08.693456+00:00",
+  "sources": [
+    {
+      "bytes": 397770,
+      "captured_at": "2026-10-04T19:46:08.205205+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "a94b7f5f203cfdbf5916a346657d65db8e336eb1c3ad06a5506af371c8c4f566",
+      "started_at": "2026-10-04T19:46:08.185995+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 393199,
+      "captured_at": "2026-10-04T19:46:08.346663+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chargers.com/news/",
+      "kind": "team_news",
+      "sha256": "fbebd468a064feefe0fb1df33a97bfca5a2741df3861aa9a01adfe622e5a5833",
+      "started_at": "2026-10-04T19:46:08.186307+00:00",
+      "status": 200,
+      "team": "LAC",
+      "url": "https://www.chargers.com/news/"
+    },
+    {
+      "bytes": 677462,
+      "captured_at": "2026-10-04T19:46:08.337923+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.seahawks.com/news/",
+      "kind": "team_news",
+      "sha256": "5339cc83742dee9e13358c3470de3eaab2e0bed92d84571cd2c53b7374a67568",
+      "started_at": "2026-10-04T19:46:08.186634+00:00",
+      "status": 200,
+      "team": "SEA",
+      "url": "https://www.seahawks.com/news/"
+    },
+    {
+      "bytes": 1605706,
+      "captured_at": "2026-10-04T19:46:08.237977+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "5c7dda2da188a92632946bf708b1ae045c6b7bd37738ac4baeb0a52889e4dcfb",
+      "started_at": "2026-10-04T19:46:08.186970+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 315703,
+      "captured_at": "2026-10-04T19:46:08.561489+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.chargers.com/news/seahawks-week-4-inactives-derwin-james",
+      "kind": "official_inactives",
+      "sha256": "58dd1a34dd80b644a7bd30d18dd9eac19fa56c0e8eef4f0488dff694cb629d39",
+      "started_at": "2026-10-04T19:46:08.463263+00:00",
+      "status": 200,
+      "team": "LAC",
+      "url": "https://www.chargers.com/news/seahawks-week-4-inactives-derwin-james"
+    },
+    {
+      "bytes": 449070,
+      "captured_at": "2026-10-04T19:46:08.509243+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.seahawks.com/news/seahawks-vs-chargers-week-4-inactives",
+      "kind": "official_inactives",
+      "sha256": "b25fae85ba8ae34a2af123eaefc3ec46506602020e47686b821fe877f303834f",
+      "started_at": "2026-10-04T19:46:08.463594+00:00",
+      "status": 200,
+      "team": "SEA",
+      "url": "https://www.seahawks.com/news/seahawks-vs-chargers-week-4-inactives"
+    },
+    {
+      "bytes": 920965,
+      "captured_at": "2026-10-04T19:46:08.489527+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "626f7e9f7990471a36ad25c0709a9da70ed439d451f8c57719c2426f183f1394",
+      "started_at": "2026-10-04T19:46:08.463966+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}

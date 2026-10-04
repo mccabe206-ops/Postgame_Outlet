@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-04T19:46:06.869989+00:00",
+  "sources": [
+    {
+      "bytes": 397770,
+      "captured_at": "2026-10-04T19:46:06.405774+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "a94b7f5f203cfdbf5916a346657d65db8e336eb1c3ad06a5506af371c8c4f566",
+      "started_at": "2026-10-04T19:46:06.379912+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 292406,
+      "captured_at": "2026-10-04T19:46:06.538716+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "e4a4e6b652b6990fece6cd4775a6ab74d332bd461ea227059ba51401604497d5",
+      "started_at": "2026-10-04T19:46:06.380217+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 520829,
+      "captured_at": "2026-10-04T19:46:06.531621+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.49ers.com/news/",
+      "kind": "team_news",
+      "sha256": "8e56b5d19240e7220b29c52c9ae5781d7d59d9895a982688a2ce76fc23fb9999",
+      "started_at": "2026-10-04T19:46:06.380568+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/"
+    },
+    {
+      "bytes": 1605706,
+      "captured_at": "2026-10-04T19:46:06.431679+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "5c7dda2da188a92632946bf708b1ae045c6b7bd37738ac4baeb0a52889e4dcfb",
+      "started_at": "2026-10-04T19:46:06.380895+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 310346,
+      "captured_at": "2026-10-04T19:46:06.741625+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/broncos-announce-inactives-for-week-4-game-vs-49ers",
+      "kind": "official_inactives",
+      "sha256": "f2b35cdf947ad238a1f5b07ba18102c5536b53c3fa09154bf6780bba4f26aed4",
+      "started_at": "2026-10-04T19:46:06.654101+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/broncos-announce-inactives-for-week-4-game-vs-49ers"
+    },
+    {
+      "bytes": 453717,
+      "captured_at": "2026-10-04T19:46:06.698486+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.49ers.com/news/romello-height-mike-evans-and-more-available-vs-broncos-inactives-for-week-4-denvssf",
+      "kind": "official_inactives",
+      "sha256": "663fbee562aee4d30e8857a3f2705d5c14dd547eed267e40e7837ac3d0cb2fd9",
+      "started_at": "2026-10-04T19:46:06.654410+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/romello-height-mike-evans-and-more-available-vs-broncos-inactives-for-week-4-denvssf"
+    },
+    {
+      "bytes": 920965,
+      "captured_at": "2026-10-04T19:46:06.687632+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "626f7e9f7990471a36ad25c0709a9da70ed439d451f8c57719c2426f183f1394",
+      "started_at": "2026-10-04T19:46:06.654729+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
