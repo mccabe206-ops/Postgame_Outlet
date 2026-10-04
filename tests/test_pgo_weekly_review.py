@@ -155,7 +155,9 @@ class WeeklyReviewTests(unittest.TestCase):
             workflow = (root/'.github/workflows'/name).read_text(encoding='utf-8')
             with self.subTest(workflow=name):
                 self.assertIn('python pgo_weekly_review.py', workflow)
-                self.assertLess(workflow.index('python pgo_weekly_review.py'), workflow.index('python pgo_comparison.py --refresh-mccabe'))
+                renderer = ('python pgo_comparison.py --refresh-mccabe' if name == 'publish-edition.yml'
+                            else 'python pgo_render_pages.py')
+                self.assertLess(workflow.index('python pgo_weekly_review.py'), workflow.index(renderer))
                 self.assertIn('if [ -d docs/analysis/weekly ]; then git add docs/analysis/weekly; fi', workflow)
         self.assertIn('tests.test_pgo_weekly_review', (root/'.github/workflows/update-season.yml').read_text())
 
