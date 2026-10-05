@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-10-05T09:12:42.575447+00:00",
+  "sources": [
+    {
+      "bytes": 397507,
+      "captured_at": "2026-10-05T09:12:42.087017+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "b85ef17272da7ecca3ee8b2c88b7a066f44c71a2b8c3aa560a8bb6a6ab165e8e",
+      "started_at": "2026-10-05T09:12:42.003946+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 534973,
+      "captured_at": "2026-10-05T09:12:42.205616+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.atlantafalcons.com/news/",
+      "kind": "team_news",
+      "sha256": "75fee47b287123da07256a681c1776e6282066302188ebe070dd09375164298e",
+      "started_at": "2026-10-05T09:12:42.004311+00:00",
+      "status": 200,
+      "team": "ATL",
+      "url": "https://www.atlantafalcons.com/news/"
+    },
+    {
+      "bytes": 386871,
+      "captured_at": "2026-10-05T09:12:42.298881+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/",
+      "kind": "team_news",
+      "sha256": "5243dce6401112fa3e9940befeec17f339baf18a2590703a18e27c1cce3d6316",
+      "started_at": "2026-10-05T09:12:42.005010+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/"
+    },
+    {
+      "bytes": 1613352,
+      "captured_at": "2026-10-05T09:12:42.257113+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "4ae7a1bd4e8b617a50038959a86538a173d10f83ecfe58e030d9c51ee43e1f34",
+      "started_at": "2026-10-05T09:12:42.005316+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 924896,
+      "captured_at": "2026-10-05T09:12:42.481121+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "f9cf426e96dd145e003e374b8da133fa8d889df890d9950d8276c5aab1aa8ded",
+      "started_at": "2026-10-05T09:12:42.411028+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
