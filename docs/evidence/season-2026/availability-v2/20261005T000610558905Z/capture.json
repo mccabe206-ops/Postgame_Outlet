@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-05T00:06:11.257271+00:00",
+  "sources": [
+    {
+      "bytes": 397507,
+      "captured_at": "2026-10-05T00:06:10.750360+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e630e1e48a969ae17fc8c865844f94fe04de34ee8e6723174ef1aab53b097ac2",
+      "started_at": "2026-10-05T00:06:10.566367+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 401232,
+      "captured_at": "2026-10-05T00:06:10.755608+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.panthers.com/news/",
+      "kind": "team_news",
+      "sha256": "b9b5c93011aaeba0012b4c484dffb3d7f9244321ada39667a17c4e121e58cd6b",
+      "started_at": "2026-10-05T00:06:10.566699+00:00",
+      "status": 200,
+      "team": "CAR",
+      "url": "https://www.panthers.com/news/"
+    },
+    {
+      "bytes": 433629,
+      "captured_at": "2026-10-05T00:06:10.764257+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.detroitlions.com/news/",
+      "kind": "team_news",
+      "sha256": "eea108853d0811751270c4dc8ad2e78666f6e03fc134e16a165dd0709e24e44b",
+      "started_at": "2026-10-05T00:06:10.566963+00:00",
+      "status": 200,
+      "team": "DET",
+      "url": "https://www.detroitlions.com/news/"
+    },
+    {
+      "bytes": 1613604,
+      "captured_at": "2026-10-05T00:06:10.898939+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "728d28bcd8891205877a1a10848bd0ed5e565e5ca61b7b01decb3b20c33cabd3",
+      "started_at": "2026-10-05T00:06:10.567212+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 485856,
+      "captured_at": "2026-10-05T00:06:11.147365+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.panthers.com/news/week-4-inactives-vs-detroit-jalen-coker-out-this-week-sunday-night-football-lions",
+      "kind": "official_inactives",
+      "sha256": "109916d219e8f53fa3449fe33d2b7af85c8ce0e2fec29c75a5ea3a011e991f9c",
+      "started_at": "2026-10-05T00:06:10.975497+00:00",
+      "status": 200,
+      "team": "CAR",
+      "url": "https://www.panthers.com/news/week-4-inactives-vs-detroit-jalen-coker-out-this-week-sunday-night-football-lions"
+    },
+    {
+      "bytes": 303101,
+      "captured_at": "2026-10-05T00:06:11.126881+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.detroitlions.com/news/inactives-lions-at-panthers-bartch-reed",
+      "kind": "official_inactives",
+      "sha256": "8794464895465e3f9219708868c98d519de73836e14e02da386bbf636d84581e",
+      "started_at": "2026-10-05T00:06:10.975769+00:00",
+      "status": 200,
+      "team": "DET",
+      "url": "https://www.detroitlions.com/news/inactives-lions-at-panthers-bartch-reed"
+    },
+    {
+      "bytes": 925516,
+      "captured_at": "2026-10-05T00:06:11.156393+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "ac9e728ebfa34cab7100b9223080e6b05e1fdca247992f00c1bf03202ec59ddd",
+      "started_at": "2026-10-05T00:06:10.976023+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
