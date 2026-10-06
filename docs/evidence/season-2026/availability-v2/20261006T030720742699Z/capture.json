@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-10-06T03:07:21.260184+00:00",
+  "sources": [
+    {
+      "bytes": 373179,
+      "captured_at": "2026-10-06T03:07:20.783787+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "6945b57fa1d1ccc64852a710a921680e5ce7fad0b1bbc69898198342f53f89b5",
+      "started_at": "2026-10-06T03:07:20.752354+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 510406,
+      "captured_at": "2026-10-06T03:07:21.111533+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.atlantafalcons.com/news/",
+      "kind": "team_news",
+      "sha256": "b2c464bbcf5ac9bfa5fa8087acfaa6801262b5970298c44fad02681fd6f135bc",
+      "started_at": "2026-10-06T03:07:20.752713+00:00",
+      "status": 200,
+      "team": "ATL",
+      "url": "https://www.atlantafalcons.com/news/"
+    },
+    {
+      "bytes": 362289,
+      "captured_at": "2026-10-06T03:07:20.899570+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/",
+      "kind": "team_news",
+      "sha256": "d0747a99cbf264649e84f5761515bfafa03f74d953b2498895836b0d89a700db",
+      "started_at": "2026-10-06T03:07:20.753066+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/"
+    },
+    {
+      "captured_at": "2026-10-06T03:07:20.983488+00:00",
+      "error": "ValueError: Availability source is not an allowed official HTTPS URL",
+      "kind": "league_news",
+      "started_at": "2026-10-06T03:07:20.753366+00:00",
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 559441,
+      "captured_at": "2026-10-06T03:07:21.208716+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.atlantafalcons.com/news/atlanta-falcons-week-4-inactives-vs-new-orleans-saints-on-monday-night-football",
+      "kind": "official_inactives",
+      "sha256": "6b935c2edb8ec3671d291e37bf94c8443964074eb8a7d32d2efe7f9da27de4ed",
+      "started_at": "2026-10-06T03:07:21.174752+00:00",
+      "status": 200,
+      "team": "ATL",
+      "url": "https://www.atlantafalcons.com/news/atlanta-falcons-week-4-inactives-vs-new-orleans-saints-on-monday-night-football"
+    },
+    {
+      "bytes": 299689,
+      "captured_at": "2026-10-06T03:07:21.199853+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/new-orleans-saints-inactives-atlanta-falcons-2026-nfl-week-4-gameday",
+      "kind": "official_inactives",
+      "sha256": "1e84275664001cc00b46740250a4c4525cea269b8e33aa9ee9fd8b55cc5e1540",
+      "started_at": "2026-10-06T03:07:21.175073+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/new-orleans-saints-inactives-atlanta-falcons-2026-nfl-week-4-gameday"
+    }
+  ]
+}
