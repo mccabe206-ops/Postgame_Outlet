@@ -17,8 +17,14 @@ _ENGLISH_POSITIONS = {'tight end':'TE','quarterback':'QB','running back':'RB','t
                      'defensive tackle':'DT','offensive lineman':'OL','defensive end':'DE'}
 
 
-def _row(line):
+def _row(line, *, version=3):
     source_text = line
+    if version == 7:
+        line = re.sub(r'\s*\|\s*\d{1,2}\s*$', '', line)
+        line = re.sub(r'^(?:Rookie|Veteran)\s+', '', line)
+        for label, code in {'wide receiver': 'WR', 'guard': 'G'}.items():
+            line = re.sub('^' + label + r'\s+', code + ' ', line, flags=re.I)
+        line = re.sub(r'^(' + _POSITION + r')\s+\d{1,3}\s+', r'\1 ', line, flags=re.I)
     line = re.sub(r'^(?:No\.\s*)?\d{1,3}\s+','',line,flags=re.I)
     for label,code in _ENGLISH_POSITIONS.items():
         line = re.sub('^' + label + r'\s+',code+' ',line,flags=re.I)
@@ -38,9 +44,9 @@ def _row(line):
                 status='EMERGENCY_QB' if position == 'QB' and ('emergency' in note.casefold() or re.search(r'3\s*QB|3rd QB|third QB',note,re.I)) else 'INACTIVE')
 
 
-def is_player_row(text):
+def is_player_row(text, *, version=3):
     """Whether a complete DOM list item is an observed structured player row."""
-    return isinstance(text,str) and _row(text) is not None
+    return isinstance(text,str) and _row(text,version=version) is not None
 
 
 def parse_club_body(body, headline, source_team, team, game, *, version=3):
@@ -60,6 +66,17 @@ def parse_club_body(body, headline, source_team, team, game, *, version=3):
     # Some club CMS text glues a full team heading directly to the previous row.
     heading = re.compile(own + r"(?:['\u2019]s?)?(?:\s+inactive(?:s| players)(?:[^:\n]*:)?\s*)?[ \t]*(?=\n|$)",re.I)
     starts = {m.end() for m in heading.finditer(body)}
+    declared_at = {}
+    if version == 7:
+        named_count = re.compile(r'(?:The\s+)?' + own + r'\s+have\s+(' + _NUMBER
+                                + r')\s+players on their inactive list[.:](?=\s*(?:\n|$))', re.I)
+        for match in named_count.finditer(body):
+            starts.add(match.end()); declared_at[match.end()] = match[1]
+        if source_team == team:
+            own_count = re.compile(r'placed\s+(' + _NUMBER
+                + r")\s+players on today['\u2019]s inactive list[.:](?=\s*(?:\n|$))", re.I)
+            for match in own_count.finditer(body):
+                starts.add(match.end()); declared_at[match.end()] = match[1]
     generic = re.compile(r'(?<!\w)INACTIVES[ \t]*(?=\n)|listing the following players as INACTIVE[^:\n]*:|placed\s+' + _NUMBER + r'\s+players[^:\n]*inactive list:|ruled out\s+' + _NUMBER + r'\s+players[^:\n]*:',re.I)
     for match in generic.finditer(body) if source_team == team else ():
         line = body[body.rfind('\n',0,match.start())+1:match.start()]
@@ -70,21 +87,27 @@ def parse_club_body(body, headline, source_team, team, game, *, version=3):
         section = body[start:]
         # A named next-club heading or link closes the current list, even glued.
         boundary = re.search(r'(?:The\s+)?' + opponent + r'(?:\s+inactives(?:\s+here\.)?\s*:?)?[ \t]*(?=\n|$)',section,re.I)
+        if version == 7:
+            boundary = re.search(r'(?:View the\s+|The\s+)?' + opponent
+                + r'(?:\s+inactives(?:\s+here\.)?\s*:?|\s+have\s+' + _NUMBER
+                + r'\s+players on their inactive list[.:])?[ \t]*(?=\n|$)', section, re.I)
         if boundary:
             section = section[:boundary.start()]
         section = section.split('Bringing you the action:',1)[0]
         lines = [re.sub(r'\s+',' ',s.strip().lstrip('-*\u2022 ').strip()) for s in section.splitlines() if s.strip()]
-        if not lines or not _row(lines[0]):
+        if not lines or not _row(lines[0],version=version):
             continue
         rows = []
         for line in lines:
-            row = _row(line)
+            row = _row(line,version=version)
             if row:
                 rows.append(row); continue
             if (re.search(r'\b(?:elevated|practice squad|download)\b',line,re.I)
+                    or (version == 7 and re.fullmatch(_NUMBER + r'\s+(?:' + own + '|' + opponent
+                        + r')\s+started the week on the injury report but were all cleared to play\.', line, re.I))
                     or re.match(r"\\?Editor's Note:",line,re.I)
                     or re.search(r'\b(?:was ruled out|are out due to injury)\b',line,re.I)
-                    or (version == 5 and any(line == r['name'].split()[-1]+' is out due to injury.' for r in rows))
+                    or (version in (5,7) and any(line == r['name'].split()[-1]+' is out due to injury.' for r in rows))
                     or (line.endswith(('.', '!', '?')) and ',' in line
                         and re.search(r'\b(?:who|was|is|are|will|has|have)\b',line))):
                 break
@@ -96,6 +119,8 @@ def parse_club_body(body, headline, source_team, team, game, *, version=3):
                   if not re.search(r'\bweek\s*$',headline[:match.start()],re.I)] if source_team == team else []
         counts += re.findall(r'(?:placed|ruled out)\s+(' + _NUMBER + r')\s+players',prefix,re.I) if source_team == team else []
         counts += re.findall(r'among\s+(' + _NUMBER + r')\s+players deactivated',prefix,re.I) if source_team == team else []
+        if start in declared_at:
+            counts.append(declared_at[start])
         declared = {_COUNTS.get(n.casefold(),int(n) if n.isdigit() else None) for n in counts}
         if declared and declared != {len(rows)}:
             raise ValueError('Declared inactive count does not match the complete list')

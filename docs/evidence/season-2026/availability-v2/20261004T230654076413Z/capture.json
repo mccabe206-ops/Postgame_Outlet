@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-04T23:06:55.225570+00:00",
+  "sources": [
+    {
+      "bytes": 397800,
+      "captured_at": "2026-10-04T23:06:54.162117+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "18ac4a93f587f639b07bf030d710e119b796455beb2b2a6ea5cf7da340d82d21",
+      "started_at": "2026-10-04T23:06:54.083101+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 503193,
+      "captured_at": "2026-10-04T23:06:54.641965+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "9e1dbae28ddfc4680589b7b7e9715b699f59c0e808ae09e732e9fd4140ba6320",
+      "started_at": "2026-10-04T23:06:54.083340+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 643216,
+      "captured_at": "2026-10-04T23:06:54.493760+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.raiders.com/news/",
+      "kind": "team_news",
+      "sha256": "99497d87b2074b5d68b9824cb52cf0444554b1122756be76687a9b4ce28a4451",
+      "started_at": "2026-10-04T23:06:54.083544+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/"
+    },
+    {
+      "bytes": 1612829,
+      "captured_at": "2026-10-04T23:06:54.223652+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "c60a1db2a5f06b0d21b0eaf1d5895b8925ad5e7c64d27068149aff391f678514",
+      "started_at": "2026-10-04T23:06:54.083756+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 452777,
+      "captured_at": "2026-10-04T23:06:55.150733+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.chiefs.com/news/week-4-inactive-players-chiefs-vs-raiders",
+      "kind": "official_inactives",
+      "sha256": "774093a5d4acf8a610e7d0e24168374c4e3fb2f1252af2886ce12b36efa21c45",
+      "started_at": "2026-10-04T23:06:54.713403+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/week-4-inactive-players-chiefs-vs-raiders"
+    },
+    {
+      "bytes": 340368,
+      "captured_at": "2026-10-04T23:06:54.942958+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.raiders.com/news/las-vegas-raiders-week-4-inactives-vs-kansas-city-chiefs-100426",
+      "kind": "official_inactives",
+      "sha256": "4bb00d20442612a6ac8fb89dc835700e90d1347fa62b6524edd4489fb2d6c9ca",
+      "started_at": "2026-10-04T23:06:54.713611+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/las-vegas-raiders-week-4-inactives-vs-kansas-city-chiefs-100426"
+    },
+    {
+      "bytes": 926104,
+      "captured_at": "2026-10-04T23:06:54.799444+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "23d633e96ae6f4b04918566ccedaacb2f56ec01fb169049c10176fd5823018a8",
+      "started_at": "2026-10-04T23:06:54.713848+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}

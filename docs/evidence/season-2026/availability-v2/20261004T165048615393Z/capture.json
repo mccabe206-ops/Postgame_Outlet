@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-04T16:50:49.312841+00:00",
+  "sources": [
+    {
+      "bytes": 397518,
+      "captured_at": "2026-10-04T16:50:48.698285+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e527ba8d54bc0b7e451102f1b185377a2de5d0b0a17c538364dc7227ea7e6fba",
+      "started_at": "2026-10-04T16:50:48.627287+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 660098,
+      "captured_at": "2026-10-04T16:50:48.952028+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/",
+      "kind": "team_news",
+      "sha256": "e7991b714cfbe00606bef2ed06b566fa5438cfc904a929fe71133ceb2d252e59",
+      "started_at": "2026-10-04T16:50:48.627547+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/"
+    },
+    {
+      "bytes": 486412,
+      "captured_at": "2026-10-04T16:50:48.915159+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.tennesseetitans.com/news/",
+      "kind": "team_news",
+      "sha256": "3224771106c46f0dbdad6ced993ce1968becd538e9717ba08804b3908e0c8837",
+      "started_at": "2026-10-04T16:50:48.627806+00:00",
+      "status": 200,
+      "team": "TEN",
+      "url": "https://www.tennesseetitans.com/news/"
+    },
+    {
+      "bytes": 1588736,
+      "captured_at": "2026-10-04T16:50:48.760493+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "1a6f92e14da31ede30f284bbc615b090c1565c20709544e09ba53c0f5310d741",
+      "started_at": "2026-10-04T16:50:48.628052+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 318515,
+      "captured_at": "2026-10-04T16:50:49.198852+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/zay-flowers-ronnie-stanley-inactives-ravens-titans-2026",
+      "kind": "official_inactives",
+      "sha256": "40dfe4b23e8cd1b8144a20d824504e0717e192041aa4980f5899b6acfdc51ec9",
+      "started_at": "2026-10-04T16:50:49.023317+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/zay-flowers-ronnie-stanley-inactives-ravens-titans-2026"
+    },
+    {
+      "bytes": 410300,
+      "captured_at": "2026-10-04T16:50:49.235910+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.tennesseetitans.com/news/game-inactives-week-4-titans-at-ravens",
+      "kind": "official_inactives",
+      "sha256": "1edc8546b9f5738062697569fe43c8ab0c4057f960f74af221d1e468157afe76",
+      "started_at": "2026-10-04T16:50:49.023576+00:00",
+      "status": 200,
+      "team": "TEN",
+      "url": "https://www.tennesseetitans.com/news/game-inactives-week-4-titans-at-ravens"
+    },
+    {
+      "bytes": 899485,
+      "captured_at": "2026-10-04T16:50:49.111792+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "fafdb8619c8ad36370dddc2b562d520834167d68173c8332a5eb6d30ad258ce6",
+      "started_at": "2026-10-04T16:50:49.023882+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}

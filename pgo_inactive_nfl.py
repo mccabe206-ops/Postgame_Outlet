@@ -24,7 +24,7 @@ def is_nfl_full_slate_url(url, game, *, version=4):
     parsed = urlsplit(url)
     expected = f'/news/inactive-reports-sunday-week-{game["week"]}-{game["season"]}-nfl-season'
     return (parsed.scheme == 'https' and parsed.netloc in ('nfl.com','www.nfl.com')
-            and (parsed.path.rstrip('/') == expected or (version == 5 and re.fullmatch(
+            and (parsed.path.rstrip('/') == expected or (version in (5,7) and re.fullmatch(
                 rf'/news/nfl-week-{game["week"]}-inactives-players-ruled-out-sunday-(?:[1-9]|1[0-6])-games-{game["season"]}',
                 parsed.path.rstrip('/')) is not None)) and not parsed.query and not parsed.fragment)
 
@@ -184,8 +184,16 @@ def _children(node):
     return [child for child in node[2] if not isinstance(child,str) or child.strip()]
 
 
+def _empty_ad(node):
+    """Only an empty, explicitly identified ad wrapper may separate a card/list."""
+    nodes = list(_nodes(node))
+    return (all(n[0] == 'div' and not any(isinstance(c,str) and c.strip() for c in n[2]) for n in nodes)
+            and sum(bool(re.fullmatch(r'ad-slot-[0-9a-f-]+', n[1].get('id',''))) for n in nodes) == 1
+            and all(not _children(n) for n in nodes if n[1].get('id','').startswith('ad-slot-')))
+
+
 class _SiblingCards:
-    def __init__(self, text, game, target):
+    def __init__(self, text, game, target, *, version=5):
         self.sections, self.errors = [], []
         tree = _Tree(text).root
         stories = [n for n in _nodes(tree) if n[0]=='section' and n[1].get('id')=='Story-1' and n[1].get('data-testid')=='Story-1']
@@ -196,6 +204,8 @@ class _SiblingCards:
         if len(containers) != 1:
             return
         blocks = _children(containers[0])
+        if version == 7:
+            blocks = [node for node in blocks if not (isinstance(node,list) and _empty_ad(node))]
         expected = [TEAM_NAMES[t].split()[-1].casefold() for t in (game['away'],game['home'])]
         for card,following in zip(blocks,blocks[1:]):
             if not isinstance(card,list) or not isinstance(following,list):
@@ -261,7 +271,8 @@ def parse_nfl_full_slate(raw, url, game, team, captured_at, *, version=4):
     if not (lower <= published < kickoff and published <= captured
             and lower <= modified < kickoff and modified <= captured):
         raise ValueError('NFL full-slate clocks are outside the capture window')
-    cards = (_SiblingCards if version == 5 and not is_nfl_full_slate_url(url,game) else _Cards)(text,game,team)
+    cards = (_SiblingCards(text,game,team,version=version)
+             if version in (5,7) and not is_nfl_full_slate_url(url,game) else _Cards(text,game,team))
     if cards.errors:
         raise ValueError(cards.errors[0])
     if len(cards.sections) != 1:

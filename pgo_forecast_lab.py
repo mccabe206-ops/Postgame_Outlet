@@ -24,6 +24,7 @@ import pgo_forecast_snapshot
 import pgo_forecast_weekly
 import pgo_prospective
 from release_ratings import atomic_write_text
+from pgo_render_state import SEASON_UNLOADED
 
 
 FORECAST_DISPLAY_SCRIPT = """<script>
@@ -311,7 +312,7 @@ def _accepted_results(raw, lock, captured_at, label):
     return accepted
 
 
-def load_results(capture_root, lock):
+def load_results(capture_root, lock, *, season_state=SEASON_UNLOADED):
     """Load immutable incremental result transcriptions, rejecting corrections."""
     root = Path(capture_root)
     if not root.exists():
@@ -360,7 +361,7 @@ def load_results(capture_root, lock):
         provenance.append(metadata)
     if root.absolute() in {CAPTURE_ROOT.absolute(), (SNAPSHOT_DIR / 'results').absolute(), (WEEKLY_DIR / 'results').absolute()}:
         from pgo_season import load_current
-        season = load_current()
+        season = load_current() if season_state is SEASON_UNLOADED else season_state
         if season:
             known = {g['game_id'] for g in lock.get('games', ())}
             for result in season['results']:
@@ -1422,7 +1423,7 @@ def _model_sensitivity(sensitivity, strength_study=None):
 
 def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, strength_study=None,
                snapshot_results=(), snapshot_provenance=(), weekly=None,
-               weekly_results=(), weekly_provenance=(), corrected=None):
+               weekly_results=(), weekly_provenance=(), corrected=None, season_state=SEASON_UNLOADED):
     """Render a standalone, escaped, no-fetch Forecast Lab page."""
     from pgo_availability_view import render_current_scenario
     from pgo_model_updates import EDITION as selected_edition, render_current_updates
@@ -1437,7 +1438,7 @@ def render_lab(lock, results, provenance, *, snapshot=None, sensitivity=None, st
     else:
         lead = _snapshot_section(snapshot, snapshot_results, snapshot_provenance)
         if weekly is not None:
-            updates = render_current_updates()
+            updates = render_current_updates(season_state=season_state)
             selected = f'data-edition="{selected_edition}"' in updates
             lead = (
                 _weekly_section(weekly, snapshot, weekly_results, weekly_provenance, corrected=corrected)
@@ -1600,13 +1601,26 @@ def main(argv=None):
                 )
         elif args.source_url:
             raise ValueError("capture metadata requires a result-recording option")
-        results, provenance = load_results(args.captures, lock)
+        # One verified season snapshot serves this render.  Every transcription
+        # and downstream result/model check still runs for its own ledger.
+        canonical_results = {CAPTURE_ROOT.absolute(), (SNAPSHOT_DIR / 'results').absolute(),
+                             (WEEKLY_DIR / 'results').absolute()}
+        result_roots = [args.captures, args.weekly / 'results']
+        if snapshot is not None:
+            result_roots.append(args.snapshot / 'results')
+        season_state = SEASON_UNLOADED
+        if (snapshot is not None or any(path.exists() and path.absolute() in canonical_results
+                                        for path in result_roots)):
+            from pgo_season import load_current
+            season_state = load_current()
+        results, provenance = load_results(args.captures, lock, season_state=season_state)
         snapshot_results, snapshot_provenance = [], []
         if snapshot is not None:
             snapshot_results, snapshot_provenance = load_results(
-                args.snapshot / "results", snapshot["lock"]
+                args.snapshot / "results", snapshot["lock"], season_state=season_state
             )
-        weekly_results, weekly_provenance = load_results(args.weekly / "results", weekly_lock)
+        weekly_results, weekly_provenance = load_results(args.weekly / "results", weekly_lock,
+                                                        season_state=season_state)
         atomic_write_text(args.output, render_lab(
             lock, results, provenance, snapshot=snapshot, sensitivity=sensitivity, strength_study=strength_study,
             snapshot_results=snapshot_results,
@@ -1615,6 +1629,7 @@ def main(argv=None):
             weekly_results=weekly_results,
             weekly_provenance=weekly_provenance,
             corrected=corrected,
+            season_state=season_state,
         ))
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
         print(f"Forecast Lab failed: {error}", file=sys.stderr)

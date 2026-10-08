@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-04T16:50:45.856151+00:00",
+  "sources": [
+    {
+      "bytes": 397518,
+      "captured_at": "2026-10-04T16:50:45.340911+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e527ba8d54bc0b7e451102f1b185377a2de5d0b0a17c538364dc7227ea7e6fba",
+      "started_at": "2026-10-04T16:50:45.273651+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 366573,
+      "captured_at": "2026-10-04T16:50:45.444276+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "676ed3e56c3afc5e5e8f347cca7e8626334647250e5e5f6e326a26de48d04dab",
+      "started_at": "2026-10-04T16:50:45.273939+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 531884,
+      "captured_at": "2026-10-04T16:50:45.554374+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "87620c8364be7310b647699ff78d14a3fa703ef19c117a0a6ec4c67a6db832d0",
+      "started_at": "2026-10-04T16:50:45.274183+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "bytes": 1588736,
+      "captured_at": "2026-10-04T16:50:45.402115+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "1a6f92e14da31ede30f284bbc615b090c1565c20709544e09ba53c0f5310d741",
+      "started_at": "2026-10-04T16:50:45.274407+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 576120,
+      "captured_at": "2026-10-04T16:50:45.774628+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.therams.com/news/colby-parkinson-and-aaron-donald-among-rams-inactives-for-week-4-2026-at-eagles",
+      "kind": "official_inactives",
+      "sha256": "36649f99c0ca9bb6ca4ba9c49a0c89ac38087d2200146ff8ca9118f7c608c69f",
+      "started_at": "2026-10-04T16:50:45.617197+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/colby-parkinson-and-aaron-donald-among-rams-inactives-for-week-4-2026-at-eagles"
+    },
+    {
+      "bytes": 344766,
+      "captured_at": "2026-10-04T16:50:45.778089+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/rams-vs-eagles-inactives-week-4-2026-zack-baun-devonta-smith",
+      "kind": "official_inactives",
+      "sha256": "3f971d7a760b7ec54c523a42b6e0c4b769c1d34a30332912c0a07d4ccbe3a157",
+      "started_at": "2026-10-04T16:50:45.617457+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/rams-vs-eagles-inactives-week-4-2026-zack-baun-devonta-smith"
+    },
+    {
+      "bytes": 899485,
+      "captured_at": "2026-10-04T16:50:45.709548+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "fafdb8619c8ad36370dddc2b562d520834167d68173c8332a5eb6d30ad258ce6",
+      "started_at": "2026-10-04T16:50:45.617700+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}

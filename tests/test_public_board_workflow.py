@@ -14,6 +14,34 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PublicBoardWorkflowTests(unittest.TestCase):
+    def test_parallel_renderers_finish_before_either_publisher_can_run(self):
+        for name, marker in (
+                ('update-board.yml', '- name: Render verified board and Forecast Lab concurrently'),
+                ('update-season.yml', '- name: Render current board and auditable archives')):
+            workflow = (ROOT / '.github/workflows' / name).read_text(encoding='utf-8')
+            with self.subTest(workflow=name):
+                before, following = workflow.split(marker, 1)
+                render_step, publication = following.split('\n      - name:', 1)
+                self.assertIn('python pgo_render_pages.py', render_step)
+                if name == 'update-season.yml':
+                    self.assertLess(render_step.index('python pgo_weekly_review.py'),
+                                    render_step.index('python pgo_render_pages.py'))
+                else:
+                    self.assertIn('python pgo_weekly_review.py', before)
+                    self.assertIn('pgo_publication_guard.py', before)
+                self.assertNotIn('continue-on-error', render_step)
+                self.assertNotIn('||', render_step)
+                self.assertNotIn('&', render_step)
+                publish_step = publication.split('\n      - name:', 1)[0]
+                self.assertIn('git push origin HEAD:main', publish_step)
+                # Default Actions success gating must skip a publisher after
+                # a nonzero renderer exit; health/alerts can still run later.
+                self.assertNotIn('always()', publish_step)
+                self.assertNotIn('continue-on-error', publish_step)
+        season = (ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
+        gate = season.split('- name: Capture verified finals', 1)[0]
+        self.assertIn('tests.test_pgo_render_pages', gate)
+
     def test_report_replay_installs_only_tested_requirements_before_guard(self):
         for name in ('update-board.yml','publish-edition.yml'):
             publisher=(ROOT/'.github/workflows'/name).read_text().split('\n  publish:',1)[1]
@@ -245,7 +273,7 @@ class PublicBoardWorkflowTests(unittest.TestCase):
             ROOT / ".github" / "workflows" / "publish-edition.yml"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("python pgo_comparison.py --refresh-mccabe", update_board)
+        self.assertIn("python pgo_render_pages.py", update_board)
         self.assertIn("python pgo_comparison.py --refresh-mccabe", publish_edition)
         self.assertNotIn("python generate_site.py --output docs/index.html", update_board)
         self.assertNotIn(

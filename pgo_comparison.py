@@ -21,6 +21,7 @@ import pgo_current_board
 import pgo_injury_source
 import snapshot
 from release_ratings import atomic_write_text, load_release_rows, rating_total
+from pgo_render_state import SEASON_UNLOADED
 
 
 HERE = Path(__file__).resolve().parent
@@ -1234,7 +1235,7 @@ def strip_current_injury_notes(page):
                   '', page, flags=re.S)
 
 
-def add_current_injury_notes(page, source_path=None):
+def add_current_injury_notes(page, source_path=None, *, season_state=SEASON_UNLOADED):
     """Annotate saved fantasy projections without changing any scoring inputs."""
     page = strip_current_injury_notes(page)
     if 'id="panel-fantasy"' not in page:
@@ -1275,7 +1276,7 @@ def add_current_injury_notes(page, source_path=None):
                   int(player["source_kind"] == "official_news" and "inactive" in status.casefold()))
 
     from pgo_season import DEFAULT_ROOT, load_current
-    season = load_current(DEFAULT_ROOT)
+    season = load_current(DEFAULT_ROOT) if season_state is SEASON_UNLOADED else season_state
     edition = re.search(r'<h2>\s*(\d{4}) Week (\d+) Fantasy Rankings\s*</h2>', page)
     if season is not None and edition:
         availability = [game.get("availability") for week in season.get("weeks", []) for game in week["games"]]
@@ -1350,7 +1351,7 @@ def add_current_injury_notes(page, source_path=None):
     return page
 
 
-def inject_fantasy_preview(existing_html, panel_html):
+def inject_fantasy_preview(existing_html, panel_html, *, season_state=SEASON_UNLOADED):
     if (
         'id="tab-fantasy"' in existing_html
         or 'id="panel-fantasy"' in existing_html
@@ -1401,7 +1402,7 @@ def inject_fantasy_preview(existing_html, panel_html):
         comparison_panel, comparison_panel + "\n" + panel_html, 1
     )
     output = output.replace("</body>", FANTASY_SCRIPT + "\n</body>", 1)
-    return add_current_injury_notes(output)
+    return add_current_injury_notes(output, season_state=season_state)
 
 
 def extract_comparison_panel(existing_html):
@@ -1751,7 +1752,7 @@ def _refresh_comparison_panel(panel_html, mccabe_rows, source_timestamp):
     return _refresh_comparison_metadata(refreshed, source_timestamp)
 
 
-def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
+def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH, *, season_state=SEASON_UNLOADED):
     existing_html = pgo_current_board.strip_current_board(existing_html)
     mccabe_rows = load_mccabe_rows(mccabe_path)
     fantasy_panel = _extract_published_fantasy_panel(existing_html)
@@ -1790,7 +1791,8 @@ def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH):
     )
     output = inject_comparison(base_html, panel)
     if fantasy_panel is not None:
-        output = inject_fantasy_preview(output, _upgrade_fantasy_league_controls(fantasy_panel))
+        output = inject_fantasy_preview(output, _upgrade_fantasy_league_controls(fantasy_panel),
+                                        season_state=season_state)
     return add_rating_explanations(output) if had_explanations else output
 
 
@@ -1902,6 +1904,10 @@ def main(argv=None):
         if not (args.publish or args.refresh_mccabe) and preview_root not in output.parents:
             raise ValueError("Comparison output must stay under output/")
 
+        # Validate the immutable archive once, then share that exact snapshot
+        # across the current board and fantasy annotations in this render.
+        from pgo_season import load_current
+        season_state = load_current()
         fantasy_preview = None
         comparison_rows = receipt = None
         if args.fantasy_preview is not None:
@@ -1916,6 +1922,7 @@ def main(argv=None):
             preview = inject_fantasy_preview(
                 PUBLIC_OUTPUT.read_text(encoding="utf-8"),
                 render_fantasy_panel(fantasy_preview),
+                season_state=season_state,
             )
         else:
             config = generate_site.load_config()
@@ -1927,7 +1934,7 @@ def main(argv=None):
             base_html = generate_site.build_html(site_rows, config)
             if args.refresh_mccabe:
                 preview = refresh_mccabe_page(
-                    base_html, PUBLIC_OUTPUT.read_text(encoding="utf-8")
+                    base_html, PUBLIC_OUTPUT.read_text(encoding="utf-8"), season_state=season_state
                 )
             else:
                 comparison_rows, receipt = load_comparison_rows(
@@ -1941,7 +1948,7 @@ def main(argv=None):
                     render_comparison_panel(comparison_rows, receipt),
                 )
         preview = add_rating_explanations(preview)
-        preview = pgo_current_board.add_current_board(preview)
+        preview = pgo_current_board.add_current_board(preview, season_state=season_state)
         preview = inject_record_block(preview)
         atomic_write_text(output, preview)
     except (csv.Error, KeyError, OSError, TypeError, ValueError) as error:

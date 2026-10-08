@@ -1,0 +1,101 @@
+{
+  "checked_at": "2026-10-04T16:50:47.349429+00:00",
+  "sources": [
+    {
+      "bytes": 397518,
+      "captured_at": "2026-10-04T16:50:46.232026+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e527ba8d54bc0b7e451102f1b185377a2de5d0b0a17c538364dc7227ea7e6fba",
+      "started_at": "2026-10-04T16:50:46.160413+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 444101,
+      "captured_at": "2026-10-04T16:50:46.523363+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.buffalobills.com/news/",
+      "kind": "team_news",
+      "sha256": "31c6f68fec45fb28b6782c2f90a3bf157d8ced5a8209d7dfd7a365a2c723ef03",
+      "started_at": "2026-10-04T16:50:46.160662+00:00",
+      "status": 200,
+      "team": "BUF",
+      "url": "https://www.buffalobills.com/news/"
+    },
+    {
+      "bytes": 1815354,
+      "captured_at": "2026-10-04T16:50:46.404896+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.patriots.com/news/",
+      "kind": "team_news",
+      "sha256": "47a8d9b96ad57a7de610340f531721c48ac86d9da600d691646a5164392ad051",
+      "started_at": "2026-10-04T16:50:46.160947+00:00",
+      "status": 200,
+      "team": "NE",
+      "url": "https://www.patriots.com/news/"
+    },
+    {
+      "bytes": 1588736,
+      "captured_at": "2026-10-04T16:50:46.301688+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "1a6f92e14da31ede30f284bbc615b090c1565c20709544e09ba53c0f5310d741",
+      "started_at": "2026-10-04T16:50:46.161126+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 638198,
+      "captured_at": "2026-10-04T16:50:46.962478+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-patriots-week-4",
+      "kind": "official_inactives",
+      "sha256": "63f1ed64133b515d8ae226c1e29b678b85f2b3ab17a01c6d797cb92df031b21c",
+      "started_at": "2026-10-04T16:50:46.623251+00:00",
+      "status": 200,
+      "team": "BUF",
+      "url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-patriots-week-4"
+    },
+    {
+      "bytes": 418884,
+      "captured_at": "2026-10-04T16:50:46.780299+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.patriots.com/news/week-4-inactives-patriots-at-bills",
+      "kind": "official_inactives",
+      "sha256": "92d4b935944a7d20fffd680ff5e3a30e4622f5ed2ffeb10e3e34740c0a07429d",
+      "started_at": "2026-10-04T16:50:46.623517+00:00",
+      "status": 200,
+      "team": "NE",
+      "url": "https://www.patriots.com/news/week-4-inactives-patriots-at-bills"
+    },
+    {
+      "bytes": 438200,
+      "captured_at": "2026-10-04T16:50:47.255955+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.patriots.com/news/inactives-analysis-dre-mont-jones-craig-woodson-and-eli-raridon-return-for-sunday-s-afc-east-matchup-vs-the-bills",
+      "kind": "official_inactives",
+      "sha256": "1dcc1a660245a226ba40369395d353ae6c2b999b54ec7c6bcecd90443e5e437d",
+      "started_at": "2026-10-04T16:50:46.623761+00:00",
+      "status": 200,
+      "team": "NE",
+      "url": "https://www.patriots.com/news/inactives-analysis-dre-mont-jones-craig-woodson-and-eli-raridon-return-for-sunday-s-afc-east-matchup-vs-the-bills"
+    },
+    {
+      "bytes": 899485,
+      "captured_at": "2026-10-04T16:50:46.743620+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "fafdb8619c8ad36370dddc2b562d520834167d68173c8332a5eb6d30ad258ce6",
+      "started_at": "2026-10-04T16:50:46.624077+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-04T16:50:42.237443+00:00",
+  "sources": [
+    {
+      "bytes": 397518,
+      "captured_at": "2026-10-04T16:50:41.581267+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e527ba8d54bc0b7e451102f1b185377a2de5d0b0a17c538364dc7227ea7e6fba",
+      "started_at": "2026-10-04T16:50:41.507542+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 501500,
+      "captured_at": "2026-10-04T16:50:41.815896+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "7d361f8f7dbfd303fd1320f8c5c9281f7d0aca4481907c107a13a11715a206ec",
+      "started_at": "2026-10-04T16:50:41.507791+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 869711,
+      "captured_at": "2026-10-04T16:50:41.865574+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.houstontexans.com/news/",
+      "kind": "team_news",
+      "sha256": "523c9580ea0741a19932a77569e85edb453bba6b233367c7a274acaf131691c1",
+      "started_at": "2026-10-04T16:50:41.508058+00:00",
+      "status": 200,
+      "team": "HOU",
+      "url": "https://www.houstontexans.com/news/"
+    },
+    {
+      "bytes": 1588736,
+      "captured_at": "2026-10-04T16:50:41.641387+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "1a6f92e14da31ede30f284bbc615b090c1565c20709544e09ba53c0f5310d741",
+      "started_at": "2026-10-04T16:50:41.508256+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 475214,
+      "captured_at": "2026-10-04T16:50:42.161524+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.houstontexans.com/news/texans-inactives-week-4-vs-dallas-cowboys",
+      "kind": "official_inactives",
+      "sha256": "dbc904f4cbc92153dad929ead02fc9e7620b41d83518321f458ed8fbe121902e",
+      "started_at": "2026-10-04T16:50:41.933698+00:00",
+      "status": 200,
+      "team": "HOU",
+      "url": "https://www.houstontexans.com/news/texans-inactives-week-4-vs-dallas-cowboys"
+    },
+    {
+      "bytes": 899485,
+      "captured_at": "2026-10-04T16:50:42.040264+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026",
+      "kind": "official_inactives",
+      "sha256": "fafdb8619c8ad36370dddc2b562d520834167d68173c8332a5eb6d30ad258ce6",
+      "started_at": "2026-10-04T16:50:41.933976+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-4-inactives-players-ruled-out-sunday-14-games-2026"
+    }
+  ]
+}
