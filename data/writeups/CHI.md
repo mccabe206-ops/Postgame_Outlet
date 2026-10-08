@@ -1,3 +1,50 @@
+## Week 4: vs N.Y. Jets (W 23–12)
+
+A third quarterback, a third win, and the most lopsided box score of the week. Chicago out-gained the
+Jets **492–157**, had **34 first downs to 7**, and held the ball for **42:45**. The box says the Bears
+"should" have scored ~35, not 23:
+- Two **D'Andre Swift** goal-line touchdowns were reversed on replay on the opening drive.
+- Two turnovers in Jets territory set up both New York field goals.
+
+**Tyson Bagent** made his first start since 2023 and was poised against the pressure: **25-of-34 for a
+career-high 268**, one INT. That's a **79.8 PFF passing grade (8th of 33 Week 4 QBs)** and a 75.1 QBR.
+Ben Johnson even lined up **both Bagent and Case Keenum** for the first snap. Rookie **Kyle Monangai**
+carried **30 times for 146 yards and two TDs**, RT **Darnell Wright (83.4)** led the line, and **Rome
+Odunze** and **Luther Burden III** both graded near 80. The defense was dominant for a third straight
+week: **157 yards, 7 first downs, 0-for-7 on third down**. Over the last three games it has allowed 9, 7
+and 12 points.
+
+**Injuries** (depth string: original slot → effective slot):
+- **QB Caleb Williams** (**right hamstring**) — **Starter → out** again in Week 5. **Tyson Bagent** went
+  **3rd string → effective starter**, and **Johnson has named him the starter** at Green Bay. **Case
+  Keenum** (2nd string, the Week 3 fill-in) is back to backup.
+- **LT Braxton Jones** (**knee**) — **Starter → injured reserve.** **Theo Benedet** went **2nd string →
+  effective starter** and was solid (71.0).
+- **RB D'Andre Swift** (**hip/knee**) — **Starter.** DNP Wednesday after an 89-snap day.
+- **RB Kyle Monangai** (**thumb/toe**) — **2nd string → effective lead back.** Also DNP Wednesday.
+- **OL Joe Thuney** (**pec**), **Darnell Wright** (**ankle**) and **Jonah Jackson** (**ankle**) —
+  **Starters → DNP Wednesday.** Thursday's report will show how much is soreness.
+- **Nickel Kyler Gordon** (**calf**) — **Starter → out**, but a full participant and nearing a return.
+  **Malik Muhammad** is **2nd string → effective starter**.
+- **S Coby Bryant** (knee surgery, IR) — **Starter → out.** **Xavier Woods** is **2nd string →
+  effective starter**.
+
+**What changed:**
+- **QB: Keenum (−2.5) → Bagent at −1.5 (+1.0).** Bagent is now the active starter, and Ben Johnson
+  confirmed him for Green Bay. He's graded at the top of the backup band. Here's why: his first start
+  was top-10 (25-of-34, 268 yards, 79.8 PFF, 8th of the week); he has real NFL starts and wins; and he
+  runs one of the league's best-designed offenses. Chicago is 3–1 with three different quarterbacks,
+  which says the scheme carries more than the name under center. Caleb's +3.0 stays parked on the QB
+  list until he's back.
+- **Offense +1.0 held:** the pre-set −0.1 for Braxton Jones landing on IR is offset by a dominant line
+  and run game. Those produced a 35-point box with a backup QB. *(Watch: Thuney, Wright, Jonah Jackson,
+  Swift and Monangai all missed Wednesday's practice. That's likely rest after 89 snaps, but it's on
+  the watch list.)*
+- **Defense −0.5 → +0.1 (+0.6 total; +0.3 after Week 4 film, +0.3 more on review):** three straight
+  elite performances, without Gordon or Bryant, against three different offenses. Holding Philadelphia
+  to 7 and the Jets to 12 isn't a fluke anymore. It's the identity of this team.
+- **New total −2.0 → −0.7.**
+
 ## Week 3: vs Philadelphia (W 27–7)
 
 No Caleb, no problem. **Case Keenum** made his first start and the Bears **beat Philadelphia by 20**
@@ -49,15 +96,12 @@ the Bears' own defense gave up 37 and 361 passing to a Panthers team missing bot
 
 ## The current rating
 
-Chicago's current number uses Case Keenum at quarterback, lowering the team despite the Week 1
+Chicago's current number uses Tyson Bagent at quarterback, lowering the team despite the Week 1
 offensive showing. The defense remains below average.
 
 ## Quarterback
 
-Case Keenum (−2.5) is the selected quarterback while Caleb Williams is unavailable — up from −4.5 after a clean Week 3 start and a re-grade to backup level (proven veteran in Ben Johnson's offense). Williams's
-earlier +3.0 grade remains his own player value; it is not the quarterback component in the
-current Chicago team rating. Keenum is a bridge option, and the gap between the two drives the
-drop from the Week 1 team number.
+Tyson Bagent (−1.5) is the selected quarterback while Caleb Williams (right hamstring) is unavailable. He took over from Case Keenum in Week 4 and was named the Week 5 starter after a poised first start (25-of-34, 268 yards, 79.8 PFF). He's graded at the top of the backup band — a proven backup with a top-10 start in Ben Johnson's offense — which keeps the drop from Caleb much smaller than the names suggest. Williams's +3.0 grade remains his own player value; it is not the quarterback component in the current Chicago team rating.
 
 ## What moved the number
 

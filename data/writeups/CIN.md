@@ -1,3 +1,44 @@
+## Week 4: vs Jacksonville (L 17–22)
+
+Cincinnati won the box and lost the game. The Bengals **out-gained Jacksonville 437–323**, the model had
+them by about five, and they **under-performed their expected score by ~12**. The difference was two Joe
+Burrow interceptions, one converted into a Jaguars touchdown and the other **in the red zone**. Then came a
+last-minute 4th-and-10 dump-off that **Chase Brown** couldn't get past the sticks on. **Burrow** threw for
+**428 yards** (39-of-54, a TD, plus a sneak for a score), his eighth career 400-yard game. That earned a
+**79.6 PFF passing grade (9th of 33)**, but a 48.0 QBR. **Tee Higgins (89.9 PFF)** caught 11 for 151.
+Up front, **Jonathan Allen (80.7)** and **Dexter Lawrence (76.4, sack)** got home. The defense held a
+clean Jaguars offense to 22, but CB **DJ Turner II** (40.9) was a target.
+
+**Injuries** (depth string: original slot → effective slot):
+- **WR Ja'Marr Chase** (**concussion**) — **Starter (WR1) → left the game.** He took a hit to the head (a
+  facemask penalty) early in the second quarter. He's in the protocol, was **DNP Wednesday**, and must
+  log a full practice to play at Miami.
+- **WR Tee Higgins** (**groin**, neck added) — **Starter (WR2) → hurt in the fourth quarter.** Also DNP
+  Wednesday.
+- **WR Mitchell Tinsley** — **3rd string → effective starter.** Colbie Young (knee) missed Week 4, and
+  Andrei Iosivas is on IR.
+- **S Bryan Cook** (**ankle**) — **Starter → DNP Wednesday.** **PJ Jules** went **2nd string → effective
+  starter**.
+- **S Kyle Dugger** (**quad**) — **2nd string (rotational) → not expected to practice this week.**
+- **NT Dexter Lawrence** (**wrist**) and **LB Barrett Carter** (**ankle**) — **Starters → limited.**
+- **DT B.J. Hill** (**Achilles**) — **Starter.** He practiced fully for the first time in three weeks and
+  is on track to return Sunday.
+- Cincinnati's **bye is Week 6**.
+
+**What changed:** nothing yet. **All three components held (total 5.4).**
+- **Burrow +5.0:** 428 yards and a top-10 grade. The two picks are the story of the loss, not of his
+  level.
+- **Offense +0.7 held for now, with a Week 5 condition (applied off Friday's injury report).**
+  The offense moved the ball at will, and the box says ~29 points. **Ja'Marr Chase out → offense
+  −0.5. Tee Higgins out → another −0.5.** That's the same for each, and the two compound. Chase is one
+  of the elite receivers in the league. Higgins would be a WR1 on many teams. Losing both turns one of
+  the best receiver rooms in the NFL into one of the worst: WR3 Andrei Iosivas is on IR (thumb), Colbie
+  Young is hurt (knee), and 3rd-stringer Mitchell Tinsley was already playing starter snaps in Week 4.
+  With both out, the offense goes 0.7 → −0.3. Both injuries are short-term with a bye right behind
+  them, so this is an availability call, not a talent cut. They'll be restored on return.
+- **Defense −0.3 held:** 22 allowed and a strong interior rush. Hill's return and the safety injuries
+  roughly offset.
+
 ## Week 3: at Pittsburgh (L 27–30)
 
 **Joe Burrow was the best quarterback in football this week and Cincinnati lost anyway.** He went

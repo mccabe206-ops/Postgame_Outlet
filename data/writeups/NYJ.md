@@ -1,3 +1,41 @@
+## Week 4: at Chicago (L 12–23)
+
+The Jets' worst performance of the season, and the 23–12 score flattered them. Chicago out-gained New
+York **492–157**, had **34 first downs to 7**, and held the ball for **42:45**. The Jets went **0-for-7 on
+third down**, and the box had the Bears scoring ~35. **Geno Smith** barely got the ball: 8-of-15 for 119
+on just **32 offensive snaps**. His one highlight was a 58-yard TD to **Isaiah Williams** late. The
+defense kept it close for a while:
+- **Minkah Fitzpatrick** returned with an interception.
+- **Jamien Sherwood** forced a fumble.
+- Two goal-line stands held after replay reversed two Bears touchdowns.
+
+But a unit on the field for **93 snaps** finally gave way to **232 rushing yards**. Individually it graded
+well (**T'Vondre Sweat 92.5**, **Dane Belton 87.6**, Sherwood 86.2). Rookie RT **Armand Membou (90.4)**
+continues to look like a cornerstone.
+
+**Injuries** (depth string: original slot → effective slot):
+- **RB Breece Hall** (**quad**) — **Starter → out.** **Braelon Allen** is **2nd string → effective
+  starter**.
+- **LG Dylan Parham** (**knee**) — **Starter → out.** **Jordan Meredith** is **2nd string → effective
+  starter**.
+- Hall and Parham were both DNP Wednesday, and Aaron Glenn calls them **week-to-week**.
+- **WR Adonai Mitchell** (**finger**) — **Starter → out**, week-to-week. **Isaiah Williams** went **2nd
+  string (slot) → effective starter**.
+- **WRs Tim Patrick** (groin), **Omar Cooper** (ankle) and **Arian Smith** (knee) — **2nd/3rd string →
+  all on IR.** The receiver room behind Garrett Wilson is nearly empty.
+- **Nickel Jarvis Brownlee Jr.** — **Starter → concussion protocol.** **D'Angelo Ponds** (3rd string)
+  is next up.
+- **S Minkah Fitzpatrick** — **Starter, back** from his groin strain. He played every snap.
+
+**What changed:**
+- **Geno −1.5 held:** 15 passes on 32 snaps isn't a sample. He's been mistake-free all year.
+- **Offense −0.9 → −1.1 (−0.2):** seven first downs, and now the receiver room is down to its third
+  through fifth options. That's on top of the Hall and Parham absences already priced in on Oct. 4.
+- **Defense +0.3 → +0.1 (−0.2):** 492 yards and 34 first downs allowed is a real dent, especially against
+  the run. The cut stays small because the individual grades were strong and the offense left the unit on
+  the field all day.
+- **New total −2.1 → −2.5.**
+
 ## Week 3: at Detroit (L 24–31)
 
 Another one-score loss, and another game the Jets were right in. New York trailed 24–10 early in

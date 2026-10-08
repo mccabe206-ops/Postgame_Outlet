@@ -1,3 +1,40 @@
+## Week 4: at Carolina (L 26–32)
+
+Detroit's offense did nearly everything right except finish, and its defense did very little
+right. This was a turnover-free shootout with nearly identical yardage (**DET 452, CAR 445**), and
+the box had it about even (~35–33 CAR). The Lions **kicked five field goals** (Jake Bates),
+went **2-for-4 in the red zone** and 4-of-12 on third down, and ran for just **46 yards**. That's
+the gap between 26 and the ~33 they "earned." **Jared Goff** was terrific: 32-of-52 for **412
+yards**, 1 TD, no interceptions (**85.9 PFF passing grade, 4th of 33 QBs**; 71.3 QBR). That's
+still zero interceptions through four games. **Sam LaPorta (85.7)** and **Christian Mahogany
+(85.1)** led the offense. **Jahmyr Gibbs** was bottled up (57.4). On defense, **Aidan
+Hutchinson** was dominant (**90.2, eight pressures**) and **Alim McNeill** added seven pressures and
+a sack, but the coverage behind them broke down again. A Carolina offense without either starting
+tackle put up 445 yards, 28 first downs and 3-of-4 in the red zone (**Christian Izien 48.8, D.J.
+Reed 52.2** in coverage).
+
+**Injuries** (depth string: original slot → effective slot):
+- **CB Rock Ya-Sin** (**hamstring**) — **Starter (RCB) → left early, could miss time** (Dan Campbell).
+  **Ennis Rakestraw Jr.** went **2nd string → effective starter** (31 snaps, 51.0).
+- **S Brian Branch** (**Achilles**, PUP) — **Starter → still out**, but **"hopeful" to return to
+  practice this week**, the first real sign the secondary gets help.
+- **S Kerby Joseph** (**knee**, PUP) — **Starter → out indefinitely.** With both starting safeties out,
+  **Chuck Clark** and **Christian Izien** (48.8 in coverage) are **2nd string → effective starters**.
+- **S Thomas Harper** (**ankle**, IR) — **role unclear (safety depth) → out until ~Week 7 at the
+  earliest.**
+- **CB Avonte Maddox** (**foot surgery**) — **role unclear (CB depth) → IR.**
+- **DE DJ Wonnum** (**back**) — **Starter (ROLB, 36 snaps) → questionable.**
+- **OL Cade Mays** (**wrist fracture**) — **2nd string (reserve lineman) → IR.**
+
+**What changed: nothing. All three components held (total 1.5).**
+- **QB Goff held at +2.0:** he was terrific — 412 yards, no interceptions all season, and a top-five
+  passing grade (85.9, 4th of 33). That's noted, and it's a reason to watch him for a raise. But it
+  was against a struggling Carolina defense in a loss, and Detroit stays where it is this week.
+- **Offense held at +1.5:** 452 yards and 24 first downs. The 26 points was red-zone and kicking
+  regression, not a talent drop.
+- **Defense held at −2.0:** another bad coverage day, but the number already sits low. Branch's
+  return to practice is the first restore signal, and Ya-Sin's hamstring roughly offsets it for now.
+
 ## Week 3: vs NY Jets (W 31–24)
 
 Detroit got back in the win column, 31–24, but it needed a late answer. The Lions led 24–10
@@ -52,7 +89,7 @@ Detroit's rating is offense-led — a good quarterback fronting one of the leagu
 
 ## Quarterback
 
-Jared Goff (+2.0) is an above-average grade — a precise, high-volume passer perfectly fit to this scheme.
+Jared Goff (+2.0) is the selected quarterback, held after a 412-yard Week 4 at Carolina — four straight quality games with no interceptions all season. He's a precise, high-volume passer perfectly fit to this scheme. He's playing at or above this grade, and he's on watch for a raise.
 
 ## What moved the number
 

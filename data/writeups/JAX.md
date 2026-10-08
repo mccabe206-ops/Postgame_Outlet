@@ -1,3 +1,44 @@
+## Week 4: at Cincinnati (W 22–17)
+
+A win Jacksonville would have lost a year ago, and it was more about the defense's timing than about
+controlling the game. Cincinnati **out-gained the Jaguars 437–323**, and the box had the Bengals by about
+five. But Jacksonville was **turnover-free** and took the ball away twice from Joe Burrow, once in the red
+zone. It then made a second red-zone stand: S **Rayuan Lane III** stopped Chase Brown a yard short on 4th-
+and-10 with 50 seconds left. **Trevor Lawrence** was clean and low-volume: **18-of-23, 227 yards, a TD, no
+turnovers** (70.8 PFF, 60.6 QBR). It was his first career win over Burrow. Rookie **Bhayshul Tuten (87.6
+PFF)** was the best player on the offense. **Chris Rodriguez Jr.** broke a 25-yard TD, and **Brian Thomas
+Jr.** scored. **Travis Hunter (86.4)** played all 76 defensive snaps at corner and was excellent in
+coverage. LBs **Foyesade Oluokun** and **Ventrell Miller** both graded in the mid-to-high 70s.
+
+**Injuries** (depth string: original slot → effective slot):
+- **S Eric Murray** (**concussion**) — **Starter → DNP Wednesday.**
+- **S Caleb Ransaw** (**knee**) — **2nd string → left the game → IR.** **Rayuan Lane III** is now **2nd
+  string → effective starter**, with rookie **Jalen Huskey** (3rd string) next. The safety room is thin
+  for **Week 5 vs Philadelphia in London**.
+- **CB Montaric Brown** (**hamstring**) — **Starter → missed Week 4**, limited Wednesday. **Jarrian
+  Jones** went **2nd string → effective starter**.
+- **Nickel Jourdan Lewis** (**hamstring**) — **Starter → limited Wednesday.**
+- **DT DaVon Hamilton** (foot), **Josh Hines-Allen** (groin) and **Anton Harrison** (elbow) —
+  **Starters → limited.**
+- **OL Patrick Mekari** (back surgery, IR) — **Starter → out.**
+
+**What changed (4.3 → 4.8): Defense +0.3 → +0.8 (+0.5).** QB and offense held.
+- **Defense +0.3 → +0.8:** this isn't about one game's points allowed. It's the pattern across four
+  opponents. Jacksonville has held its opponents **about 9 points below what those same teams score
+  in their other games**: Cleveland (3–1) to 10, New England to 6 (a week before the Patriots put 29
+  on Buffalo), and Cincinnati to 17 (a week after the Bengals scored 27 at Pittsburgh). Only Denver
+  scored above its norm. The yardage is more ordinary. Denver and Cincinnati both gained more than they
+  usually do, and **8 takeaways in four games** plus repeated red-zone stands will not hold at this
+  rate. That's why this is +0.8 and not a top-of-the-league number. But **Travis Hunter** is
+  covering like a shutdown corner, **Oluokun** and **Miller** are playing at a high level, and the
+  run defense is still the identity. Three strong results out of four is a trend.
+- **Watch:** the safety room is down to backups for London (Murray concussion, Ransaw IR). **If Murray
+  misses Week 5, the defense comes down 0.1.**
+- **Lawrence +3.5 held:** efficient and mistake-free on the road. He was a mid-pack grader this week, so
+  there's no move either way.
+- **Offense +0.5 held:** the offense landed on its expected score (~24) with no turnovers. The interior line
+  (Hainsey, Cleveland) remains the weakness.
+
 ## Week 3: vs New England (W 35–6)
 
 Jacksonville bounced back with a 35–6 rout, and it came from **finishing and taking the ball away**

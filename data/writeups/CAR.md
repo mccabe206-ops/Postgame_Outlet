@@ -1,3 +1,35 @@
+## Week 4: vs Detroit (W 32–26, Sunday night)
+
+**Bryce Young** had his best game of the year in a turnover-free Sunday-night shootout, and
+Carolina heads into its bye at 2–2. The yardage was nearly even (**CAR 445, DET 452**), but the
+Panthers went **3-for-4 in the red zone** while Detroit kicked five field goals. They held the ball
+for **33:15** and survived two missed PATs. Young was 29-of-41 for 329 yards, 2 TDs and no
+interceptions (**88.1 PFF passing grade, 3rd of 33 QBs**; 85.4 QBR), and he did it behind a
+patchwork line still missing both starting tackles. **Tetairoa McMillan** (93.5 on PFF) caught both
+touchdowns (32 and 10 yards), **Chuba Hubbard** (81.6) ran for two more, and **John Metchie** (81.3)
+chipped in. The defense gave up 452 yards to an elite offense but forced Detroit into field
+goals. **Pat Jones II** (seven pressures) and **Princely Umanmielen** (six pressures, a sack)
+pressured Goff, but the cornerback room without **Jaycee Horn** and **Mike Jackson** got picked on
+(Akayleb Evans 28.6 in coverage).
+
+**Injuries** (depth string: original slot → effective slot):
+- **CB Jaycee Horn** (**torn quad**, IR) and **CB Mike Jackson** (**groin**, IR) — **both Starters →
+  out.** **Will Lee III** and **Akayleb Evans** are **2nd string → effective starters** (71 snaps each).
+- **LT Ikem Ekwonu** (**knee**, PUP) and **RT Taylor Moton** (**blood clots in his lung**, PUP) — **both
+  Starters → out.** **Rasheed Walker** (LT) and **Monroe Freeling/Stone Forsythe** (RT) are 2nd string
+  → effective starters. **Moton and DT Tershawn Wharton** (**neck**, Starter) could be cleared coming
+  out of the Week 5 bye. Ekwonu's knee is a longer road.
+- **QB Bryce Young** — **Starter**; his Week 3 lower-body injury is a non-issue. He played all 75 snaps.
+
+**What moved the number:**
+- **QB Young +1.0 → +1.5 (+0.5):** three strong games out of four, including a top-three passing
+  grade this week, with no starting tackles. He's earned the grade of a solid above-average starter.
+- **Offense −0.6 → −0.3 (+0.3):** 445 yards and 32 points. The bump is held down because Detroit's
+  defense is one of the league's worst, and it rises further when Moton and Ekwonu return.
+- **Defense held at −0.6:** it allowed 452 to an elite offense, and the cornerback losses are
+  already priced in.
+- **New total −0.2 → +0.6.**
+
 ## Week 3: at Cleveland (L 18–21)
 
 A loss Carolina mostly gave away. The Panthers **out-gained Cleveland 360–259** and the box score
@@ -58,9 +90,7 @@ are trending up, while the defense is now the drag.
 
 ## Quarterback
 
-Bryce Young (+0.5 → +1.0) climbs after the best kind of Week 1: 361 yards, three touchdown
-passes and a rushing score while playing behind a patchwork line. The model has warmed to him,
-and putting up that line without his tackles is exactly the evidence it wanted.
+Bryce Young (+1.5) is the selected quarterback after his best game of the year (29-of-41, 329 yards, 2 TDs, 0 INT vs Detroit). He climbed from +0.5 to +1.0 after Week 1 and to +1.5 after Week 4, and he has done it behind a patchwork line missing both starting tackles.
 
 ## What moved the number
 

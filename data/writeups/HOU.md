@@ -1,3 +1,35 @@
+## Week 4: vs Dallas (L 30–34)
+
+Houston is **0–4**, and this was the most painful loss yet: a **16–6 halftime lead** blown at home, then
+a go-ahead Woody Marks touchdown with 2:23 left undone by a Dak → CeeDee Lamb TD at 0:40. The box-score
+model had Dallas by about 5, so this wasn't bad luck. The yardage was even (399–397) and neither side
+turned it over, but Dallas ran **28 first downs to Houston's 16**. The Texans also beat themselves with
+**13 penalties for 90 yards** and went 3-of-10 on third down.
+
+The good news is the quarterback. With **Nico Collins back** (7 catches, 118 yards, 2 TD), **C.J. Stroud
+had his best game of the year**: 21-of-31, 347 yards, 2 TD, 0 INT, a **126.7 passer rating** and a
+**91.8 PFF grade, best of 33 Week 4 QBs**. His QBR (54.8) was lower because the offense ran only 55
+snaps. The line remains the problem: RG Ed Ingram (38.6), C Evan Brown and LT Aireontae Ersery all
+graded poorly.
+
+**Injuries** (depth string: original slot → effective slot):
+- **CB Jaylin Smith** (**hamstring**) — **2nd string → left in the 2nd quarter → IR.**
+- **DT Jaden Crumedy** (**shoulder**) — **2nd string (rotational) → hurt**, status unclear.
+- **LB Henry To'oTo'o** (**shoulder**, IR) and **LB E.J. Speed** (**quad**, PUP) — **Starters → still
+  out.** **Jake Hansen** and **Kenneth Murray** are **2nd string → effective starters**, so the
+  linebacker room is a full layer deep into its depth chart.
+
+**What moved the number:**
+- **Defense +2.0 → +1.5 (−0.5):** a full half-point. The strength of this team gave up **34 points and
+  28 first downs** to a Dallas offense missing its All-Pro guard, and it blew a 16–6 halftime lead at
+  home. Will Anderson Jr. (86.0, 7 pressures) is still elite, but the coverage behind Derek Stingley
+  graded poorly (Lassiter 49.4, Bullock 49.6), and both starting linebackers are out, with backups
+  playing every down. It's still an above-average unit, but not a +2.0 one right now.
+- **QB Stroud held at +0.5:** the best-graded game of the week, with the wins blocked by what's around
+  him rather than by him. If he keeps grading like this, there's room above his number.
+- **Offense held at +0.3:** Nico's return (+1.0) was already applied before kickoff.
+- **New total +2.8 → +2.3.**
+
 ## Week 3: at Indianapolis (L 17–19)
 
 Houston dropped to 0–3 on a 53-yard field goal with 16 seconds left, and it's hard to lose a

@@ -1,3 +1,29 @@
+## Week 4: vs Pittsburgh (W 27–24)
+
+The Browns are **3–1** after another one-score win. **Andre Szmyt** won it with a **56-yard field
+goal with 10 seconds left**, two minutes after Pittsburgh tied it. The box called it even (24–24
+expected), and Cleveland's 3-point edge is basically that kick. The Browns built it with 21 straight
+second-quarter points. Jaleel McLaughlin ran 28 yards for one score, Quinshon Judkins went in from
+2, and Deshaun Watson hit Harold Fannin Jr. for another. **Watson** played his best game of the
+year: 24-of-33 for 268 yards, 1 TD and 1 INT (94.0 rating, 53.4 QBR, 74.3 PFF grade, 13th of 33),
+and he drove them into range for the winner. The offensive line won its matchup against Watt and
+Heyward and allowed only 2 sacks. Backup RG **Austin Barber** (2nd string → effective starter with
+Teven Jenkins out a 4th straight game) graded 82.6. Denzel Boston had 4 catches for 89.
+
+The cost: **DT Mason Graham (starter, team sack leader with 4)** went down on Pittsburgh's opening
+drive with a **left MCL sprain and ankle sprain**. He's **week-to-week, expected to miss a few
+weeks**. Michael Hall Jr. moves from 2nd string to effective starter. CB **Tyson Campbell** is back
+from his hip/ankle injury (70 snaps). S **Grant Delpit (starter)** is questionable with a shoulder
+injury.
+
+- **Watson −2.5 → −2.2 (+0.3):** a clean, productive game and a game-winning drive. That makes two
+  good games out of four. It stays a small move because his process has swung wildly week to week.
+- **Offense −0.8 → −0.6 (+0.2):** the line held up against an elite front, and the young
+  receivers keep producing.
+- **Defense +0.5 → +0.3 (−0.2):** losing Graham for a few weeks takes away the interior rush.
+- **New total −2.8 → −2.5.** The record (3–1) still runs ahead of the rating. All three wins were
+  one-score games the box called close.
+
 ## Week 3: vs Carolina (W 21–18)
 
 A second straight comeback win, though the box score says Cleveland was fortunate: Carolina
@@ -49,7 +75,7 @@ Cleveland grades poorly, and it is almost entirely the quarterback. The defense 
 
 ## Quarterback
 
-Deshaun Watson (-2.5) is the selected quarterback after improving from -3.0 in Week 2. His 24-of-30, 238-yard, two-touchdown game at Tampa Bay supported the increase; the Week 1 concern remains historical context.
+Deshaun Watson (−2.2) is up from −2.5 after his best game of 2026 in the Week 4 win over Pittsburgh (24-of-33, 268 yards, 94.0 rating, 74.3 PFF grade) and the game-winning drive. His week-to-week process has been volatile, which is why the move is small.
 
 ## Quarterback: through Week 1 2026 (historical)
 

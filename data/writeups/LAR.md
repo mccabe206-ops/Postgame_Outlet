@@ -1,3 +1,42 @@
+## Week 4: at Philadelphia (W 24–20)
+
+The Rams **were much better than a four-point win.** They **out-gained Philadelphia 415–172**, held the
+Eagles to **0-for-12 on third down** and **zero second-half points**, and the box-score model had them
+winning by about 15 (28–13). They trailed 20–10 at halftime anyway. **Two Matthew Stafford
+interceptions** and **8 penalties for 100 yards** kept the Eagles alive until **Kyren Williams scored
+twice in the final four minutes** (1 yard, then 7 yards at 1:10).
+
+**Puka Nacua is back:** 9 catches, 125 yards and a rushing touchdown in his return from the hip/groin
+injury. **Tyler Higbee** (82.9) and Kyren (80 rushing, 67 receiving) were excellent. The defense,
+playing **without Myles Garrett, Aaron Donald and Jaylen Watson**, sacked Jalen Hurts four times;
+**Byron Young** had 2.5 sacks and 7 pressures. **Stafford** went 32-of-51 for 317 yards, **0 TD and 2
+INT** (63.9 passer rating, 56.1 QBR, 63.6 PFF, 20th of 33).
+
+**Injuries** (depth string: original slot → effective slot):
+- **CB Jaylen Watson** (**dislocated shoulder**) — **Starter → sat out.** **Emmanuel Forbes** and
+  slot **Josh Wallace** covered the snaps (2nd string → effective starters). Sean McVay is hopeful
+  Watson plays Monday night against Buffalo.
+- **DT Aaron Donald** (**back**) — **Starter → sat out**, also hopeful for Monday. **Braden Fiske** and
+  **Poona Ford** (2nd string) absorbed his snaps.
+- **EDGE Myles Garrett** (**knee**, IR) — **Starter → out**, still targeting about Week 6. **Josaiah
+  Stewart** and **Wesley Bailey** are 2nd string → effective starters in the rotation.
+- **TE Terrance Ferguson** (**medial ankle sprain**) — **2nd string (TE2) → IR for four games.**
+  **Davis Allen** (40 snaps) moves up behind Higbee.
+
+**What moved the number:**
+- **Offense +1.4 → +1.8 (+0.4):** the pre-set **+0.5 for Nacua's return**, less 0.1 for losing Ferguson.
+  This offense has out-gained its last two opponents by 225 and 243 yards; with Puka back it's one of
+  the league's best non-QB groups. That's above the +1.5 we treated as a soft preseason ceiling, and
+  it's on purpose. Four weeks in, the evidence supports stronger opinions, and the offense has
+  earned a number that says it's elite.
+- **Defense +0.3 → +0.5 (+0.2):** dominant without three starters. It's tempered because Philadelphia
+  lost Saquon Barkley on its first series. The Week 3 availability trim comes back if Watson and Donald
+  return.
+- **QB Stafford +5.5 → +5.0 (−0.5):** six interceptions in four games and three straight PFF grades in
+  the 40s–60s. At 38 the arm is still there, but the turnover-prone play is enough to trim him from the
+  top tier into the next one.
+- **New total +7.2 → +7.3.**
+
 ## Week 3: at Denver (L 26–30, Sunday night)
 
 The Rams were the better team and lost anyway. They led **16–0 at halftime** on a 256–72
@@ -71,9 +110,9 @@ Garrett loss move the number.
 
 ## Quarterback
 
-Matthew Stafford (+5.5, unchanged) is still a top-tier grade — veteran precision and arm
-talent. Week 1 was a poor one, but it's one game against a good defense on the road in
-Australia, not a reason to move an established elite quarterback.
+Matthew Stafford (+5.0) moved down from +5.5 after Week 4. The arm talent and veteran precision
+are still there, but six interceptions in four games and three straight mid-tier grades at age 38
+move him from the elite tier into the next one.
 
 ## What moved the number
 

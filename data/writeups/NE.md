@@ -1,3 +1,39 @@
+## Week 4: at Buffalo (W 29–26)
+
+The bounce-back game New England needed, and the box backs it up. The Patriots out-gained the
+previously unbeaten Bills **405–340** with 26 first downs to 19 (the model had NE by ~6). **Drake Maye**
+was the story: **22-of-37, 269 yards, three touchdowns**, a 91.0 QBR and an **81.5 PFF passing grade (5th
+of 33 Week 4 QBs)**. He shook off two first-half turnovers (an INT and a fumble) and drove 73 yards for the
+winner, a **one-handed 23-yard TD by Efton Chism III with 1:50 left**. **Craig Woodson** then picked off
+Josh Allen to seal it. That earned Maye **AFC Offensive Player of the Week**. Chism (87.0 PFF) stepped in
+after **Mack Hollins** left. **Romeo Doubs** caught two TDs. On defense, LB **Robert Spillane (91.2)** and
+edge **Gabe Jacas (84.4)** led the way, and **Dre'Mont Jones** returned with five pressures.
+
+**Injuries** (depth string: original slot → effective slot):
+- **WR Mack Hollins** (**calf**) — **2nd string → effective starter** (with A.J. Brown on IR) → left the
+  game. Vrabel isn't sure he practices "for a couple days." **Efton Chism III** went **2nd string →
+  effective starter**.
+- **RB Rhamondre Stevenson** — **Starter.** He limped off late and was limited Wednesday.
+- **CB Christian Gonzalez** (**shoulder**) — **Starter (CB1) → out** Week 4 and DNP again Wednesday.
+  **Charles Woods** went **2nd string → effective starter** and was the defense's weak spot.
+- **DT Christian Barmore** (**shoulder**) — **Starter → out** Week 4, limited Wednesday.
+- **CB Carlton Davis III** (**neck**) — **Starter.** He played but didn't practice Wednesday.
+- **WR A.J. Brown** (high-ankle sprain, IR) — **Starter (WR1) → out.** He's **eligible to return in
+  Week 6 vs the Jets**.
+- **RG** is still on its **3rd string**. Ben Brown is the **effective starter** behind Mike Onwenu (ankle
+  fracture, IR) and Greg Van Roten (thigh, IR).
+
+**What changed:**
+- **Maye +1.0 → +1.5 (+0.5):** his best game of the year, and he was top-five in the league in Week 4. He
+  gets back a third of the Week 3 cut, not all of it. There were still two turnovers, and he's now at 4 TD /
+  7 INT on the year.
+- **Offense −0.9 → −0.7 (+0.2):** 405 yards and 26 first downs is real production. It came without A.J.
+  Brown and with a third-string right guard. It's capped because Hollins and Stevenson are now banged up.
+  Brown's return is a separate, bigger restore.
+- **Defense +0.5 held:** it allowed 26 to an elite quarterback without Gonzalez or Barmore. The front
+  seven and Spillane were excellent, and the fill-in corners were the leak.
+- **New total 0.6 → 1.3.**
+
 ## Week 3: at Jacksonville (L 6–35)
 
 The worst loss of the Vrabel era, but the box says it wasn't as lopsided as 35–6 looks. The yards
@@ -51,7 +87,7 @@ structure are real even when the process is sloppy and the WR1 is gone.
 
 ## Quarterback
 
-Drake Maye (+1.0) is the selected quarterback after a half-point cut in Week 2 and a full 1.5-point cut in Week 3. He has 1
+Drake Maye (+1.5) is the selected quarterback — cut a half-point in Week 2 and 1.5 in Week 3, then back up a half-point after a three-touchdown win at Buffalo in Week 4 (81.5 PFF, 5th in the league that week). He had 1
 touchdown against 6 interceptions through three games. His Week 3 at Jacksonville (28.1 PFF grade,
 48.6 rating, 20.0 QBR, a lost fumble) ranked last in the league that week. The talent that made
 him the centerpiece is still there, and he's working without A.J. Brown. But the grade now prices

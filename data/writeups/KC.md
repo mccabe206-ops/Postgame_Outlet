@@ -1,3 +1,28 @@
+## Week 4: at Las Vegas (W 30–27)
+
+Kansas City is **4–0**, but this was a game the box says it should have lost. The box had it **LV
+30, KC 28**. The Raiders out-gained KC 437–399 with 28 first downs to 18. KC won on efficiency (6.9
+yards per play, 3-of-4 in the red zone) and two takeaways. **Kenneth Walker III** ran **22 times for
+177 yards** and scored **two TDs 19 seconds apart** late in the 4th quarter to turn 17–19 into
+30–19. **Tyquan Thornton** had 5 catches, 111 yards and two TDs before he was carted off. **Patrick
+Mahomes** was ordinary throwing the ball after losing Rashee Rice in the first series: 15 of 30, 225
+yards, 2 TD, 0 INT, a 59.8 PFF grade (22nd of 33) and a 63.6 QBR. **George Karlaftis** had **11
+pressures**, but the coverage leaked badly (Sneed 29.1, Gilman 28.4).
+
+**Injuries:** **starting WR Tyquan Thornton** needs **ankle surgery and is out 12–16 weeks**
+(Rapoport), with a late-season or playoff return possible. 2nd-string WRs (Royals, Cyrus Allen)
+are now effective starters. **WR1 Rashee Rice's hamstring** is described as a minor "tweak." With
+the **Week 5 bye**, he may not miss a game. **Starting LT Josh Simmons (back)** has missed four
+straight, and **Kahlil Benson (2nd string → effective starter)** continues to fill in.
+
+**What changed: nothing. All three components held (total 5.0).**
+- **Offense held +0.5:** Thornton's ankle surgery (out 12–16 weeks) is a real loss and goes on the
+  watch list. Rice is expected back after the bye, and Walker is carrying the offense, so the unit's
+  level hasn't changed enough to move it.
+- **Defense held 0.0:** 365 passing yards and 28 first downs allowed is a bad day, but it's one game,
+  and red-zone stops and takeaways won it on the road.
+- **Mahomes held +4.5:** one middling passing day without his top receiver.
+
 ## Week 3: at Miami (W 24–10)
 
 Kansas City moved to 3–0 with a controlled 24–10 win in Miami, and **Patrick Mahomes** was
@@ -49,10 +74,10 @@ Mahomes' knee looks fine.
 
 ## Quarterback
 
-Patrick Mahomes (+4.5) is the selected quarterback after his Week 2 performance (32-of-47,
-382 yards, three touchdowns, no interceptions) raised his grade from +4.0. The earlier Week 1
-return from injury moved him from +3.5 to +4.0; those were prior edition values. The current
-team rating also includes +0.5 offense and an average (0.0) defense. His knee is no longer a factor in the grade.
+Patrick Mahomes (+4.5) is the selected quarterback, held after Week 4 (15 of 30, 225
+yards, 2 TD, 0 INT) at Las Vegas, where he lost WR1 Rashee Rice in the first series. He reached
++4.5 after his Week 2 performance (32 of 47, 382 yards, 3 TD, 0 INT) and followed it with a
+surgical Week 3 at Miami (82.4 PFF). His knee is no longer a factor in the grade.
 
 ## What moved the number
 
@@ -61,5 +86,6 @@ team rating also includes +0.5 offense and an average (0.0) defense. His knee is
 
 ## Bottom line
 
-The current rating uses Mahomes at +4.5 after two games. Protection and the rest of the roster
-remain separate considerations in the offense and defense components.
+Kansas City is 4–0 behind Mahomes and a rejuvenated run game. The cracks are a secondary
+that just got carved for 365 yards and a receiver room down Thornton for months. The bye comes at
+the right time for Rice and Simmons.
