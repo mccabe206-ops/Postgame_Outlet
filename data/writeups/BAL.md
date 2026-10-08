@@ -16,16 +16,17 @@ Trey Hendrickson (fractured finger)** and **CB Marlon Humphrey (calf)** both sat
 Mike Green and Chidobe Awuzie (2nd string) the effective starters. **Kyle Hamilton (groin)**, **Zay
 Flowers (foot)**, and **Rashod Bateman (shoulder)** are all starters listed as questionable.
 
-**What changed (5.8 → 5.6): Defense +0.5 → +0.3 (−0.2).** QB and offense held for now.
-- **QB Lamar held at 4.5, pending his status.** He's a Starter with a left ankle sprain and missed
-  Wednesday's practice. If he's ruled out for Atlanta, **Tyler Huntley (2nd string → effective starter)
-  takes over at −1.5**. That's a re-grade from −2.5 to the top of the backup band, because he has real
-  NFL starts and wins and plays behind a Henry-led run game. Baltimore would drop to about −0.4. That's
-  a 6-point swing, more than our usual 4–5 point guideline, so it waits on the official status rather
-  than a guess. Lamar returns at full value the moment he's cleared.
+**What changed (5.8 → −0.4): QB Lamar 4.5 → Tyler Huntley −1.5 (−6.0); Defense +0.5 → +0.3 (−0.2).**
+- **QB: Huntley starts while Lamar's left ankle heals.** Lamar (Starter) missed Wednesday's practice,
+  and the market has moved to **Atlanta −3.5**, which only makes sense if he's out. **Tyler Huntley
+  (2nd string → effective starter)** is re-graded from −2.5 to −1.5, the top of the backup band,
+  because he has real NFL starts and wins and plays behind a Henry-led run game. That's a 6-point
+  swing, bigger than our usual 4–5 point QB-change guideline, and that's deliberate: Lamar near the
+  top of the league is the whole engine. He's restored to 4.5 the moment he's cleared.
 - **Offense held +0.8:** Flowers is producing, and Ioane has steadied the center spot. On Oct 7,
-  Baltimore **traded for Philadelphia's Pro Bowl center Cam Jurgens** with both Gwyn and Pocic out. That's
-  a real plus up front; we'll fold it in once he's on the field.
+  Baltimore **traded for Philadelphia's two-time Pro Bowl center Cam Jurgens** with three centers on
+  IR. That's a real plus up front (and Ioane moves back to guard). We'll fold it in once he's on the
+  field.
 - **Defense +0.5 → +0.3 (−0.2):** Hendrickson and Humphrey are both out, and Roquan Smith had a
   rough day in coverage.
 
@@ -89,7 +90,7 @@ Baltimore is a top-five roster: an elite quarterback, a strong skill group, and 
 
 ## Quarterback
 
-Lamar Jackson (+4.5) stays the selected quarterback while his Week 4 left ankle sprain is evaluated. He's near the top of the league when healthy. If he's ruled out, Tyler Huntley (−1.5, re-graded to the top of the backup band as a proven spot starter in a run-first offense) starts in his place.
+Tyler Huntley (−1.5) is the selected quarterback while Lamar Jackson recovers from the left ankle sprain he suffered just before halftime in Week 4. Huntley is re-graded to the top of the backup band as a proven spot starter in a run-first offense. Lamar (+4.5, near the top of the league) returns to QB1 at full value as soon as he's cleared.
 
 ## Quarterback: through Week 1 2026 (historical)
 
