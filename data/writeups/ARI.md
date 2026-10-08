@@ -1,3 +1,39 @@
+## Week 4: at N.Y. Giants (L 24–36)
+
+The score looks like a beating; the game wasn't. The box-score model had this **16–14 Giants**. Six
+turnovers (three each), seven field goals, and a **98-yard interception return on the final play**
+turned it into 36–24. Arizona led 14–3 early on a Jacoby Brissett → Marvin Harrison Jr. TD and a
+22-yard Tyler Allgeier run. It was **24–30 until the last snap**, after Chad Ryland hit a **60-yard
+field goal** at the half and Elijah Higgins scored in the third. The Giants still deserved it: they
+out-gained Arizona 319–270 and won the turnover-return battle.
+
+**Brissett** finished 21-of-35 for 166 yards, 2 TD and **3 INT** (55.2 rating, 31.8 QBR). His PFF pass
+grade was a more forgiving **69.7, 18th of 33**: the last pick was a desperation throw, and he lost his
+left tackle mid-game. **Michael Wilson** (7-95) and **Higgins** (93.7 PFF) were the bright spots.
+
+**Injuries — the costly part** (depth string: original slot → effective slot):
+- **LT Paris Johnson Jr.** (**torn left biceps**) — **Starter → out for the season** (IR, his third
+  straight year ending on IR). He was the best player on the line. **Replacement TBD.** Arizona
+  hasn't named who moves to left tackle.
+- **RG Isaiah Adams** (**ankle**) — **Starter → carted off**, "most likely" out Week 5. **Jon Gaines
+  II** is **2nd string → effective starter** (38 snaps Sunday).
+- **TE Hunter Long** (**knee**, a friendly-fire collision on punt coverage) — **2nd string (TE2) →
+  IR for at least four games.** Elijah Higgins moves up behind McBride.
+- **S Andrew Wingard** — **2nd string (depth safety/special teams) → carted off**; injury not specified.
+- Still out: **CB1 Will Johnson** (**neck**, IR) and **RB James Conner** (**foot**, IR), both
+  **Starters**. **Max Melton/Denzel Burke** and **Tyler Allgeier/Jeremiyah Love** are the effective
+  starters in their place.
+
+**What moved the number:**
+- **Offense −0.3 → −0.8 (−0.5):** losing the starting left tackle for the year, plus the starting right
+  guard and the No. 2 tight end, turns a decent line into a liability in front of a 34-year-old pocket
+  passer.
+- **QB Brissett held at −1.0:** three picks, but one came on the final play and the grade was in line
+  with his number.
+- **Defense held at −0.8:** 319 yards allowed, and 7 of the 36 points were a pick-six. Not a defensive
+  collapse.
+- **New total −1.9 → −2.4.**
+
 ## Week 3: at San Francisco (L 30–36)
 
 Arizona lost by six, but it played the 3–0 49ers to a draw on the box. Both teams projected to

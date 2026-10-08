@@ -1,3 +1,32 @@
+## Week 4: at Houston (W 34–30)
+
+Dallas **won on the road by taking over the second half.** Houston led **16–6 at halftime** on four
+field goals and a Nico Collins touchdown. Then the Cowboys put up **272 yards and 28 points** after the
+break: three short Javonte Williams TD runs, and after Houston retook the lead at 2:23, a **12-yard Dak
+Prescott → CeeDee Lamb touchdown with 40 seconds left**. The box-score model had Dallas winning 32–27,
+so the result was earned, not lucky. Neither team turned it over; Dallas ran 28 first downs to 16 and
+went **4-for-4 in the red zone**.
+
+**Dak Prescott** went 32-of-45 for 335 yards, 1 TD and 0 INT (99.8 passer rating, 85.3 QBR, 74.5 PFF
+grade, 12th of 33 Week 4 QBs) and closed it out. **CeeDee Lamb** was the story: **17 catches for 189
+yards** and the winner. Up front, **Quinnen Williams** and **Rashan Gary** (6 pressures) held Houston to
+62 rushing yards. The back end gave up 347 passing yards, with slot CB Reddy Steward, DaRon Bland and
+Caleb Downs all graded poorly.
+
+**Injuries** (depth string: original slot → effective slot):
+- **S Malik Hooker** (**forearm fracture**) — **Starter → returned** and had two pass breakups.
+- **S Alijah Clark** — **depth safety (2nd string or lower) → carted off**; injury not yet specified.
+- **QB Dak Prescott** (**right hand**, stepped on) — **Starter → fine.** Brian Schottenheimer says it's
+  "great," with no concern for Thursday.
+- **LG Tyler Smith** (**thumb surgery**, IR; earliest ~Week 5–6) — **Starter → out.** **T.J. Bass** is
+  **2nd string → effective starter** (78 snaps).
+- **S Jalen Thompson** (**hamstring**, IR) — **Starter → out.**
+
+**What moved the number:** nothing — **held at QB +2.0 / Off +1.0 / Def −1.3 (total +1.7).** A
+good closing game from Dak is already in his number. The offense is still missing Tyler Smith, and the
+3.3-yards-per-carry run game shows it. On defense, the pass rush is real but the secondary is still
+patched; Hooker's return offsets the new safety injury.
+
 ## Week 3: vs Baltimore in Rio de Janeiro (L 31–34)
 
 A heartbreaker in Brazil. Brandon Aubrey tied it at 31 with seven seconds left, and Baltimore

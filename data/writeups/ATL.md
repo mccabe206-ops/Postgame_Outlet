@@ -1,3 +1,32 @@
+## Week 4: at New Orleans (W 45–24, MNF)
+
+Atlanta beat the Saints by three scores in their building. The **competitive score (before it was
+decided early in the 4th quarter) was ATL 38, NO 17**, and that's the right read. The 45 includes
+garbage time, but the efficiency was real: **7.5 yards per play, 205 rushing yards, zero
+turnovers, 4-of-5 in the red zone**. **Bijan Robinson** ran for 145 yards and 2 TDs (including a
+59-yarder on the opening drive). **Brian Robinson Jr.** scored **three rushing TDs**. **Michael
+Penix Jr.** was surgical: **15 of 20, 223 yards, a 31-yard TD to Jahan Dotson, no turnovers, an
+81.0 PFF grade (7th of 33), 79.6 QBR and a 127.7 rating**. RG **Chris Lindstrom (93.6)** led a line
+that dominated. The defense held New Orleans to **50 rushing yards**, and **Cameron Thomas had 7
+pressures**.
+
+**Injuries:** **starting LT Jake Matthews (groin)** left late in the first quarter and
+**didn't practice Wednesday** ahead of a short week before Sunday night at Baltimore. **Michael
+Jerrell (2nd string)** would be the effective starter, but he's limited (ankle) himself.
+**Za'Darius Smith (2nd string → effective rotation starter** on an edge room without Jalon Walker
+and the suspended Pearce) is in the **concussion protocol**. **Yasir Abdullah** (3rd string →
+effective rotation, hamstring) didn't practice. Starter Cam Thomas (shoulder) was limited. CB1
+**A.J. Terrell** (starter, groin, IR) is eligible ~Week 7, and **Mike Hughes (2nd string →
+effective starter)** holds the spot until then.
+
+**What changed:**
+- **QB Penix −1.5 → −1.0 (+0.5):** two straight top-10 PFF games since coming back from the ACL.
+  He's trending toward a league-average starter.
+- **Defense −0.8 → −0.6 (+0.2):** shut down the run and got real pressure. Kept small with Smith
+  in the protocol.
+- **Offense held +1.0:** already the top of the band. **Drops −0.2 if Matthews misses Week 5.**
+- **New total −1.3 → −0.6.**
+
 ## Week 3: at Green Bay (W 35–14, TNF)
 
 Atlanta's first win, and a thorough one. **Michael Penix Jr.'s 2026 debut** — off the third ACL of
@@ -52,11 +81,10 @@ and the defense's pass rush is thinned through the first half.
 
 ## Quarterback
 
-**Michael Penix Jr. (−1.5)** is the starter — raised a half-point after a strong 2026 debut at
-Green Bay (73.0 PFF, 84.9 QBR) following the torn ACL that kept him out the first two weeks. Behind him: Tua Tagovailoa (−2.5, oblique) at QB2 and
-fill-in **Cooper Rush (−4.5)** at QB3, downgraded a full point after a two-interception,
-pick-six disaster in the Carolina blowout. Penix now sits a clear 3.0 points above Rush — the gap
-a returning franchise starter should hold over a journeyman third-stringer.
+**Michael Penix Jr. (−1.0)** is the starter, raised another half-point after a
+127.7-rating, 81.0-PFF night at New Orleans (15 of 20, 223 yards, 1 TD). That follows his strong
+2026 debut at Green Bay, coming back from the torn ACL that kept him out the first two weeks.
+Behind him: Tua Tagovailoa (−1.5) at QB2 and **Cooper Rush (−4.5)** at QB3.
 
 ## What moved the number
 
@@ -67,4 +95,7 @@ a returning franchise starter should hold over a journeyman third-stringer.
 
 ## Bottom line
 
-Bijan and the skill group keep Atlanta competitive on offense; the negative rating is the quarterback spot, now compounded by a short-handed pass rush until the edge room gets healthy and reinstated around midseason.
+Atlanta's offense is legitimately good, and Penix is the reason it's no longer wasted.
+Bijan and Brian Robinson, London and Pitts give him plenty to work with. The rating is still held
+back by a short-handed pass rush and secondary until Terrell and the edge rushers return around
+midseason, plus the risk that Matthews misses time at LT.

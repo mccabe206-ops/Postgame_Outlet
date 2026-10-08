@@ -1,3 +1,28 @@
+## Week 4: vs Kansas City (L 27–30)
+
+The Raiders' first loss came in a game they arguably should have won. The box had it **LV 30, KC
+28**. Las Vegas out-gained Kansas City 437–399, ran 78 plays to 58, had **28 first downs to 18**,
+and held the ball 35:42. It lost because of **0-for-2 in the red zone** (Matt Gay kicked four FGs)
+and **two turnovers to none**. **Kirk Cousins** had his best game yet: **31 of 52, 365 yards, 2 TD,
+1 INT, a 73.4 PFF grade (14th of 33), a 72.7 QBR** and an 85.8 rating. He hit Ian Thomas for a
+27-yard TD and **Brock Bowers** (6 catches, 86 yards) for a 20-yarder, then threw the two-point
+conversion that made it 30–27 with 1:46 left. **Maxx Crosby** had 8 pressures and a sack, but the
+run defense was gashed for **189 yards** (Kenneth Walker 177).
+
+**Injuries:** **starting WR Jalen Nailor (concussion)** didn't practice Wednesday. With
+Bech and Dont'e Thornton on IR, **Cody White (3rd string → effective starter)** is the next man up,
+and he's limited (ankle). Starters **Bowers (knee)**, **LG Spencer Burford (knee)** and **DT
+Fatukasi (shoulder)** were limited, which is maintenance-level for now. Bowers is still managing
+the knee after September's meniscus trim. Ashton Jeanty (ankle) practiced fully.
+
+**What changed:**
+- **QB Cousins −1.0 → −0.5 (+0.5):** a fourth straight starter-level game, now with real volume
+  against a good defense. He has **11 TD / 4 INT** through four games.
+- **Offense −0.1 → 0.0 (+0.1):** moved the ball at will. The red-zone failures are a regression
+  candidate. RG Caleb Rogers is a weak spot (7.6 pass-block grade).
+- **Defense −0.5 → −0.7 (−0.2):** run over for 189 yards and 6.9 yards per play.
+- **New total −1.6 → −1.2.**
+
 ## Week 3: at New Orleans (W 35–27)
 
 **The Raiders are 3–0.** The way they got there says to be careful not to overreact. Las Vegas
@@ -74,7 +99,10 @@ Las Vegas has two genuine stars — one on each side of the ball — dragged dow
 
 ## Quarterback
 
-Kirk Cousins (-1.0) is the selected quarterback after another half-point increase following the Week 3 win at New Orleans (3 TD, 0 INT). He has now thrown three touchdown passes in all three games. The -1.5 value followed Week 2, and -2.5 was the Week 1 edition.
+Kirk Cousins (−0.5) is the selected quarterback, up another half-point after his best
+game yet, a 31-of-52, 365-yard, 2-TD day against Kansas City (73.4 PFF, 72.7 QBR). He has
+**11 TD / 4 INT** through four games and has thrown multiple TDs in every one. He was −1.0 after
+Week 3, −1.5 after Week 2, and −2.5 in the Week 1 edition.
 
 ## Quarterback: through Week 1 2026 (historical)
 
@@ -87,7 +115,10 @@ Kirk Cousins (-2.5) sits at the worst-starter floor. There's a mild argument up:
 
 ## Bottom line
 
-Bowers, Jeanty, and Crosby are legitimately good, and this roster is more watchable than its number. But a floor-level quarterback and thin support at receiver and in the secondary keep the whole thing below the line until Cousins proves he's more than a bridge — or Mendoza takes over.
+Bowers, Jeanty and Crosby
+are legitimately good, and Cousins has been better than anyone expected. Las Vegas is 3–1 and has
+covered all four games. The run defense and a thin secondary are what still keep it below the
+line.
 
 ## What changed — Week 1 2026
 

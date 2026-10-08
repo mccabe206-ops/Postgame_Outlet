@@ -1,3 +1,34 @@
+## Week 4: vs Tennessee (W 24–18)
+
+Baltimore won the game in the first half and spent the second half losing its quarterback. **Lamar
+Jackson** was close to perfect: 15-of-20 for 222 yards and 2 TD (to Zay Flowers and Mark Andrews),
+144.2 rating, **90.9 PFF pass grade, 2nd of 33 QBs**. Tyler Loop hit a **64-yard field goal** at the
+gun for a 24–7 halftime lead. Then Lamar **sprained his left ankle** escaping pressure just before
+the half and didn't return. With Tyler Huntley (8-of-9, 63 yards), the offense scored **zero
+second-half points**, and Tennessee covered with a late touchdown and 2-point conversion. The box
+had Baltimore by about 9. Thirteen penalties for 131 yards helped keep it close. Flowers had 8
+catches for 118. Derrick Henry was held to 3.2 yards a carry. Rookie Vega Ioane (a 3rd-string guard
+→ effective starting center with Gwyn and Pocic out) graded a solid 75.1.
+
+Lamar **missed Wednesday's practice**, reports say he **could miss multiple games**, and Jesse
+Minter is noncommittal for Sunday night in Atlanta. The defense is also short two starters: **EDGE
+Trey Hendrickson (fractured finger)** and **CB Marlon Humphrey (calf)** both sat out, which makes
+Mike Green and Chidobe Awuzie (2nd string) the effective starters. **Kyle Hamilton (groin)**, **Zay
+Flowers (foot)**, and **Rashod Bateman (shoulder)** are all starters listed as questionable.
+
+**What changed (5.8 → 5.6): Defense +0.5 → +0.3 (−0.2).** QB and offense held for now.
+- **QB Lamar held at 4.5, pending his status.** He's a Starter with a left ankle sprain and missed
+  Wednesday's practice. If he's ruled out for Atlanta, **Tyler Huntley (2nd string → effective starter)
+  takes over at −1.5**. That's a re-grade from −2.5 to the top of the backup band, because he has real
+  NFL starts and wins and plays behind a Henry-led run game. Baltimore would drop to about −0.4. That's
+  a 6-point swing, more than our usual 4–5 point guideline, so it waits on the official status rather
+  than a guess. Lamar returns at full value the moment he's cleared.
+- **Offense held +0.8:** Flowers is producing, and Ioane has steadied the center spot. On Oct 7,
+  Baltimore **traded for Philadelphia's Pro Bowl center Cam Jurgens** with both Gwyn and Pocic out. That's
+  a real plus up front; we'll fold it in once he's on the field.
+- **Defense +0.5 → +0.3 (−0.2):** Hendrickson and Humphrey are both out, and Roquan Smith had a
+  rough day in coverage.
+
 ## Week 3: vs Dallas in Rio de Janeiro (W 34–31)
 
 A coin flip in the Maracanã, won on the last snap. Tyler Loop hit a **56-yard field goal as
@@ -58,7 +89,7 @@ Baltimore is a top-five roster: an elite quarterback, a strong skill group, and 
 
 ## Quarterback
 
-Lamar Jackson (+4.5) is back at his Week 1 grade after closing out the Week 3 win in Rio (15-of-20, 186, 2 TD, 0 INT, 94.0 QBR). The Week 2 cut to +4.0 was for failing to finish against New Orleans.
+Lamar Jackson (+4.5) stays the selected quarterback while his Week 4 left ankle sprain is evaluated. He's near the top of the league when healthy. If he's ruled out, Tyler Huntley (−1.5, re-graded to the top of the backup band as a proven spot starter in a run-first offense) starts in his place.
 
 ## Quarterback: through Week 1 2026 (historical)
 

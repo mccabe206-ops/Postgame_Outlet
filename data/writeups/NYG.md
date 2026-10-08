@@ -1,3 +1,37 @@
+## Week 4: vs Arizona (W 36–24)
+
+The Giants **won going away, on defense.** It was a 30–24 game until the final snap, when **CB Deonte
+Banks returned an interception 98 yards** for a touchdown. The box-score model had the game about
+**16–14**: New York's 36 was built on three takeaways, three Dominic Zvada field goals (39, 50, 52) and
+short fields. The Giants out-gained Arizona 319–270 and controlled the clock (32:13).
+
+**Jameis Winston** had his best game as the starter: 18-of-29 for 250 yards, **3 TD and 2 INT** (95.5
+passer rating, 53.1 QBR, 59.9 PFF grade, 21st of 33). He hit Malachi Fields (12), **Malik Nabers** (25;
+6-112 on the day) and Theo Johnson (11) for scores. It was good, but still classic Jameis with two
+giveaways. The defense was the story:
+- **Arvell Reese**: 90.5, 9 solo tackles, an INT, 3 PBU.
+- **Banks**: 88.3, back from his calf injury.
+- **DJ Reader**: 85.8.
+- **Abdul Carter**: 6 pressures.
+
+**Injuries** (depth string: original slot → effective slot):
+- **DE Chauncey Golston** (**neck**) — **Starter (LE) → left after 25 snaps.** **Darius Alexander**
+  (2nd string) took the rest.
+- **WR/KR Braxton Berrios** (**foot**) — **2nd string (WR depth, return man) → IR, at least four weeks.**
+- **S Jason Pinnock** (**concussion**) — **2nd string (rotational S) → in protocol.**
+- **EDGE Brian Burns** (**torn right ACL plus meniscus**, surgery Oct. 1) — **Starter → out for the
+  season.** That was already priced into the defense after Week 3. **Kayvon Thibodeaux** and
+  **Abdul Carter** are the starting edges.
+
+**What moved the number:**
+- **Defense +0.1 → +0.3 (+0.2):** three interceptions, Banks back and dominant, Reese and Carter rising.
+  It's kept small because some of it was Arizona's turnovers and an Arizona line that lost its left
+  tackle mid-game.
+- **QB Winston held at −3.5:** a better game, but two INTs and a mid-pack grade. The backup-band number
+  fits.
+- **Offense held at 0.0:** Berrios is a depth piece.
+- **New total −3.4 → −3.2.**
+
 ## Week 3: vs Tennessee (W 12–7)
 
 The Giants won an ugly one in a nor'easter, and it cost them their best defender. **Jameis

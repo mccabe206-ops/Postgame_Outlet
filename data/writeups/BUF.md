@@ -1,3 +1,41 @@
+## Week 4: vs New England (L 26–29)
+
+Buffalo's first loss under Joe Brady, and its first at the new Highmark Stadium. The Patriots out-gained
+the Bills **405–340**, and the box had New England by ~6, so Buffalo was lucky to be in it late. **Josh
+Allen** went 23-of-33 for 253 with a TD pass and a rushing TD. His 34-yarder to **Keon Coleman (83.8
+PFF)** put Buffalo up 26–21 with under four minutes left. But Maye answered, and on the final drive Allen
+spun out of a sack and forced a deep ball that **Craig Woodson intercepted**. "Should have thrown that one
+out of bounds," Allen said. A Khalil Shakir lost fumble was the other giveaway. Allen's **56.6 PFF passing
+grade ranked 26th of 33** QBs, his second straight below-par game (62.3 in Week 3). The offense faded after
+the injury below: 172 yards and 9 points in the second half. The pass protection struggled again (Dawkins,
+McGovern and Anderson all in the 40s in pass block).
+
+**Injuries** (depth string: original slot → effective slot):
+- **WR DJ Moore** — **Starter (WR1) → left the game.** He **aggravated his left shoulder** (the AC-joint
+  sprain from Week 2) diving for a pass late in the second quarter. Per ESPN's Adam Schefter it's **not
+  considered long-term**, but it's the second time in three weeks. **Joshua Palmer** went **2nd string →
+  effective starter**.
+- **DT Ed Oliver** (**knee**) — **Starter → left** early in the third quarter. Imaging was due Monday;
+  he'd just come back from a hip injury.
+- **Slot CB Dee Alford** (**ankle**) — **Starter (nickel) → left.**
+- **DB Te'Cory Couch** (**hamstring**) — **3rd string, a practice-squad call-up → effective nickel →
+  left.**
+- **CB Christian Benford** (**toe**) — **Starter (CB1) → inactive.** **Davison Igbinosun** went **2nd
+  string → effective starter** opposite **Maxwell Hairston** (32.0 PFF). Buffalo finished the game on
+  its fourth and fifth corners.
+- **DT T.J. Sanders** (appendectomy) — **Starter → out.** **Landon Jackson** is **2nd string →
+  effective starter**.
+
+**What changed:**
+- **Allen +6.5 held:** it's the top QB grade and the talent hasn't changed. But two straight ordinary games
+  and eight turnover-worthy plays through four weeks are now a trend to watch, not a one-off.
+- **Offense +1.1 → +0.9 (−0.2):** the pass protection has graded poorly two weeks running, and the
+  offense stalled once Moore's shoulder gave out again. The receiver depth behind him is thin.
+- **Defense −0.5 → −0.8 (−0.3):** the pre-set −0.2 for Benford missing time triggered. Another −0.1 is for
+  losing Oliver and Alford on top of Sanders.
+- **Monday night at the Rams in Week 5** gives everyone an extra day.
+- **New total 7.1 → 6.6.**
+
 ## Week 3: vs L.A. Chargers (W 24–16)
 
 3–0, but not pretty: Buffalo won **despite five turnovers** (three lost fumbles, two interceptions)

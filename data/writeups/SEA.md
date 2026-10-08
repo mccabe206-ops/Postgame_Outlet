@@ -1,3 +1,34 @@
+## Week 4: vs L.A. Chargers (W 30–23)
+
+Seattle got back in the win column with its defense and a **4–1 turnover margin** rather than
+its offense. The Seahawks were actually **out-gained 301–286**, went 3-of-12 on third down, and
+committed 14 penalties for 150 yards. But every Charger giveaway turned into a short field, and
+Seattle led **20–6 at the half** (an **Emanuel Wilson** 23-yard catch-and-run, a **Rashid Shaheed**
+28-yard end-around, and a Wilson goal-line run) and **30–13 after three** (a **Tory Horton** 6-yard
+TD). **Sam Darnold** was efficient on low volume: 13-of-22, 168 yards, 2 TDs and 1 INT, a 57.4 PFF
+passing grade and a 20.4 QBR. The offense didn't need more. The defense was the story. LB **Drake
+Thomas (90.2)** was everywhere in coverage, **DeMarcus Lawrence** and **Leonard Williams** had four
+pressures apiece, and the unit forced four turnovers. **Julian Love was back** at safety for all 71
+snaps. The tackles were excellent (**Abraham Lucas 81.1, Charles Cross 76.5**). Right guard is
+still the soft spot with **Anthony Bradford** on IR.
+
+**Injuries** (depth string: original slot → effective slot):
+- **DT Leonard Williams** (**ankle**) — **Starter → left in the second half.** Mike Macdonald is
+  "optimistic" he plays **Week 5 vs San Francisco**.
+- **RB Zach Charbonnet** (**ACL recovery**, PUP) — **Starter → still out**, won't play vs the 49ers.
+  **Emanuel Wilson** is **2nd string → effective starter**.
+- **RG Anthony Bradford** (**knee/hip**, IR) — **Starter → out.** **Christian Haynes** and **Beau
+  Stephens** (2nd string) split the snaps.
+- **S Bud Clark** (**ankle fracture**, IR) — **role unclear (safety depth) → out.**
+- **S Julian Love** (**calf**) — **Starter → back** after missing Week 3.
+
+**What moved the number:**
+- **Held across the board: QB Darnold +2.0, Offense +1.3, Defense +3.0.** The offense's quiet
+  afternoon was a function of short fields, not a decline. Charbonnet's return is still the lever
+  that restores the Offense toward +1.5. The defense showed why it sits at +3.0, and the safety
+  room is healthier with Love back.
+- **Total unchanged at +6.3.**
+
 ## Week 3: at Washington (L 31–33)
 
 Seattle's 12-game winning streak ended on turnovers, not football. The Seahawks **out-gained

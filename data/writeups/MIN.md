@@ -1,3 +1,33 @@
+## Week 4: vs Miami (W 15–10)
+
+Minnesota is **4–0**, but this should have been a blowout. The box had it **MIN 25, MIA 10**.
+The Vikings ran **72 plays to 37**, held the ball **39 minutes** and out-gained Miami 336–198.
+Then they went **0-for-3 in the red zone** and settled for **five Will Reichard field goals**,
+with **11 penalties for 85 yards** stalling drives. That's a positive-regression game, not a
+warning sign. **Kyler Murray** had his best game as a Viking without Justin Jefferson: 27 of 37,
+247 yards, no turnovers, a **79.3 PFF grade (10th of 33)** and a 90.7 rating, though only a 41.5
+QBR. He threw mostly to **T.J. Hockenson (13 catches, 119 yards, 93.2 grade)**. The defense held
+Miami to 8 first downs, with **Dallas Turner adding 2 sacks**.
+
+**Injuries:** **starting LG Donovan Jackson tore his meniscus, had surgery, and is on IR,
+likely for the season**, so **Joe Huber (2nd string → effective starter)** takes over. **Starting
+LT Christian Darrisaw** left with a **concussion** and is likely out Week 5 vs New Orleans. That
+makes **Ryan Van Demark (2nd string → effective starter)**, and two backups would start on the left
+side. Starting WR **Jordan Addison (hamstring)** didn't practice Wednesday. The good news is
+**Justin Jefferson (starter, ankle sprain)**, who missed Week 4 (Tai Felton, 2nd string, was the
+effective starter) but was **back at practice on a limited basis** and is trending toward playing
+Sunday.
+
+**What changed:**
+- **Murray held at −0.5:** a clean game with no WR1 (79.3 PFF, no turnovers), but 247 yards and a
+  41.5 QBR against the league's worst team is not a reason to raise him. He has to do it against a
+  real defense first.
+- **Offense +0.5 → +0.3 (−0.2):** a starting guard is lost for the season. **It comes back +0.3
+  when Jefferson returns** (likely Week 5), and drops another −0.1 if Darrisaw and Addison both
+  miss.
+- **Defense held +1.0:** dominant, but against the league's worst offense.
+- **New total 1.0 → 0.8.**
+
 ## Week 3: at Tampa Bay (W 23–16)
 
 Minnesota is 3–0, and once again the **defense and special teams** did it. The offense managed
@@ -55,10 +85,10 @@ defense. Carson Wentz's Week 1–2 appearances remain historical context.
 
 ## Quarterback
 
-Kyler Murray (−0.5, held) is the selected quarterback, back from the Week 1 concussion. His return
-at Tampa was rough: 15-of-29, 168, 1 TD, 1 INT, 55.8 PFF grade, 25.4 QBR, a 66.5 rating. It came
-with Justin Jefferson out after the first quarter. Carson Wentz (−1.0) managed the Week 1–2
-fill-in and is the QB2. If Murray doesn't settle in, his grade drifts toward that level.
+Kyler Murray (−0.5) is the selected quarterback, held after his best game in
+Minnesota (27 of 37, 247 yards, no turnovers, 79.3 PFF, 10th of 33) without Justin Jefferson.
+That came after a rough return from his Week 1 concussion at Tampa (55.8 PFF, 25.4 QBR). Carson
+Wentz (−1.0) is the QB2.
 
 ## What moved the number
 
@@ -74,7 +104,7 @@ fill-in and is the QB2. If Murray doesn't settle in, his grade drifts toward tha
 
 ## Bottom line
 
-Minnesota is 3–0 on defense and special teams. Flores's unit has become the best thing about this
-roster, and it's covering for an offense that has sputtered with a quarterback working back from a
-concussion. Jefferson's ankle is the swing factor: if he's back soon, the offense should rebound
-toward its talent.
+Minnesota is 4–0 on defense and special teams, and now
+the offense is starting to show up too. Murray is settling in, and the 0-for-3 red-zone day against
+Miami is a regression candidate. Jefferson's return offsets a line that just lost its left guard
+for the year. The rating should climb once Jefferson and Darrisaw are both back.

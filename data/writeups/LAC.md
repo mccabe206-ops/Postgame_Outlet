@@ -1,3 +1,41 @@
+## Week 4: at Seattle (L 23–30)
+
+The Chargers lost the turnover battle **4–1** (two Justin Herbert interceptions and two lost
+fumbles) and lost the game by seven. They actually **out-gained Seattle 301–286**, and the box
+had this as a ~20–14 game. But four giveaways and **16 penalties for 130 yards** handed the
+Seahawks short fields, and Seattle led **20–6 at the half** and **30–13 after three**. The 10
+fourth-quarter points came while chasing. **Herbert** finished 19-of-31 for 189 yards with a TD
+and 2 INTs, a **41.4 PFF passing grade** (31st of 33 QBs this week) and a 36.7 QBR. He took four
+sacks, and for most of the second half he was playing behind backups at both tackle spots. The
+defense was the good news again. **Tuli Tuipulotu (91.6)** and **Khalil Mack (86.3, a sack)** led a
+unit that held Seattle to 286 yards and 3-of-12 on third down, all without Derwin James.
+
+**Injuries** (depth string: original slot → effective slot):
+- **LT Rashawn Slater** (**high right ankle sprain**) — **Starter → out several weeks.** Harbaugh says
+  he'll "miss some time," and he's an IR candidate. The swing tackle steps in (replacement TBD).
+- **RT Joe Alt** (**neck**, late first half) — **Starter → expected to miss Week 5 vs Denver**, no IR
+  planned. **Travis Burke** is **2nd string → effective starter** (49 snaps Sunday).
+- So **both starting tackles** are hurt, on a line already missing **C Tyler Biadasz** (knee, IR) and
+  **G Trey Pipkins** (knee, IR), both Starters. **Jake Slaughter** (C) and **Trevor Penning/Logan
+  Taylor** (LG) are 2nd string → effective starters. Four of five line spots are now backups or
+  replacements.
+- **WR Ladd McConkey** (**foot**) — **Starter → ruled out in the 3rd quarter** after 24 snaps,
+  day-to-day.
+- **S Derwin James** (**hamstring**) — **Starter → sat out**, week-to-week, not an IR candidate.
+  **Tony Jefferson** and **Genesis Smith** are 2nd string → effective starters.
+- **TE David Njoku** (**lower leg**, IR) — **Starter → out**, eligible ~Week 7.
+
+**What moved the number:**
+- **Offense −0.5 → −1.0 (−0.5):** both starting tackles are now hurt on top of a center and a
+  guard already on IR, and the WR1's foot is day-to-day. The fill-ins graded in the 30s in pass
+  protection. This is the biggest line-availability hit in the league right now. It restores as
+  Alt and Slater return.
+- **QB Herbert held at +1.0:** a fourth straight poor game, but this one came behind a line that
+  fell apart mid-game. That's priced in the Offense number, not double-counted on the QB.
+- **Defense −0.7 → −0.5 (+0.2):** a second straight good week (5 takeaways at Buffalo, then a
+  strong Seattle offense held under 300 yards), and James should be back soon.
+- **New total −0.2 → −0.5.**
+
 ## Week 3: at Buffalo (L 16–24)
 
 0–3, and the same story: the Chargers moved the ball and couldn't finish. They matched Buffalo in
@@ -60,7 +98,7 @@ but Week 1 pulled the offense back to the pack.
 
 ## Quarterback
 
-Justin Herbert (+1.0) is the selected quarterback after three difficult games. His grade fell from +1.5 after Week 3 at Buffalo, from +3.0 after Week 2 against Las Vegas, and from +4.0 after Week 1.
+Justin Herbert (+1.0) is the selected quarterback, held after Week 4 at Seattle. It was a fourth straight difficult game (19-of-31, 189, 2 INT), but this one came behind backups at both tackle spots, which is priced in the offense. His grade fell from +1.5 after Week 3 at Buffalo, from +3.0 after Week 2 against Las Vegas, and from +4.0 after Week 1.
 
 ## Quarterback: through Week 1 2026 (historical)
 

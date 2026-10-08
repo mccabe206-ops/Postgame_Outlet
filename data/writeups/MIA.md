@@ -1,3 +1,30 @@
+## Week 4: at Minnesota (L 10–15)
+
+The score was close but the game wasn't. Miami ran **37 plays to Minnesota's 72**, had the ball
+**20:49**, and finished with **8 first downs and 77 net passing yards**. The Dolphins covered the
+10-point spread only because Minnesota went 0-for-3 in the red zone and kicked five field goals.
+**Malik Willis** went 9 of 17 for 85 yards (44.8 PFF grade, 31st of 33; 37.6 QBR). He has **one
+passing touchdown in four starts**. The bright spots were **Ollie Gordon II** (9 carries, 100
+yards, a 12-yard TD) and a defense that kept it a one-score game. **Chop Robinson** had **8
+pressures**, Joshua Uche had a sack, and Zach Sieler had two.
+
+**Injuries:** DT **Kenneth Grant** (starter-caliber 2025 1st-rounder, preseason toe/lower-leg
+injury on IR) had his **practice window opened Wednesday** and was limited. Activating him would
+help the defensive line. Starting WR **Caleb Douglas (ankle)** is day-to-day after missing two
+games, and **Malik Washington (2nd string → effective starter)** has filled in. Starters Chris Bell
+(WR, knee), Dante Trader Jr. (S, knee) and JuJu Brents (CB, heel) are questionable. No new major
+injuries.
+
+**What changed:**
+- **QB Willis held at −2.0:** four starts, one passing TD, and near the bottom of the league again
+  this week (31st of 33). That's not good, but −2.0 already prices a well-below-average starter, and
+  he's close enough to the worst-starter floor that another cut isn't warranted yet. Another game like
+  this one would change that.
+- **Defense −1.5 → −1.3 (+0.2):** held a 72-play Minnesota offense to 15 with three red-zone
+  stops. Chop Robinson is a real piece.
+- **Offense held −1.9:** the run game showed signs of life. The passing game is the QB.
+- **New total −5.4 → −5.2.**
+
 ## Week 3: vs Kansas City (L 10–24)
 
 Miami fell to 0–3 with a 24–10 home loss to Kansas City. The game cost the Dolphins far more
@@ -53,7 +80,10 @@ Miami grades near the floor on all three lines — the aftermath of a roster tea
 
 ## Quarterback
 
-Malik Willis (-2.0) is the selected quarterback after his grade moved down from -1.5 following the Week 2 loss at San Francisco. The limited established passing record remains the caution in this rating.
+Malik Willis (−2.0) is the selected quarterback, held after Week 4 despite another poor day
+(9 of 17, 85 yards; 44.8 PFF, 31st of 33). He has one passing touchdown in four starts, and he's
+right above the worst-starter floor. His legs give the offense a pulse (66.9 PFF run grade at Minnesota).
+The dropback game hasn't shown up.
 
 ## Quarterback: through Week 1 2026 (historical)
 
@@ -66,4 +96,7 @@ Malik Willis (-1.5) is a defensible-to-generous grade for one of the league's wo
 
 ## Bottom line
 
-Chop Robinson is real, and there's a foundation to rebuild on — but Achane's season-ending ACL tear takes away the offense's one elite piece. But a teardown offseason left negative grades everywhere — an unproven quarterback, a stripped receiver room, and a thinned defense — and it would take major overperformance from Willis to pull this toward respectability.
+Chop Robinson is real, and there's a foundation to
+rebuild on defense. But Achane's season-ending ACL tear took the offense's one elite piece, and the
+quarterback hasn't given the passing game anything. Miami is at the bottom of the board, and only
+a major jump from Willis changes that.

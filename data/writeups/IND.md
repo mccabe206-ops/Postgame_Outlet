@@ -1,3 +1,28 @@
+## Week 4: vs Washington in London (W 30–13)
+
+The score flatters the offense. Indianapolis **over-performed its box by about 15 points**: it had
+just 257 yards and 3.9 yards per play, and the model expected 15 points. It won on finishing and
+discipline. It went **3-for-3 in the red zone**: two 5-yard Jonathan Taylor touchdowns (20 carries
+for 95) and a Daniel Jones 4-yard run. Spencer Shrader hit three field goals, and the Colts had
+**one penalty for 5 yards**. The real story was the defense against a Washington offense that lost
+its QB in the first quarter. **Akeem Davis-Gaither (91.6)** and **Jaylon Carlies (91.1)** ran the
+show, Camryn Bynum added 80.3, and Washington managed 12 first downs and 2-of-15 on third down.
+
+**Daniel Jones** struggled for a second straight week: 19-of-34 for 143 yards, 0 TD and 1 INT
+(19.6 QBR, 53.9 rating, 37.6 PFF grade, 32nd of 33 QBs). Injuries: **WR Alec Pierce (starter,
+IR, left heel)** and **WR Keenan Allen (starter, groin, did not play)** are both out, which makes
+Laquon Treadwell the effective starter. **EDGE Arden Key (starter, hamstring)** is out.
+**Davis-Gaither (knee)** and **Carlies** are questionable. C **Tanor Bortolini (starter)** missed
+Wednesday's practice.
+
+- **Jones +0.5 → 0.0 (−0.5):** two poor games in a row (4 turnover-worthy plays in Week 3, 4.2
+  yards per attempt in Week 4). He's back to a middling starter until the passing returns.
+- **Offense held +0.6:** Taylor and the line are fine. The receiver losses were already
+  partly priced in Week 3.
+- **Defense −0.5 → −0.3 (+0.2):** a dominant linebacker performance. It's only +0.2 because it
+  came against a 7th-round rookie QB.
+- **New total 0.6 → 0.3.**
+
 ## Week 3: vs Houston (W 19–17)
 
 Indianapolis snapped a nine-game losing streak on **Spencer Shrader's 53-yard field goal with
@@ -59,7 +84,7 @@ skill group is above average, but Week 1 pulled the quarterback and defense belo
 
 ## Quarterback
 
-Daniel Jones (+0.5) holds his Week 2 grade despite a turnover-prone Week 3 (four turnover-worthy plays, 36.1 QBR). The mobility is back from the Achilles; the consistency is the question for the next few weeks.
+Daniel Jones (0.0) is cut from +0.5 after two straight poor passing games: four turnover-worthy plays in Week 3, then 19-of-34 for 143 yards and a 19.6 QBR in London. The legs and the Achilles recovery look fine; the passing is the question.
 
 ## Quarterback: through Week 1 2026 (historical)
 

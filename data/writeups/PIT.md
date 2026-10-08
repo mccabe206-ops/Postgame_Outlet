@@ -1,3 +1,28 @@
+## Week 4: at Cleveland (L 24–27)
+
+This was a coin flip on Thursday night, and Pittsburgh lost it on a **56-yard field goal with 10
+seconds left**. The box had it dead even (24–24 expected), with about 360 yards and 2 turnovers each.
+Cleveland ran off 21 straight in the second quarter. Aaron Rodgers then led **two fourth-quarter
+touchdown drives** (Darnell Washington from 21, Pat Freiermuth from 3, plus his own 2-point run)
+to tie it at 24 with 1:42 left, and the defense couldn't get the last stop. Rodgers finished 22-of-40
+for 299 yards, 3 TD and 2 INT (49.4 QBR, 83.2 rating, 57.2 PFF grade, 25th of 33 QBs). He was
+sacked 5 times. DK Metcalf had 5 catches for 115. Cam Heyward (89.0) and T.J. Watt (87.8) were
+excellent. Most of the rest of the defense was not.
+
+The bill came in the secondary. **CB Jamel Dean (starter)** left after 16 snaps with an **ankle
+injury** and is expected to miss **a couple of weeks**. 2nd-stringer Daylen Everette is now the
+effective starter. **Jalen Ramsey (starter)** played every snap but has a **fractured wrist** and
+didn't practice Wednesday. That's on top of **S DeShon Elliott (starter, IR)** and slot **Brandon
+Echols (starter, concussion, did not play)**. Two 2nd-string corners are now starting. WR **Michael
+Pittman Jr. (starter)** is playing through a **foot injury**.
+
+- **Rodgers held −1.2:** the late drives were real, but so were 2 INTs and 5 sacks. This is who
+  the rating says he is.
+- **Offense held +0.2.**
+- **Defense +1.0 → +0.7 (−0.3):** the secondary cluster (Dean out a couple of weeks, Ramsey's
+  wrist, Elliott on IR, Echols out). It also let a Watson-led offense score 27.
+- **New total 0.0 → −0.3.**
+
 ## Week 3: vs Cincinnati (W 30–27)
 
 The bounce-back the Week 2 box hinted at. **Aaron Rodgers** threw for 292 yards and three
@@ -53,7 +78,7 @@ Pittsburgh lands right at the waterline — a strong, veteran-laden defense bala
 
 ## Quarterback
 
-Aaron Rodgers (−1.2) is the selected quarterback — cut to −1.5 after the Week 2 loss at New England, then back up 0.3 after the Week 3 bounce-back against Cincinnati. The prior −1.0 value belonged to the Week 1 rating.
+Aaron Rodgers (−1.2) holds after the Week 4 loss at Cleveland: 299 yards and two late tying drives, offset by two interceptions and five sacks. He was cut to −1.5 after Week 2 and moved back up after Week 3.
 
 ## Quarterback: through Week 1 2026 (historical)
 

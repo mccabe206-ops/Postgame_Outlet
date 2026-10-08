@@ -1,3 +1,28 @@
+## Week 4: at Baltimore (L 18–24)
+
+Tennessee was down 24–7 at halftime, won the second half 11–0, and **covered the 8.5**. The box was
+close to the score (BAL 28 – TEN 19 expected). The context is that **Lamar Jackson left with an
+ankle injury just before half**, so the comeback came against Tyler Huntley's offense. Even so,
+this was **Cam Ward's best game as a pro**: 20-of-31 for 222 yards, 1 TD and 1 INT (83.0 rating,
+48.3 QBR) and an **81.3 PFF pass grade, 6th of 33 QBs**. He finished a late drive with a 3-yard TD
+to Wan'Dale Robinson and a 2-point pass to Gunnar Helm. Rookie **Carnell Tate** had 9 catches for
+145 yards, and the line allowed one sack. On defense, John Franklin-Myers (80.0) and Jermaine
+Johnson (78.6, sack) were good. The linebackers (Anthony Hill Jr. 35.8, Cody Barton 39.1) were not.
+
+Injuries: **DT Jeffery Simmons (starter, their best player)** sat out Wednesday with a **back**
+injury ahead of Houston. **S Amani Hooker (starter)** is in the **concussion protocol**, and Tony
+Adams (2nd string) would be the effective starter. **Franklin-Myers (back)**, **Kevin Winston Jr.
+(shoulder)**, **Marcus Harris (knee)**, and **RB Tony Pollard (foot)**, all starters, are
+questionable. RG Carmona (ankle) missed the game, so Atonio Mafi (2nd string) is the effective
+starter.
+
+- **Ward −2.0 → −1.5 (+0.5):** a genuinely good road game on tape. That gives back half of last
+  week's cut. The QBR keeps it from going further.
+- **Offense −1.5 → −1.3 (+0.2):** Tate looks like a real No. 1 receiver, and the line held up.
+- **Defense held −0.7:** it gave up 24 in the first half to Lamar and nothing to Huntley. If Simmons
+  and/or Hooker miss Houston, this drops 0.2.
+- **New total −4.2 → −3.5.**
+
 ## Week 3: at N.Y. Giants (L 7–12)
 
 An ugly one in a nor'easter at MetLife. Tennessee managed **34 yards and no points in the first
@@ -56,10 +81,10 @@ all read below the line.
 
 ## Quarterback
 
-Cam Ward (−2.0) is the 2025 No. 1 overall pick, now in his **second year**, but three games in he
-hasn't produced like it. He's been pressured and inaccurate, with no downfield rhythm. After a
-poor Week 1 (while playing through a right-shoulder injury) and two more below-average starts, he
-drops to near the bottom of the starter tier. The arm talent still gives him a way back up.
+Cam Ward (−1.5) is the 2025 No. 1 overall pick, now in his **second year**. After three
+below-average starts dropped him to −2.0, he played his best game in the Week 4 loss at Baltimore
+(81.3 PFF pass grade, 6th of 33 QBs; a late TD drive and 2-point pass), so half of that cut comes
+back. The arm talent is starting to show up. Consistency is the next test.
 
 ## What moved the number
 

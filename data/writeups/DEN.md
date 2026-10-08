@@ -1,3 +1,49 @@
+## Week 4: at San Francisco (L 14–24)
+
+Denver's defense kept it close for three quarters, but the offense couldn't do enough. The box
+had a fair ~27–19 SF win, and that's about what happened. The Broncos were out-gained **358–296**
+and out-rushed **140–82**, managed **16 first downs**, and reached the red zone exactly once. It
+was **3–3 at the half**. After SF went up 17–6, **Bo Nix** hit **Jaylen Waddle** for a 13-yard TD
+(plus a Tyler Badie two-point run) to make it 17–14 with 4:05 left. Then **George Kittle** broke a
+56-yard touchdown to end it. Nix was clean but ineffective: 25-of-42 for 214 yards, 1 TD, no
+interceptions and no sacks, a 59.0 PFF passing grade (23rd of 33 QBs) and a 43.9 QBR, at 5.1
+yards per attempt. The receivers didn't help (**Waddle 58.3, Sutton 52.6, Franklin 52.1** on PFF).
+The defense was strong again. **Nik Bonitto (76.5)**, **Jahdae Barron (76.1)**, **Zach Allen**
+(four pressures), **Brandon Jones** and **Alex Singleton** all graded in the 70s, but the defense
+lost its best player before halftime.
+
+**Injuries** (depth string: original slot → effective slot):
+- **CB Pat Surtain II** (**right ankle**, non-contact, late in the first half) — **Starter (All-Pro
+  RCB) → out.** His **Achilles is intact**, and it's not believed to be season-ending, but he could
+  miss **multiple games**. Sean Payton "doesn't think" he goes on IR. He did not practice Wednesday.
+- **CB Riley Moss** (**ribs**, 18 seconds before half) — **Starter (LCB) → out.** A source told 9NEWS
+  it won't sideline him long term, but his return is to be determined. He did not practice Wednesday.
+- So **both starting outside corners** are out. **Kris Abrams-Draine** (2024 5th-rounder) and
+  **Jahdae Barron** (2025 1st-rounder) go **2nd string → effective starters** outside. Ja'Quan
+  McMillian stays in the slot.
+- **WR Pat Bryant** (**ankle sprain**, carted off late in the 3rd) — **2nd string (No. 3 WR,
+  rotational: 25 snaps) → out.** Not long-term and not expected on IR, but he did not practice
+  Wednesday. **Troy Franklin** (2nd string) absorbs his snaps; he had 0 targets on 32 snaps
+  Sunday. **WR Marvin Mims Jr.** (2nd string) returned from his foot injury.
+- **TE Adam Trautman** (**shoulder**) — **Starter (TE, 31 snaps) → limited Wednesday.**
+- **OLB Dondrea Tillman** (**hamstring**) — **2nd string (rotational edge) → missed Week 4**, back limited.
+- **EDGE Jonathon Cooper** is still on the Commissioner's Exempt List (not an injury).
+
+**What moved the number:**
+- **Defense +1.5 → +0.8 (−0.7):** this is about availability, not performance — the defense played
+  well again. But it's now without **both starting outside corners**, including Surtain, the best
+  player on the unit. A pass defense built around two outside starters is now relying on a
+  5th-round backup and a second-year player. Barron graded well (76.1) and is a real talent, which
+  is why it's not lower. It gets restored as Surtain and Moss come back.
+- **Offense +0.5 → +0.2 (−0.3):** four games in, the upgraded receiver room isn't separating
+  (Waddle 58.3, Sutton 52.6, Franklin 52.1). The offense had 16 first downs and one red-zone trip,
+  and now it loses Bryant, a big receiver who blocks, with Trautman also banged up. The line
+  (Meinerz 78.9, McGlinchey 76.4) is holding up its end.
+- **QB Nix held at 0.0:** a clean game (no turnovers, no sacks) against a quality defense, but a
+  third below-average outing in four. He stays at the middle-of-the-league grade for now, and it's
+  on watch.
+- **New total +2.0 → +1.0.**
+
 ## Week 3: vs L.A. Rams (W 30–26, Sunday night)
 
 A win Denver will take, but not one the rating should chase. The Broncos were **out-gained
@@ -56,7 +102,7 @@ quarterback — but the defense's Week 1 showing trimmed the number.
 
 ## Quarterback
 
-Bo Nix (0.0) — back at his opening grade. He dipped to −0.5 after Week 3 (17-of-34, 186, 46.4 QBR against the Rams), but one poor game against a top defense shouldn't hold a second-year starter below the middle of the league. He opened at 0.0 as an ascending second-year starter in Sean Payton's system, with upgraded weapons and a strong line. The tools are still there, but the play hasn't matched the grade.
+Bo Nix (0.0) — held at his opening grade after Week 4 at San Francisco (25-of-42, 214, no turnovers, no sacks, 43.9 QBR). He dipped to −0.5 after Week 3 and was restored, and he's on watch: three of four games have been below average. He opened at 0.0 as an ascending second-year starter in Sean Payton's system, with upgraded weapons and a strong line. The tools are still there, but the play hasn't matched the grade.
 
 ## What moved the number
 

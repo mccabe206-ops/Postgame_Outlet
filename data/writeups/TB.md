@@ -1,3 +1,27 @@
+## Week 4: vs Green Bay (L 14–17)
+
+Tampa Bay is **0–4**, but this was the closest it's been. The box had it **TB 17, GB 16**, a coin
+flip lost on a 58-yard field goal and a Green Bay offense that went 3-for-3 on fourth down. UDFA
+rookie **Jalon Daniels** made his first NFL start: 19 of 27, 148 yards, 1 TD (a 10-yarder to Kenny
+Gainwell), **2 INT**, a 53.1 PFF grade (28th of 33), 49.7 QBR and a 65.0 rating. He was safe and
+short, and his legs helped (64.1 run grade). The running game worked (31 carries for 141) and the
+passing game didn't (134 net). The defense was excellent again: **Tykee Smith 90.4**, **A'Shawn
+Robinson 84.9**, **David Walker 84.5**, two takeaways, and 283 yards allowed.
+
+**Injuries:** **S Antoine Winfield Jr. (starter) has a slight rib fracture and is out 2–4
+weeks** (Todd Bowles). He's ruled out for Thursday at Dallas, and **Miles Killebrew (2nd string →
+effective starter)** steps in. CB Benjamin Morrison (quad, 2nd string) and LB SirVocea Dennis
+(ankle, 2nd string) are also out. Starting edge **Rueben Bain Jr. (groin)** is expected back
+Thursday. **Baker Mayfield (starter, right thumb)** is out again, targeting ~Week 7, so Daniels
+remains the effective starter.
+
+**What changed:** nothing. Every component held.
+- **Daniels held −4.5:** a poor but not disastrous first start. The market (TB +2.5) priced him
+  higher, so another competent game would earn him a bump.
+- **Defense held −0.7:** a strong game (+0.2) offsets Winfield's 2–4 weeks out (−0.2). Bain's
+  return is a small plus.
+- **Offense held +0.5.** **Total held at −4.7.**
+
 ## Week 3: vs Minnesota (L 16–23)
 
 Tampa Bay fell to 0–3, and the loss got worse at the end. **Baker Mayfield dislocated his right
@@ -63,12 +87,11 @@ Tampa Bay grades above the line as a genuinely balanced team — a proven quarte
 
 ## Quarterback
 
-Jalon Daniels (−4.5) is the selected quarterback while Baker Mayfield (+1.5) recovers from a
-dislocated right thumb (out at least three weeks, targeting ~Week 7). Daniels is an undrafted
-rookie out of Kansas who beat out Jake Browning for the QB2 job in camp (Browning was released
-Aug. 30). His only regular-season action is three late throws against Minnesota. He sits at the
-bottom of the backup band until he shows more. Baker had been flat before the injury: 17-of-34
-with a 17.0 QBR in Week 3, after a 21-of-34 Week 2 against Cleveland.
+Jalon Daniels (−4.5) is the selected quarterback while Baker Mayfield (+1.5) recovers
+from a dislocated right thumb (out at least three weeks, targeting ~Week 7). Daniels is an
+undrafted rookie out of Kansas. In his first NFL start vs Green Bay he went 19 of 27 for 148 yards
+with 1 TD and 2 INT (53.1 PFF, 49.7 QBR). He sits at the bottom of the backup band until he shows
+more. Baker had been flat before the injury: 17 of 34 with a 17.0 QBR in Week 3.
 
 ## Quarterback: through Week 1 2026 (historical)
 
@@ -87,7 +110,7 @@ Baker Mayfield (+2.0) is a solid above-average grade. He's coming off the best s
 
 ## Bottom line
 
-This is rock bottom for the moment: 0–3, the starting quarterback out for a month, two rookie
-defensive starters hurt, and an offense that hasn't moved the ball in two weeks. The defense is
-better than the record, and Baker's return around Week 7 restores six points to the rating. Until
-then, Tampa Bay grades as one of the league's weakest teams.
+Tampa Bay is 0–4 and missing its starting quarterback, but this defense is better than
+the record. It held Green Bay to 17 with an offense that gave it little help.
+Winfield's rib costs it a few weeks. Baker's return around Week 7 restores six points to the
+rating. Until then, Tampa grades as one of the league's weakest teams.

@@ -1,3 +1,37 @@
+## Week 4: vs Denver (W 24–14)
+
+This was a clean, grown-up win over one of the league's best defenses, and it moves San
+Francisco to 4–0. The 49ers out-gained Denver **358–296**, ran for **140 yards**, and committed
+**zero turnovers and one penalty**. It was only 3–3 at the half despite an ~89-yard first-half
+yardage edge. After Denver closed to 17–14 with four minutes left, **Brock Purdy** found **George
+Kittle** for a **56-yard touchdown** to put it away. Purdy was 19-of-30 for 218 yards and 2 TDs
+with no interceptions (71.8 PFF passing grade, 67.5 QBR) against a top-10 defense. **Christian
+McCaffrey** and **Deebo Samuel** added short TDs. The two scares from Week 3 both played and
+played well. **Mike Evans** (ribs) graded **88.9**, and **Trent Williams** (neck) went all 66 snaps
+at **78.5**. The defense, still without **Nick Bosa**, held Denver to 16 first downs and one
+red-zone trip (**Malik Mustapha 81.4, Ji'Ayir Brown 69.8, Dre Greenlaw** four pressures).
+
+**Injuries** (depth string: original slot → effective slot):
+- **FB Kyle Juszczyk** (**knee sprain + bone bruise**) — **Starter (FB) → out two to three weeks.**
+  That's a real loss in Shanahan's run game.
+- **S Marques Sigle** (**high-ankle sprain**) — **Starter → expected to miss multiple weeks.**
+  **Malik Mustapha** is **2nd string → effective starter** next to Ji'Ayir Brown.
+- **DE Nick Bosa** (**calf strain**) — **Starter → still out "a few weeks."** **DE Mykel Williams**
+  (**ACL recovery**, PUP) — **Starter → still out.** **Keion White** and **Romello Height** are
+  2nd string → effective starters at end.
+- **WR Mike Evans** (**ribs**) — **Starter → questionable, played** (39 snaps). **LT Trent Williams**
+  (**neck**) — **Starter → resolved**, played every snap.
+- **WR Christian Kirk** (**calf**, IR) — **role unclear (WR depth) → targeting a Week 6 return to
+  practice.** **WR Ricky Pearsall** (**PCL surgery**) — **Starter → out for the season.**
+
+**What moved the number:**
+- **Offense +0.7 → +0.9 (+0.2):** last week's −0.3 was for Evans and Trent Williams. Both came
+  back and graded well. Juszczyk's 2–3 week absence keeps it just short of a full restore.
+- **Defense held at +0.7:** a strong game without Bosa, offset by losing starting safety Sigle
+  for multiple weeks.
+- **Purdy held at +3.2.**
+- **New total +4.6 → +4.8.**
+
 ## Week 3: vs Arizona (W 36–30)
 
 San Francisco moved to 3–0, but this was the first game where the injury pile showed. The box had
@@ -58,10 +92,7 @@ confidence.
 
 ## Quarterback
 
-Brock Purdy (+3.2, held) is the selected quarterback. Through three games he's 60-of-83 for 789
-yards with 9 touchdowns and 1 interception, including a near-perfect Week 2 (20-of-22, 99.7 PFF)
-and a 4-touchdown Week 3 (133.8 rating, 2nd-best of the week). He's a settled, above-average
-starter running a machine. The question now is how much of the machine is healthy around him.
+Brock Purdy (+3.2, held) is the selected quarterback. Through four games he's 79-of-113 for 1,007 yards with 11 touchdowns and 1 interception, including a near-perfect Week 2 (20-of-22, 99.7 PFF), a 4-touchdown Week 3, and a clean 2-TD game against Denver's elite defense in Week 4. He's a settled, above-average starter running a machine. The question now is how much of the machine is healthy around him.
 
 ## Quarterback: through Week 1 2026 (historical)
 

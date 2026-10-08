@@ -1,3 +1,32 @@
+## Week 4: at Tampa Bay (W 17–14)
+
+A grinding road win in a coin-flip game. The box had it **TB 17, GB 16**. Neither offense got
+going: Green Bay had **283 yards and went 2-of-10 on third down**, Tampa had 275. The Packers won
+it on three plays: a **2-yard Love → Matthew Golden TD**, **Trey Smack's 58-yard FG at the half**,
+and a 2-yard Love → Tucker Kraft TD to open the 3rd quarter. They also went **3-for-3 on fourth
+down**. Jordan Love had his best game of 2026 (22 of 30, 197 yards, 2 TD, 1 INT, **78.2 PFF grade,
+11th of 33**, 63.9 QBR, 98.9 rating) behind a line that allowed no sacks. The defense held Tampa's
+rookie QB to 134 net passing yards.
+
+**Injuries:** the win cost Green Bay its best defender. **LB Edgerrin Cooper (starter) tore his
+Achilles and is out for the season** (MRI confirmed, now on IR). He had a **90.5 PFF grade** in
+this game before he went down. **Isaiah McDuffie (2nd string → effective starter)** takes his spot.
+**Micah Parsons** (starter, torn ACL, PUP) is eligible but **won't practice this week and won't
+play Week 5**, and reporting suggests he may not play until November. Starters **Devonte Wyatt
+(ankle)** and **Lukas Van Ness (shoulder)** are questionable. **Josh Jacobs** (starter) is still
+on the Commissioner's Exempt List, so the 2nd-string backs remain the effective starters.
+
+**What changed: nothing. All three components held (total −0.3).**
+- **Why no move:** Green Bay won, but it was a very unimpressive win against a bad Tampa team
+  starting a rookie quarterback. A 3-point game the box called a coin flip, 283 yards and 2-of-10 on
+  third down don't earn a raise. They don't earn a cut either.
+- **Love held +0.5:** one good game after three below-average ones. He needs to string a few
+  together to climb back.
+- **Offense held 0.0:** LT Jordan Morgan (41.2 grade) is a weak point, and third downs were bad.
+- **Defense held −0.8:** losing Cooper for the season hurts, but the unit played a sound game against a
+  weak offense. **Watch:** Cooper's Achilles and Parsons' delayed return. If the defense slips without
+  them, it comes down next.
+
 ## Week 3: vs Atlanta (L 14–35, TNF)
 
 A home-opening beatdown that exposed how much of this roster isn't on the field. Atlanta **out-rushed
@@ -45,8 +74,10 @@ Green Bay now grades below the line — not because the core talent vanished, bu
 
 ## Quarterback
 
-Jordan Love (+0.5) is an average-plus, still-developing starter — cut a half-point after three
-below-average games behind a failing line. The arm talent and flashes of top-tier play are there; the number stops short of elite because the consistency and durability haven't fully arrived. This is a quarterback the model likes and expects to keep climbing, not one it's ready to price with the game's best yet.
+Jordan Love (+0.5) is an average-plus, still-developing starter, held this week. His
+best game of the year at Tampa (78.2 PFF, 11th of 33; 98.9 rating) followed three below-average
+games behind a failing line. The arm talent and flashes are there. The number won't climb back
+until the consistency does.
 
 ## What moved the number
 
@@ -55,4 +86,7 @@ below-average games behind a failing line. The arm talent and flashes of top-tie
 
 ## Bottom line
 
-Green Bay is now below the line: a quarterback under siege, an offense missing its lead back and two starting linemen, and a defense waiting on Parsons. The number climbs back in steps — Parsons (~Week 5), Banks, and above all Jacobs, if and when the league clears him.
+Green Bay is below the line. Its quarterback is steadying,
+but the offense is missing its lead back and two starting linemen, and the defense just lost
+Edgerrin Cooper for the year while Parsons' return slides toward November. The number comes back
+in steps: Parsons first, then Jacobs if and when the league clears him.
