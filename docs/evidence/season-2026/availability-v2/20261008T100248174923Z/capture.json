@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-08T10:02:50.625929+00:00",
+  "sources": [
+    {
+      "bytes": 375304,
+      "captured_at": "2026-10-08T10:02:50.344431+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "3e5c51e3918385ea0545aad202caf74ed929d6066fdfda78f6090738f152ecb4",
+      "started_at": "2026-10-08T10:02:50.198342+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 506487,
+      "captured_at": "2026-10-08T10:02:50.519874+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "54b2ce3455ae71cb42cbf516275efd9f945439fdbf13ded81a2117caaadc6c39",
+      "started_at": "2026-10-08T10:02:50.198675+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 358323,
+      "captured_at": "2026-10-08T10:02:50.447420+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.buccaneers.com/news/",
+      "kind": "team_news",
+      "sha256": "ea702b2a759b851c1f54687abd61b7603ec9f6709901749e9df32736f6169fa1",
+      "started_at": "2026-10-08T10:02:50.198926+00:00",
+      "status": 200,
+      "team": "TB",
+      "url": "https://www.buccaneers.com/news/"
+    },
+    {
+      "bytes": 1605470,
+      "captured_at": "2026-10-08T10:02:50.465689+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "09213e6fc3272a11f0543bad8e6652f1ce66f43a757fd3ef97b7102598d4011b",
+      "started_at": "2026-10-08T10:02:50.199129+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}
