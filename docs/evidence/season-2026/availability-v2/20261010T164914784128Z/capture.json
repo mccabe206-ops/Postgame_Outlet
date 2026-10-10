@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-10T16:49:17.503354+00:00",
+  "sources": [
+    {
+      "bytes": 409881,
+      "captured_at": "2026-10-10T16:49:17.081169+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "257eb05fe52f855c900f6bef11cf86fe7b002c2e770d6250895fa36f05146265",
+      "started_at": "2026-10-10T16:49:16.854992+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 395988,
+      "captured_at": "2026-10-10T16:49:17.184450+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.jaguars.com/news/",
+      "kind": "team_news",
+      "sha256": "14ac81158b2ef52e7926ac7aba74ddb5218a52a9577cb9b1118af77d8f3053b4",
+      "started_at": "2026-10-10T16:49:16.855289+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/"
+    },
+    {
+      "bytes": 537357,
+      "captured_at": "2026-10-10T16:49:17.063499+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "937ad4d670c872d6b4f667cb91f2dc7db50a9c670d027b5ef595f7a7576d08e7",
+      "started_at": "2026-10-10T16:49:16.855503+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "bytes": 1599999,
+      "captured_at": "2026-10-10T16:49:17.392142+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "857a75f09f09aee5e1a7a8a046d29069337c249e83627a0fe1583000738d2a0b",
+      "started_at": "2026-10-10T16:49:16.855682+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}
