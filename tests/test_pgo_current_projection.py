@@ -1,5 +1,6 @@
 """Current projections are independent of the immutable weekly forecasting record."""
 import copy
+import base64
 import importlib
 import importlib.util
 import inspect
@@ -82,6 +83,60 @@ class CurrentProjectionTests(unittest.TestCase):
         self.state['checked_at'] = self.clock
         self.state['source_captures'] = [ref for ref in refs if 'path' in ref]
         return api
+
+    def later_projection(self):
+        self.refresh()
+        earlier = copy.deepcopy(self.state['current_projections'][GAME])
+        self.state['results'].append(dict(game_id=GAME, week=1, finalized_at=self.clock))
+        self.clock = '2026-09-13T23:30:00Z'
+        game = next(g for g in self.state['schedule'] if g['game_id']=='2026_01_DAL_NYG')
+        roster = season.csv_rows(self.inputs['roster'][0])
+        player = season.select_roster(roster, season.csv_rows(self.inputs['depth'][0]), self.clock)['DAL']
+        record = json.loads(self.announcement)
+        statement = player['full_name']+' will start at quarterback.'
+        article = dict(**{'@type':'NewsArticle'}, headline='DALvsNYG Week 1', articleBody=statement,
+                       datePublished=record['published_at'], dateModified=record['modified_at'])
+        raw = ('<script type="application/ld+json">'+json.dumps(article)+'</script>').encode()
+        record.update(url='https://www.dallascowboys.com/news/starter',
+                      final_url='https://www.dallascowboys.com/news/starter', body_base64=base64.b64encode(raw).decode(),
+                      raw_bytes=len(raw), raw_sha256=season.sha(raw),
+                      decision=dict(team='DAL', gsis_id=player['gsis_id'], full_name=player['full_name'],
+                                    statement=statement, game={k:game[k] for k in season.IDENTITY}))
+        raw = season.canonical(record); digest = season.sha(raw)
+        source = dict(url=record['url'], path='source-archive/'+digest+'.json', sha256=digest,
+                      bytes=len(raw), captured_at=record['captured_at'])
+        (self.root/source['path']).write_bytes(raw)
+        self.config.write_bytes(season.canonical(dict(schema_version=1,
+            announcements=[dict(game_id=game['game_id'], source=source)])))
+        api = self.refresh()
+        self.assertEqual(self.state['current_projection_check']['status'], 'READY', self.state['current_projection_check'])
+        return api, earlier, game['game_id']
+
+    def test_completed_current_week_authority_survives_later_full_calculation(self):
+        api, earlier, key = self.later_projection()
+        later = self.state['current_projections'][key]
+        atl = next(row for row in later['rankings']['teams'] if row['team']=='ATL')
+        self.assertEqual(atl['qb_gsis_id'], RUSH)
+        annotation = later['model_inputs']['starter_announcements'][GAME][0]
+        self.assertEqual(annotation['verified_at'], earlier['inputs_as_of'])
+        self.assertEqual(self.state['current_projections'][GAME], earlier)
+        self.assertEqual(self.state['weeks'], self.original['weeks'])
+        self.assertEqual(self.state['rankings'], self.original['rankings'])
+        season.save_state(self.state, self.root)
+        self.assertEqual(season.load_current(self.root), self.state)
+        for label in ('absent authority', 'forged clock', 'future clock', 'wrong week', 'self reference', 'identity'):
+            malformed = copy.deepcopy(self.state)
+            row = malformed['current_projections'][key]['model_inputs']['starter_announcements'][GAME][0]
+            if label == 'absent authority': del malformed['current_projections'][GAME]
+            elif label == 'forged clock': row['verified_at'] = '2026-09-13T17:04:00Z'
+            elif label == 'future clock': row['verified_at'] = '2026-09-14T23:30:00Z'
+            elif label == 'wrong week': malformed['current_projections'][GAME]['week'] = 2
+            elif label == 'self reference':
+                own = malformed['current_projections'][key]
+                own['starter_announcements'][0]['verified_at'] = own['inputs_as_of']
+                own['model_inputs']['starter_announcements'][key][0]['verified_at'] = own['inputs_as_of']
+            else: row['full_name'] = 'Invented Player'
+            with self.subTest(label=label), self.assertRaises(ValueError): api.validate(malformed, self.root)
 
     def test_real_model_can_build_postlock_current_games_without_revising_weekly_records(self):
         self.assertIn('current_projection', inspect.signature(season.build_next).parameters,

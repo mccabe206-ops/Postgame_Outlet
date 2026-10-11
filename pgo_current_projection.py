@@ -33,7 +33,7 @@ def _games(state, checked_at):
 
 def refresh(state, root):
     """Build only explicitly verified current starters; leave every issued week alone."""
-    from pgo_expected_starters import apply_current
+    from pgo_expected_starters import apply_current, select_player, verify_current
     from pgo_season_availability import capture_availability, UNAVAILABLE
     checked = season.now()
     refs = []
@@ -50,6 +50,27 @@ def refresh(state, root):
                         if game['week'] == state['rankings']['completed_week']+1
                         and game['game_id'] not in {row['game_id'] for row in state.get('results', [])}]
         selected, annotations = apply_current({}, roster, current_week, root, season.now(), depth=depth)
+        live_teams = {row['team'] for rows in annotations.values() for row in rows}
+        carried_teams = set()
+        scheduled = {game['game_id']:game for game in state['schedule']}
+        for key, earlier in state.get('current_projections', {}).items():
+            if earlier['week'] != state['rankings']['completed_week']+1:
+                continue
+            require(earlier['rankings']['completed_week'] == state['rankings']['completed_week']
+                    and key in scheduled and identity(earlier, scheduled[key]),
+                    'Carried current starter game or completed-week basis differs')
+            own = earlier['starter_announcements']
+            verify_current(earlier, own, root)
+            for row in own:
+                team = row['team']
+                if team in live_teams:
+                    continue
+                require(team not in carried_teams and 'verified_at' not in row
+                        and utc(earlier['inputs_as_of']) < utc(checked),
+                        'Carried current starter is conflicting or not earlier')
+                carried_teams.add(team)
+                selected[team] = select_player(roster, row, scheduled[key])
+                annotations.setdefault(key, []).append(dict(copy.deepcopy(row), verified_at=earlier['inputs_as_of']))
         verified = [game for game in games if annotations.get(game['game_id'])]
         require(len(verified) == len(games), 'Current starter authority is missing for an applicable game')
         refs += [row['source'] for rows in annotations.values() for row in rows]
@@ -225,7 +246,18 @@ def _replay(state, game, root):
                 'Current model starter game differs')
         for row in rows:
             require(row['source'] in game['source_captures'], 'Current model starter source is absent')
-            decision = _announcement(schedule[key], row['source'], root, game['inputs_as_of'], purpose='current_projection')
+            verified_at = row.get('verified_at', game['inputs_as_of'])
+            if 'verified_at' in row:
+                earlier = state.get('current_projections', {}).get(key)
+                original = {field:value for field,value in row.items() if field != 'verified_at'}
+                require(key != game['game_id'] and earlier is not None
+                        and identity(earlier, schedule[key]) and earlier['week'] == game['week']
+                        and earlier['rankings']['completed_week'] == completed
+                        and verified_at == earlier['inputs_as_of']
+                        and utc(verified_at) < utc(game['inputs_as_of'])
+                        and original in earlier['starter_announcements'],
+                        'Carried current starter authority or clock differs')
+            decision = _announcement(schedule[key], row['source'], root, verified_at, purpose='current_projection')
             team = decision['team']
             require(team not in selected and all(row[field] == decision[field] for field in ('team','gsis_id','full_name')),
                     'Current model starter identity differs')
