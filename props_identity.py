@@ -29,6 +29,21 @@ def roster(season):
     return idx
 
 
+_LAST = {}
+
+
+def _by_last(season):
+    if season not in _LAST:
+        idx = {}
+        for recs in roster(season).values():
+            for c in recs:
+                parts = _norm(c["name"]).split()
+                if parts:
+                    idx.setdefault(parts[-1], []).append(c)
+        _LAST[season] = idx
+    return _LAST[season]
+
+
 def resolve(name, season, teams=None):
     """Return the player dict, or None if unknown / ambiguous."""
     cands = roster(season).get(_norm(name), [])
@@ -42,10 +57,8 @@ def resolve(name, season, teams=None):
         # last-name + first-initial fallback ("P.Nacua", "Pat Freiermuth" vs "Patrick")
         n = _norm(name).split()
         if len(n) >= 2:
-            last, init = n[-1], n[0][0]
-            pool = [c for recs in roster(season).values() for c in recs
-                    if _norm(c["name"]).split()[-1] == last
-                    and _norm(c["name"]).startswith(init)]
+            pool = [c for c in _by_last(season).get(n[-1], [])
+                    if _norm(c["name"]).startswith(n[0][0])]
             if teams:
                 pool = [c for c in pool if c["team"] in {t.upper() for t in teams}] or pool
             if len(pool) == 1:

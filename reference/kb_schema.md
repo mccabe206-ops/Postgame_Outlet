@@ -12,7 +12,8 @@ raw SQL or canned reports. This doc is the map: read it, then write SQL for anyt
   phase (PFR/supplemental, scrape-sensitive) and not here yet.
 - **Betting:** `games` has closing `spread_line` / `total_line` (well-populated 1999+) and
   moneylines (more recent). **No historical player-prop odds** (not freely available) — the KB
-  powers prop *models* from player stats, not historical prop lines.
+  powers prop *models* from player stats; live prop prices come from `props_markets.py`
+  (Kalshi / Polymarket / Odds API) and are logged forward in `data/props/ledger.jsonl`.
 - **Source:** nflverse (CC BY 4.0) — Lee Sharpe `nfldata` games + nflverse-data weekly stats,
   rosters. Team abbreviations are normalized to today's 32 (OAK→LV, SD→LAC, STL/LA→LAR, etc.).
 - This is a **living** DB (unpinned). Rebuild/refresh: `python3 kb_build.py` (see bottom).
@@ -69,6 +70,30 @@ snapshot_at`. Join to `fantasy_value` on `sleeper_id` for name/pos/team.
 > Sleeper tables are a **current snapshot** (rebuilt each `kb_build.py --sources sleeper`), not
 > history. **No ADP or weekly projections** — not in the free Sleeper API.
 
+### `pbp` — play-by-play (nflverse nflfastR, **2016+**, streamed + trimmed)
+One row per play, 64 of nflverse's 372 columns (see `kb_build.PBP_COLS`): `game_id, season,
+week, season_type, posteam, defteam, play_type, yardline_100, down, ydstogo, qtr`, the
+`passer/rusher/receiver/td_player_id` (+ `_name`) keys, `pass_attempt, rush_attempt,
+complete_pass, air_yards, yards_after_catch, yards_gained, passing/rushing/receiving_yards,
+touchdown, pass_touchdown, rush_touchdown, interception, sack, qb_scramble, two_point_attempt,
+fumble_lost, penalty, score_differential, wp, vegas_wp, spread_line, total_line, epa, success,
+cpoe, xpass, pass_oe, shotgun, no_huddle`. Player ids are **GSIS** (= `player_week.player_id`).
+- **Red zone** = `yardline_100 <= 20`; inside-10 = `<= 10`. Targets = `pass_attempt=1 AND
+  sack=0 AND receiver_player_id IS NOT NULL`.
+- Position isn't on pbp: join `player_week` (season, player_id) for it.
+- Teams normalized like the other tables (LA→LAR); Washington is **`WAS`** in the KB (ESPN uses
+  `WSH`).
+
+```sql
+-- red-zone targets by team defense allowed to WRs, 2026
+SELECT p.defteam, COUNT(*) FROM pbp p
+JOIN (SELECT DISTINCT player_id, position FROM player_week WHERE season=2026) w
+  ON w.player_id = p.receiver_player_id
+WHERE p.season=2026 AND p.season_type='REG' AND p.yardline_100<=20
+  AND p.pass_attempt=1 AND p.sack=0 AND w.position='WR'
+GROUP BY p.defteam ORDER BY 2 DESC;
+```
+
 ## Canned reports (betting + fantasy shortcuts)
 ```bash
 python3 kb_query.py --report ats --team NE --since 2010 [--home|--away|--div|--fav|--dog|--rest]
@@ -115,12 +140,16 @@ situational filters), **Fantasy** (PPR leaders/usage + Sleeper trending adds/dro
 ## Rebuild / refresh
 ```bash
 python3 kb_build.py                       # all sources, 1999–2026 (idempotent full rebuild)
-python3 kb_build.py --seasons 2024-2025   # just recent seasons (in-season refresh)
+python3 kb_build.py --sources player_week,pbp   # in-season refresh (what props_nightly runs)
 python3 kb_build.py --sources games,player_week
 ```
+> ⚠️ Each listed table is **dropped and rebuilt from `--seasons` only** — `--seasons 2024-2025
+> --sources player_week` would delete every other season. Refresh with the full default range.
+> `pbp` ignores seasons before 2016 by design.
 
 ## Roadmap (not built yet)
-Play-by-play (nflfastR 1999+); pre-1999 scores via PFR; PFR/TeamRankings targeted enrichment;
+Pre-2016 play-by-play; pre-1999 scores via PFR; PFR/TeamRankings targeted enrichment;
 Sleeper **ADP/projections** (undocumented endpoints or FantasyPros — free API lacks them);
 trending *history* (currently latest snapshot only); deeper betting-line history.
-_(Done: query CLI, betting/fantasy reports, Sleeper trending + value, the guru dashboard.)_
+_(Done: query CLI, betting/fantasy reports, Sleeper trending + value, the guru dashboard,
+play-by-play 2016+ for the Prop Board.)_

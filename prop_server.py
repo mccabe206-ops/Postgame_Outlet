@@ -131,8 +131,12 @@ def api_edge(q):
         import props_model
     except Exception as e:  # noqa: BLE001
         return {"ready": False, "why": f"model not built yet ({e.__class__.__name__})"}
-    return props_model.edge_board(event=(q.get("event") or [""])[0],
-                                  market=(q.get("market") or [""])[0])
+    board = props_model.edge_board(event=(q.get("event") or [""])[0],
+                                   market=(q.get("market") or [""])[0])
+    if board.get("ready") and not (q.get("event") or q.get("market")):
+        board["logged"] = props_model.log_board(board)  # pre-game rows only
+    board["ledger"] = props_model.ledger_summary()
+    return board
 
 
 PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
@@ -237,10 +241,15 @@ async function markets(){
   t.appendChild(tr);}); $('mout').innerHTML='';$('mout').appendChild(t);
 }
 async function refresh(odds){$('mstat').textContent='Pulling…';const d=await post('/api/refresh',{oddsapi:odds});$('mstat').textContent=(d.log||[]).join(' | ');markets();}
-async function edge(){const d=await (await fetch('/api/edge')).json();
- if(!d.ready){$('eout').textContent='Edge board not live yet: '+(d.why||'')+'. Leans only appear once the model is calibrated.';return;}
- $('eout').innerHTML='';const t=el('table');t.innerHTML='<tr><th>Player</th><th>Game</th><th>Market</th><th>Line</th><th>Model</th><th>Best price</th><th>Edge</th><th>Lean</th><th>Caveats</th></tr>';
- for(const r of d.rows){const tr=el('tr',r.lean?'':'thin');[r.player,r.event_key,r.market,'o'+r.line,pct(r.p_model),pct(r.p_market)+' '+r.best_book,(r.edge>0?'+':'')+(100*r.edge).toFixed(1),r.lean||'no edge',(r.caveats||[]).join('; ')].forEach(v=>tr.appendChild(el('td',null,v)));t.appendChild(tr);}
+async function edge(){$('eout').textContent='Computing…';const d=await (await fetch('/api/edge')).json();
+ if(!d.ready){$('eout').textContent='Edge board not live yet: '+(d.why||'')+'.';return;}
+ $('eout').innerHTML='';const L=d.ledger||{};const leans=d.rows.filter(r=>r.lean).length;
+ const ban=el('div','card');ban.innerHTML=`<b>${d.proven?'Model record verified':'UNPROVEN'}</b> — Week ${d.week} · prices ${d.fetched_at} · ${leans} leans of ${d.rows.length} priced props. `+
+  `Model weight ${Math.round(100*d.w_model)}% vs market. Ledger: ${L.graded||0} graded` + (L.leans_graded?`, leans ${L.leans_graded} · win ${pct(L.lean_win_rate)} · ROI ${(100*L.lean_roi).toFixed(1)}%`:'')+
+  (L.brier_model!=null?` · Brier model ${L.brier_model.toFixed(3)} vs market ${L.brier_market.toFixed(3)}`:'')+
+  `. <span class="note">Leans need ≥4pt edge after blending with the market, a calibrated bin, ≥3 games, no injury tag and no role change. Treat as research until the ledger proves it.</span>`;
+ $('eout').appendChild(ban);const t=el('table');t.innerHTML='<tr><th>Player</th><th>Game</th><th>Market</th><th>Line</th><th>Model</th><th>Market fair</th><th>Blend</th><th>Best price</th><th>Edge</th><th>Lean</th><th>Caveats</th></tr>';
+ for(const r of d.rows){const tr=el('tr',r.lean?'':'thin');[r.player,r.event_key,r.market,'o'+r.line,pct(r.p_model)+` (${r.mean})`,pct(r.p_fair),pct(r.p_blend),pct(r.p_market)+' '+r.best_book+' '+r.side,(r.edge>0?'+':'')+(100*r.edge).toFixed(1),r.lean||'no edge',(r.caveats||[]).join('; ')].forEach(v=>tr.appendChild(el('td',null,v)));t.appendChild(tr);}
  $('eout').appendChild(t);}
 async function sources(){const d=await (await fetch('/api/sources')).json();
  const t=el('table');t.innerHTML='<tr><th>Account</th><th>Claims</th><th>Claims true</th><th>Graded picks</th><th>Hit rate</th></tr>';

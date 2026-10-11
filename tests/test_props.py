@@ -1,6 +1,7 @@
 """Prop Board: claim parsing, verification math, market adapters (no network)."""
 
 import json
+import math
 import os
 import shutil
 import sqlite3
@@ -89,6 +90,7 @@ class _KBCase(unittest.TestCase):
                                    lambda sql, params=(): real_query(sql, params, self.db))
         self.p.start()
         props_identity._CACHE.clear()
+        props_identity._LAST.clear()
         self.p2 = mock.patch.object(pv, "injury_status", return_value=None)
         self.p2.start()
 
@@ -96,6 +98,7 @@ class _KBCase(unittest.TestCase):
         self.p.stop()
         self.p2.stop()
         props_identity._CACHE.clear()
+        props_identity._LAST.clear()
         shutil.rmtree(self.tmp, ignore_errors=True)
 
 
@@ -270,3 +273,44 @@ class PbpLoaderTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ModelMathTests(unittest.TestCase):
+    def setUp(self):
+        import props_model
+        self.pm = props_model
+
+    def test_p_over_monotone_in_line_for_every_market(self):
+        for m, mean in (("rec_yds", 55), ("pass_yds", 240), ("rush_yds", 60),
+                        ("receptions", 4.6), ("pass_tds", 1.6), ("pass_ints", 0.8),
+                        ("anytime_td", 0.45)):
+            lines = [0.5, 1.5, 2.5, 3.5] if m in ("receptions", "pass_tds", "pass_ints",
+                                                   "anytime_td") else [10.5, 40.5, 80.5,
+                                                                       200.5]
+            ps = [self.pm.p_over(mean, ln, m) for ln in lines]
+            self.assertTrue(all(0.0 <= p <= 1.0 for p in ps), (m, ps))
+            self.assertEqual(ps, sorted(ps, reverse=True), m)
+
+    def test_yardage_median_near_mean(self):
+        p = self.pm.p_over(60, 59.5, "rec_yds")
+        self.assertTrue(0.35 < p < 0.6, p)
+
+    def test_anytime_td_poisson_limit(self):
+        P = dict(self.pm.PARAMS, R=dict(self.pm.PARAMS["R"], anytime_td=1e6))
+        self.assertAlmostEqual(self.pm.p_over(0.5, 0.5, "anytime_td", P),
+                               1 - math.exp(-0.5), places=6)
+
+    def test_nb_cdf_sums_to_one(self):
+        self.assertAlmostEqual(self.pm._nb_cdf(200, 4.0, 5.0), 1.0, places=6)
+
+    def test_calibration_gate(self):
+        cal = {"rec_yds": {"bins": [{"lo": 0.5, "hi": 0.6, "n": 500, "pred": 0.55,
+                                     "obs": 0.56},
+                                    {"lo": 0.6, "hi": 0.7, "n": 500, "pred": 0.65,
+                                     "obs": 0.55},
+                                    {"lo": 0.7, "hi": 0.8, "n": 20, "pred": 0.75,
+                                     "obs": 0.75}]}}
+        self.assertTrue(self.pm._calibrated(cal, "rec_yds", 0.55)[0])
+        self.assertFalse(self.pm._calibrated(cal, "rec_yds", 0.65)[0])  # off by 10 pts
+        self.assertFalse(self.pm._calibrated(cal, "rec_yds", 0.75)[0])  # thin bin
+        self.assertFalse(self.pm._calibrated({}, "rec_yds", 0.55)[0])
