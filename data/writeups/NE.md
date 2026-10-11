@@ -1,3 +1,18 @@
+## Week 5 preview: vs Las Vegas
+
+**What changed (1.3 → 0.3): Defense +0.5 → −0.3 (−0.8); Offense −0.7 → −0.9 (−0.2).**
+- **Defense +0.5 → −0.3 (−0.8):** the cornerback room is gone. **CB1 Christian Gonzalez
+  (shoulder)** misses a second straight game, and **CB2 Carlton Davis III (neck)** is out. So are
+  the next two men up, **Karon Prunty** and **Channing Canada** (both hamstrings). That puts New
+  England on its **4th- and 5th-string corners**. **Charles Woods** (2nd string → effective CB1),
+  who was the weak spot in Week 4, is himself questionable (shoulder). **S Craig Woodson**, **DT
+  Christian Barmore**, **EDGE Dre'Mont Jones** and **LB Christian Elliss** are also questionable.
+- **Offense −0.7 → −0.9 (−0.2):** **WR Mack Hollins (calf)** went to IR on Saturday. He was the
+  effective WR1 with **A.J. Brown** on IR, so Efton Chism III and Romeo Doubs carry the group until
+  Brown is eligible in Week 6. **RB Rhamondre Stevenson** is questionable; **TreVeyon Henderson**
+  starts if he sits.
+- These are availability moves, so the number comes back as the corners return.
+
 ## Week 4: at Buffalo (W 29–26)
 
 The bounce-back game New England needed, and the box backs it up. The Patriots out-gained the
