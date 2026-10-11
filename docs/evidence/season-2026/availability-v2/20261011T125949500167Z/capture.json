@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-11T12:59:50.155113+00:00",
+  "sources": [
+    {
+      "bytes": 403968,
+      "captured_at": "2026-10-11T12:59:49.589667+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "ba97480c2eaefeb1dce7f19f22486e93c9a144cf8fdafd8da63c73019fa26727",
+      "started_at": "2026-10-11T12:59:49.509561+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 388798,
+      "captured_at": "2026-10-11T12:59:49.769034+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.jaguars.com/news/",
+      "kind": "team_news",
+      "sha256": "051edb3e5039e7be882d0a144347b5bc60902ef26d7ba0c17582acdc54493ec4",
+      "started_at": "2026-10-11T12:59:49.509865+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/"
+    },
+    {
+      "bytes": 530641,
+      "captured_at": "2026-10-11T12:59:49.837515+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "fc522752d404ba5b8d410b61f91e1c4b10ca207dd024dcdb1e87c6ac97fdca99",
+      "started_at": "2026-10-11T12:59:49.510279+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "bytes": 1584717,
+      "captured_at": "2026-10-11T12:59:49.679138+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "0a4cc6745506da2ef4709e7ca4e9f6534739731f426fac2b34bc4cf18fbc0487",
+      "started_at": "2026-10-11T12:59:49.510620+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 316854,
+      "captured_at": "2026-10-11T12:59:50.045899+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.jaguars.com/news/in-and-out-2026-week-5-murray-inactive-for-eagles-vs-jaguars",
+      "kind": "official_inactives",
+      "sha256": "18e558e97221dab9b4e26f6a65adab75a103e3904b5811b11b3f949f44d52d63",
+      "started_at": "2026-10-11T12:59:49.931051+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/in-and-out-2026-week-5-murray-inactive-for-eagles-vs-jaguars"
+    },
+    {
+      "bytes": 846711,
+      "captured_at": "2026-10-11T12:59:50.026699+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-5-inactives-players-ruled-out-sunday-2026-season",
+      "kind": "official_inactives",
+      "sha256": "ed95752ddd7d8fd2d899e0aea8ac6915b868865c38f854627e6672d976c9f272",
+      "started_at": "2026-10-11T12:59:49.931397+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-5-inactives-players-ruled-out-sunday-2026-season"
+    }
+  ]
+}
