@@ -34,6 +34,7 @@ def _games(state, checked_at):
 def refresh(state, root):
     """Build only explicitly verified current starters; leave every issued week alone."""
     from pgo_expected_starters import apply_current, select_player, verify_current
+    from pgo_sources import CURRENT_TEAMS
     from pgo_season_availability import capture_availability, UNAVAILABLE
     checked = season.now()
     refs = []
@@ -49,9 +50,10 @@ def refresh(state, root):
         current_week = [game for game in state['schedule']
                         if game['week'] == state['rankings']['completed_week']+1
                         and game['game_id'] not in {row['game_id'] for row in state.get('results', [])}]
-        selected, annotations = apply_current({}, roster, current_week, root, season.now(), depth=depth)
+        selected, annotations = apply_current({}, roster, current_week, root, season.now(), resolve_defaults=False)
         live_teams = {row['team'] for rows in annotations.values() for row in rows}
         carried_teams = set()
+        carried = []
         scheduled = {game['game_id']:game for game in state['schedule']}
         for key, earlier in state.get('current_projections', {}).items():
             if earlier['week'] != state['rankings']['completed_week']+1:
@@ -70,7 +72,16 @@ def refresh(state, root):
                         'Carried current starter is conflicting or not earlier')
                 carried_teams.add(team)
                 selected[team] = select_player(roster, row, scheduled[key])
-                annotations.setdefault(key, []).append(dict(copy.deepcopy(row), verified_at=earlier['inputs_as_of']))
+                annotation = copy.deepcopy(row)
+                annotations.setdefault(key, []).append(annotation)
+                carried.append((key, earlier, annotation))
+        remaining = set(CURRENT_TEAMS) - set(selected)
+        if remaining:
+            selected.update(season.select_roster(roster, depth, checked, teams=remaining))
+        ids = [row['gsis_id'] for row in selected.values()]
+        require(set(selected) == set(CURRENT_TEAMS) and len(set(ids)) == len(CURRENT_TEAMS)
+                and all(isinstance(pid, str) and re.fullmatch(r'00-\d{7}', pid) for pid in ids),
+                'Current starter identities differ or are duplicated')
         verified = [game for game in games if annotations.get(game['game_id'])]
         require(len(verified) == len(games), 'Current starter authority is missing for an applicable game')
         refs += [row['source'] for rows in annotations.values() for row in rows]
@@ -97,6 +108,12 @@ def refresh(state, root):
             refs.append(dict(label='Latest current availability attempt; earlier unavailable evidence retained',
                 href=season.archive_href(directory.relative_to(root).as_posix()+'/availability.json')))
             return refs
+        rebuilt = {game['game_id'] for game in verified}
+        for key, earlier, annotation in carried:
+            if key in rebuilt:
+                verify_current(dict(earlier, issued_at=checked, inputs_as_of=checked), [annotation], root)
+            else:
+                annotation['verified_at'] = earlier['inputs_as_of']
         rankings, week, model_refs = season.build_next(state, state['schedule'], state['results'], root,
             completed=state['rankings']['completed_week'], selected=selected, roster_sources=refs,
             captured_sources=refs, starter_announcements=annotations, current_projection=True)
@@ -221,8 +238,10 @@ def _replay(state, game, root):
     known_schedule = {row['game_id']:row for row in state['schedule'] if row['week'] <= game['week']}
     require(set(schedule) == set(known_schedule), 'Current model schedule inventory differs')
     for key, row in schedule.items():
-        _same({field:row[field] for field in GAME_IDENTITY},
-              {field:known_schedule[key][field] for field in GAME_IDENTITY}, 'Current model schedule identity')
+        # Unrelated current-week venue/rest fields never enter this saved calculation.
+        fields = GAME_IDENTITY if row['week'] <= completed or key == game['game_id'] else season.IDENTITY
+        _same({field:row[field] for field in fields},
+              {field:known_schedule[key][field] for field in fields}, 'Current model schedule identity')
     results = inputs['completed_results']; saved_results = {row['game_id']:row for row in state['results']}
     require(len({row['game_id'] for row in results}) == len(results), 'Duplicate current model result')
     require({row['game_id'] for row in results} == {key for key,row in saved_results.items() if row['week'] <= completed},
