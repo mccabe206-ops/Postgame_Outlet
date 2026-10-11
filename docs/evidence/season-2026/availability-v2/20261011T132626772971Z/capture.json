@@ -1,0 +1,61 @@
+{
+  "checked_at": "2026-10-11T13:26:27.087490+00:00",
+  "sources": [
+    {
+      "bytes": 403848,
+      "captured_at": "2026-10-11T13:26:26.828037+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "657fdd192c52b185033f44126f1a2bd72778adcee4ceb76565478f5455062f2e",
+      "started_at": "2026-10-11T13:26:26.783110+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 389170,
+      "captured_at": "2026-10-11T13:26:26.867869+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.jaguars.com/news/",
+      "kind": "team_news",
+      "sha256": "2eb89fee9b73f72fa1d58c2d1c6b92fcd715cd348e19ae31d212f272dcdd0221",
+      "started_at": "2026-10-11T13:26:26.783425+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/"
+    },
+    {
+      "bytes": 531013,
+      "captured_at": "2026-10-11T13:26:26.933917+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "7c0c66e4c59b0c0935fefd3bd3fd58d1fdb4f2da36685fa43e69836f47aad9d2",
+      "started_at": "2026-10-11T13:26:26.783765+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "captured_at": "2026-10-11T13:26:26.871642+00:00",
+      "error": "ValueError: Availability source is not an allowed official HTTPS URL",
+      "kind": "league_news",
+      "started_at": "2026-10-11T13:26:26.784084+00:00",
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 317226,
+      "captured_at": "2026-10-11T13:26:27.042826+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.jaguars.com/news/in-and-out-2026-week-5-murray-inactive-for-eagles-vs-jaguars",
+      "kind": "official_inactives",
+      "sha256": "becc8cb25455ddf61a5ff3a2869cd8b7b5016519a868f538111dae2df7d87857",
+      "started_at": "2026-10-11T13:26:27.001040+00:00",
+      "status": 200,
+      "team": "JAX",
+      "url": "https://www.jaguars.com/news/in-and-out-2026-week-5-murray-inactive-for-eagles-vs-jaguars"
+    }
+  ]
+}
