@@ -1,3 +1,12 @@
+## Week 5 preview: at New England
+
+**What changed (−1.2 → −1.5): Offense 0.0 → −0.3 (−0.3).**
+- **RB Ashton Jeanty (Starter, ankle + foot)** didn't practice Friday and is a game-time decision.
+  He's been the engine of this offense, and even if he plays he won't be at full strength, so the
+  number comes down either way. **WR Jalen Nailor (concussion)** is out, and **Jack Bech** (forearm)
+  and **Dont'e Thornton Jr.** (hamstring) are on IR.
+- The number comes back once Jeanty is healthy.
+
 ## Week 4: vs Kansas City (L 27–30)
 
 The Raiders' first loss came in a game they arguably should have won. The box had it **LV 30, KC

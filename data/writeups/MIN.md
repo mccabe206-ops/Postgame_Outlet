@@ -1,3 +1,11 @@
+## Week 5 preview: at New Orleans
+
+**What changed (1.1 → 1.4): Offense +0.3 → +0.6 (+0.3).**
+- **WR Justin Jefferson (Starter, left ankle sprain)** plans to play, per ESPN's Jeremy Fowler. He
+  had three limited practices this week, and the sprain is believed to be mild. His absence cost
+  0.3 in Week 4, so that comes back. **WR Jordan Addison (hamstring)** is questionable.
+- Kyler Murray and the defense are unchanged.
+
 ## Week 4: vs Miami (W 15–10)
 
 Minnesota is **4–0**, but this should have been a blowout. The box had it **MIN 25, MIA 10**.

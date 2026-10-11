@@ -1,3 +1,18 @@
+## Week 5 preview: at Jacksonville, London (neutral site)
+
+**What changed (0.5 → −0.25): Offense −1.0 → −1.5 (−0.5); Defense 0.0 → −0.25 (−0.25).**
+- **Offense −1.0 → −1.5 (−0.5):** Philadelphia is down to bare bones in London. **WR DeVonta Smith
+  (Starter, hamstring)** is out. He's the WR1 who carried the offense in Week 2. **C Drew Kendall
+  (knee)** is out too. He was a **2nd string → effective starter** after the Cam Jurgens trade, so
+  the Eagles are now on their **3rd-string center**, with Lane Johnson already retired. **WR
+  Hollywood Brown** is also out. **Saquon Barkley (hamstring)** sits again, but he was already priced
+  in after Week 4, and **Will Shipley** starts. The one piece of good news is that **TE Dallas
+  Goedert (knee)** returns, which offsets part of the drop.
+- **Defense 0.0 → −0.25 (−0.25):** **EDGE Jonathan Greenard (Starter, ankle)** is out. His return
+  was the pass rush's upside. **S Marcus Epps (groin)** is out as well. **LB Zack Baun** has cleared
+  the concussion protocol and plays, and so does **LB Jihaad Campbell**.
+- These are injury moves, so the number comes back as Smith, Kendall and Greenard return.
+
 ## Week 4: vs L.A. Rams (L 20–24)
 
 A **20–10 halftime lead couldn't hide how badly Philadelphia was out-played.** The Rams **out-gained the
@@ -100,8 +115,8 @@ Jalen Hurts (+1.5) is an above-average dual-threat grade, cut from +2.0 after We
 
 ## What moved the number
 
-- **Offense (+0.5):** raised from 0.0. Even after **losing A.J. Brown**, this is a strong group: **Saquon Barkley is an elite back**, DeVonta Smith headlines a still-solid receiver room, Dallas Goedert is a real tight end, and the offensive line is very good (Mailata, Dickerson, Lane Johnson). Barkley plus that line is enough to grade above average on its own.
-- **Defense (0.0; cut from +0.5 after Week 3):** the secondary is a young strength (Quinyon Mitchell, DeJean, Woolen, Mukuba) and the interior is stout, but they lost edge production (Graham, Ojulari, Phillips) and added Greenard and Epenesa — the pass rush is the question that keeps this from grading higher.
+- **Offense (−1.5; was +0.5 in the preseason):** Even after **losing A.J. Brown**, this is a strong group: **Saquon Barkley is an elite back**, DeVonta Smith headlines a still-solid receiver room, Dallas Goedert is a real tight end, and the offensive line is very good (Mailata, Dickerson, Lane Johnson). Barkley plus that line was enough to grade above average on its own when healthy. Since then, the injuries and departures above (Barkley, Bigsby, Smith, Lane Johnson's retirement, the Jurgens trade, Kendall) have pulled it well below.
+- **Defense (−0.25; cut from +0.5 after Week 3, and again for Greenard's Week 5 absence):** the secondary is a young strength (Quinyon Mitchell, DeJean, Woolen, Mukuba) and the interior is stout, but they lost edge production (Graham, Ojulari, Phillips) and added Greenard and Epenesa — the pass rush is the question that keeps this from grading higher.
 
 ## Bottom line
 
