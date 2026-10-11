@@ -529,3 +529,50 @@ def prob_for_claim(player, market, line):
         return None
     return {"p": round(p_over(pj["mean"], line, market, P), 3), "mean": round(pj["mean"], 1),
             "week": week}
+
+
+# -------------------------------------------------------------- real bets
+BETS_PATH = os.path.join(HERE, "data", "props", "bets.jsonl")
+
+
+def log_bet(bet):
+    """Append one real ticket (dict: season, week, player_id, player, market, line,
+    side, stake, payout, price, book, placed_at, p_model, p_blend)."""
+    os.makedirs(os.path.dirname(BETS_PATH), exist_ok=True)
+    with open(BETS_PATH, "a") as f:
+        f.write(json.dumps(bet) + "\n")
+
+
+def grade_bets(query=None):
+    """Settle open tickets from player_week; returns the running P&L."""
+    q = query or kb.query
+    try:
+        with open(BETS_PATH) as f:
+            bets = [json.loads(ln) for ln in f]
+    except OSError:
+        return {"bets": 0}
+    changed = False
+    for b in bets:
+        if b.get("result"):
+            continue
+        got = q("SELECT * FROM player_week WHERE season=? AND week=? AND player_id=? "
+                "AND season_type='REG'", (b["season"], b["week"], b["player_id"]))
+        if not got:
+            continue
+        y = MARKET_STAT[b["market"]](dict(got[0]))
+        won = (y > b["line"]) if b["side"] == "over" else (y < b["line"])
+        b.update(actual=y, result="win" if won else "loss",
+                 profit=round((b["payout"] - b["stake"]) if won else -b["stake"], 2))
+        changed = True
+    if changed:
+        tmp = BETS_PATH + ".tmp"
+        with open(tmp, "w") as f:
+            for b in bets:
+                f.write(json.dumps(b) + "\n")
+        os.replace(tmp, BETS_PATH)
+    done = [b for b in bets if b.get("result")]
+    return {"bets": len(bets), "settled": len(done),
+            "record": f"{sum(b['result'] == 'win' for b in done)}-"
+                      f"{sum(b['result'] == 'loss' for b in done)}",
+            "profit": round(sum(b["profit"] for b in done), 2),
+            "staked": round(sum(b["stake"] for b in bets), 2)}

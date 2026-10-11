@@ -18,6 +18,7 @@ def main():
     print(f"== props nightly {datetime.now():%Y-%m-%d %H:%M}")
     kb_build.main(["--sources", "player_week,pbp"])
     print("ledger:", props_model.grade_ledger(), props_model.ledger_summary())
+    print("bets:", props_model.grade_bets())
     return 0
 
 
