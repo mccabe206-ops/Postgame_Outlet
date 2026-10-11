@@ -54,7 +54,29 @@ SEASONAL = {
     "player_week": _RELEASES + "/stats_player/stats_player_week_{season}.csv.gz",
     "rosters": _RELEASES + "/weekly_rosters/roster_weekly_{season}.csv",
 }
-ALL_SOURCES = ("games",) + tuple(SEASONAL) + ("sleeper",)
+# play-by-play: ~50K plays/season x 372 cols upstream, so it is STREAMED (not the
+# list-of-dicts path) and trimmed to the columns props/red-zone work needs.
+PBP_URL = _RELEASES + "/pbp/play_by_play_{season}.csv.gz"
+PBP_MIN_SEASON = 2016  # props backtests need recent eras only; keeps the DB small
+PBP_TEXT = ("game_id", "season_type", "posteam", "defteam", "home_team", "away_team",
+            "play_type", "game_date", "td_team", "passer_player_id",
+            "passer_player_name", "rusher_player_id", "rusher_player_name",
+            "receiver_player_id", "receiver_player_name", "td_player_id",
+            "td_player_name", "fantasy_player_id", "two_point_conv_result")
+PBP_INT = ("season", "week", "play_id", "drive", "qtr", "down")
+PBP_REAL = ("yardline_100", "ydstogo", "pass_attempt", "rush_attempt", "complete_pass",
+            "incomplete_pass", "air_yards", "yards_after_catch", "yards_gained",
+            "passing_yards", "rushing_yards", "receiving_yards", "touchdown",
+            "pass_touchdown", "rush_touchdown", "interception", "sack", "qb_scramble",
+            "qb_kneel", "qb_spike", "qb_dropback", "two_point_attempt", "fumble_lost",
+            "penalty", "score_differential", "wp", "vegas_wp", "spread_line",
+            "total_line", "posteam_score", "defteam_score", "epa", "success", "cpoe",
+            "xpass", "pass_oe", "shotgun", "no_huddle", "order_sequence")
+PBP_COLS = PBP_TEXT + PBP_INT + PBP_REAL
+PBP_INDEXES = [("season", "week", "posteam"), ("season", "week", "defteam"),
+               ("receiver_player_id",), ("rusher_player_id",), ("passer_player_id",),
+               ("td_player_id",), ("game_id",)]
+ALL_SOURCES = ("games",) + tuple(SEASONAL) + ("pbp", "sleeper")
 TEAM_COLS = {"team", "opponent_team", "home_team", "away_team", "recent_team"}
 # index these column-combos when the table has them (fast splits/aggregations)
 _INDEX_COMBOS = [("season", "week", "team"), ("season", "week"), ("team",),
@@ -134,6 +156,59 @@ def build_table(con, name, rows):
     return cols
 
 
+def _pbp_type(c):
+    return "TEXT" if c in PBP_TEXT else ("INTEGER" if c in PBP_INT else "REAL")
+
+
+def build_pbp(con, seasons, fetch=None, log=print):
+    """Stream nflverse play-by-play into `pbp` (trimmed columns, regular + post).
+    Seasons below PBP_MIN_SEASON are ignored. Returns (rows, seasons_loaded)."""
+    fetch = fetch or fetch_url
+    lo, hi = max(seasons[0], PBP_MIN_SEASON), seasons[1]
+    q = lambda c: '"' + c + '"'  # noqa: E731
+    con.execute('DROP TABLE IF EXISTS "pbp"')
+    con.execute('CREATE TABLE "pbp" ('
+                + ", ".join(f"{q(c)} {_pbp_type(c)}" for c in PBP_COLS) + ")")
+    ins = ('INSERT INTO "pbp" (' + ",".join(q(c) for c in PBP_COLS) + ") VALUES ("
+           + ",".join("?" * len(PBP_COLS)) + ")")
+    total, got = 0, []
+    for s in range(lo, hi + 1):
+        url = PBP_URL.format(season=s)
+        try:
+            data = fetch(url)
+        except Exception as e:  # noqa: BLE001 — a season may not exist yet
+            log(f"    pbp {s}: skipped ({e})")
+            continue
+        reader = csv.DictReader(io.TextIOWrapper(
+            gzip.GzipFile(fileobj=io.BytesIO(data)), encoding="utf-8-sig"))
+        batch = []
+        for r in reader:
+            row = []
+            for c in PBP_COLS:
+                v = r.get(c)
+                if v in (None, "", "NA"):
+                    row.append(None)
+                elif c in ("posteam", "defteam", "home_team", "away_team", "td_team"):
+                    row.append(_norm_team(v))
+                else:
+                    row.append(v)
+            batch.append(row)
+            if len(batch) >= 5000:
+                con.executemany(ins, batch)
+                total += len(batch)
+                batch = []
+        if batch:
+            con.executemany(ins, batch)
+            total += len(batch)
+        got.append(s)
+        log(f"    pbp {s}: loaded (running total {total})")
+    for combo in PBP_INDEXES:
+        idx = "idx_pbp_" + "_".join(combo)
+        con.execute(f'CREATE INDEX IF NOT EXISTS {q(idx)} ON "pbp" ('
+                    + ",".join(q(c) for c in combo) + ")")
+    return total, got
+
+
 def build(seasons, sources, db_path, log=print):
     lo, hi = seasons
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
@@ -169,6 +244,13 @@ def build(seasons, sources, db_path, log=print):
                  "columns": len(cols), "seasons": [got[0], got[-1]] if got else []})
             log(f"  {name}: {len(allrows)} rows, {len(cols)} cols "
                 f"({got[0]}-{got[-1]})" if got else f"  {name}: 0")
+        if "pbp" in sources:
+            n, got = build_pbp(con, seasons, log=log)
+            manifest["sources"].append(
+                {"table": "pbp", "url": PBP_URL, "rows": n, "columns": len(PBP_COLS),
+                 "seasons": [got[0], got[-1]] if got else []})
+            log(f"  pbp: {n} rows, {len(PBP_COLS)} cols "
+                f"({got[0]}-{got[-1]})" if got else "  pbp: 0")
         if "sleeper" in sources:  # non-seasonal current snapshot: fantasy value + trending
             import kb_sleeper
             fv, tr = kb_sleeper.collect(built_at)
@@ -182,9 +264,18 @@ def build(seasons, sources, db_path, log=print):
         con.commit()
     finally:
         con.close()
-    atomic_write_text(kb.LOCK_PATH if db_path == kb.DB_PATH
-                      else os.path.join(os.path.dirname(db_path), "sources.lock.json"),
-                      json.dumps(manifest, indent=2) + "\n")
+    lock = (kb.LOCK_PATH if db_path == kb.DB_PATH
+            else os.path.join(os.path.dirname(db_path), "sources.lock.json"))
+    # partial rebuilds (e.g. --sources pbp) keep the other tables' provenance
+    try:
+        with open(lock) as f:
+            prev = json.load(f).get("sources", [])
+    except (OSError, ValueError):
+        prev = []
+    rebuilt = {s["table"] for s in manifest["sources"]}
+    manifest["sources"] = ([s for s in prev if s.get("table") not in rebuilt]
+                           + manifest["sources"])
+    atomic_write_text(lock, json.dumps(manifest, indent=2) + "\n")
     return manifest
 
 

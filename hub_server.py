@@ -76,6 +76,7 @@ TOOLS = {
     "guru": ("guru_server.py", 8790),
     "depth": ("depth_server.py", 8791),
     "game": ("game_server.py", 8792),
+    "props": ("prop_server.py", 8793),
 }
 
 
@@ -1076,6 +1077,8 @@ const CARDS = [
    render:c=>kbCard(c)},
  {n:8, t:"Market vs Mine", d:"What the betting market thinks each team is worth (fit from recent lines, QB-adjusted) next to your rating — and where you disagree.",
    render:c=>btn(c,"Open Market vs Mine",()=>openMarketBoard())},
+ {n:9, t:"Prop Board", d:"Verify prop claims from X (true + caveats: sample, DNPs, injuries, market price) and compare Kalshi / Polymarket / DK / FD prices — model edges once calibrated.",
+   render:c=>btn(c,"Open Prop Board",()=>launch('props'))},
 ];
 
 function el(t,cls,txt){const e=document.createElement(t);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
