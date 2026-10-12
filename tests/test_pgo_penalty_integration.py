@@ -60,9 +60,9 @@ class PenaltyIntegrationTests(unittest.TestCase):
             self.assertEqual(state['weeks'][0]['games'][0]['margin'], game['margin'])
             return {'status':'READY', 'games':[], 'verified_primary_finals':len(state['results'])}
         module = SimpleNamespace(refresh_shadow=shadow, check_durable_shadow=Mock())
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp); season.save_state(before, root)
-            with patch.dict(sys.modules, {'pgo_penalty_monitor':module}), patch.object(season,'fetch_inputs',return_value=([game,future],finals,[],{})), patch.object(season,'legacy_models',return_value=[]), patch.object(season,'refresh_availability',return_value=[]):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(season,'legacy_models',return_value=[]):
+            root = Path(tmp); season.decorate(before, []); season.save_state(before, root)
+            with patch.dict(sys.modules, {'pgo_penalty_monitor':module}), patch.object(season,'fetch_inputs',return_value=([game,future],finals,[],{})), patch.object(season,'refresh_availability',return_value=[]):
                 after = season.refresh(root)
             self.assertEqual(after.get('penalty_shadow',{}).get('verified_primary_finals'), 1)
             self.assertEqual(season.load_current(root), after)

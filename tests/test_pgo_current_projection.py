@@ -90,7 +90,11 @@ class CurrentProjectionTests(unittest.TestCase):
     def later_projection(self, inactive_primary=False):
         self.refresh()
         earlier = copy.deepcopy(self.state['current_projections'][GAME])
-        self.state['results'].append(dict(game_id=GAME, week=1, finalized_at=self.clock))
+        completed = next(g for g in self.state['schedule'] if g['game_id']==GAME)
+        self.state['results'].append(dict(
+            **{k:completed[k] for k in ('game_id', 'season', 'week', 'game_type', 'kickoff')},
+            home_team=completed['home'], away_team=completed['away'], home_score=21,
+            away_score=20, actual_margin=1, finalized_at=self.clock))
         if inactive_primary:
             roster = season.csv_rows(self.inputs['roster'][0])
             primary = season.select_roster(roster, season.csv_rows(self.inputs['depth'][0]), self.clock)['ATL']['gsis_id']
