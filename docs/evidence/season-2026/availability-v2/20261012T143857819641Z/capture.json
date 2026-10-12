@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-12T14:39:00.900811+00:00",
+  "sources": [
+    {
+      "bytes": 403073,
+      "captured_at": "2026-10-12T14:39:00.397690+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "fa710b0d3f5935cdb6ccdd6502536409eef216d0e56be66395eb66d2e276b07b",
+      "started_at": "2026-10-12T14:39:00.369236+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 440565,
+      "captured_at": "2026-10-12T14:39:00.717918+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.buffalobills.com/news/",
+      "kind": "team_news",
+      "sha256": "84eec6612e9598d566fd01a76eb3046957f3a99923896943135c3cac81c0641d",
+      "started_at": "2026-10-12T14:39:00.369618+00:00",
+      "status": 200,
+      "team": "BUF",
+      "url": "https://www.buffalobills.com/news/"
+    },
+    {
+      "bytes": 367026,
+      "captured_at": "2026-10-12T14:39:00.549588+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "935a6631f3cf1cef4c3cf7384f194f4cb190e9c5212118ab5736972389318d3e",
+      "started_at": "2026-10-12T14:39:00.369949+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 1618014,
+      "captured_at": "2026-10-12T14:39:00.691750+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "d3b6bef83482cb41de692b1550ad8f087fbf2167d0469b4343f46df72bc4fdff",
+      "started_at": "2026-10-12T14:39:00.370300+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}
