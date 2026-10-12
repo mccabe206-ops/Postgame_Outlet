@@ -82,6 +82,61 @@ class LegacyGradeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Grade identity differs'):
             season.decorate(state, [self.final])
 
+    def test_pending_game_can_receive_first_verified_final_at_save_and_load(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); previous, pointer, state = self.saved_hold(root)
+            self.assertEqual(previous['weeks'][0]['games'][0]['grade'], 'PENDING')
+            self.assertIsNone(previous['weeks'][0]['games'][0]['result'])
+            with patch.object(season, 'now', return_value='2026-10-11T22:01:00Z'):
+                season.save_state(state, root)
+            accepted = season.load_current(root)
+            self.assertEqual(accepted['results'], [self.final])
+            self.assertEqual(accepted['weeks'][0]['games'][0]['grade'], 'W')
+
+    def test_save_rejects_accepted_final_and_grade_rewrites_without_advancing_pointer(self):
+        for change in ('final', 'grade'):
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp); previous, pointer, accepted = self.saved_hold(root)
+                with patch.object(season, 'now', return_value='2026-10-11T22:01:00Z'):
+                    season.save_state(accepted, root)
+                latest = season.read_json(root / 'current.json')
+                bad = copy.deepcopy(accepted); bad['checked_at'] = '2026-10-11T23:00:00Z'
+                finals = [dict(self.final, home_score=20, away_score=24, actual_margin=-4)] if change == 'final' else [self.final]
+                season.decorate(bad, finals, previous=accepted, previous_pointer=latest)
+                if change == 'grade': bad['weeks'][0]['games'][0]['grade'] = 'L'
+                before = (root / 'current.json').read_bytes()
+                with patch.object(season, 'now', return_value='2026-10-11T23:01:00Z'):
+                    with self.assertRaisesRegex(ValueError, 'Accepted (?:final|game grade) changed'):
+                        season.save_state(bad, root)
+                self.assertEqual((root / 'current.json').read_bytes(), before)
+                self.assertEqual(season.load_current(root), accepted)
+
+    def test_load_rejects_rehashed_accepted_final_and_grade_rewrites(self):
+        import gzip
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); previous, pointer, accepted = self.saved_hold(root)
+            with patch.object(season, 'now', return_value='2026-10-11T22:01:00Z'):
+                season.save_state(accepted, root)
+            latest = season.read_json(root / 'current.json')
+            again = copy.deepcopy(accepted); again['checked_at'] = '2026-10-11T23:00:00Z'
+            season.decorate(again, [self.final], previous=accepted, previous_pointer=latest)
+            with patch.object(season, 'now', return_value='2026-10-11T23:01:00Z'):
+                directory = season.save_state(again, root)
+            for change in ('final', 'grade'):
+                bad = copy.deepcopy(again)
+                finals = [dict(self.final, home_score=20, away_score=24, actual_margin=-4)] if change == 'final' else [self.final]
+                season.decorate(bad, finals, previous=accepted, previous_pointer=latest)
+                if change == 'grade': bad['weeks'][0]['games'][0]['grade'] = 'L'
+                payload = gzip.compress(season.canonical(bad), mtime=0)
+                (directory / 'state.json.gz').write_bytes(payload)
+                manifest = season.read_json(directory / 'manifest.json')
+                manifest['files']['state.json.gz'] = dict(sha256=season.sha(payload), bytes=len(payload))
+                raw = season.canonical(manifest); (directory / 'manifest.json').write_bytes(raw)
+                current = season.read_json(root / 'current.json'); current['manifest_sha256'] = season.sha(raw)
+                (root / 'current.json').write_bytes(season.canonical(current))
+                with self.subTest(change=change), self.assertRaisesRegex(ValueError, 'Accepted (?:final|game grade) changed'):
+                    season.load_current(root)
+
     def test_custody_rejects_forged_counts_sources_clocks_and_missing_holds(self):
         import pgo_legacy_grades as legacy
         with tempfile.TemporaryDirectory() as tmp:

@@ -91,7 +91,7 @@ def validate(state, root, previous_pointer, *, durable=None):
 
 
 def _validate(state, root, previous_pointer, durable):
-    from pgo_season_rollover import load_archive
+    from pgo_season_rollover import check_preserved, load_archive
     cache = {}
     def archive(pointer):
         pointer = _pointer(pointer)
@@ -122,6 +122,7 @@ def _validate(state, root, previous_pointer, durable):
         require(utc(durable) >= utc(state['checked_at']), 'Legacy grading durable clock precedes check')
     if previous is not None:
         require(utc(previous['checked_at']) < utc(state['checked_at']), 'Previous legacy record is not historical')
+        check_preserved(previous, state, durable)
     rows = _rows(state); models = _models()
     require(set(rows) == {'pgo-weekly-2026', *(model['edition'] for model in models)}, 'Unknown or absent model record edition')
     holds = component['models']

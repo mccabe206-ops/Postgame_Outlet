@@ -102,7 +102,10 @@ class SeasonTests(unittest.TestCase):
                    weeks=[dict(week=1,games=[g,other])],rankings={'completed_week':0},results=[],sources=[])
         finals=api.parse_scoreboard(self.board(),[g],'2026-09-09T23:00:00Z')['results']
         with tempfile.TemporaryDirectory() as tmp:
-            root=Path(tmp);api.save_state(state,root)
+            root=Path(tmp)
+            with patch.object(api,'legacy_models',return_value=[]):
+                api.decorate(state,[])
+                api.save_state(state,root)
             with patch.object(api,'fetch_inputs',return_value=([g,other],finals,[],{})), patch.object(api,'legacy_models',return_value=[]), patch.object(api,'build_next') as build, patch.object(api,'refresh_availability',return_value=[]):
                 updated=api.refresh(root)
             build.assert_not_called()
