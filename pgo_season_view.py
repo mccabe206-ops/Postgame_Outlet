@@ -979,6 +979,9 @@ def _accuracy(summary, *, weekly_reviews=None):
                        '<th>Saved comparison model</th><th>Lead error: weekly / comparison</th><th>Same games</th>'
                        '<th>Total error: weekly / comparison</th><th>Same games</th></tr></thead><tbody>'
                        + ''.join(comparisons) + '</tbody></table></div>') if comparisons else '<p>No separately verified model series supplied for comparison.</p>'
+    comparison_table += ''.join('<p><strong>Accuracy and comparisons unavailable: '
+        + _text(edition) + '.</strong> ' + _legacy_hold(hold) + '</p>'
+        for edition, hold in summary.get('held_models', {}).items())
     bins = []
     for row in primary['reliability_bins']:
         chance = 'Unavailable' if row['mean_probability'] is None else f'{_number(row["mean_probability"]):.1%}'
@@ -1391,6 +1394,12 @@ def _statistics_review(state):
             f'<summary>Later statistical corrections: {label}</summary>'+note+'</details>')
 
 
+def _legacy_hold(hold):
+    saved = ('Saved record checked ' + _time(hold['record_checked_at']) + '.'
+             if hold.get('record_checked_at') else 'No verified saved record is available.')
+    return '<strong>Legacy grading held:</strong> ' + _text(hold['blocked_reason']) + ' ' + saved
+
+
 def render_season(state, *, accuracy=None, mccabe=None, market=None, weekly_reviews=None):
     """Render validated saved state using the existing shared PGO styles once per page."""
     if state['schema_version'] != 1 or state['status'] not in ('READY','BLOCKED'):
@@ -1419,8 +1428,11 @@ def render_season(state, *, accuracy=None, mccabe=None, market=None, weekly_revi
                             current_lineup=ranking_snapshot is not state.get('rankings'))
     records = []
     for row in state.get('model_records', []):
-        counts = ''.join(f'<td>{_integer(row[key])}</td>' for key in ('wins','losses','ties','no_pick','pending'))
-        records.append(f'<tr><th scope="row">{_text(row["name"])}<br><small>{_text(row["edition"])}</small></th>{counts}</tr>')
+        hold = ((state.get('legacy_grading_check') or {}).get('models', {})).get(row['edition'])
+        counts = ''.join(f'<td>{"Unavailable" if hold and row[key] is None else _integer(row[key])}</td>'
+                         for key in ('wins','losses','ties','no_pick','pending'))
+        note = '<br><small>' + _legacy_hold(hold) + '</small>' if hold else ''
+        records.append(f'<tr><th scope="row">{_text(row["name"])}<br><small>{_text(row["edition"])}</small>{note}</th>{counts}</tr>')
     block = f'<p><strong>Update blocked:</strong> {_text(state["blocked_reason"])}</p>' if state.get('blocked_reason') else ''
     failed_updates = [f'<a href="#{anchor}">{label}</a>' for key, anchor, label in (
         ('penalty_shadow', 'pgo-penalty-test', 'Penalty test'),
@@ -1433,6 +1445,7 @@ def render_season(state, *, accuracy=None, mccabe=None, market=None, weekly_revi
         ('score_range_collection', 'season-score-collection', 'Score-error collection'),
         ('statistics_review', 'season-statistics-review', 'Later statistical corrections'),
         ('current_projection_check', 'season-current-projection-check', 'Current forecasts'),
+        ('legacy_grading_check', 'season-records', 'Legacy grading'),
         ('ats', 'season-ats', 'Sportsbook comparisons')) if (state.get(key) or {}).get('status') == 'BLOCKED']
     update_note = ('<p class="season-caption">Separate updates needing review: ' + ', '.join(failed_updates)
                    + '. Earlier saved information is retained.</p>') if failed_updates else ''

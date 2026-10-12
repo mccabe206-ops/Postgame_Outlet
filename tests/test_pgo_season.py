@@ -109,7 +109,8 @@ class SeasonTests(unittest.TestCase):
             self.assertEqual(updated['current_week'],1)
             self.assertEqual(updated['model_records'][0]['wins'],1)
             self.assertEqual(updated['weeks'][0]['games'][0]['margin'],3)
-            self.assertEqual(api.load_current(root),updated)
+            with patch.object(api,'legacy_models',return_value=[]):
+                self.assertEqual(api.load_current(root),updated)
 
 
 if __name__=='__main__':unittest.main()

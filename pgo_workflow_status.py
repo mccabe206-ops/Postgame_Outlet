@@ -25,12 +25,15 @@ def report_health(state, summary_path=None):
                   ('score_range_collection', 'score_range_collection', 'READY'),
                   ('mccabe_forecasts', 'mccabe_forecasts', 'READY'),
                   ('current_projection_check', 'current_projection', 'READY'),
+                  ('legacy_grading_check', 'legacy_grading', 'READY'),
                   ('statistics_review', 'statistics_review', 'CLEAR'),
                   ('ats','ats','READY')]
     for key, prefix, _ in components:
         component = state.get(key) or {}
         report[prefix + '_status'] = component.get('status', 'UNKNOWN')
         report[prefix + '_blocked_reason'] = component.get('blocked_reason')
+    report['legacy_grading_condition'] = ('LEGACY_GRADING_REVIEW'
+        if report['legacy_grading_status'] == 'BLOCKED' else 'READY')
     report['replacement_depth_historical_admission'] = (state.get('replacement_depth') or {}).get('historical_admission')
     mccabe_games = (state.get('mccabe_forecasts') or {}).get('games') or []
     report['mccabe_forecasts_captured'] = len(mccabe_games)
@@ -46,7 +49,7 @@ def report_health(state, summary_path=None):
     if status != 'READY':
         warnings.append(f'PGO {condition}: {reason or "Saved status is unavailable"}')
     for _, prefix, healthy in components:
-        if prefix == 'current_projection' and report[prefix + '_status'] in ('UNKNOWN', 'IDLE'):
+        if prefix in ('current_projection', 'legacy_grading') and report[prefix + '_status'] in ('UNKNOWN', 'IDLE'):
             continue
         if prefix in ('injury_usage','offensive_inventory','offensive_usage','score_range_collection','statistics_review','mccabe_forecasts') and report[prefix + '_status'] in ('UNKNOWN', 'WAITING'):
             continue

@@ -39,6 +39,46 @@ def state():
 
 
 class SeasonViewTests(unittest.TestCase):
+    def test_board_and_lab_disclose_historical_and_unavailable_legacy_records(self):
+        import tempfile
+        from pathlib import Path
+        import pgo_model_updates as updates
+        data = state()
+        held = dict(game_ids=['2026_05_CHI_GB'], blocked_reason='Legacy kickoff differs <review>.',
+            record_source=dict(path='runs-v2/20260915T210000000000Z', manifest_sha256='a'*64,
+                               checked_at='2026-09-15T21:00:00Z'),
+            record_checked_at='2026-09-15T21:00:00Z')
+        data['legacy_grading_check'] = dict(status='BLOCKED', checked_at=data['checked_at'],
+            blocked_reason='Legacy review', models={'legacy':held})
+        data['model_records'].append(dict(name='Legacy', edition='legacy', wins=7, losses=2,
+            ties=0, no_pick=0, pending=263))
+        before = copy.deepcopy(data)
+        mccabe = [dict(abbr=t['team'],rank=t['rank']) for t in data['rankings']['teams']]
+        with tempfile.TemporaryDirectory() as tmp, \
+             patch.object(updates, 'DEFAULT_DIR', Path(tmp)/'evidence/forecast/model'), \
+             patch.object(updates, 'render_updates', return_value='<div>Original editions</div>'), \
+             patch.object(updates, '_load_defense_test', return_value=None), \
+             patch('pgo_season_accuracy.load_models', return_value=[]), \
+             patch('pgo_comparison.load_mccabe_rows', return_value=mccabe), \
+             patch('pgo_comparison.mccabe_source_timestamp', return_value='2026-09-15T21:00:00Z'), \
+             patch('pgo_market_benchmark.summarize', return_value=None), \
+             patch('pgo_weekly_review.links', return_value=[]):
+            for include_original in (False, True):
+                page = updates.render_current_updates(include_original=include_original, season_state=data)
+                self.assertIn('Legacy grading held:', page)
+                self.assertIn('Legacy kickoff differs &lt;review&gt;.', page)
+                self.assertIn('Saved record checked', page)
+                self.assertIn('datetime="2026-09-15T21:00:00Z"', page)
+                self.assertIn('Accuracy and comparisons unavailable', page)
+                self.assertIn('<td>7</td><td>2</td>', page)
+                self.assertIn('Latest refresh completed', page)
+            self.assertEqual(data, before)
+            data['model_records'][-1].update(dict.fromkeys(('wins','losses','ties','no_pick','pending')))
+            held.update(record_source=None, record_checked_at=None)
+            page = updates.render_current_updates(season_state=data)
+            self.assertIn('No verified saved record is available', page)
+            self.assertIn('<td>Unavailable</td>', page)
+
     def ranking_comparison(self):
         snapshot = state()['rankings']
         snapshot['completed_week'] = 1
