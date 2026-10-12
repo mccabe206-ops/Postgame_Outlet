@@ -49,7 +49,7 @@ class ReplacementRefreshTests(unittest.TestCase):
         with patch.object(season, 'legacy_models', return_value=[]), patch.object(capture, '_history', return_value=({}, None)):
             season.decorate(state, state['results'])
             state['replacement_depth'] = capture.capture(state, root, OLD)
-        with patch.object(season, 'now', return_value=OLD): season.save_state(state, root)
+            with patch.object(season, 'now', return_value=OLD): season.save_state(state, root)
         return state
 
     def production(self, root, before, clock, *, fetch=None, availability=None):
@@ -135,7 +135,9 @@ class ReplacementRefreshTests(unittest.TestCase):
             conflict = dict(first, sha256=digest, path=relative, bytes=len(raw), captured_at='2026-09-12T04:00:00+00:00')
             before['source_captures'] += [first, conflict]
             before['checked_at'] = '2026-09-12T04:00:00Z'
-            with patch.object(season, 'now', return_value=NOW): season.save_state(before, root)
+            with patch.object(season, 'legacy_models', return_value=[]), patch.object(season, 'now', return_value=NOW):
+                season.decorate(before, before['results'])
+                season.save_state(before, root)
             result, calls = self.production(root, before, ['2026-09-12T04:15:00Z'])
             self.assertEqual(result['status'], 'READY')
             self.assertEqual(result['replacement_source_check']['status'], 'BLOCKED')
