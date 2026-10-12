@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-12T00:53:20.838934+00:00",
+  "sources": [
+    {
+      "bytes": 402985,
+      "captured_at": "2026-10-12T00:53:20.224584+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "4ae047d769db0377aa5182a7a729c2af6d5466160096a5a8dd9c308b0513d2cb",
+      "started_at": "2026-10-12T00:53:20.159732+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 532336,
+      "captured_at": "2026-10-12T00:53:20.375472+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.atlantafalcons.com/news/",
+      "kind": "team_news",
+      "sha256": "42428192bef59923c2ee86898b1c1072ca447cd2f840c8de7131b9231007884c",
+      "started_at": "2026-10-12T00:53:20.160174+00:00",
+      "status": 200,
+      "team": "ATL",
+      "url": "https://www.atlantafalcons.com/news/"
+    },
+    {
+      "bytes": 658919,
+      "captured_at": "2026-10-12T00:53:20.260646+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/",
+      "kind": "team_news",
+      "sha256": "ccab98c3956d6ff726185f53d4e5d576aefc824ff996fcbdc33ec5741af2968c",
+      "started_at": "2026-10-12T00:53:20.160584+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/"
+    },
+    {
+      "bytes": 1597777,
+      "captured_at": "2026-10-12T00:53:20.410827+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "27095306c4475f1d6bf3fb22cc64b858323e37d6a48eb3e274c7468222e3a9ad",
+      "started_at": "2026-10-12T00:53:20.160886+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 525688,
+      "captured_at": "2026-10-12T00:53:20.635712+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.atlantafalcons.com/news/atlanta-falcons-week-5-inactives-vs-baltimore-ravens-on-sunday-night-football",
+      "kind": "official_inactives",
+      "sha256": "285e18cb6a55c84f9f476bea175c5f1b05f3b2554a2f855d619487b403a111e8",
+      "started_at": "2026-10-12T00:53:20.526164+00:00",
+      "status": 200,
+      "team": "ATL",
+      "url": "https://www.atlantafalcons.com/news/atlanta-falcons-week-5-inactives-vs-baltimore-ravens-on-sunday-night-football"
+    },
+    {
+      "bytes": 314089,
+      "captured_at": "2026-10-12T00:53:20.781183+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/zay-flowers-marlon-humphrey-active-week-5-falcons-ravens",
+      "kind": "official_inactives",
+      "sha256": "34f7ce926c33e9c5d2b943bc0abb0cbb4d3eb354687634f72e96d5917fce3576",
+      "started_at": "2026-10-12T00:53:20.526616+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/zay-flowers-marlon-humphrey-active-week-5-falcons-ravens"
+    }
+  ]
+}
