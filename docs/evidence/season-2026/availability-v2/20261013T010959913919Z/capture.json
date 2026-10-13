@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-13T01:10:00.822990+00:00",
+  "sources": [
+    {
+      "bytes": 382195,
+      "captured_at": "2026-10-13T01:10:00.113999+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "b1af83f01792dd31043aacd0a74eeca46f00e4a52b9b3f0dbbd346c1331e576c",
+      "started_at": "2026-10-13T01:09:59.925025+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 419786,
+      "captured_at": "2026-10-13T01:10:00.163039+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.buffalobills.com/news/",
+      "kind": "team_news",
+      "sha256": "09f368e9dda08698b1af4bdc4d9e9576304789721d56afa347988e905ea0169d",
+      "started_at": "2026-10-13T01:09:59.925479+00:00",
+      "status": 200,
+      "team": "BUF",
+      "url": "https://www.buffalobills.com/news/"
+    },
+    {
+      "bytes": 345733,
+      "captured_at": "2026-10-13T01:10:00.327819+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "97633d09c702cb637e06d5025e097d99b2321cb49c88fe931e5795f6578eb1c4",
+      "started_at": "2026-10-13T01:09:59.925819+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 1621073,
+      "captured_at": "2026-10-13T01:10:00.072588+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "b830b4d31291e2ae7ac291731d9dcf8214a0eff6c73dd6bef79f7c68f16a3edc",
+      "started_at": "2026-10-13T01:09:59.926155+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 527462,
+      "captured_at": "2026-10-13T01:10:00.712405+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.buffalobills.com/news/dj-moore-among-bills-inactives-vs-rams",
+      "kind": "official_inactives",
+      "sha256": "72e6fad7a6c6d8c966f9501611655636f1c08ee304b6d9cbd6801b3b70e4537e",
+      "started_at": "2026-10-13T01:10:00.441405+00:00",
+      "status": 200,
+      "team": "BUF",
+      "url": "https://www.buffalobills.com/news/dj-moore-among-bills-inactives-vs-rams"
+    },
+    {
+      "bytes": 554588,
+      "captured_at": "2026-10-13T01:10:00.627987+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.therams.com/news/among-rams-inactives-for-monday-night-football-vs-bills-in-week-5-2026",
+      "kind": "official_inactives",
+      "sha256": "5896a05d7563ef1935d98419d3f03b1c7280d472d41c5034189efa651bb3eec3",
+      "started_at": "2026-10-13T01:10:00.441718+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/among-rams-inactives-for-monday-night-football-vs-bills-in-week-5-2026"
+    },
+    {
+      "bytes": 713291,
+      "captured_at": "2026-10-13T01:10:00.662729+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/week-5-monday-night-inactives-buffalo-bills-at-los-angeles-rams",
+      "kind": "official_inactives",
+      "sha256": "c6848ed0dcd8a44401f1e5279791b4b8f774355ab6bec8c8455afa9feabd728b",
+      "started_at": "2026-10-13T01:10:00.442088+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/week-5-monday-night-inactives-buffalo-bills-at-los-angeles-rams"
+    }
+  ]
+}
