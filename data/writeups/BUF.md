@@ -22,12 +22,12 @@ linebackers struggled (Gardner-Johnson 29.3, Bernard 39.9).
 - **CB Christian Benford** (**toe**) — **Starter (CB1) → back.**
 
 **What moved the number:**
-- **Held across the board: QB Allen +6.5, Offense +0.9, Defense −0.8.** Allen's passing grades are a trend
-  we're watching, but 121 rushing yards and a 93.0 QBR without his top two receivers isn't a reason to cut
-  the league's top QB grade. The offense's big rushing night is balanced by losing Brown. The defense's
-  numbers were about what you'd expect against the Rams.
+- **Offense +0.9 → +1.1 (+0.2):** 37 points on the road against the Rams without DJ Moore or Palmer. Allen
+  ran for 121 yards with a 93.0 QBR, and the offense keeps producing without its top receivers.
+- **QB Allen held at +6.5** (the model's ceiling); his passing grades stay on watch. **Defense held at −0.8:**
+  about what you'd expect against the Rams.
 - **Pending:** **Offense −0.2 if Brown misses Week 6 at Las Vegas, +0.2 when Moore returns.**
-- **Total held at +6.6.**
+- **New total +6.6 → +6.8.**
 
 ## Week 4: vs New England (L 26–29)
 

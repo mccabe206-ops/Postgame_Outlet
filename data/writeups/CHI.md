@@ -28,10 +28,11 @@ was a real disagreement, and this result settled it.
 - Already out: **LT Braxton Jones (IR, knee)**, **nickel Kyler Gordon (PUP)** and **S Coby Bryant (IR,
   knee)**.
 
-**What moved the number (−0.4 → −1.1 with a backup QB; +3.4 if Caleb starts):**
-- **QB Bagent held at −1.5:** one top-10 start and one last-place start. The Jets game is still the
-  better guide to what he is, so he stays at the top of the backup band. **Caleb's +3.0 returns the
-  week he starts.**
+**What moved the number (−0.4 → −2.1 with Keenum; +3.4 if Caleb starts):**
+- **QB Bagent −1.5 → Case Keenum −2.5 (−1.0):** Bagent was benched in the 4th quarter at Green Bay,
+  and Keenum is expected to start at Atlanta if Caleb can't go (Ben Johnson hasn't named a starter).
+  Bagent keeps his −1.5 as the backup. **Caleb's +3.0 returns the week he starts**: he's "progressing"
+  and "close."
 - **Offense +1.0 → +0.8 (−0.2):** the line was fine. Most of the giveaways are priced into the QB
   move. Monangai's absence and a sloppy skill group take −0.2.
 - **Defense +0.1 → −0.4 (−0.5):** about −0.2 for getting beaten deep repeatedly, and **about −0.3 for
@@ -143,10 +144,10 @@ offensive showing. The defense remains below average.
 
 ## Quarterback
 
-Tyson Bagent (−1.5) is the selected quarterback while Caleb Williams (right hamstring) is unavailable.
-His two starts couldn't be more different: a top-10 game vs the Jets (25-of-34, 268 yards, 79.8 PFF)
-and a last-place one at Green Bay (12-of-21, 87 yards, 2 INT, 31.6 PFF). That puts him mid-backup
-band, level with Case Keenum (−2.5), with the Week 6 starter undecided if Caleb can't go. Williams's
+Case Keenum (−2.5) is the selected quarterback while Caleb Williams (right hamstring) is unavailable;
+he's expected to start at Atlanta after replacing Tyson Bagent (−1.5, now QB3) at Green Bay. Bagent's two starts couldn't be more different: a top-10 game vs the Jets (25-of-34, 268 yards, 79.8 PFF)
+and a last-place one at Green Bay (12-of-21, 87 yards, 2 INT, 31.6 PFF). Keenum is the proven
+veteran, and won his Week 3 start against the Eagles. Williams's
 +3.0 grade remains his own player value; it is not the quarterback component in the current Chicago
 team rating.
 

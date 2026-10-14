@@ -21,11 +21,12 @@ controlled the run.
   started on the left side again.
 
 **What changed:**
-- **Murray −0.5 → −0.2 (+0.3):** two straight top-10 passing grades with no turnovers, now with
-  Jefferson back. It's a partial move because the two opponents (Miami, New Orleans) are weak.
-- **Defense +1.0 → +1.2 (+0.2):** a fifth straight dominant game. Brian Flores keeps getting more
-  out of this group than the talent read says. Tempered because the Saints were depleted and their
-  QB was playing hurt.
+- **Murray held at −0.5:** two straight top-10 passing grades with no turnovers, now with Jefferson
+  back, but both came against weak opponents (Miami, New Orleans). He has to do it against a real
+  defense before the number moves.
+- **Defense +1.0 → +1.5 (+0.5):** a fifth straight dominant game (142 yards allowed, Byron Murphy Jr.
+  with two interceptions). Five weeks is no longer a hot streak: Brian Flores keeps getting more out of
+  this group than the talent read says, and the number now reflects it.
 - **Offense held +0.6:** Jefferson's return was priced before the game. Darrisaw, Addison and
   Hockenson are all expected back after the bye. If they are, the offense goes up a notch for Week 7.
 - **New total 1.1 → 1.6.**
@@ -117,10 +118,10 @@ defense. Carson Wentz's Week 1–2 appearances remain historical context.
 
 ## Quarterback
 
-Kyler Murray (−0.2) is up from −0.5 after back-to-back clean, efficient games: 79.3 PFF vs Miami
+Kyler Murray (−0.5) is held despite back-to-back clean, efficient games: 79.3 PFF vs Miami
 and 79.9 (tied for 3rd of 30) at New Orleans, with no turnovers in either. His Week 3 return from
 the Week 1 concussion was rough (55.8 PFF, 24.5 QBR). He's trending toward a middling starter in
-O'Connell's system. Carson Wentz (−1.0) is the QB2.
+O'Connell's system; the raise waits for a strong game against a good defense. Carson Wentz (−1.0) is the QB2.
 
 ## What moved the number
 

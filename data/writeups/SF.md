@@ -28,8 +28,9 @@ rookie LB **Jaden Dugger 78.1**).
   +0.2 comes back if Bosa returns.**
 - **Offense +0.9 → +0.8 (−0.1):** Deebo's hamstring takes a starter out for a few weeks. Kirk's return
   is the offset to watch.
-- **Purdy held at +3.2.**
-- **New total +4.8 → +4.9.**
+- **Purdy +3.2 → +3.7 (+0.5):** 6th of 30 by PFF, another game-winning drive, and 13 TD to 2 INT through
+  five games with a 5–0 team. He's earned the move up.
+- **New total +4.8 → +5.4.**
 
 ## Week 4: vs Denver (W 24–14)
 
@@ -125,7 +126,7 @@ confidence.
 
 ## Quarterback
 
-Brock Purdy (+3.2, held) is the selected quarterback. Through five games he's 98-of-142 for 1,196 yards with 13 touchdowns and 2 interceptions, and the 49ers are 5–0. Week 5 at Seattle was another solid road grade (74.8 PFF, 6th of 30). He's a settled, above-average starter running a machine. The question is how much of the machine is healthy around him: Deebo is now out for a few weeks, alongside Pearsall and Kirk.
+Brock Purdy (+3.7) is the selected quarterback, up half a point after Week 5. Through five games he's 98-of-142 for 1,196 yards with 13 touchdowns and 2 interceptions, and the 49ers are 5–0. Week 5 at Seattle was another solid road grade (74.8 PFF, 6th of 30). He's a settled, above-average starter running a machine. The question is how much of the machine is healthy around him: Deebo is now out for a few weeks, alongside Pearsall and Kirk.
 
 ## Quarterback: through Week 1 2026 (historical)
 

@@ -27,11 +27,11 @@ PFF) and LG **Christian Mahogany** (75.6). The defense played its best game of t
 **What moved the number:**
 - **QB Goff +2.0 → +2.5 (+0.5):** the raise he's been on watch for. Five straight quality games, no
   interceptions all season, and back-to-back top-seven passing grades.
-- **Defense −2.0 → −1.7 (+0.3):** its best game, discounted for opponent. Branch's activation would
-  be the next step up.
+- **Defense held at −2.0:** its best game (99 first-half yards allowed), but against a broken Arizona
+  offense, so it doesn't move the number yet. Branch's activation would be the first step up.
 - **Offense held at +1.5:** dominant, but one blowout of a bad defense isn't a reason to raise an
   already-high grade.
-- **New total +1.5 → +2.3.**
+- **New total +1.5 → +2.0.**
 
 ## Week 4: at Carolina (L 26–32)
 

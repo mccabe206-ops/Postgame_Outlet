@@ -24,11 +24,11 @@ between them. The defense was excellent (**Ernest Jones 81.2**, **Byron Murphy I
 - **QB Darnold held at +2.0:** two straight below-average grades (57.4, 54.5), 3 interceptions and 8 sacks
   taken in two weeks. That's a real watch item, but two games don't erase the track record behind the
   number; he stays put and has to answer it.
-- **Offense +1.3 → +1.1 (−0.2):** the backfield still can't run or hold onto the ball, and JSN's ankle is
-  a question on a short week. **Another −0.2 if JSN misses Thursday.**
+- **Offense held at +1.3:** the backfield couldn't run or hold onto the ball (2.8 a carry, 3 fumbles), but
+  Zach Charbonnet may be back soon and that's the fix. **−0.2 if JSN (ankle) misses Thursday.**
 - **Defense held at +3.0:** 251 yards and 14 first downs allowed is elite work. The points came off
   turnovers.
-- **New total +6.3 → +6.1.**
+- **Total held at +6.3.**
 
 ## Week 4: vs L.A. Chargers (W 30–23)
 
