@@ -523,6 +523,25 @@ def _summary_market(event_id):
     return None, None
 
 
+def _summary_open(event_id):
+    """Home-relative OPENING spread from ESPN's summary `pickcenter`
+    (`pointSpread.home.open.line`, DraftKings), which ESPN keeps after the game is
+    final. Returns (spread, provider) or (None, None)."""
+    try:
+        s = fetch_json(SUMMARY.format(eid=event_id))
+    except Exception:  # noqa: BLE001
+        return None, None
+    for p in (s.get("pickcenter") or []):
+        line = (((p.get("pointSpread") or {}).get("home") or {}).get("open") or {}).get("line")
+        if line in (None, "", "OFF"):
+            continue
+        try:
+            return round(float(str(line).replace("+", "")), 1), (p.get("provider") or {}).get("name")
+        except (TypeError, ValueError):
+            continue
+    return None, None
+
+
 def freeze_week_lines(week, year, overwrite=False):
     """Persist the real ESPN market line for each game of a week into
     data/line_overrides.json (keyed by ESPN game_id), so the blind-model record
@@ -549,6 +568,7 @@ def freeze_week_lines(week, year, overwrite=False):
         except (ValueError, OSError):
             raw = {}
     written = 0
+    changed = False
     for e in payload.get("events", []):
         c = e["competitions"][0]
         comp = {t["homeAway"]: t for t in c["competitors"]}
@@ -563,6 +583,16 @@ def freeze_week_lines(week, year, overwrite=False):
             if Lm and Lm["my_spread"] is not None:
                 existing["model_spread"] = Lm["my_spread"]
                 raw[gid] = existing
+                changed = True
+        # the true opening line (ESPN/DraftKings open) replaces any proxy opener
+        if existing.get("open_source") != "espn_open":
+            opn, prov = _summary_open(gid)
+            if opn is not None:
+                existing["market_open"] = opn
+                existing["open_source"] = "espn_open"
+                existing["open_note"] = f"{prov or 'ESPN'} opening line (ESPN summary pickcenter)"
+                raw[gid] = existing
+                changed = True
         if existing.get("market") is not None and not overwrite:
             continue
         odds = c.get("odds") or []
@@ -579,7 +609,7 @@ def freeze_week_lines(week, year, overwrite=False):
                                    f"{now.strftime('%Y-%m-%dT%H:%MZ')})").strip()
         raw[gid] = existing
         written += 1
-    if written:
+    if written or changed:
         with open(LINE_OVERRIDES, "w") as f:
             json.dump(raw, f, indent=2)
     return written

@@ -1,3 +1,38 @@
+## Week 5: vs Minnesota (L 13–23)
+
+The offense bottomed out. New Orleans had **142 yards, 9 first downs and 3.3 yards per play**, ran
+for 55, and went 2-of-10 on third down. The box-score model says the offense earned about **3
+points**. The Saints stayed in it because the defense scored. **Jonas Sanker returned a fumble 87
+yards for a touchdown**, tying it 13–13 late in the third quarter, and **Chase Young's** 27-yard
+return of an Aaron Jones fumble set up Kendre Miller's 2-yard TD. Minnesota pulled away in the
+fourth. **Tyler Shough** went 16 of 25 for **96 yards with 2 interceptions** (both to Byron Murphy
+Jr.), with a 38.1 rating and 41.6 QBR, playing with his left hand wrapped. Kellen Moore blamed his
+own play-calling. The defense was the bright spot: **Khristian Boyd (80.5, 90.0 vs the run)** and
+**Carl Granderson (79.9, 2 sacks)** in his return.
+
+**Injuries:**
+- **QB Tyler Shough (starter)** is playing through a **left (non-throwing) hand injury** from the
+  Week 4 loss to Atlanta. Asked whether it's broken, Moore said it "got banged two weeks ago" and
+  he's "wearing some protection." He's expected to keep starting.
+- **LB Kaden Elliss (starter, calf)** missed a second straight game. **Danny Stutsman** (2nd string →
+  effective starter) played 61 snaps.
+- **DTs Nathan Shepherd and Vernon Broughton** were out with an **illness**, which should be
+  short-term.
+- **DE Granderson (ankle)** is back. Still on IR: **RB Travis Etienne (hamstring)**, **WR Jordyn Tyson
+  (hamstring)**, **LT Kelvin Banks (high-ankle surgery, out for months)** and **DT Bryan Bresee
+  (torn ACL, season)**.
+
+**What changed:**
+- **Shough 0.0 → −0.3 (−0.3):** the hand is the reason, not one bad box score. His PFF grade has
+  slipped every week (76 → 72 → 66 → 61) since the injury, and ball security is the issue again. He
+  moves back toward 0.0 once the hand is clean.
+- **Offense −0.2 → −0.4 (−0.2):** no lead back (Etienne on IR, Kamara limited to 12 snaps), a rookie
+  WR2 on IR, and the starting left tackle out for months. Some of the 142 yards was Minnesota's
+  defense, so the cut stays with the personnel.
+- **Defense −1.0 → −0.9 (+0.1):** Granderson's return is the conditional coming back. It held
+  Minnesota's offense to 16 points while the offense kept handing it short fields.
+- **New total −1.2 → −1.6.**
+
 ## Week 4: vs Atlanta (L 24–45, MNF)
 
 A beating at home. The **competitive score was ATL 38, NO 17** (the final includes a garbage-time
@@ -87,11 +122,10 @@ keeps thinning out, though the skill group keeps the offense afloat.
 
 ## Quarterback
 
-Tyler Shough (0.0) is the selected quarterback, held after Week 4 (30 of 48, 286
-yards, 1 TD, 0 INT while chasing). He was raised to 0.0 after the Week 2 win at Baltimore and to
-−0.5 after the Week 1 comeback at Detroit. He's leading the league in passing volume, but ball
-security under pressure (two strip-sack fumbles in Week 3) is still the watch item. He's playing
-through a left-hand injury.
+Tyler Shough (−0.3) is cut from 0.0 while he plays through a left (non-throwing) hand injury that
+the team won't fully describe. His grades have slid four straight weeks, and in Week 5 he threw for
+96 yards with 2 INTs against Minnesota. Before the injury he was a legitimate starter (410 yards at
+Detroit, the upset at Baltimore). Ball security under pressure remains the watch item.
 
 ## Quarterback: through Week 1 2026 (historical)
 

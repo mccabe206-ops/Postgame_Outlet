@@ -1,3 +1,34 @@
+## Week 5: vs Cincinnati (L 24–31)
+
+Miami lost again but **covered the 7.5**, scoring 14 points in the 4th after trailing 28–10. The
+Dolphins actually out-gained Cincinnati, 331–307, behind **217 rushing yards**: **Ollie Gordon II** had
+18 for 88 and a TD, and **Malik Willis** ran 8 times for 74 and the final score. The interior line
+(Jarrett Kingston 78.3, Aaron Brewer 76.0, Kadyn Proctor 72.7) and TE Greg Dulcich (80.9) graded well.
+**Three turnovers** were the difference.
+
+The passing game is still the problem. **Willis** went 15-of-27 for 137 yards with a TD and **two
+interceptions** (51.0 rating; **34.7 PFF pass grade, 29th of 30**). That's **2 passing touchdowns in five
+starts**. His 67.9 QBR is mostly his running. On defense, corners **JuJu Brents (90.1)** and **Chris
+Johnson (86.9)** were excellent, and **DT Kenneth Grant** made his season debut off IR.
+
+**Injuries** (depth string: original slot → effective slot):
+- **CB JuJu Brents** (**neck stinger**) — **Starter → left in the 4th quarter.** He cleared the
+  concussion evaluation, and the Week 6 bye helps.
+- **RG Jonah Savaiinaea** (**ankle**) — **Starter → left the game, day-to-day.** **Jarrett Kingston**
+  went **2nd string → effective starter** and was the best-graded lineman.
+- **WR Caleb Douglas** (**ankle**) — **Starter → out again.** **Malik Washington** (2nd string) is the
+  effective starter.
+- **LB Trey Moore** (left ankle, surgery in August, IR) — **Starter-designate → stays out through the
+  bye.**
+
+**What moved the number:**
+- **QB Willis −2.0 → −2.5 (−0.5):** down to the worst-starter floor. Week 4's write-up said another
+  game like that would move him, and this was it. His legs keep him from going lower.
+- **Offense −1.9 → −1.7 (+0.2):** the run game is real for a second straight week, behind an interior
+  line that's playing well.
+- **Defense held at −1.3:** 31 allowed (the box said ~22), with great cornerback play and Grant back.
+- **New total −5.2 → −5.5.** Miami has its **bye in Week 6**.
+
 ## Week 4: at Minnesota (L 10–15)
 
 The score was close but the game wasn't. Miami ran **37 plays to Minnesota's 72**, had the ball
@@ -80,10 +111,9 @@ Miami grades near the floor on all three lines — the aftermath of a roster tea
 
 ## Quarterback
 
-Malik Willis (−2.0) is the selected quarterback, held after Week 4 despite another poor day
-(9 of 17, 85 yards; 44.8 PFF, 31st of 33). He has one passing touchdown in four starts, and he's
-right above the worst-starter floor. His legs give the offense a pulse (66.9 PFF run grade at Minnesota).
-The dropback game hasn't shown up.
+Malik Willis (−2.5) is now at the worst-starter floor. He has **2 passing touchdowns in five starts**,
+and his Week 5 pass grade (34.7) was 29th of 30. His running (8–74 and a TD against Cincinnati) is real
+and keeps the offense competitive, but the dropback passing game hasn't shown up.
 
 ## Quarterback: through Week 1 2026 (historical)
 

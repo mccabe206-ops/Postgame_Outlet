@@ -1,3 +1,32 @@
+## Week 5: vs Indianapolis (W 34–22)
+
+The box says this was even (25–25). Pittsburgh won it with two huge plays from **Jaylen Warren**:
+an **80-yard catch-and-run touchdown** on the first offensive snap, and a **50-yard touchdown run** in
+the third quarter. He finished with 101 rushing yards and 87 receiving. **Aaron Rodgers** was clean,
+going 22 of 31 for 235 yards with **3 TDs** (two to Pat Freiermuth), no interceptions, a 125.1
+rating, and one sack. The underlying grade was more modest (65.1 PFF, 15th of 30), and a third of the
+yards came on the Warren screen. The defense bent but held Indianapolis to **1-of-3 in the red zone**
+and 4-of-15 on third down. **Jalen Ramsey (80.9)** played every snap on his fractured wrist. Mason
+McCormick (82.2) led the line. Brock Hoffman (31.2) was the weak spot at right guard.
+
+**Injuries:**
+- **WR Michael Pittman Jr. (starter)** went on **short-term IR** after re-aggravating his **foot (plantar
+  fasciitis)** in Wednesday's practice. He's out at least four games.
+- **WR Roman Wilson (2nd string → effective starter in Pittman's spot)** hurt his **finger** at the end
+  of the first half and is **expected to miss multiple weeks** (ESPN's Jeremy Fowler). With **Ben
+  Skowronek (calf)** also out, the receiver room is **DK Metcalf, Germie Bernard and Brandon Smith**.
+- **CB Jamel Dean (starter, ankle)** missed a second game, with Daylen Everette (2nd string → effective
+  starter) in his place. **S DeShon Elliott** and **DL Derrick Harmon** (both starters) are still on IR.
+
+**What changed:**
+- **Rodgers held −1.2:** the stat line was excellent, but one play made it. The real improvement was
+  ball security (no turnovers, one sack).
+- **Offense +0.2 → 0.0 (−0.2):** two of the top three receivers are out for weeks (Pittman on IR, Wilson
+  with the finger). Some of it comes back with Wilson, and the rest with Pittman.
+- **Defense held +0.7:** the secondary injuries were priced in Week 4. It made the red-zone stops and
+  Ramsey played through the wrist.
+- **New total −0.3 → −0.5.**
+
 ## Week 4: at Cleveland (L 24–27)
 
 This was a coin flip on Thursday night, and Pittsburgh lost it on a **56-yard field goal with 10
@@ -78,7 +107,10 @@ Pittsburgh lands right at the waterline — a strong, veteran-laden defense bala
 
 ## Quarterback
 
-Aaron Rodgers (−1.2) holds after the Week 4 loss at Cleveland: 299 yards and two late tying drives, offset by two interceptions and five sacks. He was cut to −1.5 after Week 2 and moved back up after Week 3.
+Aaron Rodgers (−1.2) holds after a clean Week 5 win over Indianapolis (22-of-31, 235 yards, 3 TD, 0
+INT, 65.1 PFF). He also held after the Week 4 loss at Cleveland (two interceptions, five sacks). He
+was cut to −1.5 after Week 2 and moved back up after Week 3. At 42 the arm comes and goes, but he's
+protecting the ball.
 
 ## Quarterback: through Week 1 2026 (historical)
 

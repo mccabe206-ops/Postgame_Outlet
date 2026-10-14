@@ -1,3 +1,36 @@
+## Week 5: at Dallas (W 24–16, TNF)
+
+Tampa Bay got its first win, and it was **more dominant than the score**. The box-score model had it
+**TB 32, DAL 20**. The Bucs out-gained Dallas 419–366, **ran for 241 yards**, held the ball for 39
+minutes and **didn't turn it over** while forcing three. **Bucky Irving** ran 21 times for 165 yards,
+including a 72-yarder that set up his own TD, and caught another. Their opening drive alone took 10:58.
+Undrafted rookie **Jalon Daniels** was clean in his second start: 19 of 25, 189 yards, 1 TD, **0 INT**,
+a 110.2 rating, and a 21-yard 3rd-and-21 conversion (59.5 PFF, 22nd of 30). The line won again. **Luke
+Goedeke** graded 85.5 run-blocking and **Tristan Wirfs** 87.7 pass-blocking before he left with cramps.
+The defense was opportunistic: **Yaya Diaby** and **Alex Anzalone** had interceptions, and **Calijah
+Kancey** (80.9) and **Al-Quadin Muhammad** (81.0) won inside.
+
+**Injuries** (depth string: original slot → effective slot):
+- **QB Baker Mayfield (dislocated right thumb)** — **Starter → out** for a third game. He's in a
+  smaller splint and testing his grip this week. Most reports say he's not expected for Week 6 vs
+  Pittsburgh, with Week 7 vs Carolina the target. **Daniels (2nd string → effective starter)** keeps
+  the job until Baker is cleared.
+- **S Antoine Winfield Jr. (rib fracture)** — **Starter → out** (2–4 weeks from Oct. 1). Week 6 is the
+  earliest return.
+- **LT Tristan Wirfs (cramps)** — **Starter**, missed part of the 2nd half. Not an injury.
+- **Edge Rueben Bain Jr. (groin)** — **Starter → back** and played 35 snaps.
+
+**What moved the number (−4.7 → −3.8):**
+- **QB Daniels −4.5 → −4.0 (+0.5):** a competent, zero-turnover second start. As the 2nd-string QB he
+  belongs in the backup band, at its floor as a raw UDFA. **Baker's +1.5 returns the week he starts.**
+- **Offense +0.5 → +0.7 (+0.2):** a second straight strong week from the line (Wirfs, Goedeke, Barton)
+  and a 241-yard run game. The Week 3 line worry looks overstated. It's only +0.2 because Dallas's run
+  defense is poor.
+- **Defense −0.7 → −0.5 (+0.2):** a third straight sound game without Winfield. Three takeaways, 50
+  rushing yards allowed, and Bain is back.
+
+<!-- REPLACE the current "## Quarterback" section -->
+
 ## Week 4: vs Green Bay (L 14–17)
 
 Tampa Bay is **0–4**, but this was the closest it's been. The box had it **TB 17, GB 16**, a coin
@@ -87,11 +120,12 @@ Tampa Bay grades above the line as a genuinely balanced team — a proven quarte
 
 ## Quarterback
 
-Jalon Daniels (−4.5) is the selected quarterback while Baker Mayfield (+1.5) recovers
-from a dislocated right thumb (out at least three weeks, targeting ~Week 7). Daniels is an
-undrafted rookie out of Kansas. In his first NFL start vs Green Bay he went 19 of 27 for 148 yards
-with 1 TD and 2 INT (53.1 PFF, 49.7 QBR). He sits at the bottom of the backup band until he shows
-more. Baker had been flat before the injury: 17 of 34 with a 17.0 QBR in Week 3.
+Jalon Daniels (−4.0) is the selected quarterback while Baker Mayfield (+1.5) recovers from a
+dislocated right thumb (targeting ~Week 7). The undrafted rookie has two starts: a shaky debut vs
+Green Bay (19 of 27, 148 yards, 2 INT, 53.1 PFF) and a clean road win at Dallas (19 of 25, 189 yards,
+1 TD, 0 INT, 110.2 rating). He's a safe, short-area passer with useful legs, playing behind the
+league's best run game this week. He sits at the floor of the backup band, which is where a raw UDFA
+belongs until he does more than avoid mistakes.
 
 ## Quarterback: through Week 1 2026 (historical)
 

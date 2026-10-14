@@ -1,17 +1,37 @@
-## Week 5 preview: at Jacksonville, London (neutral site)
+## Week 5: vs Jacksonville in London (L 17–19)
 
-**What changed (0.5 → −0.25): Offense −1.0 → −1.5 (−0.5); Defense 0.0 → −0.25 (−0.25).**
-- **Offense −1.0 → −1.5 (−0.5):** Philadelphia is down to bare bones in London. **WR DeVonta Smith
-  (Starter, hamstring)** is out. He's the WR1 who carried the offense in Week 2. **C Drew Kendall
-  (knee)** is out too. He was a **2nd string → effective starter** after the Cam Jurgens trade, so
-  the Eagles are now on their **3rd-string center**, with Lane Johnson already retired. **WR
-  Hollywood Brown** is also out. **Saquon Barkley (hamstring)** sits again, but he was already priced
-  in after Week 4, and **Will Shipley** starts. The one piece of good news is that **TE Dallas
-  Goedert (knee)** returns, which offsets part of the drop.
-- **Defense 0.0 → −0.25 (−0.25):** **EDGE Jonathan Greenard (Starter, ankle)** is out. His return
-  was the pass rush's upside. **S Marcus Epps (groin)** is out as well. **LB Zack Baun** has cleared
-  the concussion protocol and plays, and so does **LB Jihaad Campbell**.
-- These are injury moves, so the number comes back as Smith, Kendall and Greenard return.
+Philadelphia lost on the final play, and on a decision Nick Sirianni took the blame for. Jake Elliott's
+48-yard field goal put the Eagles up 17–16 with 8 seconds left. The kickoff wasn't kicked out of
+bounds, **Ameer Abdullah returned it 53 yards**, and **Cam Little hit a 57-yarder** at the gun. ("I
+cost us that game.") The Eagles covered as 7.5-point underdogs, and the box score says the rest was
+about right. Jacksonville out-gained them **408–232**, and the model had JAX by 9. The Jaguars kept
+it close themselves: 0-for-3 in the red zone, a failed 4th-and-goal at the 1, and a missed PAT. The
+offense was what we've priced. **22 rushing yards** behind a 3rd-string center, plus two big plays: a
+Will Shipley TD and a **62-yard Hurts → Darius Cooper TD**. **Jalen Hurts** went 21 of 40 for 220
+yards, 1 TD, 0 INT (64.9 PFF, 16th of 30), a real step up from two last-place weeks. The defense was
+good: **Quinyon Mitchell** (84.6, INT), **Jalen Carter** (2 sacks, 2 forced fumbles), Tariq Woolen
+78.5, and Zack Baun's goal-line stop.
+
+**Injuries** (depth string: original slot → effective slot):
+- **OLB Jalyx Hunt (left ankle + knee)** — **Starter → hurt on the last play of the 1st half** after
+  grading 87.0. Vic Fangio says it would be "miraculous" if he plays Week 6. **Expect him out.**
+  With Greenard also out, **Arnold Ebiketie** is **2nd string → effective starter**.
+- **DB Michael Carter II (abdomen)** — **Starter (slot) → ruled out in the 3rd quarter**, status TBD.
+- **RB Will Shipley (foot)** — **3rd string → was the effective starter → out.** **Dameon Pierce** is
+  now the effective starter (11 carries, 14 yards).
+- **WR DeVonta Smith** and **RB Saquon Barkley (hamstrings)** — **Starters → out** again. Sirianni is
+  "hopeful" both return Week 6 vs Carolina.
+- **EDGE Jonathan Greenard (ankle)** — **Starter → out**, day-to-day. **C Drew Kendall (knee)** — 2nd
+  string → was the effective starter → out. **TE Dallas Goedert** returned (80.2).
+
+**What moved the number:** nothing. **Held at QB +1.5 / Off −1.5 / Def −0.25 (total −0.25).**
+- **Hurts held +1.5:** a mid-pack game with this cast is what +1.5 looks like.
+- **Offense held −1.5:** it scored exactly what the box said (17). **If Saquon and DeVonta Smith both
+  return in Week 6, this comes back +0.5.**
+- **Defense held −0.25:** it played above its number, but losing Hunt for Week 6 (and Carter II's
+  abdomen) offsets that. Greenard's return would add +0.1.
+
+<!-- REPLACE the current "## Quarterback" section -->
 
 ## Week 4: vs L.A. Rams (L 20–24)
 
@@ -111,7 +131,10 @@ Philadelphia grades above the line — a proven quarterback, a talented supporti
 
 ## Quarterback
 
-Jalen Hurts (+1.5) is an above-average dual-threat grade, cut from +2.0 after Week 4. Two straight bottom-of-the-league games (38.0 and 36.9 PFF) were partly about a depleted cast, but they still move the number. The rushing value is baked in.
+Jalen Hurts (+1.5) is an above-average dual-threat grade, held after Week 5. Following two
+bottom-of-the-league weeks (38.0 and 36.9 PFF), he was mid-pack in London (21 of 40, 220 yards, 1 TD,
+0 INT, 64.9 PFF). That's with no Saquon, no DeVonta Smith, and backups at center, left guard and right
+tackle. The number assumes the cast gets healthier. The rushing value is baked in.
 
 ## What moved the number
 

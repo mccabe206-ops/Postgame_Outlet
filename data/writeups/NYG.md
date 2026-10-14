@@ -1,3 +1,34 @@
+## Week 5: at Washington (T 27–27, OT)
+
+The Giants **came back from 14 down in the fourth quarter** and left Washington with a tie. It was
+27–13 with 11 minutes left. **Jameis Winston** then threw touchdowns to **Isaiah Likely** (17 yards)
+and **Malik Nabers** (17 yards, 1:43 left) to force overtime. Neither team scored in the extra
+period, and Washington ran out the clock at the Giants' 24 without getting a field-goal try off.
+The box-score model had it **29–28**, a true coin flip. New York out-gained Washington 408–378,
+had 29 first downs to 20, and held the ball for 39 minutes.
+
+**Winston** threw a career-high 54 passes: 33-of-54 for 326 yards, **3 TD and no interceptions** (96.7
+rating, 75.8 QBR, 61.7 PFF passing grade, 20th of 30). That's his second straight productive game.
+**Likely** (11–94, 2 TD, 81.6 PFF) and **Nabers** (11–121, TD, on 20 targets) carried the passing
+game. On defense, **Abdul Carter** (89.7 PFF, 6 pressures, a sack) and **Dru Phillips** (2 sacks) got home,
+but Washington ran for 202 yards, 103 of them by Jayden Daniels.
+
+**Injuries** (depth string: original slot → effective slot):
+- **RT Jermaine Eluemunor** (**left calf strain**). **Starter → carried off in the 3rd quarter.** The MRI
+  ruled out a long-term injury, and John Harbaugh calls him **day-to-day**. Marcus Mbow (2nd string)
+  filled in.
+- **S Tyler Nubin** (**neck**). **2nd string (rotational S) → day-to-day.**
+- **CB Colton Hood** (**concussion**, on a kickoff). **2nd string → in the protocol.**
+- Still out: DE Chauncey Golston (neck, IR) and EDGE Brian Burns (ACL, season).
+
+**What moved the number:**
+- **QB Winston −3.5 → −3.0 (+0.5):** two straight productive games, no interceptions here, and a
+  fourth-quarter comeback. He's a long-time starter playing at the top half of the backup band.
+- **Offense 0.0 → +0.2 (+0.2):** 408 yards and 29 first downs. Likely has emerged next to Nabers,
+  and the line allowed two sacks on 56 dropbacks.
+- **Defense held at +0.3:** the pass rush was excellent, and the run defense wasn't.
+- **New total −3.2 → −2.5.**
+
 ## Week 4: vs Arizona (W 36–24)
 
 The Giants **won going away, on defense.** It was a 30–24 game until the final snap, when **CB Deonte
@@ -90,11 +121,10 @@ dangerous pass rush. Week 2 changed the quarterback component.
 
 ## Quarterback
 
-Jameis Winston (−3.5) is the selected quarterback in the current rating after replacing the
-injured Jaxson Dart. Winston's grade fell from −3.0 to −4.0 after his Week 2 relief appearance and
-was lifted to −3.5 after Week 3, when the backup scale was re-set. The Giants traded for J.J.
-McCarthy on 9/28, but Harbaugh has kept Winston as the starter.
-Dart's earlier −0.5 grade belongs to the Week 1 lineup.
+Jameis Winston (−3.0) is the selected quarterback, raised half a point after a 326-yard, three-touchdown,
+no-interception day at Washington, his second straight productive start. He replaced the injured
+Jaxson Dart (left knee surgery, out at least the rest of the regular season). J.J. McCarthy,
+acquired 9/28, is the backup, and John Harbaugh has kept Winston as the starter.
 
 ## What moved the number
 

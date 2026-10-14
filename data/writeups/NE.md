@@ -1,17 +1,34 @@
-## Week 5 preview: vs Las Vegas
+## Week 5: vs Las Vegas (W 45–17)
 
-**What changed (1.3 → 0.3): Defense +0.5 → −0.3 (−0.8); Offense −0.7 → −0.9 (−0.2).**
-- **Defense +0.5 → −0.3 (−0.8):** the cornerback room is gone. **CB1 Christian Gonzalez
-  (shoulder)** misses a second straight game, and **CB2 Carlton Davis III (neck)** is out. So are
-  the next two men up, **Karon Prunty** and **Channing Canada** (both hamstrings). That puts New
-  England on its **4th- and 5th-string corners**. **Charles Woods** (2nd string → effective CB1),
-  who was the weak spot in Week 4, is himself questionable (shoulder). **S Craig Woodson**, **DT
-  Christian Barmore**, **EDGE Dre'Mont Jones** and **LB Christian Elliss** are also questionable.
-- **Offense −0.7 → −0.9 (−0.2):** **WR Mack Hollins (calf)** went to IR on Saturday. He was the
-  effective WR1 with **A.J. Brown** on IR, so Efton Chism III and Romeo Doubs carry the group until
-  Brown is eligible in Week 6. **RB Rhamondre Stevenson** is questionable; **TreVeyon Henderson**
-  starts if he sits.
-- These are availability moves, so the number comes back as the corners return.
+**Drake Maye** had the best game of his career: **26-of-34, 374 yards, 4 TD, 0 INT**, plus a rushing TD,
+a **150.9 passer rating**, a **95.1 QBR** and a **93.5 PFF pass grade, 2nd of 30 QBs**. New England led
+21–7 at the half and 35–10 late in the 3rd, and finished with **536 yards at 8.1 per play**. Three
+young receivers did it without A.J. Brown: **DeMario Douglas** (2 TD), **Kyle Williams** (34-yard TD,
+3–91) and **Efton Chism III** (5–57). The patchwork secondary, playing its 2nd- and 5th-string corners,
+held up. **Charles Woods (83.5) and Kindle Vildor (82.2)** were both excellent, and **Elijah Ponder**
+(93.2, 2 sacks) and **Gabe Jacas** (89.5) wrecked the Raiders' protection.
+
+The win was costly:
+
+**Injuries** (depth string: original slot → effective slot):
+- **LT Will Campbell** (**right MCL sprain**) — **Starter → week-to-week.** It's the same knee he tore
+  in 2025, but this one is less severe and no surgery is planned. He's expected to miss Week 6.
+  **Caleb Lomu** (rookie 1st-rounder) goes **2nd string → starting LT** and played well in relief.
+- **RB TreVeyon Henderson** (**high-ankle sprain**) — **2nd string → out multiple weeks**, no surgery.
+  **Corey Kiner** moves up to RB2 behind Rhamondre Stevenson.
+- **CB Christian Gonzalez** (shoulder) and **CB Carlton Davis III** (neck) — **Starters → out.**
+  Woods and Vildor fill in.
+- **WR A.J. Brown** (high-ankle sprain, IR) — **Starter → eligible to return in Week 6.** Mike Vrabel
+  says there's "a chance" he plays the Jets.
+
+**What moved the number:**
+- **QB Maye +1.5 → +2.0 (+0.5):** two straight top-five weeks (7 TD, 1 INT across them). The early-season
+  decision-making problem hasn't shown up since Week 3, so he gets another half-point back.
+- **Defense −0.3 → −0.1 (+0.2):** the pre-game cut for losing four corners was too steep. The fill-ins
+  held up, and the pass rush is dominant. The rest comes back when Gonzalez and Davis return.
+- **Offense held at −0.9:** the production is real, but losing the starting LT and RB2 offsets it. When
+  A.J. Brown is active, the offense goes up.
+- **New total +0.3 → +0.9.**
 
 ## Week 4: at Buffalo (W 29–26)
 
@@ -102,11 +119,10 @@ structure are real even when the process is sloppy and the WR1 is gone.
 
 ## Quarterback
 
-Drake Maye (+1.5) is the selected quarterback — cut a half-point in Week 2 and 1.5 in Week 3, then back up a half-point after a three-touchdown win at Buffalo in Week 4 (81.5 PFF, 5th in the league that week). He had 1
-touchdown against 6 interceptions through three games. His Week 3 at Jacksonville (28.1 PFF grade,
-48.6 rating, 20.0 QBR, a lost fumble) ranked last in the league that week. The talent that made
-him the centerpiece is still there, and he's working without A.J. Brown. But the grade now prices
-in a real, three-game decision-making problem rather than a one-off.
+Drake Maye (+2.0) is back up another half-point after the best two-game stretch of his career: 48-of-71,
+643 yards, 7 TD, 1 INT, and back-to-back top-five PFF grades (81.5 at Buffalo, 93.5 vs Las Vegas). He
+was 3.0 preseason and was cut to 1.0 after a three-game slump (1 TD, 6 INT). The slump is fading, but
+two games don't erase it yet, so there's still room above this number.
 
 ## Quarterback: through Week 1 2026 (historical)
 

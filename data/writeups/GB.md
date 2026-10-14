@@ -1,3 +1,37 @@
+## Week 5: vs Chicago (W 31–7)
+
+Green Bay's most complete game of the year, and the box-score model agrees (GB 30, CHI 8). **Jordan
+Love was the best-graded quarterback of Week 5**: 25 of 31, **367 yards**, 2 TD, 0 INT, a 137.5 rating
+and **94.5 PFF**, against a pass defense that had allowed 9, 7 and 12 points the previous three weeks.
+**Christian Watson** (6-143, TDs of 42 and 53) and **Matthew Golden** (6-123, a career high, 90.0)
+beat Chicago deep. **MarShawn Lloyd** ran for two scores. In the first quarter alone, Green Bay out-gained
+Chicago 130–9. The defense **forced five turnovers**: **Xavier McKinney** had 2 INTs (90.1),
+**Ty'Ron Hopper** had another, and **Brenton Cox Jr.** had 6 pressures (88.7). The only blemishes were
+rookie K Trey Smack missing two field goals and a PAT, a 70-yard run game, and **RG Travis Glover**
+(21.0 pass block). We had Green Bay favored (−2.0) while the market had Chicago, and the 24-point
+margin backed our read.
+
+**Injuries** (depth string: original slot → effective slot):
+- **DT Javon Hargrave (Achilles)** — **Starter → torn Achilles late in the 4th, season over** (tests
+  confirmed Monday). That's the second front-seven starter lost for the year in two weeks, after LB
+  Edgerrin Cooper's Achilles in Week 4.
+- **OLB Micah Parsons (ACL, PUP)** — **Starter → out.** Matt LaFleur says he's "getting closer," but he
+  won't practice this week.
+- **WR Skyy Moore (ankle)** — **depth WR → left in the 1st half.** **CB Benjamin St-Juste (hamstring)**
+  — **2nd string → hurt in the 2nd half.**
+- **RB Josh Jacobs** — still on the Commissioner's Exempt List (not an injury).
+
+**What moved the number (−0.3 → +0.5):**
+- **QB Love +0.5 → +1.0 (+0.5):** two straight above-average games (78.2, then 94.5 and 1st of the
+  week) against a pass defense that had been elite. That restores his pre-Week-3 number. It's not
+  more, because Weeks 1–3 were all below average and the receivers did a lot of the work.
+- **Offense 0.0 → +0.2 (+0.2):** Golden, Watson and Kraft are a real explosive-play group. The run
+  game, the right guard spot and Jacobs' absence keep it modest.
+- **Defense −0.8 → −0.7 (+0.1):** five takeaways are worth about +0.3, though they came against a
+  backup quarterback. **Losing Hargrave for the season takes −0.2 back.** Parsons is still the upside.
+
+<!-- REPLACE the current "## Quarterback" section -->
+
 ## Week 4: at Tampa Bay (W 17–14)
 
 A grinding road win in a coin-flip game. The box had it **TB 17, GB 16**. Neither offense got
@@ -74,10 +108,11 @@ Green Bay now grades below the line — not because the core talent vanished, bu
 
 ## Quarterback
 
-Jordan Love (+0.5) is an average-plus, still-developing starter, held this week. His
-best game of the year at Tampa (78.2 PFF, 11th of 33; 98.9 rating) followed three below-average
-games behind a failing line. The arm talent and flashes are there. The number won't climb back
-until the consistency does.
+Jordan Love (+1.0) is an above-average starter again after two straight strong games: 22 of 30 with
+2 TD at Tampa (78.2 PFF), then 25 of 31 for 367 yards and 2 TD vs Chicago (94.5 PFF, best of Week 5).
+The first three games were all below average behind a line in flux. With Golden, Watson and Kraft
+stretching defenses, the question is whether this is the 2023–24 version of Love for good. One more
+week like this and the number keeps climbing.
 
 ## What moved the number
 

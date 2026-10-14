@@ -1,3 +1,38 @@
+## Week 5: at Arizona (W 45–21)
+
+Detroit **scored 24 straight points in the second quarter** and was never threatened. After falling
+behind 7–0, the Lions got a Jahmyr Gibbs 1-yard run, a **38-yard Jared Goff → Sam LaPorta**
+touchdown, an 8-yard Goff → Jameson Williams score and a field goal before half, then a **39-yard
+Williams TD** in the third. The game was **45–14 when it was decided** (Arizona's last touchdown came with
+2:11 left). The box-score model had Detroit by about 8 (31–23). The extra came from a **perfect
+4-for-4 red-zone day** and zero turnovers.
+
+**Goff** was efficient: 19-of-30 for 271 yards, **3 TD and no interceptions** (125.8 rating, 71.9 PFF
+passing grade, 7th of 30), plus a 1-yard rushing score. That's still **no interceptions through five
+games**. **Gibbs** ran 25 times for **151 yards and 2 TD**, behind a dominant **Penei Sewell** (94.3
+PFF) and LG **Christian Mahogany** (75.6). The defense played its best game of the year. Arizona had
+**99 first-half yards**. **Alim McNeill** (81.1, a sack), **D.J. Reed** (80.0), **Jack Campbell**
+(79.2) and **D.J. Wonnum** (2 sacks) led five sacks, and fill-in corner **Ennis Rakestraw Jr.** graded
+71.0. This came against an Arizona offense missing its WR1 and left tackle, so it's discounted.
+
+**Injuries** (depth string: original slot → effective slot):
+- **LB Devin White** (**broken forearm**). **2nd string (rotational MLB) → likely surgery**, multiple
+  weeks.
+- **WR Tom Kennedy.** **3rd string (depth) → "doesn't look good"** short-term (Dan Campbell).
+- **S Brian Branch** (**Achilles**, PUP). **Starter → returned to practice last week**, window open, not
+  yet activated. **S Kerby Joseph** (**knee**, PUP). **Starter → still out.** **CB Rock Ya-Sin**
+  (**hamstring**). **Starter → out.** Chuck Clark, Jalen Mills and Rakestraw (2nd string) remain the
+  effective starters.
+
+**What moved the number:**
+- **QB Goff +2.0 → +2.5 (+0.5):** the raise he's been on watch for. Five straight quality games, no
+  interceptions all season, and back-to-back top-seven passing grades.
+- **Defense −2.0 → −1.7 (+0.3):** its best game, discounted for opponent. Branch's activation would
+  be the next step up.
+- **Offense held at +1.5:** dominant, but one blowout of a bad defense isn't a reason to raise an
+  already-high grade.
+- **New total +1.5 → +2.3.**
+
 ## Week 4: at Carolina (L 26–32)
 
 Detroit's offense did nearly everything right except finish, and its defense did very little
@@ -89,7 +124,9 @@ Detroit's rating is offense-led — a good quarterback fronting one of the leagu
 
 ## Quarterback
 
-Jared Goff (+2.0) is the selected quarterback, held after a 412-yard Week 4 at Carolina — four straight quality games with no interceptions all season. He's a precise, high-volume passer perfectly fit to this scheme. He's playing at or above this grade, and he's on watch for a raise.
+Jared Goff (+2.5) is the selected quarterback, raised half a point after a 271-yard, three-touchdown
+Week 5 at Arizona. He has five straight quality games and no interceptions through five starts, with
+back-to-back top-seven PFF passing grades. He's a precise, high-volume passer perfectly fit to this scheme.
 
 ## What moved the number
 

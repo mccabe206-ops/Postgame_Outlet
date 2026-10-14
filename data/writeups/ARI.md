@@ -1,3 +1,35 @@
+## Week 5: vs Detroit (L 21–45)
+
+Arizona **scored first and then got run over**. A 2-yard Jacoby Brissett → Teagan Quitoriano
+touchdown made it 7–0. Detroit then scored 24 straight in the second quarter and **45 of the next 52**
+points. It was **45–14 when it was decided**, and the box-score model had a closer ~31–23 game (Detroit
+finished all four red-zone trips and never turned it over). The Cardinals managed **99 first-half
+yards** and **56 rushing yards**, and gave up 412 yards and 163 on the ground.
+
+The week's biggest news happened before kickoff. **WR Marvin Harrison Jr. was inactive and then traded
+to Houston** (finalized 10/11) for a 2027 second-round pick. **Brissett** threw for 292 yards and 3 TD
+(29-of-47, 1 INT; 70.8 PFF passing grade, 10th of 30) without his top receiver and behind backup left
+tackle **Jayden Williams** (54.4 PFF, 5 sacks allowed by the line). **Trey McBride** had 9 catches and
+a touchdown. On defense only **Max Melton** (85.9) and **Baron Browning** (77.9, a sack) held up.
+**Mack Wilson** (28.0), **Walter Nolen** (29.4), **Budda Baker** (33.8) and **Garrett Williams**
+(27.3) all graded in the 20s and 30s.
+
+**Injuries / roster** (depth string: original slot → effective slot):
+- **WR Marvin Harrison Jr.** **Starter (WR1) → traded to Houston.** Michael Wilson, Kendrick Bourne and
+  Jalen Brooks (2nd string) move up.
+- **S Andrew Wingard** (**knee bruise**). **Starter → out.**
+- Still out: LT Paris Johnson Jr. (torn left biceps, season; Jayden Williams 2nd → effective starter),
+  RG Isaiah Adams (ankle, IR; Jon Gaines II 2nd → effective starter), CB Will Johnson (neck, IR), RB
+  James Conner (foot, IR).
+
+**What moved the number:**
+- **Offense −0.8 → −1.2 (−0.4):** the WR1 is gone for good, and without Paris Johnson the run game
+  and pass protection both broke down. McBride keeps it from going further.
+- **Defense −0.8 → −1.0 (−0.2):** 45 points and no takeaways. Kept small because Detroit's offense is
+  one of the league's best.
+- **QB Brissett held at −1.0:** a solid game in bad circumstances.
+- **New total −2.6 → −3.2.**
+
 ## Week 4: at N.Y. Giants (L 24–36)
 
 The score looks like a beating; the game wasn't. The box-score model had this **16–14 Giants**. Six
@@ -77,11 +109,10 @@ are better than a bottom-of-the-league read, even with a stopgap quarterback.
 
 ## Quarterback
 
-Jacoby Brissett (−1.0) is the selected quarterback after a half-point increase. He's a steady,
-low-end starter who has now played well in two of three games: 27-of-37 with no picks in the Week 1
-upset at the Chargers, and 38-of-52 for 280 with 2 TD and no turnovers at San Francisco (6th in
-Week 3 PFF pass grade). He won't win a game by himself, but he has been a better bridge than the
-floor grade assumed.
+Jacoby Brissett (−1.0) is the selected quarterback, held after Week 5. He threw for 292 yards and
+three touchdowns against Detroit with no WR1 (Marvin Harrison Jr. was traded to Houston) and behind a
+backup left tackle. He's a steady, low-end starter who has graded as a better bridge than the floor
+assumed (PFF passing grade 10th of 30 in Week 5, 6th in Week 3).
 
 ## What moved the number
 

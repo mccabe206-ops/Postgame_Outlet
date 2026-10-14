@@ -1,3 +1,38 @@
+## Week 5: at New York Jets (L 12–17)
+
+The Browns' streak of one-score wins ended with a one-score loss, and the box agreed: **NYJ 15, CLE
+10 expected**. Cleveland's offense had **198 yards and 3.0 yards per play** and **allowed 8 sacks**.
+**Deshaun Watson** went 15 of 33 for 155 yards and 1 TD (24.0 QBR, 47.5 PFF, 27th of 30). He found
+**Denzel Boston** for a 29-yard TD and a 12–10 lead with 6:15 left. Then an aborted punt snap gave
+the Jets the ball at the Cleveland 28, and Braelon Allen scored three plays later. Watson's final
+drive ended in a strip-sack. The line pass-blocked better than 8 sacks suggests (**Zion Johnson
+82.6**, Spencer Fano 72.9), which points at Watson holding the ball. The defense was excellent:
+**Quincy Williams (95.7)** forced three fumbles, rookie **Emmanuel McNeil-Warren** graded 92.0, and
+**Carson Schwesinger** had a strip-sack.
+
+**Injuries:**
+- **WR KC Concepcion (starter)** was ruled out in the first quarter with a **concussion** after a
+  helmet-to-helmet hit. He's in the protocol, and his Week 6 status is uncertain.
+- **RB Quinshon Judkins (starter, right ankle)** and **LB Carson Schwesinger (starter, Grade 1 right
+  ankle sprain)** both left in walking boots. Todd Monken calls both **day-to-day**, and neither has
+  been ruled out for Baltimore.
+- **RB Raheim Sanders (hip)** went on **IR**. With Dylan Sampson also on IR, the backfield behind
+  Judkins is down to its third string.
+- **DT Mason Graham (MCL and ankle sprains)** and **DT Mike Hall Jr. (ankle)** both missed the game,
+  so third-stringers started inside. Monken hinted both could return this week.
+- **RG Teven Jenkins (back)** missed a fifth straight game.
+
+**What changed:**
+- **Watson −2.2 → −2.5 (−0.3):** this gives back last week's bump. Eight sacks behind a line that
+  pass-blocked well, plus 4.7 yards per attempt. His week-to-week swings average out right about
+  here.
+- **Offense −0.6 → −0.8 (−0.2):** the starting rookie receiver is in the concussion protocol, the
+  starting back has a sore ankle, and both backup backs are on IR. If Concepcion and Judkins both
+  play Sunday, +0.1 comes back.
+- **Defense held +0.3:** it was dominant, but against a weak Jets offense and without its two best
+  tackles. It goes up if Graham returns.
+- **New total −2.5 → −3.0.** At 3–2, the record still runs ahead of the rating.
+
 ## Week 4: vs Pittsburgh (W 27–24)
 
 The Browns are **3–1** after another one-score win. **Andre Szmyt** won it with a **56-yard field
@@ -75,7 +110,9 @@ Cleveland grades poorly, and it is almost entirely the quarterback. The defense 
 
 ## Quarterback
 
-Deshaun Watson (−2.2) is up from −2.5 after his best game of 2026 in the Week 4 win over Pittsburgh (24-of-33, 268 yards, 94.0 rating, 74.3 PFF grade) and the game-winning drive. His week-to-week process has been volatile, which is why the move is small.
+Deshaun Watson (−2.5) gives back last week's bump after taking 8 sacks in the loss at the Jets
+(15-of-33, 155 yards, 47.5 PFF, 27th of 30). His season has swung week to week (PFF 33.7, 69.1, 39.1,
+74.3, 47.5), and −2.5 is where that averages out. He was raised from −3.0 after Week 2.
 
 ## Quarterback: through Week 1 2026 (historical)
 

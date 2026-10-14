@@ -1,3 +1,35 @@
+## Week 5: vs Philadelphia in London (W 19–17)
+
+Jacksonville is 4–1 after the wildest finish of the season. Elliott put Philadelphia up 17–16 with 8
+seconds left. **Ameer Abdullah's 53-yard kickoff return** set up **Cam Little's 57-yard field goal**
+at the gun. The Jaguars were the better team by more than the score. They out-gained the Eagles
+**408–232**, held them to **22 rushing yards**, and the box-score model had them winning by about 9.
+They gave it back with **0-for-3 in the red zone** (including a stuffed 4th-and-goal at the 1 before
+halftime), **13 penalties for 100 yards**, and a missed PAT. **Trevor Lawrence** threw for 331 yards
+and 2 TDs, both to **Parker Washington** (6-124-2, 84.2 PFF). He also had an INT and two fumbles
+(both recovered), finishing at 67.4 PFF, 13th of 30. **Ventrell Miller (92.6)**, **Ruke Orhorhoro
+(82.6)** and **DaVon Hamilton (82.5)** led a defense that played without its starting safety.
+
+**Injuries** (depth string: original slot → effective slot):
+- **LT Anton Harrison (right knee)** — **Starter → carted off in the 3rd quarter → injured reserve.**
+  He's having **arthroscopic surgery**, and the timeline depends on what the surgeon finds: **3–5
+  weeks, or 3–4 months** (Rapoport/Fowler). **Walker Little** is **2nd string → effective starting
+  LT** (87.9 pass block in relief). With **Patrick Mekari** (back, IR) already out, two line starters
+  are gone.
+- **S Eric Murray (concussion)** — **Starter → didn't dress.** **Rayuan Lane III** was **2nd string →
+  effective starter** (47.1).
+- **CB Jaylon Jones (hamstring)** — depth, out. **LS Ross Matiscik (shoulder)** left the game.
+
+**What moved the number (+4.8 → +4.6): Offense +0.5 → +0.3 (−0.2).**
+- **Offense −0.2:** losing the starting left tackle for weeks or the season, with Mekari already
+  gone. Little is a capable swing tackle, which keeps this to −0.2. The red-zone failures are bad luck,
+  not talent.
+- **Defense held +0.8:** it held Philadelphia to 232 yards **without Murray**, so the planned −0.1 for
+  his absence isn't needed.
+- **Lawrence held +3.5:** big volume and the winning drive, offset by two fumbles and a 35.1 QBR.
+
+<!-- REPLACE the current "## Quarterback" section -->
+
 ## Week 4: at Cincinnati (W 22–17)
 
 A win Jacksonville would have lost a year ago, and it was more about the defense's timing than about
@@ -93,11 +125,11 @@ Jacksonville grades as a clear riser led by its quarterback, with a receiver roo
 
 ## Quarterback
 
-Trevor Lawrence (+3.5, held) is the engine of this rating. Through three games he has a
-career-best Week 1 (18-of-23, 4 TD, 150.6 rating, 87.1 PFF grade), a Week 2 that faded late at
-Denver (17-of-29, 0 TD, 1 INT), and an efficient Week 3 (19-of-29, 3 TD, 1 INT, 102.9 rating,
-79.8 QBR, 68.1 PFF). The Coen system is organizing the tools. The next step is repeating the
-Week 1 version against a real secondary.
+Trevor Lawrence (+3.5, held) is the engine of this rating. In five games he has 10 TD and 3 INT: a
+career-best Week 1 (4 TD, 150.6 rating, 87.1 PFF), steady efficient games against New England and
+Cincinnati, and 331 yards with the winning drive in London (67.4 PFF). The ball security in London
+(two fumbles) and the red-zone stalls are the nitpicks. The Coen system has him playing like a
+top-10 quarterback, and the left tackle injury is the new test.
 
 ## What moved the number
 

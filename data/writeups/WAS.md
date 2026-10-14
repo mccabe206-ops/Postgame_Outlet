@@ -1,3 +1,41 @@
+## Week 5: vs N.Y. Giants (T 27–27, OT)
+
+**Jayden Daniels** came back from his elbow injury and was electric on the ground, then made the
+decision that turned a likely win into a tie. Washington led **27–13 with 11 minutes left** after
+Daniels touchdown runs of **38 and 26 yards** (plus a two-point pass to Terry McLaurin), and then
+gave up two Jameis Winston touchdown drives. In overtime, Washington reached the Giants' 24 with
+about 12 seconds left and **no timeouts**. Daniels held the ball, scrambled, and was tackled in
+bounds. The clock expired before the field-goal unit could get on. Daniels said "it's on me." Dan
+Quinn said the call was to clock it and took the blame. The box-score model had this **28–29**, a
+coin flip, so a tie is a fair reflection of how the teams played.
+
+**Daniels** went 17-of-25 for 199 yards with no touchdowns and no turnovers (80.9 QBR), and ran **9
+times for 103 yards and 2 TD**. His passing grade was 59.0 (24th of 30), but his running grade was
+84.5. He took 5 sacks. **McLaurin** (83.3 PFF) was back from his hamstring, and **Sam Cosmi** (81.5,
+back from a concussion) anchored a line that helped the team run for **202 yards**. The finishing wasn't
+there: 0-for-1 in the red zone, two field goals, and a missed PAT. The defense gave up **408 yards and
+29 first downs** to a backup-band quarterback, and backup DBs Amik Robertson (48.2) and Mike Sainristil
+(55.1) were picked on all day.
+
+**Injuries** (depth string: original slot → effective slot):
+- **QB Jayden Daniels** (**left elbow**, brace). **Starter → finished healthy.**
+- **WR Stefon Diggs** (**hamstring**). **Starter → still out.** Treylon Burks and Antonio Williams
+  (2nd string) remain the effective WR2/WR3.
+- **S Nick Cross** (**illness**) and **CB Trey Amos** (**ankle, IR**). **Both Starters → out.** That's a
+  secondary cluster. Robertson and Fabian Moreau (2nd string) are the effective starters.
+- Still out: LT Laremy Tunsil (triceps, IR), LB Leo Chenal (neck, IR), DE Charles Omenihu (groin),
+  QB2 Marcus Mariota (right MCL sprain).
+
+**What moved the number:**
+- **QB Daniels held at +1.5:** the elbow held up, he had no turnovers, and he ran for 103 yards and two
+  touchdowns, but the overtime clock blunder cost a near-certain winning field goal. The full restore
+  to +2.0 waits one more week.
+- **Offense −1.0 → −0.8 (+0.2):** McLaurin and Cosmi are back, and the run game produced 202 yards.
+  Diggs is still out, and the red zone stalled.
+- **Defense −1.3 → −1.5 (−0.2):** 408 yards and a blown 14-point fourth-quarter lead, with two starting
+  defensive backs out.
+- **New total −0.8 → −0.3.**
+
 ## Week 4: vs Indianapolis in London (L 13–30)
 
 Washington lost **a second starting quarterback** before the first quarter ended. **Marcus Mariota
@@ -89,7 +127,10 @@ units. Daniels's earlier grade describes a different lineup.
 
 ## Quarterback
 
-Jayden Daniels (+1.5) is the selected quarterback again. He was out since dislocating his left (non-throwing) elbow in Week 2, practiced fully before Week 5, and is set to start in a brace. He's restored half a point below his +2.0 grade until he shows he's fully himself. Marcus Mariota (right MCL sprain in Week 4, no IR) moves back to QB2 at −2.0.
+Jayden Daniels (+1.5) is the selected quarterback, held one more week after his Week 5 return from a
+dislocated left (non-throwing) elbow. He played in a brace, had no turnovers, and ran for 103 yards
+and two touchdowns against the Giants, though his overtime clock-management mistake cost Washington a
+game-winning field-goal try. Marcus Mariota (right MCL sprain, no IR) is QB2 at −2.0.
 
 ## What moved the number
 

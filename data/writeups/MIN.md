@@ -1,10 +1,34 @@
-## Week 5 preview: at New Orleans
+## Week 5: at New Orleans (W 23–13)
 
-**What changed (1.1 → 1.4): Offense +0.3 → +0.6 (+0.3).**
-- **WR Justin Jefferson (Starter, left ankle sprain)** plans to play, per ESPN's Jeremy Fowler. He
-  had three limited practices this week, and the sprain is believed to be mild. His absence cost
-  0.3 in Week 4, so that comes back. **WR Jordan Addison (hamstring)** is questionable.
-- Kyler Murray and the defense are unchanged.
+Minnesota is **5–0**, and the box says the game was more lopsided than 23–13. The model had it
+**MIN 21, NO 3**. The Saints' offense managed **142 yards and 9 first downs** and went 2-of-10 on
+third down. Seven of their 13 points came on **Jonas Sanker's 87-yard fumble-return touchdown**, and
+their only offensive score followed an Aaron Jones goal-line fumble. **Kyler Murray** had his
+second straight strong game: 24 of 30, 229 yards, 1 TD, no turnovers, a **79.9 PFF passing grade
+(tied for 3rd of 30)**, a 78.8 QBR, and 51 rushing yards. **Justin Jefferson** came back from his
+ankle sprain with 6 catches for 79 and a touchdown. **Aaron Jones** ran 25 times for 113. The
+defense did the rest: **Byron Murphy Jr. intercepted Tyler Shough twice**, and Jalen Redmond
+controlled the run.
+
+**Injuries:**
+- **TE T.J. Hockenson (starter)** suffered a **concussion** on the second play when his head hit the
+  turf, and he's in the protocol. O'Connell says he's "feeling pretty good," and the **Week 6 bye**
+  gives him two weeks to clear. Rookie Gavin Bartholomew (2nd string → effective starter) played 44
+  snaps.
+- **LT Christian Darrisaw (concussion)** and **WR Jordan Addison (hamstring)**, both starters, missed
+  the game. **Both are expected back after the bye.**
+- **LG Donovan Jackson (meniscus surgery)** is still on IR, so two backups (Van Demark and Huber)
+  started on the left side again.
+
+**What changed:**
+- **Murray −0.5 → −0.2 (+0.3):** two straight top-10 passing grades with no turnovers, now with
+  Jefferson back. It's a partial move because the two opponents (Miami, New Orleans) are weak.
+- **Defense +1.0 → +1.2 (+0.2):** a fifth straight dominant game. Brian Flores keeps getting more
+  out of this group than the talent read says. Tempered because the Saints were depleted and their
+  QB was playing hurt.
+- **Offense held +0.6:** Jefferson's return was priced before the game. Darrisaw, Addison and
+  Hockenson are all expected back after the bye. If they are, the offense goes up a notch for Week 7.
+- **New total 1.1 → 1.6.**
 
 ## Week 4: vs Miami (W 15–10)
 
@@ -93,10 +117,10 @@ defense. Carson Wentz's Week 1–2 appearances remain historical context.
 
 ## Quarterback
 
-Kyler Murray (−0.5) is the selected quarterback, held after his best game in
-Minnesota (27 of 37, 247 yards, no turnovers, 79.3 PFF, 10th of 33) without Justin Jefferson.
-That came after a rough return from his Week 1 concussion at Tampa (55.8 PFF, 25.4 QBR). Carson
-Wentz (−1.0) is the QB2.
+Kyler Murray (−0.2) is up from −0.5 after back-to-back clean, efficient games: 79.3 PFF vs Miami
+and 79.9 (tied for 3rd of 30) at New Orleans, with no turnovers in either. His Week 3 return from
+the Week 1 concussion was rough (55.8 PFF, 24.5 QBR). He's trending toward a middling starter in
+O'Connell's system. Carson Wentz (−1.0) is the QB2.
 
 ## What moved the number
 

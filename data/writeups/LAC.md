@@ -1,3 +1,41 @@
+## Week 5: vs Denver (L 17–23)
+
+The Chargers are **0–5**. This one slipped away in the fourth quarter. Los Angeles led **17–10** after a 7-yard
+**Justin Herbert → Hayden Rucci** touchdown and a **42-yard Kimani Vidal run** in the third, then gave
+up 13 straight points and lost on a final-play sack. Jim Harbaugh took "100% accountability" for a failed
+fourth-down decision. The box-score model had it **16–10 Denver**. The Chargers gained only **237
+yards (82 passing)** and turned it over three times.
+
+**Herbert** went 14-of-24 for 121 yards with a touchdown, an interception and a lost fumble (27.0 QBR,
+37.3 PFF passing grade, 28th of 30), and took **5 sacks**. That's a fifth straight poor game. He's
+playing behind a line that is mostly backups (fill-in LG Logan Taylor 31.9 and LT Travis Burke 39.7
+in pass protection) and now without his receivers too. The defense was good for a third straight
+week. **Del'Shawn Phillips** (89.9 PFF) and **Akheem Mesidor** (89.6, a sack) led a unit that held
+Denver to 224 yards and 1-of-12 on third down.
+
+**Injuries** (depth string: original slot → effective slot):
+- **WR Tre' Harris** (**hamstring**). **Starter → left mid-game**, status pending.
+- **WR Ladd McConkey** (**foot**). **Starter → limited/not a factor** after missing every practice.
+- **WR Quentin Johnston** (**chest**). **Starter → out.** With all three top receivers hurt, **Marquez
+  Valdes-Scantling** and **Theo Wease Jr.** (2nd/3rd string) are the effective starters.
+- **Offensive line:** **RT Joe Alt** (**neck**). **Starter → out.** **LT Rashawn Slater** (**high right
+  ankle**). **Starter → IR.** **Trevor Penning** (**concussion**). **2nd string → fill-in LG → IR.**
+  C Tyler Biadasz and G Trey Pipkins are both Starters on IR. Four of five line spots are backups.
+- **S Derwin James** and **CB Donte Jackson** (both **hamstring**). **Starters → out.** That's a
+  secondary cluster.
+- **QB2 Trey Lance** (**groin**). **2nd string → IR.**
+
+**What moved the number:**
+- **QB Herbert +1.0 → +0.5 (−0.5):** five straight poor games. Much of it is the line, which is
+  priced in the offense, but five weeks in, the play is closer to a middling starter than an
+  above-average one.
+- **Offense −1.0 → −1.3 (−0.3):** now it's the receivers as well as the line. Harris, McConkey and
+  Johnston are all hurt, TE David Njoku is on IR, and Penning joined the IR list. It restores as Alt and
+  the receivers return.
+- **Defense −0.5 → −0.3 (+0.2):** a third straight good week, discounted for a weak Denver offense.
+  Derwin James is still out.
+- **New total −0.5 → −1.1.**
+
 ## Week 4: at Seattle (L 23–30)
 
 The Chargers lost the turnover battle **4–1** (two Justin Herbert interceptions and two lost
@@ -98,7 +136,10 @@ but Week 1 pulled the offense back to the pack.
 
 ## Quarterback
 
-Justin Herbert (+1.0) is the selected quarterback, held after Week 4 at Seattle. It was a fourth straight difficult game (19-of-31, 189, 2 INT), but this one came behind backups at both tackle spots, which is priced in the offense. His grade fell from +1.5 after Week 3 at Buffalo, from +3.0 after Week 2 against Las Vegas, and from +4.0 after Week 1.
+Justin Herbert (+0.5) is the selected quarterback, cut half a point after Week 5 against Denver
+(14-of-24, 121 yards, an interception and a lost fumble, 5 sacks). It's his fifth straight difficult
+game, and it came behind backups at four offensive-line spots and without his top three receivers.
+His grade has fallen from +4.0 to start the season. QB2 Trey Lance is on injured reserve (groin).
 
 ## Quarterback: through Week 1 2026 (historical)
 

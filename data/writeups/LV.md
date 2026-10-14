@@ -1,11 +1,29 @@
-## Week 5 preview: at New England
+## Week 5: at New England (L 17–45)
 
-**What changed (−1.2 → −1.5): Offense 0.0 → −0.3 (−0.3).**
-- **RB Ashton Jeanty (Starter, ankle + foot)** didn't practice Friday and is a game-time decision.
-  He's been the engine of this offense, and even if he plays he won't be at full strength, so the
-  number comes down either way. **WR Jalen Nailor (concussion)** is out, and **Jack Bech** (forearm)
-  and **Dont'e Thornton Jr.** (hamstring) are on IR.
-- The number comes back once Jeanty is healthy.
+The Raiders' worst game of the season. New England led 21–7 at the half and 35–10 late in the 3rd, and
+finished with **536 yards at 8.1 per play**. That was against a Patriots team missing its WR1 and RG1 and
+losing its LT and RB2 during the game. Drake Maye threw for 374 and 4 TDs. The back seven couldn't
+cover or tackle: **LBs Quay Walker (46.2) and Nakobe Dean (45.5), CBs Eric Stokes (44.8) and Hezekiah
+Masses (36.1)**. Maxx Crosby (5 pressures) and Adam Butler (74.3) were the only bright spots. It was the
+second straight week the defense got pushed around, after 189 rushing yards allowed to Kansas City.
+
+The offense ran for **38 yards**. **Ashton Jeanty** played through a flare-up of **plantar fasciitis
+plus an ankle injury** and managed 10 for 27. **Kirk Cousins** was efficient (19-of-28, 243, TD, 0 INT,
+106.7 rating, 68.7 QBR) before Fernando Mendoza mopped up in garbage time. **Brock Bowers** (8–110, TD,
+88.1 PFF) was the best player on the team. LG Spencer Burford graded 23.4.
+
+**Injuries** (depth string: original slot → effective slot):
+- **RB Ashton Jeanty** (**ankle + plantar fasciitis**) — **Starter → played limited.** Already priced.
+- **WR Jalen Nailor** (**concussion**) — **Starter → out.** **Cody White** went **3rd string → effective
+  starter**, with Jack Bech (forearm fracture) and Dont'e Thornton Jr. on IR.
+- **DT Tonka Hemingway** (**stinger**) — rotational, questionable.
+
+**What moved the number:**
+- **Defense −0.7 → −1.1 (−0.4):** two straight weeks of getting run over and thrown on, with no injury
+  to explain it. The linebackers and corners are the issue.
+- **QB Cousins held at −0.5:** efficient and mistake-free. Nothing changed at quarterback.
+- **Offense held at −0.3:** the Jeanty dock is already priced. It comes back when he's healthy.
+- **New total −1.5 → −1.9.**
 
 ## Week 4: vs Kansas City (L 27–30)
 

@@ -1,3 +1,31 @@
+## Week 5: at Atlanta (W 30–23, OT)
+
+Baltimore won in overtime in Atlanta **without Lamar Jackson, its new center Cam Jurgens, or edge Trey
+Hendrickson**. **Tyler Huntley** was the story. He went 24-of-32 for 201 yards, 2 TD and no turnovers,
+with a **79.9 PFF passing grade, 5th of 30** QBs this week. Down 23–15 with 2:31 left, he drove the Ravens
+75 yards, hit **Devontez Walker** for a 7-yard TD with 40 seconds left, and Derrick Henry ran in the tying
+two-point conversion. **Kyle Hamilton** then intercepted Tua Tagovailoa in overtime, and Huntley won it on
+a 1-yard sneak. The box score backs the result: Baltimore out-gained Atlanta **391–367**, ran for **208
+yards**, and held the ball 35 minutes. Atlanta's only first-quarter touchdown was **Jessie Bates'
+36-yard return of a Mark Andrews fumble**. Henry ran 24 times for 102 yards, **Calais Campbell (81.5)**
+anchored the front, and **Marlon Humphrey** was back at corner.
+
+**Injuries and availability** (depth string: original slot → effective slot):
+- **QB Lamar Jackson** (**left ankle sprain**) — **Starter → inactive.** Jesse Minter says he's "definitely
+  doing better." Reports give him a **"real chance" to return Week 6 vs Cleveland.** **Huntley** is **2nd
+  string → effective starter** until then.
+- **C Cam Jurgens** (**concussion**) — **Starter → inactive**, in the "finishing stages" of the protocol.
+- **EDGE Trey Hendrickson** (**broken right finger, surgery**) — **Starter → missed a 2nd game**, and
+  Minter expects him back soon. **Mike Green** is **2nd string → effective starter**.
+
+**What moved the number:**
+- **QB Huntley −1.5 → −1.0 (+0.5):** he played like a solid starter (5th of 30 by PFF, no turnovers,
+  the winning drive), so he moves above the usual backup band as a proven-veteran exception. Offense
+  (+0.8) and Defense (+0.3) held. **Lamar goes back to QB1 at
+  +4.5 the moment he's active.** That's the big one, about +6.0.
+- **Pending:** **Offense +0.2 when Jurgens plays; Defense +0.2 when Hendrickson returns.**
+- **New total −0.4 → +0.1.**
+
 ## Week 4: vs Tennessee (W 24–18)
 
 Baltimore won the game in the first half and spent the second half losing its quarterback. **Lamar
@@ -90,7 +118,7 @@ Baltimore is a top-five roster: an elite quarterback, a strong skill group, and 
 
 ## Quarterback
 
-Tyler Huntley (−1.5) is the selected quarterback while Lamar Jackson recovers from the left ankle sprain he suffered just before halftime in Week 4. Huntley is re-graded to the top of the backup band as a proven spot starter in a run-first offense. Lamar (+4.5, near the top of the league) returns to QB1 at full value as soon as he's cleared.
+Tyler Huntley (−1.0) is the selected quarterback while Lamar Jackson recovers from the left ankle sprain he suffered just before halftime in Week 4. Huntley won his start in Atlanta: 24-of-32, 2 TD, no turnovers, a 79.9 PFF passing grade (5th of 30), plus the overtime-winning touchdown. He's rated above the usual backup band as a proven spot starter in a run-first offense. Lamar (+4.5, near the top of the league) returns to QB1 at full value as soon as he's cleared, possibly Week 6 vs Cleveland.
 
 ## Quarterback: through Week 1 2026 (historical)
 

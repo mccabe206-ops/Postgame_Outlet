@@ -1,3 +1,33 @@
+## Week 5: vs Houston (L 3–26)
+
+Tennessee is **0–5** after its worst offensive game of the season: **187 yards, 3.2 per play, 3
+points**, and nothing after a first-drive field goal. The line couldn't hold up. **Cam Ward** was sacked
+four times for 40 yards, and the run game managed 57 yards. Ward went 23-of-36 for 170 yards with no
+touchdowns and an interception (63.4 rating, **15.4 QBR**). PFF graded his passing in the middle of the
+pack (**67.8, 12th of 30**), which says much of the damage came from protection: **LT Dan Moore Jr.
+graded 34.2** (35.6 pass block), and C Austin Schlottmann and RG Atonio Mafi were in the 40s. Robert
+Saleh said afterward that "Cam is our starting quarterback."
+
+The defense kept it respectable for a half. Houston kicked four field goals before scoring a touchdown,
+and **S Terrell Burgess** (79.3) filled in well for Amani Hooker. **Jeffery Simmons** played through his
+back injury (72.5).
+
+**Injuries** (depth string: original slot → effective slot):
+- **S Amani Hooker** (**concussion**) — **Starter → did not play.** **Terrell Burgess** went **2nd
+  string → effective starter**.
+- **S Kevin Winston Jr.** (**quad**) — **Starter → did not play.** Tony Adams and Isaiah Oliver covered.
+- **CB Cor'Dale Flott** (**chest**) — **Starter → played, questionable.**
+- **RG Fernando Carmona** (**ankle**, IR) — **Starter → out.** **Atonio Mafi** is **2nd string →
+  effective starter**.
+
+**What moved the number:**
+- **Offense −1.3 → −1.6 (−0.3):** that gives back the Week 4 bump and then some. The line couldn't
+  protect, there was no run game, and it was 187 yards at home.
+- **QB Ward held at −1.5:** the result was ugly, but the tape put most of it on the protection. PFF
+  had his passing mid-pack, and his Week 4 game is still in the sample.
+- **Defense held at −0.7:** it held Houston to field goals for a half without either starting safety.
+- **New total −3.5 → −3.8.**
+
 ## Week 4: at Baltimore (L 18–24)
 
 Tennessee was down 24–7 at halftime, won the second half 11–0, and **covered the 8.5**. The box was
