@@ -28,11 +28,11 @@ was a real disagreement, and this result settled it.
 - Already out: **LT Braxton Jones (IR, knee)**, **nickel Kyler Gordon (PUP)** and **S Coby Bryant (IR,
   knee)**.
 
-**What moved the number (−0.4 → −1.1 with Keenum; +3.4 if Caleb starts):**
-- **QB Bagent → Case Keenum, both −1.5 (no change):** Bagent was benched in the 4th quarter at Green Bay,
-  and Keenum is expected to start at Atlanta if Caleb can't go (Ben Johnson hasn't named a starter).
-  Honestly, the two backups are about equal, so the swap doesn't move the number. **Caleb's +3.0 returns the week he starts**: he's "progressing"
-  and "close."
+**What moved the number (−0.4 → +3.4, with Caleb Williams back as QB1):**
+- **QB Bagent −1.5 → Caleb Williams +3.0 (+4.5):** Caleb (right hamstring) is "progressing" and "close," and
+  the market agrees: Chicago is a 3-point road favorite at Atlanta, a price that only makes sense with him
+  playing. The rating reflects that expected reality. **If he's ruled out, Case Keenum and Tyson Bagent are
+  rated about equal at −1.5**, after Bagent was benched in the 4th quarter at Green Bay.
 - **Offense +1.0 → +0.8 (−0.2):** the line was fine. Most of the giveaways are priced into the QB
   move. Monangai's absence and a sloppy skill group take −0.2.
 - **Defense +0.1 → −0.4 (−0.5):** about −0.2 for getting beaten deep repeatedly, and **about −0.3 for
@@ -144,12 +144,11 @@ offensive showing. The defense remains below average.
 
 ## Quarterback
 
-Case Keenum (−1.5) is the selected quarterback while Caleb Williams (right hamstring) is unavailable;
-he's expected to start at Atlanta after replacing Tyson Bagent (also −1.5, now QB3) at Green Bay; the two are rated about equal. Bagent's two starts couldn't be more different: a top-10 game vs the Jets (25-of-34, 268 yards, 79.8 PFF)
+Caleb Williams (+3.0) is the selected quarterback for Week 6, expected back from the Grade 2 right hamstring
+strain that has cost him three games; the market (CHI −3 at Atlanta) is pricing him in. If he can't go,
+Case Keenum and Tyson Bagent are rated about equal at −1.5. Bagent's two starts couldn't be more different: a top-10 game vs the Jets (25-of-34, 268 yards, 79.8 PFF)
 and a last-place one at Green Bay (12-of-21, 87 yards, 2 INT, 31.6 PFF). Keenum is the proven
-veteran, and won his Week 3 start against the Eagles. Williams's
-+3.0 grade remains his own player value; it is not the quarterback component in the current Chicago
-team rating.
+veteran, and won his Week 3 start against the Eagles.
 
 ## What moved the number
 
