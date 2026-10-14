@@ -1,3 +1,15 @@
+## Week 5: bye
+
+Kansas City was off in Week 5, and the number moved anyway. **Patrick Mahomes goes from +4.5 to +5.0**,
+level with Joe Burrow and Matthew Stafford. Through four games he's 82 of 128 for 1,037 yards, **9 TD and
+2 INT**, at **8.1 yards per attempt**: the most efficient of the three, with the best touchdown-to-interception
+ratio. Four clean games after the ACL/LCL return mean there's no reason left to rate him below those two.
+
+**What moved the number:**
+- **QB Mahomes +4.5 → +5.0 (+0.5):** level with Burrow and Stafford on both efficiency and track record.
+- **Offense (+0.5) and Defense (0.0) held** through the bye.
+- **New total +5.0 → +5.5.**
+
 ## Week 4: at Las Vegas (W 30–27)
 
 Kansas City is **4–0**, but this was a game the box says it should have lost. The box had it **LV
@@ -74,7 +86,7 @@ Mahomes' knee looks fine.
 
 ## Quarterback
 
-Patrick Mahomes (+4.5) is the selected quarterback, held after Week 4 (15 of 30, 225
+Patrick Mahomes (+5.0) is the selected quarterback, raised during the Week 5 bye to sit level with Burrow and Stafford. He was held after Week 4 (15 of 30, 225
 yards, 2 TD, 0 INT) at Las Vegas, where he lost WR1 Rashee Rice in the first series. He reached
 +4.5 after his Week 2 performance (32 of 47, 382 yards, 3 TD, 0 INT) and followed it with a
 surgical Week 3 at Miami (82.4 PFF). His knee is no longer a factor in the grade.
