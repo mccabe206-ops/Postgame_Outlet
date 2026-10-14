@@ -24,13 +24,13 @@ spots.
 - **DE Za'Darius Smith** (**concussion/neck**) — **2nd string → effective rotation starter → out.**
 
 **What moved the number:**
-- **Defense −0.6 → −0.8 (−0.2):** run over for 208 yards, and the corner room is thinning with Henderson
-  hurt on top of Terrell.
-- **QB Penix held at −1.0** (a step back, but no turnovers). **If he can't go Week 6, Tua (−1.5)
-  starts.**
+- **Defense held at −0.6:** run over for 208 yards and the corner room is thinning (Henderson hurt on top
+  of Terrell), but one game against Derrick Henry doesn't move the number.
+- **QB Penix held at −1.0** (a step back, but no turnovers). His rib injury is not considered serious
+  and Atlanta expects him to start Week 6. **If Tua starts instead, the QB grade comes down.**
 - **Offense held at +1.0:** London and Bijan were fine. The red-zone stalls are the issue, and Matthews
   being back kept the line intact.
-- **New total −0.6 → −0.8.**
+- **Total held at −0.6.**
 
 ## Week 4: at New Orleans (W 45–24, MNF)
 
