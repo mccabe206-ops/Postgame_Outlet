@@ -1,3 +1,35 @@
+## Week 5: vs San Francisco (L 29–32)
+
+Seattle lost a game its defense played well enough to win. The Seahawks held the 49ers to **269
+yards and 14 first downs**, but they **turned it over four times**: two Renardo Green interceptions of
+Sam Darnold and two running-back fumbles, one of which **Gracen Halton recovered in the end zone just
+before halftime** for a 21–13 49ers lead. Seattle came back to lead 26–21 behind **Jaxon
+Smith-Njigba** (5-102-1, a 16-yard TD) and **Jason Myers** (five field goals). But the 49ers answered with
+a touchdown and two-point conversion, and Eddy Pineiro's 44-yarder won it with 1:56 left. **Darnold**
+went 18-of-29 for 195 yards, 1 TD and 2 INT, and was sacked five times. His **54.5 PFF passing grade
+ranked 26th of 30**. That's his second straight below-average week (57.4 in Week 4). The run game was
+broken again: **Emanuel Wilson** and **George Holani** averaged 2.8 yards a carry and fumbled three times
+between them. The defense was excellent (**Ernest Jones 81.2**, **Byron Murphy II two sacks**).
+
+**Injuries** (depth string: original slot → effective slot):
+- **WR Jaxon Smith-Njigba** (**ankle**) — **Starter (WR1) → played heavily taped, limited Monday.**
+  Mike Macdonald: "I don't know" if it's good or bad. **Seattle plays Thursday at Denver.**
+- **LB Drake Thomas** (**ankle**) — **Starter → still not practicing Tuesday.**
+- **DT Leonard Williams** (**ankle**) — **Starter → played** (44 snaps, 4 pressures).
+- **RB Zach Charbonnet** (**ACL recovery**, PUP) — **Starter → still out.** **Emanuel Wilson** is **2nd
+  string → effective starter**.
+- **RG Anthony Bradford** (**knee/hip**, IR) — **Starter → out.**
+
+**What moved the number:**
+- **QB Darnold held at +2.0:** two straight below-average grades (57.4, 54.5), 3 interceptions and 8 sacks
+  taken in two weeks. That's a real watch item, but two games don't erase the track record behind the
+  number; he stays put and has to answer it.
+- **Offense +1.3 → +1.1 (−0.2):** the backfield still can't run or hold onto the ball, and JSN's ankle is
+  a question on a short week. **Another −0.2 if JSN misses Thursday.**
+- **Defense held at +3.0:** 251 yards and 14 first downs allowed is elite work. The points came off
+  turnovers.
+- **New total +6.3 → +6.1.**
+
 ## Week 4: vs L.A. Chargers (W 30–23)
 
 Seattle got back in the win column with its defense and a **4–1 turnover margin** rather than
@@ -96,9 +128,10 @@ into the season.
 
 ## Quarterback
 
-Sam Darnold (+2.0) is the starter again after missing Week 2 with a glute strain suffered in
-the opener. Drew Lock (0.0) is back to QB2 after a strong two-game stretch in relief: the Week 1
-relief line (16-of-22, 187 yards, a touchdown, no interceptions) and the Week 2 win at Arizona.
+Sam Darnold (+2.0) is the starter, held despite back-to-back below-average games (57.4 and 54.5
+PFF passing grades, 3 INT, 8 sacks taken in Weeks 4–5). He missed Week 2 with a glute strain from the
+opener, and his Week 3 at Washington (83.1, four touchdowns) shows the ceiling is still there. Drew Lock
+(0.0) is QB2. He's listed with a forearm issue this week.
 
 ## Week 1 rating notes (historical)
 

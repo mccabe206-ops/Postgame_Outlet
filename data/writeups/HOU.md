@@ -1,3 +1,35 @@
+## Week 5: at Tennessee (W 26–3)
+
+Houston's first win was never in doubt. The Texans led 12–3 at halftime on four Ka'imi Fairbairn field
+goals, then put it away with a **C.J. Stroud 2-yard TD run** and a **Stroud → Jaylin Noel 9-yard TD**.
+The defense held Tennessee to **187 yards (3.2 per play)**, sacked Cam Ward four times and forced two
+turnovers. **Danielle Hunter** had 10 pressures and **Will Anderson Jr.** had 3 sacks. The box-score
+model had it about 25–10, so this was earned. The one complaint is the red zone: Houston settled for
+field goals on 2 of 4 trips, and committed 11 penalties again.
+
+**Stroud** went 26-of-34 for 261 yards with a TD (and a rushing TD), a 107.6 passer rating, a 63.0
+QBR and a **79.9 PFF pass grade, tied for 3rd of 30 QBs**. That's his second straight week near the
+top of the league, and he **still hasn't thrown an interception this season**. RG Ed Ingram bounced
+back from a rough Week 4 with an 89.0 grade.
+
+**Injuries** (depth string: original slot → effective slot):
+- **S/nickel Jalen Pitre** (**shoulder, AC joint**) — **Starter → left the game, week-to-week.**
+  **Kamari Ramsey** goes **2nd string → effective starter**.
+- **RB David Montgomery** (**groin**) — **2nd string → left in the 2nd quarter, week-to-week.**
+  Woody Marks stays the lead back.
+- **LB Henry To'oTo'o** (shoulder, IR) and **LB E.J. Speed** (quad, PUP) — **Starters → still out.**
+  **Jake Hansen** (2nd string → effective starter) graded 86.4.
+
+**What moved the number:**
+- **QB Stroud +0.5 → +1.0 (+0.5):** two straight weeks near the top of the league by PFF and no
+  interceptions in five games. Protection has been his governor, not his play.
+- **Offense +0.3 → +0.5 (+0.2):** **Marvin Harrison Jr.** arrives from Arizona (traded Oct. 11 for a
+  2027 2nd-round pick) and gives Nico Collins a real No. 2 receiver (+0.3, modest while he learns the
+  playbook mid-season). Montgomery's groin takes away the change-of-pace back (−0.1).
+- **Defense held at +1.5:** dominant, but against one of the league's worst offenses, and Pitre is
+  now week-to-week. Those offset.
+- **New total +2.3 → +3.0.**
+
 ## Week 4: vs Dallas (L 30–34)
 
 Houston is **0–4**, and this was the most painful loss yet: a **16–6 halftime lead** blown at home, then
@@ -87,7 +119,10 @@ Houston's grade is built on one of the best defenses in football, with an ascend
 
 ## Quarterback
 
-C.J. Stroud (+0.5) sits just above the middling-starter line — a forward-looking read on recent play, not reputation. The arm talent and poise are real, but 2025 was a step back gated by shaky pass protection, so this is priced as a prove-it/bounce-back year. If the line holds up, there's clear room above this number; the tools justify the optimism without projecting it.
+C.J. Stroud (+1.0) is up a half-point after two straight weeks near the top of the league (91.8 PFF
+in Week 4, 1st of 33; 79.9 pass grade in Week 5, tied for 3rd of 30). He has **no interceptions
+through five games**. The arm talent and poise were never the question. The protection was, and he's
+producing behind a line that still has holes. There's more room above this number if it continues.
 
 ## What moved the number
 

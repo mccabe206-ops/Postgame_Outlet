@@ -1,3 +1,36 @@
+## Week 5: at Seattle (W 32–29)
+
+San Francisco is **5–0** after winning a sloppy, turnover-heavy NFC West game on **Eddy Pineiro's
+44-yard field goal with 1:56 left**. Neither offense moved the ball much (**269 yards to 251, 14 first
+downs each**), and seven turnovers decided it. DT **Gracen Halton recovered a fumble in the end zone
+with 13 seconds left in the first half**, and CB **Renardo Green intercepted Sam Darnold twice**. After
+Seattle went up 26–21, **Brock Purdy** hit **Brandin Cooks** for a 7-yard TD and **Mike Evans** for the
+2-point conversion. Purdy finished 19-of-29 for 189 yards, 2 TD and 1 INT, with a **74.8 PFF passing grade,
+6th of 30** QBs. Evans (7-113-1, **92.0 PFF**) is carrying the receiver room. The defense, still
+without **Nick Bosa**, held Seattle to 4.2 yards a play (**Green 92.3, Halton 90.6, Ji'Ayir Brown 83.3**,
+rookie LB **Jaden Dugger 78.1**).
+
+**Injuries and availability** (depth string: original slot → effective slot):
+- **WR Deebo Samuel** (**right hamstring strain**) — **Starter → out "at least a couple of weeks"**
+  (Shanahan). **Jordan Watkins / Jacob Cowing** go **2nd string → effective starter**. **Christian Kirk**
+  (calf, IR) is targeting a Week 6 practice return.
+- **LB Dre Greenlaw** — **Starter → suspended one game (Week 6 vs Washington)** for head-butting a
+  helmetless Ernest Jones IV during a second-quarter sideline scuffle. He was ejected and is appealing.
+  **Jaden Dugger** is **2nd string → effective starter**. (Discipline, not injury.)
+- **DE Nick Bosa** (**left calf strain**) — **Starter → missed a 3rd straight game.** Shanahan says he
+  **"has a chance" to play Week 6.**
+- **FB Kyle Juszczyk** (**knee sprain, bone bruise**) and **S Marques Sigle** (**high-ankle sprain**) —
+  **Starters → still out.** **Malik Mustapha** is **2nd string → effective starter** at safety.
+
+**What moved the number:**
+- **Defense +0.7 → +0.9 (+0.2):** holding a strong Seattle offense to 251 yards with four takeaways and a
+  touchdown, without Bosa or Sigle, is a real signal. Greenlaw's one-game ban is temporary. **Another
+  +0.2 comes back if Bosa returns.**
+- **Offense +0.9 → +0.8 (−0.1):** Deebo's hamstring takes a starter out for a few weeks. Kirk's return
+  is the offset to watch.
+- **Purdy held at +3.2.**
+- **New total +4.8 → +4.9.**
+
 ## Week 4: vs Denver (W 24–14)
 
 This was a clean, grown-up win over one of the league's best defenses, and it moves San
@@ -92,7 +125,7 @@ confidence.
 
 ## Quarterback
 
-Brock Purdy (+3.2, held) is the selected quarterback. Through four games he's 79-of-113 for 1,007 yards with 11 touchdowns and 1 interception, including a near-perfect Week 2 (20-of-22, 99.7 PFF), a 4-touchdown Week 3, and a clean 2-TD game against Denver's elite defense in Week 4. He's a settled, above-average starter running a machine. The question now is how much of the machine is healthy around him.
+Brock Purdy (+3.2, held) is the selected quarterback. Through five games he's 98-of-142 for 1,196 yards with 13 touchdowns and 2 interceptions, and the 49ers are 5–0. Week 5 at Seattle was another solid road grade (74.8 PFF, 6th of 30). He's a settled, above-average starter running a machine. The question is how much of the machine is healthy around him: Deebo is now out for a few weeks, alongside Pearsall and Kirk.
 
 ## Quarterback: through Week 1 2026 (historical)
 

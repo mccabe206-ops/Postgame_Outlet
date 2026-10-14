@@ -1,3 +1,33 @@
+## Week 5: vs Cleveland (W 17–12)
+
+An ugly win that matched the box (**NYJ 15, CLE 10 expected**). **Garrett Wilson** opened the scoring
+with a 32-yard touchdown and finished with 7 catches for 104. Then the Jets stalled: 0-for-2 in the
+red zone, **10 penalties for 102 yards**, and a **Kenyon Sadiq fumble at the Cleveland 7**. Down 12–10
+late, they got a gift when the Browns botched a punt snap at their own 28, and **Braelon Allen** ran
+22 yards for the winner (24 carries, 116 yards). **Geno Smith** went 17 of 30 for 182 yards and a
+TD (65.7 PFF, 14th of 30). He took 4 sacks and lost a fumble, and a penalty wiped out an
+interception. The defense won it: **8 sacks**, **David Bailey** with 3 sacks and 9 pressures, **Jamien
+Sherwood** at 83.5, and **Will McDonald's** strip-sack ending Cleveland's last drive.
+
+**Injuries:**
+- **TE Kenyon Sadiq (starter, rookie)** suffered a **concussion**. Aaron Glenn says he "checked out
+  just fine" but has to clear the protocol before facing New England. Mason Taylor (starter, back from
+  injury) covers the position.
+- **RB Breece Hall (quad)**, **LG Dylan Parham (knee)** and **WR Adonai Mitchell (finger)**, all
+  starters, missed another game and remain week-to-week. **Braelon Allen** (2nd string → effective
+  starter), **Jordan Meredith** and **Isaiah Williams** fill in.
+- **Nickel Jarvis Brownlee Jr.** is **back** from his concussion, and **Minkah Fitzpatrick** played
+  every snap. The secondary is whole again.
+
+**What changed:**
+- **Geno held −1.5:** a mid-pack game, with no interceptions on the stat sheet but some loose
+  moments.
+- **Offense held −1.1:** Allen and Wilson carried it. The red-zone fumble and the penalties were
+  sloppiness, not a talent change. Hall, Parham and Mitchell were already priced out.
+- **Defense +0.1 → +0.3 (+0.2):** with Brownlee and Fitzpatrick both healthy, last week's cut comes
+  back, and the front just had 8 sacks.
+- **New total −2.5 → −2.3.**
+
 ## Week 4: at Chicago (L 12–23)
 
 The Jets' worst performance of the season, and the 23–12 score flattered them. Chicago out-gained New
@@ -103,9 +133,9 @@ anchor, while the units around him are better than replacement-level and climbin
 
 ## Quarterback
 
-Geno Smith (−1.5) moves up from −2.0 after three weeks of mistake-free football, capped by a
-31-of-37, 321-yard, three-touchdown day at Detroit. He's still a below-the-line starter, since
-the ceiling is limited, but he's no longer being priced near the floor.
+Geno Smith (−1.5) holds after the Week 5 win over Cleveland (17-of-30, 182 yards, 1 TD, 65.7 PFF). He
+was raised from −2.0 after three mistake-free weeks capped by 321 yards and 3 TDs at Detroit. He's a
+below-the-line starter whose ceiling is limited, but he's not being priced near the floor.
 
 ## What moved the number
 

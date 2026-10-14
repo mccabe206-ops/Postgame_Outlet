@@ -1,3 +1,45 @@
+## Week 5: at Green Bay (L 7–31)
+
+The backup-quarterback magic ran out at Lambeau. Chicago was a 1.5-point favorite and lost by 24, and
+the box-score model agrees with every point (GB 30, CHI 8). The Bears **turned it over five times**:
+**Tyson Bagent** threw 2 interceptions, **Case Keenum** threw 1 and lost a fumble, and Rome Odunze lost
+one. They gave it away on four straight second-half possessions. Bagent went 12 of 21 for **87 yards**
+(31.6 PFF, **last of 30** Week 5 QBs) and was replaced early in the 4th by Keenum (11 of 19, 108). The
+defense that had allowed 9, 7 and 12 points was beaten deep for **367 passing yards**, including
+Christian Watson TDs of 42 and 53 over **Xavier Woods (28.8)** and Dillon Thieneman. The line held
+up (Joe Thuney 80.3 in pass protection). **Austin Booker** (2 sacks, 85.3), **Devin Bush (85.7)** and
+**Noah Sewell (87.6)** were the bright spots. The model line (GB −2.0) against the market (CHI −1.5)
+was a real disagreement, and this result settled it.
+
+**Injuries and availability** (depth string: original slot → effective slot):
+- **QB Caleb Williams (Grade 2 right hamstring)** — **Starter → out** for a third game. Ben Johnson
+  says he's "on track" and it's "going to be close" for Week 6 at Atlanta. If Caleb can't go, the
+  starter is undecided ("still working through that"). **Bagent (3rd string → effective starter)** is
+  no longer the named starter. **Keenum** is the 2nd string.
+- **DE Montez Sweat** — **Starter → suspended two games** for violating the league's
+  performance-enhancing-substances policy (not an injury). He misses **Week 6 at Atlanta and Week 7 vs
+  New England** and is eligible for Week 8. The Bears activated **Shemar Turner** (torn ACL, 2025) from
+  PUP.
+- **LB T.J. Edwards (hamstring)** — **Starter (MLB) → left in the 1st half**, Week 6 TBD. **Noah Sewell
+  (2nd string → effective starter)** graded 87.6.
+- **CB Tyrique Stevenson (hamstring)** — **Starter → left in the 2nd half**, likely out Week 6.
+- **DE Dayo Odeyingbo (quad)** and **DB Cam Lewis** — **2nd string → hurt in the 2nd half.**
+- **RB Kyle Monangai (toe/thumb)** — **2nd string → was the effective lead back → inactive.**
+- Already out: **LT Braxton Jones (IR, knee)**, **nickel Kyler Gordon (PUP)** and **S Coby Bryant (IR,
+  knee)**.
+
+**What moved the number (−0.4 → −1.1 with a backup QB; +3.4 if Caleb starts):**
+- **QB Bagent held at −1.5:** one top-10 start and one last-place start. The Jets game is still the
+  better guide to what he is, so he stays at the top of the backup band. **Caleb's +3.0 returns the
+  week he starts.**
+- **Offense +1.0 → +0.8 (−0.2):** the line was fine. Most of the giveaways are priced into the QB
+  move. Monangai's absence and a sloppy skill group take −0.2.
+- **Defense +0.1 → −0.4 (−0.5):** about −0.2 for getting beaten deep repeatedly, and **about −0.3 for
+  Week 6 availability**: Sweat's suspension, Stevenson's hamstring, Edwards TBD. The availability
+  part comes back when Sweat returns in Week 8.
+
+<!-- REPLACE the current "## Quarterback" section -->
+
 ## Week 4: vs N.Y. Jets (W 23–12)
 
 A third quarterback, a third win, and the most lopsided box score of the week. Chicago out-gained the
@@ -101,7 +143,12 @@ offensive showing. The defense remains below average.
 
 ## Quarterback
 
-Tyson Bagent (−1.5) is the selected quarterback while Caleb Williams (right hamstring) is unavailable. He took over from Case Keenum in Week 4 and was named the Week 5 starter after a poised first start (25-of-34, 268 yards, 79.8 PFF). He's graded at the top of the backup band — a proven backup with a top-10 start in Ben Johnson's offense — which keeps the drop from Caleb much smaller than the names suggest. Williams's +3.0 grade remains his own player value; it is not the quarterback component in the current Chicago team rating.
+Tyson Bagent (−1.5) is the selected quarterback while Caleb Williams (right hamstring) is unavailable.
+His two starts couldn't be more different: a top-10 game vs the Jets (25-of-34, 268 yards, 79.8 PFF)
+and a last-place one at Green Bay (12-of-21, 87 yards, 2 INT, 31.6 PFF). That puts him mid-backup
+band, level with Case Keenum (−2.5), with the Week 6 starter undecided if Caleb can't go. Williams's
++3.0 grade remains his own player value; it is not the quarterback component in the current Chicago
+team rating.
 
 ## What moved the number
 

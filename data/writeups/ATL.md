@@ -1,3 +1,37 @@
+## Week 5: vs Baltimore (L 23–30, OT)
+
+Atlanta had this one with two and a half minutes left and lost it. Up **23–15** after Nick Folk's
+third field goal, the Falcons let a Lamar-less Baltimore drive 75 yards for a touchdown and two-point
+conversion with 40 seconds left. **Michael Penix Jr.** was hurt on Atlanta's final regulation drive
+(**ribs**, on a Tavius Robinson sack). **Tua Tagovailoa** came on in overtime and was intercepted by
+Kyle Hamilton, and Baltimore won it on a Tyler Huntley sneak. Atlanta's offense scored only **16 points
+in regulation**. The other 7 came on **Jessie Bates' 36-yard fumble-return touchdown**. The Falcons
+went **1-for-3 in the red zone**. Penix went 19-of-32 for 240 yards, a TD to **Kyle Pitts**, and no
+interceptions. His **59.2 PFF passing grade ranked 23rd of 30**, a step back after two top-10 games.
+**Drake London** (7-118, 83.8) and **Bijan Robinson** (86 rushing + 32 receiving) produced. The problem was
+the run defense: Baltimore ran for **208 yards at 5.9 a carry**, and **Mike Hughes (41.0)** and **Samson
+Ebukam (47.4)** were the soft spots. **Sydney Brown (86.9)** and **Gervon Dexter (77.3)** were the bright
+spots.
+
+**Injuries** (depth string: original slot → effective slot):
+- **QB Michael Penix Jr.** (**ribs**) — **Starter → left late, missed OT.** Per ESPN's Adam Schefter it's
+  **not considered serious**. He might play Week 6 vs Chicago, but Atlanta wants to see him practice
+  first. **Tua Tagovailoa** is **2nd string → effective starter** if he can't.
+- **CB C.J. Henderson** (**groin**) — **2nd string → effective starter (A.J. Terrell is on IR) → left the
+  game.** No update yet. If he's out, Atlanta is down to its third and fourth corners.
+- **CB A.J. Terrell** (**groin**, IR) — **Starter → out, eligible around Week 7.**
+- **LT Jake Matthews** (**groin**) — **Starter → returned** and played 63 snaps.
+- **DE Za'Darius Smith** (**concussion/neck**) — **2nd string → effective rotation starter → out.**
+
+**What moved the number:**
+- **Defense −0.6 → −0.8 (−0.2):** run over for 208 yards, and the corner room is thinning with Henderson
+  hurt on top of Terrell.
+- **QB Penix held at −1.0** (a step back, but no turnovers). **If he can't go Week 6, Tua (−1.5)
+  starts.**
+- **Offense held at +1.0:** London and Bijan were fine. The red-zone stalls are the issue, and Matthews
+  being back kept the line intact.
+- **New total −0.6 → −0.8.**
+
 ## Week 4: at New Orleans (W 45–24, MNF)
 
 Atlanta beat the Saints by three scores in their building. The **competitive score (before it was
@@ -81,10 +115,7 @@ and the defense's pass rush is thinned through the first half.
 
 ## Quarterback
 
-**Michael Penix Jr. (−1.0)** is the starter, raised another half-point after a
-127.7-rating, 81.0-PFF night at New Orleans (15 of 20, 223 yards, 1 TD). That follows his strong
-2026 debut at Green Bay, coming back from the torn ACL that kept him out the first two weeks.
-Behind him: Tua Tagovailoa (−1.5) at QB2 and **Cooper Rush (−4.5)** at QB3.
+**Michael Penix Jr. (−1.0)** is the starter. He's had two top-10 PFF games since returning from the torn ACL (Weeks 3–4), then a step back against Baltimore in Week 5 (59.2, 23rd of 30). He left late in that game with a **rib injury** that isn't considered serious, and his Week 6 status depends on practice. Behind him: Tua Tagovailoa (−1.5) at QB2 and **Cooper Rush (−4.5)** at QB3.
 
 ## What moved the number
 

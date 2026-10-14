@@ -1,3 +1,33 @@
+## Week 5: at Pittsburgh (L 22–34)
+
+The box called this **dead even (25–25)**. Indianapolis lost it on explosives and red-zone failures.
+The Colts held the ball 32 minutes with no turnovers, but **Spencer Shrader kicked five field goals**
+(57, 56, 22, 40, 28) because the offense went **1-of-3 inside the 20**. The only touchdown was a Tyler
+Warren 1-yard run. Pittsburgh needed two big plays: **Jaylen Warren's 80-yard catch-and-run and 50-yard
+run**. **Daniel Jones** was better than in London: 24 of 44, 267 yards, no turnovers, a 63.1 PFF grade
+(18th of 30), but no touchdown passes and 6.1 yards per attempt. **Jonathan Taylor** was held to 45
+yards on 15 carries. Bright spots: **Quenton Nelson (86.9)**, **Tyler Warren** (7 catches for 83 plus
+the TD), and **Keenan Allen's** return from his groin injury.
+
+**Injuries:**
+- **LB Jaylon Carlies (starter, ribs)** was out. Austin Ajiake (2nd string → effective starter) graded
+  76.7. Shane Steichen says "we'll see how the week goes."
+- **EDGE Arden Key (starter, hamstring)** is on IR, with JT Tuimoloau (2nd string → effective starter)
+  in his place.
+- **WR Alec Pierce (starter, left heel)** is still on IR and eligible to return around Week 7.
+- **RT Jalen Travis (starter)** hurt his **right ankle** in a fourth-quarter collision, limped off, and
+  returned. Worth watching this week.
+
+**What changed:**
+- **Jones held 0.0:** a cleaner game than Weeks 3–4, but still no touchdown passes. He's a middling
+  starter.
+- **Offense held +0.6:** Allen is back, Pierce is pending (+0.2 when he returns), and Pittsburgh's
+  front stuffed Taylor.
+- **Defense −0.3 → −0.5 (−0.2):** a starting linebacker (Carlies) and a starting edge (Key) are out,
+  and the depth that starred in London (Davis-Gaither 38.5) didn't hold up. It allowed 6.5 yards per
+  play and two 50-plus-yard touchdowns.
+- **New total 0.3 → 0.1.**
+
 ## Week 4: vs Washington in London (W 30–13)
 
 The score flatters the offense. Indianapolis **over-performed its box by about 15 points**: it had
@@ -84,7 +114,10 @@ skill group is above average, but Week 1 pulled the quarterback and defense belo
 
 ## Quarterback
 
-Daniel Jones (0.0) is cut from +0.5 after two straight poor passing games: four turnover-worthy plays in Week 3, then 19-of-34 for 143 yards and a 19.6 QBR in London. The legs and the Achilles recovery look fine; the passing is the question.
+Daniel Jones (0.0) holds after a turnover-free Week 5 at Pittsburgh (24-of-44, 267 yards, 63.1 PFF,
+18th of 30). It followed two poor passing games: four turnover-worthy plays in Week 3, then 143 yards
+and a 16.1 QBR in London. The legs and the Achilles recovery look fine. The passing is still the
+question.
 
 ## Quarterback: through Week 1 2026 (historical)
 

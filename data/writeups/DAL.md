@@ -1,3 +1,35 @@
+## Week 5: vs Tampa Bay (L 16–24, TNF)
+
+A bad home loss as an 8.5-point favorite, and the box-score model says it **should have been worse**
+(TB 32, DAL 20). Tampa Bay, starting an undrafted rookie quarterback, **ran for 241 yards**, held the
+ball for 39 minutes and didn't turn it over. Dallas had three giveaways: two Dak Prescott
+interceptions, the second off a tipped pass, and a **KaVontae Turpin** kickoff fumble that led to a
+field goal. The run game was gone (13 carries, 50 yards), so **Dak threw 42 times**: 24 of 42, 316
+yards, 1 TD, 2 INT, 71.2 PFF (8th of 30), 57.2 QBR. **George Pickens** (9-130-1, 85.2) was the bright
+spot, and a 99-yard drive produced the only touchdown. On defense, **DaRon Bland (29.6)**, Shavon Revel
+(36.9), **Kenny Clark (41.7)** and Rashan Gary (47.5) all graded poorly.
+
+**Injuries** (depth string: original slot → effective slot):
+- **WR CeeDee Lamb (quad contusion)** — **Starter (WR1) → left the game** after 2 catches for 9 yards.
+  Ian Rapoport says it's **not serious**, so he's day-to-day for Week 6 at Green Bay.
+- **LT Tyler Guyton (back)** — **Starter → left in the 2nd half.** X-rays were negative.
+- **LG Tyler Smith (thumb surgery)** — **Starter → activated from IR**, played all 60 snaps (66.7).
+- **CB Joey Porter Jr. (illness)** — **Starter (just acquired from Pittsburgh) → late scratch.**
+- **LB DeMarvion Overshown**, **CB Cobie Durant** (both **hamstring**) and **S Jalen Thompson (hamstring,
+  IR)** — **Starters → out.** **S Alijah Clark (hamstring)**, a 2nd-stringer, left in the 1st half
+  and is day-to-day.
+
+**What moved the number (+1.7 → +1.4):**
+- **Defense −1.3 → −1.6 (−0.3):** run over for 241 yards by an offense with a UDFA quarterback. The
+  interior and the patched secondary are both losing. Porter Jr.'s debut and the hamstring returns are
+  the way back.
+- **QB Prescott held +2.0:** graded 8th of the week. Game script forced the volume, and one of the
+  picks was tipped.
+- **Offense held +1.0:** Tyler Smith's return is the restore we were waiting for. It's offset by a
+  dead run game and Lamb's day-to-day quad.
+
+<!-- REPLACE the current "## Quarterback" section -->
+
 ## Week 4: at Houston (W 34–30)
 
 Dallas **won on the road by taking over the second half.** Houston led **16–6 at halftime** on four
@@ -85,7 +117,10 @@ defense has slipped below it.
 
 ## Quarterback
 
-Dak Prescott (+2.0) is the selected quarterback after a half-point Week 2 increase. He went 26-of-31 for 279 yards and four touchdowns against Washington; +1.5 was the earlier value.
+Dak Prescott (+2.0) is an above-average starter, held this week. Through five games he's been
+steady: 9 TD and 3 INT, with PFF grades between 71 and 78 in every game we've graded (71.2, 8th of 30, in the
+Week 5 loss). His first interceptions since the opener came in a game Dallas trailed and couldn't
+run. +2.0 is a high-floor starter whose results depend on the defense and run game around him.
 
 ## Quarterback: through Week 1 2026 (historical)
 

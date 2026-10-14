@@ -1,3 +1,36 @@
+## Week 5: vs Buffalo (L 34–37, OT, MNF)
+
+The Rams' offense did nearly everything right, and they lost anyway. Los Angeles had **33 first downs
+to 25**, more total yards (**454–436**), **38 minutes of possession**, a **5-for-5 red-zone night** and **no
+turnovers**. **Matthew Stafford** went **40-of-54 for 383 yards, 3 TD and 0 INT** (67.9 PFF, 11th of 30), his
+first turnover-free game of the year. He drove the Rams the length of the field for **Kyren Williams'
+tying touchdown with five seconds left**. **Puka Nacua caught 17 of 24 targets for 138 yards and a TD**,
+and **Davante Adams scored twice**. Two things beat them:
+- **The run defense:** Buffalo ran for **234 yards at 6.3 a carry**, Josh Allen alone for 121. Kobie
+  Turner, Quentin Lake, Kam Curl and a returning **Aaron Donald** all graded under 50.
+- **The kicking:** Greg Rousseau **blocked Harrison Mevis's tying overtime field goal**. The Rams released
+  Mevis on Tuesday.
+
+**CB Jaylen Watson** was back from his dislocated shoulder and excellent (89.9, an interception).
+
+**Injuries and availability** (depth string: original slot → effective slot):
+- **LT Alaric Jackson** — **Starter → suspended two games (Week 6 vs Arizona, Week 7 at Las Vegas)** for
+  punching Buffalo's Bradley Chubb after the game. It's his second career suspension. The backup tackle
+  becomes the **effective starter** for two weeks. (Discipline, not injury.)
+- **EDGE Myles Garrett** (**knee, arthroscopic surgery**, IR) — **Starter → still out.** The timeline is
+  about six weeks, and Sean McVay says his practice window won't open in Week 6.
+- **CB Jaylen Watson** (**shoulder**) and **DT Aaron Donald** (**back**) — **Starters → both back.**
+- **TE Terrance Ferguson** (**ankle**, IR) — **2nd string → out**, eligible around Week 8.
+
+**What moved the number:**
+- **Offense +1.8 → +1.6 (−0.2):** this is about availability, not performance. Jackson, the starting left
+  tackle, is out for two games, and his replacement is untested. **It comes back in Week 8.**
+- **Defense held at +0.5:** the pre-set +0.2 for getting Watson and Donald back is cancelled out by a
+  run defense that got gashed. Garrett's return is the next real lever.
+- **Stafford held at +5.0:** a clean 383-yard game stops the slide, but one game doesn't undo four weeks
+  of turnovers.
+- **New total +7.3 → +7.1.**
+
 ## Week 4: at Philadelphia (W 24–20)
 
 The Rams **were much better than a four-point win.** They **out-gained Philadelphia 415–172**, held the
@@ -110,9 +143,10 @@ Garrett loss move the number.
 
 ## Quarterback
 
-Matthew Stafford (+5.0) moved down from +5.5 after Week 4. The arm talent and veteran precision
-are still there, but six interceptions in four games and three straight mid-tier grades at age 38
-move him from the elite tier into the next one.
+Matthew Stafford (+5.0) moved down from +5.5 after Week 4 and held in Week 5. The arm talent and veteran
+precision are still there: Week 5 against Buffalo was 40-of-54 for 383 yards, 3 TD and his first
+turnover-free game of the year. But six interceptions in the first four games keep him in the tier below
+elite for now.
 
 ## What moved the number
 

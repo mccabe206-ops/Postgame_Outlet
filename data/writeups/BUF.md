@@ -1,3 +1,34 @@
+## Week 5: at L.A. Rams (W 37–34, OT, MNF)
+
+Buffalo won a Monday-night shootout in overtime **without its top two receivers, DJ Moore and Joshua
+Palmer**, and it did it on the ground. **Josh Allen ran 10 times for 121 yards and a TD**, and **James
+Cook** added 25-111 and two scores. Buffalo ran for **234 yards at 6.3 a carry** and averaged **7.6 yards a
+play**. Cook's 5-yard TD put the Bills up 34–27 with 1:39 left. The Rams tied it with five seconds left, but
+**Tyler Bass hit a 45-yarder in overtime**. Then **Greg Rousseau blocked Harrison Mevis's tying try**. Allen
+was only 12-of-19 passing for 210 yards, 1 TD and 1 INT. His **58.4 PFF passing grade (25th of 30)** is the
+third straight week under 63. But his overall impact (a **93.0 QBR**) was elite, and so was the line's run
+blocking (**Dion Dawkins 86.9, Alec Anderson 79.1**). The defense gave up 454 yards and 33 first downs to
+one of the league's best offenses. **CB Christian Benford was back** (76.3), but the safeties and
+linebackers struggled (Gardner-Johnson 29.3, Bernard 39.9).
+
+**Injuries** (depth string: original slot → effective slot):
+- **RT Spencer Brown** (**back**) — **Starter → left after 16 snaps** and was ruled out. He had back
+  surgery in 2022, and there's no timeline yet. **Tylan Grable** went **2nd string → effective starter**
+  and struggled in pass protection.
+- **WR DJ Moore** (**left shoulder, AC-joint sprain**) — **Starter (WR1) → inactive.** **WR Joshua
+  Palmer** (**shoulder**) — **2nd string → effective starter → out.** Rookie **Skyler Bell** went **3rd
+  string → effective starter**.
+- **DT Ed Oliver** (**knee**) and **slot CB Dee Alford** (**ankle**) — **Starters → out.**
+- **CB Christian Benford** (**toe**) — **Starter (CB1) → back.**
+
+**What moved the number:**
+- **Held across the board: QB Allen +6.5, Offense +0.9, Defense −0.8.** Allen's passing grades are a trend
+  we're watching, but 121 rushing yards and a 93.0 QBR without his top two receivers isn't a reason to cut
+  the league's top QB grade. The offense's big rushing night is balanced by losing Brown. The defense's
+  numbers were about what you'd expect against the Rams.
+- **Pending:** **Offense −0.2 if Brown misses Week 6 at Las Vegas, +0.2 when Moore returns.**
+- **Total held at +6.6.**
+
 ## Week 4: vs New England (L 26–29)
 
 Buffalo's first loss under Joe Brady, and its first at the new Highmark Stadium. The Patriots out-gained
@@ -91,7 +122,7 @@ Buffalo's rating is a quarterback story. Josh Allen at +6.5 is the model's ceili
 
 ## Quarterback
 
-Josh Allen (+6.5) is the engine — an MVP-caliber dual threat and the top QB grade in the model. He props up the whole offense, which is exactly why the roster still rates near the top even after the non-QB units were marked down.
+Josh Allen (+6.5) is the engine: an MVP-caliber dual threat and the top QB grade in the model. One caveat is open. His PFF passing grade has been under 63 for three straight weeks (62.3, 56.6, 58.4), but his legs keep winning games (121 rushing yards at the Rams), so the grade holds.
 
 ## What moved the number
 

@@ -1,3 +1,31 @@
+## Week 5: at Miami (W 31–24)
+
+**Joe Burrow** threw four touchdowns and Cincinnati led 28–10 late in the 3rd before Miami made it close
+(and covered the 7.5) with two late scores. Burrow went 23-of-32 for 190 yards, **4 TD and 0 INT**, a
+126.3 passer rating and a **90.5 QBR**, and he wasn't sacked. **Ja'Marr Chase** cleared the concussion
+protocol and scored on a **45-yard catch-and-run**. **Tee Higgins** played as well. The box-score model had
+it closer to 22–19. Cincinnati only gained 307 yards (4.9 per play) but converted **9 of 13 third downs**
+and finished drives. On defense, **Boye Mafe** (88.0, 7 pressures, sack) and **Demetrius Knight Jr.**
+(79.7) were very good, and B.J. Hill returned. The problem is the run defense: it gave up **217 rushing
+yards** to Miami.
+
+**Injuries** (depth string: original slot → effective slot):
+- **TE Tanner Hudson** (**torn pectoral**) — **2nd string (by-committee TE room) → out for the season**
+  per his agent. He caught a TD before getting hurt. Mike Gesicki, Erick All and Drew Sample absorb it.
+- **CB Jalen Davis** (hamstring, IR) — **Starter (slot) → out.** **Dax Hill** is the effective slot.
+- **S Kyle Dugger** (quad) — **2nd string → out.**
+- Chase (concussion) and Higgins (groin/neck) **both played**, so the Week 5 receiver condition never
+  triggered.
+- Cincinnati's **bye is Week 6**.
+
+**What moved the number:**
+- **Offense +0.7 → +0.6 (−0.1):** Hudson had become Burrow's red-zone safety valve. Chase and Higgins
+  are back.
+- **Defense −0.3 → −0.5 (−0.2):** 217 rushing yards and 23 first downs allowed to the league's
+  lowest-rated offense. The run defense has been the weak spot for three weeks.
+- **QB Burrow held at +5.0.**
+- **New total +5.4 → +5.1.**
+
 ## Week 4: vs Jacksonville (L 17–22)
 
 Cincinnati won the box and lost the game. The Bengals **out-gained Jacksonville 437–323**, the model had

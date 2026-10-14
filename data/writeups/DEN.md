@@ -1,3 +1,42 @@
+## Week 5: at L.A. Chargers (W 23–17)
+
+Denver won a field-position game **without either starting cornerback**, and the defense did it.
+The Broncos gained just **224 yards**, went **1-for-12 on third down**, and trailed **17–10 in the
+third quarter** after a 42-yard Kimani Vidal touchdown run. Then they scored the last 13 points: a
+**5-yard Bo Nix → Courtland Sutton TD** and two Wil Lutz field goals. **Ja'Quan McMillian sacked
+Justin Herbert on the final play** to seal it. The box-score model had this **16–10 Denver**: right
+winner and right margin, in a game both offenses struggled to move the ball.
+
+The defense was the story. **D.J. Jones** (86.5 PFF, a sack), **Brandon Jones** (80.9), **Dondrea
+Tillman** (79.7, back from his hamstring), and fill-in corner **Jahdae Barron** (79.4, 84.2
+coverage) led a unit that had **5 sacks** (2 by Nik Bonitto) and **3 takeaways**, and held Los Angeles to 82 net
+passing yards. That came against a Chargers offense playing backups at four line spots and missing
+its top three receivers, so it's discounted.
+
+**Nix** was the concern again: 16-of-27 for **123 yards** (4.6 per attempt), 1 TD, no
+interceptions, a **28.0 QBR**, and a 64.1 PFF passing grade (17th of 30). He made the go-ahead
+touchdown throw, but the receivers were invisible again (Jaylen Waddle 2–19, Sutton 2–18).
+
+**Injuries** (depth string: original slot → effective slot):
+- **CB Pat Surtain II** (**right ankle**). **Starter (All-Pro RCB) → missed the game.** Not on IR, and he
+  was a **non-participant on Monday's estimated report** ahead of Thursday vs Seattle.
+- **CB Riley Moss** (**ribs**). **Starter (LCB) → missed the game.** Not on IR, and he was **limited on
+  Monday's estimated report**, trending toward a Thursday return. **Barron** and **Kris Abrams-Draine**
+  (2nd string) were the effective starters and held up.
+- **S Brandon Jones** (**foot**) and **LG Ben Powers** (**biceps**). **Starters → on the estimated
+  report**, but both played the full game.
+- **WR Pat Bryant** (**ankle**). **2nd string → IR.**
+
+**What moved the number:**
+- **QB Nix 0.0 → −0.5 (−0.5):** four of five starts below a middling starter (QBR 11.4, 48.8, 43.9,
+  28.0), and 4.6 yards per attempt here against a depleted defense. Ball security (no interceptions in
+  two weeks) keeps it from going lower.
+- **Defense +0.8 → +0.9 (+0.1):** a dominant game, but against a broken offense. The real restore comes
+  when the corners return: Moss first, then Surtain.
+- **Offense held at +0.2:** the line protected well (one sack), and the passing problem is priced
+  at quarterback.
+- **New total +1.0 → +0.6.**
+
 ## Week 4: at San Francisco (L 14–24)
 
 Denver's defense kept it close for three quarters, but the offense couldn't do enough. The box
@@ -102,7 +141,11 @@ quarterback — but the defense's Week 1 showing trimmed the number.
 
 ## Quarterback
 
-Bo Nix (0.0) — held at his opening grade after Week 4 at San Francisco (25-of-42, 214, no turnovers, no sacks, 43.9 QBR). He dipped to −0.5 after Week 3 and was restored, and he's on watch: three of four games have been below average. He opened at 0.0 as an ascending second-year starter in Sean Payton's system, with upgraded weapons and a strong line. The tools are still there, but the play hasn't matched the grade.
+Bo Nix (−0.5) is the selected quarterback, cut half a point after Week 5 at the Chargers (16-of-27,
+123 yards, 4.6 per attempt, 28.0 QBR). That makes four below-average starts in five. He has been
+careful with the ball lately (no interceptions in Weeks 4–5), and Sean Payton's system gives him a
+floor, but the passing game hasn't functioned. He was restored to 0.0 after Week 3 and is graded
+below that now.
 
 ## What moved the number
 
