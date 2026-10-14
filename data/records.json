@@ -1,46 +1,46 @@
 {
   "season_year": 2026,
-  "through_week": 5,
-  "generated": "2026-10-08T06:08Z",
+  "through_week": 6,
+  "generated": "2026-10-14T01:04Z",
   "season_record": {
     "mine": {
       "open": {
-        "win": 11,
-        "loss": 9,
+        "win": 13,
+        "loss": 12,
         "push": 0,
         "np": 0
       },
       "close": {
-        "win": 10,
-        "loss": 9,
+        "win": 13,
+        "loss": 11,
         "push": 1,
         "np": 0
       }
     },
     "model": {
       "open": {
-        "win": 33,
-        "loss": 23,
-        "push": 1,
-        "np": 7
+        "win": 37,
+        "loss": 32,
+        "push": 0,
+        "np": 10
       },
       "close": {
-        "win": 26,
-        "loss": 30,
+        "win": 30,
+        "loss": 39,
         "push": 4,
-        "np": 4
+        "np": 6
       }
     },
     "top5": {
       "open": {
-        "win": 12,
-        "loss": 8,
+        "win": 11,
+        "loss": 14,
         "push": 0,
         "np": 0
       },
       "close": {
-        "win": 11,
-        "loss": 8,
+        "win": 13,
+        "loss": 11,
         "push": 1,
         "np": 0
       }
