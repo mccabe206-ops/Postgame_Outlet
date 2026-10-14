@@ -214,10 +214,14 @@ def summarize(state):
                    games=[game for week in state.get('weeks', []) for game in week['games']])
     models = [primary, *state.get('accuracy_models', [])]
     _require(len({model['edition'] for model in models}) == len(models), 'Duplicate accuracy model edition')
+    held = (state.get('legacy_grading_check') or {}).get('models', {})
+    _require('pgo-weekly-2026' not in held, 'Weekly accuracy cannot be held by legacy grading')
+    models = [model for model in models if model['edition'] not in held]
     summaries, evaluated = [], []
     for model in models:
         summary, rows = _series(model, results, checked); summaries.append(summary); evaluated.append(rows)
     return dict(schema_version=1, checked_at=state['checked_at'], primary=summaries[0], models=summaries,
+                held_models=copy.deepcopy(held),
                 comparisons=[_comparison(summaries[0], summaries[i], evaluated[0], evaluated[i]) for i in range(1, len(models))],
                 guidance=['Small samples do not establish accuracy or calibration; each metric shows its eligible games.',
                           'Reliability uses ten fixed selected-team probability bins; tied games count as no selected-team win.',

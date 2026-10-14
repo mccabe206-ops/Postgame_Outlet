@@ -22,6 +22,15 @@ class CurrentStarterTests(unittest.TestCase):
   chosen,notes=self.api.apply_current(self.f.selected,self.f.roster,[self.f.game],self.f.root,'2026-09-13T16:12:00+00:00')
   self.assertEqual(chosen['ATL'],self.f.player);self.assertEqual(notes[self.f.game['game_id']][0]['source'],ref)
   self.assertEqual((self.f.selected,self.f.roster,self.f.game),before)
+ def test_partial_current_authority_requires_explicit_mode_and_preserves_full_default(self):
+  self.save_current()
+  chosen,notes=self.api.apply_current({},self.f.roster,[self.f.game],self.f.root,'2026-09-13T16:12:00+00:00',resolve_defaults=False)
+  self.assertEqual(chosen,{'ATL':self.f.player});self.assertEqual(set(notes),{self.f.game['game_id']})
+  with self.assertRaises(ValueError):self.api.apply_current({},self.f.roster,[self.f.game],self.f.root,'2026-09-13T16:12:00+00:00')
+  for options in ({'resolve_defaults':0},{'resolve_defaults':False,'depth':[]},{'resolve_defaults':False,'selected':self.f.selected}):
+   selected=options.pop('selected',{})
+   with self.subTest(options=options),self.assertRaises(ValueError):
+    self.api.apply_current(selected,self.f.roster,[self.f.game],self.f.root,'2026-09-13T16:12:00+00:00',**options)
  def test_late_current_evidence_is_rejected_by_locked_replay(self):
   ref=self.save_current()
   with self.assertRaises(ValueError):self.api._announcement(self.f.game,ref,self.f.root,'2026-09-13T16:12:00+00:00')

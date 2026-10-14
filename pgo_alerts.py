@@ -88,6 +88,8 @@ def assess(state, *, outcomes, run_refresh=True, checked_at=None, refresh_starte
             add('weekly-update-overdue', 'All current-week games have verified finals, but the next edition is still missing more than six hours later. Review weekly input availability.')
         if health['ats_status'] == 'BLOCKED':
             add('ats-source-review', 'The saved sportsbook-line update needs review. Existing locked lines remain unchanged.')
+        if health['legacy_grading_status'] == 'BLOCKED':
+            add('legacy-grading-review', 'Legacy grading needs review. Retained historical records and unavailable comparisons are disclosed; current weekly updates are checked separately.')
         for prefix, label in [('penalty', 'penalty comparison'), ('totals', 'scoring comparison'),
                               ('weights', 'model-weight comparison'), ('replacement_depth', 'defender evidence'),
                               ('injury_usage', 'postgame defender usage'),

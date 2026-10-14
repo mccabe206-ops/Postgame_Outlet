@@ -10,6 +10,17 @@ from tests import test_pgo_season_boundaries as fixtures
 
 
 class AlertTests(unittest.TestCase):
+    def test_legacy_hold_alert_is_separate_from_current_updates(self):
+        state = self.state()
+        state['legacy_grading_check'] = dict(status='BLOCKED', blocked_reason='Legacy conflict')
+        report = self.report(state)
+        self.assertEqual([row['key'] for row in report['conditions']], ['legacy-grading-review'])
+        self.assertFalse(report['conditions'][0]['urgent'])
+        self.assertFalse(report['can_resolve'])
+        self.assertEqual(state['status'], 'READY')
+        state['legacy_grading_check']['status'] = 'READY'
+        self.assertEqual(self.report(state)['conditions'], [])
+
     def test_publication_completion_is_rechecked_without_hiding_persistent_staleness(self):
         for recovers in (True, False):
             with self.subTest(recovers=recovers):

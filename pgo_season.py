@@ -283,6 +283,8 @@ def save_state(state, root=DEFAULT_ROOT):
         check_durable(state, prior, durable)
     check_availability_context(state, root, durable)
     check_starter_announcements(state, root, durable=durable)
+    from pgo_legacy_grades import validate as validate_legacy_grades
+    validate_legacy_grades(state, root, read_json(root/'current.json') if prior else None, durable=durable)
     manifest = dict(schema_version=1, created_at=durable, files={'state.json.gz': {'sha256':sha(payload),'bytes':len(payload)}},
                     code_sha256=sha(Path(__file__).read_bytes()))
     previous = root/'current.json'
@@ -343,6 +345,8 @@ def load_current(root=DEFAULT_ROOT):
     if 'mccabe_forecasts' in state:
         from mccabe_forecasts import validate
         validate(state, root)
+    from pgo_legacy_grades import validate as validate_legacy_grades
+    validate_legacy_grades(state, root, manifest.get('previous'), durable=manifest.get('created_at'))
     return state
 
 
@@ -749,11 +753,13 @@ def refresh_forecast_availability(state, root):
     return refs
 
 
-def decorate(state, results):
+def decorate(state, results, *, previous=None, previous_pointer=None):
     state['results']=results;finals={r['game_id']:r for r in results}
     all_games=[g for w in state['weeks'] for g in w['games']]
     state['model_records']=[dict(name='PGO weekly model',edition='pgo-weekly-2026',**record(all_games,results))]
-    state['model_records'] += [dict(name=m['name'],edition=m['edition'],**record(m['games'],results)) for m in legacy_models()]
+    from pgo_legacy_grades import records as legacy_records
+    rows, state['legacy_grading_check'] = legacy_records(state, results, previous, previous_pointer)
+    state['model_records'] += rows
     for week in state['weeks']:
         finished=0
         for g in week['games']:
@@ -900,6 +906,7 @@ def refresh_experiments(state, previous, root):
 
 def refresh(root=DEFAULT_ROOT):
     root=Path(root);previous=load_current(root)
+    previous_pointer=read_json(root/'current.json') if previous else None
     if previous and previous.get('season_complete'):return previous
     state=copy.deepcopy(previous) if previous else bootstrap()
     state.update(checked_at=now(),status='READY',blocked_reason=None)
@@ -925,10 +932,10 @@ def refresh(root=DEFAULT_ROOT):
         from pgo_current_projection import refresh as refresh_current_projection
         state['sources'] += refresh_current_projection(state, root)
         state['events']=events
-        decorate(state,results)
+        decorate(state,results,previous=previous,previous_pointer=previous_pointer)
     except (ValueError,KeyError,OSError) as error:
         state.update(status='BLOCKED',blocked_reason='Automatic update needs review: '+str(error))
-        decorate(state,state['results'])
+        decorate(state,state['results'],previous=previous,previous_pointer=previous_pointer)
     try:refresh_replacement_sources(state,root)
     except Exception:
         # Optional source maintenance must not suppress primary grading/publication.
@@ -951,11 +958,11 @@ def refresh(root=DEFAULT_ROOT):
                 if before and utc(state['checked_at'])>=utc(g['kickoff'])-timedelta(minutes=60):
                     # Restore the whole issued record, including its explanations and source/QB identity.
                     week['games'][index]=copy.deepcopy(before)
-        decorate(state,state['results'])
         pointer=read_json(root/'current.json')
         prior_manifest=read_json(root/pointer['path']/'manifest.json')
         prior_file=next(iter(prior_manifest['files']))
         state['archives']=[*previous.get('archives',[]),dict(checked_at=previous['checked_at'],href=archive_href(pointer['path']+'/'+prior_file))]
+    decorate(state,state['results'],previous=previous,previous_pointer=previous_pointer)
     state['source_captures']=[r for r in state['sources'] if 'path' in r]
     state['sources']=[r if 'href' in r else {'label':'Source captured '+r['captured_at'], 'href':archive_href(r['path'])} for r in state['sources']]
     state['sources'].append({'label':'Saved refreshes and verification record','href':'evidence/season-2026/current.json'})

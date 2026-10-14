@@ -10,6 +10,14 @@ from pgo_workflow_status import report_health
 
 
 class WorkflowStatusTests(unittest.TestCase):
+    def test_legacy_hold_has_separate_review_condition_with_ready_main_update(self):
+        payload, output = self.report(legacy_grading_check=dict(status='BLOCKED',
+            blocked_reason='Legacy kickoff conflict', models={'legacy':{'game_ids':['CHI_GB']}}))
+        self.assertEqual(payload['condition'], 'READY')
+        self.assertEqual(payload['legacy_grading_status'], 'BLOCKED')
+        self.assertEqual(payload['legacy_grading_condition'], 'LEGACY_GRADING_REVIEW')
+        self.assertIn('Legacy kickoff conflict', output)
+
     def report(self, status='READY', reason=None, penalty_status='READY', penalty_reason=None, **components):
         state = dict(status=status, blocked_reason=reason, checked_at='2026-09-10T16:22:00Z',
                      penalty_shadow=dict(status=penalty_status, blocked_reason=penalty_reason),

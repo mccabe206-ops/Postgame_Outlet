@@ -193,8 +193,10 @@ def verify(game, annotations, root):
         raise ValueError('Invalid saved starter announcement schema') from error
 
 
-def apply_current(selected, roster, games, root, checked_at, *, teams=None, depth=None):
-    """Resolve separately reviewed current authority; never change locked rules."""
+def apply_current(selected, roster, games, root, checked_at, *, teams=None, depth=None, resolve_defaults=True):
+    """Resolve current authority; partial mode defers defaults until retained authority is selected."""
+    require(type(resolve_defaults) is bool and (resolve_defaults or (depth is None and not selected)),
+            'Partial current authority requires empty selections and no default depth')
     requested = set(CURRENT_TEAMS if teams is None else teams)
     require(requested and requested <= set(CURRENT_TEAMS), 'Invalid current starter team scope')
     indexed = {g['game_id']:g for g in games}
@@ -223,10 +225,11 @@ def apply_current(selected, roster, games, root, checked_at, *, teams=None, dept
         remaining = requested - set(chosen)
         if remaining:
             chosen.update(select_roster(roster, depth, checked_at, teams=remaining))
-    require(set(chosen) == requested, 'Current starters must cover requested teams')
+    require(set(chosen) == requested if resolve_defaults else set(chosen) <= requested,
+            'Current starters must cover requested teams')
     ids = [r['gsis_id'] for r in chosen.values()]
     require(all(isinstance(pid,str) and re.fullmatch(r'00-\d{7}',pid) for pid in ids)
-            and len(set(ids)) == len(requested)
+            and len(set(ids)) == len(chosen)
             and all(normalize_team(row['team']) == team for team,row in chosen.items()),
             'Current starter identities differ or are duplicated')
     return chosen, annotations

@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-10-11T19:22:19.774421+00:00",
+  "sources": [
+    {
+      "bytes": 404060,
+      "captured_at": "2026-10-11T19:22:19.144959+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e045eaf3c333ea21120f16e4c60445e1ef81541b82b28434645ada1c0c560e90",
+      "started_at": "2026-10-11T19:22:19.027246+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 534418,
+      "captured_at": "2026-10-11T19:22:19.486848+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chicagobears.com/news/",
+      "kind": "team_news",
+      "sha256": "1a217119fbcb55fbfd644d91523f997956632acdaedf1f383e128690b26e124d",
+      "started_at": "2026-10-11T19:22:19.027630+00:00",
+      "status": 200,
+      "team": "CHI",
+      "url": "https://www.chicagobears.com/news/"
+    },
+    {
+      "bytes": 693910,
+      "captured_at": "2026-10-11T19:22:19.488411+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.packers.com/news/",
+      "kind": "team_news",
+      "sha256": "eba7a33add36df20f3d1af8a769497a043f12f4d6250bf9796fbfb156b958f9c",
+      "started_at": "2026-10-11T19:22:19.027958+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/"
+    },
+    {
+      "bytes": 1600428,
+      "captured_at": "2026-10-11T19:22:19.328546+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "c5b60738e868e3b42e268427766076fc5a872ce8a2de72698342cde75a52e8bf",
+      "started_at": "2026-10-11T19:22:19.028269+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 311013,
+      "captured_at": "2026-10-11T19:22:19.721805+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.packers.com/news/packers-bears-week-5-inactives-oct-11-2026",
+      "kind": "official_inactives",
+      "sha256": "73db544a3e859474c204c5b20db0e86d8cfafa38df2033e02f09887ce368eb89",
+      "started_at": "2026-10-11T19:22:19.614838+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/packers-bears-week-5-inactives-oct-11-2026"
+    }
+  ]
+}
