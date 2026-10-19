@@ -1393,7 +1393,10 @@ def inject_fantasy_preview(existing_html, panel_html, *, season_state=SEASON_UNL
         panel_html = panel_html.replace(
             active_fantasy, inactive_fantasy, 1
         ).replace(active_label, inactive_label, 1)
-    fantasy_css = FANTASY_CSS
+    fantasy_css = FANTASY_CSS + """
+#panel-fantasy a.fantasy-source-badge:focus-visible { outline-color:var(--ink); }
+#panel-fantasy .fantasy-view-buttons .fantasy-view-button[aria-pressed="true"] { color:var(--action-ink); }
+"""
     if 'class="fantasy-availability"' in panel_html:
         fantasy_css += "\n" + FANTASY_AVAILABILITY_CSS
     output = existing_html.replace("</style>", fantasy_css + "\n</style>", 1)
@@ -1790,9 +1793,6 @@ def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH, *, se
         mccabe_source_timestamp(mccabe_path),
     )
     output = inject_comparison(base_html, panel)
-    if fantasy_panel is not None:
-        output = inject_fantasy_preview(output, _upgrade_fantasy_league_controls(fantasy_panel),
-                                        season_state=season_state)
     return add_rating_explanations(output) if had_explanations else output
 
 
