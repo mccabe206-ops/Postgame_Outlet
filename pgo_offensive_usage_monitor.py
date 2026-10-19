@@ -40,7 +40,8 @@ def _select(root, finals, selected, excluded):
             relevant = {key for key in missing if durable < utc(finals[key]['kickoff'])-timedelta(minutes=60)}
             if not relevant: continue
             pointer = dict(path=path.parent.relative_to(root).as_posix(), manifest_sha256=sha(raw))
-            state, _ = load_archive(root, pointer)
+            # The chosen pointer is fully validated when its inventory is loaded.
+            state, _ = load_archive(root, pointer, check=False)
             if 'offensive_inventory' not in state: continue
             # Presence fixes the candidate before validating even its version or shape.
             games = {game['game_id'] for week in state['weeks'] for game in week['games']}

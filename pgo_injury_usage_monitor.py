@@ -89,7 +89,8 @@ def _select(root, finals, selected, excluded):
                 relevant = {key: row for key, row in missing.items() if durable < utc(row['kickoff'])-timedelta(minutes=60)}
                 if not relevant: continue
                 pointer = dict(path=path.parent.relative_to(root).as_posix(), manifest_sha256=sha(raw))
-                state, _ = load_archive(root, pointer)
+                # The chosen pointer is fully validated by load_inventory below.
+                state, _ = load_archive(root, pointer, check=False)
                 snapshot = state.get('replacement_depth') or {}
                 if 'inventory_version' not in snapshot: continue
                 games = {game['game_id'] for game in snapshot.get('games', [])}
