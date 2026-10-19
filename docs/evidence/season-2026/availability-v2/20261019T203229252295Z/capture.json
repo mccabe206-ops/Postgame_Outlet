@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-19T20:32:32.919196+00:00",
+  "sources": [
+    {
+      "bytes": 403960,
+      "captured_at": "2026-10-19T20:32:32.440592+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e2bc57de3eed31c13ce8b7d058170334d76b3c433866549205cf31afbf43944b",
+      "started_at": "2026-10-19T20:32:32.303103+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 519597,
+      "captured_at": "2026-10-19T20:32:32.706853+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.49ers.com/news/",
+      "kind": "team_news",
+      "sha256": "bb644aec6eea6da016e2535f301ab9b0b002a4ec92be0aadd1d0aa1814f3ec9b",
+      "started_at": "2026-10-19T20:32:32.303531+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/"
+    },
+    {
+      "bytes": 490294,
+      "captured_at": "2026-10-19T20:32:32.624709+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.commanders.com/news/",
+      "kind": "team_news",
+      "sha256": "430fe6c9a82597342a794987c46592e92bb93afa5d5e0e7d73cabf9b30f246f1",
+      "started_at": "2026-10-19T20:32:32.303871+00:00",
+      "status": 200,
+      "team": "WAS",
+      "url": "https://www.commanders.com/news/"
+    },
+    {
+      "bytes": 1611051,
+      "captured_at": "2026-10-19T20:32:32.522354+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "f937fa3f2fa2f152e9ea460c3bb91cbce16104a1b748ee26834040a611673d93",
+      "started_at": "2026-10-19T20:32:32.304377+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}
