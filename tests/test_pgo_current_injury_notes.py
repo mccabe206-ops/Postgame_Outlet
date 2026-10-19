@@ -6,6 +6,7 @@ import unittest
 from unittest.mock import patch
 
 import pgo_comparison as comparison
+from tests import test_pgo_comparison as fixtures
 
 
 class CurrentInjuryNotesTests(unittest.TestCase):
@@ -15,9 +16,28 @@ class CurrentInjuryNotesTests(unittest.TestCase):
         loader = patch('pgo_season.load_current', return_value=None)
         self.season_loader = loader.start()
         self.addCleanup(loader.stop)
+        preview = fixtures.ComparisonTests._fantasy_preview()
+        template = preview['rows'][2]
+        # Synthetic projections exercise source identities without reading the public board.
+        preview['rows'] = [
+            dict(template, gsis_id=identifier, player_name=name, team=team,
+                 opponent=opponent, position=position, position_rank=rank,
+                 flex_rank=rank, superflex_rank=rank)
+            for rank, (identifier, name, team, opponent, position) in enumerate((
+                ('00-0036849', 'Tutu Atwell', 'LAR', 'SF', 'WR'),
+                ('00-0040177', 'Jordan James', 'SF', 'LAR', 'RB'),
+                ('00-0040734', 'TreVeyon Henderson', 'NE', 'SEA', 'RB'),
+                ('00-0040648', 'Tory Horton', 'SEA', 'NE', 'WR'),
+                ('00-0033288', 'George Kittle', 'SF', 'LAR', 'TE'),
+            ), 1)
+        ]
+        self.saved = comparison.inject_fantasy_preview(
+            comparison.inject_comparison(fixtures.ComparisonTests._base_html(),
+                comparison.render_comparison_panel([], fixtures.ComparisonTests._held_receipt())),
+            comparison.render_fantasy_panel(preview))
 
     def test_newer_verified_season_inactives_join_exact_ids_without_changing_fantasy(self):
-        saved = comparison.PUBLIC_OUTPUT.read_text(encoding='utf-8')
+        saved = self.saved
         targets = {}
         for match in re.finditer(r'<tr class="fantasy-row"([^>]*)>(.*?)</tr>', saved, re.S):
             for name in ('Tutu Atwell', 'Jordan James'):
@@ -87,7 +107,7 @@ class CurrentInjuryNotesTests(unittest.TestCase):
             comparison.add_current_injury_notes(page,self.source)
 
     def test_current_notes_preserve_every_saved_projection_byte_and_are_idempotent(self):
-        saved = comparison.PUBLIC_OUTPUT.read_text(encoding='utf-8')
+        saved = self.saved
         page = comparison.add_current_injury_notes(saved, self.source)
         self.assertEqual(comparison.strip_current_injury_notes(page),
                          comparison.strip_current_injury_notes(saved))
@@ -117,7 +137,7 @@ class CurrentInjuryNotesTests(unittest.TestCase):
         for team, identifier, name, position, text in notes:
             data['players'].append(dict(team=team, gsis_id=identifier, player=name, position=position,
                 source_url='https://example.com/final-inactives', availability_text=text))
-        saved = comparison.PUBLIC_OUTPUT.read_text(encoding='utf-8')
+        saved = self.saved
         extra = ('<tr class="fantasy-row" data-team="SEA" data-player-id="emergency-qb-fixture" '
                  'data-base-points="1.25" data-inactive="false"><th class="fantasy-player">'
                  'Emergency QB</th><td>1.25</td></tr>')
@@ -154,7 +174,7 @@ class CurrentInjuryNotesTests(unittest.TestCase):
             path = Path(directory) / 'invalid.json'
             path.write_text(json.dumps(data), encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'later than the injury snapshot'):
-                comparison.add_current_injury_notes(comparison.PUBLIC_OUTPUT.read_text(encoding='utf-8'), path)
+                comparison.add_current_injury_notes(self.saved, path)
 
 
 if __name__ == '__main__':

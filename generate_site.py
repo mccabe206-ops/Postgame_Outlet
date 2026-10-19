@@ -615,7 +615,6 @@ TEMPLATE = """<!DOCTYPE html>
     overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
   }
   :focus-visible { outline:3px solid #60a5fa; outline-offset:3px; }
-  #panel-fantasy a.fantasy-source-badge:focus-visible { outline-color:var(--ink); }
   .tab, .sort-button, .row-trigger, .drawer-close { font:inherit; }
   .sort-button, .row-trigger {
     border:0; background:transparent; color:inherit; padding:0; cursor:pointer;
@@ -706,7 +705,6 @@ TEMPLATE = """<!DOCTYPE html>
   }
   .tab:hover { color:var(--ink); border-color:var(--border2); }
   .tab.active { color:var(--action-ink); background:var(--action-bg); border-color:var(--action-bg); }
-  #panel-fantasy .fantasy-view-buttons .fantasy-view-button[aria-pressed="true"] { color:var(--action-ink); }
   .panel { display:none; } .panel.active { display:block; }
   .sort-button { width:100%; text-align:inherit; text-transform:inherit; letter-spacing:inherit; }
   .row-trigger { display:inline-flex; align-items:center; text-align:left; }

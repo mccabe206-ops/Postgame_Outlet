@@ -13,7 +13,7 @@ import pgo_season as season
 from pgo_season import canonical, require, sha, utc
 
 
-def load_archive(root, pointer):
+def load_archive(root, pointer, *, check=True):
     require(re.fullmatch(r'runs(?:-v2)?/\d{8}T\d{12}Z', pointer['path']) is not None, 'Invalid archive path')
     root = Path(root).resolve()
     directory = root / pointer['path']
@@ -30,7 +30,8 @@ def load_archive(root, pointer):
     meta = manifest['files'][name]
     require(sha(payload) == meta['sha256'] and len(payload) == meta['bytes'], 'Archive state hash differs')
     state = json.loads(gzip.decompress(payload) if name.endswith('.gz') else payload)
-    season.check_starter_announcements(state, root, durable=manifest.get('created_at'))
+    # Candidate scans pass check=False: replaying every archived projection made rollover scans take hours.
+    if check: season.check_starter_announcements(state, root, durable=manifest.get('created_at'))
     return state, manifest
 
 

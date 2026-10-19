@@ -493,12 +493,27 @@ def select_roster(roster, depth, captured_at, *, teams=None):
     require(eligible, 'No dated QB depth data')
     latest = max(utc(r['dt']) for r in eligible)
     require(utc(captured_at)-latest <= timedelta(days=7), 'QB depth snapshot is older than seven days')
+    current_teams = [pgo_sources.normalize_team(r['team']) for r in eligible if utc(r['dt']) == latest]
+    for team in requested:
+        require(current_teams.count(team) == 1, f'{team}: Expected QB is ambiguous or not on the active roster')
     selected = {}
     for r in eligible:
         if utc(r['dt']) != latest: continue
         team = pgo_sources.normalize_team(r['team']);key=(team,r['gsis_id'])
         if team not in requested: continue
-        require(team not in selected and key in active, f'{team}: Expected QB is ambiguous or not on the active roster')
+        if key not in active:
+            # Depth charts lag injuries; the roster's ACT status is authoritative, so fall to the next active depth QB.
+            backups = [row for row in depth if row.get('pos_abb') == 'QB' and pgo_sources.normalize_team(row['team']) == team
+                       and str(row.get('pos_rank')) != '1' and utc(row['dt']) == latest]
+            ranks = [str(row.get('pos_rank')) for row in backups]
+            require(all(re.fullmatch(r'[1-9][0-9]*',rank) for rank in ranks) and len(set(ranks)) == len(ranks),
+                    f'{team}: Expected QB is ambiguous or not on the active roster')
+            for row in sorted(backups,key=lambda row:int(row['pos_rank'])):
+                backup = (team,row['gsis_id'])
+                if backup in active:
+                    key = backup
+                    break
+            require(key in active, f'{team}: Expected QB is ambiguous or not on the active roster')
         selected[team] = active[key]
     require(set(selected) == requested and len({r['gsis_id'] for r in selected.values()}) == len(requested),
             'Expected QBs must cover requested teams uniquely; missing: ' + ', '.join(sorted(requested-set(selected))))

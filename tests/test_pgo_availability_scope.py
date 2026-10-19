@@ -53,6 +53,58 @@ class AvailabilityScopeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 api.select_roster(self.roster,self.depth,self.clock,teams=teams)
 
+    def test_full_selection_falls_back_to_active_rank_two(self):
+        backup=dict(self.roster[0],team='ATL',gsis_id='00-9999998',full_name='ATL Backup',status='ACT')
+        self.roster.append(backup)
+        self.depth.append(dict(self.depth[0],team='ATL',gsis_id=backup['gsis_id'],pos_rank='2'))
+        selected=api.select_roster(self.roster,self.depth,self.clock)
+        expected={r['team']:r for r in self.roster}
+        self.assertEqual(api.canonical(selected),api.canonical(expected))
+
+    def test_full_selection_skips_inactive_rank_two(self):
+        self.roster.extend([dict(self.roster[0],team='ATL',gsis_id='00-9999998',full_name='ATL Backup',status='INA'),
+                            dict(self.roster[0],team='ATL',gsis_id='00-9999999',full_name='ATL Third',status='ACT')])
+        self.depth.extend([dict(self.depth[0],team='ATL',gsis_id='00-9999999',pos_rank='3'),
+                           dict(self.depth[0],team='ATL',gsis_id='00-9999998',pos_rank='2')])
+        selected=api.select_roster(self.roster,self.depth,self.clock)
+        self.assertEqual(selected['ATL'],self.roster[-1])
+
+    def test_full_selection_rejects_older_backup(self):
+        self.roster.append(dict(self.roster[0],team='ATL',gsis_id='00-9999998',full_name='ATL Backup',status='ACT'))
+        self.depth.append(dict(self.depth[0],team='ATL',gsis_id='00-9999998',pos_rank='2',dt='2026-09-13T13:53:31Z'))
+        with self.assertRaisesRegex(ValueError,'ATL'):
+            api.select_roster(self.roster,self.depth,self.clock)
+
+    def test_full_selection_rejects_no_active_backup(self):
+        self.roster.append(dict(self.roster[0],team='ATL',gsis_id='00-9999998',full_name='ATL Backup',status='INA'))
+        self.depth.append(dict(self.depth[0],team='ATL',gsis_id='00-9999998',pos_rank='2'))
+        with self.assertRaisesRegex(ValueError,'ATL'):
+            api.select_roster(self.roster,self.depth,self.clock)
+
+    def test_full_selection_keeps_active_rank_one(self):
+        next(r for r in self.roster if r['team']=='ATL')['status']='ACT'
+        expected={r['team']:r for r in self.roster}
+        self.roster.append(dict(self.roster[0],team='ATL',gsis_id='00-9999998',full_name='ATL Backup'))
+        self.depth.append(dict(self.depth[0],team='ATL',gsis_id='00-9999998',pos_rank='2'))
+        selected=api.select_roster(self.roster,self.depth,self.clock)
+        self.assertEqual(api.canonical(selected),api.canonical(expected))
+
+    def test_full_selection_rejects_duplicate_backup_ranks(self):
+        self.roster.extend([dict(self.roster[0],team='ATL',gsis_id='00-9999998',status='ACT'),
+                            dict(self.roster[0],team='ATL',gsis_id='00-9999999',status='ACT')])
+        self.depth.extend([dict(self.depth[0],team='ATL',gsis_id='00-9999998',pos_rank='2'),
+                           dict(self.depth[0],team='ATL',gsis_id='00-9999999',pos_rank='2')])
+        with self.assertRaisesRegex(ValueError,'ATL'):
+            api.select_roster(self.roster,self.depth,self.clock)
+
+    def test_full_selection_requires_one_current_rank_one(self):
+        atl=next(r for r in self.depth if r['team']=='ATL')
+        cases=[[r for r in self.depth if r['team']!='ATL'],
+               self.depth+[atl,dict(atl,pos_rank='2',dt='invalid')]]
+        for depth in cases:
+            with self.subTest(depth=len(depth)), self.assertRaisesRegex(ValueError,'^ATL: Expected QB is ambiguous or not on the active roster$'):
+                api.select_roster(self.roster,depth,self.clock)
+
     def run_refresh(self, *, context=False, changed=False):
         if context: self.clock='2026-09-14T23:30:00Z'
         if changed:
