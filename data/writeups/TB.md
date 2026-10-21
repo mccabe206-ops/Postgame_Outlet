@@ -1,3 +1,12 @@
+## Week 6: vs Pittsburgh (L 19–26, OT)
+
+Tampa led **13–3 at halftime** and had a real chance to win, but managed **122 yards after the break**. Rookie **Jalon Daniels** threw two fourth-quarter
+interceptions (22-of-43, 164 yards, a TD, 36.7 PFF passing). His late field goal drive forced overtime, and Pittsburgh scored first. The defense held up
+again without S **Antoine Winfield Jr.**: **5 sacks** (David Walker 2) and **19 points allowed in regulation**. **Rueben Bain Jr.** returned. **Emeka Egbuka** drew 16 targets.
+
+**What changed:** nothing. The rating holds at **−3.8** with Daniels at quarterback (−4.0). **Baker Mayfield** (right thumb) is set to practice Wednesday;
+when he's cleared, he goes back in as the starter at **+1.5**.
+
 ## Week 5: at Dallas (W 24–16, TNF)
 
 Tampa Bay got its first win, and it was **more dominant than the score**. The box-score model had it

@@ -1,3 +1,17 @@
+## Week 6: vs L.A. Chargers (W 22–6)
+
+Kansas City dominated a division rival more than the score shows. The Chiefs out-gained the Chargers **422–259** at **7.4 yards a play**, led **19–3 at
+halftime**, and only let them into scoring range a few times, with zero touchdowns. **Kenneth Walker** ran for **128 yards and two touchdowns**, and **Patrick
+Mahomes** was efficient (23-of-30, 272 yards, 9.1 a throw, no sacks), with an interception at the 2-yard line the one blemish. Guards **Trey Smith (90.1)** and
+**Kingsley Suamataia (88.9)** controlled the line. The defense was excellent: **4 sacks**, **L'Jarius Sneed (88.6)** and **Nohl Williams (85.1)** in coverage, and
+**George Karlaftis** with 8 pressures.
+
+**What changed:**
+- **Defense 0.0 → +0.5 (+0.5):** Kansas City ranks **4th in the NFL in EPA allowed per play** this season. The rating had fallen well behind what this
+  unit is doing.
+- **QB Mahomes held at +5.0** and **offense held at +0.5.** LT Josh Simmons is still out.
+- **New total +5.5 → +6.0.**
+
 ## Week 5: bye
 
 Kansas City was off in Week 5, and the number moved anyway. **Patrick Mahomes goes from +4.5 to +5.0**,

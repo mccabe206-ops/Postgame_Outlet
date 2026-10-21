@@ -1,3 +1,20 @@
+## Week 6: vs Houston at Wembley (L 31–34)
+
+In their second straight game in London, the Jaguars lost a game the box score called even (**29–29**). **Trevor Lawrence** threw
+**4 touchdowns** (24-of-41, 306 yards, 1 INT), but his **60.4 PFF passing grade** was his lowest of the season. The run game (106
+yards) and the offensive line (no sacks allowed) were good. The defense wasn't: Houston averaged **7.2 yards a play**, and
+corners **Jarrian Jones** and **Jourdan Lewis** were picked on. LB **Ventrell Miller (90.6)** was the standout. Penalties tilted
+it, too. Houston converted a 4th-and-1 and a 3rd-and-5 on Jacksonville flags.
+
+**Brian Thomas Jr.** dropped a pass on the opening drive and was **benched after 15 snaps**, with no catches for the second
+straight week. Reports say Jacksonville is phasing him out. **Travis Hunter** took some receiver snaps on top of his work at corner.
+S **Eric Murray** returned from his concussion.
+
+**What changed:**
+- **Defense +0.8 → +0.5 (−0.3):** 34 points and no sacks.
+- **QB Lawrence held at +3.5** and **offense held at +0.3.** The Thomas situation is the thing to watch.
+- **New total +4.6 → +4.3.**
+
 ## Week 5: vs Philadelphia in London (W 19–17)
 
 Jacksonville is 4–1 after the wildest finish of the season. Elliott put Philadelphia up 17–16 with 8

@@ -1,3 +1,33 @@
+## Week 6: vs Arizona (L 16–18)
+
+The Rams lost to a 13.5-point underdog, and the box score says it wasn't bad luck. Arizona **out-gained
+them 338–286** and held the ball for nearly 35 minutes, and the box-stat model had the **Cardinals by
+about four (24–20)**. Los Angeles ran only 56 plays and went 0-for-2 on fourth down. **Matthew Stafford**
+went 25-of-33 for 222 yards, 2 TD and no interceptions, but his **50.4 PFF passing grade** was his worst
+since Week 1, at just 6.7 yards a throw. He gave the Rams a 16–15 lead with a TD to **Colby Parkinson** with
+47 seconds left. Arizona then kicked its sixth field goal as time expired. **David Quessenberry (83.0)**
+was excellent at left tackle in place of the suspended Alaric Jackson.
+
+The bigger story is what the game cost them:
+- **WR Davante Adams** (**ruptured hamstring**) — **Starter → out 6–10 weeks.** Konata Mumpfield and Jordan
+  Whittington step into larger roles.
+- **NT Poona Ford** (**ruptured triceps**) — **Starter → out for the season.**
+- **DT Kobie Turner** (**groin strain**) — **Starter → IR, out 4–6 weeks.** With Ford, that's two interior
+  starters lost in one afternoon. **Aaron Donald (78.9)** is the only healthy starter left inside.
+- **EDGE Myles Garrett** (**knee, IR**) — **still out.** His practice window won't open this week, so Week 8
+  is the earliest realistic return.
+- **LT Alaric Jackson** — **suspended for one more game** (Week 7 at Las Vegas).
+
+**What changed:**
+- **Offense +1.6 → +1.2 (−0.4):** −0.3 for losing Adams for most of two months, and −0.1 for a flat
+  offensive day. The +0.2 for Jackson's return comes back in Week 8.
+- **Defense +0.5 → +0.1 (−0.4):** this is availability, not performance. The unit held Arizona without a
+  touchdown (Josh Wallace 84.7, Quentin Lake 81.1 with an INT). It just lost two starting interior linemen.
+  Garrett's return is the way back up.
+- **QB Stafford held at +5.0.** One poor grade with no turnovers, while losing his WR2 mid-game, doesn't
+  move an elite-tier quarterback.
+- **New total +7.1 → +6.3.**
+
 ## Week 5: vs Buffalo (L 34–37, OT, MNF)
 
 The Rams' offense did nearly everything right, and they lost anyway. Los Angeles had **33 first downs

@@ -1,3 +1,30 @@
+## Week 6: at L.A. Rams (W 18–16)
+
+Arizona won outright as a **13.5-point underdog**, and it was the better team. The Cardinals **out-gained
+the Rams 338–286**, held the ball for **34:52**, and the box-stat model had them by about four. They never
+scored a touchdown, going **0-for-5 in the red zone**, but **Chad Ryland hit six field goals**, the last a
+43-yarder as time expired. **Jacoby Brissett** (24-of-35, 218 yards, no TD, 1 INT; 62.0 PFF passing) didn't
+take a single sack behind backup LT **Jayden Williams**, and he drove 47 seconds for the winner. With
+**Jeremiyah Love** (left ankle) inactive, **Tyler Allgeier and Bam Knight** combined for 120 rushing yards on
+35 carries. RG **Jon Gaines II (78.1)** led the line.
+
+The defense had its best game in a month. It held the Rams to **286 yards and 16 points** with **3 sacks**.
+**Budda Baker (80.0)** and **Josh Sweat (79.5)** led it. CB **Max Melton (33.6)** and the linebackers in
+coverage are still the weak spots.
+
+**Injuries:**
+- **RB Jeremiyah Love** (**left ankle**) — **Starter → inactive**, day-to-day for Week 7 vs Denver, with no IR planned.
+- **DT Walter Nolen III** (**ankle**) — reports conflict on whether he was hurt in the second half. Check the
+  Week 7 injury report.
+
+**What changed:**
+- **Defense −1.0 → −0.8 (+0.2):** a real step forward, discounted because the Rams lost Davante Adams
+  mid-game and were missing their starting left tackle.
+- **Offense held at −1.2:** the line was much better (no sacks), and the run game worked without Love. That's
+  offset by failing on all five red-zone trips.
+- **QB Brissett held at −1.0.**
+- **New total −3.2 → −3.0.**
+
 ## Week 5: vs Detroit (L 21–45)
 
 Arizona **scored first and then got run over**. A 2-yard Jacoby Brissett → Teagan Quitoriano

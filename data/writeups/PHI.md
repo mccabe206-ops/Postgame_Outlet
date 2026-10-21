@@ -1,3 +1,24 @@
+## Week 6: vs Carolina (L 14–25)
+
+Philadelphia played its first game without **Jalen Hurts**, who is expected to miss the rest of the season with blood clots in his lungs
+(deep vein thrombosis and bilateral pulmonary emboli). It traces back to a calf injury in Week 4. **Tanner McKee**, in his third career start,
+played cleanly (26-of-45, 215 yards, a TD, no turnovers, 69.8 PFF passing) but couldn't move the offense: **4.8 yards a throw**, and the Eagles
+ran the ball only **13 times for 35 yards** with Saquon Barkley still out. **DeVonta Smith** returned from his hamstring injury and led the team
+(7-75-1). Carolina out-gained Philadelphia **399–222**, and **Chuba Hubbard** ran for 120 yards against a defense that has allowed 100+ rushing yards
+every week.
+
+**Injuries** (depth string: original slot → effective slot):
+- **QB Jalen Hurts** (**blood clots: DVT + bilateral pulmonary emboli**) — **Starter → IR, likely out for the season.** He's on blood thinners, and doctors
+  expect a full long-term recovery. **Tanner McKee: 2nd string → starter.** Andy Dalton was released, so rookie **Cole Payton** is the backup.
+- **WR DeVonta Smith** (**hamstring**) and **EDGE Jonathan Greenard** (**ankle**) — **Starters → back.**
+- Still out: **RB Saquon Barkley** (hamstring) and **C Drew Kendall** (knee).
+
+**What changed:**
+- **QB: Tanner McKee is the starter at −3.0**, the top of the backup range after a clean first start. Hurts moves to the injured list.
+- **Offense −1.5 → −1.3 (+0.2):** Smith's return. The line and the run game are still the problem.
+- **Defense −0.25 → −0.5 (−0.25):** this unit ranks **23rd in EPA allowed per play** and **24th against the pass**, and it hasn't had a good game yet.
+- **New total −0.25 → −4.8** (with McKee at quarterback).
+
 ## Week 5: vs Jacksonville in London (L 17–19)
 
 Philadelphia lost on the final play, and on a decision Nick Sirianni took the blame for. Jake Elliott's
@@ -131,10 +152,7 @@ Philadelphia grades above the line — a proven quarterback, a talented supporti
 
 ## Quarterback
 
-Jalen Hurts (+1.5) is an above-average dual-threat grade, held after Week 5. Following two
-bottom-of-the-league weeks (38.0 and 36.9 PFF), he was mid-pack in London (21 of 40, 220 yards, 1 TD,
-0 INT, 64.9 PFF). That's with no Saquon, no DeVonta Smith, and backups at center, left guard and right
-tackle. The number assumes the cast gets healthier. The rushing value is baked in.
+Tanner McKee (−3.0) is the starting quarterback with Jalen Hurts out, likely for the season, with blood clots in his lungs. McKee's first start was clean (no turnovers, 69.8 PFF passing) but limited: 4.8 yards per attempt with no run game behind him. That puts him at the top of the backup range. Rookie Cole Payton is the healthy backup after Andy Dalton's release.
 
 ## What moved the number
 

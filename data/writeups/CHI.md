@@ -1,3 +1,18 @@
+## Week 6: at Atlanta (W 31–23)
+
+**Caleb Williams** came back from his right-hamstring injury and played like nothing happened: **30-of-36 for 305 yards**, a TD and no
+interceptions (70.7 PFF passing). Chicago held the ball for **40 minutes**, led **21–7 at halftime**, and the competitive score was **31–15**
+before Atlanta's garbage-time points. **Luther Burden III** caught 8 balls for 95 yards, and **Colston Loveland** added 6 for 65 and a TD.
+The defense was the story: **5 sacks without Montez Sweat** (suspended), led by **Kyler Gordon, who had 3 sacks on just 17 snaps**. Chicago
+won comfortably despite **12 penalties for 133 yards**.
+
+**What changed:**
+- **QB Caleb Williams held at +3.0:** this was exactly the player that number describes.
+- **Defense −0.4 → −0.1 (+0.3):** a dominant front, discounted a bit because two of Atlanta's three fumbles came on special teams and the
+  safeties were picked on.
+- **Offense held at +0.8.**
+- **New total +3.4 → +3.7.**
+
 ## Week 5: at Green Bay (L 7–31)
 
 The backup-quarterback magic ran out at Lambeau. Chicago was a 1.5-point favorite and lost by 24, and

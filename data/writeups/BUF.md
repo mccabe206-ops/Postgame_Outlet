@@ -1,3 +1,15 @@
+## Week 6: at Las Vegas (W 33–30)
+
+Buffalo won a shootout that the box score called a coin flip (28–27 Las Vegas). **Josh Allen** got back on track: 23-of-33 for 255 yards, 2 TD and no turnovers
+(**72.8 PFF passing**, ending a three-game slide). **James Cook** ran for 95 yards and a TD and added 58 receiving, and Keon Coleman and Khalil Shakir caught TDs. RT
+**Spencer Brown** and WR **Joshua Palmer** returned. **DJ Moore** (left shoulder) is still out. The defense is the concern. It gave up **313 passing yards**, never
+sacked Kirk Cousins, and allowed two fourth-quarter touchdowns to Tre Tucker that made it close. **Dorian Williams (91.3)** had the only takeaway.
+
+**What changed:**
+- **Defense −0.8 → −1.1 (−0.3):** Buffalo ranks **30th in EPA allowed per play** this season. DT Ed Oliver is still out.
+- **QB Allen held at +6.5** (the slide is over) and **offense held at +1.1** (2nd in EPA per play). Moore's return is the next step up.
+- **New total +6.8 → +6.5.**
+
 ## Week 5: at L.A. Rams (W 37–34, OT, MNF)
 
 Buffalo won a Monday-night shootout in overtime **without its top two receivers, DJ Moore and Joshua

@@ -1,3 +1,32 @@
+## Update: Jonathon Cooper reinstated (Oct. 20)
+
+EDGE **Jonathon Cooper** has been removed from the Commissioner's Exempt List and can return to the field. Denver's defense was trimmed in the preseason because
+of his absence, and that comes back now.
+
+- **Defense +1.2 → +1.5 (+0.3).** If the league suspends him, it comes back out.
+- **New total +0.4 → +0.7.**
+
+## Week 6: vs Seattle (W 17–14, OT, TNF)
+
+Denver won a game its offense nearly lost. The defense ran it: **42 pressures, 5 sacks, 3 takeaways**, and a 14–3 lead into the
+fourth quarter against a Seattle offense rated well above average. **Alex Singleton (90.5)** was everywhere. **Nik Bonitto** had a
+sack and a forced fumble, and **Ja'Quan McMillian** and **Kris Abrams-Draine** picked off Darnold. All of that came **without CB
+Patrick Surtain II or S Talanoa Hufanga**, and with **Riley Moss** (ribs) limited to 20 snaps. The offense managed **168 yards and 2.9
+a play**, and **33 yards after halftime**. **Bo Nix** went 17-of-27 for **107 yards** (4.0 a throw, 45.1 PFF passing, 28.8 QBR).
+
+**Injuries:**
+- **CB Patrick Surtain II** (**right ankle**) — **Starter → out** for a 2nd straight game. **Week 8 is more likely than Week 7.**
+- **S Talanoa Hufanga** (**ankle**) — **Starter → out.** Devon Key (74.3) filled in.
+- **CB Riley Moss** (**ribs**) — **Starter → active but limited.**
+
+**What changed:**
+- **QB Nix −0.5 → −1.0 (−0.5):** yes, after a win. Three straight games with a QBR under 45, and 107 yards in this one.
+  The defense is carrying him.
+- **Defense +0.9 → +1.2 (+0.3):** an elite performance with two starters in the secondary out. **Another +0.3 when Surtain
+  returns.**
+- **Offense held at +0.2.**
+- **New total +0.6 → +0.4.**
+
 ## Week 5: at L.A. Chargers (W 23–17)
 
 Denver won a field-position game **without either starting cornerback**, and the defense did it.
@@ -141,11 +170,7 @@ quarterback — but the defense's Week 1 showing trimmed the number.
 
 ## Quarterback
 
-Bo Nix (−0.5) is the selected quarterback, cut half a point after Week 5 at the Chargers (16-of-27,
-123 yards, 4.6 per attempt, 28.0 QBR). That makes four below-average starts in five. He has been
-careful with the ball lately (no interceptions in Weeks 4–5), and Sean Payton's system gives him a
-floor, but the passing game hasn't functioned. He was restored to 0.0 after Week 3 and is graded
-below that now.
+Bo Nix (−1.0) is the selected quarterback, down another half-point even after a win. He threw for 107 yards against Seattle (4.0 per attempt, 45.1 PFF passing, 28.8 QBR), his third straight game with a QBR under 45 and his second straight under 125 passing yards. The defense is carrying this team.
 
 ## What moved the number
 

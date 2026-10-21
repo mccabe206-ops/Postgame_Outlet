@@ -1,3 +1,21 @@
+## Week 6: vs N.Y. Jets (W 26–19)
+
+New England led **17–3 at halftime** and held on. The box score was close to even (**24–23**), because the Jets moved the ball and then
+went **0-for-3 in the red zone**. **Drake Maye** was excellent again: 18-of-32 for 235 yards, **3 TD, no interceptions, no sacks**, and a
+**92.1 PFF passing grade**, his third straight elite game. The completion rate undersells it. **A.J. Brown**, back from the high-ankle
+sprain that had him on IR since Week 1, caught just 3 of 10 targets in a rusty return. **DeMario Douglas** (7-86-1) and **Hunter Henry**
+(4-48-1) carried the passing game.
+
+The bigger news is who came back. **LT Will Campbell** (MCL), **CB Christian Gonzalez** (shoulder) and **DL Christian Barmore** all
+returned, along with Brown. That's most of the injury list that dragged the rating down in Week 5.
+
+**What changed:**
+- **QB Maye +2.0 → +2.5 (+0.5):** three straight elite games and 7 TD with no interceptions over the last two.
+- **Offense −0.9 → 0.0 (+0.9):** Brown and Campbell are back. Brown will look better once the rust is off.
+- **Defense −0.1 → +0.5 (+0.6):** Gonzalez and Barmore are back, which restores the unit to where it was before the Week 5 cornerback
+  injuries. The safeties (Kevin Byard, Craig Woodson) are the weak spot.
+- **New total +1.0 → +3.0.**
+
 ## Week 5: vs Las Vegas (W 45–17)
 
 **Drake Maye** had the best game of his career: **26-of-34, 374 yards, 4 TD, 0 INT**, plus a rushing TD,
@@ -119,10 +137,7 @@ structure are real even when the process is sloppy and the WR1 is gone.
 
 ## Quarterback
 
-Drake Maye (+2.0) is back up another half-point after the best two-game stretch of his career: 48-of-71,
-643 yards, 7 TD, 1 INT, and back-to-back top-five PFF grades (81.5 at Buffalo, 93.5 vs Las Vegas). He
-was 3.0 preseason and was cut to 1.0 after a three-game slump (1 TD, 6 INT). The slump is fading, but
-two games don't erase it yet, so there's still room above this number.
+Drake Maye (+2.5) is the starter, up another half-point after his third straight elite game: 92.1 PFF passing against the Jets (3 TD, no interceptions, no sacks) on the heels of a 93.5 against Las Vegas. That's 7 touchdowns and no interceptions over his last two games, and the early-season rough patch (three picks at Seattle, a 28.1 at Jacksonville) is well behind him. With A.J. Brown and Will Campbell back, the offense around him is finally close to whole.
 
 ## Quarterback: through Week 1 2026 (historical)
 
