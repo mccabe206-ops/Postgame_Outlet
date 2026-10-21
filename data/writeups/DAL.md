@@ -1,3 +1,17 @@
+## Week 6: at Green Bay (L 13–23, SNF)
+
+Dallas fell behind **17–0 at halftime**, with two **Dak Prescott** interceptions in the second quarter doing most of the damage, then out-gained Green Bay
+209–83 after the break but managed just 13 points. Prescott threw 54 times for only 258 yards (4.8 a throw) and has four interceptions in two games. All-Pro
+LG **Tyler Smith** returned from IR (78.4), and **CeeDee Lamb** played through his quad bruise (9 catches on 18 targets). The running game gave Dallas nothing
+(15 carries, 48 yards). The defense played better than usual (**Quinnen Williams 86.2**, **Rashan Gary** 9 pressures), but it's still the league's worst unit
+by EPA allowed.
+
+**What changed:**
+- **Offense +1.0 → +1.2 (+0.2):** Tyler Smith is back.
+- **Defense −1.6 → −1.8 (−0.2):** **32nd in the NFL in EPA allowed per play**. One decent night doesn't change that.
+- **QB Prescott held at +2.0** (watching the interceptions).
+- **New total holds at +1.4.**
+
 ## Week 5: vs Tampa Bay (L 16–24, TNF)
 
 A bad home loss as an 8.5-point favorite, and the box-score model says it **should have been worse**

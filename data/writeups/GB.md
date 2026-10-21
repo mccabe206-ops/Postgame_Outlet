@@ -1,3 +1,19 @@
+## Week 6: vs Dallas (W 23–13, SNF)
+
+Green Bay jumped out to a **17–0 halftime lead** and held on. **Jordan Love** was sharp again (23-of-41, 276 yards, a TD pass and a TD run, **80.9 PFF passing**),
+his third straight strong game, and rookie **Matthew Golden** caught 6 balls for 104 yards and a score. The defense set the tone. It held a top-10 Dallas offense
+to 13 points and **48 rushing yards** and picked off Dak Prescott twice (**Evan Williams** and **Brandon Cisse**), with **Carrington Valentine (91.7)** shutting down
+his side. The run game was the one problem: 26 carries for 57 yards.
+
+**The big news:** **Josh Jacobs** was removed from the Commissioner's Exempt List on Oct. 19 and is eligible to play in Week 7 at Detroit, his first action of
+2026. The NFL's conduct review is still ongoing, so a suspension remains possible.
+
+**What changed:**
+- **QB Love +1.0 → +1.5 (+0.5):** three straight quality games (78.2, 94.5, 80.9).
+- **Offense +0.2 → +0.7 (+0.5):** Jacobs's return. Green Bay's run game ranks **last in the NFL** in efficiency without him. If he's suspended, this comes back out.
+- **Defense −0.7 → −0.4 (+0.3):** a top-10 unit by EPA allowed, despite playing without Micah Parsons, Edgerrin Cooper and Javon Hargrave.
+- **New total +0.5 → +1.8.**
+
 ## Week 5: vs Chicago (W 31–7)
 
 Green Bay's most complete game of the year, and the box-score model agrees (GB 30, CHI 8). **Jordan
@@ -108,11 +124,7 @@ Green Bay now grades below the line — not because the core talent vanished, bu
 
 ## Quarterback
 
-Jordan Love (+1.0) is an above-average starter again after two straight strong games: 22 of 30 with
-2 TD at Tampa (78.2 PFF), then 25 of 31 for 367 yards and 2 TD vs Chicago (94.5 PFF, best of Week 5).
-The first three games were all below average behind a line in flux. With Golden, Watson and Kraft
-stretching defenses, the question is whether this is the 2023–24 version of Love for good. One more
-week like this and the number keeps climbing.
+Jordan Love (+1.5) is the starter, up half a point after his third straight quality game: 276 yards, a TD pass and a TD run against Dallas (80.9 PFF passing), after a 78.2 at Tampa and a 94.5 against Chicago. The shaky early-season version is gone. Josh Jacobs's return gives him the run game he hasn't had all year.
 
 ## What moved the number
 

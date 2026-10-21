@@ -1,3 +1,16 @@
+## Week 6: vs Baltimore (W 13–10)
+
+Cleveland won a defensive slugfest. Both teams gained about 235 yards, and the box score called it close to even. The Browns' defense
+allowed **10 points, none after the first quarter**. **Denzel Ward** shut down his side of the field (one catch allowed on four targets),
+**Carson Schwesinger** forced the Derrick Henry fumble that set up the winning field goal, and **Maliek Collins** and **Isaiah McGuire** each had a
+sack. **Deshaun Watson** didn't turn it over (16-of-26, 164 yards, 56.5 PFF passing), but he was sacked 5 times and the offense did little.
+The line (Zion Johnson, Tytus Howard, Austin Barber) was the best part of it.
+
+**What changed:**
+- **Defense +0.3 → +0.5 (+0.2):** an elite day against a Ravens offense without Lamar Jackson. DT **Mason Graham's** return is the next step up.
+- **QB Watson held at −2.5** and **offense held at −0.8.** It isn't a good offense.
+- **New total −3.0 → −2.8.**
+
 ## Week 5: at New York Jets (L 12–17)
 
 The Browns' streak of one-score wins ended with a one-score loss, and the box agreed: **NYJ 15, CLE

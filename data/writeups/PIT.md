@@ -1,3 +1,16 @@
+## Week 6: at Tampa Bay (W 26–19, OT)
+
+Pittsburgh trailed **13–3 at halftime**, then took over. The Steelers out-gained Tampa **206–122** after the break, scored 16 in the fourth quarter,
+and won in overtime on a 6-yard touchdown to rookie **Germie Bernard** (11 catches, 87 yards). **Aaron Rodgers** threw short all day (33-of-49, 253 yards,
+2 TD, 1 INT, 5.2 a throw), with **DK Metcalf** catching 11 for 93. The defense was the difference: **5 sacks and 2 interceptions**, with CB **Jamel Dean**
+(84.9, an INT and 4 pass breakups) and **Jalen Ramsey** (76.5, 2 sacks) both back from injury. **Rico Dowdle** returned too.
+
+**What changed:**
+- **Defense +0.7 → +0.9 (+0.2):** this restores most of the Week 4 injury cut. Dean, Ramsey and Brandin Echols are all back. The last +0.1 comes back when
+  S **DeShon Elliott** returns from IR.
+- **QB Rodgers held at −1.2** and **offense held at 0.0.**
+- **New total −0.5 → −0.3.**
+
 ## Week 5: vs Indianapolis (W 34–22)
 
 The box says this was even (25–25). Pittsburgh won it with two huge plays from **Jaylen Warren**:

@@ -1,3 +1,18 @@
+## Week 6: at New England (L 19–26)
+
+The Jets were close to New England's equal in this one. The box score had it **24–23**, and they had the better success rate. They just
+couldn't finish: **0-for-3 in the red zone** and 0-for-2 on fourth down. **Geno Smith** went 20-of-30 for 252 yards, with a TD and his first
+interception of the season (64.9 PFF passing). **Omar Cooper Jr.** (6-103-1) and **Mason Taylor** (81.6) were the bright spots, and
+**Braelon Allen** ran for 78 yards with **Breece Hall** inactive again. The defense never got to Drake Maye (no sacks) and allowed 148
+rushing yards.
+
+**What changed:**
+- **Offense −1.1 → −0.8 (+0.3):** rookie WR **Omar Cooper Jr.**, back from the ankle injury he suffered in Week 1, looked like a real
+  difference-maker: 6 catches, 103 yards and a TD, with a 78.0 PFF grade. The receiver room had been running on 2nd- and 3rd-string
+  options. Hall's return is the next step up.
+- **QB Geno held at −1.5** and **defense held at +0.3.**
+- **New total −2.3 → −2.0.**
+
 ## Week 5: vs Cleveland (W 17–12)
 
 An ugly win that matched the box (**NYJ 15, CLE 10 expected**). **Garrett Wilson** opened the scoring

@@ -1,3 +1,24 @@
+## Week 6: at Denver (L 14–17, OT, TNF)
+
+The box score says Seattle should have won, and the game says Seattle was lucky to get to overtime. The Seahawks
+out-gained Denver **353–168**, but it took **85 snaps at 4.3 yards a play**, and they trailed **14–3 entering the fourth
+quarter**. Eleven late points tied it, and Denver won it with an overtime field goal. **Sam Darnold** threw 51 times for 278
+yards, **no touchdowns and 2 interceptions** (48.2 PFF passing), and was sacked 5 times. That's **7 interceptions in his last
+four games**. **Jaxon Smith-Njigba (82.9)** was excellent again, and the defense was elite: it allowed **168 yards and 2.9 a play**.
+
+The bigger story is the offense. Through six weeks Seattle is **25th in EPA per play** and **30th running the ball**, without
+Kenneth Walker, and has **12 giveaways**. The right side of the line (RG Christian Haynes 37.8, RT Abraham Lucas 37.1 in pass
+protection) is where the sacks are coming from.
+
+**What changed:**
+- **QB Darnold +2.0 → +1.5 (−0.5):** turnovers and three straight sub-58 passing grades. Macdonald says he's staying
+  the starter.
+- **Offense +1.3 → +0.5 (−0.8):** the rating had been carried by JSN's reputation. The data says this is a below-average
+  offense with no running game. **Zach Charbonnet** (ACL, PUP) has a good chance to debut in Week 7; **+0.2 comes back once
+  he's playing and looks like himself.**
+- **Defense held at +3.0.**
+- **New total +6.3 → +5.0.**
+
 ## Week 5: vs San Francisco (L 29–32)
 
 Seattle lost a game its defense played well enough to win. The Seahawks held the 49ers to **269
@@ -128,10 +149,7 @@ into the season.
 
 ## Quarterback
 
-Sam Darnold (+2.0) is the starter, held despite back-to-back below-average games (57.4 and 54.5
-PFF passing grades, 3 INT, 8 sacks taken in Weeks 4–5). He missed Week 2 with a glute strain from the
-opener, and his Week 3 at Washington (83.1, four touchdowns) shows the ceiling is still there. Drew Lock
-(0.0) is QB2. He's listed with a forearm issue this week.
+Sam Darnold (+1.5) is the starter, down half a point after two interceptions and no touchdowns on 51 attempts at Denver (48.2 PFF passing). That's three straight passing grades under 58 and seven interceptions in his last four games. Mike Macdonald says he's staying the starter. Drew Lock (0.0) is the QB2.
 
 ## Week 1 rating notes (historical)
 

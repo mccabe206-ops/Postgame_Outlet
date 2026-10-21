@@ -1,3 +1,18 @@
+## Week 6: vs Tennessee (L 20–26)
+
+Indianapolis out-gained Tennessee **399–186**, ran 78 plays to 45, held the ball for **38 minutes**, and lost anyway. **Daniel Jones** threw two
+interceptions in scoring range, **Jonathan Taylor** fumbled, a punt was blocked and returned for a touchdown, and Tennessee turned those gifts
+into 20 points. Jones was sacked 6 times, mostly up the middle, and finished with a **38.1 PFF passing grade** and a 24.5 QBR. That's his third
+game under 51 in the last four. The rest of the offense did its job: 165 rushing yards behind **Bernhard Raimann (86.3)** and **Quenton Nelson
+(79.2)**, and **Keenan Allen** returned from his groin injury. The defense held the Titans to 186 yards, with **Akeem Davis-Gaither (90.4)** back
+from his knee injury.
+
+**What changed:**
+- **QB Jones 0.0 → −0.5 (−0.5):** the supporting cast keeps creating chances, and he keeps not finishing them.
+- **Offense held at +0.6.** WR Alec Pierce (heel, IR) is eligible to return around Week 7.
+- **Defense held at −0.5:** a strong day, but against one of the league's worst offenses. It has to do it again.
+- **New total +0.1 → −0.4.**
+
 ## Week 5: at Pittsburgh (L 22–34)
 
 The box called this **dead even (25–25)**. Indianapolis lost it on explosives and red-zone failures.
@@ -114,10 +129,7 @@ skill group is above average, but Week 1 pulled the quarterback and defense belo
 
 ## Quarterback
 
-Daniel Jones (0.0) holds after a turnover-free Week 5 at Pittsburgh (24-of-44, 267 yards, 63.1 PFF,
-18th of 30). It followed two poor passing games: four turnover-worthy plays in Week 3, then 143 yards
-and a 16.1 QBR in London. The legs and the Achilles recovery look fine. The passing is still the
-question.
+Daniel Jones (−0.5) is the starter, down half a point after a 38.1 passing grade against Tennessee: two interceptions in scoring range and six sacks. That's three games under 51 in his last four, and his best grade this season is 63.1. The line and run game around him are good, which makes the turnovers harder to excuse.
 
 ## Quarterback: through Week 1 2026 (historical)
 

@@ -1,3 +1,18 @@
+## Week 6: at Indianapolis (W 26–20)
+
+Tennessee won a game it was badly out-played in. Indianapolis out-gained the Titans **399–186** and led **13–3 entering the fourth quarter**.
+Then the Colts started giving it away. **20 of Tennessee's 26 points** came off Indianapolis mistakes: a **blocked punt returned for a touchdown**
+by Oluwafemi Oladejo, plus scoring drives that started inside Colts territory after a Jonathan Taylor fumble and two Daniel Jones interceptions.
+**Carnell Tate** caught the go-ahead touchdown. The offense managed just 60 first-half yards, and **Cam Ward** threw only 22 passes (102 yards).
+
+The defense earned its share. It sacked Jones **6 times** on 25 pressures, got interceptions from **Amani Hooker (86.3)** and **Cor'Dale Flott**,
+and **Jeffery Simmons** (2 sacks) and Hooker were both back healthy. LT **Dan Moore Jr.** bounced back from a rough Week 5 and didn't allow a sack.
+
+**What changed:**
+- **Defense −0.7 → −0.4 (+0.3):** a real pass rush and real takeaways, tempered by 399 yards and 165 rushing yards allowed.
+- **QB Ward held at −1.5** and **offense held at −1.6.** The win came from field position, not the offense.
+- **New total −3.8 → −3.5.**
+
 ## Week 5: vs Houston (L 3–26)
 
 Tennessee is **0–5** after its worst offensive game of the season: **187 yards, 3.2 per play, 3

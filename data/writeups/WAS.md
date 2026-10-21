@@ -1,3 +1,29 @@
+## Week 6: at San Francisco (L 17–23, MNF)
+
+Washington fell behind **20–3 at halftime**, out-gained 278–71, and then nearly came all the way back. After the
+break the Commanders out-gained the 6–0 49ers **210–67** and held them to a field goal. **Stefon Diggs** (back
+from his hamstring) and **Rachaad White** caught touchdown passes, and **K'Lavon Chaisson (88.0 PFF)** forced a
+fumble. The box-stat model had it **24–25**, close to a coin flip. **Jayden Daniels** finished 29-of-40 for 300
+yards, 2 TD and no turnovers, a 76.3 PFF passing grade. The numbers flatter him, though: on film he wasn't sharp,
+and he took 4 sacks behind a shaky interior line (RT Josh Conerly 38.6, LG Chris Paul 45.6, C Lucas Patrick 50.2).
+
+**Injuries** (depth string: original slot → effective slot):
+- **WR Terry McLaurin** (**torn left patellar tendon**) — **Starter (WR1) → out for the season** after 7 snaps.
+  **Diggs: effective WR1. Treylon Burks / Antonio Williams: 2nd string → effective starters.**
+- **WR Stefon Diggs** (**hamstring**) — **Starter → back.** **CB Trey Amos** (ankle, IR) and **S Nick Cross**
+  (illness) — **Starters → back.**
+- **RB Jacory Croskey-Merritt** (**groin**, IR) — **Starter → out.** White and Jeremy McNichols carried it.
+
+**What changed:**
+- **Before kickoff (−0.8 → −0.4):** the offense went −0.8 → −0.6 (+0.3 for Diggs back, which counted extra with
+  McLaurin alongside him, and −0.1 for Croskey-Merritt to IR). The defense went −1.5 → −1.3 (+0.2 for Amos and Cross back).
+- **Offense −0.6 → −1.1 (−0.5):** −0.3 for losing McLaurin for the year, and −0.2 to take back the bump we gave
+  the offense for having Diggs and McLaurin on the field together.
+- **QB Daniels held at +1.5:** the stat line was his best of the year, but he didn't look right. The last
+  half-point waits.
+- **Defense held at −1.3:** 20 first-half points allowed, then 3 in the second half.
+- **New total −0.4 → −0.9.** Week 7 is the bye.
+
 ## Week 5: vs N.Y. Giants (T 27–27, OT)
 
 **Jayden Daniels** came back from his elbow injury and was electric on the ground, then made the
@@ -122,22 +148,26 @@ with Daniels' rhythm and the Tunsil-less line the things to watch.
 
 ## The current rating
 
-Washington's current number uses Mariota at quarterback alongside two below-average non-QB
-units. Daniels's earlier grade describes a different lineup.
+Washington's number (−0.9) uses Jayden Daniels at quarterback with two below-average units around him,
+and an offense that just lost its best receiver for the season.
 
 ## Quarterback
 
-Jayden Daniels (+1.5) is the selected quarterback, held one more week after his Week 5 return from a
-dislocated left (non-throwing) elbow. He played in a brace, had no turnovers, and ran for 103 yards
-and two touchdowns against the Giants, though his overtime clock-management mistake cost Washington a
-game-winning field-goal try. Marcus Mariota (right MCL sprain, no IR) is QB2 at −2.0.
+Jayden Daniels (+1.5) is the selected quarterback, back from a dislocated left (non-throwing) elbow since
+Week 5. The full restore to +2.0 is on hold. His Week 6 box score at San Francisco was clean, but on film
+he didn't look like himself. Marcus Mariota (right MCL sprain, no IR) is QB2 at −2.0.
 
 ## What moved the number
 
-- **Offense (−0.8, up from −1.0 after Week 3):** below average, and it's protection-driven. **Laremy Tunsil is on IR — a huge blow to the blindside and the whole offensive line**, the kind of loss that reshapes how an offense can operate. There's talent to throw to — Terry McLaurin headlines with Stefon Diggs added to the room — but a compromised front in front of a still-developing passer is what pulls this into the red.
-- **Defense (−1.5, cut from −1.0 after Week 2):** below average and thinning. **Jer'Zhan Newton is on IR (torn pec, out roughly a month)**, and edge Dorance Armstrong is suspended for Week 1 on top of coming back from a torn ACL — so the pass rush opens the season short-handed. Frankie Luvu, Rasul Douglas, Mike Sainristil, and Nick Cross keep it from bottoming out, but there's no unit-carrying strength here yet.
+- **Offense (−1.1):** below average, and thinner now. **Terry McLaurin is out for the season** with a torn
+  patellar tendon, so Stefon Diggs is the WR1 with Treylon Burks and Antonio Williams behind him. **LT Laremy
+  Tunsil is on IR** (torn triceps), and the interior line struggled at San Francisco. Sam Cosmi is the bright spot.
+- **Defense (−1.3):** below average. The pass rush has juice (K'Lavon Chaisson), and the secondary is healthier
+  with Trey Amos and Nick Cross back. But the corners are still being picked on, and **Jer'Zhan Newton** and
+  **Leo Chenal** are on IR.
 
 ## Bottom line
 
-The quarterback selection is the largest change from the earlier waterline rating. Protection
-and defense remain concerns in the current grade.
+Washington heads into its bye at 1–4–1, with Daniels healthy but not yet sharp and no McLaurin for the rest
+of the year. The defense showed in the second half at San Francisco what it can be. The offense has to find
+a new top target.

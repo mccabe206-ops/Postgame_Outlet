@@ -1,3 +1,18 @@
+## Week 6: vs New Orleans (L 27–34)
+
+The Giants out-gained New Orleans **461–319** and still lost a game that was decided early in the fourth quarter (the competitive score was
+**34–13**). **Jameis Winston** threw two interceptions, took four sacks and was **benched in the fourth quarter** (34.9 PFF passing). A kickoff-return
+fumble handed the Saints a short touchdown. **J.J. McCarthy** came on and threw for 243 yards, mostly against a defense protecting a lead.
+**Malik Nabers** was spectacular in defeat (12 catches, 165 yards), and **Isaiah Likely** added 6-99-1. The defense held New Orleans to 144 passing
+yards (**DJ Reader 89.2**) but gave up 175 on the ground and never sacked Tyler Shough.
+
+**What changed:**
+- **QB: Winston −3.0 → −3.5** after the benching, and **McCarthy −3.0 → −2.5**. John Harbaugh hasn't named a Week 7 starter yet, and whoever he picks
+  becomes the rated QB1.
+- **Offense held at +0.2.**
+- **Defense +0.3 → 0.0 (−0.3):** the unit ranks 21st in EPA allowed this season and gave up 175 rushing yards with no sacks in this one.
+- **New total −2.5 → −3.3** (with Winston).
+
 ## Week 5: at Washington (T 27–27, OT)
 
 The Giants **came back from 14 down in the fourth quarter** and left Washington with a tie. It was
@@ -121,10 +136,7 @@ dangerous pass rush. Week 2 changed the quarterback component.
 
 ## Quarterback
 
-Jameis Winston (−3.0) is the selected quarterback, raised half a point after a 326-yard, three-touchdown,
-no-interception day at Washington, his second straight productive start. He replaced the injured
-Jaxson Dart (left knee surgery, out at least the rest of the regular season). J.J. McCarthy,
-acquired 9/28, is the backup, and John Harbaugh has kept Winston as the starter.
+Jameis Winston (−3.5) is the selected quarterback for now, down half a point after he was benched in the fourth quarter against New Orleans (two interceptions, four sacks, 34.9 PFF passing). J.J. McCarthy (−2.5), who threw for 243 yards in relief, is in line to take over if John Harbaugh names him the Week 7 starter. Jaxson Dart (left knee) is out for the regular season.
 
 ## What moved the number
 

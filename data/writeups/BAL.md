@@ -1,3 +1,19 @@
+## Week 6: at Cleveland (L 10–13)
+
+With **Lamar Jackson** (left ankle) out for a second straight game, Baltimore scored 10 points in the first quarter and **nothing after it**,
+gaining **64 yards after halftime**. **Tyler Huntley** couldn't repeat last week's strong showing: 19-of-31 for 165 yards and a TD (5.3 yards a
+throw, 50.9 PFF passing), with 3 sacks. A **Derrick Henry fumble** in the fourth quarter was the game's only turnover, and Cleveland kicked the
+winning field goal off it. The defense was excellent: **237 yards and 13 points allowed, with 5 sacks**. **Trenton Simpson (90.2)** and **Kyle
+Hamilton (87.1)** led it, and **Marlon Humphrey** and **Trey Hendrickson** both returned. C **Cam Jurgens** (concussion) still hasn't debuted for
+Baltimore. WR **Ja'Kobi Lane** came back from IR and was the best receiver on the field (79.7).
+
+**What changed:**
+- **QB: Lamar Jackson back to QB1 at +4.0** for Week 7. He's day-to-day, and the coaching staff says he could practice this week. That's half a
+  point below his normal +4.5 for his first game back from the ankle. A clean game restores it.
+- **Tyler Huntley −1.0 → −1.5**, back to QB2. He starts at −1.5 if Lamar is ruled out.
+- **Offense and defense held** (+0.8 and +0.3).
+- **New total +0.1 → +5.1** (Lamar at quarterback).
+
 ## Week 5: at Atlanta (W 30–23, OT)
 
 Baltimore won in overtime in Atlanta **without Lamar Jackson, its new center Cam Jurgens, or edge Trey
@@ -118,7 +134,7 @@ Baltimore is a top-five roster: an elite quarterback, a strong skill group, and 
 
 ## Quarterback
 
-Tyler Huntley (−1.0) is the selected quarterback while Lamar Jackson recovers from the left ankle sprain he suffered just before halftime in Week 4. Huntley won his start in Atlanta: 24-of-32, 2 TD, no turnovers, a 79.9 PFF passing grade (5th of 30), plus the overtime-winning touchdown. He's rated above the usual backup band as a proven spot starter in a run-first offense. Lamar (+4.5, near the top of the league) returns to QB1 at full value as soon as he's cleared, possibly Week 6 vs Cleveland.
+Lamar Jackson (+4.0) is the selected quarterback for Week 7, half a point below his normal +4.5 for his first game back from the left ankle sprain he suffered in Week 4. He's day-to-day, and the coaching staff says he could practice this week. A clean game restores the full grade. Tyler Huntley (−1.5) is QB2 after a 50.9 passing grade at Cleveland, and he starts if Lamar is ruled out.
 
 ## Quarterback: through Week 1 2026 (historical)
 

@@ -1,3 +1,18 @@
+## Week 6: at Kansas City (L 6–22)
+
+The Chargers' offense hit bottom. It managed **6 points and 259 yards**, went **0-for-3 in the red zone and 0-for-3 on fourth down**, and Justin Herbert was
+sacked 4 times behind a line still made up mostly of backups. Herbert went 22-of-37 for 204 yards with no touchdowns and an interception (60.8 PFF passing).
+That's his **sixth straight game under 61**, with 8 interceptions and never more than one touchdown in a game. **Ladd McConkey** (foot) played only 8 snaps.
+Through six weeks, the Chargers have the **worst offense in the NFL by EPA per play**. The defense held up better than the score suggests over the season
+(7th in EPA allowed), though Kansas City ran for 150 yards on it here.
+
+**What changed:**
+- **QB Herbert +0.5 → −1.0 (−1.5):** six straight poor games. The supporting cast explains part of it, but Herbert hasn't played like an average
+  starter once this season.
+- **Offense −1.3 → −1.6 (−0.3):** McConkey is treated as out until he's back to a full workload, on top of the injuries up and down the line.
+- **Defense held at −0.3.**
+- **New total −1.1 → −2.9.**
+
 ## Week 5: vs Denver (L 17–23)
 
 The Chargers are **0–5**. This one slipped away in the fourth quarter. Los Angeles led **17–10** after a 7-yard
@@ -136,10 +151,7 @@ but Week 1 pulled the offense back to the pack.
 
 ## Quarterback
 
-Justin Herbert (+0.5) is the selected quarterback, cut half a point after Week 5 against Denver
-(14-of-24, 121 yards, an interception and a lost fumble, 5 sacks). It's his fifth straight difficult
-game, and it came behind backups at four offensive-line spots and without his top three receivers.
-His grade has fallen from +4.0 to start the season. QB2 Trey Lance is on injured reserve (groin).
+Justin Herbert (−1.0) is the selected quarterback, down a point and a half after his sixth straight passing grade under 61. At Kansas City he threw for 204 yards with no touchdowns and an interception, and he hasn't thrown more than one touchdown in any game this season (8 INTs in six games). Backup linemen and injured receivers explain part of it, and the grade will be revisited when the line and Ladd McConkey are healthy.
 
 ## Quarterback: through Week 1 2026 (historical)
 

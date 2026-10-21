@@ -1,3 +1,16 @@
+## Week 6: at N.Y. Giants (W 34–27)
+
+New Orleans won comfortably, leading by 21 before the Giants' late rally. It was out-gained, but it took care of the ball and finished: **3-for-3 in the red
+zone**, **175 rushing yards** (Kendre Miller 20-70, Alvin Kamara 7-34 and a TD catch), and three touchdown passes from **Tyler Shough**, who threw for just
+144 yards with his left hand still wrapped. The defense won the game: **6 sacks** (Chase Young and Carl Granderson 2 each) and **3 interceptions**, two by
+**Martin Emerson Jr. (88.4)**. C **Erik McCoy** returned.
+
+**What changed:**
+- **Offense −0.4 → −0.2 (+0.2):** the run game and red-zone finishing, with McCoy back. Left tackle is still a hole while Kelvin Banks is out.
+- **Defense −0.9 → −0.6 (+0.3):** 6 sacks and 3 takeaways. It's still a bottom-five unit by EPA this season, so this is a modest bump.
+- **QB Shough held at −0.3.**
+- **New total −1.6 → −1.1.**
+
 ## Week 5: vs Minnesota (L 13–23)
 
 The offense bottomed out. New Orleans had **142 yards, 9 first downs and 3.3 yards per play**, ran

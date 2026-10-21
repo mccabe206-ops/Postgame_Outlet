@@ -1,3 +1,19 @@
+## Week 6: vs Chicago (L 23–31)
+
+Atlanta never had the ball long enough to matter. Chicago held it for **40 minutes**, and the Falcons ran only **50 plays**. **Bijan Robinson**
+got just 9 carries (61 yards). **Michael Penix Jr.**, playing through a rib injury from Week 5, threw 3 TD passes, but his **48.8 PFF passing
+grade** and **33.0 QBR** tell the real story. He was sacked 5 times, lost a strip-sack fumble, and 8 of the points came in garbage time. Two
+special-teams fumbles (a muffed punt and a kickoff return) didn't help. **Kyle Pitts** (82.4, 2 TD) and **Jahan Dotson** (3-87-1) were the
+bright spots.
+
+**What changed:**
+- **QB Penix −1.0 → −1.3 (−0.3):** two straight sub-60 games since the rib injury, after a 73.0 and an 81.0 when healthy. This looks like
+  the ribs, so it comes back if he does.
+- **Offense held at +1.0:** with Penix at quarterback, Atlanta's offense ranks **6th in the NFL in EPA per play** and **2nd running the
+  ball**. The season numbers are dragged down by the two games before he returned.
+- **Defense held at −0.6.** A.J. Terrell's return from IR is the next step up.
+- **New total −0.6 → −0.9.**
+
 ## Week 5: vs Baltimore (L 23–30, OT)
 
 Atlanta had this one with two and a half minutes left and lost it. Up **23–15** after Nick Folk's
@@ -115,7 +131,7 @@ and the defense's pass rush is thinned through the first half.
 
 ## Quarterback
 
-**Michael Penix Jr. (−1.0)** is the starter. He's had two top-10 PFF games since returning from the torn ACL (Weeks 3–4), then a step back against Baltimore in Week 5 (59.2, 23rd of 30). He left late in that game with a **rib injury** that isn't considered serious, and his Week 6 status depends on practice. Behind him: Tua Tagovailoa (−1.5) at QB2 and **Cooper Rush (−4.5)** at QB3.
+Michael Penix Jr. (−1.3) is the starter, down three-tenths after his second straight game under 60 since hurting his ribs late in Week 5 (48.8 PFF passing, 33.0 QBR and five sacks against Chicago). He graded 73.0 and 81.0 in his two healthy starts, so this looks like the ribs. The grade comes back up if he does.
 
 ## What moved the number
 

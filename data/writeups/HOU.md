@@ -1,3 +1,22 @@
+## Week 6: vs Jacksonville at Wembley (W 34–31)
+
+Houston won a London shootout that the box score scored dead even (**29–29**). The Texans gained 426 yards to Jacksonville's
+412, and neither team recorded a sack. **C.J. Stroud** was excellent: 24-of-34 for **312 yards, 3 TD** and his first interception
+of the season (**78.8 PFF passing, 95.6 QBR**, 9.2 yards a throw). He worked the middle of the field to **Jaylin Noel (90.8)**
+and **Marvin Harrison Jr.** Penalties helped. Houston converted a 4th-and-1 and a 3rd-and-5 on Jacksonville flags, worth
+roughly the 3-point margin. The defense had a rough day: 31 points allowed, no sacks, and LB **Henry To'oTo'o** (back from IR)
+gave up two touchdowns in coverage.
+
+**The Nico Collins effect:** in the four games Collins has played, Houston's offense ranks **5th in the NFL in EPA per play**
+and **4th in passing EPA**. In the two games he missed, it was **−0.19 EPA per play**, near the bottom of the league.
+
+**What changed:**
+- **QB Stroud +1.0 → +1.5 (+0.5):** four straight passing grades of 75 or better and one interception in six games.
+- **Offense +0.5 → +1.0 (+0.5):** with Collins on the field, this is a top-five offense, and Harrison Jr. adds another weapon.
+  The interior line is still the weak spot. The rating assumes Collins plays. If he misses time, it comes back down sharply.
+- **Defense +1.5 → +1.2 (−0.3):** not the elite unit it was rated as. No pass rush and soft coverage in this one.
+- **New total +3.0 → +3.7.**
+
 ## Week 5: at Tennessee (W 26–3)
 
 Houston's first win was never in doubt. The Texans led 12–3 at halftime on four Ka'imi Fairbairn field
@@ -119,10 +138,7 @@ Houston's grade is built on one of the best defenses in football, with an ascend
 
 ## Quarterback
 
-C.J. Stroud (+1.0) is up a half-point after two straight weeks near the top of the league (91.8 PFF
-in Week 4, 1st of 33; 79.9 pass grade in Week 5, tied for 3rd of 30). He has **no interceptions
-through five games**. The arm talent and poise were never the question. The protection was, and he's
-producing behind a line that still has holes. There's more room above this number if it continues.
+C.J. Stroud (+1.5) is the starter, up another half-point after his fourth straight strong game: 312 yards and 3 TD at Wembley (78.8 PFF, 95.6 QBR), following grades of 91.8 and 79.9. He has one interception in six games. With Nico Collins on the field, Houston's offense is a top-five unit, and Stroud is a big reason why.
 
 ## What moved the number
 

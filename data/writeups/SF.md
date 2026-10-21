@@ -1,3 +1,29 @@
+## Week 6: vs Washington (W 23–17, MNF)
+
+San Francisco is **6–0** after building a **20–3 halftime lead** and then hanging on. The first half was the 49ers at their
+best: **278 yards to 71**, a **George Kittle** touchdown on the opening drive, and two short **Christian McCaffrey** scores.
+**Brock Purdy** went 21-of-29 for 264 yards, a TD and no interceptions (**9.1 yards a throw**, a **76.7 PFF passing grade**,
+his third straight above 74). Then **Mike Evans** limped off before halftime with an Achilles flare-up, and the offense
+gained **67 yards** the rest of the night. **Malik Mustapha** (78.1) made the late stops, and the pass rush got home
+4 times on 29 pressures.
+
+**Injuries** (depth string: original slot → effective slot):
+- **WR Mike Evans** (**Achilles tendinitis, aggravated mid-game**) — **Starter → left after 25 snaps.** The MRI shows the
+  Achilles is intact. Shanahan is hopeful for Week 7, but Rapoport says it's something he'll manage for much of the season.
+- **WR room:** Deebo Samuel (hamstring), Christian Kirk (calf, IR), Ricky Pearsall (season) and Brandon Aiyuk are all out.
+  **Brandin Cooks, Jordan Watkins and Jacob Cowing** are the effective starters behind Evans.
+- **DE Nick Bosa** (**left calf**) — **Starter → missed a 4th straight game.** **LB Dre Greenlaw** served his one-game suspension.
+
+**What changed:**
+- **Before kickoff:** Defense +0.9 → +0.7 for Greenlaw's suspension.
+- **QB Purdy +3.7 → +4.5 (+0.8):** this is about talent, not the 6–0 record. Three straight strong grades, 15 TD to 2 INT,
+  and he's doing it with almost none of his receivers. The 49ers have the league's **#1 offense by EPA per play**.
+- **Offense +0.8 → +0.7 (−0.1):** Evans's Achilles is now a season-long concern, and the receiver room is very thin, but
+  the line (Trent Williams, Colton McKivitz), McCaffrey and Kittle keep it well above average. San Francisco is also
+  **3rd in rushing EPA**.
+- **Defense back to +0.9:** Greenlaw returns. Bosa's return is the next step up.
+- **New total +5.4 → +6.1.**
+
 ## Week 5: at Seattle (W 32–29)
 
 San Francisco is **5–0** after winning a sloppy, turnover-heavy NFC West game on **Eddy Pineiro's
@@ -126,7 +152,7 @@ confidence.
 
 ## Quarterback
 
-Brock Purdy (+3.7) is the selected quarterback, up half a point after Week 5. Through five games he's 98-of-142 for 1,196 yards with 13 touchdowns and 2 interceptions, and the 49ers are 5–0. Week 5 at Seattle was another solid road grade (74.8 PFF, 6th of 30). He's a settled, above-average starter running a machine. The question is how much of the machine is healthy around him: Deebo is now out for a few weeks, alongside Pearsall and Kirk.
+Brock Purdy (+4.5) is the selected quarterback, up eight-tenths after Week 6. He went 21-of-29 for 264 yards against Washington (9.1 per attempt, 76.7 PFF passing), his third straight grade above 74, and he has 15 touchdowns to 2 interceptions for a 6–0 team. He's doing it with Deebo Samuel, Christian Kirk, Ricky Pearsall and Brandon Aiyuk all out and Mike Evans managing an Achilles problem.
 
 ## Quarterback: through Week 1 2026 (historical)
 

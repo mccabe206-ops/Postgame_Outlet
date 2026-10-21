@@ -1,3 +1,17 @@
+## Week 6: at Philadelphia (W 25–14)
+
+Carolina came off its bye and controlled the game, beating a Hurts-less Eagles team by 11 in a game the box score said should have been
+wider (**31–18**). **Chuba Hubbard** carried 28 times for **120 yards** and a TD, and **Tommy Tremble** caught both of **Bryce Young's** TD passes. Young was
+clean (20-of-39, 281 yards, no turnovers). Jalen Coker (6-97) and Tetairoa McMillan (6-86) did the rest. The returns of **RT Taylor Moton**, **LB Devin Lloyd**
+(79.7, a sack) and **DT Tershawn Wharton** showed: Philadelphia managed **222 yards and 35 rushing**. The one blemish was **13 penalties for 149 yards**.
+
+**What changed:**
+- **Offense −0.3 → 0.0 (+0.3):** a real run game with Moton back. RG Robert Hunt (30.4) was the weak link.
+- **Defense −0.6 → −0.3 (+0.3):** Lloyd and Wharton are back and the front dominated, though against a backup quarterback. CB Jaycee Horn (torn quad) is
+  still out.
+- **QB Young held at +1.5.**
+- **New total +0.6 → +1.2.**
+
 ## Week 4: vs Detroit (W 32–26, Sunday night)
 
 **Bryce Young** had his best game of the year in a turnover-free Sunday-night shootout, and

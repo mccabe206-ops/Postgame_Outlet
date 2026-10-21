@@ -1,3 +1,16 @@
+## Week 6: vs Buffalo (L 30–33)
+
+Las Vegas went toe-to-toe with one of the league's best teams. **Kirk Cousins** had his best game of the season (23-of-41, **313 yards**, 2 TD, 1 INT, 75.1 PFF
+passing) and wasn't sacked. **Michael Mayer** (7-95, 89.2) and **Tre Tucker** (5-97, 2 TD) were the stars, and **Ashton Jeanty** returned from his ankle and foot
+injuries in a limited role (10 carries, a TD). Tucker's 44-yard score with the game nearly over cut it to three. The defense got nothing from its pass rush
+beyond Maxx Crosby, and didn't force a turnover.
+
+**What changed:**
+- **QB Cousins −0.5 → 0.0 (+0.5):** five starter-level games in six, capped by his best one.
+- **Offense −0.3 → −0.1 (+0.2):** Jeanty and Jalen Nailor are back. Another +0.2 comes back when Jeanty is at full workload.
+- **Defense held at −1.1.**
+- **New total −1.9 → −1.2.**
+
 ## Week 5: at New England (L 17–45)
 
 The Raiders' worst game of the season. New England led 21–7 at the half and 35–10 late in the 3rd, and
@@ -126,10 +139,7 @@ Las Vegas has two genuine stars — one on each side of the ball — dragged dow
 
 ## Quarterback
 
-Kirk Cousins (−0.5) is the selected quarterback, up another half-point after his best
-game yet, a 31-of-52, 365-yard, 2-TD day against Kansas City (73.4 PFF, 72.7 QBR). He has
-**11 TD / 4 INT** through four games and has thrown multiple TDs in every one. He was −1.0 after
-Week 3, −1.5 after Week 2, and −2.5 in the Week 1 edition.
+Kirk Cousins (0.0) is the starter, up half a point after his best game of the season: 313 yards and 2 TD against Buffalo (75.1 PFF passing) without being sacked. That's five starter-level games in six. He's playing like a league-average quarterback, and that's what the number now says.
 
 ## Quarterback: through Week 1 2026 (historical)
 
