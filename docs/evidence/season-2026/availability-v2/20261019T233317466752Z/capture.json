@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-19T23:33:18.453006+00:00",
+  "sources": [
+    {
+      "bytes": 403914,
+      "captured_at": "2026-10-19T23:33:17.533619+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "5cb2d89c22f0de434e495dd639d4b2a9e52d3de3a3c0229055fc67cbebf6152e",
+      "started_at": "2026-10-19T23:33:17.477349+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 519700,
+      "captured_at": "2026-10-19T23:33:17.685978+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.49ers.com/news/",
+      "kind": "team_news",
+      "sha256": "c75879f8913527e127917826294a0597445d1db4eef65f32a36e2d74a4290c38",
+      "started_at": "2026-10-19T23:33:17.477756+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/"
+    },
+    {
+      "bytes": 490491,
+      "captured_at": "2026-10-19T23:33:17.867390+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.commanders.com/news/",
+      "kind": "team_news",
+      "sha256": "1d6c4a0aa7185befc7ef849f93e52c6e464d07b228fdc78656b50e11ec872225",
+      "started_at": "2026-10-19T23:33:17.478168+00:00",
+      "status": 200,
+      "team": "WAS",
+      "url": "https://www.commanders.com/news/"
+    },
+    {
+      "bytes": 1607933,
+      "captured_at": "2026-10-19T23:33:18.064302+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "56d77e33209ae803b90164c3b42bc4f43586f9c162c47e92596833acae79c20f",
+      "started_at": "2026-10-19T23:33:17.478504+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 451520,
+      "captured_at": "2026-10-19T23:33:18.339002+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.49ers.com/news/mike-evans-active-kirk-out-vs-commanders-inactives-week-6-wasvssf",
+      "kind": "official_inactives",
+      "sha256": "77bc7147dd39342184ba4b38339c418a3f4377acd42118900442fe5f549a84f8",
+      "started_at": "2026-10-19T23:33:18.209963+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/mike-evans-active-kirk-out-vs-commanders-inactives-week-6-wasvssf"
+    },
+    {
+      "bytes": 304839,
+      "captured_at": "2026-10-19T23:33:18.329725+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.commanders.com/news/inactives-commanders-vs-49ers-week-6",
+      "kind": "official_inactives",
+      "sha256": "7b79ddda82bd9dff3f058a25f6b6e3ce1d4a0628698db82f42f85bae3983d647",
+      "started_at": "2026-10-19T23:33:18.210294+00:00",
+      "status": 200,
+      "team": "WAS",
+      "url": "https://www.commanders.com/news/inactives-commanders-vs-49ers-week-6"
+    },
+    {
+      "bytes": 702251,
+      "captured_at": "2026-10-19T23:33:18.261640+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/week-6-monday-night-inactives-washington-commanders-at-san-francisco-49ers",
+      "kind": "official_inactives",
+      "sha256": "c44aea286d5555a2c822c31c944515d4452ec17861b3a275283cb925a589dd92",
+      "started_at": "2026-10-19T23:33:18.210624+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/week-6-monday-night-inactives-washington-commanders-at-san-francisco-49ers"
+    }
+  ]
+}

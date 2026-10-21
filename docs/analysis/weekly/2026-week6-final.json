@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-20T03:57:58.828350+00:00",
+  "html_bytes": 8090,
+  "html_sha256": "562e07fea2d4b1c4fca8af824fb24f3912542412ee7540fb2fb939ee4507593d",
+  "schema_version": 1,
+  "season": 2026,
+  "source_paths": [
+    "docs/evidence/season-2026/runs-v2/20261020T035758828350Z/manifest.json",
+    "docs/evidence/season-2026/runs-v2/20261020T035758828350Z/state.json.gz",
+    "docs/evidence/season-2026/source-archive/1a46539dac0baa361f92dffdf80903ab1d0678598cdbee9ed47aa154624e4d10.json",
+    "docs/evidence/season-2026/source-archive/aaf312e2669eff33146bd17e1903329831e30390ab9dcbde198a1e933cd84593.json",
+    "docs/evidence/season-2026/source-archive/dfe9bbd6f3ce736b66185548b2440649eeed60df697832cd8440afe81d745d39.csv.gz",
+    "docs/evidence/season-2026/source-archive/f647079b169b14b40f54339b1885276ad7f1f43c5191a699679f87d06a90fc47.json"
+  ],
+  "source_pointer": {
+    "manifest_sha256": "14b049e0bd6b6337d1c9567e176b1714fc2e8ed4aaa73c815e849b96ed9f167a",
+    "path": "runs-v2/20261020T035758828350Z"
+  },
+  "week": 6
+}
