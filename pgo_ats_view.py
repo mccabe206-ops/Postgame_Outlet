@@ -128,6 +128,10 @@ def render(ats):
             'No cover probability is estimated, and straight-up win chances are not cover chances.</p>'
             + status_note
             + '<div class="game-day-grid">' + ''.join(records) + '</div>'
+            + '<p>Correction, October 22, 2026: when PGO withholds or replaces its main pick after a sportsbook '
+            'comparison was saved (for example, the expected quarterback is ruled out), that earlier comparison '
+            'is no longer graded and is counted as Unavailable. Earlier editions graded 8 such games through '
+            'Week 5 (6-1-1 against the spread).</p>'
             + '<p>Wins and losses count only graded selections. Pushes are listed separately, as are games with no projected difference or no pick, pending games and unavailable lines.</p>'
             + (_test_table('ats-games', ['Matchup', 'PGO projected line (home)', 'Winner pick vs PGO line', 'ESPN sportsbook line',
                                        'Winner pick vs sportsbook line', 'PGO ATS choice', 'ATS result'], rows) if rows else '<p>No saved spread comparisons.</p>')

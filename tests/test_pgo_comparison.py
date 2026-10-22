@@ -1128,6 +1128,9 @@ class ComparisonTests(unittest.TestCase):
             with patch.object(pgo_comparison, 'HERE', Path(temporary)):
                 published = pgo_comparison.inject_record_block(published)
             block = re.search(r'<!--track-record-start-->.*?<!--track-record-end-->', published, re.S).group(0)
+            self.assertIn('Ratings model', block)
+            self.assertNotIn('Blind', block)
+            self.assertIn('not independently verified', block)
             style = re.search(r'<style>.*?</style>', block, re.S).group(0)
             for refresh in range(2):
                 if refresh:
