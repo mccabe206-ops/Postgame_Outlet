@@ -10,6 +10,90 @@ from tests import test_pgo_season_boundaries as fixtures
 
 
 class AlertTests(unittest.TestCase):
+    def mccabe_state(self):
+        state = self.state()
+        state['current_week'] = 7
+        state['rankings']['completed_week'] = 6
+        state['weeks'][0]['week'] = 7
+        for game in (state['schedule'][0], state['weeks'][0]['games'][0]):
+            game.update(week=7, game_id='2026_07_NE_SEA')
+        state['mccabe_forecasts'] = dict(status='READY', games=[dict(game_id='2026_05_TB_DAL', week=5)])
+        return state
+
+    def test_missing_current_mccabe_game_alerts_once_and_resolves_after_capture(self):
+        for partial in (False, True):
+            with self.subTest(partial=partial):
+                state = self.mccabe_state()
+                game = state['schedule'][0]
+                if partial:
+                    other = dict(copy.deepcopy(state['weeks'][0]['games'][0]),
+                                 game_id='2026_07_BAL_BUF', away='BAL', home='BUF')
+                    state['schedule'].append(other)
+                    state['weeks'][0]['games'].append(copy.deepcopy(other))
+                    state['mccabe_forecasts']['games'].append(dict(game_id=other['game_id'], week=7))
+                before = copy.deepcopy(state)
+                report = self.report(state)
+                self.assertEqual([row['key'] for row in report['conditions']], ['monitor-mccabe-forecasts'])
+                self.assertIn('current-week', report['conditions'][0]['message'])
+                self.assertIn('T-60', report['conditions'][0]['message'])
+                self.assertFalse(report['can_resolve'])
+                self.assertEqual(state, before)
+                fake = FakeAPI([])
+                self.assertEqual(alerts.deliver(report, fake, alerts.RUN_URL)['action'], 'created')
+                self.assertEqual(alerts.deliver(self.report(state), fake, alerts.RUN_URL)['action'], 'unchanged')
+                state['mccabe_forecasts']['games'].append(dict(game_id=game['game_id'], week=game['week']))
+                recovered = self.report(state)
+                self.assertEqual(recovered['conditions'], [])
+                self.assertTrue(recovered['can_resolve'])
+                self.assertEqual(alerts.deliver(recovered, fake, alerts.RUN_URL)['action'], 'resolved')
+                self.assertEqual(sum(method == 'POST' for method, _, _ in fake.calls), 1)
+
+    def test_current_mccabe_gap_has_existing_clock_boundaries_and_no_duplicate_blocked_alert(self):
+        checked = datetime(2026, 9, 13, 15, 31, tzinfo=timezone.utc)
+        for remaining, expected in ((86400.000001, False), (86400, True), (3600.000001, True),
+                                    (3600, False), (3599, False)):
+            with self.subTest(remaining=remaining):
+                state = self.mccabe_state()
+                for game in (state['schedule'][0], state['weeks'][0]['games'][0]):
+                    game['kickoff'] = (checked + timedelta(seconds=remaining)).isoformat()
+                    game['lock_at'] = (checked + timedelta(seconds=remaining - 3600)).isoformat()
+                with patch.object(alerts, 'availability_watch', return_value=dict(games=[])):
+                    report = self.report(state)
+                self.assertEqual(any(row['key'] == 'monitor-mccabe-forecasts' for row in report['conditions']), expected)
+                if remaining <= 3600:
+                    self.assertFalse(report['can_resolve'], 'Passing a missed cutoff cannot prove capture recovery')
+        for case in ('final', 'other-week', 'season-complete', 'source-blocked', 'collector-blocked'):
+            with self.subTest(case=case):
+                state = self.mccabe_state()
+                if case == 'final':
+                    state['results'] = [dict(game_id=state['schedule'][0]['game_id'])]
+                elif case == 'other-week':
+                    state['current_week'] = 2
+                elif case == 'season-complete':
+                    state['season_complete'] = True
+                elif case == 'source-blocked':
+                    state.update(status='BLOCKED', blocked_reason='Automatic update needs review: fixture')
+                else:
+                    state['mccabe_forecasts']['status'] = 'BLOCKED'
+                conditions = [row for row in self.report(state)['conditions'] if row['key'] == 'monitor-mccabe-forecasts']
+                self.assertEqual(len(conditions), int(case == 'collector-blocked'))
+
+    def test_empty_present_mccabe_collector_warns_before_cutoff_and_holds_missed_capture(self):
+        checked = datetime(2026, 9, 13, 15, 31, tzinfo=timezone.utc)
+        for status in ('READY', 'WAITING'):
+            for remaining in (86401, 5340, 3600, 3599):
+                with self.subTest(status=status, remaining=remaining):
+                    state = self.mccabe_state()
+                    state['mccabe_forecasts'] = dict(status=status, games=[])
+                    for game in (state['schedule'][0], state['weeks'][0]['games'][0]):
+                        game['kickoff'] = (checked + timedelta(seconds=remaining)).isoformat()
+                        game['lock_at'] = (checked + timedelta(seconds=remaining - 3600)).isoformat()
+                    with patch.object(alerts, 'availability_watch', return_value=dict(games=[])):
+                        report = self.report(state)
+                    conditions = [row for row in report['conditions'] if row['key'] == 'monitor-mccabe-forecasts']
+                    self.assertEqual(len(conditions), int(3600 < remaining <= 86400))
+                    self.assertEqual(report['can_resolve'], remaining > 86400)
+
     def test_legacy_hold_alert_is_separate_from_current_updates(self):
         state = self.state()
         state['legacy_grading_check'] = dict(status='BLOCKED', blocked_reason='Legacy conflict')
@@ -166,6 +250,9 @@ class AlertTests(unittest.TestCase):
                 self.assertEqual(alerts.deliver(report, fake, alerts.RUN_URL)['action'], 'created')
                 self.assertEqual(alerts.deliver(self.report(state), fake, alerts.RUN_URL)['action'], 'unchanged')
                 state[key].update(status=healthy, blocked_reason=None)
+                if key == 'mccabe_forecasts':
+                    game = state['schedule'][0]
+                    state[key]['games'] = [dict(game_id=game['game_id'], week=game['week'])]
                 recovered = self.report(state)
                 self.assertEqual(recovered['conditions'], [])
                 self.assertTrue(recovered['can_resolve'])
@@ -173,7 +260,7 @@ class AlertTests(unittest.TestCase):
                 self.assertEqual(sum(method == 'POST' for method, _, _ in fake.calls), 1)
 
     def test_mccabe_collection_alert_is_bounded_and_keeps_expected_waits_quiet(self):
-        for component in (None, {}, {'status': 'WAITING'}, {'status': 'READY'}):
+        for component in (None, {}):
             with self.subTest(component=component):
                 state = self.state()
                 state['mccabe_forecasts'] = component

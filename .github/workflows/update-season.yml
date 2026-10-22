@@ -17,12 +17,19 @@ permissions:
   pages: write
   issues: write
 
-concurrency:
-  group: board-update
-  cancel-in-progress: false
-
 jobs:
   refresh:
+    concurrency:
+      group: board-update
+      cancel-in-progress: false
+    outputs:
+      saved_sha: ${{ steps.saved.outputs.sha || steps.publish.outputs.sha || steps.source.outputs.sha }}
+      run_refresh: ${{ steps.route.outputs.run_refresh }}
+      verify_outcome: ${{ steps.verify.outcome }}
+      refresh_outcome: ${{ steps.refresh.outcome }}
+      render_outcome: ${{ steps.render.outcome }}
+      publish_outcome: ${{ steps.publish.outcome }}
+      refresh_started_at: ${{ steps.refresh.outputs.started_at }}
     if: github.repository == 'walshja9/Postgame_Outlet'
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -33,6 +40,9 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+      - name: Record checked-out source commit
+        id: source
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
@@ -93,34 +103,121 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "Update verified PGO season records and forecasts"
             git push origin HEAD:main
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
             gh api --method POST repos/${{ github.repository }}/pages/builds
+          else
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           fi
+      - name: Record saved publication commit
+        id: saved
+        if: always()
+        env:
+          PGO_PUBLISHED_SHA: ${{ steps.publish.outputs.sha }}
+          PGO_CHECKED_OUT_SHA: ${{ steps.source.outputs.sha }}
+        shell: python
+        run: |
+          import os
+          saved = os.environ['PGO_PUBLISHED_SHA'] or os.environ['PGO_CHECKED_OUT_SHA']
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              output.write('sha=' + saved + '\n')
+
+  audit:
+    needs: refresh
+    outputs:
+      rollover_outcome: ${{ steps.rollover.outcome }}
+    if: always() && github.repository == 'walshja9/Postgame_Outlet' && needs.refresh.outputs.run_refresh != 'false' && (needs.refresh.result != 'cancelled' || needs.refresh.outputs.saved_sha != '' || needs.refresh.outputs.run_refresh != '')
+    concurrency:
+      group: pgo-rollover-audit
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    env:
+      TZ: America/New_York
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.refresh.outputs.saved_sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements-pgo.txt
       - name: Report saved season, inactive context and independent experiment health
-        if: always() && steps.refresh.outcome == 'success'
+        if: always() && needs.refresh.outputs.refresh_outcome == 'success'
         run: python pgo_workflow_status.py
-      - name: Observe the first weekly rollover
+      - name: Observe the latest weekly rollover
         id: rollover
-        if: always() && steps.refresh.outcome == 'success'
+        if: always() && needs.refresh.outputs.refresh_outcome == 'success'
         run: python pgo_season_rollover.py --output output/rollover-${{ github.run_id }}-${{ github.run_attempt }}.json
       - name: Retain rollover evidence
-        if: always() && steps.refresh.outcome == 'success'
+        if: always() && needs.refresh.outputs.refresh_outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
           name: rollover-${{ github.run_id }}-${{ github.run_attempt }}
           path: output/rollover-${{ github.run_id }}-${{ github.run_attempt }}.json
           if-no-files-found: error
           retention-days: 90
+
+  notify:
+    needs: [refresh, audit]
+    if: always() && github.repository == 'walshja9/Postgame_Outlet' && needs.refresh.outputs.run_refresh != 'false' && (needs.refresh.result != 'cancelled' || needs.refresh.outputs.saved_sha != '' || needs.refresh.outputs.run_refresh != '')
+    concurrency:
+      group: board-update
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+    env:
+      TZ: America/New_York
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements-pgo.txt
+      - name: Check whether the audited state is still current
+        id: current
+        if: always()
+        env:
+          PGO_SAVED_SHA: ${{ needs.refresh.outputs.saved_sha || github.sha }}
+          PGO_WORKSPACE: ${{ github.workspace }}
+          PGO_AUDIT_RESULT: ${{ needs.audit.result }}
+          PGO_ROLLOVER_OUTCOME: ${{ needs.audit.outputs.rollover_outcome }}
+        shell: python
+        run: |
+          import os
+          import subprocess
+          result = subprocess.run(['git', 'diff', '--quiet', os.environ['PGO_SAVED_SHA'], 'HEAD',
+              '--', 'docs/evidence/season-2026/current.json'], cwd=os.environ['PGO_WORKSPACE'])
+          if result.returncode not in (0, 1):
+              raise RuntimeError('Could not compare audited and current season pointers')
+          same = result.returncode == 0
+          audit = os.environ['PGO_AUDIT_RESULT']
+          rollover = (audit if audit in ('failure', 'cancelled') else
+                      os.environ['PGO_ROLLOVER_OUTCOME'] or audit)
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              output.write('same_state=' + str(same).lower() + '\n')
+              output.write('rollover_outcome=' + rollover + '\n')
+          print('Audited state is current; assess owner alerts' if same else
+                'Audited state was superseded; receipt and CI outcome retained, stale owner alerts skipped')
       - name: Check notification delivery when requested
-        if: github.event_name == 'workflow_dispatch' && inputs.alert_delivery_check && steps.publish.outcome == 'success'
+        if: steps.current.outputs.same_state == 'true' && github.event_name == 'workflow_dispatch' && inputs.alert_delivery_check && needs.refresh.outputs.publish_outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
           PYTHONPATH: ${{ github.workspace }}
-          PGO_VERIFY: ${{ steps.verify.outcome }}
-          PGO_REFRESH: ${{ steps.refresh.outcome }}
-          PGO_RENDER: ${{ steps.render.outcome }}
-          PGO_PUBLISH: ${{ steps.publish.outcome }}
-          PGO_ROLLOVER: ${{ steps.rollover.outcome }}
-          PGO_REFRESH_STARTED: ${{ steps.refresh.outputs.started_at }}
+          PGO_VERIFY: ${{ needs.refresh.outputs.verify_outcome }}
+          PGO_REFRESH: ${{ needs.refresh.outputs.refresh_outcome }}
+          PGO_RENDER: ${{ needs.refresh.outputs.render_outcome }}
+          PGO_PUBLISH: ${{ needs.refresh.outputs.publish_outcome }}
+          PGO_ROLLOVER: ${{ steps.current.outputs.rollover_outcome }}
+          PGO_REFRESH_STARTED: ${{ needs.refresh.outputs.refresh_started_at }}
         shell: python
         run: |
           import json
@@ -140,15 +237,15 @@ jobs:
           else:
               print('Delivery setup check skipped: current health or an existing incident needs review.')
       - name: Notify the PGO owner when attention is needed
-        if: always()
+        if: always() && steps.current.outputs.same_state == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python pgo_alerts.py --deliver --check-public \
-            --run-refresh '${{ steps.route.outputs.run_refresh }}' \
-            --verify-outcome '${{ steps.verify.outcome }}' \
-            --refresh-outcome '${{ steps.refresh.outcome }}' \
-            --render-outcome '${{ steps.render.outcome }}' \
-            --publish-outcome '${{ steps.publish.outcome }}' \
-            --rollover-outcome '${{ steps.rollover.outcome }}' \
-            --refresh-started-at '${{ steps.refresh.outputs.started_at }}'
+            --run-refresh '${{ needs.refresh.outputs.run_refresh }}' \
+            --verify-outcome '${{ needs.refresh.outputs.verify_outcome }}' \
+            --refresh-outcome '${{ needs.refresh.outputs.refresh_outcome }}' \
+            --render-outcome '${{ needs.refresh.outputs.render_outcome }}' \
+            --publish-outcome '${{ needs.refresh.outputs.publish_outcome }}' \
+            --rollover-outcome '${{ steps.current.outputs.rollover_outcome }}' \
+            --refresh-started-at '${{ needs.refresh.outputs.refresh_started_at }}'

@@ -14,6 +14,132 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PublicBoardWorkflowTests(unittest.TestCase):
+    def test_full_audit_job_failure_cannot_resolve_owner_alert_after_rollover_success(self):
+        from tests.test_pgo_alerts import AlertTests
+        workflow = (ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
+        guard = workflow.split('- name: Check whether the audited state is still current', 1)[1].split('\n      - name:', 1)[0]
+        self.assertIn('PGO_AUDIT_RESULT: ${{ needs.audit.result }}', guard)
+        script = textwrap.dedent(guard.split('        run: |\n', 1)[1])
+        for job, step, expected in (('success', 'success', 'success'), ('failure', 'success', 'failure'),
+                                    ('cancelled', 'success', 'cancelled'), ('failure', '', 'failure'),
+                                    ('skipped', '', 'skipped')):
+            with self.subTest(job=job, step=step), tempfile.TemporaryDirectory() as folder:
+                output = Path(folder) / 'outputs'
+                env = dict(PGO_SAVED_SHA='a' * 40, PGO_WORKSPACE=folder, GITHUB_OUTPUT=str(output),
+                           PGO_AUDIT_RESULT=job, PGO_ROLLOVER_OUTCOME=step)
+                with mock.patch.dict(os.environ, env), mock.patch('subprocess.run', return_value=SimpleNamespace(returncode=0)):
+                    exec(script, {'__name__': '__main__'})
+                values = dict(row.split('=', 1) for row in output.read_text().splitlines())
+                self.assertEqual(values['rollover_outcome'], expected)
+                outcomes = dict.fromkeys(('verify', 'refresh', 'render', 'publish', 'rollover'), 'success')
+                outcomes['rollover'] = values['rollover_outcome']
+                report = AlertTests().report(outcomes=outcomes)
+                self.assertEqual(report['can_resolve'], expected == 'success')
+                if expected in ('failure', 'cancelled'):
+                    self.assertIn('failed-rollover', [row['key'] for row in report['conditions']])
+
+    def test_cancelled_pending_refresh_does_not_start_downstream_audit_or_notify(self):
+        workflow = (ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
+        for job in ('audit', 'notify'):
+            definition = workflow.split('\n  ' + job + ':', 1)[1]
+            condition = next(line.strip()[4:] for line in definition.splitlines() if line.startswith('    if: '))
+            self.assertIn("needs.refresh.result != 'cancelled'", condition)
+            for result, saved, route, expected in (('cancelled', '', '', False),
+                                                   ('cancelled', 'a' * 40, '', True),
+                                                   ('cancelled', '', 'true', True),
+                                                   ('failure', '', '', True),
+                                                   ('success', 'a' * 40, 'false', False)):
+                with self.subTest(job=job, result=result, saved=saved, route=route):
+                    expression = condition.replace('always()', 'True').replace('github.repository', repr('walshja9/Postgame_Outlet'))
+                    expression = expression.replace('needs.refresh.result', repr(result)).replace('needs.refresh.outputs.saved_sha', repr(saved))
+                    expression = expression.replace('needs.refresh.outputs.run_refresh', repr(route)).replace('&&', ' and ').replace('||', ' or ')
+                    self.assertEqual(eval(expression, {'__builtins__': {}}), expected)
+
+    def test_failed_push_uses_reachable_checkout_instead_of_unpublished_local_commit(self):
+        workflow = (ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
+        refresh = workflow.split('\n  audit:', 1)[0]
+        saved = refresh.split('- name: Record saved publication commit', 1)[1]
+        self.assertIn('shell: python', saved)
+        script = textwrap.dedent(saved.split('        run: |\n', 1)[1])
+        for published, expected in (('', 'a' * 40), ('b' * 40, 'b' * 40), ('a' * 40, 'a' * 40)):
+            with self.subTest(published=published), tempfile.TemporaryDirectory() as folder:
+                output = Path(folder) / 'outputs'
+                env = dict(PGO_PUBLISHED_SHA=published, PGO_CHECKED_OUT_SHA='a' * 40,
+                           GITHUB_OUTPUT=str(output))
+                with mock.patch.dict(os.environ, env):
+                    exec(script, {'__name__': '__main__'})
+                self.assertEqual(output.read_text(), 'sha=' + expected + '\n')
+        publish = refresh.split('- name: Publish changed season data and pages', 1)[1].split('\n      - name:', 1)[0]
+        pushed = publish.index('git push origin HEAD:main')
+        published_sha = publish.index('echo "sha=$(git rev-parse HEAD)"', pushed)
+        self.assertLess(pushed, published_sha)
+        self.assertLess(published_sha, publish.index('gh api --method POST'))
+
+    def test_superseded_audits_cannot_deliver_stale_health_but_same_state_failure_can(self):
+        workflow = (ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
+        self.assertIn('\n  notify:', workflow)
+        notify = workflow.split('\n  notify:', 1)[1]
+        self.assertIn('needs: [refresh, audit]', notify)
+        self.assertIn('group: board-update', notify)
+        self.assertIn('ref: main', notify)
+        guard = notify.split('- name: Check whether the audited state is still current', 1)[1].split('\n      - name:', 1)[0]
+        self.assertIn('if: always()', guard)
+        script = textwrap.dedent(guard.split('        run: |\n', 1)[1])
+        for scenario, changed in (('old healthy then newer BLOCKED', True),
+                                  ('old stale then newer healthy', True),
+                                  ('same current state with failed publish', False)):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as folder:
+                repo = Path(folder)
+                def git(*args):
+                    return subprocess.check_output(['git', '-C', str(repo), *args], text=True).strip()
+                git('init', '-q')
+                git('config', 'user.name', 'Workflow test')
+                git('config', 'user.email', 'workflow@example.invalid')
+                pointer = repo / 'docs/evidence/season-2026/current.json'
+                pointer.parent.mkdir(parents=True)
+                pointer.write_text('{"path":"old","manifest_sha256":"aaa"}')
+                git('add', '.')
+                git('commit', '-qm', 'Old audited state')
+                pinned = git('rev-parse', 'HEAD')
+                if changed:
+                    pointer.write_text('{"path":"new","manifest_sha256":"bbb"}')
+                    git('add', '.')
+                    git('commit', '-qm', 'New current state')
+                output = repo / 'outputs'
+                env = dict(PGO_SAVED_SHA=pinned, PGO_WORKSPACE=str(repo), GITHUB_OUTPUT=str(output),
+                           PGO_AUDIT_RESULT='success', PGO_ROLLOVER_OUTCOME='success')
+                with mock.patch.dict(os.environ, env):
+                    exec(script, {'__name__': '__main__'})
+                self.assertEqual(output.read_text(), 'same_state=' + str(not changed).lower() + '\nrollover_outcome=success\n')
+        alerts = notify.split('- name: Notify the PGO owner when attention is needed', 1)[1]
+        self.assertIn("if: always() && steps.current.outputs.same_state == 'true'", alerts)
+        self.assertIn("--publish-outcome '${{ needs.refresh.outputs.publish_outcome }}'", alerts)
+        self.assertIn("--rollover-outcome '${{ steps.current.outputs.rollover_outcome }}'", alerts)
+
+    def test_rollover_audit_releases_shared_publishing_lock_and_pins_saved_commit(self):
+        workflow = (ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
+        header, jobs = workflow.split('\njobs:', 1)
+        self.assertNotIn('\nconcurrency:', header)
+        refresh, audit = jobs.split('\n  audit:', 1)
+        audit = audit.split('\n  notify:', 1)[0]
+        self.assertIn('concurrency:\n      group: board-update\n      cancel-in-progress: false', refresh)
+        self.assertNotIn('pgo_season_rollover.py --output', refresh)
+        self.assertIn('saved_sha: ${{ steps.saved.outputs.sha || steps.publish.outputs.sha || steps.source.outputs.sha }}', refresh)
+        saved = refresh.split('- name: Record saved publication commit', 1)[1]
+        self.assertIn('if: always()', saved)
+        self.assertIn('PGO_CHECKED_OUT_SHA: ${{ steps.source.outputs.sha }}', saved)
+        self.assertIn('PGO_PUBLISHED_SHA: ${{ steps.publish.outputs.sha }}', saved)
+        self.assertIn('- name: Record checked-out source commit', refresh)
+        self.assertIn('needs: refresh', audit)
+        self.assertIn("if: always() && github.repository == 'walshja9/Postgame_Outlet'", audit)
+        self.assertIn('group: pgo-rollover-audit', audit)
+        self.assertIn('ref: ${{ needs.refresh.outputs.saved_sha || github.sha }}', audit)
+        self.assertNotIn('ref: main', audit)
+        for stage in ('verify', 'refresh', 'render', 'publish'):
+            self.assertIn(stage + '_outcome: ${{ steps.' + stage + '.outcome }}', refresh)
+        self.assertIn('refresh_started_at: ${{ steps.refresh.outputs.started_at }}', refresh)
+        self.assertIn('run_refresh: ${{ steps.route.outputs.run_refresh }}', refresh)
+
     def test_parallel_renderers_finish_before_either_publisher_can_run(self):
         for name, marker in (
                 ('update-board.yml', '- name: Render verified board and Forecast Lab concurrently'),
@@ -58,18 +184,19 @@ class PublicBoardWorkflowTests(unittest.TestCase):
         self.assertIn('issues: write', workflow)
         self.assertIn('if: always()', alert)
         self.assertIn('--deliver --check-public', alert)
-        self.assertIn("--run-refresh '${{ steps.route.outputs.run_refresh }}'", alert)
+        self.assertIn("--run-refresh '${{ needs.refresh.outputs.run_refresh }}'", alert)
         for stage in ('verify', 'refresh', 'render', 'publish', 'rollover'):
             self.assertIn('id: ' + stage, workflow)
-            self.assertIn('--' + stage + "-outcome '${{ steps." + stage + ".outcome }}'", alert)
-        self.assertIn("--refresh-started-at '${{ steps.refresh.outputs.started_at }}'", alert)
+            context = 'steps.current.outputs.rollover_outcome' if stage == 'rollover' else 'needs.refresh.outputs.' + stage + '_outcome'
+            self.assertIn('--' + stage + "-outcome '${{ " + context + " }}'", alert)
+        self.assertIn("--refresh-started-at '${{ needs.refresh.outputs.refresh_started_at }}'", alert)
         self.assertLess(workflow.index('git push origin HEAD:main'), workflow.index('- name: Notify the PGO owner'))
         self.assertIn('alert_delivery_check:', workflow)
         self.assertIn('default: false', workflow)
         check = workflow.split('- name: Check notification delivery when requested', 1)[1].split('\n      - name:', 1)[0]
-        self.assertIn("github.event_name == 'workflow_dispatch' && inputs.alert_delivery_check", check)
+        self.assertIn("github.event_name == 'workflow_dispatch' && inputs.alert_delivery_check && needs.refresh.outputs.publish_outcome == 'success'", check)
         self.assertIn('PYTHONPATH: ${{ github.workspace }}', check)
-        self.assertIn('PGO_ROLLOVER: ${{ steps.rollover.outcome }}', check)
+        self.assertIn('PGO_ROLLOVER: ${{ steps.current.outputs.rollover_outcome }}', check)
         script = textwrap.dedent(check.split('        run: |\n', 1)[1])
         compile(script, '<delivery-check>', 'exec')
         for healthy, existing in ((True, None), (False, None), (True, {'number': 1})):
@@ -187,7 +314,7 @@ class PublicBoardWorkflowTests(unittest.TestCase):
         self.assertIn('cron: "7,22,37,52 * * * *"', workflow)
         self.assertIn('cron: "2,12,17,27,32,42,47,57 * * * *"', workflow)
         self.assertIn('  workflow_dispatch:', workflow)
-        self.assertIn('concurrency:\n  group: board-update\n  cancel-in-progress: false', workflow)
+        self.assertIn('concurrency:\n      group: board-update\n      cancel-in-progress: false', workflow)
         self.assertIn("if: github.repository == 'walshja9/Postgame_Outlet'", workflow)
         self.assertIn('git add docs/evidence/season-2026 docs/index.html docs/forecast-lab.html', workflow)
         self.assertIn('git push origin HEAD:main', workflow)
@@ -232,16 +359,16 @@ class PublicBoardWorkflowTests(unittest.TestCase):
     def test_saved_state_health_is_reported_after_publication(self):
         workflow = (ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
         self.assertIn('id: refresh', workflow)
-        self.assertIn("if: always() && steps.refresh.outcome == 'success'", workflow)
+        self.assertIn("if: always() && needs.refresh.outputs.refresh_outcome == 'success'", workflow)
         self.assertGreater(workflow.index('python pgo_workflow_status.py'),
                            workflow.index('gh api --method POST'))
 
     def test_rollover_receipt_is_observed_after_refresh_and_retained_on_failure(self):
         workflow=(ROOT / '.github/workflows/update-season.yml').read_text(encoding='utf-8')
         self.assertIn('tests.test_pgo_season_rollover',workflow)
-        step=workflow.split('- name: Observe the first weekly rollover',1)[1].split('\n      - name:',1)[0]
+        step=workflow.split('- name: Observe the latest weekly rollover',1)[1].split('\n      - name:',1)[0]
         self.assertIn('id: rollover', step)
-        self.assertIn("if: always() && steps.refresh.outcome == 'success'",step)
+        self.assertIn("if: always() && needs.refresh.outputs.refresh_outcome == 'success'",step)
         self.assertIn('python pgo_season_rollover.py --output output/rollover-${{ github.run_id }}-${{ github.run_attempt }}.json',step)
         upload=workflow.split('- name: Retain rollover evidence',1)[1]
         self.assertIn('if: always()',upload)

@@ -100,6 +100,22 @@ def assess(state, *, outcomes, run_refresh=True, checked_at=None, refresh_starte
             if health[prefix + '_status'] == 'BLOCKED':
                 add('monitor-' + prefix.replace('_', '-'), 'The independent ' + label
                     + ' update is blocked. Main picks and grades are checked separately.')
+        finals = {result['game_id'] for result in state.get('results', [])}
+        mccabe_pending = False
+        mccabe = state.get('mccabe_forecasts') or {}
+        if not isinstance(mccabe, dict):
+            raise ValueError('Invalid McCabe collection')
+        if (state['status'] == 'READY' and not state.get('season_complete')
+                and health['mccabe_forecasts_status'] in ('READY', 'WAITING')):
+            captured = {row['game_id'] for row in mccabe.get('games', []) if row['week'] == state['current_week']}
+            missing = [game for game in state['schedule']
+                       if game['week'] == state['current_week'] and game['game_id'] not in captured | finals
+                       and (utc(game['kickoff']) - checked).total_seconds() <= 86400]
+            # A missed cutoff cannot turn absent human evidence into a recovery.
+            mccabe_pending = bool(missing)
+            if any(checked < utc(game['lock_at']) for game in missing):
+                add('monitor-mccabe-forecasts', 'A current-week McCabe forecast is missing before an upcoming T-60 cutoff. '
+                    'Review the current human edition and collection. Existing records remain unchanged.')
         if watch.get('blocked_reason'):
             add('inactive-source-review', 'The latest official inactive-list check could not be verified.',
                 any(utc(game['kickoff']) > checked for game in watch['games']))
@@ -109,7 +125,6 @@ def assess(state, *, outcomes, run_refresh=True, checked_at=None, refresh_starte
                           if game['status'] == 'MISSING' else 'the final inactive-list check is overdue')
                 add('inactive:' + game['game_id'], game['away'] + ' at ' + game['home'] + ': ' + reason
                     + '. Kickoff ' + utc(game['kickoff']).isoformat() + '.', utc(game['kickoff']) > checked)
-        finals = {result['game_id'] for result in state.get('results', [])}
         availability_pending = False
         for game in games:
             remaining = (utc(game['kickoff']) - checked).total_seconds()
@@ -129,7 +144,7 @@ def assess(state, *, outcomes, run_refresh=True, checked_at=None, refresh_starte
             if not observed or not 0 <= (checked - utc(observed)).total_seconds() <= 30 * 60:
                 add('availability:' + game['game_id'], game['away'] + ' at ' + game['home']
                     + ': the pre-lock availability check is missing or more than 30 minutes old.', remaining <= 75 * 60)
-        report['can_resolve'] = (public_ready and not availability_pending and not report['conditions'] and all(outcomes.get(stage) == 'success' for stage in STAGES)
+        report['can_resolve'] = (public_ready and not availability_pending and not mccabe_pending and not report['conditions'] and all(outcomes.get(stage) == 'success' for stage in STAGES)
             and bool(refresh_started_at) and utc(refresh_started_at) <= saved <= checked
             and (checked - saved).total_seconds() <= 45 * 60)
     except (ValueError, TypeError, KeyError, AttributeError):
