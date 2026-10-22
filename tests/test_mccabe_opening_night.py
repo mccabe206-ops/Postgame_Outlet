@@ -106,6 +106,37 @@ class McCabeOpeningNightTests(unittest.TestCase):
         self.assertIn('class="rating-fill neg" style="right:50%;width:25.0%"', generate_site.rating_bar(-4.0))
         self.assertIn('class="rating-fill zero" style="left:50%;width:0.0%"', generate_site.rating_bar(0.0))
 
+    def test_current_board_refresh_omits_historical_injury_banner(self):
+        from tests.test_pgo_comparison import ComparisonTests
+
+        config = {
+            "season": "2026", "edition": "Week 7 2026", "author": "Sean McCabe",
+            "injury_checked_at": "2026-09-09T23:15:18.707959+00:00",
+            "injury_status": "Historical opening-week inactive reports only.",
+            "injury_source_url": "https://www.nfl.com/injuries/",
+        }
+        original = dict(config)
+        with patch.object(generate_site, "load_snaps", return_value={}), patch.object(
+            generate_site.build_html, "qb_data", ([], []), create=True
+        ):
+            base = generate_site.build_html([], config)
+        historical_banner = generate_site.build_injury_status(config)
+        published = pgo_comparison.inject_comparison(
+            base.replace('<div class="wrap">', '<div class="wrap">' + historical_banner, 1),
+            pgo_comparison.render_comparison_panel([], ComparisonTests._held_receipt()),
+        )
+        with patch.object(pgo_comparison, "load_mccabe_rows", return_value=[]), patch.object(
+            pgo_comparison, "mccabe_source_timestamp", return_value="2026-10-21T05:07:27Z"
+        ):
+            refreshed = pgo_comparison.refresh_mccabe_page(base, published)
+        for label, document in (("generated", base), ("refreshed", refreshed)):
+            with self.subTest(path=label):
+                self.assertFalse("Injuries checked" in document,
+                                 "Current board repeats a historical injury-review claim")
+                self.assertFalse('<details class="injury-status">' in document)
+                self.assertFalse(config["injury_status"] in document)
+        self.assertEqual(config, original)
+
     def test_injury_status_and_markdown_links_are_explicit_and_safe(self):
         block = generate_site.build_injury_status({
             "injury_checked_at": "2026-09-09T14:49:44+00:00",

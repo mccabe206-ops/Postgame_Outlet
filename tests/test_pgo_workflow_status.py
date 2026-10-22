@@ -143,6 +143,18 @@ class WorkflowStatusTests(unittest.TestCase):
                 self.assertEqual(payload['status'], 'READY')
                 self.assertNotIn('::warning::', output)
 
+    def test_historical_mccabe_venue_review_is_visible_with_ready_current_collection(self):
+        conflicts = [dict(game_id='2026_05_PHI_JAX', saved_location='Home',
+            verified_location='Neutral', final_source_sha256='a' * 64)]
+        payload, output = self.report(mccabe_forecasts=dict(status='READY', games=[],
+            schedule_conflicts=conflicts))
+        self.assertEqual(payload['mccabe_forecasts_status'], 'READY')
+        self.assertEqual(payload['condition'], 'READY')
+        self.assertEqual(payload.get('mccabe_forecasts_schedule_conflicts'), conflicts)
+        self.assertIn('::warning::PGO McCabe historical venue review', output)
+        self.assertIn('2026_05_PHI_JAX: saved Home; verified Neutral', output)
+        self.assertIn('issued forecast remains unchanged', output)
+
 
 if __name__ == '__main__':
     unittest.main()

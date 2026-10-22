@@ -9,6 +9,43 @@ import pgo_season_rollover as rollover
 
 
 class RolloverTests(unittest.TestCase):
+    def test_default_observes_latest_completed_week_and_explicit_history_is_retained(self):
+        state = dict(checked_at='2026-10-22T14:00:00Z', results=[], rankings=dict(completed_week=6))
+        pointer = dict(path='runs/20261022T140000000000Z')
+        with patch.object(season, 'load_current', return_value=state), \
+                patch.object(season, 'read_json', return_value=pointer), \
+                patch.object(rollover, 'load_archive', return_value=(state, {})), \
+                patch.object(rollover, 'verify_finals', return_value={'pending'}) as finals:
+            for explicit, expected in ((None, 6), (1, 1)):
+                with self.subTest(completed_week=explicit):
+                    report = rollover.observe('.') if explicit is None else rollover.observe('.', explicit)
+                    self.assertEqual(report['completed_week'], expected)
+                    self.assertEqual(report['status'], 'WAITING')
+                    finals.assert_called_with(state, Path('.'), expected)
+
+    def test_default_completed_week_rejects_untrusted_values(self):
+        for invalid in ('6', -1, 19, True, None):
+            state = dict(checked_at='2026-10-22T14:00:00Z', results=[], rankings=dict(completed_week=invalid))
+            with self.subTest(value=invalid), patch.object(season, 'load_current', return_value=state), \
+                    patch.object(season, 'read_json', return_value={}), \
+                    patch.object(rollover, 'load_archive', return_value=(state, {})), \
+                    patch.object(rollover, 'verify_finals', return_value={'pending'}):
+                with self.assertRaisesRegex(ValueError, 'completed week'):
+                    rollover.observe('.')
+
+    def test_default_bounds_opening_and_finished_season_to_valid_transitions(self):
+        pointer = dict(path='runs/20261022T140000000000Z')
+        for completed, expected in ((0, 1), (18, 17)):
+            state = dict(checked_at='2026-10-22T14:00:00Z', results=[], rankings=dict(completed_week=completed))
+            with self.subTest(completed_week=completed), \
+                    patch.object(season, 'load_current', return_value=state), \
+                    patch.object(season, 'read_json', return_value=pointer), \
+                    patch.object(rollover, 'load_archive', return_value=(state, {})), \
+                    patch.object(rollover, 'verify_finals', return_value={'pending'}):
+                report = rollover.observe('.')
+                self.assertEqual(report['completed_week'], expected)
+                self.assertEqual(report['status'], 'WAITING')
+
     def test_archive_hash_and_path_boundary(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

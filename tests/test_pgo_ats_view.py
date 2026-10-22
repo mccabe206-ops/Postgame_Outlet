@@ -35,6 +35,12 @@ class ATSViewTests(unittest.TestCase):
         self.assertNotIn('60.0%',page)
         self.assertNotIn('profit',page.lower())
 
+    def test_records_include_the_withheld_forecast_correction(self):
+        self.assertIn('Correction, October 22, 2026: when PGO withholds or replaces its main pick after a sportsbook '
+                      'comparison was saved (for example, the expected quarterback is ruled out), that earlier '
+                      'comparison is no longer graded and is counted as Unavailable. Earlier editions graded 8 '
+                      'such games through Week 5 (6-1-1 against the spread).',view.render(fixture()))
+
     def test_away_edge_no_edge_and_push_have_distinct_labels(self):
         data=fixture();game=data['games'][0]
         game.update(pgo_margin=-1.25,model_home_handicap=1.25,home_handicap=3.5,away_handicap=-3.5,

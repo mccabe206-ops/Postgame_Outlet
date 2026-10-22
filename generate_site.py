@@ -572,7 +572,6 @@ def build_html(rows, config, generated_at=None):
             .replace("{{AUTHOR}}", html.escape(author))
             .replace("{{UPDATED_ISO}}", html.escape(updated_iso))
             .replace("{{UPDATED}}", updated)
-            .replace("{{INJURY_STATUS}}", build_injury_status(config))
             .replace("{{ROWS}}", body)
             .replace("{{DETAILS_JSON}}", details_json)
             .replace("{{VERSIONS_JSON}}", versions_json)
@@ -874,7 +873,6 @@ TEMPLATE = """<!DOCTYPE html>
   </header>
 </div>
 <div class="wrap">
-  {{INJURY_STATUS}}
   <div class="tabs" role="tablist" aria-label="Ratings views">
     <button type="button" class="tab active" id="tab-ratings" role="tab"
       aria-selected="true" aria-controls="panel-ratings" tabindex="0"

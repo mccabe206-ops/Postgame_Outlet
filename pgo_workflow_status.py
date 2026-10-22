@@ -38,6 +38,7 @@ def report_health(state, summary_path=None):
     mccabe_games = (state.get('mccabe_forecasts') or {}).get('games') or []
     report['mccabe_forecasts_captured'] = len(mccabe_games)
     report['mccabe_forecasts_current_week_captured'] = sum(game.get('week') == state.get('current_week') for game in mccabe_games)
+    report['mccabe_forecasts_schedule_conflicts'] = (state.get('mccabe_forecasts') or {}).get('schedule_conflicts', [])
     from pgo_season import availability_watch
     report['availability_watch'] = availability_watch(state)
     rendered = json.dumps(report, indent=2)
@@ -48,6 +49,10 @@ def report_health(state, summary_path=None):
     warnings = []
     if status != 'READY':
         warnings.append(f'PGO {condition}: {reason or "Saved status is unavailable"}')
+    for conflict in report['mccabe_forecasts_schedule_conflicts']:
+        warnings.append(f'PGO McCabe historical venue review: {conflict["game_id"]}: '
+                        f'saved {conflict["saved_location"]}; verified {conflict["verified_location"]}; '
+                        'issued forecast remains unchanged')
     for _, prefix, healthy in components:
         if prefix in ('current_projection', 'legacy_grading') and report[prefix + '_status'] in ('UNKNOWN', 'IDLE'):
             continue

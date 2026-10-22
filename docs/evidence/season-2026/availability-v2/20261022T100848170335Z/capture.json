@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-22T10:08:51.732321+00:00",
+  "sources": [
+    {
+      "bytes": 384705,
+      "captured_at": "2026-10-22T10:08:51.118194+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "2e93b73a2327635ec0f55779a5e12d9871f2cf8744824b37deeb0da8963bb7c9",
+      "started_at": "2026-10-22T10:08:51.061207+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 539692,
+      "captured_at": "2026-10-22T10:08:51.331191+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chicagobears.com/news/",
+      "kind": "team_news",
+      "sha256": "af07e1e21c482314f748128f52e5fe326f671558a761377fe214c5bba6168283",
+      "started_at": "2026-10-22T10:08:51.061583+00:00",
+      "status": 200,
+      "team": "CHI",
+      "url": "https://www.chicagobears.com/news/"
+    },
+    {
+      "bytes": 1824974,
+      "captured_at": "2026-10-22T10:08:51.437538+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.patriots.com/news/",
+      "kind": "team_news",
+      "sha256": "458e19087142a3474dd4483a1e5ab6a4d0db1947f5118acd8376b8218f4dbed9",
+      "started_at": "2026-10-22T10:08:51.061964+00:00",
+      "status": 200,
+      "team": "NE",
+      "url": "https://www.patriots.com/news/"
+    },
+    {
+      "bytes": 1602408,
+      "captured_at": "2026-10-22T10:08:51.169564+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "42dc6f74f1dceae6e402276849ea976daf530e8b07a3f7f4658474123bc5ddbf",
+      "started_at": "2026-10-22T10:08:51.062310+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}

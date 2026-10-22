@@ -1870,13 +1870,17 @@ def inject_record_block(page):
         '<h3>2026 ATS Track Record <span class="tr-sub">&mdash; season to date</span></h3>'
         '<table class="tr-table"><thead><tr><th></th>'
         '<th scope="col">vs open</th><th scope="col">vs close</th></tr></thead><tbody>'
-        + row('Blind model', 'model', 'the ratings vs the market, every game')
+        + row('Ratings model', 'model', 'the ratings vs the market, every game')
         + row('McCabe picks', 'mine', 'the weekly 5-game confidence pool')
         + row('Top-5 edges', 'top5', "the model's five biggest edges each week")
         + '</tbody></table>'
-        '<p class="tr-fine">These are power ratings, not predictions. The blind-model line '
-        'bets every game the ratings disagree with the market; NP = no play (no edge). Records '
-        f'are shown against both the opening and closing line. Updated {gen}.</p>'
+        '<p class="tr-fine">These are power ratings, not predictions. The ratings-model line '
+        'bets every game the ratings disagree with the market; NP = no play (no edge). Its model '
+        "lines were recorded from the ratings after each week's games had started rather than "
+        'captured before each kickoff, and the Week 6 CAR at PHI line was corrected after the game '
+        'for the quarterback who started. Records are shown against both the opening and closing '
+        "line and are calculated with McCabe's tools, not independently verified by PGO. "
+        f'Updated {gen}.</p>'
         '</div>' + end
     )
     page = re.sub(re.escape(start) + '.*?' + re.escape(end), '', page, flags=re.S)

@@ -100,6 +100,28 @@ def _index(rows):
     return indexed
 
 
+def _schedule_conflicts(state, games):
+    """Disclose a completed prior venue correction without changing its capture."""
+    schedule = _index(state['schedule']); finals = _index(state['results'])
+    checked = utc(state['checked_at'])
+    conflicts = []
+    for key, old in games.items():
+        require(key in schedule and identity(old, schedule[key]), 'Saved McCabe schedule identity changed')
+        current = schedule[key]
+        if old['location'] == current['location']:
+            continue
+        final = finals.get(key)
+        require(old['week'] < state['current_week'] and _game(current) <= checked and final is not None,
+                'Saved McCabe venue differs without a completed prior-week game')
+        require(identity(old, dict(final, home=final['home_team'], away=final['away_team']))
+                and utc(final['source']['captured_at']) == utc(final['finalized_at']) <= checked
+                and re.fullmatch(r'[0-9a-f]{64}', final['source']['sha256']) is not None,
+                'Saved McCabe venue differs without a matching accepted final')
+        conflicts.append(dict(game_id=key, saved_location=old['location'],
+            verified_location=current['location'], final_source_sha256=final['source']['sha256']))
+    return sorted(conflicts, key=lambda row: row['game_id'])
+
+
 def _forecast(game, inputs, input_id, issued, market):
     cutoff = _game(game)
     require(game['season'] == inputs['season'] and game['week'] == inputs['week'], 'McCabe edition/game week differs')
@@ -154,11 +176,15 @@ def validate(state, root):
         replay = _forecast(row, parsed[row['input_id']], row['input_id'], row['issued_at'], row['market'])
         require(row == replay, 'McCabe forecast arithmetic/input replay differs')
         _market(row, root)
+    if 'schedule_conflicts' in payload:
+        require(payload['schedule_conflicts'] == _schedule_conflicts(state, games),
+                'McCabe historical venue review differs from saved schedule/final evidence')
 
 
 def blocked(previous, checked_at, reason):
     out = copy.deepcopy((previous or {}).get('mccabe_forecasts') or {})
     out.update(status='BLOCKED', checked_at=checked_at, blocked_reason=str(reason))
+    out.pop('schedule_conflicts', None)  # A failed check cannot assert a fresh schedule review.
     out.setdefault('games', []); out.setdefault('inputs', {})
     return out
 
@@ -180,9 +206,7 @@ def refresh(state, previous, root, checked_at, *, data_dir=None):
         require(inputs['season'] == state['season'], 'McCabe season differs from schedule')
         schedule = _index(state['schedule'])
         before = _index(out['games'])
-        for key, old in before.items():
-            require(key in schedule and identity(old, schedule[key]) and old['location'] == schedule[key]['location'],
-                    'Saved McCabe schedule identity changed')
+        conflicts = _schedule_conflicts(state, before)
         eligible = []
         for game in schedule.values():
             cutoff = _game(game)
@@ -213,7 +237,8 @@ def refresh(state, previous, root, checked_at, *, data_dir=None):
         if added:
             out['inputs'][input_id] = files
             out['games'].extend(added)
-        out.update(status='READY' if out['games'] else 'WAITING', blocked_reason=None)
+        out.update(status='READY' if out['games'] else 'WAITING', blocked_reason=None,
+                   schedule_conflicts=conflicts)
         validate(dict(state, mccabe_forecasts=out), root)
         return out
     except (ValueError, KeyError, TypeError, OSError, OverflowError) as error:

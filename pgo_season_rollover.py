@@ -147,11 +147,16 @@ def verify_statistics(state, root, completed):
         model._validate_production(game, teams, players)
 
 
-def observe(root=season.DEFAULT_ROOT, completed=1):
-    require(type(completed) is int and 1 <= completed <= 17, 'Transition week must be between 1 and 17')
+def observe(root=season.DEFAULT_ROOT, completed=None):
+    if completed is not None:
+        require(type(completed) is int and 1 <= completed <= 17, 'Transition week must be between 1 and 17')
     root = Path(root)
     state = season.load_current(root)
     require(state is not None, 'No saved season state')
+    if completed is None:
+        latest = state['rankings']['completed_week']
+        require(type(latest) is int and 0 <= latest <= 18, 'Invalid rankings completed week')
+        completed = max(1, min(latest, 17))
     pointer = season.read_json(root / 'current.json')
     current, manifest = load_archive(root, pointer)
     require(current == state, 'Current pointer changed during verification')
@@ -217,7 +222,7 @@ def observe(root=season.DEFAULT_ROOT, completed=1):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=season.DEFAULT_ROOT)
-    parser.add_argument('--completed-week', type=int, default=1)
+    parser.add_argument('--completed-week', type=int, help='Historical transition to audit; defaults to the latest saved completed week')
     parser.add_argument('--output', type=Path, help='New receipt file; existing receipts are never overwritten')
     args = parser.parse_args()
     try:

@@ -211,7 +211,8 @@ class ATSTests(unittest.TestCase):
                 state,payload=self.fixture();root=Path(tmp);self.archive(root,state,payload)
                 old=api.refresh(state,None,root,state['checked_at'])
                 game=state['weeks'][0]['games'][0]
-                game.update(margin=6.,issued_at='2026-09-10T20:05:00Z',blocked_reason='QB withheld' if withheld else None)
+                game.update(margin=None if withheld else 6.,issued_at='2026-09-10T20:05:00Z',
+                            blocked_reason='Expected QB unavailable' if withheld else None)
                 payload['events'][0]['competitions'][0]['odds']=[]
                 self.archive(root,state,payload,'2026-09-10T20:10:00Z')
                 stale=api.refresh(state,dict(ats=old),root,'2026-09-10T20:11:00Z')
@@ -221,9 +222,34 @@ class ATSTests(unittest.TestCase):
                 state['results']=[self.final(game,5)]
                 locked=api.refresh(state,dict(ats=stale),root,'2026-09-13T22:00:00Z')
                 self.assertEqual(locked['status'],'READY')
-                self.assertEqual(locked['games'][0]['grade']['model_line'],'W')
+                self.assertEqual(locked['games'][0]['grade'],dict(model_line='UNAVAILABLE',straight_up_ats='UNAVAILABLE',ats='UNAVAILABLE'))
                 self.assertEqual(locked['games'][0]['status'],'LOCKED')
+                self.assertIn('Main PGO forecast changed or was withheld',locked['games'][0]['stale_reason'])
+                self.assertEqual(locked['games'][0]['result'],state['results'][0])
+                self.assertEqual(locked['unavailable'],[])
+                for record in locked['metrics'].values():
+                    self.assertEqual(record['unavailable'],1)
+                    self.assertEqual((record['wins'],record['losses'],record['pushes']),(0,0,0))
                 api.check_durable(dict(state,ats=locked),dict(ats=stale),'2026-09-13T22:00:01Z')
+
+    def test_unchanged_basis_and_two_argument_grading_keep_saved_outcomes(self):
+        api=self.api()
+        with tempfile.TemporaryDirectory() as tmp:
+            state,payload=self.fixture(line=-3.);root=Path(tmp);self.archive(root,state,payload)
+            saved=api.refresh(state,None,root,state['checked_at'])
+            game=state['weeks'][0]['games'][0]
+            basis=api._basis(game,api.utc('2026-09-13T22:00:00Z'))
+            for actual,model,market in ((2,'L','L'),(3,'L','PUSH'),(4,'PUSH','W'),(5,'W','W')):
+                with self.subTest(actual=actual):
+                    result=self.final(game,actual)
+                    state['results']=[result]
+                    out=api.refresh(state,dict(ats=saved),root,'2026-09-13T22:00:00Z')
+                    expected=dict(model_line=model,straight_up_ats=market,ats=market)
+                    self.assertEqual(out['games'][0]['grade'],expected)
+                    for args in ((),(basis,)):
+                        row=copy.deepcopy(saved['games'][0]);api._grade(row,result,*args)
+                        self.assertEqual(row['grade'],expected)
+                        self.assertEqual(row['result'],result)
 
 
 if __name__=='__main__':unittest.main()
