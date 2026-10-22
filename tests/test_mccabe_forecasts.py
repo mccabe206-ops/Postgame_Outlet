@@ -100,6 +100,94 @@ class McCabeForecastTests(unittest.TestCase):
         self.assertEqual(again['mccabe_forecasts']['inputs'], first['mccabe_forecasts']['inputs'])
         self.api().check_durable(again, first, self.state['checked_at'], self.root)
 
+    def completed_venue_change(self):
+        self.edition = 'Week 3 2026'
+        self.write_inputs()
+        first = self.collect()
+        state = copy.deepcopy(self.state)
+        state.update(current_week=4, checked_at='2026-10-02T12:00:00Z')
+        state['schedule'][0]['location'] = 'Neutral'
+        state['results'] = [dict(self.game, home_team=self.game['home'], away_team=self.game['away'],
+            finalized_at='2026-09-28T12:00:00Z', source=dict(sha256='a' * 64,
+                captured_at='2026-09-28T12:00:00Z'))]
+        state['schedule'].append(dict(self.game, game_id='2026_04_NE_SEA', week=4,
+            kickoff='2026-10-04T17:00:00Z', lock_at='2026-10-04T16:00:00Z'))
+        self.edition = 'Week 4 2026'
+        self.write_inputs(published='2026-10-01T12:00:00Z')
+        return first, state
+
+    def test_completed_prior_venue_change_is_disclosed_without_rewriting_or_blocking_new_week(self):
+        first, state = self.completed_venue_change()
+        before = copy.deepcopy(first)
+        out = self.collect(state, first)
+        payload = out['mccabe_forecasts']
+        self.assertEqual(payload['status'], 'READY', payload.get('blocked_reason'))
+        self.assertEqual(payload['games'][:1], first['mccabe_forecasts']['games'])
+        self.assertEqual(len(payload['games']), 2)
+        for key, bundle in first['mccabe_forecasts']['inputs'].items():
+            self.assertEqual(payload['inputs'][key], bundle)
+        conflict, = payload['schedule_conflicts']
+        self.assertEqual(conflict, dict(game_id=self.game['game_id'], saved_location='Home',
+            verified_location='Neutral', final_source_sha256='a' * 64))
+        self.api().validate(out, self.root)
+        self.api().check_durable(out, first, state['checked_at'], self.root)
+        repeated = self.collect(state, out)
+        self.assertEqual(repeated['mccabe_forecasts'], payload)
+        self.assertEqual(first, before)
+
+    def test_venue_exception_rejects_unfinished_current_or_changed_core_identity(self):
+        for change in ('current_week', 'precutoff', 'unfinalized', 'future_final', 'final_capture_time', 'final_source',
+                       'final_teams', 'final_kickoff', 'schedule_teams', 'kickoff',
+                       'missing_game', 'unknown_venue'):
+            first, state = self.completed_venue_change()
+            if change == 'current_week': state['current_week'] = 3
+            elif change == 'precutoff':
+                state['checked_at'] = '2026-09-27T12:00:00Z'
+                state['results'][0]['finalized_at'] = state['results'][0]['source']['captured_at'] = '2026-09-27T11:00:00Z'
+                self.write_inputs(published='2026-09-26T12:00:00Z')
+            elif change == 'unfinalized': state['results'] = []
+            elif change == 'future_final': state['results'][0]['finalized_at'] = '2026-10-03T12:00:00Z'
+            elif change == 'final_capture_time': state['results'][0]['source']['captured_at'] = '2026-09-28T11:00:00Z'
+            elif change == 'final_source': state['results'][0]['source']['sha256'] = 'bad'
+            elif change == 'final_teams': state['results'][0]['home_team'] = 'BUF'
+            elif change == 'final_kickoff': state['results'][0]['kickoff'] = '2026-09-27T18:00:00Z'
+            elif change == 'schedule_teams': state['schedule'][0]['home'] = 'BUF'
+            elif change == 'kickoff': state['schedule'][0]['kickoff'] = '2026-09-27T18:00:00Z'
+            elif change == 'missing_game': state['schedule'].pop(0)
+            else: state['schedule'][0]['location'] = 'Unknown'
+            with self.subTest(change=change):
+                payload = self.collect(state, first)['mccabe_forecasts']
+                self.assertEqual(payload['status'], 'BLOCKED')
+                self.assertEqual(payload['games'], first['mccabe_forecasts']['games'])
+                self.assertEqual(payload['inputs'], first['mccabe_forecasts']['inputs'])
+
+    def test_present_venue_disclosure_is_replayed_and_new_venue_guard_remains_strict(self):
+        first, state = self.completed_venue_change()
+        out = self.collect(state, first)
+        for change in ('omit_conflict', 'location', 'source', 'invent_conflict'):
+            tampered = copy.deepcopy(out)
+            conflicts = tampered['mccabe_forecasts']['schedule_conflicts']
+            if change == 'omit_conflict': conflicts.clear()
+            elif change == 'location': conflicts[0]['verified_location'] = 'Home'
+            elif change == 'source': conflicts[0]['final_source_sha256'] = 'b' * 64
+            else: conflicts.append(copy.deepcopy(conflicts[0]))
+            with self.subTest(change=change), self.assertRaisesRegex(ValueError, 'schedule|venue'):
+                self.api().validate(tampered, self.root)
+        out['mccabe_forecasts'].pop('schedule_conflicts')  # Existing archives predate disclosure.
+        self.api().validate(out, self.root)
+        out['schedule'][-1]['location'] = 'Neutral'
+        with self.assertRaisesRegex(ValueError, 'current schedule'):
+            self.api().check_durable(out, first, state['checked_at'], self.root)
+
+    def test_blocked_check_does_not_reuse_previous_schedule_review_as_a_fresh_check(self):
+        first, state = self.completed_venue_change()
+        out = self.collect(state, first)
+        state['schedule'].pop(0)
+        blocked = self.collect(state, out)
+        self.assertEqual(blocked['mccabe_forecasts']['status'], 'BLOCKED')
+        self.assertNotIn('schedule_conflicts', blocked['mccabe_forecasts'])
+        self.api().validate(blocked, self.root)
+
     def test_only_current_edition_week_and_pregame_records_are_eligible(self):
         for change in ('old', 'future_week', 'different_edition', 'cutoff', 'after', 'final'):
             state = copy.deepcopy(self.state)

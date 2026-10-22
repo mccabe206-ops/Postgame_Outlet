@@ -37,3 +37,23 @@ retained the existing 45 McCabe game identities. This preflight did not write a
 season archive or issue a durable forecast. Actual collection must use the
 normal season writer and retain its real issue and durable-save times before
 the cutoff. Maye/Williams remain the assumed quarterbacks pending final inactives.
+
+The first normal refresh exposed a historical venue discrepancy that the earlier
+arithmetic preflight did not exercise against the full saved payload:
+`2026_05_PHI_JAX` was captured as `Home`, while the verified schedule now says
+`Neutral`. Its accepted provider FINAL has the same teams and kickoff,
+`2026-10-11T13:30:00Z`, and source SHA256
+`bd7685d8de8f2a192c9d1992dfb4913f0abfcd7c2297318cd0fe23d53800bd4c`.
+The old issued row, its `Home` context, line and input bundle remain unchanged.
+The published formula already applies team/default HFA at neutral venues, so
+its numerical replay also remains unchanged. This discrepancy remains a
+historical venue review, exposed in saved collection metadata and workflow
+health. It is separate from the existing CHI-GB legacy kickoff review.
+
+A venue-only difference can coexist with current collection only for an earlier
+week after its cutoff, with an already accepted matching FINAL observed by the
+check time. Missing games, changed teams or kickoffs, unfinished games and
+current-week venue differences still block collection. New-capture schedule,
+edition, issue-time and durable T-60 checks are unchanged. Old archives without
+the new disclosure field remain readable; when present, it must replay exactly
+from saved schedule, issued record and accepted FINAL evidence.
