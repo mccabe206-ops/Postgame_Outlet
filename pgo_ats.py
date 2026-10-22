@@ -175,7 +175,7 @@ def _outcome(value):
     return 'W' if value > 0 else 'L' if value < 0 else 'PUSH'
 
 
-def _grade(row, result, basis=None):
+def _grade(row, result):
     if row.get('result') is not None:
         require(result is not None and all(row['result'].get(k) == result.get(k) for k in
                 ('game_id', 'home_score', 'away_score', 'actual_margin', 'event_id', 'finalized_at')),
@@ -194,8 +194,6 @@ def _grade(row, result, basis=None):
         for kind, pick in (('straight_up_ats', row['su_pick']), ('ats', row['ats_pick'])):
             grades[kind] = ('NOPICK' if pick is None else 'PENDING' if result is None else
                             _outcome((1 if pick == row['home'] else -1) * (result['actual_margin'] + row['home_handicap'])))
-    if basis is not None and any(row.get(k) != basis.get(k) for k in BASIS):
-        grades = dict.fromkeys(grades, 'UNAVAILABLE')
     row.update(grade=grades, result=copy.deepcopy(result))
 
 
@@ -299,7 +297,7 @@ def refresh(state, previous, root, checked_at):
                 rows.append(row)
             result = finals.get(key)
             if result is not None: _final(result, row, checked)
-            _grade(row, result, basis)
+            _grade(row, result)
         out.update(games=rows, unavailable=unavailable)
     except (ValueError, KeyError, TypeError, OSError, OverflowError) as exc:
         out.update(status='BLOCKED', blocked_reason=str(exc))
