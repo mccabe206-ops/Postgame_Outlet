@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-23T00:07:14.602751+00:00",
+  "sources": [
+    {
+      "bytes": 399673,
+      "captured_at": "2026-10-23T00:07:13.868758+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "97c1a965cea370b900603a3776be814f4174dde646eb50582fe013a882078ba7",
+      "started_at": "2026-10-23T00:07:13.755101+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 540237,
+      "captured_at": "2026-10-23T00:07:14.002254+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chicagobears.com/news/",
+      "kind": "team_news",
+      "sha256": "527701109386d41987a3c468bcd99b2d50e222cfaf4595ecc2a8ae4090a0ccc0",
+      "started_at": "2026-10-23T00:07:13.755521+00:00",
+      "status": 200,
+      "team": "CHI",
+      "url": "https://www.chicagobears.com/news/"
+    },
+    {
+      "bytes": 1824872,
+      "captured_at": "2026-10-23T00:07:14.158731+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.patriots.com/news/",
+      "kind": "team_news",
+      "sha256": "e4096acc609189bc16c03893c9dd814c594cd930d5b06463c99a327bd0708936",
+      "started_at": "2026-10-23T00:07:13.755910+00:00",
+      "status": 200,
+      "team": "NE",
+      "url": "https://www.patriots.com/news/"
+    },
+    {
+      "bytes": 1599374,
+      "captured_at": "2026-10-23T00:07:14.072614+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "c50d2f9bbb484f1b3479751ebbda0defa0d9430f35a2581ffa6bc5d21cba54d3",
+      "started_at": "2026-10-23T00:07:13.756225+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 426253,
+      "captured_at": "2026-10-23T00:07:14.476644+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.patriots.com/news/week-7-inactives-patriots-at-bears-x7631",
+      "kind": "official_inactives",
+      "sha256": "eed7356ac40543898f861c1790d13be5bbf32e2e4a66dea6aed781c4cacb7257",
+      "started_at": "2026-10-23T00:07:14.333462+00:00",
+      "status": 200,
+      "team": "NE",
+      "url": "https://www.patriots.com/news/week-7-inactives-patriots-at-bears-x7631"
+    },
+    {
+      "bytes": 447424,
+      "captured_at": "2026-10-23T00:07:14.479876+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.patriots.com/news/inactives-analysis-patriots-place-lg-alijah-vera-tucker-on-ir-rt-morgan-moses-officially-active-for-thursday-night-s-game-vs-the-bears",
+      "kind": "official_inactives",
+      "sha256": "7c69f55673c32578d473225b3bb9ca09b02bf814e1ede0cc9c94db1e671dfe76",
+      "started_at": "2026-10-23T00:07:14.333757+00:00",
+      "status": 200,
+      "team": "NE",
+      "url": "https://www.patriots.com/news/inactives-analysis-patriots-place-lg-alijah-vera-tucker-on-ir-rt-morgan-moses-officially-active-for-thursday-night-s-game-vs-the-bears"
+    },
+    {
+      "bytes": 694757,
+      "captured_at": "2026-10-23T00:07:14.410401+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/week-7-thursday-night-inactives-new-england-patriots-at-chicago-bears",
+      "kind": "official_inactives",
+      "sha256": "cbe4adc15f2785ec1d1d541a6e887f4e026076d4fb93b33551420b46d1b02e26",
+      "started_at": "2026-10-23T00:07:14.334184+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/week-7-thursday-night-inactives-new-england-patriots-at-chicago-bears"
+    }
+  ]
+}
