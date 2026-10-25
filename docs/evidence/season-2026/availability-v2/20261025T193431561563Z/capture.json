@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T19:34:32.192368+00:00",
+  "sources": [
+    {
+      "bytes": 398307,
+      "captured_at": "2026-10-25T19:34:31.614807+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "7e638f734274c00a2ac97fe1a426eff9ccb85414a2e5ca66cfcd2e52f864a4b9",
+      "started_at": "2026-10-25T19:34:31.572197+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 530710,
+      "captured_at": "2026-10-25T19:34:31.767380+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.miamidolphins.com/news/",
+      "kind": "team_news",
+      "sha256": "b37385ec7e4dd1e6244f30cd504ab346052ec623053403185a34c5aad69a24d9",
+      "started_at": "2026-10-25T19:34:31.572522+00:00",
+      "status": 200,
+      "team": "MIA",
+      "url": "https://www.miamidolphins.com/news/"
+    },
+    {
+      "bytes": 392159,
+      "captured_at": "2026-10-25T19:34:31.750411+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.newyorkjets.com/news/",
+      "kind": "team_news",
+      "sha256": "0375931b1c1515ddaff0cc8e716682735f9143279eb4e2b4ffc7c3b67c3cad82",
+      "started_at": "2026-10-25T19:34:31.573683+00:00",
+      "status": 200,
+      "team": "NYJ",
+      "url": "https://www.newyorkjets.com/news/"
+    },
+    {
+      "bytes": 1565703,
+      "captured_at": "2026-10-25T19:34:31.649716+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "ff9b7f2cf9480f5086dbb5627cfb18d93273939d0de01b7124d4edd041aca0dc",
+      "started_at": "2026-10-25T19:34:31.573972+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 278633,
+      "captured_at": "2026-10-25T19:34:32.028141+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.miamidolphins.com/news/inactives-week-7-dolphins-at-jets",
+      "kind": "official_inactives",
+      "sha256": "ff2e25b0aaf0f9a851aef5d3624a524f3bc46018a8dd5f35c265bf59d1dea55b",
+      "started_at": "2026-10-25T19:34:31.879893+00:00",
+      "status": 200,
+      "team": "MIA",
+      "url": "https://www.miamidolphins.com/news/inactives-week-7-dolphins-at-jets"
+    },
+    {
+      "bytes": 427204,
+      "captured_at": "2026-10-25T19:34:32.101971+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.newyorkjets.com/news/jets-vs-dolphins-nfl-game-inactives-10-25-2026",
+      "kind": "official_inactives",
+      "sha256": "a2078747618652ca6f59b9e4eb1732dfaddd5055d985ec0d427e9b7108be5da5",
+      "started_at": "2026-10-25T19:34:31.880186+00:00",
+      "status": 200,
+      "team": "NYJ",
+      "url": "https://www.newyorkjets.com/news/jets-vs-dolphins-nfl-game-inactives-10-25-2026"
+    }
+  ]
+}
