@@ -1,3 +1,12 @@
+## Week 7: vs NY Giants (pre-game)
+
+Nickel CB **Jalen Pitre** (shoulder) and S **Reed Blankenship** (concussion) are out. **Nico Collins** is off the injury report and playing.
+
+**What changed:**
+- **Defense +1.2 → +1.0** for the two missing DBs.
+- **QB and offense held** (+1.5 and +1.0, with Collins).
+- **New total 3.7 → 3.5.**
+
 ## Week 6: vs Jacksonville at Wembley (W 34–31)
 
 Houston won a London shootout that the box score scored dead even (**29–29**). The Texans gained 426 yards to Jacksonville's

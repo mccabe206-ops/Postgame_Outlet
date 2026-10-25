@@ -1,3 +1,12 @@
+## Week 7: vs Cincinnati (pre-game)
+
+**Lamar Jackson** (high-ankle sprain) has been **ruled out** for a third straight game. He hasn't practiced since Oct. 4. **Tyler Huntley** makes his third straight start.
+
+**What changed:**
+- **QB: Huntley is QB1 at −1.5**, down from Lamar's +4.0. That's a 5.5-point swing, the biggest single move on the board this week. Lamar goes back in at +4.0 when he's cleared and returns to +4.5 after a clean game.
+- **Offense and defense held** (+0.8 and +0.3).
+- **New total +5.1 → −0.4.**
+
 ## Week 6: at Cleveland (L 10–13)
 
 With **Lamar Jackson** (left ankle) out for a second straight game, Baltimore scored 10 points in the first quarter and **nothing after it**,

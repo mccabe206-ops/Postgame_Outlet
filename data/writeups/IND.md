@@ -1,3 +1,12 @@
+## Week 7: at Minnesota (pre-game)
+
+CB **Sauce Gardner** is out with a calf injury.
+
+**What changed:**
+- **Defense −0.5 → −0.8** without its top corner.
+- **QB and offense held** (−0.5 and +0.6).
+- **New total −0.4 → −0.7.**
+
 ## Week 6: vs Tennessee (L 20–26)
 
 Indianapolis out-gained Tennessee **399–186**, ran 78 plays to 45, held the ball for **38 minutes**, and lost anyway. **Daniel Jones** threw two

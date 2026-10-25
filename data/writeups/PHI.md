@@ -1,3 +1,12 @@
+## Week 7: vs Dallas (pre-game)
+
+Philadelphia will be without WRs **DeVonta Smith** (hamstring/toe) and **Dontayvion Wicks** (ankle), two of its top three receivers. **Saquon Barkley** (hamstring) practiced in full and is expected back after missing two games, and TE **Dallas Goedert** is off the injury report.
+
+**What changed:**
+- **Offense −1.3 → −1.7.** Losing two of the top three WRs costs more than Saquon and Goedert give back. That number assumes Saquon plays; if he's inactive, the offense drops to −2.0.
+- **QB and defense held** (−3.0 and −0.5).
+- **New total −4.8 → −5.2.**
+
 ## Week 6: vs Carolina (L 14–25)
 
 Philadelphia played its first game without **Jalen Hurts**, who is expected to miss the rest of the season with blood clots in his lungs

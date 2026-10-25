@@ -1,3 +1,13 @@
+## Week 7: at Carolina (pre-game)
+
+**Baker Mayfield** is back. He practiced in full all week after dislocating his right thumb in Week 3, and he'll play in a reinforced glove. Todd Bowles called him "ready to go." Tampa will be without WR **Emeka Egbuka** (concussion), RT **Luke Goedeke** (calf) and S **Antoine Winfield Jr.** (rib fracture).
+
+**What changed:**
+- **QB: Baker back to QB1 at +1.0.** That's half a point below his normal +1.5 for his first game back, and a clean game restores it. **Jalon Daniels** (−4.0) goes back to QB2 after going 1–2 as the starter.
+- **Offense +0.7 → +0.4.** Egbuka, Baker's most-targeted receiver last week (16 targets), and Goedeke, the right tackle, are both out. Both come back on their return.
+- **Defense held at −0.5.** Winfield's absence is already priced in.
+- **New total −3.8 → +0.9.**
+
 ## Week 6: vs Pittsburgh (L 19–26, OT)
 
 Tampa led **13–3 at halftime** and had a real chance to win, but managed **122 yards after the break**. Rookie **Jalon Daniels** threw two fourth-quarter
