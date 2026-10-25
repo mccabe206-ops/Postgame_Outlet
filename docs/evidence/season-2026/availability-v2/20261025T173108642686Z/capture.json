@@ -1,0 +1,121 @@
+{
+  "checked_at": "2026-10-25T17:31:12.615257+00:00",
+  "sources": [
+    {
+      "bytes": 398354,
+      "captured_at": "2026-10-25T17:31:11.755570+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "4ddf700da0f4669937fbc9cc7781483fe27dc3a4e0e2d3bf387e61795372619b",
+      "started_at": "2026-10-25T17:31:11.653216+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 707058,
+      "captured_at": "2026-10-25T17:31:11.837932+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.azcardinals.com/news/",
+      "kind": "team_news",
+      "sha256": "0a7e6f59c38fa62edbab452d7e67bf8c33ccaa0edd06fcbf51fae7c26b566162",
+      "started_at": "2026-10-25T17:31:11.653645+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/"
+    },
+    {
+      "bytes": 292294,
+      "captured_at": "2026-10-25T17:31:11.954763+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "d23d9e517fab2ba92ad2fa25cd4ee7518ad46698dc7c3f67a4dec73fa9f8e6b3",
+      "started_at": "2026-10-25T17:31:11.654069+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 436809,
+      "captured_at": "2026-10-25T17:31:11.854810+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.detroitlions.com/news/",
+      "kind": "team_news",
+      "sha256": "4ac0786141d3ee3267a80a160df162e0a9006e2b4357ca06963a72b6e9e765e6",
+      "started_at": "2026-10-25T17:31:11.654490+00:00",
+      "status": 200,
+      "team": "DET",
+      "url": "https://www.detroitlions.com/news/"
+    },
+    {
+      "bytes": 695176,
+      "captured_at": "2026-10-25T17:31:12.070604+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.packers.com/news/",
+      "kind": "team_news",
+      "sha256": "fae1012d44e63dbdbd2c3a648f87e64d267d7c538d544e1c4146489560020ea9",
+      "started_at": "2026-10-25T17:31:11.755625+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/"
+    },
+    {
+      "bytes": 504116,
+      "captured_at": "2026-10-25T17:31:12.009770+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "bd10fdf0df93acfff64714f28c59d708b4ecb13a002da3139550cc540af1e226",
+      "started_at": "2026-10-25T17:31:11.837990+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 367068,
+      "captured_at": "2026-10-25T17:31:12.041394+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "d6d67e06803a087ea593e7973ad2a708136186177167c304fea212bcde3fd719",
+      "started_at": "2026-10-25T17:31:11.854848+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 642073,
+      "captured_at": "2026-10-25T17:31:12.239499+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.raiders.com/news/",
+      "kind": "team_news",
+      "sha256": "b3a2ddda8940c0f394d7371ff54e2033d07aa8ba89aa85a5e4359eca62f47833",
+      "started_at": "2026-10-25T17:31:11.954817+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/"
+    },
+    {
+      "bytes": 675361,
+      "captured_at": "2026-10-25T17:31:12.212537+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.seahawks.com/news/",
+      "kind": "team_news",
+      "sha256": "5715e79b36052f51f0742210da41714d1793320068fc8cc20e28b0d76933236a",
+      "started_at": "2026-10-25T17:31:12.009809+00:00",
+      "status": 200,
+      "team": "SEA",
+      "url": "https://www.seahawks.com/news/"
+    },
+    {
+      "captured_at": "2026-10-25T17:31:12.270857+00:00",
+      "error": "ValueError: Availability source is not an allowed official HTTPS URL",
+      "kind": "league_news",
+      "started_at": "2026-10-25T17:31:12.041436+00:00",
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}
