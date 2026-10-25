@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T16:24:48.055619+00:00",
+  "sources": [
+    {
+      "bytes": 398354,
+      "captured_at": "2026-10-25T16:24:47.656050+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "bfb06ad22d3ae9f97373ca02718abad3381bab30442f4817f0171865efcb939a",
+      "started_at": "2026-10-25T16:24:47.561761+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 532820,
+      "captured_at": "2026-10-25T16:24:47.746200+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.atlantafalcons.com/news/",
+      "kind": "team_news",
+      "sha256": "967130297a34dbb435a47551677cc84678d1dffd0763b6d0115b7474ac89318c",
+      "started_at": "2026-10-25T16:24:47.562003+00:00",
+      "status": 200,
+      "team": "ATL",
+      "url": "https://www.atlantafalcons.com/news/"
+    },
+    {
+      "bytes": 518967,
+      "captured_at": "2026-10-25T16:24:47.765933+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.49ers.com/news/",
+      "kind": "team_news",
+      "sha256": "d4ef2259bbdd16e1d127577b3efa508e78ea9b76ca5e240ce2e8504ea5f442e3",
+      "started_at": "2026-10-25T16:24:47.562226+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/"
+    },
+    {
+      "bytes": 1563536,
+      "captured_at": "2026-10-25T16:24:47.728863+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "630e6e34ca69347a2980d7507b6fc357be313a8e8268e63f6180f03464c2871e",
+      "started_at": "2026-10-25T16:24:47.562430+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 567796,
+      "captured_at": "2026-10-25T16:24:47.992964+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.atlantafalcons.com/news/atlanta-falcons-week-7-inactives-vs-san-francisco-49ers",
+      "kind": "official_inactives",
+      "sha256": "e038a78776a4f7800f4d25f38fe2c643225a98f09df5da64ce3b9928aa4b4d35",
+      "started_at": "2026-10-25T16:24:47.838119+00:00",
+      "status": 200,
+      "team": "ATL",
+      "url": "https://www.atlantafalcons.com/news/atlanta-falcons-week-7-inactives-vs-san-francisco-49ers"
+    },
+    {
+      "bytes": 452714,
+      "captured_at": "2026-10-25T16:24:47.990683+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.49ers.com/news/stout-kirk-active-vs-falcons-inactives-week-7-sfvsatl",
+      "kind": "official_inactives",
+      "sha256": "f1cc9c09c3914d617f13f2ef8a21f17bd5c39ec87e30e55c183aaa29a31cb706",
+      "started_at": "2026-10-25T16:24:47.838299+00:00",
+      "status": 200,
+      "team": "SF",
+      "url": "https://www.49ers.com/news/stout-kirk-active-vs-falcons-inactives-week-7-sfvsatl"
+    }
+  ]
+}

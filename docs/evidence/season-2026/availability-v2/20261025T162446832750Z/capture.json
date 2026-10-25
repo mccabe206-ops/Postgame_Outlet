@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T16:24:47.313296+00:00",
+  "sources": [
+    {
+      "bytes": 398354,
+      "captured_at": "2026-10-25T16:24:46.958196+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "bfb06ad22d3ae9f97373ca02718abad3381bab30442f4817f0171865efcb939a",
+      "started_at": "2026-10-25T16:24:46.841038+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 895789,
+      "captured_at": "2026-10-25T16:24:47.042202+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.houstontexans.com/news/",
+      "kind": "team_news",
+      "sha256": "6a3985fae100346d5f42f54114d9ddcedd9c533c3d47a5790be0006808250b2e",
+      "started_at": "2026-10-25T16:24:46.841338+00:00",
+      "status": 200,
+      "team": "HOU",
+      "url": "https://www.houstontexans.com/news/"
+    },
+    {
+      "bytes": 572673,
+      "captured_at": "2026-10-25T16:24:47.028093+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.giants.com/news/",
+      "kind": "team_news",
+      "sha256": "a28635d69bc4d318078bdc58c2a97c9e388fbd2eca8f77c053033c5783bed28c",
+      "started_at": "2026-10-25T16:24:46.841666+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/"
+    },
+    {
+      "bytes": 1563536,
+      "captured_at": "2026-10-25T16:24:47.042825+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "630e6e34ca69347a2980d7507b6fc357be313a8e8268e63f6180f03464c2871e",
+      "started_at": "2026-10-25T16:24:46.841859+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 487092,
+      "captured_at": "2026-10-25T16:24:47.245642+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.houstontexans.com/news/texans-inactives-week-7-vs-new-york-giants",
+      "kind": "official_inactives",
+      "sha256": "79d38b27332f88985f36945f9ed8b2275bce74e026a60da2a10efbb04cb35729",
+      "started_at": "2026-10-25T16:24:47.111118+00:00",
+      "status": 200,
+      "team": "HOU",
+      "url": "https://www.houstontexans.com/news/texans-inactives-week-7-vs-new-york-giants"
+    },
+    {
+      "bytes": 506695,
+      "captured_at": "2026-10-25T16:24:47.244102+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.giants.com/news/inactives-who-s-in-who-s-out-for-giants-at-texans",
+      "kind": "official_inactives",
+      "sha256": "f64e99b0d8bb42e406fb5685eab314f2158f2d7547214645ce67a575ed54651e",
+      "started_at": "2026-10-25T16:24:47.111302+00:00",
+      "status": 200,
+      "team": "NYG",
+      "url": "https://www.giants.com/news/inactives-who-s-in-who-s-out-for-giants-at-texans"
+    }
+  ]
+}
