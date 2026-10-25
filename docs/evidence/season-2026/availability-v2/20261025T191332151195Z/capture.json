@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T19:13:32.666302+00:00",
+  "sources": [
+    {
+      "bytes": 398307,
+      "captured_at": "2026-10-25T19:13:32.269579+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "d6dfffada1384c1510a8ac5ea11f1482974403c7f6b859ff623cb86e44db9167",
+      "started_at": "2026-10-25T19:13:32.159625+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 706986,
+      "captured_at": "2026-10-25T19:13:32.323714+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.azcardinals.com/news/",
+      "kind": "team_news",
+      "sha256": "693f00770c83b02818001f2bf55e6ca3a7a8d292a8f35b7f382b53354ca43ab5",
+      "started_at": "2026-10-25T19:13:32.159908+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/"
+    },
+    {
+      "bytes": 292140,
+      "captured_at": "2026-10-25T19:13:32.336536+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "17fe889dc9e26843741c72fc6c1203ff2dbb21e5999e5549af43193430fbd53c",
+      "started_at": "2026-10-25T19:13:32.160243+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 1564371,
+      "captured_at": "2026-10-25T19:13:32.357765+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "90f8e55c51953bb5f5362d1358b29727add3c36aa847dbe07deed38e88a4dc43",
+      "started_at": "2026-10-25T19:13:32.160520+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 304583,
+      "captured_at": "2026-10-25T19:13:32.573689+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.azcardinals.com/news/cornerback-max-melton-inactive-for-game-against-broncos",
+      "kind": "official_inactives",
+      "sha256": "ff952e85718a6848742e2b3dc5d535ddf52bd18f815b2d1894f9a0f4d9675a12",
+      "started_at": "2026-10-25T19:13:32.447839+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/cornerback-max-melton-inactive-for-game-against-broncos"
+    },
+    {
+      "bytes": 312852,
+      "captured_at": "2026-10-25T19:13:32.554420+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/cb-pat-surtain-ii-among-broncos-inactive-players-for-week-7-game-vs-cardinals",
+      "kind": "official_inactives",
+      "sha256": "001472c8b1e172b9eac875a2c8dee74aaf6c6bba85e7f1cc7ee9603f88a4a749",
+      "started_at": "2026-10-25T19:13:32.448146+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/cb-pat-surtain-ii-among-broncos-inactive-players-for-week-7-game-vs-cardinals"
+    }
+  ]
+}
