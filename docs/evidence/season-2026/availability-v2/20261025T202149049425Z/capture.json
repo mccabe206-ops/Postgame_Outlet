@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T20:21:49.913700+00:00",
+  "sources": [
+    {
+      "bytes": 397167,
+      "captured_at": "2026-10-25T20:21:49.082015+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "9613b7c8fc668da609343d024702af0d3cd24eb797940ae3bcd98de3fdd1d7e0",
+      "started_at": "2026-10-25T20:21:49.061689+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 434358,
+      "captured_at": "2026-10-25T20:21:49.137144+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.detroitlions.com/news/",
+      "kind": "team_news",
+      "sha256": "3e20ea4abced7fba8e5a85e4622cda97550dea35350de01a82290fe8c948f5f2",
+      "started_at": "2026-10-25T20:21:49.061992+00:00",
+      "status": 200,
+      "team": "DET",
+      "url": "https://www.detroitlions.com/news/"
+    },
+    {
+      "bytes": 692916,
+      "captured_at": "2026-10-25T20:21:49.641799+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.packers.com/news/",
+      "kind": "team_news",
+      "sha256": "8ef80ddb612fa2f854d7aa7649fef66e6b22f1862cf141df1b5272849420024a",
+      "started_at": "2026-10-25T20:21:49.062407+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/"
+    },
+    {
+      "bytes": 1564657,
+      "captured_at": "2026-10-25T20:21:49.104451+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "dc429067e3895ed5ca01e88bf3c907a7e98b0364f213de38ea012d422f8a55ba",
+      "started_at": "2026-10-25T20:21:49.062723+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 305422,
+      "captured_at": "2026-10-25T20:21:49.792943+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.detroitlions.com/news/inactives-lions-vs-packers-branch-mays",
+      "kind": "official_inactives",
+      "sha256": "03f0a96f64003c208d33d053a4096aeeb32f24d641b5873250f18a9a9c610151",
+      "started_at": "2026-10-25T20:21:49.772271+00:00",
+      "status": 200,
+      "team": "DET",
+      "url": "https://www.detroitlions.com/news/inactives-lions-vs-packers-branch-mays"
+    },
+    {
+      "bytes": 311072,
+      "captured_at": "2026-10-25T20:21:49.823841+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.packers.com/news/packers-lions-week-7-inactives-oct-25-2026",
+      "kind": "official_inactives",
+      "sha256": "2777d09f550b0d37494554ae24d3c7ce137aac52d607aea74bfe68c78a3ad5f6",
+      "started_at": "2026-10-25T20:21:49.772549+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/packers-lions-week-7-inactives-oct-25-2026"
+    }
+  ]
+}
