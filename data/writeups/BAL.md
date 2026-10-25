@@ -143,7 +143,7 @@ Baltimore is a top-five roster: an elite quarterback, a strong skill group, and 
 
 ## Quarterback
 
-Lamar Jackson (+4.0) is the selected quarterback for Week 7, half a point below his normal +4.5 for his first game back from the left ankle sprain he suffered in Week 4. He's day-to-day, and the coaching staff says he could practice this week. A clean game restores the full grade. Tyler Huntley (−1.5) is QB2 after a 50.9 passing grade at Cleveland, and he starts if Lamar is ruled out.
+Tyler Huntley (−1.5) is the selected quarterback for Week 7 after **Lamar Jackson** (high-ankle sprain) was ruled out for a third straight game. Huntley was excellent in the Week 5 overtime win at Atlanta (79.9 PFF passing) and poor at Cleveland in Week 6 (50.9). Lamar (+4.5) goes back in at +4.0 for his first game back and returns to +4.5 after a clean game.
 
 ## Quarterback: through Week 1 2026 (historical)
 

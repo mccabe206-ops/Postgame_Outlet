@@ -139,12 +139,7 @@ Tampa Bay grades above the line as a genuinely balanced team — a proven quarte
 
 ## Quarterback
 
-Jalon Daniels (−4.0) is the selected quarterback while Baker Mayfield (+1.5) recovers from a
-dislocated right thumb (targeting ~Week 7). The undrafted rookie has two starts: a shaky debut vs
-Green Bay (19 of 27, 148 yards, 2 INT, 53.1 PFF) and a clean road win at Dallas (19 of 25, 189 yards,
-1 TD, 0 INT, 110.2 rating). He's a safe, short-area passer with useful legs, playing behind the
-league's best run game this week. He sits at the floor of the backup band, which is where a raw UDFA
-belongs until he does more than avoid mistakes.
+Baker Mayfield (+1.0) is the selected quarterback for Week 7, back from the dislocated right thumb he suffered in Week 3. He practiced in full all week and will play in a reinforced glove. That's half a point below his normal +1.5 for his first game back, and a clean game restores it. Rookie Jalon Daniels (−4.0) goes back to QB2 after going 1–2 as the starter.
 
 ## Quarterback: through Week 1 2026 (historical)
 

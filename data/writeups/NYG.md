@@ -145,7 +145,7 @@ dangerous pass rush. Week 2 changed the quarterback component.
 
 ## Quarterback
 
-Jameis Winston (−3.5) is the selected quarterback for now, down half a point after he was benched in the fourth quarter against New Orleans (two interceptions, four sacks, 34.9 PFF passing). J.J. McCarthy (−2.5), who threw for 243 yards in relief, is in line to take over if John Harbaugh names him the Week 7 starter. Jaxson Dart (left knee) is out for the regular season.
+J.J. McCarthy (−3.0) is the selected quarterback after John Harbaugh named him the Week 7 starter. He threw for 243 yards in relief of the benched Jameis Winston against New Orleans, but most of it came against a defense protecting a lead, so he sits only half a point above Winston (−3.5) until he does it in a game that's still in doubt. Jaxson Dart (left knee) is out for the regular season.
 
 ## What moved the number
 
