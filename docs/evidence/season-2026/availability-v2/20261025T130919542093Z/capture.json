@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-25T13:09:20.033201+00:00",
+  "sources": [
+    {
+      "bytes": 398354,
+      "captured_at": "2026-10-25T13:09:19.641430+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "73ee93bb25dc084e7cf3e1aa56825e447380213ccd4135ca1936c91d4f5c92bb",
+      "started_at": "2026-10-25T13:09:19.552391+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 387599,
+      "captured_at": "2026-10-25T13:09:19.655872+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/",
+      "kind": "team_news",
+      "sha256": "ffd01acd7ee93d154eacebd131f30e061d82834a3938989ad6e3c67309552cb0",
+      "started_at": "2026-10-25T13:09:19.552720+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/"
+    },
+    {
+      "bytes": 388112,
+      "captured_at": "2026-10-25T13:09:19.684643+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.steelers.com/news/",
+      "kind": "team_news",
+      "sha256": "4d58447d36420b4ab88b2dd46399dfa81545069dce8ed425ebe704ec7b829885",
+      "started_at": "2026-10-25T13:09:19.553069+00:00",
+      "status": 200,
+      "team": "PIT",
+      "url": "https://www.steelers.com/news/"
+    },
+    {
+      "bytes": 1575993,
+      "captured_at": "2026-10-25T13:09:19.722327+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "bc18fecaf03d2dea12e5b65f2ca4cae0e52a106ef2c7ef401309d496feb2f01e",
+      "started_at": "2026-10-25T13:09:19.553351+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 322790,
+      "captured_at": "2026-10-25T13:09:19.917128+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.neworleanssaints.com/news/new-orleans-saints-inactives-pittsburgh-steelers-2026-nfl-week-7-gameday",
+      "kind": "official_inactives",
+      "sha256": "fd7bdaf7512b25d88288c899f066be089d70139d96697ef039f9a710e3b85392",
+      "started_at": "2026-10-25T13:09:19.831019+00:00",
+      "status": 200,
+      "team": "NO",
+      "url": "https://www.neworleanssaints.com/news/new-orleans-saints-inactives-pittsburgh-steelers-2026-nfl-week-7-gameday"
+    },
+    {
+      "bytes": 330007,
+      "captured_at": "2026-10-25T13:09:19.914596+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.steelers.com/news/steelers-inactives-for-week-7-at-saints",
+      "kind": "official_inactives",
+      "sha256": "b9366f3239b15f50243665f3bd55a21e068cf55ed390aea92c9bcae76cb1ec7d",
+      "started_at": "2026-10-25T13:09:19.831324+00:00",
+      "status": 200,
+      "team": "PIT",
+      "url": "https://www.steelers.com/news/steelers-inactives-for-week-7-at-saints"
+    },
+    {
+      "bytes": 830965,
+      "captured_at": "2026-10-25T13:09:19.922456+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.nfl.com/news/nfl-week-7-inactives-players-ruled-out-sunday-2026-season",
+      "kind": "official_inactives",
+      "sha256": "832fda36976f3dbf2ace15bb77b42dea8c61013535d42315e732a4e5bb432f5c",
+      "started_at": "2026-10-25T13:09:19.831676+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/nfl-week-7-inactives-players-ruled-out-sunday-2026-season"
+    }
+  ]
+}
