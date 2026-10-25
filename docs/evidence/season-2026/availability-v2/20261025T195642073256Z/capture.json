@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T19:56:42.896818+00:00",
+  "sources": [
+    {
+      "bytes": 398309,
+      "captured_at": "2026-10-25T19:56:42.143971+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "a127328089efa9a5d9f6322d827129ba8953aadb04cf39171debe58b4dcf2b76",
+      "started_at": "2026-10-25T19:56:42.082145+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 570484,
+      "captured_at": "2026-10-25T19:56:42.302032+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.clevelandbrowns.com/news/",
+      "kind": "team_news",
+      "sha256": "789d2106a865c629a0a8e1c46af74ac7caa4a2ee056a60e5e324dd5e8d1e908a",
+      "started_at": "2026-10-25T19:56:42.082474+00:00",
+      "status": 200,
+      "team": "CLE",
+      "url": "https://www.clevelandbrowns.com/news/"
+    },
+    {
+      "bytes": 486245,
+      "captured_at": "2026-10-25T19:56:42.351224+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.tennesseetitans.com/news/",
+      "kind": "team_news",
+      "sha256": "9936d9513280c3a6ff7379077511108520bdfc9b8c0e65a2775ac101e813ecef",
+      "started_at": "2026-10-25T19:56:42.082779+00:00",
+      "status": 200,
+      "team": "TEN",
+      "url": "https://www.tennesseetitans.com/news/"
+    },
+    {
+      "bytes": 1565820,
+      "captured_at": "2026-10-25T19:56:42.212629+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "10358ea3a1283c2e9b411c2928936639c2b60e71b5ceb498fe7edfc614ac05f7",
+      "started_at": "2026-10-25T19:56:42.083045+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 307515,
+      "captured_at": "2026-10-25T19:56:42.739018+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.clevelandbrowns.com/news/browns-announce-inactives-for-week-7-vs-the-titans",
+      "kind": "official_inactives",
+      "sha256": "e2af15d0a1f0e6b5cabe820f6f14999ee7a6da23968eb22ba13b2aa76edf2572",
+      "started_at": "2026-10-25T19:56:42.454684+00:00",
+      "status": 200,
+      "team": "CLE",
+      "url": "https://www.clevelandbrowns.com/news/browns-announce-inactives-for-week-7-vs-the-titans"
+    },
+    {
+      "bytes": 329260,
+      "captured_at": "2026-10-25T19:56:42.806523+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.tennesseetitans.com/news/game-inactives-week-7-titans-vs-browns",
+      "kind": "official_inactives",
+      "sha256": "4553fad41e1e66331c2082b95fa9548f9cb02e9fb78e98d53aec61f8b072f62b",
+      "started_at": "2026-10-25T19:56:42.454998+00:00",
+      "status": 200,
+      "team": "TEN",
+      "url": "https://www.tennesseetitans.com/news/game-inactives-week-7-titans-vs-browns"
+    }
+  ]
+}
