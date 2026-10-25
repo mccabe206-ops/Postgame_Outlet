@@ -1,0 +1,71 @@
+{
+  "checked_at": "2026-10-25T17:49:34.373904+00:00",
+  "members": [
+    {
+      "bytes": 59748,
+      "file": "availability.json",
+      "sha256": "5148e635a3f65801d8f4f776cd01745248f0e487190a69b47b530f71694c16a7"
+    },
+    {
+      "bytes": 4419,
+      "file": "capture.json",
+      "sha256": "b2f2997abef54c6bf9eb77c398530838480dfc1b9e05c6922ef947babf306aef"
+    },
+    {
+      "bytes": 19616,
+      "file": "inputs.json.gz",
+      "sha256": "bc3cfa37103899763d2e7cc02b0627910dacdc18200d7e52188fb81c7cf1afc7"
+    },
+    {
+      "bytes": 65917,
+      "file": "raw/000.html.gz",
+      "sha256": "397fcd8b7a7dc94d33ec75fdc325afbb4cb56182dc7c5e4d45ceaa651d35428a"
+    },
+    {
+      "bytes": 90087,
+      "file": "raw/001.html.gz",
+      "sha256": "ad6d392d43d9c32f07cc0e7918ef2d6f03569a69d0249feb7563894c97e90d2e"
+    },
+    {
+      "bytes": 59122,
+      "file": "raw/002.html.gz",
+      "sha256": "ad68d58aec3caed885f8c7b4dfeb9e39b2a353f586aaf00333e2d435efff3734"
+    },
+    {
+      "bytes": 71579,
+      "file": "raw/003.html.gz",
+      "sha256": "dc40cc20085a4dba42225a8838c705ea4640af39ab4f6df5f773a76ea628b860"
+    },
+    {
+      "bytes": 94845,
+      "file": "raw/004.html.gz",
+      "sha256": "02518776621de5de203c5801842657ee6379c84566a5506e8a0e56058e9c9023"
+    },
+    {
+      "bytes": 78039,
+      "file": "raw/005.html.gz",
+      "sha256": "3f0b2d9c05a18c3f6bce4638bc862681a9b84091f268b1b41a04d8a3ce8170fd"
+    },
+    {
+      "bytes": 66870,
+      "file": "raw/006.html.gz",
+      "sha256": "dbcf4adb17c5faf9660e3c0f3ab0a3b53e7ae37126a93e143befe46e66f6a7f1"
+    },
+    {
+      "bytes": 92241,
+      "file": "raw/007.html.gz",
+      "sha256": "ba0efe30bdef27e577763ac0488df02b9585aad54175fd52d10f225d862e31d4"
+    },
+    {
+      "bytes": 95717,
+      "file": "raw/008.html.gz",
+      "sha256": "b47ebb7620beba1272f35ec34e07af5aaaf1eccc86eec91365e6d38e6b56fb96"
+    },
+    {
+      "bytes": 172005,
+      "file": "raw/009.html.gz",
+      "sha256": "fcc2e2742140d3c157012a06eca5eea3b42198d03f9c1ab07944b17e969475a0"
+    }
+  ],
+  "schema_version": 1
+}
