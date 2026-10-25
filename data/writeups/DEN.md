@@ -1,3 +1,12 @@
+## Week 7: at Arizona (pre-game)
+
+CB **Pat Surtain II** is expected back from the ankle injury that cost him the last stretch, and RB **Jonah Coleman** returns from IR (ankle) after a full week of practice.
+
+**What changed:**
+- **Defense +1.5 → +1.8** with Surtain back, the restore that was set aside for his return.
+- **Offense +0.2 → +0.3** with Coleman back.
+- **QB held** (−1.0). **New total 0.7 → 1.1.**
+
 ## Update: Jonathon Cooper reinstated (Oct. 20)
 
 EDGE **Jonathon Cooper** has been removed from the Commissioner's Exempt List and can return to the field. Denver's defense was trimmed in the preseason because

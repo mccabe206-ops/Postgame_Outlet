@@ -1,3 +1,12 @@
+## Week 7: at Atlanta (pre-game)
+
+**Mike Evans** is out (Achilles tendinitis and a rib injury) after he aggravated the Achilles against Washington. **Nick Bosa** (knee) and S **Marques Sigle** (ankle) remain out.
+
+**What changed:**
+- **Offense +0.7 → +0.4** without Evans, in a WR room that was already thin.
+- **QB and defense held** (+4.5 and +0.9). Bosa and Sigle were already priced.
+- **New total 6.1 → 5.8.**
+
 ## Week 6: vs Washington (W 23–17, MNF)
 
 San Francisco is **6–0** after building a **20–3 halftime lead** and then hanging on. The first half was the 49ers at their

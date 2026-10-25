@@ -1,3 +1,12 @@
+## Week 7: at Las Vegas (pre-game)
+
+LB **Nate Landman** is out (concussion), CB **Trent McDuffie** is questionable (groin), and **Puka Nacua** is a game-time decision with a calf injury that Ian Rapoport calls minor.
+
+**What changed:**
+- **Defense +0.1 → 0.0.** If Nacua is inactive, the offense drops 0.5.
+- **QB and offense held** (+5.0 and +1.2).
+- **New total 6.3 → 6.2.**
+
 ## Week 6: vs Arizona (L 16–18)
 
 The Rams lost to a 13.5-point underdog, and the box score says it wasn't bad luck. Arizona **out-gained

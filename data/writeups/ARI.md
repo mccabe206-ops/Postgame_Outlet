@@ -1,3 +1,12 @@
+## Week 7: vs Denver (pre-game)
+
+Rookie RB **Jeremiyah Love** misses a second straight game with a high-ankle sprain, and DT **Walter Nolen** (ankle) and S **Andrew Wingard** (knee) are also out. S **Budda Baker** is questionable (groin).
+
+**What changed:**
+- **Offense −1.2 → −1.4** without Love. The run game held up without him last week, but he's the offense's best young piece; this is restored when he returns.
+- **Defense −0.8 → −1.0** for Nolen and Wingard.
+- **QB held** (−1.0). **New total −3.0 → −3.4.**
+
 ## Week 6: at L.A. Rams (W 18–16)
 
 Arizona won outright as a **13.5-point underdog**, and it was the better team. The Cardinals **out-gained

@@ -1,3 +1,11 @@
+## Week 7: at Seattle (pre-game)
+
+Kansas City will be without **both starting tackles**: RT **Jaylon Moore** is out with a concussion, and LT **Josh Simmons** (back) has gone on IR. WR **Rashee Rice** (hamstring/knee) misses another game.
+
+**What changed:**
+- **Offense +0.5 → +0.3.** That's for the tackles; Rice's absence was already priced last week.
+- **QB and defense held** (+5.0 and +0.5). **New total 6.0 → 5.8.**
+
 ## Week 6: vs L.A. Chargers (W 22–6)
 
 Kansas City dominated a division rival more than the score shows. The Chiefs out-gained the Chargers **422–259** at **7.4 yards a play**, led **19–3 at

@@ -1,3 +1,12 @@
+## Week 7: at Houston (pre-game)
+
+John Harbaugh named **J.J. McCarthy** the starter after he relieved the benched Jameis Winston against New Orleans. The secondary is down two more starters: CB **Greg Newsome** and S **Jevón Holland** are both out with concussions.
+
+**What changed:**
+- **QB: McCarthy is QB1 at −3.0**, only half a point above Winston (−3.5). Most of his 243 yards in Week 6 came against a defense protecting a lead, so his rating stays close to Winston's until he does it in a game that's still in doubt. Winston moves to QB3.
+- **Defense 0.0 → −0.3** for the secondary losses. **Offense held** at +0.2.
+- **New total −3.3 → −3.1.**
+
 ## Week 6: vs New Orleans (L 27–34)
 
 The Giants out-gained New Orleans **461–319** and still lost a game that was decided early in the fourth quarter (the competitive score was
