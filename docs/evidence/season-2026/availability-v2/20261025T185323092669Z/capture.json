@@ -1,0 +1,149 @@
+{
+  "checked_at": "2026-10-25T18:53:26.984908+00:00",
+  "sources": [
+    {
+      "bytes": 398307,
+      "captured_at": "2026-10-25T18:53:26.118918+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "74ace9c02c475e9be0b934ba55f6546a521a73ed6ace3dba39d7c0dfce8a42cd",
+      "started_at": "2026-10-25T18:53:26.099040+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 706986,
+      "captured_at": "2026-10-25T18:53:26.159914+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.azcardinals.com/news/",
+      "kind": "team_news",
+      "sha256": "056f556bc7f3c8e216a70bc2496928223fe90724c47ae68306c8bab54d2c6952",
+      "started_at": "2026-10-25T18:53:26.099431+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/"
+    },
+    {
+      "bytes": 292140,
+      "captured_at": "2026-10-25T18:53:26.122715+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/",
+      "kind": "team_news",
+      "sha256": "27c4480bb8e08098a1910bd05560c39dc316bf78b38480399b1720cdf6873d93",
+      "started_at": "2026-10-25T18:53:26.099795+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/"
+    },
+    {
+      "bytes": 436493,
+      "captured_at": "2026-10-25T18:53:26.287849+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.detroitlions.com/news/",
+      "kind": "team_news",
+      "sha256": "06bef53f532de8c38f90c396fd755f94c4e6b75acb3506edc31ebdf5c1b4a964",
+      "started_at": "2026-10-25T18:53:26.100467+00:00",
+      "status": 200,
+      "team": "DET",
+      "url": "https://www.detroitlions.com/news/"
+    },
+    {
+      "bytes": 695176,
+      "captured_at": "2026-10-25T18:53:26.172400+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.packers.com/news/",
+      "kind": "team_news",
+      "sha256": "2f6989c92bbe0e3502a17c441c5a32cb8900f70eb30dc2f49ff58e7ec10c8ccb",
+      "started_at": "2026-10-25T18:53:26.118972+00:00",
+      "status": 200,
+      "team": "GB",
+      "url": "https://www.packers.com/news/"
+    },
+    {
+      "bytes": 504116,
+      "captured_at": "2026-10-25T18:53:26.186821+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "d670a3c756f8db58ce27c70589ee3b278acf504b089705d8be53a4322cefd531",
+      "started_at": "2026-10-25T18:53:26.122733+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 367068,
+      "captured_at": "2026-10-25T18:53:26.220879+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "e1ef581752096f36a401ee284f3e41be4dc45f3c29271d9d9edc49f0072c8baf",
+      "started_at": "2026-10-25T18:53:26.159971+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 642082,
+      "captured_at": "2026-10-25T18:53:26.201807+00:00",
+      "file": "raw/007.html.gz",
+      "final_url": "https://www.raiders.com/news/",
+      "kind": "team_news",
+      "sha256": "1c531580141af5a0d6ccfc8a1966edd9af8cd564e97a6b68b561ad61e8cb7ae7",
+      "started_at": "2026-10-25T18:53:26.172416+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/"
+    },
+    {
+      "bytes": 675678,
+      "captured_at": "2026-10-25T18:53:26.439225+00:00",
+      "file": "raw/008.html.gz",
+      "final_url": "https://www.seahawks.com/news/",
+      "kind": "team_news",
+      "sha256": "9977306477a37f354c1eabd472048a7e7e5b20609f953d22942ce105ff35d6a7",
+      "started_at": "2026-10-25T18:53:26.186837+00:00",
+      "status": 200,
+      "team": "SEA",
+      "url": "https://www.seahawks.com/news/"
+    },
+    {
+      "bytes": 1563704,
+      "captured_at": "2026-10-25T18:53:26.254855+00:00",
+      "file": "raw/009.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "7ef3cf0a0f011823a3d389e60ee4529bb178ef27f5de645e76be3293c28d3f79",
+      "started_at": "2026-10-25T18:53:26.201823+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 304583,
+      "captured_at": "2026-10-25T18:53:26.820513+00:00",
+      "file": "raw/010.html.gz",
+      "final_url": "https://www.azcardinals.com/news/cornerback-max-melton-inactive-for-game-against-broncos",
+      "kind": "official_inactives",
+      "sha256": "efb5194d16933d5509b85375a85aeded9333ee70fee77aedb6799f2d4fce38e1",
+      "started_at": "2026-10-25T18:53:26.792078+00:00",
+      "status": 200,
+      "team": "ARI",
+      "url": "https://www.azcardinals.com/news/cornerback-max-melton-inactive-for-game-against-broncos"
+    },
+    {
+      "bytes": 312852,
+      "captured_at": "2026-10-25T18:53:26.819856+00:00",
+      "file": "raw/011.html.gz",
+      "final_url": "https://www.denverbroncos.com/news/cb-pat-surtain-ii-among-broncos-inactive-players-for-week-7-game-vs-cardinals",
+      "kind": "official_inactives",
+      "sha256": "774669179dd69ad39abd8b143c60a0e94e94963de8e88ee6636a71d7db196b37",
+      "started_at": "2026-10-25T18:53:26.792325+00:00",
+      "status": 200,
+      "team": "DEN",
+      "url": "https://www.denverbroncos.com/news/cb-pat-surtain-ii-among-broncos-inactive-players-for-week-7-game-vs-cardinals"
+    }
+  ]
+}
