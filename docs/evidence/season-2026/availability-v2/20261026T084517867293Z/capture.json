@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-26T08:45:21.648981+00:00",
+  "sources": [
+    {
+      "bytes": 397168,
+      "captured_at": "2026-10-26T08:45:20.897077+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "6802ce7b8d78827b130ca361a6d1ec49abaed9cb8a079e34f86fa46ebd10a173",
+      "started_at": "2026-10-26T08:45:20.832566+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 500313,
+      "captured_at": "2026-10-26T08:45:21.279323+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "b9b5cb96b13407bbce6fc0ac85b165092fb00ced46675dacae580a8543d30e95",
+      "started_at": "2026-10-26T08:45:20.832942+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 530296,
+      "captured_at": "2026-10-26T08:45:21.153548+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "6712431d97ee4813005f995e5a5b81fce133da0e991f4aefc47332e89f62135b",
+      "started_at": "2026-10-26T08:45:20.833326+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "bytes": 1564723,
+      "captured_at": "2026-10-26T08:45:21.485766+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "2a10959f2adc8c163867a0181c603f0b780daa6f5c54889c40d052ea8c322e1d",
+      "started_at": "2026-10-26T08:45:20.833593+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}
