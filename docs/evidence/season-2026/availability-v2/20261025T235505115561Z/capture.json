@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T23:55:05.785513+00:00",
+  "sources": [
+    {
+      "bytes": 397168,
+      "captured_at": "2026-10-25T23:55:05.263471+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "37b2ddafde0d0e2014fd19dc01a7ebf7f0f11b9f939d7020b31b04fc76803187",
+      "started_at": "2026-10-25T23:55:05.126327+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 503312,
+      "captured_at": "2026-10-25T23:55:05.300059+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "d157a53817998d66034d84999415fbfdc64383935d0dfca8898990eb608648d0",
+      "started_at": "2026-10-25T23:55:05.126725+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 674893,
+      "captured_at": "2026-10-25T23:55:05.334657+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.seahawks.com/news/",
+      "kind": "team_news",
+      "sha256": "698c11beca51a2eb49d5c6ef0ff1eddfb4d28592feac94125d15002482b72f6e",
+      "started_at": "2026-10-25T23:55:05.127063+00:00",
+      "status": 200,
+      "team": "SEA",
+      "url": "https://www.seahawks.com/news/"
+    },
+    {
+      "bytes": 1570098,
+      "captured_at": "2026-10-25T23:55:05.402851+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "311cc05020aac3339fb36ffc943f14bf5fd673a001066230d00b05b588e6d47f",
+      "started_at": "2026-10-25T23:55:05.127410+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 307907,
+      "captured_at": "2026-10-25T23:55:05.650986+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.chiefs.com/news/week-7-inactive-players-chiefs-vs-seahawks",
+      "kind": "official_inactives",
+      "sha256": "e5cba8bd40a0684348076da01d1b7cc0d97bf0dec24a67f132506121a806fdb7",
+      "started_at": "2026-10-25T23:55:05.537935+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/week-7-inactive-players-chiefs-vs-seahawks"
+    },
+    {
+      "bytes": 451259,
+      "captured_at": "2026-10-25T23:55:05.693719+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.seahawks.com/news/seahawks-vs-chiefs-week-7-inactives",
+      "kind": "official_inactives",
+      "sha256": "9dc505dd8420eba0b2a4773a19aac70e6e366b1f8de4f450bf1a9c266e6df94b",
+      "started_at": "2026-10-25T23:55:05.538186+00:00",
+      "status": 200,
+      "team": "SEA",
+      "url": "https://www.seahawks.com/news/seahawks-vs-chiefs-week-7-inactives"
+    }
+  ]
+}
