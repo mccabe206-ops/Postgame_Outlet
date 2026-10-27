@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-26T23:52:35.585934+00:00",
+  "sources": [
+    {
+      "bytes": 397024,
+      "captured_at": "2026-10-26T23:52:35.308079+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "e4c54708be6407ad43d52f3295dde0cfa5a041e3880db0b98d0c170f6f9ef023",
+      "started_at": "2026-10-26T23:52:35.266175+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 500367,
+      "captured_at": "2026-10-26T23:52:35.321960+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.dallascowboys.com/news/",
+      "kind": "team_news",
+      "sha256": "98788c189e714352946bb01350b68ddcac6b7c2ddbfa8f90e7486fd341ed032d",
+      "started_at": "2026-10-26T23:52:35.266578+00:00",
+      "status": 200,
+      "team": "DAL",
+      "url": "https://www.dallascowboys.com/news/"
+    },
+    {
+      "bytes": 530862,
+      "captured_at": "2026-10-26T23:52:35.335795+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/",
+      "kind": "team_news",
+      "sha256": "67429d56c7312e7f1bad3449a72e97bdbfdebceea4a3d54d16cc6f6fdfc308e4",
+      "started_at": "2026-10-26T23:52:35.267448+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/"
+    },
+    {
+      "bytes": 1587513,
+      "captured_at": "2026-10-26T23:52:35.336883+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "808320935262ac3bfcca1404b982e52cd70ee4dda90a8cff6c76393ef35d1614",
+      "started_at": "2026-10-26T23:52:35.268093+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 422786,
+      "captured_at": "2026-10-26T23:52:35.486001+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.philadelphiaeagles.com/news/cowboys-vs-eagles-inactives-saquon-barkley-jalyx-hunt-2026-week-7-monday-night-football",
+      "kind": "official_inactives",
+      "sha256": "68977e22c4e1c4052627b75068102ea42d8bbfea3f74a16f3ce0aa95db766f7c",
+      "started_at": "2026-10-26T23:52:35.459233+00:00",
+      "status": 200,
+      "team": "PHI",
+      "url": "https://www.philadelphiaeagles.com/news/cowboys-vs-eagles-inactives-saquon-barkley-jalyx-hunt-2026-week-7-monday-night-football"
+    },
+    {
+      "bytes": 699868,
+      "captured_at": "2026-10-26T23:52:35.481762+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.nfl.com/news/week-7-monday-night-inactives-dallas-cowboys-at-philadelphia-eagles",
+      "kind": "official_inactives",
+      "sha256": "86aa50f464d3520274f2a2887d81e3fa74912c20a8e71c9a92f26392423e6496",
+      "started_at": "2026-10-26T23:52:35.459548+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/week-7-monday-night-inactives-dallas-cowboys-at-philadelphia-eagles"
+    }
+  ]
+}
