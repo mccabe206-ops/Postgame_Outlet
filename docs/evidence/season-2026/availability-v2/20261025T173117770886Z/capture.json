@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T17:31:18.461289+00:00",
+  "sources": [
+    {
+      "bytes": 398354,
+      "captured_at": "2026-10-25T17:31:17.864625+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "4ddf700da0f4669937fbc9cc7781483fe27dc3a4e0e2d3bf387e61795372619b",
+      "started_at": "2026-10-25T17:31:17.779833+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 416201,
+      "captured_at": "2026-10-25T17:31:18.057150+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.colts.com/news/",
+      "kind": "team_news",
+      "sha256": "2a3e5e724f5c8214cc4034be79ff3dd2c45c79373ecc341b0dfa1e4be229ff84",
+      "started_at": "2026-10-25T17:31:17.780158+00:00",
+      "status": 200,
+      "team": "IND",
+      "url": "https://www.colts.com/news/"
+    },
+    {
+      "bytes": 545515,
+      "captured_at": "2026-10-25T17:31:17.925114+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.vikings.com/news/",
+      "kind": "team_news",
+      "sha256": "005c180e3d936f180b1995413950ded8aeb460c9378c54bcb013f6a7bd02f09a",
+      "started_at": "2026-10-25T17:31:17.780497+00:00",
+      "status": 200,
+      "team": "MIN",
+      "url": "https://www.vikings.com/news/"
+    },
+    {
+      "bytes": 1564847,
+      "captured_at": "2026-10-25T17:31:17.950191+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "8a6d0cb85d43c66020615684afcd0a35d438e3ffd32a27a62637757cb356805e",
+      "started_at": "2026-10-25T17:31:17.780807+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 313177,
+      "captured_at": "2026-10-25T17:31:18.361495+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.colts.com/news/colts-announce-7-inactive-players-for-week-7-game-at-minnesota-vikings",
+      "kind": "official_inactives",
+      "sha256": "9f48e5c37609a8711d5b69a519a033cd1023007abb4fa32e88bf048d3a7f2e0c",
+      "started_at": "2026-10-25T17:31:18.151034+00:00",
+      "status": 200,
+      "team": "IND",
+      "url": "https://www.colts.com/news/colts-announce-7-inactive-players-for-week-7-game-at-minnesota-vikings"
+    },
+    {
+      "bytes": 469528,
+      "captured_at": "2026-10-25T17:31:18.270966+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.vikings.com/news/inactives-colts-week-7-2026",
+      "kind": "official_inactives",
+      "sha256": "398c0aa808782a809abf08a57d0c8fb73e48a95226076584a98053a35c2fd452",
+      "started_at": "2026-10-25T17:31:18.151369+00:00",
+      "status": 200,
+      "team": "MIN",
+      "url": "https://www.vikings.com/news/inactives-colts-week-7-2026"
+    }
+  ]
+}

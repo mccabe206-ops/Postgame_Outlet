@@ -1,0 +1,71 @@
+{
+  "checked_at": "2026-10-25T16:24:41.446828+00:00",
+  "members": [
+    {
+      "bytes": 59748,
+      "file": "availability.json",
+      "sha256": "d83b9e91008826e9eae38da0020df5e0214e5a99887d9ae1915294901fb84af3"
+    },
+    {
+      "bytes": 4419,
+      "file": "capture.json",
+      "sha256": "5ce97c7fc959617c3100168c6aaacf2d1743c7c317174616091f8cc04e5a0215"
+    },
+    {
+      "bytes": 19616,
+      "file": "inputs.json.gz",
+      "sha256": "bc3cfa37103899763d2e7cc02b0627910dacdc18200d7e52188fb81c7cf1afc7"
+    },
+    {
+      "bytes": 65917,
+      "file": "raw/000.html.gz",
+      "sha256": "306875ad3f0c83aa5a7b1f890c7c9cd9427bf413de08ff64d4491faf65e0e72b"
+    },
+    {
+      "bytes": 90088,
+      "file": "raw/001.html.gz",
+      "sha256": "37b4f44a8f60db99737b894189f10014f0c31555cfceaf21c7f350ee88561445"
+    },
+    {
+      "bytes": 59123,
+      "file": "raw/002.html.gz",
+      "sha256": "6795e150b197abdf12fe222f50fb1d9f85d5ca04d043baf4321ed86551c20154"
+    },
+    {
+      "bytes": 71583,
+      "file": "raw/003.html.gz",
+      "sha256": "535d6c143e6f11b9ea51253e90cff7aaf0871eba9cbed2051d0f15881fafcd8c"
+    },
+    {
+      "bytes": 94849,
+      "file": "raw/004.html.gz",
+      "sha256": "d0479173d820543f2b6c380b55b7b69757b16c80856793562ebe4541f29ae74a"
+    },
+    {
+      "bytes": 78035,
+      "file": "raw/005.html.gz",
+      "sha256": "35b534d50a6e4862d4b47a236e7340fe4cf96c9e9c672030f69288bd1371618d"
+    },
+    {
+      "bytes": 66870,
+      "file": "raw/006.html.gz",
+      "sha256": "6318fb799f6c3b43ecb64205b5584c008fd02763731e2914d8da99ce6ab029a2"
+    },
+    {
+      "bytes": 92121,
+      "file": "raw/007.html.gz",
+      "sha256": "bcec7ed6b473389956f023c7ec37aa22f330084bb92b09f05822bb5ddfe24617"
+    },
+    {
+      "bytes": 95713,
+      "file": "raw/008.html.gz",
+      "sha256": "6f7ceacd11d266dd28942694b26cf9ec5feb12815037a11d04a3835bd6874f76"
+    },
+    {
+      "bytes": 171919,
+      "file": "raw/009.html.gz",
+      "sha256": "7c40303c120cf00043da1137c038df5fdd2a994f73741103f2c613cd0fbbe0e5"
+    }
+  ],
+  "schema_version": 1
+}

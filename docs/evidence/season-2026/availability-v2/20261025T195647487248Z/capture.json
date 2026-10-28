@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T19:56:48.052855+00:00",
+  "sources": [
+    {
+      "bytes": 398309,
+      "captured_at": "2026-10-25T19:56:47.559096+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "a127328089efa9a5d9f6322d827129ba8953aadb04cf39171debe58b4dcf2b76",
+      "started_at": "2026-10-25T19:56:47.496425+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 367073,
+      "captured_at": "2026-10-25T19:56:47.667842+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.therams.com/news/",
+      "kind": "team_news",
+      "sha256": "fba965c9c6bd3909df37a09ac6913a22d280b30f4d3b2f02d5b5630e315d3432",
+      "started_at": "2026-10-25T19:56:47.496724+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/"
+    },
+    {
+      "bytes": 642321,
+      "captured_at": "2026-10-25T19:56:47.712367+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.raiders.com/news/",
+      "kind": "team_news",
+      "sha256": "f0b24d8ce481c94a224e9d15333c28dfa4dd74797ab2bb662f56c888c737a0b6",
+      "started_at": "2026-10-25T19:56:47.497120+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/"
+    },
+    {
+      "bytes": 1565991,
+      "captured_at": "2026-10-25T19:56:47.610571+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "c682c14d6e958442368a566426bdd2271f884c760648734753d54a2f265e670b",
+      "started_at": "2026-10-25T19:56:47.497466+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 584536,
+      "captured_at": "2026-10-25T19:56:47.949112+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.therams.com/news/trent-mcduffie-among-rams-inactives-for-week-7-2026-at-raiders",
+      "kind": "official_inactives",
+      "sha256": "c3471192db64658ceaebcad1a6ae564c0ae478d305bdcf5d8e2a138593f94c85",
+      "started_at": "2026-10-25T19:56:47.817721+00:00",
+      "status": 200,
+      "team": "LAR",
+      "url": "https://www.therams.com/news/trent-mcduffie-among-rams-inactives-for-week-7-2026-at-raiders"
+    },
+    {
+      "bytes": 337768,
+      "captured_at": "2026-10-25T19:56:47.962025+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.raiders.com/news/las-vegas-raiders-week-7-inactives-vs-los-angeles-rams",
+      "kind": "official_inactives",
+      "sha256": "e256dc8c86bab963fd48fe065000c802b10ab248f05d082eae8a625c2360ccd2",
+      "started_at": "2026-10-25T19:56:47.818020+00:00",
+      "status": 200,
+      "team": "LV",
+      "url": "https://www.raiders.com/news/las-vegas-raiders-week-7-inactives-vs-los-angeles-rams"
+    }
+  ]
+}

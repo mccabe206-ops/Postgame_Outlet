@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-25T17:31:16.563440+00:00",
+  "sources": [
+    {
+      "bytes": 398354,
+      "captured_at": "2026-10-25T17:31:15.820224+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "4ddf700da0f4669937fbc9cc7781483fe27dc3a4e0e2d3bf387e61795372619b",
+      "started_at": "2026-10-25T17:31:15.709687+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 659435,
+      "captured_at": "2026-10-25T17:31:15.888199+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/",
+      "kind": "team_news",
+      "sha256": "0661328279af6fd3f6dc2278157c42a69d0eaf506a9100f20517a150ad8550ce",
+      "started_at": "2026-10-25T17:31:15.709997+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/"
+    },
+    {
+      "bytes": 739447,
+      "captured_at": "2026-10-25T17:31:16.162660+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.bengals.com/news/",
+      "kind": "team_news",
+      "sha256": "0e770752df944233d49bebba9b4b8b4a00bc1b915d9d2269a7f3b2ff61726fba",
+      "started_at": "2026-10-25T17:31:15.710425+00:00",
+      "status": 200,
+      "team": "CIN",
+      "url": "https://www.bengals.com/news/"
+    },
+    {
+      "bytes": 1564847,
+      "captured_at": "2026-10-25T17:31:15.873241+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "8a6d0cb85d43c66020615684afcd0a35d438e3ffd32a27a62637757cb356805e",
+      "started_at": "2026-10-25T17:31:15.710873+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 321756,
+      "captured_at": "2026-10-25T17:31:16.460739+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.baltimoreravens.com/news/lamar-jackson-ravens-bengals-inactives-cam-jurgens-broderick-washington",
+      "kind": "official_inactives",
+      "sha256": "5e354ed455176d9e8994682c479bf0eb20afa6cb1e7dece753166df3de0be21b",
+      "started_at": "2026-10-25T17:31:16.280037+00:00",
+      "status": 200,
+      "team": "BAL",
+      "url": "https://www.baltimoreravens.com/news/lamar-jackson-ravens-bengals-inactives-cam-jurgens-broderick-washington"
+    },
+    {
+      "bytes": 357272,
+      "captured_at": "2026-10-25T17:31:16.457438+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.bengals.com/news/bengals-ravens-inactives-week-7-2026",
+      "kind": "official_inactives",
+      "sha256": "6d85f40ab785d509def4b1139235aafac21d0464d581d886fdcbc6592f0a0302",
+      "started_at": "2026-10-25T17:31:16.280374+00:00",
+      "status": 200,
+      "team": "CIN",
+      "url": "https://www.bengals.com/news/bengals-ravens-inactives-week-7-2026"
+    }
+  ]
+}

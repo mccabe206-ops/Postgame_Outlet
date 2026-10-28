@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-25T16:06:10.487476+00:00",
+  "sources": [
+    {
+      "bytes": 398354,
+      "captured_at": "2026-10-25T16:06:10.254546+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "b99de82733c10b0ceec3510ca7a8de8a5a458adb7e31384125c12b372c96761f",
+      "started_at": "2026-10-25T16:06:10.236497+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 390811,
+      "captured_at": "2026-10-25T16:06:10.300373+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.panthers.com/news/",
+      "kind": "team_news",
+      "sha256": "901b09ce15352753544e52b9a5146fdebd35cc7ac618267525ae5beb23e0a49c",
+      "started_at": "2026-10-25T16:06:10.236737+00:00",
+      "status": 200,
+      "team": "CAR",
+      "url": "https://www.panthers.com/news/"
+    },
+    {
+      "bytes": 352017,
+      "captured_at": "2026-10-25T16:06:10.266006+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.buccaneers.com/news/",
+      "kind": "team_news",
+      "sha256": "4ca9a98c0d27626b011aa25e5dae012baddb42ab015ec2e4ed4943862592d141",
+      "started_at": "2026-10-25T16:06:10.237001+00:00",
+      "status": 200,
+      "team": "TB",
+      "url": "https://www.buccaneers.com/news/"
+    },
+    {
+      "bytes": 1563809,
+      "captured_at": "2026-10-25T16:06:10.279233+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "dc4397fbd2befbd6415c2e68418651bfcd2b7fd8d2c284d8c30e3904dc5a93d5",
+      "started_at": "2026-10-25T16:06:10.237222+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    },
+    {
+      "bytes": 493908,
+      "captured_at": "2026-10-25T16:06:10.398110+00:00",
+      "file": "raw/004.html.gz",
+      "final_url": "https://www.panthers.com/news/week-7-inactives-vs-tampa-bay-no-jaelan-phillips-this-week",
+      "kind": "official_inactives",
+      "sha256": "d42a708bd07b7dddbd2f0bbf4fc42d16ed5f60e5bfd51a210c8fdd60ee1582a2",
+      "started_at": "2026-10-25T16:06:10.375002+00:00",
+      "status": 200,
+      "team": "CAR",
+      "url": "https://www.panthers.com/news/week-7-inactives-vs-tampa-bay-no-jaelan-phillips-this-week"
+    },
+    {
+      "bytes": 412002,
+      "captured_at": "2026-10-25T16:06:10.395608+00:00",
+      "file": "raw/005.html.gz",
+      "final_url": "https://www.panthers.com/news/panthers-waive-offensive-tackle-albert-reese",
+      "kind": "official_inactives",
+      "sha256": "da65026dec819d6434a1bcf070181957f2d74b48393f60d8f89cd964094b5604",
+      "started_at": "2026-10-25T16:06:10.375231+00:00",
+      "status": 200,
+      "team": "CAR",
+      "url": "https://www.panthers.com/news/panthers-waive-offensive-tackle-albert-reese"
+    },
+    {
+      "bytes": 383854,
+      "captured_at": "2026-10-25T16:06:10.396307+00:00",
+      "file": "raw/006.html.gz",
+      "final_url": "https://www.buccaneers.com/news/bucs-panthers-inactives-baker-mayfield-returns-action",
+      "kind": "official_inactives",
+      "sha256": "fd7645cb91c788c3003c7c86975fc4b7ac80beb1db1134b6dfd53537548f49ca",
+      "started_at": "2026-10-25T16:06:10.375471+00:00",
+      "status": 200,
+      "team": "TB",
+      "url": "https://www.buccaneers.com/news/bucs-panthers-inactives-baker-mayfield-returns-action"
+    }
+  ]
+}

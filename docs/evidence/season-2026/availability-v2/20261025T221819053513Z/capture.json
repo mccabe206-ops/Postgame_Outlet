@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-25T22:18:21.868775+00:00",
+  "sources": [
+    {
+      "bytes": 397167,
+      "captured_at": "2026-10-25T22:18:21.495867+00:00",
+      "file": "raw/000.html.gz",
+      "final_url": "https://www.nfl.com/injuries/",
+      "kind": "official_report",
+      "sha256": "1306c22670e7f713f497eb80c7830d6d3c17cd78587bde113de78e1435e76b5c",
+      "started_at": "2026-10-25T22:18:21.363112+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "bytes": 502976,
+      "captured_at": "2026-10-25T22:18:21.756906+00:00",
+      "file": "raw/001.html.gz",
+      "final_url": "https://www.chiefs.com/news/",
+      "kind": "team_news",
+      "sha256": "0607a5c9cb7fe3094fd11a428cbdd4b67c32032daa0ff2d17ec426b348605bd4",
+      "started_at": "2026-10-25T22:18:21.363416+00:00",
+      "status": 200,
+      "team": "KC",
+      "url": "https://www.chiefs.com/news/"
+    },
+    {
+      "bytes": 674696,
+      "captured_at": "2026-10-25T22:18:21.629413+00:00",
+      "file": "raw/002.html.gz",
+      "final_url": "https://www.seahawks.com/news/",
+      "kind": "team_news",
+      "sha256": "766f34c3039103f5e233f7a7db7ce3376d1900aa4617c6b28dab9660229a83ae",
+      "started_at": "2026-10-25T22:18:21.363630+00:00",
+      "status": 200,
+      "team": "SEA",
+      "url": "https://www.seahawks.com/news/"
+    },
+    {
+      "bytes": 1565478,
+      "captured_at": "2026-10-25T22:18:21.528385+00:00",
+      "file": "raw/003.html.gz",
+      "final_url": "https://www.nfl.com/news",
+      "kind": "league_news",
+      "sha256": "9b55e4e9b3cffe0d833314013a1a9b02491458798a9474ed9091d9140851e9ec",
+      "started_at": "2026-10-25T22:18:21.363814+00:00",
+      "status": 200,
+      "team": null,
+      "url": "https://www.nfl.com/news/"
+    }
+  ]
+}
