@@ -50,6 +50,26 @@ try:
 except Exception:  # noqa: BLE001
     MKT = None
 
+try:
+    import picks as PICKS  # weekly slate: market line, my line, edge (same as pick sheet)
+except Exception:  # noqa: BLE001
+    PICKS = None
+
+# Static, offline abbr map for the compact board/slate views.
+TEAM_ABBR = {
+    "Arizona Cardinals": "ARI", "Atlanta Falcons": "ATL", "Baltimore Ravens": "BAL",
+    "Buffalo Bills": "BUF", "Carolina Panthers": "CAR", "Chicago Bears": "CHI",
+    "Cincinnati Bengals": "CIN", "Cleveland Browns": "CLE", "Dallas Cowboys": "DAL",
+    "Denver Broncos": "DEN", "Detroit Lions": "DET", "Green Bay Packers": "GB",
+    "Houston Texans": "HOU", "Indianapolis Colts": "IND", "Jacksonville Jaguars": "JAX",
+    "Kansas City Chiefs": "KC", "Las Vegas Raiders": "LV", "Los Angeles Chargers": "LAC",
+    "Los Angeles Rams": "LAR", "Miami Dolphins": "MIA", "Minnesota Vikings": "MIN",
+    "New England Patriots": "NE", "New Orleans Saints": "NO", "New York Giants": "NYG",
+    "New York Jets": "NYJ", "Philadelphia Eagles": "PHI", "Pittsburgh Steelers": "PIT",
+    "San Francisco 49ers": "SF", "Seattle Seahawks": "SEA", "Tampa Bay Buccaneers": "TB",
+    "Tennessee Titans": "TEN", "Washington Commanders": "WAS",
+}
+
 HOST = "127.0.0.1"
 PORT = 8786
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -254,6 +274,49 @@ def act_market(week=None, year=None, refresh=False):
         return {"ok": True, **c["data"]}
     except Exception as e:  # noqa: BLE001
         return {"ok": False, "message": str(e)}
+
+
+_SLATE_CACHE = {"at": 0.0, "data": None}
+SLATE_TTL = 120  # seconds — one ESPN scoreboard call per refresh window
+
+
+def act_slate(refresh=False):
+    """Upcoming week's games with market line, my line and edge — the exact numbers
+    the pick sheet shows (picks.build_sheet), trimmed for the hub's week board."""
+    import time
+    if PICKS is None:
+        return {"ok": False, "message": "picks.py unavailable"}
+    now = time.time()
+    if not refresh and _SLATE_CACHE["data"] and now - _SLATE_CACHE["at"] < SLATE_TTL:
+        return _SLATE_CACHE["data"]
+    try:
+        s = PICKS.build_sheet()
+    except Exception as e:  # noqa: BLE001
+        return {"ok": False, "message": f"could not load the slate: {e}"}
+    games = []
+    for g in s.get("games", []):
+        games.append({
+            "game_id": g["game_id"], "kickoff": g["kickoff"], "locked": g["locked"],
+            "final": g["final"], "neutral": g["neutral"],
+            "away": g["away"], "home": g["home"],
+            "away_abbr": TEAM_ABBR.get(g["away"], g["away"][:3].upper()),
+            "home_abbr": TEAM_ABBR.get(g["home"], g["home"][:3].upper()),
+            "away_score": g["away_score"], "home_score": g["home_score"],
+            "market": g["market"], "my_spread": g["my_spread"], "edge": g["edge"],
+            "pick_side": g["pick_side"], "pick_confidence": g["pick_confidence"],
+        })
+    data = {"ok": True, "season": s.get("season"), "week": s.get("week"),
+            "picked_count": s.get("picked_count", 0), "max_picks": s.get("max_picks", 5),
+            "games": games, "generated": s.get("generated")}
+    _SLATE_CACHE.update(at=now, data=data)
+    return data
+
+
+def act_board():
+    rows = _read_ratings()
+    for r in rows:
+        r["abbr"] = TEAM_ABBR.get(r["team"], "")
+    return {"ok": True, "rows": rows}
 
 
 # ---------------------------------------------------------------- actions
@@ -934,107 +997,292 @@ def act_run_trend(body):
 
 
 # ---------------------------------------------------------------- page
-PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
-<title>Power Ratings — Hub</title>
+PAGE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Power Ratings Hub</title>
 <style>
- :root{--bg:#0e1116;--card:#171c24;--line:#273040;--ink:#e6edf3;--dim:#93a1b0;
-       --good:#2ea043;--bad:#e5534b;--warn:#d8c534;--accent:#3b82f6}
- *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);
-   font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif}
- header{padding:16px 22px;border-bottom:1px solid var(--line);display:flex;
-   align-items:center;gap:14px;position:sticky;top:0;background:var(--bg);z-index:5;flex-wrap:wrap}
- h1{font-size:19px;margin:0}
- .pill{font-size:12px;padding:3px 10px;border-radius:20px;border:1px solid var(--line);color:var(--dim)}
- .pill.on{color:var(--good);border-color:#1c4a2b;background:#12331d}
- .pill.off{color:var(--dim)}
- .pill.warn{color:var(--warn);border-color:#4a4a1c;background:#2a2f0e}
- .pill.bad{color:var(--bad);border-color:#4a1c1c;background:#331212}
- #bar{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
- .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:18px 22px}
- .cardbox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
-   display:flex;flex-direction:column;gap:8px}
- .cardbox h3{margin:0;font-size:15px;display:flex;align-items:center;gap:8px}
- .n{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;
-   border-radius:6px;background:#12233f;color:#9dc1ff;font-size:12px;font-weight:700;flex:0 0 auto}
- .cardbox p{margin:0;color:var(--dim);font-size:12.5px;min-height:32px}
- .cardbox.wide{grid-column:1/-1}
- .trendgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;width:100%}
- .trendgrid button{width:100%;text-align:center}
- .kbtools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+ :root{--bg:#07090d;--s1:#0d1117;--s2:#131921;--s3:#1a222d;--line:#1d2632;--line2:#2a3545;
+   --ink:#e9eef4;--dim:#8794a5;--faint:#566274;
+   --acc:#2fd27a;--acc-ink:#03140a;--acc-soft:rgba(47,210,122,.12);--acc-line:rgba(47,210,122,.35);
+   --neg:#ff5c6c;--neg-soft:rgba(255,92,108,.12);--warn:#f5b84a;--warn-soft:rgba(245,184,74,.12);
+   --good:var(--acc);--bad:var(--neg);--card:var(--s2);--accent:var(--acc);
+   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+   color-scheme:dark}
+ *{box-sizing:border-box}
+ [hidden]{display:none!important}
+ html,body{margin:0;background:var(--bg);color:var(--ink)}
+ body{font:14px/1.45 var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh}
+ button{font:inherit;color:inherit}
+ .num,td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+ /* header */
+ .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+   padding:12px 24px;background:rgba(7,9,13,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+ .brand{display:flex;align-items:center;gap:10px}
+ .logo{width:32px;height:32px;border-radius:8px;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;
+   font:800 13px/1 var(--sans);letter-spacing:-.02em}
+ .bt{font-weight:700;font-size:15px;letter-spacing:-.01em}
+ .bs{font-size:11.5px;color:var(--dim)}
+ .hstat{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+ .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:4px 10px;border-radius:999px;
+   border:1px solid var(--line2);color:var(--dim);background:var(--s1);white-space:nowrap}
+ .chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--faint)}
+ .chip.plain::before{display:none}
+ .chip.ok{color:var(--acc);border-color:var(--acc-line);background:var(--acc-soft)} .chip.ok::before{background:var(--acc)}
+ .chip.warn{color:var(--warn);border-color:rgba(245,184,74,.35);background:var(--warn-soft)} .chip.warn::before{background:var(--warn)}
+ .chip.bad{color:var(--neg);border-color:rgba(255,92,108,.35);background:var(--neg-soft)} .chip.bad::before{background:var(--neg)}
+ .icon{width:32px;height:32px;border-radius:8px;border:1px solid var(--line2);background:var(--s1);cursor:pointer;color:var(--dim)}
+ .icon:hover{color:var(--ink);border-color:var(--faint)}
+
+ /* layout */
+ .wrap{max-width:1280px;margin:0 auto;padding:20px 24px 120px;display:flex;flex-direction:column;gap:18px}
+ .cols{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:18px;align-items:start}
+ .side{display:flex;flex-direction:column;gap:18px;min-width:0}
+ @media(max-width:1180px){.cols{grid-template-columns:minmax(0,1fr)}
+   .side{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));align-items:start}}
+ .panel{background:var(--s1);border:1px solid var(--line);border-radius:14px;min-width:0;overflow:hidden}
+ .ph{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 18px 12px}
+ .ph h2{margin:0;font-size:16px;font-weight:700;letter-spacing:-.01em}
+ .sub{font-size:12px;color:var(--dim);margin-top:2px}
+ .pa{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+ /* buttons */
+ .btn,.go{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:8px;cursor:pointer;
+   font-size:13px;font-weight:600;border:1px solid var(--line2);background:var(--s2);color:var(--ink);white-space:nowrap}
+ .btn:hover,.go:hover{border-color:var(--faint);background:var(--s3)}
+ .btn.pri{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+ .btn.pri:hover{filter:brightness(1.08);background:var(--acc)}
+ .go{color:var(--acc);border-color:var(--acc-line);background:var(--acc-soft)}
+ .go:hover{background:rgba(47,210,122,.2);border-color:var(--acc)}
+ .go.alt{color:var(--ink);border-color:var(--line2);background:var(--s2)}
+ .go:disabled,.btn:disabled{opacity:.5;cursor:not-allowed}
+ .close{cursor:pointer;color:var(--dim);border:1px solid var(--line2);border-radius:8px;padding:5px 10px;background:var(--s2);font-size:12.5px}
+ .close:hover{color:var(--ink)}
+ .tgl{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--dim);cursor:pointer;user-select:none}
+ .tgl input{accent-color:var(--acc)}
+ input,textarea,select{background:var(--bg);border:1px solid var(--line2);color:var(--ink);border-radius:8px;
+   padding:7px 10px;font-size:13px;font-family:inherit;min-width:0}
+ input:focus,textarea:focus{outline:none;border-color:var(--acc)}
+ input.sm{width:70px} textarea{width:100%;min-height:110px;font-family:var(--mono);font-size:12.5px}
  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
- button.go{background:#12233f;border:1px solid var(--accent);color:#dbe9ff;padding:7px 12px;
-   border-radius:8px;cursor:pointer;font-size:13.5px}
- button.go:hover{background:#193253} button.go.alt{background:var(--card);border-color:var(--line);color:var(--ink)}
- button.go:disabled{opacity:.5;cursor:not-allowed}
- input,textarea,select{background:#0e1116;border:1px solid var(--line);color:var(--ink);
-   border-radius:8px;padding:6px 9px;font-size:13.5px;font-family:inherit}
- input.sm{width:66px} textarea{width:100%;min-height:120px;font-family:ui-monospace,Menlo,monospace}
- .note{font-size:11.5px;color:var(--warn)}
- #out{position:sticky;bottom:0;background:#0b0e13;border-top:1px solid var(--line);max-height:44vh;
-   display:flex;flex-direction:column}
- #outhead{padding:8px 16px;display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line)}
- #outhead .title{font-weight:600} #outhead .cmd{color:var(--dim);font-size:12px;
-   font-family:ui-monospace,Menlo,monospace}
- .toggle{margin-left:auto;display:flex;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
- .toggle button{background:var(--card);border:0;color:var(--dim);padding:5px 12px;cursor:pointer;font-size:12.5px}
- .toggle button.sel{background:#12233f;color:#dbe9ff}
- #outbody{overflow:auto;padding:12px 16px}
- pre{margin:0;white-space:pre-wrap;word-break:break-word;font:12.5px/1.5 ui-monospace,Menlo,monospace;color:#cdd9e5}
- table.r{border-collapse:collapse;width:100%} table.r th,table.r td{padding:6px 10px;
-   border-bottom:1px solid var(--line);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+ .note{font-size:12px;color:var(--dim)}
+ .subhd{margin:14px 0 6px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--faint)}
+ .subhd:first-of-type{margin-top:4px}
+ .trendgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;width:100%}
+ .trendgrid button{width:100%;justify-content:center}
+ .kbtools{display:flex;gap:8px;flex-wrap:wrap}
+
+ /* tables */
+ .tbl-wrap{overflow-x:auto;border-top:1px solid var(--line)}
+ .tbl-wrap.tall{max-height:760px;overflow-y:auto}
+ table.slate,table.board{width:100%;border-collapse:collapse}
+ .slate th,.board th{position:sticky;top:0;background:var(--s1);z-index:1;padding:9px 12px;font-size:10.5px;font-weight:700;
+   text-transform:uppercase;letter-spacing:.07em;color:var(--faint);text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+ .slate td,.board td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+ .slate th.l,.slate td.l,.board th.l,.board td.l{text-align:left}
+ .slate tbody tr:last-child td,.board tbody tr:last-child td{border-bottom:0}
+ .slate tbody tr:hover,.board tbody tr:hover{background:var(--s2)}
+ .slate .when{color:var(--dim);font-size:12px}
+ .slate .when b{color:var(--ink);font-weight:600}
+ .mu{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.01em}
+ .mu .at{color:var(--faint);font-weight:400}
+ .mu .lean{color:var(--acc)}
+ .line{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px}
+ .line .t{color:var(--dim);margin-right:5px;font-family:var(--sans);font-size:12px;font-weight:600}
+ .edge{display:inline-flex;align-items:center;gap:6px;justify-content:flex-end;min-width:86px;padding:4px 9px;border-radius:7px;
+   font-family:var(--mono);font-size:13px;font-weight:700;color:var(--dim)}
+ .edge .t{font-family:var(--sans);font-size:11.5px;font-weight:700}
+ .edge.hot{background:var(--acc-soft);color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc-line)}
+ .edge.none{font-weight:400;color:var(--faint)}
+ .pk{display:inline-flex;gap:5px;align-items:center;font-size:12px;font-weight:700;color:var(--warn)}
+ .res-w{color:var(--acc)} .res-l{color:var(--neg)}
+ .empty{padding:22px 18px;color:var(--dim);font-size:13px}
+ .board tbody tr{cursor:pointer}
+ .board .rk{color:var(--faint);font-family:var(--mono);width:30px}
+ .tm{display:flex;flex-direction:column;line-height:1.2}
+ .tm b{font-size:13.5px} .tm span{font-size:11.5px;color:var(--dim)}
+ .board .qbn{color:var(--dim);font-size:12.5px}
+ .pos{color:var(--acc)} .neg{color:var(--neg)} .zero{color:var(--dim)}
+ .tot{display:flex;align-items:center;justify-content:flex-end;gap:10px}
+ .tot .v{font-family:var(--mono);font-weight:700;font-size:14px;min-width:44px;text-align:right}
+ .bar{position:relative;width:92px;height:6px;border-radius:3px;background:var(--s3)}
+ .bar::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--line2)}
+ .bar i{position:absolute;top:0;bottom:0;border-radius:3px}
+ .bar i.p{left:50%;background:var(--acc)} .bar i.m{right:50%;background:var(--neg)}
+ .flagd{color:var(--warn);margin-left:4px}
+ @media(max-width:640px){
+   .hide-sm{display:none}
+   .top{padding:10px 16px} .wrap{padding:14px 16px 120px}
+   .slate td,.board td,.slate th,.board th{padding:9px 6px}
+   .slate td:first-child,.board td:first-child,.slate th:first-child,.board th:first-child{padding-left:14px}
+   .slate td:last-child,.board td:last-child,.slate th:last-child,.board th:last-child{padding-right:14px}
+   .mu{gap:5px} .line{font-size:12.5px} .line .t{margin-right:3px;font-size:11px}
+   .edge{min-width:0;padding:3px 7px;gap:4px;font-size:12.5px}
+   .bar{display:none}
+   .ph .pa{width:100%;justify-content:space-between}
+ }
+
+ /* side panels */
+ .tiles{display:grid;gap:10px;padding:0 18px 18px}
+ .tile{text-align:left;display:flex;flex-direction:column;gap:3px;padding:13px 14px;border-radius:10px;cursor:pointer;
+   background:var(--s2);border:1px solid var(--line)}
+ .tile:hover{border-color:var(--acc-line);background:var(--s3)}
+ .tile .tt{font-weight:700;font-size:14px;display:flex;justify-content:space-between}
+ .tile .tt::after{content:"→";color:var(--acc)}
+ .tile .td{font-size:12px;color:var(--dim)}
+ .trends{display:flex;flex-direction:column;padding:0 10px 6px}
+ .trend{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:10px 8px;border:0;border-bottom:1px solid var(--line);
+   background:none;cursor:pointer;border-radius:0}
+ .trend:last-child{border-bottom:0}
+ .trend:hover{background:var(--s2);border-radius:8px}
+ .trend .tx{flex:1;min-width:0}
+ .trend .tl{font-weight:600;font-size:13.5px}
+ .trend .tdsc{font-size:12px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .trend .go-arrow{color:var(--faint);font-size:13px}
+ .trend:hover .go-arrow{color:var(--acc)}
+ details.sql{border-top:1px solid var(--line);padding:12px 18px 16px}
+ details.sql summary{cursor:pointer;color:var(--dim);font-size:12.5px;font-weight:600}
+ details.sql textarea{margin:10px 0 8px}
+
+ /* more tools */
+ details.more{background:var(--s1);border:1px solid var(--line);border-radius:14px}
+ details.more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 18px;flex-wrap:wrap}
+ details.more>summary::-webkit-details-marker{display:none}
+ details.more>summary>span:first-child{font-weight:700;font-size:15px}
+ details.more>summary::before{content:"+";width:22px;height:22px;border-radius:6px;display:grid;place-items:center;
+   background:var(--s3);color:var(--dim);font-weight:700}
+ details.more[open]>summary::before{content:"–"}
+ .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:12px;padding:0 18px 18px}
+ .mcard{background:var(--s2);border:1px solid var(--line);border-radius:11px;padding:14px 15px;display:flex;flex-direction:column;gap:8px;min-width:0}
+ .mcard h3{margin:0;font-size:14px}
+ .mcard>p{margin:0;font-size:12px;color:var(--dim)}
+
+ /* output drawer */
+ #out{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--s1);border-top:1px solid var(--line2);
+   box-shadow:0 -12px 40px rgba(0,0,0,.5);max-height:52vh;flex-direction:column}
+ #outhead{padding:10px 18px;display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);flex-wrap:wrap}
+ #outhead .title{font-weight:700}
+ #outhead .cmd{color:var(--faint);font-size:12px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:40ch}
+ .toggle{margin-left:auto;display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden}
+ .toggle button{background:var(--s2);border:0;color:var(--dim);padding:5px 12px;cursor:pointer;font-size:12.5px}
+ .toggle button.sel,.toggle button.act{background:var(--s3);color:var(--ink)}
+ #outbody{overflow:auto;padding:14px 18px}
+ pre{margin:0;white-space:pre-wrap;word-break:break-word;font:12.5px/1.55 var(--mono);color:#c9d4df}
+ .rc-ok{color:var(--acc);font-size:12px} .rc-bad{color:var(--neg);font-size:12px}
+
+ /* tables used inside dialogs / output */
+ table.r{border-collapse:collapse;width:100%}
+ table.r th,table.r td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
  table.r th:first-child,table.r td:first-child,table.r th.l,table.r td.l{text-align:left}
- table.r th{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
- tr.flag td{background:#2a2f0e}
- .close{cursor:pointer;color:var(--dim);border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:var(--card)}
- .rc-ok{color:var(--good)} .rc-bad{color:var(--bad)}
- .toggle button.act{background:#193253;color:var(--ink)}
- .subhd{margin:12px 0 5px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);border-top:1px solid var(--line);padding-top:9px}
- .subhd:first-child{border-top:0;padding-top:0;margin-top:2px}
- .qbwrap{overflow:auto;max-height:70vh}
+ table.r th{color:var(--faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em}
+ tr.flag td{background:var(--warn-soft)}
+ .qbwrap{overflow:auto;max-height:66vh}
  .qbt{width:100%;border-collapse:collapse;font-size:12.5px}
- .qbt th,.qbt td{padding:4px 9px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
- .qbt th{color:var(--dim);font-weight:600;position:sticky;top:0;background:var(--card);z-index:1}
- .qbt td.rk{color:var(--dim);text-align:right;width:26px}
- .qbt td.num{text-align:right;font-variant-numeric:tabular-nums}
+ .qbt th,.qbt td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+ .qbt th{color:var(--faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;position:sticky;top:0;background:var(--s1);z-index:1}
+ .qbt td.rk{color:var(--faint);text-align:right;width:26px}
+ .qbt td.num{text-align:right;font-family:var(--mono)}
  .qbt .dim{color:var(--dim)}
- .qbt .pos{color:#3fb950} .qbt .neg{color:#f85149}
- .qbt tbody tr:hover{background:#1c2431}
- dialog{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;
-   padding:18px;max-width:560px;width:92%}
- dialog.wide{max-width:1000px}
- dialog::backdrop{background:rgba(0,0,0,.6)}
+ .qbt tbody tr:hover{background:var(--s2)}
+ .pill{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--dim)}
+ .pill.warn{color:var(--warn);border-color:rgba(245,184,74,.35);background:var(--warn-soft)}
+
+ /* dialogs */
+ dialog{background:var(--s1);color:var(--ink);border:1px solid var(--line2);border-radius:14px;padding:20px;max-width:560px;width:94%;
+   box-shadow:0 30px 80px rgba(0,0,0,.6)}
+ dialog.wide{max-width:1040px}
+ dialog::backdrop{background:rgba(2,4,8,.72)}
+ dialog h3{margin:0 0 6px;font-size:17px}
  .wu-split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
  @media(max-width:720px){.wu-split{grid-template-columns:1fr}}
  .wu-pane{display:flex;flex-direction:column;min-width:0}
- .wu-hd{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-bottom:5px}
- .wu-ta{width:100%;min-height:360px;resize:vertical;background:#0e131b;color:#cdd9e5;border:1px solid var(--line);
-   border-radius:8px;padding:10px;font:12.5px/1.55 ui-monospace,Menlo,monospace}
- .wu-prev{min-height:360px;max-height:60vh;overflow:auto;background:#0e131b;border:1px solid var(--line);
-   border-radius:8px;padding:12px 14px}
+ .wu-hd{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);font-weight:700;margin-bottom:6px}
+ .wu-ta{width:100%;min-height:360px;resize:vertical;background:var(--bg);color:#c9d4df;border:1px solid var(--line2);
+   border-radius:8px;padding:10px;font:12.5px/1.55 var(--mono)}
+ .wu-prev{min-height:360px;max-height:60vh;overflow:auto;background:var(--bg);border:1px solid var(--line2);border-radius:8px;padding:12px 14px}
  .wu-prev h2{font-size:17px;margin:.2em 0 .3em} .wu-prev h3{font-size:15px;margin:.6em 0 .3em}
  .wu-prev h4{font-size:13px;margin:.6em 0 .2em;color:var(--dim)}
  .wu-prev p{margin:.4em 0} .wu-prev ul{margin:.3em 0 .5em;padding-left:1.2em} .wu-prev li{margin:.15em 0}
- .wu-prev .empty{color:var(--dim);font-style:italic}
- .te-sec{border:1px solid var(--line);border-radius:10px;padding:12px}
+ .wu-prev .empty{color:var(--dim);font-style:italic;padding:0}
+ .te-sec{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--s2)}
  .te-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
  @media(max-width:640px){.te-nums{grid-template-columns:1fr}}
  .te-cell{display:flex;flex-direction:column;gap:3px}
  .te-cell label{font-size:11px;color:var(--dim)}
- .te-num{background:#0e131b;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:15px ui-monospace,Menlo,monospace}
- .te-ctx{font-size:10.5px;color:var(--dim)}
+ .te-num{background:var(--bg);color:var(--ink);border:1px solid var(--line2);border-radius:8px;padding:8px 10px;font:15px var(--mono)}
+ .te-ctx{font-size:10.5px;color:var(--faint)}
  .te-tot{margin-top:8px} .te-totv{font-weight:700;font-size:15px}
 </style></head><body>
-<header>
-  <h1>⚡ Power Ratings Hub</h1>
-  <span class="pill" id="p-branch">branch…</span>
-  <span class="pill" id="p-gate">gate…</span>
-  <div id="bar"><span class="pill" id="p-dirty">…</span>
-    <span class="pill" id="s-pick">pick</span><span class="pill" id="s-team">team</span>
-    <span class="pill" id="s-injury">injury</span><span class="pill" id="s-guru">guru</span>
-    <button class="close" onclick="refresh()">↻</button></div>
+<header class="top">
+  <div class="brand"><span class="logo">PR</span>
+    <div><div class="bt">Power Ratings</div><div class="bs">McCabe Method</div></div></div>
+  <div class="hstat">
+    <span class="chip plain" id="p-week">Week —</span>
+    <span class="chip" id="p-gate">gate…</span>
+    <span class="chip warn" id="p-dirty" hidden>uncommitted data</span>
+    <span class="chip warn" id="p-branch" hidden></span>
+    <button class="icon" onclick="reloadAll(true)" title="Refresh lines and ratings" aria-label="Refresh">↻</button>
+  </div>
 </header>
 
-<div class="grid" id="cards"></div>
+<main class="wrap">
+  <section class="panel">
+    <div class="ph">
+      <div><h2 id="sl-title">This week</h2><div class="sub" id="sl-sub">loading lines…</div></div>
+      <div class="pa">
+        <label class="tgl"><input type="checkbox" id="sl-edges" onchange="renderSlate()"> Edges ≥ 1.5 only</label>
+        <button class="btn pri" onclick="launch('pick')">Open pick sheet →</button>
+      </div>
+    </div>
+    <div class="tbl-wrap"><table class="slate" id="sl-tbl"></table></div>
+  </section>
+
+  <div class="cols">
+    <section class="panel">
+      <div class="ph">
+        <div><h2>Power ratings</h2><div class="sub" id="rt-sub">QB + Off + Def · click a team to edit</div></div>
+        <div class="pa">
+          <button class="btn" onclick="openQbBoard()">QB rankings</button>
+          <button class="btn" onclick="openEditions()">Editions</button>
+        </div>
+      </div>
+      <div class="tbl-wrap tall"><table class="board" id="rt-tbl"></table></div>
+    </section>
+
+    <div class="side">
+      <section class="panel">
+        <div class="ph"><div><h2>Market</h2><div class="sub">where the market disagrees with you</div></div></div>
+        <div class="tiles">
+          <button class="tile" onclick="openMarketBoard()"><span class="tt">Market vs Mine</span>
+            <span class="td">Market-implied rating for every team next to yours, with the gap</span></button>
+          <button class="tile" onclick="launch('props')"><span class="tt">Prop Board</span>
+            <span class="td">Check prop claims and compare Kalshi, Polymarket, DK and FD prices</span></button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="ph">
+          <div><h2>Trends</h2><div class="sub" id="trend-label">from the knowledge base</div></div>
+          <div class="pa"><button class="btn" onclick="launch('guru')">Open guru</button></div>
+        </div>
+        <div class="trends" id="trend-btns"><div class="empty">loading…</div></div>
+        <details class="sql"><summary>Raw SQL</summary>
+          <textarea id="kb-sql" placeholder="SELECT … (blank = show schema)"></textarea>
+          <div class="row">
+            <button class="btn pri" onclick="run({action:'kb',sql:document.getElementById('kb-sql').value},'KB query')">Run query</button>
+            <button class="btn" onclick="openKbChat()">Chat (needs API key)</button>
+          </div>
+        </details>
+      </section>
+    </div>
+  </div>
+
+  <details class="more">
+    <summary><span>More tools</span><span class="sub">ratings editor · game analysis · injuries &amp; depth · publish</span></summary>
+    <div class="mgrid" id="more-grid"></div>
+  </details>
+</main>
 
 <div id="out" style="display:none">
   <div id="outhead">
@@ -1051,50 +1299,26 @@ PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
 <dialog id="dlg"><div id="dlg-body"></div></dialog>
 
 <script>
-const CARDS = [
- {n:1, t:"Weekly picks", d:"Your editable weekly pick sheet — matchups, market vs. your line, edge; pick 5 with confidence.",
-   render:c=>btn(c,"Open pick sheet",()=>launch('pick'))},
- {n:2, t:"Update ratings & write-up", d:"Edit QB/Off/Def (gated save, or hand to Claude Code) AND the write-up with live preview — current numbers + league context in view.",
+const MORE = [
+ {t:"Update ratings & write-up", d:"Edit QB/Off/Def (gated save) and the write-up with live preview. Or click any team on the board.",
    render:c=>teamEditorCard(c)},
- {n:3, t:"Ratings board", wide:true, d:"View the ratings — the full 32-team board, QB rankings, and past editions.",
-   render:c=>{ sub(c,'Board — 32 teams, best to worst'); btn(c,"Show board",()=>run({action:'ratings'},"Current ratings"));
-     sub(c,'Market vs Mine — market-implied ratings next to yours, with the gap'); btn(c,"Open Market vs Mine",()=>openMarketBoard());
-     sub(c,'QB rankings — starters 1–32 + backups, week-to-week'); btn(c,"Open QB rankings",()=>openQbBoard());
-     sub(c,'Editions — snapshot now, or open a past board (Δ vs current)'); snapshotCard(c); }},
- {n:4, t:"Game analysis", wide:true, d:"What happened in the games — scores + graded picks, visual game reports, per-player PFF grades.",
-   render:c=>{ sub(c,'Results & grading — scores, picks vs market, rating signals'); weekRun(c,'results',"Results & grading");
-     sub(c,'Game reports — full visual report per game'); btn(c,"Open game reports",()=>launch('game'));
-     sub(c,'PFF player stats — grades by game (reads local cache)'); pffCard(c); }},
- {n:5, t:"Roster & health", wide:true, d:"Who's healthy and who's starting — rating-relevant injuries (Sleeper) and depth-chart order (Ourlads).",
-   render:c=>{ sub(c,'Injury report — rating-relevant injuries'); injuryCard(c);
-     sub(c,'Depth charts — starter → backup order'); depthCard(c); }},
- {n:6, t:"Publish center", wide:true, d:"Preview, preflight the gate, see what changed, and publish a named edition.",
-   render:c=>{ sub(c,'Preview — regenerate to a private local file (no publish)'); btn(c,"Build preview",()=>run({action:'preview'},"Local preview"));
-     sub(c,'What changed — data/ diff since last publish'); btn(c,"Show diff",()=>run({action:'whatchanged'},"What changed"));
-     sub(c,'Preflight — gate + tests; shows exactly what would go live'); btn(c,"Run preflight",()=>publishCheck(),"alt");
-     sub(c,'Publish an edition'); {const p=el('p','note','Named board snapshot via the publish-edition Action — tell Claude Code the label. To go live, say “publish” to Claude Code.'); c.appendChild(p);} }},
- {n:7, t:"NFL knowledge base", wide:true, d:"Chat in plain English — model writes read-only SQL and cites the numbers. One-click trends + a raw SQL box, no key needed.",
-   render:c=>kbCard(c)},
- {n:8, t:"Market vs Mine", d:"What the betting market thinks each team is worth (fit from recent lines, QB-adjusted) next to your rating — and where you disagree.",
-   render:c=>btn(c,"Open Market vs Mine",()=>openMarketBoard())},
- {n:9, t:"Prop Board", d:"Verify prop claims from X (true + caveats: sample, DNPs, injuries, market price) and compare Kalshi / Polymarket / DK / FD prices — model edges once calibrated.",
-   render:c=>btn(c,"Open Prop Board",()=>launch('props'))},
+ {t:"Game analysis", d:"Scores and graded picks, visual game reports, PFF player grades.",
+   render:c=>{ sub(c,'Results & grading'); weekRun(c,'results',"Results & grading");
+     sub(c,'Game reports'); btn(c,"Open game reports",()=>launch('game'));
+     sub(c,'PFF player stats (local cache)'); pffCard(c); }},
+ {t:"Injuries & depth", d:"Rating-relevant injuries (Sleeper) and depth-chart order (Ourlads).",
+   render:c=>{ sub(c,'Injury report'); injuryCard(c); sub(c,'Depth charts'); depthCard(c); }},
+ {t:"Publish center", d:"Preview, see what changed, run the gate. To go live, say “publish” to Claude Code.",
+   render:c=>{ const r=el('div','row');
+     const a=el('button','go','Build preview'); a.onclick=()=>run({action:'preview'},"Local preview");
+     const b=el('button','go alt','What changed'); b.onclick=()=>run({action:'whatchanged'},"What changed");
+     const p=el('button','go alt','Run preflight'); p.onclick=()=>publishCheck();
+     [a,b,p].forEach(x=>r.appendChild(x)); c.appendChild(r); }},
 ];
-
 function el(t,cls,txt){const e=document.createElement(t);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
 function btn(c,label,fn,cls){const b=el('button',(cls?'go '+cls:'go'),label);b.onclick=fn;
   const r=el('div','row');r.appendChild(b);c.appendChild(r);return b;}
 function sub(c,label){const s=el('div','subhd',label);c.appendChild(s);return s;}
-
-function buildCards(){
-  const g=document.getElementById('cards'); g.innerHTML='';
-  for(const cd of CARDS){
-    const box=el('div','cardbox'+(cd.wide?' wide':''));
-    const h=el('h3'); h.appendChild(el('span','n',cd.n)); h.appendChild(document.createTextNode(cd.t));
-    box.appendChild(h); box.appendChild(el('p',null,cd.d));
-    cd.render(box); g.appendChild(box);
-  }
-}
 
 // ---- card builders that need inputs
 function teamOpen(c){
@@ -1150,21 +1374,6 @@ function kbCard(c){
   const b2=el('button','go','Run raw SQL'); b2.onclick=()=>run({action:'kb',sql:ta.value},"KB query");
   r2.appendChild(b2); c.appendChild(r2);
 }
-async function loadTrends(row){
-  try{
-    const j=await api('/api/trends');
-    row.innerHTML='';
-    const wk = j.week!=null ? ` · Wk${j.week} ${j.season}` : '';
-    const lbl=document.getElementById('trend-label');
-    if(lbl && j.week!=null) lbl.textContent=`One-click bettable trends for Week ${j.week} ${j.season} (no key needed):`;
-    (j.trends||[]).forEach(t=>{
-      const b=el('button','go alt',t.label); b.title=t.desc;
-      b.onclick=()=>run({action:'trend',trend:t.id}, t.label+wk);
-      row.appendChild(b);
-    });
-  }catch(e){ row.textContent='(trends unavailable)'; }
-}
-
 // ---- KB chat (Claude API backed)
 let KB_HISTORY=[];
 function genericTable(rows){
@@ -1228,8 +1437,8 @@ async function openKbChat(){
   if(!st.has_key){
     help.style.display='block';
     help.innerHTML='<div class="note">No key found. In your <b>own Terminal</b> run:<br>'
-      +'<code>read -rs \"k?Anthropic key: \" && printf %s \"$k\" &gt; ~/projects/Postgame_Outlet/data/.anthropic_key '
-      +'&amp;&amp; chmod 600 ~/projects/Postgame_Outlet/data/.anthropic_key &amp;&amp; unset k</code><br>then reopen this chat.</div>';
+      +'<code>read -rs \"k?Anthropic key: \" && printf %s \"$k\" &gt; ~/Documents/Postgame_Outlet-hub/data/.anthropic_key '
+      +'&amp;&amp; chmod 600 ~/Documents/Postgame_Outlet-hub/data/.anthropic_key &amp;&amp; unset k</code><br>then reopen this chat.</div>';
   } else { help.style.display='none'; }
   dlg.showModal();
   document.getElementById('kb-input').focus();
@@ -1646,23 +1855,142 @@ function openWriteupEditor(j){
   dlg.showModal();
 }
 
-// ---- status bar
-async function refresh(){
-  let s; try{ s=await api('/api/status'); }catch(e){ return; }
-  const br=document.getElementById('p-branch'); br.textContent='branch: '+s.branch;
-  br.className='pill '+(s.branch==='testing'?'on':'warn');
-  const gate=document.getElementById('p-gate');
-  if(s.needs_review.count){ gate.textContent='gate: '+s.needs_review.count+' need review'; gate.className='pill bad'; }
-  else { gate.textContent='gate: clear'; gate.className='pill on'; }
-  const d=document.getElementById('p-dirty');
-  d.textContent = s.dirty?'data: uncommitted':'data: clean'; d.className='pill '+(s.dirty?'warn':'off');
-  for(const k of ['pick','team','injury','guru']){
-    const e=document.getElementById('s-'+k); const up=s.servers[k];
-    e.textContent=k+(up?' ●':' ○'); e.className='pill '+(up?'on':'off'); e.title=up?'running':'stopped';
+// ---- layout builders (new hub)
+const escH=s=>String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const sgn=v=>{ const n=Number(v); if(!isFinite(n))return '—'; return (n>0?'+':'')+n.toFixed(1); };
+const vcl=v=>{ const n=Number(v); return n>0?'pos':(n<0?'neg':'zero'); };
+
+function buildMore(){
+  const g=document.getElementById('more-grid'); g.innerHTML='';
+  for(const cd of MORE){
+    const box=el('div','mcard'); box.appendChild(el('h3',null,cd.t)); box.appendChild(el('p',null,cd.d));
+    cd.render(box); g.appendChild(box);
   }
 }
-buildCards(); refresh(); setInterval(refresh, 8000);
+
+// ---- week board (market vs my line, same numbers as the pick sheet)
+let SLATE=null;
+function favLine(v,home,away){ // home-relative: negative = home favored
+  if(v==null) return '<span class="zero">—</span>';
+  const n=Number(v); if(n===0) return '<span class="t">PK</span>';
+  const team=n<0?home:away; return `<span class="t">${escH(team)}</span>−${Math.abs(n).toFixed(1).replace(/\.0$/,'')}`;
+}
+function kickoffCell(g){
+  if(g.final) return `<span class="when"><b>Final</b> ${g.away_score??''}–${g.home_score??''}</span>`;
+  if(g.locked) return '<span class="when"><b style="color:var(--neg)">Live</b></span>';
+  const d=new Date(g.kickoff); if(isNaN(d)) return '<span class="when">TBD</span>';
+  const day=d.toLocaleDateString([], {weekday:'short'});
+  const t=d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+  return `<span class="when"><b>${day}</b> ${t}</span>`;
+}
+async function loadSlate(force){
+  try{ SLATE=await api('/api/slate'+(force?'?refresh=1':'')); }catch(e){ SLATE={ok:false,message:String(e)}; }
+  renderSlate();
+}
+function renderSlate(){
+  const t=document.getElementById('sl-tbl'), sub=document.getElementById('sl-sub');
+  if(!SLATE || !SLATE.ok){ t.innerHTML=`<tbody><tr><td class="empty l">${escH((SLATE&&SLATE.message)||'Lines unavailable.')}</td></tr></tbody>`;
+    sub.textContent='lines unavailable'; return; }
+  document.getElementById('sl-title').textContent=`Week ${SLATE.week} board`;
+  const wk=document.getElementById('p-week'); wk.textContent=`Week ${SLATE.week} · ${SLATE.season}`;
+  const games=SLATE.games.slice().sort((a,b)=>(a.kickoff||'').localeCompare(b.kickoff||''));
+  const hot=games.filter(g=>g.edge!=null && Math.abs(g.edge)>=1.5);
+  const onlyEdges=document.getElementById('sl-edges').checked;
+  const gen=SLATE.generated?new Date(SLATE.generated.replace('Z',':00Z')):null;
+  sub.textContent=`${games.length} games · ${hot.length} edge${hot.length===1?'':'s'} ≥ 1.5 · picks ${SLATE.picked_count}/${SLATE.max_picks}`
+    +(gen&&!isNaN(gen)?` · lines ${gen.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}`:'');
+  const rows=(onlyEdges?hot:games);
+  let h='<thead><tr><th class="l hide-sm">Kickoff</th><th class="l">Matchup</th><th>Market</th><th>Mine</th><th>Edge</th><th class="hide-sm">Pick</th></tr></thead><tbody>';
+  if(!rows.length) h+=`<tr><td class="empty l" colspan="6">No games with an edge of 1.5 or more.</td></tr>`;
+  for(const g of rows){
+    const e=g.edge, lean=e==null||e===0?null:(e>0?'home':'away');
+    const leanAbbr=lean==='home'?g.home_abbr:(lean==='away'?g.away_abbr:'');
+    const isHot=e!=null && Math.abs(e)>=1.5;
+    const edgeHtml=e==null?'<span class="edge none">—</span>'
+      :(e===0?'<span class="edge none">0.0</span>'
+      :`<span class="edge${isHot?' hot':''}"><span class="t">${escH(leanAbbr)}</span>${Math.abs(e).toFixed(1)}</span>`);
+    const pk=g.pick_side?`<span class="pk">★${g.pick_confidence??''} ${escH(g.pick_side==='home'?g.home_abbr:g.away_abbr)}</span>`:'<span class="zero">—</span>';
+    h+=`<tr><td class="l hide-sm">${kickoffCell(g)}</td>`
+      +`<td class="l"><span class="mu"><span class="${lean==='away'?'lean':''}" title="${escH(g.away)}">${escH(g.away_abbr)}</span>`
+      +`<span class="at">@</span><span class="${lean==='home'?'lean':''}" title="${escH(g.home)}">${escH(g.home_abbr)}</span></span></td>`
+      +`<td><span class="line">${favLine(g.market,g.home_abbr,g.away_abbr)}</span></td>`
+      +`<td><span class="line">${favLine(g.my_spread,g.home_abbr,g.away_abbr)}</span></td>`
+      +`<td>${edgeHtml}</td><td class="hide-sm">${pk}</td></tr>`;
+  }
+  t.innerHTML=h+'</tbody>';
+}
+
+// ---- ratings board
+async function loadBoard(){
+  const t=document.getElementById('rt-tbl');
+  let j; try{ j=await api('/api/board'); }catch(e){ t.innerHTML='<tbody><tr><td class="empty l">Ratings unavailable.</td></tr></tbody>'; return; }
+  const rows=j.rows||[]; const mx=Math.max(1,...rows.map(r=>Math.abs(r.rating)));
+  const flagged=rows.filter(r=>r.needs_review==='Y').length;
+  document.getElementById('rt-sub').textContent=`${rows.length} teams · QB + Off + Def · click a team to edit`+(flagged?` · ${flagged} need review`:'');
+  let h='<thead><tr><th class="l">#</th><th class="l">Team</th><th class="l hide-sm">QB</th><th>QB</th><th>Off</th><th>Def</th><th>Total</th></tr></thead><tbody>';
+  rows.forEach((r,i)=>{
+    const w=Math.min(50,Math.abs(r.rating)/mx*50);
+    const nick=r.team.split(' ').slice(-1)[0];
+    h+=`<tr data-abbr="${escH(r.abbr||r.team)}"><td class="l rk">${i+1}</td>`
+      +`<td class="l"><span class="tm"><b>${escH(r.abbr||r.team)}${r.needs_review==='Y'?'<span class="flagd" title="needs review">⚠</span>':''}</b><span>${escH(nick)}</span></span></td>`
+      +`<td class="l hide-sm qbn">${escH(r.qb_name||'')}</td>`
+      +`<td class="n ${vcl(r.qb)}">${sgn(r.qb)}</td><td class="n ${vcl(r.off)}">${sgn(r.off)}</td><td class="n ${vcl(r.def)}">${sgn(r.def)}</td>`
+      +`<td><span class="tot"><span class="bar"><i class="${r.rating>=0?'p':'m'}" style="width:${w}%"></i></span><span class="v ${vcl(r.rating)}">${sgn(r.rating)}</span></span></td></tr>`;
+  });
+  t.innerHTML=h+'</tbody>';
+  t.querySelectorAll('tbody tr').forEach(tr=>tr.onclick=async()=>{
+    const q=tr.dataset.abbr; const jj=await api('/api/team?q='+encodeURIComponent(q));
+    if(!jj.ok) return alert(jj.message||'load failed'); openTeamEditor(jj);
+  });
+}
+
+// ---- editions (snapshots) in a dialog
+function openEditions(){
+  const dlg=document.getElementById('dlg'); const b=document.getElementById('dlg-body'); b.innerHTML=''; dlg.classList.remove('wide');
+  b.appendChild(el('h3',null,'Editions'));
+  b.appendChild(el('p','note','Freeze the current board as a named edition, or open a past one to compare.'));
+  snapshotCard(b);
+  const foot=el('div','row'); foot.style.marginTop='14px';
+  const close=el('button','go alt','Close'); close.onclick=()=>dlg.close(); foot.appendChild(close); b.appendChild(foot);
+  dlg.showModal();
+}
+
+// ---- trends (KB, no key needed)
+async function loadTrends(row){
+  row=row||document.getElementById('trend-btns');
+  try{
+    const j=await api('/api/trends');
+    row.innerHTML='';
+    const wk = j.week!=null ? ` · Wk${j.week} ${j.season}` : '';
+    const lbl=document.getElementById('trend-label');
+    if(lbl && j.week!=null) lbl.textContent=`Week ${j.week} angles from history · no API key needed`;
+    (j.trends||[]).forEach(t=>{
+      const b=el('button','trend');
+      const label=t.label.replace(/^\W+\s*/,'');
+      const desc=t.desc.replace(/^This week #:\s*/,'');
+      b.innerHTML=`<span class="tx"><div class="tl">${escH(label)}</div><div class="tdsc" title="${escH(desc)}">${escH(desc)}</div></span><span class="go-arrow">Run →</span>`;
+      b.onclick=()=>run({action:'trend',trend:t.id}, label+wk);
+      row.appendChild(b);
+    });
+  }catch(e){ row.innerHTML='<div class="empty">Trends unavailable — build the knowledge base first.</div>'; }
+}
+
+// ---- status chips
+async function refresh(){
+  let s; try{ s=await api('/api/status'); }catch(e){ return; }
+  const gate=document.getElementById('p-gate');
+  if(s.needs_review.count){ gate.textContent=s.needs_review.count+' need review'; gate.className='chip bad';
+    gate.title=s.needs_review.teams.join(', '); }
+  else { gate.textContent='Gate clear'; gate.className='chip ok'; gate.title='No rows need review'; }
+  const d=document.getElementById('p-dirty'); d.hidden=!s.dirty; d.title=s.dirty_files||'';
+  const br=document.getElementById('p-branch'); br.hidden=(s.branch==='testing'); br.textContent='branch: '+s.branch;
+}
+function reloadAll(force){ refresh(); loadSlate(force); loadBoard(); }
+
+buildMore(); loadTrends(); reloadAll(false);
+setInterval(refresh, 15000); setInterval(()=>loadSlate(false), 300000);
 </script></body></html>"""
+
 
 
 # ---------------------------------------------------------------- server
@@ -1713,6 +2041,11 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(200, json.dumps(act_market(
                 (q.get("week") or [None])[0], (q.get("year") or [None])[0],
                 refresh=bool((q.get("refresh") or [""])[0]))))
+        if u.path == "/api/slate":
+            return self._send(200, json.dumps(act_slate(
+                refresh=bool((q.get("refresh") or [""])[0]))))
+        if u.path == "/api/board":
+            return self._send(200, json.dumps(act_board()))
         if u.path == "/api/snapshots":
             return self._send(200, json.dumps(act_snapshots_list()))
         if u.path == "/api/snapshot":
