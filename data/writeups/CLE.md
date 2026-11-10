@@ -1,3 +1,19 @@
+## Week 9: QB re-evaluation
+
+Deshaun Watson is in concussion protocol from the Week 8 hit at Pittsburgh (cleared, but questionable), so Sanders makes his first start of 2026 at his −2.5. Watson returns at −2.0.
+
+**What changed:**
+- **QB Deshaun Watson −2.0 → Shedeur Sanders −2.5.**
+- **New total −2.2 → −2.7.**
+
+## Week 9: at New Orleans (pre-game)
+
+DT **Maliek Collins (elbow)** has been ruled out. He got hurt at Pittsburgh and returned to that game. With **Mason Graham (MCL)** already out, both of Cleveland's starting defensive tackles are down, and the Browns signed **Sam Kamara** for depth.
+
+**What changed:**
+- **Defense +0.5 → +0.3 (−0.2):** both starting DTs are out.
+- **QB and offense held.** **New total −2.0 → −2.2.**
+
 ## Week 7: at Tennessee (W 27–24)
 
 Cleveland's offense finally showed up: **491 yards**, with the box score at 33–21. Deshaun Watson graded 72.8. LT Spencer Fano (92.2), WR KC Concepcion (87.6) and TE Harold Fannin Jr. (84.5) led the way, with Concepcion and RBs Judkins and Sampson all back.
@@ -133,7 +149,7 @@ Cleveland grades poorly, and it is almost entirely the quarterback. The defense 
 
 ## Quarterback
 
-Deshaun Watson (−2.0) gets a half-point bump after his best game of the year at Tennessee (72.8 PFF) as Cleveland put up 491 yards. He's still a bridge-level starter, but the offense around him is finally producing.
+Shedeur Sanders (−2.5) is the starter. Deshaun Watson is in concussion protocol from the Week 8 hit at Pittsburgh (cleared, but questionable), so Sanders makes his first start of 2026 at his −2.5. Watson returns at −2.0.
 
 ## Quarterback: through Week 1 2026 (historical)
 
