@@ -138,7 +138,7 @@ are trending up, while the defense is now the drag.
 
 ## Quarterback
 
-Bryce Young (+1.0) is the starter. He ranks 20th among this week's starters in QBR (59.9) and 23rd in passer rating (89.1), down from his early-season level.
+Bryce Young (+1.3) is up 0.3 after his best game in weeks against Denver's elite defense: 28/39 for 276 yards and 3 TD (84.6 QBR) in a five-point loss.
 
 ## What moved the number
 

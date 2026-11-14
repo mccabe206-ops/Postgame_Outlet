@@ -160,8 +160,7 @@ Jacksonville grades as a clear riser led by its quarterback, with a receiver roo
 
 ## Quarterback
 
-
-Trevor Lawrence (+3.7) goes up 0.2 after a surgical game against Indianapolis: 10/14 for 210 yards, 3 TD and 0 INT, with the game decided by halftime. The Coen system has him playing like a top-10 quarterback.
+Trevor Lawrence (+4.2) ranks fifth in the season composite (111.7 passer rating, 18 TD/4 INT). He was efficient in the 33–10 win at Baltimore: 16/26 for 242 yards, a TD and no interceptions.
 
 ## What moved the number
 

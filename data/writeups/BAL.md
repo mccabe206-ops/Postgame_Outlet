@@ -166,8 +166,7 @@ Baltimore is a top-five roster: an elite quarterback, a strong skill group, and 
 
 ## Quarterback
 
-
-Joe Fagnano (−5.0) is the selected quarterback for Thursday night against Jacksonville. Lamar Jackson suffered a **fracture-dislocation of his right (throwing) thumb** on the first play at Buffalo. He needs surgery, is on IR and is likely out for the season. Tyler Huntley (**turf toe**) is doubtful and could miss four-plus weeks. Fagnano, an undrafted rookie, went 10/21 for 91 yards in relief and is dealing with an ankle issue. Whoever starts Thursday, Fagnano or newly signed Kedon Slovis, carries the −5.0. Huntley returns at −1.5 once he's healthy.
+Jacoby Brissett (−2.0) is the new starter. Baltimore acquired him from Arizona on Nov. 6, and he's expected to make his Ravens debut Monday night against the Chargers. He was graded −1.0 in Arizona; a point comes off for his first week in a new system behind a patched-up line. Lamar Jackson (right thumb fracture-dislocation, surgery) is on IR and likely out for the season, and Tyler Huntley (turf toe) is on IR. Joe Fagnano (−5.0) returns to QB2 after a rough first start (10/18, 60 yards, 2 INT).
 
 ## Quarterback: through Week 1 2026 (historical)
 

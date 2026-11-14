@@ -135,7 +135,7 @@ defense. Carson Wentz's Week 1–2 appearances remain historical context.
 
 ## Quarterback
 
-Carson Wentz (−0.5) is the starter. Kyler Murray is out with a hamstring injury, so Wentz starts Monday against Buffalo at the same −0.5. He beat Chicago 9-3 in his Week 2 spot start.
+Kirk Cousins (0.0) is the projected starter after a deadline trade from Las Vegas. He knows Kevin O'Connell's offense and inherits Justin Jefferson and Jordan Addison; he's graded half a point below his Las Vegas number for the short prep. Kyler Murray (hamstring) is doubtful. Carson Wentz (−2.0) drops after an 8-of-25, 81-yard day against Buffalo.
 
 ## What moved the number
 

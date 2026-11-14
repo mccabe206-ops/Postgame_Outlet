@@ -161,7 +161,7 @@ Houston's grade is built on one of the best defenses in football, with an ascend
 
 ## Quarterback
 
-C.J. Stroud (+1.5) is the starter, up another half-point after his fourth straight strong game: 312 yards and 3 TD at Wembley (78.8 PFF, 95.6 QBR), following grades of 91.8 and 79.9. He has one interception in six games. With Nico Collins on the field, Houston's offense is a top-five unit, and Stroud is a big reason why.
+C.J. Stroud (+1.8) is up 0.3 after his best game of the season at the Chargers: 384 yards and 5 TD (89.7 QBR). The bump is kept modest because the Chargers' secondary is banged up. Marvin Harrison Jr. gives him a second weapon next to Nico Collins.
 
 ## What moved the number
 

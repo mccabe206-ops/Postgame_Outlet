@@ -199,7 +199,7 @@ Garrett loss move the number.
 
 ## Quarterback
 
-Matthew Stafford (+4.5) is the starter. His season QBR (63.3) and passer rating (93.2) both rank mid-pack among this week's starters, and his 8 interceptions are tied for third-most. He keeps a top-10 grade on talent, but the production hasn't matched an elite number.
+Matthew Stafford (+3.8) is the starter, down 0.7 in the Week 10 review. His season QBR (63.3) and passer rating (93.2) rank mid-pack among this week's starters, and his 8 interceptions are tied for third-most. The grade still credits his track record, so he sits just above Caleb Williams and just below Patrick Mahomes. He's now working without both Puka Nacua (knee, IR) and Davante Adams (hamstring, IR).
 
 ## What moved the number
 

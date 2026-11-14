@@ -137,7 +137,7 @@ Miami grades near the floor on all three lines — the aftermath of a roster tea
 
 ## Quarterback
 
-Malik Willis (−1.5) is the starter. He ranks 16th among this week's starters in QBR (62.5) and has been better than the floor he was priced at.
+Kyle McCord (−4.0) makes his first NFL start Sunday at Indianapolis. Malik Willis went on IR with a core muscle (groin) injury and is out through at least Week 13; Jeff Hafley says Willis starts again when he's back, at his −1.5. McCord, a 2025 sixth-round pick, has no NFL track record yet, so he sits at the bottom of the backup range.
 
 ## Quarterback: through Week 1 2026 (historical)
 

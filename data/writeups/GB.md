@@ -137,7 +137,7 @@ Green Bay now grades below the line — not because the core talent vanished, bu
 
 ## Quarterback
 
-Jordan Love (+1.5) is the starter, up half a point after his third straight quality game: 276 yards, a TD pass and a TD run against Dallas (80.9 PFF passing), after a 78.2 at Tampa and a 94.5 against Chicago. The shaky early-season version is gone. Josh Jacobs's return gives him the run game he hasn't had all year.
+Jordan Love (+2.0) is up half a point after the best game of his season at New England: 23/29 for 372 yards, 3 TD and no interceptions (98.0 QBR).
 
 ## What moved the number
 
