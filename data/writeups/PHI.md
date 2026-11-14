@@ -186,7 +186,7 @@ Philadelphia grades above the line — a proven quarterback, a talented supporti
 
 ## Quarterback
 
-Tanner McKee (−3.0) is the starting quarterback with Jalen Hurts out, likely for the season, with blood clots in his lungs. McKee's first start was clean (no turnovers, 69.8 PFF passing) but limited: 4.8 yards per attempt with no run game behind him. That puts him at the top of the backup range. Rookie Cole Payton is the healthy backup after Andy Dalton's release.
+Joe Milton (−3.0) holds his grade after a rough first Eagles start against the Giants: 18/34 for 169 yards and a 20.2 QBR in a 19–11 loss. Jalen Hurts (blood clots in his lungs) is on IR and expected to miss the season. Tanner McKee (−3.0) is the QB2.
 
 ## What moved the number
 

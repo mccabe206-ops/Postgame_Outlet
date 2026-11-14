@@ -166,8 +166,7 @@ are better than a bottom-of-the-league read, even with a stopgap quarterback.
 
 ## Quarterback
 
-
-Gardner Minshew II (−1.5) is the new starter. He replaced the benched Jacoby Brissett at Dallas and led a 27-point second half and an overtime win (17/23, 188 yards, 3 TD, 0 INT). Mike LaFleur named him the starter on Monday. Rookie Carson Beck is the QB2, and Brissett (−1.0) drops to QB3.
+Carson Beck (−3.0), a third-round rookie, is the starter. Gardner Minshew likely tore the UCL in his elbow at Seattle and is expected to need season-ending surgery, and Jacoby Brissett was traded to Baltimore. Beck is unproven, so he sits near the bottom of the backup range.
 
 ## What moved the number
 

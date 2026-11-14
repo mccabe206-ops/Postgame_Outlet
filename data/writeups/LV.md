@@ -165,8 +165,7 @@ Las Vegas has two genuine stars — one on each side of the ball — dragged dow
 
 ## Quarterback
 
-
-Kirk Cousins (+0.5) is the starter. He has 19 TD/5 INT and ranks 10th among this week's starters in passer rating (101.4).
+Fernando Mendoza (−2.0), the No. 1 overall pick, takes over after Kirk Cousins was traded to Minnesota at the deadline. He's untested, so he starts just above the worst-starter floor. Aidan O'Connell is the backup.
 
 ## Quarterback: through Week 1 2026 (historical)
 

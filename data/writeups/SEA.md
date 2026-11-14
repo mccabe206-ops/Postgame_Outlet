@@ -182,7 +182,7 @@ into the season.
 
 ## Quarterback
 
-Drew Lock (−0.5) starts Week 9 while Sam Darnold (quad, cracked rib) is out week-to-week. Lock is normally graded at 0.0 but is playing through severe elbow tendonitis. Darnold (+1.3) returns to the starting grade when healthy; his turnovers were already the watch item.
+Drew Lock (0.0) is back to his normal grade after a strong game in the 17–3 win over Arizona: 19/28 for 175 yards, a TD and an 89.9 QBR. Coach Mike Macdonald says the oblique injury is manageable. Sam Darnold (quad, cracked rib) is out again and returns at +1.3 when healthy.
 
 ## Week 1 rating notes (historical)
 

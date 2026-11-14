@@ -186,11 +186,7 @@ offensive showing. The defense remains below average.
 
 ## Quarterback
 
-Caleb Williams (+3.0) is the selected quarterback for Week 6, expected back from the Grade 2 right hamstring
-strain that has cost him three games; the market (CHI −3 at Atlanta) is pricing him in. If he can't go,
-Case Keenum and Tyson Bagent are rated about equal at −1.5. Bagent's two starts couldn't be more different: a top-10 game vs the Jets (25-of-34, 268 yards, 79.8 PFF)
-and a last-place one at Green Bay (12-of-21, 87 yards, 2 INT, 31.6 PFF). Keenum is the proven
-veteran, and won his Week 3 start against the Eagles.
+Caleb Williams (+3.5) ranks sixth in the season composite (76.9 QBR). He threw four interceptions in the 27–24 win over Tampa Bay but still moved the offense (279 yards, 2 TD), and one game isn't enough to move him. Chicago is on bye.
 
 ## What moved the number
 

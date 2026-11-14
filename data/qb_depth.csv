@@ -1,5 +1,5 @@
 team,string,qb_name,value,notes,age,exp
-Minnesota Vikings,3,Max Brosmer,-5.0,"Practice squad; QB3 after McCarthy trade 9/28 — value placeholder, verify",25,2
+Minnesota Vikings,4,Max Brosmer,-5.0,"Practice squad; QB3 after McCarthy trade 9/28 — value placeholder, verify",25,2
 Atlanta Falcons,2,Tua Tagovailoa,-1.5,Startable vet behind Penix | Band re-grade 9/29 (-2.5->-1.5): backup band now -1.5..-4.0 (Sean: backups were underrated),28,6
 Indianapolis Colts,2,Anthony Richardson Sr.,-2.0,Former starter; high upside | Band re-grade 9/29 (-2.5->-2.0): backup band now -1.5..-4.0 (Sean: backups were underrated),24,3
 Kansas City Chiefs,2,Justin Fields,-1.5,Former starter | Band re-grade 9/29 (-2.5->-1.5): backup band now -1.5..-4.0 (Sean: backups were underrated),27,5
@@ -8,14 +8,13 @@ Washington Commanders,2,Marcus Mariota,-2.0,"INJURED (right MCL sprain, no IR) �
 San Francisco 49ers,2,Mac Jones,-2.0,Former starter | Band re-grade 9/29 (-3.0->-2.0): backup band now -1.5..-4.0 (Sean: backups were underrated),28,5
 Cleveland Browns,2,Deshaun Watson,-2.0,"Concussion Wk8 (cleared protocol, Q Wk9); Shedeur Sanders named starter (-2.5, first 2026 start) — Sean 11/7",,
 New York Giants,2,Jaxson Dart,-0.5,"INJURED (left knee surgery, meniscus) — IR, out at least rest of regular season (AP); McCarthy (ratings QB1, -3.0) starting Wk7; restore Dart if/when he returns",23,1
-Baltimore Ravens,2,Lamar Jackson,4.0,"INJURED — IR (right thumb fracture-dislocation, surgery 11/2026), likely out for season; Fagnano QB1 (-5.0)",,
+Baltimore Ravens,3,Lamar Jackson,4.0,"INJURED — IR (right thumb fracture-dislocation, surgery 11/2026), likely out for season; Brissett QB1 (-2.0) from 11/12",,
 Carolina Panthers,2,Kenny Pickett,-3.0,Former 1st-rounder | Band re-grade 9/29 (-3.5->-3.0): backup band now -1.5..-4.0 (Sean: backups were underrated),28,4
 Detroit Lions,2,Joshua Dobbs,-3.0,Veteran QB2 (Bridgewater not on roster) | Band re-grade 9/29 (-3.5->-3.0): backup band now -1.5..-4.0 (Sean: backups were underrated),31,9
 Green Bay Packers,2,Tyrod Taylor,-2.5,Veteran | Band re-grade 9/29 (-3.5->-2.5): backup band now -1.5..-4.0 (Sean: backups were underrated),37,15
 Seattle Seahawks,2,Sam Darnold,1.3,"INJURED — OUT Wk9 (quad + cracked rib vs CHI, week-to-week per Macdonald); Drew Lock QB1 at -0.5 (elbow tendonitis); restore Darnold 1.3 on return",29,8
 New Orleans Saints,2,Spencer Rattler,-3.0,Developing | Band re-grade 9/29 (-3.5->-3.0): backup band now -1.5..-4.0 (Sean: backups were underrated),26,2
 Pittsburgh Steelers,2,Mason Rudolph,-2.5,Veteran | Band re-grade 9/29 (-3.5->-2.5): backup band now -1.5..-4.0 (Sean: backups were underrated),31,8
-Arizona Cardinals,2,Carson Beck,-5.0,"Rookie; promoted to QB2 11/2 (Minshew QB1, Brissett QB3)",,
 Tampa Bay Buccaneers,2,Jalon Daniels,-4.0,UDFA rookie; started Wk4-6 (1-2) while Baker was out; back to QB2 with Baker cleared Wk7,,0
 Denver Broncos,2,Jarrett Stidham,-3.5,Journeyman | Band re-grade 9/29 (-4.0->-3.5): backup band now -1.5..-4.0 (Sean: backups were underrated),,
 Los Angeles Chargers,2,Trey Lance,-3.5,Former 1st-rounder; unproven | Band re-grade 9/29 (-4.0->-3.5): backup band now -1.5..-4.0 (Sean: backups were underrated),,
@@ -27,24 +26,22 @@ Philadelphia Eagles,2,Tanner McKee,-3.0,Benched Wk9 for Joe Milton after 6 strai
 Philadelphia Eagles,3,Jalen Hurts,1.5,"INJURED — IR (DVT + bilateral pulmonary emboli, Oct 2026), expected out for season; Milton QB1 (Wk9)",,
 New York Jets,2,Will Levis,-3.0,"Veteran backup (on ESPN + Sleeper roster); value placeholder, verify | Band re-grade 9/29 (-3.5->-3.0): backup band now -1.5..-4.0 (Sean: backups were underrated)",27,4
 Miami Dolphins,2,Brady Cook,-4.0,"QB2 (Ewers not on roster; Sleeper lists Cook Out) — value placeholder, verify | Band re-grade 9/29 (-4.5->-4.0): backup band now -1.5..-4.0 (Sean: backups were underrated)",24,2
-Las Vegas Raiders,2,Fernando Mendoza,-2.5,Rookie; raised per your read | Band re-grade 9/29 (-3.0->-2.5): backup band now -1.5..-4.0 (Sean: backups were underrated),22,0
 Los Angeles Rams,2,Ty Simpson,-3.5,Rookie | Band re-grade 9/29 (-4.0->-3.5): backup band now -1.5..-4.0 (Sean: backups were underrated),,
 Chicago Bears,2,Case Keenum,-1.5,Wk3 fill-in starter (W vs PHI); replaced Bagent Wk5 at GB; QB2 with Caleb rated QB1 for Wk6 (market prices Caleb playing); starts at -1.5 if Caleb is ruled out,,
 Buffalo Bills,2,Kyle Allen,-4.0,Deep journeyman | Band re-grade 9/29 (-4.5->-4.0): backup band now -1.5..-4.0 (Sean: backups were underrated),,
 New England Patriots,2,Tommy DeVito,-4.0,Deep journeyman | Band re-grade 9/29 (-4.5->-4.0): backup band now -1.5..-4.0 (Sean: backups were underrated),,
-Las Vegas Raiders,3,Aidan O'Connell,-4.5,Real starting experience,,
+Las Vegas Raiders,2,Aidan O'Connell,-4.5,Real starting experience,,
 Tennessee Titans,3,Hendon Hooker,-5.5,"Practice squad (Levis now on NYJ) - value placeholder, verify",,
-Minnesota Vikings,2,Kyler Murray,-0.5,"INJURED — OUT Wk9 (hamstring); Carson Wentz QB1 at Kyler's -0.5 (Sean, 11/7); restore Kyler -0.5 on return",,
+Minnesota Vikings,2,Kyler Murray,-0.5,INJURED — hamstring (doubtful Wk10); Cousins QB1 (0.0) from 11/12; restore Kyler -0.5 on return if Sean prefers,,
 Dallas Cowboys,3,Sam Howell,-4.5,Has starting experience,,
 Philadelphia Eagles,4,Cole Payton,-5.5,"Rookie — QB3 behind Milton + McKee (Dalton cut ~10/13); value placeholder, verify",,
 Chicago Bears,3,Tyson Bagent,-1.5,Benched in Wk5 (L 7-31 at GB: 87 yds/2 INT); rated equal to Keenum (Sean 10/13),,
 New Orleans Saints,3,Zach Wilson,-5.0,Former #2 overall,,
 Cincinnati Bengals,3,Josh Johnson,-5.0,Career journeyman,,
-Baltimore Ravens,3,Tyler Huntley,-1.5,"INJURED — turf toe (Wk8), doubtful TNF, could miss 4+ wks; restore as QB1 at -1.5 when healthy",,
+Baltimore Ravens,4,Tyler Huntley,-1.5,"INJURED — turf toe (Wk8), doubtful TNF, could miss 4+ wks; restore as QB1 at -1.5 when healthy",,
 New York Giants,3,Jameis Winston,-3.5,"Benched for McCarthy Wk7 (Harbaugh); Wk6 34.9 PFF, 2 INT, 4 sacks, benched Q4 vs NO",,
 Cleveland Browns,3,Dillon Gabriel,-5.0,Rookie,,
 Green Bay Packers,3,Kyle McCord,-5.0,Rookie,,
-Arizona Cardinals,3,Jacoby Brissett,-1.0,Benched in Wk8 (11/1) for Minshew; demoted to QB3 (emergency),,
 Pittsburgh Steelers,3,Will Howard,-5.5,Rookie,,
 Houston Texans,3,Graham Mertz,-5.5,"Rookie — IR (ACL, season)",,
 Indianapolis Colts,3,Riley Leonard,-5.5,Rookie,,
@@ -55,7 +52,6 @@ Denver Broncos,3,Sam Ehlinger,-5.5,Deep backup,,
 Los Angeles Chargers,3,DJ Uiagalelei,-5.5,Rookie,,
 Los Angeles Rams,3,Stetson Bennett IV,-5.5,Deep backup,,
 San Francisco 49ers,3,Adrian Martinez,-5.5,Deep backup,,
-Miami Dolphins,3,Kyle McCord,-5.5,"QB3 (Miller not on roster) — value placeholder, verify",24,1
 Buffalo Bills,3,Shane Buechele,-6.0,Camp arm,,
 New England Patriots,3,Behren Morton,-6.0,Raw rookie,,
 New York Jets,3,Cade Klubnik,-4.0,Rookie; QB3 behind Levis (string order vs Levis unverified — Sleeper lists Klubnik 3rd),22,0
@@ -66,3 +62,7 @@ Tampa Bay Buccaneers,3,Easton Stick,-4.5,"Practice-squad veteran (Bazelak no lon
 Atlanta Falcons,3,Cooper Rush,-4.5,"QB3 behind Penix/Tua; downgraded -3.5->-4.5 Wk2 — awful in the 34-3 loss (pick-6, 26.7 PFF) vs a CAR D that had allowed 59 the week before",31,10
 Atlanta Falcons,4,Jack Strand,-5.5,Rookie UDFA; pick-6 in Wk2 relief debut,23,1
 New York Giants,4,Jake Haener,-4.5,"Backup (Brandon Allen no longer on roster); behind McCarthy after 9/28 trade — value placeholder, verify",27,3
+Baltimore Ravens,2,Joe Fagnano,-5.0,UDFA; started Wk9 TNF (10/18 60 2INT); back to QB2 after Brissett trade 11/6,,
+Arizona Cardinals,2,Gardner Minshew II,-1.5,"INJURED — elbow, likely torn UCL, season-ending surgery expected (11/9); Beck QB1 -3.0. Healthy QB2 unknown — verify",,
+Minnesota Vikings,3,Carson Wentz,-2.0,Wk9 start 8/25 81 2INT; QB3 after Cousins trade 11/10 (-2.0 = proven vet top of backup band); PRE-SET QB1 -2.0 if he starts,,
+Miami Dolphins,3,Malik Willis,-1.5,"INJURED — IR 11/10 (core muscle/groin), out through at least Wk13; McCord QB1 (-4.0); restore Willis -1.5 as QB1 on return",,

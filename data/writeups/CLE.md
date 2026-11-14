@@ -149,7 +149,7 @@ Cleveland grades poorly, and it is almost entirely the quarterback. The defense 
 
 ## Quarterback
 
-Shedeur Sanders (−2.5) is the starter. Deshaun Watson is in concussion protocol from the Week 8 hit at Pittsburgh (cleared, but questionable), so Sanders makes his first start of 2026 at his −2.5. Watson returns at −2.0.
+Shedeur Sanders (−2.2) is up 0.3 after a promising first start at New Orleans: 297 yards, 2 TD and 0 INT in a one-point loss.
 
 ## Quarterback: through Week 1 2026 (historical)
 
