@@ -1886,6 +1886,158 @@ def inject_record_block(page):
     return page
 
 
+PICKS_RECORD_STYLE = (
+    '<style>#panel-ratings .picks-record{margin:22px 0 6px;border:1px solid var(--border);'
+    'border-radius:10px;padding:14px 16px;background:var(--row-alt)}'
+    '#panel-ratings .picks-record h3{margin:0 0 4px;font-size:17px}'
+    '#panel-ratings .pr-sub{color:var(--dim);font-size:13px;margin:0 0 12px}'
+    '#panel-ratings .pr-wrap{overflow-x:auto}'
+    '#panel-ratings .pr-tbl{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}'
+    '#panel-ratings .pr-tbl th,#panel-ratings .pr-tbl td{padding:6px 10px;'
+    'border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}'
+    '#panel-ratings .pr-tbl thead th{color:var(--dim);font-size:12px;text-transform:uppercase;'
+    'letter-spacing:.04em;font-weight:600}'
+    '#panel-ratings .pr-tbl .l{text-align:left}'
+    '#panel-ratings .pr-tbl th[scope=row]{text-align:left;font-weight:600;text-transform:none;'
+    'letter-spacing:0;font-size:14px;color:var(--ink);background:none}'
+    '#panel-ratings .pr-desc{display:block;color:var(--dim);font-weight:400;font-size:12px;white-space:normal}'
+    '#panel-ratings .pr-season{max-width:640px;margin-bottom:14px}'
+    '#panel-ratings .pr-w{color:var(--pos);font-weight:600}'
+    '#panel-ratings .pr-l{color:var(--neg);font-weight:600}'
+    '#panel-ratings .pr-p{color:var(--dim);font-weight:600}'
+    '#panel-ratings .pr-np{color:var(--dim)}'
+    '#panel-ratings details.pr-week{border-top:1px solid var(--border);padding:8px 0}'
+    '#panel-ratings details.pr-week summary{cursor:pointer;font-weight:600;list-style-position:inside}'
+    '#panel-ratings .pr-sum{color:var(--dim);font-weight:400;margin-left:6px}'
+    '#panel-ratings .pr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));'
+    'gap:14px;margin-top:10px}'
+    '#panel-ratings .pr-grid h4{margin:0 0 6px;font-size:13px;color:var(--mut);font-weight:600}'
+    '#panel-ratings .pr-fine{color:var(--mut);font-size:12px;margin:12px 0 0;max-width:80ch}</style>'
+)
+
+
+def _pr_tally(t, np=True):
+    if not isinstance(t, dict):
+        return "&mdash;"
+    s = f'{t.get("win", 0)}-{t.get("loss", 0)}'
+    if t.get("push"):
+        s += f'-{t["push"]}'
+    if np and t.get("np"):
+        s += f' <span class="pr-np">({t["np"]} NP)</span>'
+    return s
+
+
+def _pr_line(x):
+    try:
+        x = float(x)
+    except (TypeError, ValueError):
+        return "&mdash;"
+    if abs(x) < 1e-9:
+        return "PK"
+    return f'{x:+g}'
+
+
+def _pr_result(r):
+    return {"win": '<span class="pr-w">W</span>', "loss": '<span class="pr-l">L</span>',
+            "push": '<span class="pr-p">P</span>'}.get(r, "&mdash;")
+
+
+def _pr_pts(x):
+    try:
+        x = float(x)
+    except (TypeError, ValueError):
+        return "0"
+    return f'{x:g}'
+
+
+def inject_picks_block(page):
+    """Insert the public McCabe picks record on the ratings panel, from
+    data/records.json: season tallies (McCabe picks, blind model, model top-5) plus a
+    week-by-week breakdown of completed weeks only (records.json never carries a pick
+    for a game that isn't final). No-op if the file or anchor is missing; idempotent."""
+    start, end = '<!--picks-record-start-->', '<!--picks-record-end-->'
+    page = re.sub(re.escape(start) + '.*?' + re.escape(end) + r'(?:\n  )?', '', page, flags=re.S)
+    anchor = '</section><!-- /panel-ratings -->'
+    try:
+        data = json.loads((HERE / "data" / "records.json").read_text(encoding="utf-8"))
+        sr = data["season_record"]
+        weeks = data.get("weeks") or []
+    except (OSError, ValueError, KeyError, TypeError):
+        return page
+    if anchor not in page or not isinstance(sr, dict):
+        return page
+    esc = html.escape
+    year = esc(str(data.get("season_year", "")))
+    thru = esc(str(data.get("through_week", "")))
+
+    def srow(label, key, desc, extra=""):
+        t = sr.get(key, {}) or {}
+        return (f'<tr><th scope="row">{label}<span class="pr-desc">{desc}</span></th>'
+                f'<td>{_pr_tally(t.get("close"))}</td><td>{_pr_tally(t.get("open"))}</td>'
+                f'<td>{extra}</td></tr>')
+
+    pts = _pr_pts(data.get("season_points", 0))
+    possible = 15 * len(weeks)
+    season = (
+        '<div class="pr-wrap"><table class="pr-tbl pr-season"><thead><tr><th class="l"></th>'
+        '<th scope="col">vs close</th><th scope="col">vs open</th><th scope="col">Points</th>'
+        '</tr></thead><tbody>'
+        + srow('McCabe picks', 'mine', '5 picks a week, confidence 5 (most) to 1',
+               f'{pts} / {possible}' if possible else '&mdash;')
+        + srow('Blind model', 'model', 'the ratings vs the market, every game', '&mdash;')
+        + srow('Model top 5', 'top5', "the ratings' five biggest edges each week", '&mdash;')
+        + '</tbody></table></div>'
+    )
+
+    def wk(w):
+        mine, top5 = w.get("mine_picks") or [], w.get("top5_plays") or []
+        mrows = ''.join(
+            f'<tr><td>{esc(str(r.get("confidence", "")))}</td>'
+            f'<td class="l"><b>{esc(str(r.get("team", "")))}</b> {_pr_line(r.get("line"))}</td>'
+            f'<td class="l">{esc(str(r.get("at", "")))} {esc(str(r.get("opp", "")))}</td>'
+            f'<td>{esc(str(r.get("score", "")))}</td><td>{_pr_result(r.get("result"))}</td>'
+            f'<td>{_pr_pts(r.get("points"))}</td></tr>' for r in mine)
+        trows = ''.join(
+            f'<tr><td class="l"><b>{esc(str(r.get("team", "")))}</b> {_pr_line(r.get("line"))}</td>'
+            f'<td class="l">{esc(str(r.get("at", "")))} {esc(str(r.get("opp", "")))}</td>'
+            f'<td>{_pr_pts(r.get("edge"))}</td>'
+            f'<td>{esc(str(r.get("score", "")))}</td><td>{_pr_result(r.get("result"))}</td></tr>'
+            for r in top5)
+        mt = (w.get("mine") or {}).get("close")
+        mod = (w.get("model") or {}).get("close")
+        tt = (w.get("top5") or {}).get("close")
+        summary = (f'Week {esc(str(w.get("week", "")))}'
+                   f'<span class="pr-sum">McCabe {_pr_tally(mt, False)} ({_pr_pts(w.get("mine_points"))} pts)'
+                   f' &middot; Model {_pr_tally(mod, False)} &middot; Top 5 {_pr_tally(tt, False)}</span>')
+        mine_tbl = ('<div><h4>McCabe picks</h4><div class="pr-wrap"><table class="pr-tbl"><thead><tr>'
+                    '<th>Conf</th><th class="l">Pick</th><th class="l">Opp</th><th>Score</th>'
+                    '<th>ATS</th><th>Pts</th></tr></thead><tbody>' + mrows + '</tbody></table></div></div>'
+                    ) if mine else ''
+        top_tbl = ('<div><h4>Model top 5</h4><div class="pr-wrap"><table class="pr-tbl"><thead><tr>'
+                   '<th class="l">Play</th><th class="l">Opp</th><th>Edge</th><th>Score</th>'
+                   '<th>ATS</th></tr></thead><tbody>' + trows + '</tbody></table></div></div>'
+                   ) if top5 else ''
+        return (f'<details class="pr-week"><summary>{summary}</summary>'
+                f'<div class="pr-grid">{mine_tbl}{top_tbl}</div></details>')
+
+    weekly = ''.join(wk(w) for w in sorted(weeks, key=lambda w: -int(w.get("week", 0))))
+    gen = esc(str(data.get("generated", ""))[:10])
+    block = (
+        start + PICKS_RECORD_STYLE +
+        '<div class="picks-record" id="picks-record">'
+        f'<h3>{year} McCabe Picks &amp; Model Record</h3>'
+        f'<p class="pr-sub">Against the spread, season to date through Week {thru}. '
+        'Records are vs the closing line unless noted.</p>'
+        + season + weekly +
+        '<p class="pr-fine">Picks are posted here only after that week&rsquo;s games are final. '
+        'Lines are from the picked team&rsquo;s side (ESPN closing line). Points = confidence for a '
+        'win, half for a push. The blind model bets every game where the ratings disagree with '
+        f'the market; NP = no play (no edge). Updated {gen}.</p>'
+        '</div>' + end
+    )
+    return page.replace(anchor, block + '\n  ' + anchor, 1)
+
+
 def main(argv=None):
     args = parse_args(argv)
     try:
@@ -1950,6 +2102,7 @@ def main(argv=None):
         preview = add_rating_explanations(preview)
         preview = pgo_current_board.add_current_board(preview, season_state=season_state)
         preview = inject_record_block(preview)
+        preview = inject_picks_block(preview)
         atomic_write_text(output, preview)
     except (csv.Error, KeyError, OSError, TypeError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)

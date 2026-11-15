@@ -1594,3 +1594,38 @@ class ComparisonTests(unittest.TestCase):
             (pgo_comparison.HERE / "docs" / "index.html").resolve(),
         )
         self._assert_no_public_fantasy(write.call_args.args[1])
+
+
+class PicksRecordBlockTests(unittest.TestCase):
+    PAGE = ('<section class="panel active" id="panel-ratings"><table></table>'
+            '</section><!-- /panel-ratings -->')
+
+    def _render(self, payload):
+        with tempfile.TemporaryDirectory() as temporary:
+            records = Path(temporary) / 'data' / 'records.json'
+            records.parent.mkdir()
+            records.write_text(json.dumps(payload))
+            with patch.object(pgo_comparison, 'HERE', Path(temporary)):
+                once = pgo_comparison.inject_picks_block(self.PAGE)
+                twice = pgo_comparison.inject_picks_block(once)
+        return once, twice
+
+    def test_renders_on_ratings_panel_and_is_idempotent(self):
+        row = {'team': 'CIN', 'opp': 'ATL', 'at': 'at', 'line': -3.0, 'score': '34-17',
+               'result': 'win', 'confidence': 2, 'points': 2}
+        once, twice = self._render({
+            'season_year': 2026, 'through_week': 9, 'generated': '2026-11-14T00:00Z',
+            'season_points': 2, 'season_record': {'mine': {'close': {'win': 1, 'loss': 0}}},
+            'weeks': [{'week': 9, 'mine_points': 2, 'mine_picks': [row],
+                       'top5_plays': [dict(row, edge=2.5)],
+                       'mine': {'close': {'win': 1, 'loss': 0}}}]})
+        self.assertEqual(once, twice)
+        self.assertEqual(once.count('<!--picks-record-start-->'), 1)
+        self.assertLess(once.index('picks-record'), once.index('<!-- /panel-ratings -->'))
+        self.assertIn('Week 9', once)
+        self.assertIn('<b>CIN</b> -3', once)
+
+    def test_missing_records_is_a_noop(self):
+        with tempfile.TemporaryDirectory() as temporary, \
+                patch.object(pgo_comparison, 'HERE', Path(temporary)):
+            self.assertEqual(pgo_comparison.inject_picks_block(self.PAGE), self.PAGE)

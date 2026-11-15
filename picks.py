@@ -326,6 +326,8 @@ def _line_for_event(e, ratings, hfa, default_hfa, overrides, now):
         "game_id": gid, "kickoff_iso": kickoff_iso, "kickoff": kickoff,
         "locked": locked, "neutral": neutral, "prime": prime,
         "home": home, "away": away,
+        "home_abbr": comp["home"]["team"].get("abbreviation") or home,
+        "away_abbr": comp["away"]["team"].get("abbreviation") or away,
         "home_score": hs, "away_score": as_, "final": final,
         "my_spread": my_spread, "market": market, "market_details": details,
         "market_source": market_source, "edge": edge, "actual_margin": actual_margin,
@@ -460,7 +462,7 @@ def _record_model(t, side, line, am):
 TOP_EDGE_N = 5  # "top edge plays" = the N largest-|edge| model plays per week
 
 
-def grade_week(week, year, ratings=None, hfa=None, default_hfa=None):
+def grade_week(week, year, ratings=None, hfa=None, default_hfa=None, detail=False):
     """Grade one week's completed games against BOTH the opening and closing line.
     Returns {week, season, mine:{open,close}, model:{open,close}, top5:{open,close}}
     where each open/close is a {win,loss,push,np} tally (np = no-play / no edge).
@@ -476,12 +478,17 @@ def grade_week(week, year, ratings=None, hfa=None, default_hfa=None):
     payload = fetch_json(SCOREBOARD.format(year=year, week=week))
     mine = {"open": _tally(), "close": _tally()}
     model = {"open": _tally(), "close": _tally()}
+    mine_rows = []
+    n_games = n_final = 0
     # collect the model's edge plays so we can rank the biggest ones for top5
     plays = {"open": [], "close": []}   # each: (abs_edge, side, line, am)
     for e in payload.get("events", []):
         L = _line_for_event(e, ratings, hfa, default_hfa, overrides, now)
+        if L:
+            n_games += 1
         if not L or not L["final"]:
             continue
+        n_final += 1
         am = L["actual_margin"]
         close = L["market"]
         opn = L["market_open"] if L["market_open"] is not None else close
@@ -491,17 +498,49 @@ def grade_week(week, year, ratings=None, hfa=None, default_hfa=None):
             side = _model_side(my, line)
             _record_model(model[key], side, line, am)
             if side is not None and my is not None and line is not None:
-                plays[key].append((abs(line - my), side, line, am))
+                plays[key].append((abs(line - my), side, line, am, L))
         # mine: the side I picked, graded vs each line
-        side_me = (saved.get(L["game_id"]) or {}).get("side")
+        pk = saved.get(L["game_id"]) or {}
+        side_me = pk.get("side")
         if side_me:
             _bump(mine["open"], _grade_side(side_me, opn, am))
             _bump(mine["close"], _grade_side(side_me, close, am))
+            if detail:
+                row = _detail_row(L, side_me, close, am)
+                conf = pk.get("confidence")
+                row["confidence"] = conf
+                res = row["result"]
+                row["points"] = (conf if res == "win" else conf / 2 if res == "push" else 0) if conf else 0
+                mine_rows.append(row)
     top5 = {"open": _tally(), "close": _tally()}
+    top5_rows = []
     for key in ("open", "close"):
-        for _edge, side, line, am in sorted(plays[key], key=lambda x: -x[0])[:TOP_EDGE_N]:
+        for edge, side, line, am, L in sorted(plays[key], key=lambda x: -x[0])[:TOP_EDGE_N]:
             _bump(top5[key], _grade_side(side, line, am))
-    return {"week": week, "season": year, "mine": mine, "model": model, "top5": top5}
+            if detail and key == "close":
+                row = _detail_row(L, side, line, am)
+                row["edge"] = round(edge, 1)
+                top5_rows.append(row)
+    out = {"week": week, "season": year, "mine": mine, "model": model, "top5": top5,
+           "complete": n_games > 0 and n_final == n_games}
+    if detail:
+        mine_rows.sort(key=lambda r: -(r.get("confidence") or 0))
+        out["mine_picks"] = mine_rows
+        out["top5_plays"] = top5_rows
+    return out
+
+
+def _detail_row(L, side, line, am):
+    """Public per-game row for a graded (FINAL) play: the side taken, its line from
+    that side's perspective, and the ATS result vs that (closing) line."""
+    me, opp = ("home_abbr", "away_abbr") if side == "home" else ("away_abbr", "home_abbr")
+    ms, os_ = ("home_score", "away_score") if side == "home" else ("away_score", "home_score")
+    return {
+        "team": L[me], "opp": L[opp], "at": "vs" if side == "home" else "at",
+        "line": line if side == "home" else -line,
+        "score": f'{int(L[ms] or 0)}-{int(L[os_] or 0)}',
+        "result": _grade_side(side, line, am),
+    }
 
 
 def _summary_market(event_id):
@@ -615,7 +654,7 @@ def freeze_week_lines(week, year, overwrite=False):
     return written
 
 
-def records(view_week, view_year):
+def records(view_week, view_year, detail=False):
     """Season-to-date + this-week records for Sean's picks vs the blind-model
     benchmark. Season-to-date spans weeks 1..(current week) for the live season, or
     the full 18 for a completed past season. One ESPN fetch per week — call this on
@@ -630,7 +669,7 @@ def records(view_week, view_year):
     week_cache = {}
     for w in range(1, bound + 1):
         try:
-            gw = grade_week(w, view_year, ratings, hfa, default_hfa)
+            gw = grade_week(w, view_year, ratings, hfa, default_hfa, detail=detail)
         except Exception:  # noqa: BLE001 — a bad week shouldn't sink the record
             continue
         week_cache[w] = gw
@@ -645,14 +684,15 @@ def records(view_week, view_year):
         "season": view_year, "week": view_week, "through_week": bound,
         "season_record": season,
         "week_record": {"mine": vw["mine"], "model": vw["model"], "top5": vw["top5"]},
+        "weeks": week_cache,
     }
 
 
 def write_records_json(year=None, path=None):
     """Compute the season records and write a compact PUBLIC JSON the board renders.
 
-    Aggregate W-L-P(-NP) only — no individual pick selections, so Sean's picks stay
-    private while the tallies go public. Model + mine + top-5, each vs opening and
+    Season tallies plus, per graded week, Sean's picks and the model's top-5 plays —
+    ONLY for FINAL games (a pick is never public before its game is over). Model + mine + top-5, each vs opening and
     closing line, season-to-date. Run this locally (needs the gitignored picks +
     frozen lines); the committed file is what CI renders. Returns the payload.
     """
@@ -661,12 +701,32 @@ def write_records_json(year=None, path=None):
     cw, cy = current_week_year()
     if year is None:
         year = cy or 2026
-    rec = records(cw or 1, year)
+    rec = records(cw or 1, year, detail=True)
+    weeks = []
+    season = {who: {"open": _tally(), "close": _tally()} for who in ("mine", "model", "top5")}
+    for w in sorted(rec["weeks"]):
+        gw = rec["weeks"][w]
+        # only fully completed weeks: every game FINAL, so no pick is public before
+        # its game ends and the top-5 is ranked over the whole slate
+        if not gw.get("complete"):
+            continue
+        weeks.append({
+            "week": w,
+            "mine": gw["mine"], "model": gw["model"], "top5": gw["top5"],
+            "mine_points": sum(r["points"] for r in gw["mine_picks"]),
+            "mine_picks": gw["mine_picks"],
+            "top5_plays": gw["top5_plays"],
+        })
+        for who in season:
+            for ln in ("open", "close"):
+                _add_tally(season[who][ln], gw[who][ln])
     payload = {
         "season_year": year,
-        "through_week": rec["through_week"],
+        "through_week": max([x["week"] for x in weeks] or [rec["through_week"]]),
         "generated": _now().strftime("%Y-%m-%dT%H:%MZ"),
-        "season_record": rec["season_record"],   # mine/model/top5 -> open/close tallies
+        "season_record": season,   # completed weeks only: mine/model/top5 -> open/close
+        "season_points": sum(x["mine_points"] for x in weeks),
+        "weeks": weeks,   # graded weeks only: per-pick detail for FINAL games
     }
     with open(path, "w") as f:
         json.dump(payload, f, indent=2)
