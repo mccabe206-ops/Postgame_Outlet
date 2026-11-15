@@ -972,5 +972,141 @@
     "open_note": "Draft Kings opening line (ESPN summary pickcenter)",
     "market": -3.0,
     "market_note": "SEA -3 (ESPN scoreboard, frozen 2026-11-02T01:08Z)"
+  },
+  "401873037": {
+    "model_spread": 7.0,
+    "market_open": -4.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": 9.5,
+    "market_note": "JAX -9.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_spread_sunday_ratings": 7.5,
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: 74727d57e (Nov 3, TNF)"
+  },
+  "401873038": {
+    "model_spread": 5.5,
+    "market_open": 4.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": 3.0,
+    "market_note": "CIN -3 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873040": {
+    "model_spread": 3.5,
+    "market_open": 1.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": 4.5,
+    "market_note": "DAL -4.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873045": {
+    "model_spread": -7.5,
+    "market_open": -9.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": -8.5,
+    "market_note": "KC -8.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873042": {
+    "model_spread": 4.5,
+    "market_open": 6.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": 6.5,
+    "market_note": "DET -6.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873039": {
+    "model_spread": -2.5,
+    "market_open": -3.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": -4.5,
+    "market_note": "NO -4.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873044": {
+    "model_spread": 2.5,
+    "market_open": -5.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": 3.0,
+    "market_note": "NYG -3 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873043": {
+    "model_spread": 5.5,
+    "market_open": 4.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": 4.5,
+    "market_note": "LAR -4.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873041": {
+    "model_spread": 0.5,
+    "market_open": 3.0,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": 3.0,
+    "market_note": "DEN -3 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873046": {
+    "model_spread": 5.5,
+    "market_open": -1.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": 5.5,
+    "market_note": "HOU -5.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873049": {
+    "model_spread": -2.5,
+    "market_open": -1.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": -3.5,
+    "market_note": "NE -3.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873047": {
+    "model_spread": -9.0,
+    "market_open": -8.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": -8.5,
+    "market_note": "SF -8.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873048": {
+    "model_spread": -8.5,
+    "market_open": -13.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": -9.5,
+    "market_note": "SEA -9.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873050": {
+    "model_spread": -6.0,
+    "market_open": -3.5,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": -6.5,
+    "market_note": "CHI -6.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
+  },
+  "401873051": {
+    "model_spread": 3.0,
+    "market_open": 3.0,
+    "open_source": "espn_open",
+    "open_note": "DraftKings opening line (ESPN summary pickcenter)",
+    "market": 3.5,
+    "market_note": "BUF -3.5 (ESPN summary, frozen 2026-11-15T02:38Z)",
+    "model_note": "Backfilled 2026-11-14 from ratings in effect at kickoff: b35112559 (Nov 7)"
   }
 }

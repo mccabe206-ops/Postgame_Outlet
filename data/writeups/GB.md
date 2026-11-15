@@ -1,3 +1,14 @@
+## Week 10: vs Minnesota (pre-game)
+
+The defense finally gets its due. We came into the season expecting a step back without **Micah Parsons**, and that held for the first month. It doesn't anymore. Through nine weeks Green Bay ranks **6th in EPA allowed per play**, without Parsons, **Edgerrin Cooper** or **Javon Hargrave**. The down-to-down success rate is more middle of the pack, and turnovers have helped, but this is a good defense. The offense takes a hit: **Josh Jacobs** broke his ring finger, had surgery Friday and is out for 2–3 weeks. C **Sean Rhyan** (ankle) and TE **Josh Whyle** (concussion) are also out.
+
+**What changed:**
+- **Offense +0.6 → +0.2 (−0.4):** no Jacobs, with the line still banged up. It comes back up when he returns.
+- **Defense −0.4 → +0.5 (+0.9):** our preseason doubts are no longer defensible.
+- **QB Love held at +2.0.** **New total 2.2 → 2.7.**
+
+**Watch:** Parsons is in his 21-day practice window and taking full-team reps. When he's activated, the defense gets another bump.
+
 ## Week 9: at New England (W 45–27)
 
 The best game of **Jordan Love's** season: 23/29, 372 yards, 3 TD, no interceptions (98.0 QBR). Green Bay also won the turnover battle by four.
