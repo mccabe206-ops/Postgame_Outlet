@@ -1,3 +1,18 @@
+## Week 10: at N.Y. Giants (W 24–21)
+
+**Jayden Daniels** threw his first two interceptions of the season in the fourth quarter, then drove for the winning score in the final minute (23/33, 249 yards, 3 TD). The run defense gave up a big day on the ground.
+
+**What changed:**
+- **All units held.** **Total −1.2.**
+
+## Week 9: vs L.A. Rams (L 13–20)
+
+Daniels threw for 274 yards and a TD, but Washington couldn't finish drives. G **Lucas Patrick (concussion)** is out.
+
+**What changed:**
+- **Offense −1.3 → −1.4 (−0.1):** Patrick out.
+- **QB Daniels and Defense held.** **New total −1.1 → −1.2.**
+
 ## Week 9: QB re-evaluation
 
 Daniels is held at +1.5. His 63.6 QBR, 96.2 rating and zero interceptions land right at his grade.

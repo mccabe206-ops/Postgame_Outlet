@@ -1,3 +1,20 @@
+## Week 10: at Dallas (pre-game)
+
+Deebo Samuel (hamstring) is cleared to play. LB Dre Greenlaw (knee) is questionable.
+
+**What changed:**
+- **Offense +0.4 → +0.6 (+0.2):** Deebo back.
+- **New total 7.0 → 7.2.**
+
+## Week 9: vs Las Vegas (W 38–17)
+
+Brock Purdy was efficient (17/25, 232 yards, 2 TD), and the defense picked off Kirk Cousins three times. At the deadline San Francisco added WR **Keenan Allen** from Indianapolis to a thin receiver room (Christian Kirk on IR, Brandon Aiyuk out).
+
+**What changed:**
+- **Offense +0.2 → +0.4 (+0.2):** Allen.
+- **Defense +1.5 → +1.6 (+0.1).**
+- **QB Purdy held.** **New total 6.7 → 7.0.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 2nd among this week's starters in QBR (79.3), with a 110.1 passer rating and 15 TD/4 INT. That's elite production even with the receiver room in pieces.

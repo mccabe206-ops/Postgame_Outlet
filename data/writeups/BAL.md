@@ -1,3 +1,12 @@
+## Week 9: vs Jacksonville (L 10–33)
+
+Joe Fagnano's first start went badly (10/18, 60 yards, 2 INT), and Baltimore has now lost three straight by 20 or more. The deadline changed the quarterback picture: **Jacoby Brissett** arrived from Arizona and is expected to start Monday night against the Chargers. C **Ryan Neuzil** also came over from Atlanta.
+
+**What changed:**
+- **QB Fagnano −5.0 → Brissett −2.0 (+3.0):** Brissett was −1.0 in Arizona; a point comes off for his first week in a new system behind a patched-up line. Fagnano drops to QB2.
+- **Offense +0.7 → +0.8 (+0.1):** Neuzil.
+- **Defense held.** **New total −4.6 → −1.5.**
+
 ## Week 9: QB re-evaluation
 
 Fagnano is held at −5.0, the emergency-starter level. Thursday's 10-33 loss (10.1 QBR) didn't argue for anything higher.

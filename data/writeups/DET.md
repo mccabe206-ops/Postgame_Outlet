@@ -1,3 +1,21 @@
+## Week 10: vs New England (pre-game)
+
+C **Cade Mays (ankle)** is out. Jared Goff (chest) has been cleared. CB D.J. Reed and S Kerby Joseph remain out (already priced).
+
+**Amon-Ra St. Brown (ribs)** is questionable. The rating assumes he plays; if he sits, the offense takes a manual cut. Final status comes with inactives, about 90 minutes before kickoff.
+
+**What changed:**
+- **Offense +1.5 → +1.4 (−0.1):** Mays out.
+- **New total 1.9 → 1.8.**
+
+## Week 9: at Miami (W 19–9)
+
+The defense held Miami to 9 points, a soft opponent but a needed result for a unit missing its best players. Goff was quiet (17/25, 170 yards, INT). At the deadline Detroit added S **Andre Cisco** from the Jets for safety depth.
+
+**What changed:**
+- **Defense −2.4 → −2.1 (+0.3):** +0.2 for the performance and +0.1 for Cisco.
+- **QB Goff and Offense held.** **New total 1.6 → 1.9.**
+
 ## Week 9: QB re-evaluation
 
 Goff is held at +2.5. He ranks 6th among this week's starters in passer rating (110.0) with just 1 interception, and his overall blend lands right at his grade.

@@ -1,3 +1,11 @@
+## Week 9: at Chicago (L 24–27)
+
+The defense intercepted Caleb Williams four times, but Baker Mayfield threw two interceptions of his own (18/32, 243 yards). Baker holds through the bye; his thumb needs checking before Week 11.
+
+**What changed:**
+- **Defense +0.3 → +0.4 (+0.1).**
+- **QB Mayfield and Offense held.** **New total 1.2 → 1.3.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 29th among this week's starters in QBR (35.1). He's thrown 14 passes in two games since the right-thumb dislocation, and the offense has become run-only.

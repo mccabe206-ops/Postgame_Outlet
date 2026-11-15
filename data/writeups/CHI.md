@@ -1,3 +1,11 @@
+## Week 9: vs Tampa Bay (W 27–24)
+
+Chicago won despite losing the turnover battle by three. Caleb Williams threw four interceptions but still moved the offense (279 yards, 2 TD); one game isn't enough to move his grade. CB **Malik Muhammad (toe)** is out. Week 10 is a bye.
+
+**What changed:**
+- **Defense +0.7 → +0.6 (−0.1):** Muhammad out.
+- **QB Williams and Offense held.** **New total 5.4 → 5.3.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 4th among this week's starters in QBR (76.9), with 6 TD and just 1 INT since returning from the hamstring injury.

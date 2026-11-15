@@ -1,3 +1,14 @@
+## Week 10: vs Buffalo (pre-game)
+
+**Garrett Wilson (concussion)** is questionable. The rating assumes he plays; if he's out, the offense takes a manual cut. Final status comes with inactives, about 90 minutes before kickoff.
+
+## Week 9: at Kansas City (L 12–35)
+
+Kansas City out-gained the Jets by 162 yards. Geno Smith (18/32, 165 yards) had a quiet day at Arrowhead one week after his grade went up; one road game in Kansas City isn't enough to take it back. S **Andre Cisco**, whose snaps had been cut, was traded to Detroit.
+
+**What changed:**
+- **All units held.** **Total −1.4.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 9th among this week's starters in passer rating (104.5), with 12 TD/3 INT. His 21st-ranked QBR is the one soft spot.

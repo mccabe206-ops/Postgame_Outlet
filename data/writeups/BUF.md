@@ -1,3 +1,19 @@
+## Week 10: at N.Y. Jets (pre-game)
+
+RT **Spencer Brown (ankle)** is doubtful. TE Dalton Kincaid (ankle) has been cleared.
+
+**What changed:**
+- **Offense +1.3 → +1.2 (−0.1):** Brown likely out.
+- **QB Allen and Defense held.** **New total 7.4 → 7.3.**
+
+## Week 9: at Minnesota (W 23–6)
+
+The defense held Minnesota to 6 points and 81 passing yards. That came against backup Carson Wentz, so it only counts for so much. At the deadline Buffalo added S **Amani Hooker** from Tennessee, the NFL's interception leader.
+
+**What changed:**
+- **Defense −0.9 → −0.4 (+0.5):** +0.2 for the performance (tempered for the opponent) and +0.3 for Hooker.
+- **QB Allen and Offense held.** **New total 6.9 → 7.4.**
+
 ## Week 9: QB re-evaluation
 
 Allen is held at +6.5. His passing numbers rank 6th in QBR (76.7) and 11th in passer rating (101.1), but neither stat fully captures the running and creating that make him the league's most valuable quarterback.

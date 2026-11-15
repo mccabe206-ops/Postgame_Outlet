@@ -1,3 +1,22 @@
+## Week 10: at Cleveland (pre-game)
+
+The pass rush is short-handed. DE **Danielle Hunter (hamstring)** and LB **Azeez Al-Shaair (groin)** are out. G Keylan Rutledge (neck) is also out, but RB David Montgomery is back after a full practice.
+
+**Will Anderson Jr. (ankle)** is questionable. The rating assumes Anderson plays; if he's inactive, the defense takes a further manual cut. Final status comes with inactives, about 90 minutes before kickoff.
+
+**What changed:**
+- **Defense +0.7 → +0.3 (−0.4):** Hunter (−0.3) and Al-Shaair (−0.1).
+- **Offense held:** Montgomery's return offsets Rutledge.
+- **New total 3.3 → 2.9.**
+
+## Week 9: at L.A. Chargers (W 44–22)
+
+**C.J. Stroud** had his best game of the season: 384 yards and 5 TD (89.7 QBR). The Chargers' secondary is banged up, so the bump is kept modest.
+
+**What changed:**
+- **QB Stroud +1.5 → +1.8 (+0.3).**
+- **Offense and Defense held.** **New total 3.0 → 3.3.**
+
 ## Week 9: QB re-evaluation
 
 Stroud is held at +1.5. His 69.2 QBR, 100.7 passer rating and 11 TD/1 INT sit right where that grade puts him.

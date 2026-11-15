@@ -1,3 +1,20 @@
+## Week 10: vs L.A. Rams (pre-game)
+
+C **Hjalte Froholdt (concussion)** and backup Jon Gaines II are out.
+
+**What changed:**
+- **Offense −1.7 → −1.8 (−0.1).**
+- **New total −5.7 → −5.8.**
+
+## Week 9: at Seattle (L 3–17)
+
+Gardner Minshew likely **tore the UCL in his elbow** and is expected to need season-ending surgery. Jacoby Brissett was traded to Baltimore, so rookie **Carson Beck** takes over. WR **Michael Wilson (neck)** went on IR.
+
+**What changed:**
+- **QB Minshew −1.5 → Beck −3.0 (−1.5):** Beck is unproven, so he sits near the bottom of the backup range.
+- **Offense −1.5 → −1.7 (−0.2):** Wilson out.
+- **Defense held.** **New total −4.0 → −5.7.**
+
 ## Week 9: QB re-evaluation
 
 Minshew is held at −1.5. His numbers so far are strong, but they come from only about 25 plays.

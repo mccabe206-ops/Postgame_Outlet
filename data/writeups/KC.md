@@ -1,3 +1,20 @@
+## Week 10: at Atlanta (pre-game)
+
+RB **Kenneth Walker III (groin)** is out. RT Jaylon Moore (ankle) is out too, and rookie CB Mansoor Delane is questionable.
+
+**What changed:**
+- **Offense +0.4 → +0.1 (−0.3):** Walker has been a big part of this offense. It comes back when he does.
+- **New total 4.7 → 4.4.**
+
+## Week 9: vs N.Y. Jets (W 35–12)
+
+Kansas City out-gained the Jets by 162 yards, and Patrick Mahomes was efficient (23/31, 242 yards, 2 TD). At the deadline the Chiefs added WR **Josh Downs** from Indianapolis.
+
+**What changed:**
+- **Offense 0.0 → +0.4 (+0.4):** +0.2 for the performance and +0.2 for Downs.
+- **Defense +0.2 → +0.3 (+0.1):** held the Jets to 12.
+- **QB Mahomes held** at +4.0. **New total 4.2 → 4.7.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 11th among this week's starters in QBR (67.3) and 14th in passer rating (99.7). The talent isn't in question, but this season's production sits in the middle of the league.

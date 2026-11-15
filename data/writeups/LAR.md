@@ -1,3 +1,21 @@
+## Week 10: at Arizona (pre-game)
+
+C **Steve Avila (hamstring)** is out. Stafford's grade comes down in a fresh look at the quarterback (see Quarterback).
+
+**What changed:**
+- **QB Stafford +4.5 → +3.8 (−0.7):** He's now slotted just above Caleb Williams and just below Patrick Mahomes, weighing his track record, current play and the schedule he's faced.
+- **Offense +0.9 → +0.8 (−0.1):** Avila out.
+- **New total 5.6 → 4.8.**
+
+## Week 9: at Washington (W 20–13)
+
+A win, but a costly one. **Puka Nacua** sprained the **MCL and PCL in his right knee** and has **turf toe**. He's going on IR for at least four games, and the Week 11 bye adds to his absence. Myles Garrett was activated from IR and played. CB **Jaylen Watson (shoulder)** went on IR.
+
+**What changed:**
+- **Offense +1.4 → +0.9 (−0.5):** Nacua out.
+- **Defense 0.0 → +0.2 (+0.2):** Garrett back (+0.3) and Watson out (−0.1).
+- **QB Stafford held** (for now). **New total 5.9 → 5.6.**
+
 ## Week 9: QB re-evaluation
 
 His season QBR (63.3) and passer rating (93.2) both rank mid-pack among this week's starters, and his 8 interceptions are tied for third-most. He keeps a top-10 grade on talent, but the production hasn't matched an elite number.

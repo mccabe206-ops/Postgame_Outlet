@@ -28,6 +28,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 WRITEUPS = os.path.join(DATA, "writeups")
 QB_WRITEUPS = os.path.join(DATA, "qb_writeups")  # optional per-QB overrides
+
+# Edition dropdown display. Stored snapshot labels are immutable (tests, audits
+# and the PGO comparison key on them), so cleanup happens here, display-only.
+HIDDEN_EDITIONS = {
+    "Preseason",                   # legacy list-form duplicate of "Preseason 2026"
+    "Week 1 2026 - McCabe Sep 9",  # opening-night audit copy; Sunday Week 1 edition shown
+}
+EDITION_DISPLAY = {"Week 1 2026 Power Ratings": "Week 1 2026"}
 PREVIEW_ROOT = os.path.join(HERE, "output", "ratings-preview")
 CANONICAL_URL = "https://postgameoutlet.com/pages/power-ratings"
 
@@ -507,6 +515,8 @@ def build_html(rows, config, generated_at=None):
     versions = {"Current": body}
     version_meta = {"Current": {"published_at": "", "corrections": []}}
     for label, value in snaps.items():
+        if label in HIDDEN_EDITIONS:
+            continue
         entry = normalize_snapshot_entry(value)
         versions[label] = render_rating_rows(entry["rows"], detail=False)
         version_meta[label] = {
@@ -515,8 +525,9 @@ def build_html(rows, config, generated_at=None):
         }
     versions_json = json.dumps(versions)
     version_meta_json = json.dumps(version_meta).replace("<", "\\u003c")
-    ver_opts = "".join(f'<option value="{html.escape(l)}">{html.escape(l)}</option>'
-                       for l in versions)
+    ver_opts = "".join(
+        f'<option value="{html.escape(l)}">{html.escape(EDITION_DISPLAY.get(l, l))}</option>'
+        for l in versions)
 
     # QB tab: starters 1-32, then top-18 backups. Name buttons open the same
     # drawer as teams, keyed by data-qb into the QB_DETAILS payload.

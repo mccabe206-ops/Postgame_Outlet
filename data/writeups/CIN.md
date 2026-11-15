@@ -1,3 +1,11 @@
+## Week 9: at Atlanta (W 34–17)
+
+Joe Burrow was sharp (24/29, 271 yards, 3 TD), and the defense held Atlanta to 17.
+
+**What changed:**
+- **Defense −0.7 → −0.5 (+0.2).** Kept small because this rating already sits well above the market on Cincinnati.
+- **QB Burrow and Offense held.** **New total 5.1 → 5.3.**
+
 ## Week 9: QB re-evaluation
 
 Burrow is held at +5.0. He ranks 1st among this week's starters in the QBR/passer-rating blend (77.3 QBR, 111.6 rating, 20 TD/6 INT), which confirms the elite grade he already carries.

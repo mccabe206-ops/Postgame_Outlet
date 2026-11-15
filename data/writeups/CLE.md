@@ -1,3 +1,18 @@
+## Week 10: vs Houston (pre-game)
+
+DT **Maliek Collins** is back, but S **Ronnie Hickman (concussion)** is out. CB Denzel Ward has been cleared.
+
+**What changed:**
+- **Nothing net:** Collins's return offsets Hickman's absence. **Total −2.4.**
+
+## Week 9: at New Orleans (L 22–23)
+
+**Shedeur Sanders** had a promising first start: 297 yards, 2 TD and no interceptions. Cleveland won the turnover battle by two but was out-gained, and lost by a point.
+
+**What changed:**
+- **QB Sanders −2.5 → −2.2 (+0.3).**
+- **Offense and Defense held.** **New total −2.7 → −2.4.**
+
 ## Week 9: QB re-evaluation
 
 Deshaun Watson is in concussion protocol from the Week 8 hit at Pittsburgh (cleared, but questionable), so Sanders makes his first start of 2026 at his −2.5. Watson returns at −2.0.

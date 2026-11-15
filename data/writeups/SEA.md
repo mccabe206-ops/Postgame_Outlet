@@ -1,3 +1,12 @@
+## Week 9: vs Arizona (W 17–3)
+
+**Drew Lock** played well (19/28, 175 yards, TD, 89.9 QBR), and the defense allowed 3 points. Lock injured his **oblique**, but Mike Macdonald says it's manageable and he starts at Las Vegas. Sam Darnold (quad, cracked rib) is out again.
+
+**What changed:**
+- **QB Lock −0.5 → 0.0 (+0.5):** back to his normal grade.
+- **Defense +2.7 → +2.9 (+0.2).**
+- **Offense held.** **New total 2.4 → 3.1.**
+
 ## Week 9: QB re-evaluation
 
 Lock is held at −0.5. His numbers are excellent (82.4 QBR, 127.3 rating), but they come from only about 60 plays, too small a sample to move the grade while he plays through the elbow tendonitis.

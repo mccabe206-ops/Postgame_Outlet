@@ -1,3 +1,11 @@
+## Week 9: vs N.Y. Giants (L 11–19)
+
+**Joe Milton's** first Eagles start was rough: 18/34, 169 yards, 20.2 QBR. He holds his grade; he's rated level with Tanner McKee, not below him. At the deadline Philadelphia traded DT **Jordan Davis** to Jacksonville, and LB **Jihaad Campbell (hamstring)** is out. Week 10 is a bye.
+
+**What changed:**
+- **Defense −0.8 → −1.2 (−0.4):** Davis gone (−0.3) and Campbell out (−0.1).
+- **QB Milton and Offense held.** **New total −6.0 → −6.4.**
+
 ## Week 9: QB re-evaluation
 
 Tanner McKee was benched after six straight losses, and Milton makes his first Eagles start against the Giants at the same −3.0.
