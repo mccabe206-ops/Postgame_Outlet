@@ -1,3 +1,20 @@
+## Week 10: vs Kansas City (pre-game)
+
+LB **Divine Deablo (forearm)** is doubtful.
+
+**What changed:**
+- **Defense −1.1 → −1.2 (−0.1).**
+- **New total −1.2 → −1.3.**
+
+## Week 9: vs Cincinnati (L 17–34)
+
+Joe Burrow picked the defense apart (24/29, 271 yards, 3 TD), and Michael Penix Jr. managed only 162 yards. At the deadline Atlanta traded S **Jessie Bates** to Jacksonville and C **Ryan Neuzil** to Baltimore (getting OL Andrew Vorhees back).
+
+**What changed:**
+- **Defense −0.6 → −1.1 (−0.5):** −0.2 for the performance and −0.3 for losing Bates.
+- **Offense +1.0 → +0.9 (−0.1):** Neuzil gone.
+- **QB Penix held.** **New total −0.6 → −1.2.**
+
 ## Week 9: QB re-evaluation
 
 The Week 8 cut was mostly one game in torrential rain. Over the full season (55.9 QBR, 90.9 passer rating) he grades closer to −1.0.

@@ -1,3 +1,19 @@
+## Week 10: vs Miami (pre-game)
+
+DE **Arden Key** is back from IR, but S **Jaylon Carlies (neck)** is out, and LB Akeem Davis-Gaither is on IR.
+
+**What changed:**
+- **Nothing net:** Key's return offsets Carlies. **Total −4.2.**
+
+## Week 9: vs Dallas (L 23–27)
+
+Dallas out-gained Indianapolis by 237 yards, and Dak Prescott threw for 335. Daniel Jones (20/34, 180 yards, 15.3 QBR) held his grade after last week's re-evaluation. The sell-off continued at the deadline: WR **Josh Downs** went to Kansas City and WR **Keenan Allen** to San Francisco.
+
+**What changed:**
+- **Defense −1.7 → −1.9 (−0.2):** Prescott's day, plus DE Arden Key's stint on IR.
+- **Offense +0.1 → −0.3 (−0.4):** Downs (−0.2), Allen (−0.1) and OT Jalen Travis (knee) out (−0.1).
+- **QB Jones held.** **New total −3.6 → −4.2.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 30th among this week's starters in passer rating (68.7), with 5 TD/9 INT and a 39.6 QBR.

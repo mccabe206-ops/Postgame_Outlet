@@ -1,3 +1,15 @@
+## Week 10: at New Orleans (pre-game)
+
+**Jaelan Phillips (hamstring)** is questionable. The rating assumes he's out; if he's active, the defense gets a manual bump. Final status comes with inactives, about 90 minutes before kickoff.
+
+## Week 9: vs Denver (L 21–26)
+
+**Bryce Young** played his best game in weeks against an elite defense: 28/39, 276 yards, 3 TD (84.6 QBR). Carolina out-gained Denver and lost by five.
+
+**What changed:**
+- **QB Young +1.0 → +1.3 (+0.3).**
+- **Offense and Defense held.** **New total −0.8 → −0.5.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 20th among this week's starters in QBR (59.9) and 23rd in passer rating (89.1), down from his early-season level.

@@ -1,3 +1,11 @@
+## Week 9: bye
+
+DT **Derrick Harmon (foot)** went on IR during the bye.
+
+**What changed:**
+- **Defense +1.0 → +0.9 (−0.1):** Harmon out.
+- **QB Rodgers and Offense held.** **New total 0.0 → −0.1.**
+
 ## Week 9: QB re-evaluation
 
 Rodgers is held at −1.0. His 49.2 QBR and 86.2 passer rating both rank 24th, which matches the grade.

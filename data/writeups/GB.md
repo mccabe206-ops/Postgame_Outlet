@@ -1,3 +1,12 @@
+## Week 9: at New England (W 45–27)
+
+The best game of **Jordan Love's** season: 23/29, 372 yards, 3 TD, no interceptions (98.0 QBR). Green Bay also won the turnover battle by four.
+
+**What changed:**
+- **QB Love +1.5 → +2.0 (+0.5).**
+- **Offense +0.4 → +0.6 (+0.2).**
+- **Defense held** (LB Zaire Franklin doubtful). **New total 1.5 → 2.2.**
+
 ## Week 9: QB re-evaluation
 
 Love is held at +1.5. His numbers are middle of the pack (64.2 QBR, 92.4 rating), but 16 TD/6 INT behind an inconsistent supporting cast doesn't warrant a cut yet.

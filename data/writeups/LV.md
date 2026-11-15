@@ -1,3 +1,12 @@
+## Week 9: at San Francisco (L 17–38)
+
+Kirk Cousins threw three interceptions, Las Vegas turned it over four times and was out-gained by 174 yards. Then the Raiders traded Cousins to Minnesota at the deadline, handing the job to **Fernando Mendoza**, the No. 1 overall pick.
+
+**What changed:**
+- **QB Cousins +0.5 → Mendoza −2.0 (−2.5):** Mendoza is untested, so he starts just above the worst-starter floor. Aidan O'Connell is the backup.
+- **Defense −1.5 → −1.7 (−0.2):** 38 points allowed.
+- **Offense held.** **New total −0.9 → −3.6.**
+
 ## Week 9: QB re-evaluation
 
 He has 19 TD/5 INT and ranks 10th among this week's starters in passer rating (101.4).

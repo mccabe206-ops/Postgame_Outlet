@@ -1,3 +1,10 @@
+## Week 9: at Carolina (W 26–21)
+
+Denver won but was out-gained. WR **Jaylen Waddle** and CB **Riley Moss** both left with **concussions**, and S Brandon Jones (hamstring) and S Talanoa Hufanga (ankle) are out. Week 10 is a bye. Waddle is targeting a return Nov. 22 against Las Vegas.
+
+**What changed:**
+- **All units held through the bye.** If Waddle isn't back for Week 11, the offense takes a manual cut. **Total 1.0.**
+
 ## Week 9: QB re-evaluation
 
 Nix is held at −1.0. His 49.0 QBR and 83.6 passer rating both rank 25th, exactly where the grade has him.

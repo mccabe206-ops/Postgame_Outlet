@@ -1,3 +1,20 @@
+## Week 10: at Indianapolis (pre-game)
+
+**Malik Willis** went on IR with a **core muscle (groin) injury** and is out through at least Week 13. **Kyle McCord**, a 2025 sixth-round pick, makes his first NFL start. DT **Zach Sieler (biceps)** and C **Aaron Brewer (concussion)** are also out.
+
+**What changed:**
+- **QB Willis −1.5 → McCord −4.0 (−2.5):** McCord has no NFL track record yet, so he sits at the bottom of the backup range. Willis returns at −1.5 when healthy.
+- **Defense −1.2 → −1.4 (−0.2):** Sieler out.
+- **Offense −1.5 → −1.6 (−0.1):** Brewer out.
+- **New total −4.2 → −7.0.**
+
+## Week 9: vs Detroit (L 9–19)
+
+Miami scored 9 points. Willis (13/25, 128 yards, INT) played through groin and hamstring tightness that turned out to be serious.
+
+**What changed:**
+- **All units held.** **Total −4.2.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 16th among this week's starters in QBR (62.5) and has been better than the floor he was priced at.

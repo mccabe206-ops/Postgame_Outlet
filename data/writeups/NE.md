@@ -1,3 +1,15 @@
+## Week 10: at Detroit (pre-game)
+
+**A.J. Brown (knee)** is questionable after limited practices all week. The rating currently assumes he's out; if he's active Sunday, the offense gets a manual bump before kickoff. Final status comes with inactives, about 90 minutes before kickoff.
+
+## Week 9: vs Green Bay (L 27–45)
+
+Jordan Love carved up the defense (23/29, 372 yards, 3 TD), and New England turned it over four times. **Drake Maye** threw for 299 yards and 3 TD but also 3 INT. One game doesn't undo his half-season, so his grade holds. CB **Carlton Davis (knee)** is now out.
+
+**What changed:**
+- **Defense +0.3 → 0.0 (−0.3):** 45 points allowed, plus Davis out.
+- **QB Maye and Offense held.** **New total 2.6 → 2.3.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 5th among this week's starters in QBR (76.8) with 15 touchdowns. The ascent has held up over a full half-season.

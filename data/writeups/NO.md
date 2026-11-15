@@ -1,3 +1,20 @@
+## Week 10: vs Carolina (pre-game)
+
+RT **Taliese Fuaga (knee)** is out, joining C Erik McCoy.
+
+**What changed:**
+- **Offense −0.6 → −0.7 (−0.1).**
+- **New total −2.2 → −2.3.**
+
+## Week 9: vs Cleveland (W 23–22)
+
+New Orleans out-gained Cleveland and won by a point despite losing the turnover battle by two. Tyler Shough threw for 265 yards and a TD. C **Erik McCoy (biceps)** is out, and DT **Davon Godchaux** was traded to Jacksonville.
+
+**What changed:**
+- **Offense −0.5 → −0.6 (−0.1):** McCoy out.
+- **Defense −1.0 → −1.1 (−0.1):** Godchaux gone.
+- **QB Shough held.** **New total −2.0 → −2.2.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 21st among this week's starters in passer rating (90.9) and is still playing through the left-hand injury.

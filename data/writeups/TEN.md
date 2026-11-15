@@ -1,3 +1,20 @@
+## Week 10: vs Jacksonville (pre-game)
+
+Both starting linebackers are out: **Anthony Hill Jr. (neck)** and **Cody Barton (concussion)**. LG **Peter Skoronski (hamstring)** and rookie WR **Carnell Tate (shoulder)** are out as well.
+
+**What changed:**
+- **Defense −1.6 → −1.8 (−0.2):** both linebackers out.
+- **Offense −1.4 → −1.6 (−0.2):** Skoronski and Tate.
+- **QB Ward held.** **New total −4.2 → −4.6.**
+
+## Week 9: bye
+
+Tennessee traded S **Amani Hooker**, the NFL's interception leader, to Buffalo at the deadline.
+
+**What changed:**
+- **Defense −1.3 → −1.6 (−0.3):** Hooker gone.
+- **QB Ward and Offense held.** **New total −3.9 → −4.2.**
+
 ## Week 9: QB re-evaluation
 
 Ward is held at −1.2. His 48.2 QBR and 78.7 rating rank in the bottom six, consistent with where the grade already sits.

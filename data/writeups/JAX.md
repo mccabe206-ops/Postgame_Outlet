@@ -1,3 +1,19 @@
+## Week 10: at Tennessee (pre-game)
+
+The two biggest deadline additions won't play yet. Liam Coen is resting DT Jordan Davis and S Jessie Bates because neither had a bye with his old team; neither is hurt. Both are expected to debut in Week 11. DT Davon Godchaux plays.
+
+**What changed:**
+- **Defense +1.2 → +0.7 (−0.5), this week only:** it comes back when Davis and Bates debut.
+- **New total 5.9 → 5.4.**
+
+## Week 9: at Baltimore (W 33–10)
+
+Trevor Lawrence was efficient (16/26, 242 yards, TD, no INT), and the defense held Baltimore to 10 against an emergency quarterback. Then Jacksonville had the biggest deadline in the league: DT **Jordan Davis** from Philadelphia, S **Jessie Bates** from Atlanta (in the last year of his deal) and DT **Davon Godchaux** from New Orleans.
+
+**What changed:**
+- **Defense +0.4 → +1.2 (+0.8):** +0.2 for the performance, +0.2 for Davis, +0.3 for Bates and +0.1 for Godchaux.
+- **QB Lawrence and Offense held.** **New total 5.1 → 5.9.**
+
 ## Week 9: QB re-evaluation
 
 He ranks 3rd among this week's starters in passer rating (111.7), with 18 TD/4 INT, and he's playing like a top-10 quarterback in Liam Coen's system.

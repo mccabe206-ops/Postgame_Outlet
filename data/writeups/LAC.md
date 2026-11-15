@@ -1,3 +1,11 @@
+## Week 9: vs Houston (L 22–44)
+
+C.J. Stroud threw for 384 yards and 5 TD through a depleted secondary. **Justin Herbert** left in the fourth quarter with an injury to the **middle finger of his left (non-throwing) hand** (possible fracture). He says he'll play Monday night in Baltimore and has been cleared on the injury report.
+
+**What changed:**
+- **Defense −0.5 → −0.9 (−0.4):** the secondary was overrun.
+- **QB Herbert and Offense held.** **New total −4.1 → −4.5.**
+
 ## Week 9: QB re-evaluation
 
 A 32.5 QBR and the most interceptions among this week's starters (10, with 5 TD). It's a hard-to-believe falloff for his track record, but it's seven games of evidence.

@@ -1,3 +1,18 @@
+## Week 10: vs Washington (L 21–24)
+
+A coin-flip game. **J.J. McCarthy** played well (23/36, 293 yards, TD, plus 34 rushing yards), including a 66-yard touchdown to Isaiah Likely. But his final-minute interception ended it after Jayden Daniels's late go-ahead drive.
+
+**What changed:**
+- **All units held.** **Total −2.0.**
+
+## Week 9: at Philadelphia (W 19–11)
+
+The defense held Philadelphia to 11 points, against Joe Milton in his first Eagles start. McCarthy (12/19, 127 yards) managed the game.
+
+**What changed:**
+- **Defense −0.4 → −0.2 (+0.2).**
+- **QB McCarthy and Offense held.** **New total −2.2 → −2.0.**
+
 ## Week 9: QB re-evaluation
 
 McCarthy is held at −2.0. He has only about 60 plays with the Giants, not enough to move the number.

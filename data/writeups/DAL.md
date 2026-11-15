@@ -1,3 +1,19 @@
+## Week 10: vs San Francisco (pre-game)
+
+DL **Donovan Ezeiruaku (ankle)** is out, and CB DaRon Bland is questionable. George Pickens (hamstring) has been cleared.
+
+**What changed:**
+- **Defense −1.7 → −1.8 (−0.1):** Ezeiruaku out.
+- **New total 1.4 → 1.3.**
+
+## Week 9: at Indianapolis (W 27–23)
+
+Dak Prescott threw for 335 yards and 2 TD, and Dallas out-gained Indianapolis by 237 yards. The defense held the Colts to 180 passing yards.
+
+**What changed:**
+- **Defense −1.8 → −1.7 (+0.1).**
+- **QB Prescott and Offense held** (TE Jake Ferguson's knee injury was already priced). **New total 1.3 → 1.4.**
+
 ## Week 9: QB re-evaluation
 
 Prescott is held at +2.0. He ranks 7th among this week's starters in QBR (75.8), and his overall blend lands right at his grade.

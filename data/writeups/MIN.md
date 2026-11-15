@@ -1,3 +1,21 @@
+## Week 10: at Green Bay (pre-game)
+
+Cousins is confirmed as the starter, and Kyler Murray (hamstring) is out. Several starters are also out: LB **Blake Cashman (concussion)**, TE **T.J. Hockenson (wrist)**, WR **Jauan Jennings (calf)** and DE **Tyrion Ingram-Dawkins (ankle)**. Jordan Addison (thumb) is questionable.
+
+**What changed:**
+- **Offense +0.2 → 0.0 (−0.2):** Hockenson and Jennings out.
+- **Defense +1.8 → +1.5 (−0.3):** Cashman (−0.2) and Ingram-Dawkins (−0.1).
+- **New total 2.0 → 1.5.**
+
+## Week 9: vs Buffalo (L 6–23)
+
+Carson Wentz couldn't move the offense (8/25, 81 yards, 2 INT, 2.3 QBR). At the deadline Minnesota brought back **Kirk Cousins** from Las Vegas for a 2027 third-round pick. He knows Kevin O'Connell's offense and inherits Justin Jefferson and Jordan Addison.
+
+**What changed:**
+- **QB Wentz −0.5 → Cousins 0.0 (+0.5):** Cousins is half a point below his Las Vegas grade for the short prep. Wentz drops to −2.0 as a backup.
+- **Offense +0.3 → +0.2 (−0.1):** Hockenson and Jennings banged up.
+- **Defense held.** **New total 1.6 → 2.0.**
+
 ## Week 9: QB re-evaluation
 
 Kyler Murray is out with a hamstring injury, so Wentz starts Monday against Buffalo at the same −0.5. He beat Chicago 9-3 in his Week 2 spot start.
