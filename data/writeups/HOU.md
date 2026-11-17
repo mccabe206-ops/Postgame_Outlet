@@ -1,3 +1,12 @@
+## Week 10: at Cleveland (L 24–27)
+
+Houston was out-gained by 89 yards while missing DE **Danielle Hunter (hamstring)**, RB **David Montgomery (groin)** and LB **Azeez Al-Shaair**, who has since gone on IR (groin). C.J. Stroud threw 3 TD on 20/38 passing. RB **Woody Marks** is now in concussion protocol, which leaves the backfield empty for a Thursday game against Indianapolis. G Wyatt Teller (illness) is also out.
+
+**What changed:**
+- **Offense +0.8 → +0.5 (−0.3):** Montgomery and Marks out, plus Teller.
+- **Defense +0.3 → +0.1 (−0.2):** this unit hasn't proven it's good.
+- **QB Stroud held.** **New total 2.9 → 2.4.**
+
 ## Week 10: at Cleveland (pre-game)
 
 The pass rush is short-handed. DE **Danielle Hunter (hamstring)** and LB **Azeez Al-Shaair (groin)** are out. G Keylan Rutledge (neck) is also out, but RB David Montgomery is back after a full practice.

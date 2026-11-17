@@ -1,3 +1,11 @@
+## Week 10: at Dallas (W 46–40)
+
+Brock Purdy was nearly perfect (22/28, 389 yards, 3 TD, 0 INT), and San Francisco won the shootout. But giving up 40 points is never okay, even with about 14 of them in garbage time. Dak Prescott threw 5 TD. **Mike Evans (Achilles tendinitis)** missed his third straight game; Kyle Shanahan says he's progressing.
+
+**What changed:**
+- **Defense +1.6 → +1.4 (−0.2).**
+- **QB Purdy and Offense held.** The offense goes up when Evans returns. **New total 7.2 → 7.0.**
+
 ## Week 10: at Dallas (pre-game)
 
 Deebo Samuel (hamstring) is cleared to play. LB Dre Greenlaw (knee) is questionable.

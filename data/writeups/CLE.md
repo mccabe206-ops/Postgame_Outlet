@@ -1,3 +1,11 @@
+## Week 10: vs Houston (W 27–24)
+
+**Deshaun Watson** was back as the starter and threw for 312 yards (25/40, 0 TD, 1 INT) in a win. Cleveland out-gained Houston by 89 yards. This also fixes the board: Watson has been the starter all along, and **Shedeur Sanders** only got the Week 9 start because Watson was in concussion protocol.
+
+**What changed:**
+- **QB Shedeur Sanders −2.2 → Deshaun Watson −1.5.** Watson is back at QB1, half a point above his old −2.0. Sanders goes back to QB2 at −2.2.
+- **Offense and Defense held.** **New total −2.4 → −1.7.** Cleveland is on bye in Week 11.
+
 ## Week 10: vs Houston (pre-game)
 
 DT **Maliek Collins** is back, but S **Ronnie Hickman (concussion)** is out. CB Denzel Ward has been cleared.
@@ -164,7 +172,7 @@ Cleveland grades poorly, and it is almost entirely the quarterback. The defense 
 
 ## Quarterback
 
-Shedeur Sanders (−2.2) is up 0.3 after a promising first start at New Orleans: 297 yards, 2 TD and 0 INT in a one-point loss.
+Deshaun Watson (−1.5) is the starter. He threw for 312 yards in the Week 10 win over Houston. Shedeur Sanders only started Week 9 because Watson was in concussion protocol, and he's back at QB2 (−2.2).
 
 ## Quarterback: through Week 1 2026 (historical)
 

@@ -1,3 +1,11 @@
+## Week 10: vs Jacksonville (L 23–40)
+
+Cam Ward made his share of mistakes but looked like a starting QB again: 28/39, 231 yards, 2 TD. Rookie WR **Carnell Tate (shoulder)** missed another game, and WR **Wan'Dale Robinson** hurt his **ankle** during it. Both are uncertain for Dallas.
+
+**What changed:**
+- **QB Ward −1.2 → −1.0 (+0.2).**
+- **Offense and Defense held.** If Robinson sits, the offense takes a manual cut. **New total −4.6 → −4.4.**
+
 ## Week 10: vs Jacksonville (pre-game)
 
 Both starting linebackers are out: **Anthony Hill Jr. (neck)** and **Cody Barton (concussion)**. LG **Peter Skoronski (hamstring)** and rookie WR **Carnell Tate (shoulder)** are out as well.
@@ -166,8 +174,7 @@ all read below the line.
 
 ## Quarterback
 
-
-Cam Ward (−1.2) goes up 0.3 after the best game of his second season: 26/40 for 304 yards, 2 TD and 0 INT (80.9 QBR) in the 43–36 shootout at Cincinnati. The 2025 No. 1 overall pick keeps trending up.
+Cam Ward (−1.0) makes his share of mistakes, but he keeps showing starting-QB ability. He went 28/39 for 231 yards and 2 TD against Jacksonville. The 2025 No. 1 overall pick moves up 0.2.
 
 ## What moved the number
 

@@ -1,3 +1,11 @@
+## Week 10: vs Seattle (L 13–21)
+
+Fernando Mendoza's debut was fine (17/29, 143 yards, no turnovers), but Seattle out-gained Las Vegas by 219 yards. The big loss is TE **Brock Bowers**, who hurt his **right ankle** in the first quarter and didn't return. Bowers is the offense here. DE **Kwity Paye (neck)** is questionable.
+
+**What changed:**
+- **Offense +0.1 → −0.4 (−0.5):** Bowers out. It comes back when he does.
+- **QB Mendoza and Defense held.** **New total −3.6 → −4.1.**
+
 ## Week 9: at San Francisco (L 17–38)
 
 Kirk Cousins threw three interceptions, Las Vegas turned it over four times and was out-gained by 174 yards. Then the Raiders traded Cousins to Minnesota at the deadline, handing the job to **Fernando Mendoza**, the No. 1 overall pick.

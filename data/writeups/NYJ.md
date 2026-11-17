@@ -1,3 +1,12 @@
+## Week 10: vs Buffalo (L 12–31)
+
+**Geno Smith** left late in the third quarter for X-rays on his **ankle** and was ruled out, so rookie **Cade Klubnik** finished the game. The yardage was nearly even, but Buffalo pulled away. WR **Omar Cooper Jr. (ankle)** also went down. Aaron Glenn says Smith's status for the Chargers game will be decided during the week; the rating assumes he's out.
+
+**What changed:**
+- **QB Geno Smith −0.5 → Cade Klubnik −4.0.** He's a 4th-round rookie who hasn't started yet, so he gets the same price Kyle McCord had before his debut. Smith's −0.5 comes back if he plays.
+- **Offense −0.8 → −0.9 (−0.1):** Cooper out.
+- **Defense held.** **New total −1.4 → −5.0.**
+
 ## Week 10: vs Buffalo (pre-game)
 
 **Garrett Wilson (concussion)** is questionable. The rating assumes he plays; if he's out, the offense takes a manual cut. Final status comes with inactives, about 90 minutes before kickoff.
@@ -184,7 +193,7 @@ anchor, while the units around him are better than replacement-level and climbin
 
 ## Quarterback
 
-Geno Smith (−0.5) is the starter. He ranks 9th among this week's starters in passer rating (104.5), with 12 TD/3 INT. His 21st-ranked QBR is the one soft spot.
+Cade Klubnik (−4.0) is priced as the starter. Geno Smith (−0.5) left the Buffalo game for ankle X-rays and was ruled out, and his status for the Chargers game will be decided during the week. Klubnik is a 4th-round rookie who hasn't started yet, so he gets the same price Kyle McCord had before his debut. Smith's −0.5 comes back if he plays.
 
 ## What moved the number
 

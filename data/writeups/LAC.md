@@ -1,3 +1,10 @@
+## Week 10: at Baltimore (W 23–20)
+
+Los Angeles was out-gained by 60 yards and won on a plus-two turnover margin. Justin Herbert threw just 18 times for 129 yards, but the team looked okay. WR **Ladd McConkey (back spasms)** and DL **Justin Eboigbe (ankle)** are out. Two more offensive linemen went on IR, but both were backups.
+
+**What changed:**
+- **All units held.** If McConkey misses the Jets game, the offense takes a manual cut. **Total −4.5.**
+
 ## Week 9: vs Houston (L 22–44)
 
 C.J. Stroud threw for 384 yards and 5 TD through a depleted secondary. **Justin Herbert** left in the fourth quarter with an injury to the **middle finger of his left (non-throwing) hand** (possible fracture). He says he'll play Monday night in Baltimore and has been cleared on the injury report.

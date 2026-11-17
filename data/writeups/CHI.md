@@ -1,3 +1,10 @@
+## Week 10: bye
+
+No changes over the bye. Caleb Williams is held at +3.5 after his four-interception game against Tampa Bay; that's still worth watching. Week 11 is home against New Orleans.
+
+**What changed:**
+- **All units held.** **Total 5.3.**
+
 ## Week 9: vs Tampa Bay (W 27–24)
 
 Chicago won despite losing the turnover battle by three. Caleb Williams threw four interceptions but still moved the offense (279 yards, 2 TD); one game isn't enough to move his grade. CB **Malik Muhammad (toe)** is out. Week 10 is a bye.

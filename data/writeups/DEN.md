@@ -1,3 +1,10 @@
+## Week 10: bye
+
+Denver comes out of the bye with injury questions. WR **Jaylen Waddle (concussion)** is targeting a return Nov. 22 against Las Vegas. S **Talanoa Hufanga (ankle)** and CB **Riley Moss (concussion)** are still being monitored.
+
+**What changed:**
+- **All units held.** If Waddle isn't back, the offense takes a manual cut, and the defense comes down a bit if Hufanga sits. **Total 1.0.**
+
 ## Week 9: at Carolina (W 26–21)
 
 Denver won but was out-gained. WR **Jaylen Waddle** and CB **Riley Moss** both left with **concussions**, and S Brandon Jones (hamstring) and S Talanoa Hufanga (ankle) are out. Week 10 is a bye. Waddle is targeting a return Nov. 22 against Las Vegas.

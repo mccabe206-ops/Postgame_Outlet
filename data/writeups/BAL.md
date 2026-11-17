@@ -1,3 +1,13 @@
+## Week 10: vs L.A. Chargers (L 20–23)
+
+In his first week in the system, Jacoby Brissett threw for 340 yards (33/49, 1 INT), and Baltimore out-gained Los Angeles by 60 yards. That earns back part of the new-system discount. The defense looked terrible against a weak Chargers offense. The offense also gets a correction: its +0.8 was really Lamar Jackson's value, not the unit around him, and Lamar is out with the thumb injury. DT **Nnamdi Madubuike (hamstring)** is questionable.
+
+**What changed:**
+- **QB Brissett −2.0 → −1.5 (+0.5).**
+- **Defense −0.3 → −0.5 (−0.2).**
+- **Offense +0.8 → +0.3 (−0.5):** the old number was really Lamar, not the supporting cast.
+- **New total −1.5 → −1.7.**
+
 ## Week 9: vs Jacksonville (L 10–33)
 
 Joe Fagnano's first start went badly (10/18, 60 yards, 2 INT), and Baltimore has now lost three straight by 20 or more. The deadline changed the quarterback picture: **Jacoby Brissett** arrived from Arizona and is expected to start Monday night against the Chargers. C **Ryan Neuzil** also came over from Atlanta.
@@ -175,7 +185,7 @@ Baltimore is a top-five roster: an elite quarterback, a strong skill group, and 
 
 ## Quarterback
 
-Jacoby Brissett (−2.0) is the new starter. Baltimore acquired him from Arizona on Nov. 6, and he's expected to make his Ravens debut Monday night against the Chargers. He was graded −1.0 in Arizona; a point comes off for his first week in a new system behind a patched-up line. Lamar Jackson (right thumb fracture-dislocation, surgery) is on IR and likely out for the season, and Tyler Huntley (turf toe) is on IR. Joe Fagnano (−5.0) returns to QB2 after a rough first start (10/18, 60 yards, 2 INT).
+Jacoby Brissett (−1.5) threw for 340 yards in his Ravens debut, and Baltimore out-gained the Chargers. That earns back half of the one-point discount he took for his first week in a new system behind a patched-up line. Lamar Jackson (right thumb fracture-dislocation, surgery) is on IR and likely out for the season.
 
 ## Quarterback: through Week 1 2026 (historical)
 

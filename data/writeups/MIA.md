@@ -1,3 +1,12 @@
+## Week 10: at Indianapolis (L 22–24)
+
+**Kyle McCord** made his first NFL start and held his own: 17/32, 209 yards, no turnovers, and a two-point road loss. He showed he belongs in the league as a backup, so he's no longer priced as the worst QB on the board. Willis (core muscle, IR) can't return before Dec. 13. DL **Zeek Biggers** is out after **meniscus surgery**.
+
+**What changed:**
+- **QB McCord −4.0 → −3.5 (+0.5).**
+- **Defense −1.4 → −1.5 (−0.1):** Biggers out.
+- **Offense held.** **New total −7.0 → −6.6.**
+
 ## Week 10: at Indianapolis (pre-game)
 
 **Malik Willis** went on IR with a **core muscle (groin) injury** and is out through at least Week 13. **Kyle McCord**, a 2025 sixth-round pick, makes his first NFL start. DT **Zach Sieler (biceps)** and C **Aaron Brewer (concussion)** are also out.
@@ -154,7 +163,7 @@ Miami grades near the floor on all three lines — the aftermath of a roster tea
 
 ## Quarterback
 
-Kyle McCord (−4.0) makes his first NFL start Sunday at Indianapolis. Malik Willis went on IR with a core muscle (groin) injury and is out through at least Week 13; Jeff Hafley says Willis starts again when he's back, at his −1.5. McCord, a 2025 sixth-round pick, has no NFL track record yet, so he sits at the bottom of the backup range.
+Kyle McCord (−3.5) held his own in his first NFL start: 17/32, 209 yards, no turnovers, and a two-point loss at Indianapolis. He showed he belongs in the league as a backup, so he moves off the bottom of the board. Malik Willis (core muscle, IR) can't return before Dec. 13; he starts again at −1.5 when he's back.
 
 ## Quarterback: through Week 1 2026 (historical)
 

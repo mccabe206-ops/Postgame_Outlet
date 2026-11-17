@@ -1,3 +1,10 @@
+## Week 10: at Arizona (W 34–6)
+
+The Rams blew out a much worse team, which is about what was expected. Matthew Stafford threw for 249 yards and 3 TD, and Los Angeles out-gained Arizona by 313 yards. Puka Nacua is on IR (knee, plus turf toe) and will miss at least four games. Davante Adams (hamstring) is targeting a return as soon as Nov. 25. The Rams are on bye in Week 11.
+
+**What changed:**
+- **All units held.** **Total 4.8.**
+
 ## Week 10: at Arizona (pre-game)
 
 C **Steve Avila (hamstring)** is out. Stafford's grade comes down in a fresh look at the quarterback (see Quarterback).

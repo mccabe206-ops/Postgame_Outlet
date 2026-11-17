@@ -1,3 +1,10 @@
+## Week 10: at N.Y. Jets (W 31–12)
+
+A comfortable win that was closer on the stat sheet than on the scoreboard: the yardage was nearly even. Josh Allen had a quiet line (11/21, 196 yards, 1 TD, 1 INT). Three defensive backs and a linebacker are banged up: CB **Christian Benford (groin)**, DB **Dee Alford (concussion)** and LB **Dorian Williams (calf)** are all questionable.
+
+**What changed:**
+- **All units held.** If Benford and Alford both miss Miami, the defense takes a manual cut. **Total 7.3.**
+
 ## Week 10: at N.Y. Jets (pre-game)
 
 RT **Spencer Brown (ankle)** is doubtful. TE Dalton Kincaid (ankle) has been cleared.

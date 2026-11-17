@@ -1,3 +1,12 @@
+## Week 10: at Tennessee (W 40–23)
+
+Another blowout. Trevor Lawrence went 25/35 for 352 yards and 3 TD, and Jacksonville out-gained Tennessee by 132 yards. Newly acquired DT **Jordan Davis** and S **Jessie Bates** were rested in Week 10 (not hurt) and debut in Week 11.
+
+**What changed:**
+- **Defense +0.7 → +1.2 (+0.5):** Davis and Bates are back in the lineup.
+- **Offense +0.5 → +0.6 (+0.1):** this team keeps blowing people out.
+- **QB Lawrence held.** **New total 5.4 → 6.0.**
+
 ## Week 10: at Tennessee (pre-game)
 
 The two biggest deadline additions won't play yet. Liam Coen is resting DT Jordan Davis and S Jessie Bates because neither had a bye with his old team; neither is hurt. Both are expected to debut in Week 11. DT Davon Godchaux plays.

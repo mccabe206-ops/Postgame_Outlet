@@ -1,3 +1,11 @@
+## Week 10: at New Orleans (W 20–17)
+
+Carolina out-gained New Orleans by 61 yards and won the turnover battle by two. Bryce Young was steady (17/30, 200 yards, no turnovers). CB Will Lee (hamstring) was inactive.
+
+**What changed:**
+- **Offense −0.8 → −0.6 (+0.2).**
+- **QB Young and Defense held.** **New total −0.5 → −0.3.**
+
 ## Week 10: at New Orleans (pre-game)
 
 **Jaelan Phillips (hamstring)** is questionable. The rating assumes he's out; if he's active, the defense gets a manual bump. Final status comes with inactives, about 90 minutes before kickoff.
