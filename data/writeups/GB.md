@@ -1,3 +1,12 @@
+## Week 10: vs Minnesota (L 10–30)
+
+One week after an upgrade, Green Bay turned it over three times and was out-gained by 92 yards at home. Jordan Love went 17/27 for 220 yards with 1 TD and 1 INT. Josh Jacobs (finger surgery) sat again. LB **Zaire Franklin** has a **shin fracture**, and G **Kevin Zeitler (ankle)** is out. Green Bay is on bye in Week 11.
+
+**What changed:**
+- **Offense +0.2 → +0.1 (−0.1):** Zeitler out.
+- **Defense +0.5 → +0.4 (−0.1):** Franklin out multiple weeks.
+- **QB Love held.** **New total 2.7 → 2.5.**
+
 ## Week 10: vs Minnesota (pre-game)
 
 The defense finally gets its due. We came into the season expecting a step back without **Micah Parsons**, and that held for the first month. It doesn't anymore. Through nine weeks Green Bay ranks **6th in EPA allowed per play**, without Parsons, **Edgerrin Cooper** or **Javon Hargrave**. The down-to-down success rate is more middle of the pack, and turnovers have helped, but this is a good defense. The offense takes a hit: **Josh Jacobs** broke his ring finger, had surgery Friday and is out for 2–3 weeks. C **Sean Rhyan** (ankle) and TE **Josh Whyle** (concussion) are also out.

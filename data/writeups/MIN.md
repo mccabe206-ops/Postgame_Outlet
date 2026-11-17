@@ -1,3 +1,11 @@
+## Week 10: at Green Bay (W 30–10)
+
+Minnesota out-gained Green Bay by 92 yards and won the turnover battle by three. Kirk Cousins was efficient (21/31, 207 yards, 2 TD) without WR **Jordan Addison (thumb)**, WR **Jauan Jennings (calf)** or TE **T.J. Hockenson (wrist)**. The defense held the Packers to 10 points without LB Blake Cashman.
+
+**What changed:**
+- **Defense +1.5 → +1.7 (+0.2).**
+- **QB Cousins and Offense held.** The offense goes back up as the pass-catchers return. **New total 1.5 → 1.7.**
+
 ## Week 10: at Green Bay (pre-game)
 
 Cousins is confirmed as the starter, and Kyler Murray (hamstring) is out. Several starters are also out: LB **Blake Cashman (concussion)**, TE **T.J. Hockenson (wrist)**, WR **Jauan Jennings (calf)** and DE **Tyrion Ingram-Dawkins (ankle)**. Jordan Addison (thumb) is questionable.

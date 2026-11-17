@@ -1,3 +1,10 @@
+## Week 10: bye
+
+No changes over the bye. Joe Milton is held at −3.0 after a rough first start. Week 11 is home against Pittsburgh.
+
+**What changed:**
+- **All units held.** **Total −6.4.**
+
 ## Week 9: vs N.Y. Giants (L 11–19)
 
 **Joe Milton's** first Eagles start was rough: 18/34, 169 yards, 20.2 QBR. He holds his grade; he's rated level with Tanner McKee, not below him. At the deadline Philadelphia traded DT **Jordan Davis** to Jacksonville, and LB **Jihaad Campbell (hamstring)** is out. Week 10 is a bye.

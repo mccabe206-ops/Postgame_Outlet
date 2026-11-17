@@ -1,3 +1,11 @@
+## Week 10: vs New England, Munich (W 35–10)
+
+Detroit out-gained New England by 343 yards. Jared Goff threw for 303 yards and 3 TD (2 INT). Most of the game came against backup Tommy DeVito after Drake Maye went down on the opening drive, so the margin gets discounted. Even so, the defense has been better lately, even against easier competition. CB **D.J. Reed (hip)** is out.
+
+**What changed:**
+- **Defense −2.1 → −1.9 (+0.2).**
+- **QB Goff and Offense held.** **New total 1.8 → 2.0.**
+
 ## Week 10: vs New England (pre-game)
 
 C **Cade Mays (ankle)** is out. Jared Goff (chest) has been cleared. CB D.J. Reed and S Kerby Joseph remain out (already priced).

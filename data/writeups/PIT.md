@@ -1,3 +1,11 @@
+## Week 10: at Cincinnati (L 18–38)
+
+Cincinnati out-gained Pittsburgh by 262 yards. Aaron Rodgers managed just 143 yards (15/29, 2 TD). S **DeShon Elliott (knee)** is out. WR Michael Pittman Jr. is now on IR with **plantar fasciitis**, but he was already priced out of the offense.
+
+**What changed:**
+- **Defense +0.9 → +0.8 (−0.1):** Elliott out.
+- **QB Rodgers and Offense held.** **New total −0.1 → −0.2.**
+
 ## Week 9: bye
 
 DT **Derrick Harmon (foot)** went on IR during the bye.

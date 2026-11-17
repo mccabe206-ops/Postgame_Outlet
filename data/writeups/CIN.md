@@ -1,3 +1,11 @@
+## Week 10: vs Pittsburgh (W 38–18)
+
+Joe Burrow was outstanding: 35/44, 409 yards, 4 TD, 0 INT. Cincinnati out-gained Pittsburgh by 262 yards, and the defense held the Steelers to 18.
+
+**What changed:**
+- **Defense −0.5 → −0.4 (+0.1).**
+- **QB Burrow and Offense held.** **New total 5.3 → 5.4.**
+
 ## Week 9: at Atlanta (W 34–17)
 
 Joe Burrow was sharp (24/29, 271 yards, 3 TD), and the defense held Atlanta to 17.

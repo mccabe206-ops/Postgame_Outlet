@@ -1,3 +1,12 @@
+## Week 10: vs San Francisco (L 40–46)
+
+Dak Prescott threw for 343 yards and 5 TD in a shootout loss. Dallas was out-gained by 145 yards and lost the turnover battle by two. The secondary is thinning out: CB **DaRon Bland** has an **ankle sprain**, joining P.J. Locke and Jalen Thompson. G **Tyler Booker** also has an **ankle sprain**.
+
+**What changed:**
+- **Defense −1.8 → −2.0 (−0.2):** Bland out, deepening the secondary cluster.
+- **Offense +1.1 → +1.0 (−0.1):** Booker out.
+- **QB Prescott held.** **New total 1.3 → 1.0.**
+
 ## Week 10: vs San Francisco (pre-game)
 
 DL **Donovan Ezeiruaku (ankle)** is out, and CB DaRon Bland is questionable. George Pickens (hamstring) has been cleared.

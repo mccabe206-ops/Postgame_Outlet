@@ -1,3 +1,10 @@
+## Week 10: vs Miami (W 24–22)
+
+Indianapolis won but didn't cover, which is about what the ratings expected. Daniel Jones was rough (11/22, 108 yards, 1 TD, 2 INT), but the game felt honest overall. CBs **Sauce Gardner (calf)** and **Charvarius Ward (leg)** and WR **Anthony Gould (toe)** are questionable for Thursday at Houston.
+
+**What changed:**
+- **All units held.** If Gardner or Ward sits Thursday, the defense takes a manual cut. **Total −4.2.**
+
 ## Week 10: vs Miami (pre-game)
 
 DE **Arden Key** is back from IR, but S **Jaylon Carlies (neck)** is out, and LB Akeem Davis-Gaither is on IR.

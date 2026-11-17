@@ -1,3 +1,11 @@
+## Week 10: vs Carolina (L 17–20)
+
+Mostly a hold. Tyler Shough threw for 187 yards with 1 TD and 1 INT. The offensive line keeps losing bodies: T **Asim Richards (knee)** joins C Erik McCoy and RT Taliese Fuaga on the sideline. LB **Pete Werner (hamstring)** is questionable.
+
+**What changed:**
+- **Offense −0.7 → −0.8 (−0.1):** Richards out.
+- **QB Shough and Defense held.** **New total −2.3 → −2.4.**
+
 ## Week 10: vs Carolina (pre-game)
 
 RT **Taliese Fuaga (knee)** is out, joining C Erik McCoy.

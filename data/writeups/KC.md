@@ -1,3 +1,12 @@
+## Week 10: at Atlanta (W 35–13)
+
+Patrick Mahomes was surgical: 22/35, 348 yards, 5 TD, 0 INT, his second straight dominant game. Kansas City played without RB **Kenneth Walker III (groin)**, and the offense didn't take a step back. **Emmett Johnson** looks very capable as the lead back. TE **Travis Kelce (ankle)** is questionable.
+
+**What changed:**
+- **QB Mahomes +4.0 → +4.3 (+0.3).**
+- **Offense +0.1 → +0.3 (+0.2):** no drop-off without Walker.
+- **Defense held.** **New total 4.4 → 4.9.**
+
 ## Week 10: at Atlanta (pre-game)
 
 RB **Kenneth Walker III (groin)** is out. RT Jaylon Moore (ankle) is out too, and rookie CB Mansoor Delane is questionable.
@@ -151,7 +160,7 @@ Mahomes' knee looks fine.
 
 ## Quarterback
 
-Patrick Mahomes (+4.0) is the starter. He ranks 11th among this week's starters in QBR (67.3) and 14th in passer rating (99.7). The talent isn't in question, but this season's production sits in the middle of the league.
+Patrick Mahomes (+4.3) has strung together two straight dominant games, including 348 yards, 5 TD and 0 INT at Atlanta without Kenneth Walker III. He moves up 0.3. He's still graded below the elite tier because his availability risk is priced in.
 
 ## What moved the number
 

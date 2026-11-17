@@ -1,3 +1,11 @@
+## Week 10: at Las Vegas (W 21–13)
+
+Seattle out-gained Las Vegas by 219 yards. The game stayed close only because the Raiders won the turnover battle by two. Drew Lock was sharp (14/17, 240 yards, 2 TD). DE **Leonard Williams** is out with a **shoulder stinger**. Seattle is on bye in Week 11, and Sam Darnold (quad) is expected back Nov. 29 at San Francisco.
+
+**What changed:**
+- **Defense +2.9 → +2.8 (−0.1):** Williams out.
+- **QB Lock and Offense held.** **New total 3.1 → 3.0.**
+
 ## Week 9: vs Arizona (W 17–3)
 
 **Drew Lock** played well (19/28, 175 yards, TD, 89.9 QBR), and the defense allowed 3 points. Lock injured his **oblique**, but Mike Macdonald says it's manageable and he starts at Las Vegas. Sam Darnold (quad, cracked rib) is out again.

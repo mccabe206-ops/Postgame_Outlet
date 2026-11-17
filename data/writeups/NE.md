@@ -1,3 +1,13 @@
+## Week 10: at Detroit, Munich (L 10–35)
+
+**Drake Maye (ankle)** was hurt on an Aidan Hutchinson sack on the opening drive and never returned. He's getting more tests, and the severity isn't known yet. **Tommy DeVito** took over and couldn't get anything going (12/24, 81 yards). Detroit out-gained New England by 343 yards. **A.J. Brown** was active but left early in the fourth quarter with a **hamstring** injury.
+
+The bye comes at a good time, but the rating is priced as if Maye won't play. If New England had a game this week, he wouldn't be out there.
+
+**What changed:**
+- **QB Drake Maye +3.0 → Tommy DeVito −3.5.** DeVito has real NFL starts and looks okay at times, but he's a backup. Maye's +3.0 comes back the week he does.
+- **Offense and Defense held.** Brown's bump stays off. **New total 2.3 → −4.2.**
+
 ## Week 10: at Detroit (pre-game)
 
 **A.J. Brown (knee)** is questionable after limited practices all week. The rating currently assumes he's out; if he's active Sunday, the offense gets a manual bump before kickoff. Final status comes with inactives, about 90 minutes before kickoff.
@@ -184,7 +194,7 @@ structure are real even when the process is sloppy and the WR1 is gone.
 
 ## Quarterback
 
-Drake Maye (+3.0) is the starter. He ranks 5th among this week's starters in QBR (76.8) with 15 touchdowns. The ascent has held up over a full half-season.
+Tommy DeVito (−3.5) is priced as the starter while Drake Maye (+3.0) recovers from the ankle injury he suffered on the opening drive in Munich. Maye is getting more tests, and the severity isn't known yet. DeVito has real NFL starts and looks okay at times, but he's a backup. Maye's +3.0 comes back the week he does.
 
 ## Quarterback: through Week 1 2026 (historical)
 

@@ -1,3 +1,12 @@
+## Week 10: vs L.A. Rams (L 6–34)
+
+**Carson Beck**'s first NFL start was rough: 11/18, 108 yards, 2 INT. He was the third-string QB 11 days ago, and Gardner Minshew's torn UCL means he's the starter from here. The Rams out-gained Arizona by 313 yards. S **Andrew Wingard (wrist)** is out.
+
+**What changed:**
+- **QB Beck −3.0 → −3.5 (−0.5).**
+- **Defense −1.0 → −1.1 (−0.1):** Wingard out.
+- **Offense held.** **New total −5.8 → −6.4.**
+
 ## Week 10: vs L.A. Rams (pre-game)
 
 C **Hjalte Froholdt (concussion)** and backup Jon Gaines II are out.
@@ -183,7 +192,7 @@ are better than a bottom-of-the-league read, even with a stopgap quarterback.
 
 ## Quarterback
 
-Carson Beck (−3.0), a third-round rookie, is the starter. Gardner Minshew likely tore the UCL in his elbow at Seattle and is expected to need season-ending surgery, and Jacoby Brissett was traded to Baltimore. Beck is unproven, so he sits near the bottom of the backup range.
+Carson Beck (−3.5) is the starter for the rest of the season. Gardner Minshew tore the UCL in his elbow and needs season-ending surgery. Beck's first NFL start was rough: 11/18, 108 yards, 2 INT against the Rams. He was the third-string QB 11 days earlier, so he sits near the bottom of the backup range.
 
 ## What moved the number
 

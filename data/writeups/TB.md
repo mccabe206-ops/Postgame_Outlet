@@ -1,3 +1,10 @@
+## Week 10: bye
+
+No changes over the bye. Baker Mayfield is held at +0.5. His thumb is the thing to check on this week's injury report before the Detroit game.
+
+**What changed:**
+- **All units held.** **Total 1.3.**
+
 ## Week 9: at Chicago (L 24–27)
 
 The defense intercepted Caleb Williams four times, but Baker Mayfield threw two interceptions of his own (18/32, 243 yards). Baker holds through the bye; his thumb needs checking before Week 11.
