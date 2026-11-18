@@ -476,12 +476,20 @@ def grade_week(week, year, ratings=None, hfa=None, default_hfa=None, detail=Fals
     saved = load_picks(year, week)
     now = _now()
     payload = fetch_json(SCOREBOARD.format(year=year, week=week))
-    mine = {"open": _tally(), "close": _tally()}
-    model = {"open": _tally(), "close": _tally()}
+    mine = {"open": _tally(), "close": _tally(), "pick": _tally()}
+    model = {"open": _tally(), "close": _tally(), "pick": _tally()}
     mine_rows = []
     n_games = n_final = 0
     # collect the model's edge plays so we can rank the biggest ones for top5
-    plays = {"open": [], "close": []}   # each: (abs_edge, side, line, am)
+    plays = {"open": [], "close": [], "pick": []}   # each: (abs_edge, side, line, am)
+    # "pick" = the line available when the pick was made. Mine: market_at_pick
+    # (skipped for backfilled picks — their time is unknown). Model: the market and
+    # our number frozen in the game's READY preview (previews.py); no preview = skip.
+    try:
+        import previews as _previews
+        at_write = _previews.at_write_lines(year, week)
+    except Exception:  # noqa: BLE001 — previews are optional (Lane-2)
+        at_write = {}
     for e in payload.get("events", []):
         L = _line_for_event(e, ratings, hfa, default_hfa, overrides, now)
         if L:
@@ -499,12 +507,21 @@ def grade_week(week, year, ratings=None, hfa=None, default_hfa=None, detail=Fals
             _record_model(model[key], side, line, am)
             if side is not None and my is not None and line is not None:
                 plays[key].append((abs(line - my), side, line, am, L))
+        aw = at_write.get(str(L["game_id"]))
+        if aw and aw[0] is not None and aw[1] is not None:
+            line_w, my_w = aw
+            side = _model_side(my_w, line_w)
+            _record_model(model["pick"], side, line_w, am)
+            if side is not None:
+                plays["pick"].append((abs(line_w - my_w), side, line_w, am, L))
         # mine: the side I picked, graded vs each line
         pk = saved.get(L["game_id"]) or {}
         side_me = pk.get("side")
         if side_me:
             _bump(mine["open"], _grade_side(side_me, opn, am))
             _bump(mine["close"], _grade_side(side_me, close, am))
+            if pk.get("market_at_pick") is not None and not pk.get("backfilled"):
+                _bump(mine["pick"], _grade_side(side_me, pk["market_at_pick"], am))
             if detail:
                 row = _detail_row(L, side_me, close, am)
                 conf = pk.get("confidence")
@@ -512,9 +529,9 @@ def grade_week(week, year, ratings=None, hfa=None, default_hfa=None, detail=Fals
                 res = row["result"]
                 row["points"] = (conf if res == "win" else conf / 2 if res == "push" else 0) if conf else 0
                 mine_rows.append(row)
-    top5 = {"open": _tally(), "close": _tally()}
+    top5 = {"open": _tally(), "close": _tally(), "pick": _tally()}
     top5_rows = []
-    for key in ("open", "close"):
+    for key in ("open", "close", "pick"):
         for edge, side, line, am, L in sorted(plays[key], key=lambda x: -x[0])[:TOP_EDGE_N]:
             _bump(top5[key], _grade_side(side, line, am))
             if detail and key == "close":
@@ -663,9 +680,8 @@ def records(view_week, view_year, detail=False):
     hfa, default_hfa = load_hfa()
     cw, cy = current_week_year()
     bound = 18 if (cy and view_year < cy) else (cw or view_week or 1)
-    season = {"mine": {"open": _tally(), "close": _tally()},
-              "model": {"open": _tally(), "close": _tally()},
-              "top5": {"open": _tally(), "close": _tally()}}
+    season = {who: {"open": _tally(), "close": _tally(), "pick": _tally()}
+              for who in ("mine", "model", "top5")}
     week_cache = {}
     for w in range(1, bound + 1):
         try:
@@ -674,11 +690,10 @@ def records(view_week, view_year, detail=False):
             continue
         week_cache[w] = gw
         for who in ("mine", "model", "top5"):
-            for line in ("open", "close"):
-                _add_tally(season[who][line], gw[who][line])
-    empty = {"mine": {"open": _tally(), "close": _tally()},
-             "model": {"open": _tally(), "close": _tally()},
-             "top5": {"open": _tally(), "close": _tally()}}
+            for line in ("open", "close", "pick"):
+                _add_tally(season[who][line], gw[who].get(line, {}))
+    empty = {who: {"open": _tally(), "close": _tally(), "pick": _tally()}
+             for who in ("mine", "model", "top5")}
     vw = week_cache.get(view_week) or empty
     return {
         "season": view_year, "week": view_week, "through_week": bound,
@@ -703,7 +718,8 @@ def write_records_json(year=None, path=None):
         year = cy or 2026
     rec = records(cw or 1, year, detail=True)
     weeks = []
-    season = {who: {"open": _tally(), "close": _tally()} for who in ("mine", "model", "top5")}
+    season = {who: {"open": _tally(), "close": _tally(), "pick": _tally()}
+              for who in ("mine", "model", "top5")}
     for w in sorted(rec["weeks"]):
         gw = rec["weeks"][w]
         # only fully completed weeks: every game FINAL, so no pick is public before
@@ -718,8 +734,8 @@ def write_records_json(year=None, path=None):
             "top5_plays": gw["top5_plays"],
         })
         for who in season:
-            for ln in ("open", "close"):
-                _add_tally(season[who][ln], gw[who][ln])
+            for ln in ("open", "close", "pick"):
+                _add_tally(season[who][ln], gw[who].get(ln, {}))
     payload = {
         "season_year": year,
         "through_week": max([x["week"] for x in weeks] or [rec["through_week"]]),
