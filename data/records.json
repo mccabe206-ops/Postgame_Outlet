@@ -1,52 +1,70 @@
 {
   "season_year": 2026,
-  "through_week": 9,
-  "generated": "2026-11-15T02:58Z",
+  "through_week": 10,
+  "generated": "2026-11-18T21:43Z",
   "season_record": {
     "mine": {
       "open": {
-        "win": 24,
+        "win": 29,
         "loss": 21,
         "push": 0,
         "np": 0
       },
       "close": {
-        "win": 25,
+        "win": 30,
         "loss": 19,
         "push": 1,
+        "np": 0
+      },
+      "pick": {
+        "win": 5,
+        "loss": 0,
+        "push": 0,
         "np": 0
       }
     },
     "model": {
       "open": {
-        "win": 67,
-        "loss": 58,
+        "win": 75,
+        "loss": 63,
         "push": 0,
-        "np": 11
+        "np": 12
       },
       "close": {
-        "win": 62,
-        "loss": 60,
+        "win": 69,
+        "loss": 67,
         "push": 4,
         "np": 10
+      },
+      "pick": {
+        "win": 0,
+        "loss": 0,
+        "push": 0,
+        "np": 0
       }
     },
     "top5": {
       "open": {
-        "win": 24,
-        "loss": 21,
+        "win": 27,
+        "loss": 23,
         "push": 0,
         "np": 0
       },
       "close": {
-        "win": 24,
-        "loss": 20,
+        "win": 25,
+        "loss": 24,
         "push": 1,
+        "np": 0
+      },
+      "pick": {
+        "win": 0,
+        "loss": 0,
+        "push": 0,
         "np": 0
       }
     }
   },
-  "season_points": 73.5,
+  "season_points": 88.5,
   "weeks": [
     {
       "week": 1,
@@ -60,6 +78,12 @@
         "close": {
           "win": 2,
           "loss": 3,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
           "push": 0,
           "np": 0
         }
@@ -76,6 +100,12 @@
           "loss": 8,
           "push": 1,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "top5": {
@@ -88,6 +118,12 @@
         "close": {
           "win": 2,
           "loss": 3,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
           "push": 0,
           "np": 0
         }
@@ -207,6 +243,12 @@
           "loss": 1,
           "push": 0,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "model": {
@@ -221,6 +263,12 @@
           "loss": 7,
           "push": 0,
           "np": 2
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "top5": {
@@ -233,6 +281,12 @@
         "close": {
           "win": 3,
           "loss": 2,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
           "push": 0,
           "np": 0
         }
@@ -352,6 +406,12 @@
           "loss": 2,
           "push": 1,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "model": {
@@ -366,6 +426,12 @@
           "loss": 10,
           "push": 2,
           "np": 1
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "top5": {
@@ -379,6 +445,12 @@
           "win": 2,
           "loss": 2,
           "push": 1,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
           "np": 0
         }
       },
@@ -497,6 +569,12 @@
           "loss": 3,
           "push": 0,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "model": {
@@ -511,6 +589,12 @@
           "loss": 5,
           "push": 1,
           "np": 1
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "top5": {
@@ -523,6 +607,12 @@
         "close": {
           "win": 4,
           "loss": 1,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
           "push": 0,
           "np": 0
         }
@@ -642,6 +732,12 @@
           "loss": 2,
           "push": 0,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "model": {
@@ -656,6 +752,12 @@
           "loss": 9,
           "push": 0,
           "np": 2
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "top5": {
@@ -668,6 +770,12 @@
         "close": {
           "win": 2,
           "loss": 3,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
           "push": 0,
           "np": 0
         }
@@ -787,6 +895,12 @@
           "loss": 1,
           "push": 0,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "model": {
@@ -801,6 +915,12 @@
           "loss": 3,
           "push": 0,
           "np": 2
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "top5": {
@@ -813,6 +933,12 @@
         "close": {
           "win": 4,
           "loss": 1,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
           "push": 0,
           "np": 0
         }
@@ -932,6 +1058,12 @@
           "loss": 1,
           "push": 0,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "model": {
@@ -946,6 +1078,12 @@
           "loss": 7,
           "push": 0,
           "np": 1
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "top5": {
@@ -958,6 +1096,12 @@
         "close": {
           "win": 2,
           "loss": 3,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
           "push": 0,
           "np": 0
         }
@@ -1077,6 +1221,12 @@
           "loss": 2,
           "push": 0,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "model": {
@@ -1091,6 +1241,12 @@
           "loss": 4,
           "push": 0,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "top5": {
@@ -1103,6 +1259,12 @@
         "close": {
           "win": 3,
           "loss": 2,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
           "push": 0,
           "np": 0
         }
@@ -1222,6 +1384,12 @@
           "loss": 4,
           "push": 0,
           "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "model": {
@@ -1236,6 +1404,12 @@
           "loss": 7,
           "push": 0,
           "np": 1
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
         }
       },
       "top5": {
@@ -1248,6 +1422,12 @@
         "close": {
           "win": 2,
           "loss": 3,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
           "push": 0,
           "np": 0
         }
@@ -1350,6 +1530,169 @@
           "score": "22-23",
           "result": "win",
           "edge": 2.0
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "mine": {
+        "open": {
+          "win": 5,
+          "loss": 0,
+          "push": 0,
+          "np": 0
+        },
+        "close": {
+          "win": 5,
+          "loss": 0,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 5,
+          "loss": 0,
+          "push": 0,
+          "np": 0
+        }
+      },
+      "model": {
+        "open": {
+          "win": 8,
+          "loss": 5,
+          "push": 0,
+          "np": 1
+        },
+        "close": {
+          "win": 7,
+          "loss": 7,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
+        }
+      },
+      "top5": {
+        "open": {
+          "win": 3,
+          "loss": 2,
+          "push": 0,
+          "np": 0
+        },
+        "close": {
+          "win": 1,
+          "loss": 4,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 0,
+          "loss": 0,
+          "push": 0,
+          "np": 0
+        }
+      },
+      "mine_points": 15,
+      "mine_picks": [
+        {
+          "team": "CLE",
+          "opp": "HOU",
+          "at": "vs",
+          "line": 4.5,
+          "score": "27-24",
+          "result": "win",
+          "confidence": 5,
+          "points": 5
+        },
+        {
+          "team": "CAR",
+          "opp": "NO",
+          "at": "at",
+          "line": -1.5,
+          "score": "20-17",
+          "result": "win",
+          "confidence": 4,
+          "points": 4
+        },
+        {
+          "team": "SF",
+          "opp": "DAL",
+          "at": "at",
+          "line": -3.5,
+          "score": "46-40",
+          "result": "win",
+          "confidence": 3,
+          "points": 3
+        },
+        {
+          "team": "SEA",
+          "opp": "LV",
+          "at": "at",
+          "line": -6.5,
+          "score": "21-13",
+          "result": "win",
+          "confidence": 2,
+          "points": 2
+        },
+        {
+          "team": "CIN",
+          "opp": "PIT",
+          "at": "vs",
+          "line": -4.5,
+          "score": "38-18",
+          "result": "win",
+          "confidence": 1,
+          "points": 1
+        }
+      ],
+      "top5_plays": [
+        {
+          "team": "NE",
+          "opp": "DET",
+          "at": "at",
+          "line": 2.5,
+          "score": "10-35",
+          "result": "loss",
+          "edge": 3.0
+        },
+        {
+          "team": "CIN",
+          "opp": "PIT",
+          "at": "vs",
+          "line": -4.5,
+          "score": "38-18",
+          "result": "win",
+          "edge": 3.0
+        },
+        {
+          "team": "TEN",
+          "opp": "JAX",
+          "at": "vs",
+          "line": 10.5,
+          "score": "23-40",
+          "result": "loss",
+          "edge": 2.0
+        },
+        {
+          "team": "NO",
+          "opp": "CAR",
+          "at": "vs",
+          "line": 1.5,
+          "score": "17-20",
+          "result": "loss",
+          "edge": 1.5
+        },
+        {
+          "team": "NYJ",
+          "opp": "BUF",
+          "at": "vs",
+          "line": 8.5,
+          "score": "12-31",
+          "result": "loss",
+          "edge": 1.5
         }
       ]
     }

@@ -1950,6 +1950,20 @@ def _pr_pts(x):
     return f'{x:g}'
 
 
+def inject_previews(page):
+    """Add the Game Previews tab (previews.py, Lane-2 until promoted) when present.
+    No-op if the module, the records file, or any READY preview is missing."""
+    try:
+        import previews
+    except ImportError:
+        return page
+    try:
+        records = json.loads((HERE / "data" / "records.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        records = None
+    return previews.inject_panel(page, records)
+
+
 def inject_picks_block(page):
     """Insert the public McCabe picks record on the ratings panel, from
     data/records.json: season tallies (McCabe picks, blind model, model top-5) plus a
@@ -2103,6 +2117,7 @@ def main(argv=None):
         preview = pgo_current_board.add_current_board(preview, season_state=season_state)
         preview = inject_record_block(preview)
         preview = inject_picks_block(preview)
+        preview = inject_previews(preview)
         atomic_write_text(output, preview)
     except (csv.Error, KeyError, OSError, TypeError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
