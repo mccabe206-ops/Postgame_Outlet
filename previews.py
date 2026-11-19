@@ -735,11 +735,17 @@ TAB_HTML = (TAB_START +
             '      data-panel="previews">Game Previews</button>' + TAB_END)
 
 
+def strip_panel(page):
+    """Remove a previously injected Game Previews tab + panel, so the board's own
+    tab/panel validation sees the page exactly as pgo_comparison built it."""
+    page = re.sub(re.escape(TAB_START) + ".*?" + re.escape(TAB_END), "", page, flags=re.S)
+    return re.sub(r"\n?" + re.escape(PANEL_START) + ".*?" + re.escape(PANEL_END) + r"\n?", "", page, flags=re.S)
+
+
 def inject_panel(page, records=None, which=None):
     """Add/replace the Game Previews tab + panel. Idempotent; no-op when there is no
     ready preview or the anchors are missing."""
-    page = re.sub(re.escape(TAB_START) + ".*?" + re.escape(TAB_END), "", page, flags=re.S)
-    page = re.sub(r"\n?" + re.escape(PANEL_START) + ".*?" + re.escape(PANEL_END) + r"\n?", "", page, flags=re.S)
+    page = strip_panel(page)
     weeks = [which] if which else published_weeks()
     if not weeks or page.count(TAB_ANCHOR) != 1 or page.count(PANEL_ANCHOR) != 1:
         return page

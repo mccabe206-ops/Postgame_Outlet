@@ -1756,7 +1756,7 @@ def _refresh_comparison_panel(panel_html, mccabe_rows, source_timestamp):
 
 
 def refresh_mccabe_page(base_html, existing_html, mccabe_path=MCCABE_PATH, *, season_state=SEASON_UNLOADED):
-    existing_html = pgo_current_board.strip_current_board(existing_html)
+    existing_html = pgo_current_board.strip_current_board(strip_previews(existing_html))
     mccabe_rows = load_mccabe_rows(mccabe_path)
     fantasy_panel = _extract_published_fantasy_panel(existing_html)
     comparison_panel = extract_comparison_panel(existing_html)
@@ -1950,6 +1950,15 @@ def _pr_pts(x):
     return f'{x:g}'
 
 
+def strip_previews(page):
+    """Drop an injected Game Previews tab/panel (re-added by inject_previews)."""
+    try:
+        import previews
+    except ImportError:
+        return page
+    return previews.strip_panel(page)
+
+
 def inject_previews(page):
     """Add the Game Previews tab (previews.py, Lane-2 until promoted) when present.
     No-op if the module, the records file, or any READY preview is missing."""
@@ -2086,7 +2095,7 @@ def main(argv=None):
                 fantasy_path
             )
             preview = inject_fantasy_preview(
-                PUBLIC_OUTPUT.read_text(encoding="utf-8"),
+                strip_previews(PUBLIC_OUTPUT.read_text(encoding="utf-8")),
                 render_fantasy_panel(fantasy_preview),
                 season_state=season_state,
             )
