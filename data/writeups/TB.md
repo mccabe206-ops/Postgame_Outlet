@@ -180,7 +180,7 @@ Tampa Bay grades above the line as a genuinely balanced team — a proven quarte
 
 ## Quarterback
 
-Baker Mayfield (+0.5) dropped a point in the Nov. 7 review: 28th in the season composite (35.1 QBR), with his right thumb limiting him to 14 pass attempts in the two games before Chicago. He threw two interceptions in the 27–24 loss there. Tampa Bay is on bye; check the thumb before Week 11. Rookie Jalon Daniels (−4.0) is QB2.
+Baker Mayfield (+0.5) dropped a point in the Nov. 7 review: 28th in the season composite (35.1 QBR), with his right thumb limiting him to 14 pass attempts in the two games before Chicago. He threw two interceptions in the 27–24 loss there. Tampa Bay is on bye; check the thumb before Week 11. Rookie Jalon Daniels (−2.5, raised Nov. 18 after looking okay in his three starts) is QB2.
 
 ## Quarterback: through Week 1 2026 (historical)
 
