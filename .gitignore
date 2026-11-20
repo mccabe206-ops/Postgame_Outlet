@@ -33,3 +33,6 @@ data/pff_cookie.txt
 data/game_reports/
 data/injury_news/
 data/props/
+
+# Private bet-suggestion tracker (local hub only) — never publish
+data/suggestions.json

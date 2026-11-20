@@ -1053,6 +1053,10 @@ PAGE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
  .btn:hover,.go:hover{border-color:var(--faint);background:var(--s3)}
  .btn.pri{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
  .btn.pri:hover{filter:brightness(1.08);background:var(--acc)}
+ .livebtn{text-decoration:none} .ldot{width:8px;height:8px;border-radius:50%;background:var(--acc-ink);opacity:.45}
+ .ldot.on{opacity:1;animation:lpl 1.6s infinite}
+ @keyframes lpl{0%{box-shadow:0 0 0 0 rgba(3,20,10,.55)}70%{box-shadow:0 0 0 6px rgba(3,20,10,0)}100%{box-shadow:0 0 0 0 rgba(3,20,10,0)}}
+
  .go{color:var(--acc);border-color:var(--acc-line);background:var(--acc-soft)}
  .go:hover{background:rgba(47,210,122,.2);border-color:var(--acc)}
  .go.alt{color:var(--ink);border-color:var(--line2);background:var(--s2)}
@@ -1222,6 +1226,7 @@ PAGE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
     <span class="chip" id="p-gate">gate…</span>
     <span class="chip warn" id="p-dirty" hidden>uncommitted data</span>
     <span class="chip warn" id="p-branch" hidden></span>
+    <a class="btn pri livebtn" href="/suggestions" id="p-live" title="Live board: every suggested bet, scored live"><span class="ldot" id="p-ldot"></span><span id="p-ltxt">Live bets</span></a>
     <button class="icon" onclick="reloadAll(true)" title="Refresh lines and ratings" aria-label="Refresh">↻</button>
   </div>
 </header>
@@ -1251,6 +1256,15 @@ PAGE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
     </section>
 
     <div class="side">
+      <section class="panel">
+        <div class="ph">
+          <div><h2>Suggestions tracker</h2><div class="sub" id="sg-sub">every bet Claude suggested, graded</div></div>
+          <div class="pa"><a class="btn pri livebtn" href="/suggestions">Live board &amp; tracker →</a></div>
+        </div>
+        <div class="tiles"><button class="tile" onclick="window.open('/suggestions','_blank')"><span class="tt" id="sg-rec">loading…</span>
+          <span class="td" id="sg-det"></span></button></div>
+      </section>
+
       <section class="panel">
         <div class="ph"><div><h2>Market</h2><div class="sub">where the market disagrees with you</div></div></div>
         <div class="tiles">
@@ -1987,6 +2001,19 @@ async function refresh(){
 }
 function reloadAll(force){ refresh(); loadSlate(force); loadBoard(); }
 
+async function loadSuggestions(){try{const j=await api('/api/suggestions');const S=j.summary,r=S.record;
+  const u=x=>(x>0?'+':'')+(+x).toFixed(2)+'u';
+  document.getElementById('sg-rec').textContent=(r.win+r.loss+r.push)?`${r.win}-${r.loss}${r.push?'-'+r.push:''} · ${u(S.units_pl)}`+(S.roi!=null?` · ROI ${(S.roi*100).toFixed(1)}%`:''):'No graded bets yet';
+  document.getElementById('sg-det').textContent=`${S.pending} pending (expected ${u(S.expected_pl_pending)}) · ${S.total} suggestions logged · avg edge ${S.avg_edge!=null?'+'+(S.avg_edge*100).toFixed(1)+'¢':'—'}`;
+}catch(e){document.getElementById('sg-rec').textContent='tracker unavailable';}}
+loadSuggestions();
+async function loadLiveChip(){try{const j=await api('/api/suggestions/live');const g=j.games||[];
+  const inG=g.filter(x=>x.state==='in'), bets=inG.flatMap(x=>x.rows).filter(r=>r.size_u);
+  const on=bets.filter(r=>['on','hit'].includes(r.state)).length;
+  document.getElementById('p-ldot').classList.toggle('on',inG.length>0);
+  document.getElementById('p-ltxt').textContent=inG.length?`Live bets · ${inG.length} game${inG.length>1?'s':''}${bets.length?` · ${on}/${bets.length} on track`:''}`:'Live bets';
+  setTimeout(loadLiveChip,inG.length?45e3:180e3);}catch(e){setTimeout(loadLiveChip,180e3);}}
+loadLiveChip();
 buildMore(); loadTrends(); reloadAll(false);
 setInterval(refresh, 15000); setInterval(()=>loadSlate(false), 300000);
 </script></body></html>"""
@@ -2050,6 +2077,15 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(200, json.dumps(act_snapshots_list()))
         if u.path == "/api/snapshot":
             return self._send(200, json.dumps(act_snapshot_get((q.get("label") or [""])[0])))
+        if u.path == "/suggestions":
+            with open(os.path.join(REPO, "suggestions_page.html"), encoding="utf-8") as f:
+                return self._send(200, f.read(), "text/html; charset=utf-8")
+        if u.path == "/api/suggestions":
+            import suggestions
+            return self._send(200, json.dumps(suggestions.api_payload()))
+        if u.path == "/api/suggestions/live":
+            import suggestions
+            return self._send(200, json.dumps(suggestions.live()))
         return self._send(404, "not found", "text/plain")
 
     def do_POST(self):
@@ -2070,6 +2106,14 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, json.dumps(act_snapshot_create(body)))
             if u.path == "/api/kbchat":
                 return self._send(200, json.dumps(act_kbchat(body)))
+            if u.path == "/api/suggestions/grade":
+                import suggestions
+                ch = suggestions.grade_all()
+                return self._send(200, json.dumps({"ok": True, "changes": ch}))
+            if u.path == "/api/suggestions/update":
+                import suggestions
+                sid = body.pop("id", "")
+                return self._send(200, json.dumps({"ok": True, "suggestion": suggestions.update(sid, body)}))
         except Exception as e:  # noqa: BLE001
             return self._send(500, json.dumps({"ok": False, "message": str(e)}))
         return self._send(404, "not found", "text/plain")

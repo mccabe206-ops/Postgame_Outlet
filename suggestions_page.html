@@ -1,0 +1,265 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suggestions Tracker</title>
+<style>
+ :root{--bg:#07090d;--s1:#0d1117;--s2:#131921;--s3:#1a222d;--line:#1d2632;--line2:#2a3545;
+   --ink:#e9eef4;--dim:#8794a5;--faint:#566274;--acc:#2fd27a;--acc-ink:#03140a;--acc-soft:rgba(47,210,122,.12);
+   --acc-line:rgba(47,210,122,.35);--neg:#ff5c6c;--neg-soft:rgba(255,92,108,.12);--warn:#f5b84a;--warn-soft:rgba(245,184,74,.12);
+   --info:#6aa8ff;--info-soft:rgba(106,168,255,.12);
+   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color-scheme:dark}
+ *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--ink)}
+ body{font:14px/1.45 var(--sans);-webkit-font-smoothing:antialiased}
+ button,input,select{font:inherit;color:inherit}
+ .n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+ .top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 24px;
+   background:rgba(7,9,13,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+ .logo{width:32px;height:32px;border-radius:8px;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font:800 13px/1 var(--sans)}
+ .bt{font-weight:700;font-size:15px} .bs{font-size:11.5px;color:var(--dim)}
+ .sp{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+ .btn{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;
+   border:1px solid var(--line2);background:var(--s2);text-decoration:none;color:var(--ink);white-space:nowrap}
+ .btn:hover{border-color:var(--faint);background:var(--s3)} .btn.pri{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+ .btn.sm{padding:3px 8px;font-size:12px}
+ .wrap{max-width:1360px;margin:0 auto;padding:20px 24px 80px;display:flex;flex-direction:column;gap:18px}
+ .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+ .tile{background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+ .tile .k{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em}
+ .tile .v{font:700 24px/1.2 var(--mono);margin-top:4px} .tile .s{font-size:12px;color:var(--dim);margin-top:2px}
+ .pos{color:var(--acc)} .neg{color:var(--neg)}
+ .panel{background:var(--s1);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+ .ph{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 18px 10px}
+ .ph h2{margin:0;font-size:16px} .sub{font-size:12px;color:var(--dim);margin-top:2px}
+ .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+ select,input[type=search],input[type=number]{background:var(--s2);border:1px solid var(--line2);border-radius:8px;padding:6px 9px}
+ input[type=number]{width:72px}
+ .tw{overflow-x:auto} table{border-collapse:collapse;width:100%;min-width:1100px}
+ th,td{padding:8px 10px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+ th{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;font-weight:600;background:var(--s1);position:sticky;top:0}
+ td.r,th.r{text-align:right}
+ tr.grp td{background:var(--s2);font-weight:600;color:var(--dim);font-size:12.5px}
+ .bet{font-weight:600} .note{font-size:12px;color:var(--dim);margin-top:2px;max-width:420px}
+ .pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;border:1px solid var(--line2);color:var(--dim);white-space:nowrap}
+ .pill.win{color:var(--acc);border-color:var(--acc-line);background:var(--acc-soft)}
+ .pill.loss{color:var(--neg);border-color:rgba(255,92,108,.35);background:var(--neg-soft)}
+ .pill.push,.pill.void{color:var(--dim)}
+ .pill.pending{color:var(--warn);border-color:rgba(245,184,74,.35);background:var(--warn-soft)}
+ .pill.info{color:var(--info);border-color:rgba(106,168,255,.35);background:var(--info-soft)}
+ .pill.conditional{color:var(--warn);border-color:rgba(245,184,74,.35)}
+ .cond{font-size:12px;color:var(--warn);margin-top:3px}
+ .row2{display:flex;gap:6px;align-items:center;margin-top:4px}
+ .empty{padding:24px;color:var(--dim);text-align:center}
+ .msg{font-size:12.5px;color:var(--dim)}
+ .live-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between}
+ .strip{display:flex;gap:8px;flex-wrap:wrap}
+ .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line2);background:var(--s2);color:var(--dim)}
+ .dot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
+ .st-on .dot,.st-hit .dot,.st-win .dot{background:var(--acc)} .st-behind .dot{background:var(--warn)}
+ .st-dead .dot,.st-loss .dot{background:var(--neg)} .st-pre .dot,.st-push .dot,.st-void .dot{background:var(--faint)}
+ .games{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:14px;padding:0 18px 18px}
+ @media(max-width:700px){.games{grid-template-columns:1fr;padding:0 12px 14px}}
+ .gc{background:var(--s2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+ .gc.in{border-color:var(--acc-line)}
+ .gh{display:flex;align-items:center;gap:10px;padding:12px 14px 8px}
+ .sb{display:flex;align-items:baseline;gap:8px;font-weight:700}
+ .sb .t{font-size:13px;color:var(--dim);font-weight:600} .sb .s{font:700 22px/1 var(--mono)} .sb .lead{color:var(--ink)}
+ .sb .x{color:var(--faint);font-weight:400}
+ .gst{margin-left:auto;font-size:12px;font-weight:700;color:var(--dim);display:flex;align-items:center;gap:6px}
+ .gc.in .gst{color:var(--acc)}
+ .pulse{width:8px;height:8px;border-radius:50%;background:var(--acc);animation:pl 1.6s infinite}
+ @keyframes pl{0%{box-shadow:0 0 0 0 rgba(47,210,122,.6)}70%{box-shadow:0 0 0 7px rgba(47,210,122,0)}100%{box-shadow:0 0 0 0 rgba(47,210,122,0)}}
+ .gbar{height:3px;background:var(--line)} .gbar i{display:block;height:100%;background:var(--acc)}
+ .pk{display:grid;grid-template-columns:12px 1fr auto;gap:4px 10px;align-items:center;padding:9px 14px;border-top:1px solid var(--line)}
+ .pk.lean{opacity:.72}
+ .pk .dot{margin-top:1px}
+ .pk .nm{font-weight:600;font-size:13px;line-height:1.3}
+ .pk .tags{font-size:11px;color:var(--faint);margin-left:6px;font-weight:500}
+ .pk .rt{text-align:right;font-size:12px;font-weight:700;white-space:nowrap}
+ .st-on .rt,.st-hit .rt,.st-win .rt{color:var(--acc)} .st-behind .rt{color:var(--warn)} .st-dead .rt,.st-loss .rt{color:var(--neg)}
+ .st-pre .rt,.st-push .rt,.st-void .rt{color:var(--dim)}
+ .pk .det{grid-column:2/4;display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--dim)}
+ .prog{position:relative;flex:1;height:6px;border-radius:3px;background:var(--line);min-width:80px;max-width:180px}
+ .prog i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:var(--acc)}
+ .st-behind .prog i{background:var(--warn)} .st-dead .prog i,.st-loss .prog i{background:var(--neg)}
+ .prog b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.5}
+ .mkt{margin-left:auto;white-space:nowrap}
+ .mkt .up{color:var(--acc)} .mkt .dn{color:var(--neg)}
+ details.fin{border-top:1px solid var(--line)} details.fin>summary{cursor:pointer;padding:12px 18px;color:var(--dim);font-weight:600;font-size:13px}
+ .tog{font-size:12.5px;color:var(--dim);display:flex;align-items:center;gap:6px}
+ @media(max-width:700px){.wrap,.top{padding-left:16px;padding-right:16px}}
+</style></head><body>
+<header class="top">
+  <div class="logo">SG</div>
+  <div><div class="bt">Suggestions Tracker</div><div class="bs">Every bet, lean and model pick Claude suggested, graded automatically</div></div>
+  <div class="sp">
+    <span class="msg" id="msg"></span>
+    <button class="btn pri" onclick="grade()">Grade finished games</button>
+    <a class="btn" href="/">← Hub</a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="tiles" id="tiles"></div>
+
+  <section class="panel" id="live-panel">
+    <div class="ph live-h">
+      <div><h2>Live board</h2><div class="sub" id="live-sub">loading live games…</div></div>
+      <div class="filters">
+        <div class="strip" id="live-strip"></div>
+        <label class="tog"><input type="checkbox" id="live-bets" onchange="renderLive()"> bets only</label>
+      </div>
+    </div>
+    <div class="games" id="live-games"></div>
+    <details class="fin" id="live-fin-wrap"><summary id="live-fin-sum">Finished</summary><div class="games" id="live-fin"></div></details>
+  </section>
+
+  <section class="panel">
+    <div class="ph">
+      <div><h2>All suggestions</h2><div class="sub">Units are graded at the suggested buy price. "Placed" and amount are yours to fill in.</div></div>
+      <div class="filters">
+        <select id="f-status" onchange="render()">
+          <option value="">All types</option><option value="bet">Bets</option><option value="conditional">Conditional</option><option value="info">Model picks</option>
+        </select>
+        <select id="f-result" onchange="render()">
+          <option value="">Any result</option><option value="pending">Pending</option><option value="graded">Graded</option>
+        </select>
+        <select id="f-cat" onchange="render()"><option value="">All categories</option></select>
+        <input type="search" id="f-q" placeholder="Search…" oninput="render()">
+      </div>
+    </div>
+    <div class="tw"><table id="tbl"></table></div>
+  </section>
+
+  <section class="panel">
+    <div class="ph"><div><h2>By category</h2><div class="sub">graded bets only</div></div></div>
+    <div class="tw"><table id="cat" style="min-width:520px"></table></div>
+  </section>
+</main>
+<script>
+let DATA=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const am=p=>!p?'—':(p>=.5?'−'+Math.round(100*p/(1-p)):'+'+Math.round(100*(1-p)/p));
+const pct=p=>p==null?'—':(p*100).toFixed(0)+'%';
+const u=x=>(x>0?'+':'')+(+x).toFixed(2)+'u';
+async function api(path,body){const r=await fetch(path,body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{});return r.json();}
+async function load(){DATA=await api('/api/suggestions');
+  const cats=[...new Set(DATA.suggestions.map(s=>s.category))].sort();
+  $('f-cat').innerHTML='<option value="">All categories</option>'+cats.map(c=>`<option>${esc(c)}</option>`).join('');
+  render();}
+function tiles(){const S=DATA.summary,r=S.record,c=S.model_calibration;
+  const t=(k,v,s,cls='')=>`<div class="tile"><div class="k">${k}</div><div class="v ${cls}">${v}</div><div class="s">${s}</div></div>`;
+  $('tiles').innerHTML=
+    t('Record',`${r.win}-${r.loss}${r.push?'-'+r.push:''}`,`${S.bets} bets suggested`)+
+    t('Units',u(S.units_pl),`${S.risked_u}u risked`,S.units_pl>0?'pos':S.units_pl<0?'neg':'')+
+    t('ROI',S.roi==null?'—':(S.roi*100).toFixed(1)+'%','at suggested prices',S.roi>0?'pos':S.roi<0?'neg':'')+
+    t('Pending',S.pending,`expected ${u(S.expected_pl_pending)} by our numbers`)+
+    t('Avg edge',S.avg_edge==null?'—':'+'+(S.avg_edge*100).toFixed(1)+'¢','our % minus buy price')+
+    t('Model picks',c.n?`${c.hits}/${c.n}`:'—',c.n?`expected ${c.expected} hits · ${c.pending} pending`:`${c.pending} pending (calibration)`);}
+function render(){tiles();
+  const fs=$('f-status').value,fr=$('f-result').value,fc=$('f-cat').value,q=$('f-q').value.toLowerCase();
+  let rows=DATA.suggestions.filter(s=>(!fs||s.status===fs)&&(!fc||s.category===fc)&&
+    (!fr||(fr==='pending'?s.result==='pending':s.result!=='pending'))&&
+    (!q||JSON.stringify(s).toLowerCase().includes(q)));
+  rows.sort((a,b)=>(b.created||'').localeCompare(a.created||'')||(b.size_u||0)-(a.size_u||0));
+  let html=`<tr><th>Bet</th><th>Game</th><th>Venue · buy</th><th class="r">Our %</th><th class="r">Edge</th><th class="r">Size</th><th>Type</th><th>Result</th><th class="r">P/L</th><th>Placed?</th></tr>`;
+  let grp='';
+  for(const s of rows){
+    const g=`${s.created?.slice(0,10)} · ${s.source}`;
+    if(g!==grp){grp=g;html+=`<tr class="grp"><td colspan="10">${esc(g)} · Week ${s.week}</td></tr>`;}
+    const edge=(s.our_prob&&s.price_prob)?((s.our_prob-s.price_prob)*100).toFixed(0)+'¢':'—';
+    const typ=s.status==='info'?'<span class="pill info">model pick</span>':s.status==='conditional'?'<span class="pill conditional">conditional</span>':s.status==='void'?'<span class="pill void">void</span>':'<span class="pill">bet</span>';
+    const cond=s.status==='conditional'?`<div class="cond">${esc(s.condition)}${s.condition_met===true?' — met ✓':s.condition_met===false?' — not met':''}</div>
+      ${s.result==='pending'?`<div class="row2"><button class="btn sm" onclick="upd('${s.id}',{condition_met:true})">Met</button><button class="btn sm" onclick="upd('${s.id}',{condition_met:false})">Not met</button></div>`:''}`:'';
+    const kick=s.game?.kickoff?new Date(s.game.kickoff).toLocaleString([], {weekday:'short',hour:'numeric',minute:'2-digit'}):'';
+    const sean=s.sean||{};
+    html+=`<tr>
+      <td><div class="bet">${esc(s.bet)}</div><div class="note">${esc(s.notes||'')}</div>${cond}
+        ${s.reasoning?`<details class="note"><summary>Reasoning</summary><div style="white-space:pre-wrap;margin-top:4px">${esc(s.reasoning)}</div></details>`:''}
+        ${s.review?`<details class="note" open><summary>Post-game review</summary><div style="white-space:pre-wrap;margin-top:4px">${esc(s.review)}</div></details>`:''}</td>
+      <td>${esc(s.game?.away)} @ ${esc(s.game?.home)}<div class="note">${esc(kick)}</div></td>
+      <td>${esc(s.venue)}<div class="note n">${s.price_prob?pct(s.price_prob)+' · '+am(s.price_prob):esc(s.price_note||'')}</div><div class="note">${s.price_prob?esc(s.price_note||''):''}</div></td>
+      <td class="r n">${pct(s.our_prob)}</td><td class="r n">${edge}</td>
+      <td class="r n">${s.size_u?s.size_u+'u':'—'}</td>
+      <td>${typ}</td>
+      <td><span class="pill ${s.result}">${esc(s.result)}</span><div class="note">${esc(s.actual||'')}</div></td>
+      <td class="r n ${s.profit_u>0?'pos':s.profit_u<0?'neg':''}">${s.size_u&&s.result!=='pending'?u(s.profit_u):'—'}</td>
+      <td>${s.status==='info'?'—':`<label><input type="checkbox" ${sean.placed?'checked':''} onchange="upd('${s.id}',{sean:{placed:this.checked}})"> placed</label>
+        <div class="row2">$<input type="number" step="1" min="0" value="${sean.amount??''}" onchange="upd('${s.id}',{sean:{amount:this.value===''?null:+this.value}})"></div>`}</td>
+    </tr>`;}
+  $('tbl').innerHTML=rows.length?html:'<tr><td class="empty">No suggestions match.</td></tr>';
+  const bc=DATA.summary.by_category,keys=Object.keys(bc);
+  $('cat').innerHTML=keys.length?`<tr><th>Category</th><th class="r">Record</th><th class="r">Units</th></tr>`+keys.map(k=>{const c=bc[k];
+    return `<tr><td>${esc(k)}</td><td class="r n">${c.win}-${c.loss}${c.push?'-'+c.push:''}</td><td class="r n ${c.pl>0?'pos':c.pl<0?'neg':''}">${u(c.pl)}</td></tr>`}).join(''):'<tr><td class="empty">Nothing graded yet.</td></tr>';}
+async function upd(id,fields){const j=await api('/api/suggestions/update',{id,...fields});if(!j.ok)alert(j.message||'update failed');await load();}
+async function grade(){$('msg').textContent='grading…';const j=await api('/api/suggestions/grade',{});
+  $('msg').textContent=j.ok?(j.changes.length?`settled ${j.changes.length}`:'nothing new to settle'):(j.message||'failed');await load();}
+load();
+
+// ---------------- live board
+let LIVE=null,liveTimer=null,liveAt=0;
+const STXT={on:'on track',behind:'behind',hit:'cashed',dead:'dead',win:'won',loss:'lost',push:'push',void:'void',pre:'pregame',pending:'pending'};
+const fmtK=k=>new Date(k).toLocaleString([], {weekday:'short',hour:'numeric',minute:'2-digit'});
+const p100=x=>x==null?'—':Math.round(x*100)+'%';
+function legDetail(l,state){
+  if(l.cur!=null&&l.line!=null&&l.kind!=='spread'){
+    const isTD=l.line<2&&/TD/.test(l.label||'');
+    if(isTD) return `<span>${l.cur} TD${l.pace!=null&&state==='in'?` · pace ${l.pace}`:''}</span>`;
+    const max=Math.max(l.line*1.35,l.cur,l.pace||0)||1;
+    return `<div class="prog"><i style="width:${Math.min(100,l.cur/max*100)}%"></i><b style="left:${l.line/max*100}%"></b></div>
+      <span class="n">${l.cur} / ${l.line}${l.pace!=null&&state==='in'?` · pace ${Math.round(l.pace)}`:''}</span>`;}
+  return `<span>${esc(l.text||'')}</span>`;}
+function mkt(r,state){
+  if(!r.pm||r.pm.now==null) return '';
+  const now=r.pm.now,b=r.price_prob;
+  const verb=r.status==='info'?'logged':'bought';
+  if(r.venue&&r.venue!=='Polymarket') return `<span class="mkt">mkt <span class="n">${p100(state==='pre'&&r.pm.buy!=null?r.pm.buy:now)}</span></span>`;
+  if(state==='pre'){if(r.pm.buy==null) return '';
+    const allin=r.pm.buy+0.095*r.pm.buy*(1-r.pm.buy);   // same basis as price_prob (fee included)
+    const d=b!=null?Math.round((b-allin)*100):null;      // + = price got more expensive since we logged it (moved our way)
+    return `<span class="mkt" title="all-in incl. est. fee; + means the market moved toward our side">buy now <span class="n">${p100(allin)}</span>${d!=null?` · <span class="${d<0?'up':d>0?'dn':''}">${d<0?'+'+(-d):d>0?'−'+d:'±0'}¢ CLV</span>`:''}</span>`;}
+  return `<span class="mkt">mkt <span class="n">${p100(now)}</span>${b!=null?` · ${verb} ${p100(b)}`:''}</span>`;}
+function pickRow(r,g){
+  const lean=r.status==='info', st=r.state||'pre';
+  const tags=[r.size_u?r.size_u+'u':(lean?(/Pick'em/.test(r.bet)?"pick'em":'lean'):''),r.placed?'placed ✓':'',
+    r.status==='conditional'?(r.condition_met===true?'cond. met':r.condition_met===false?'cond. not met':'conditional'):''].filter(Boolean).join(' · ');
+  const legs=r.legs||[];
+  const det=legs.length>1?legs.map(l=>`<span class="chip st-${l.state}"><span class="dot"></span>${esc(l.label)}: ${esc(l.text)}</span>`).join(' ')
+                         :legDetail(legs[0]||{},g.state);
+  return `<div class="pk st-${st}${lean?' lean':''}"><span class="dot"></span>
+    <div class="nm">${esc(r.bet.replace(/^Lean: /,''))}<span class="tags">${esc(tags)}</span></div>
+    <div class="rt">${STXT[st]||st}${legs.length===1&&legs[0].text&&!['pre'].includes(st)&&g.state==='in'&&legs[0].kind!=='spread'&&legs[0].kind!=='moneyline'?` · ${esc(legs[0].text)}`:''}</div>
+    <div class="det">${det}${mkt(r,g.state)}</div></div>`;}
+function gameCard(g,betsOnly){
+  const rows=g.rows.filter(r=>!betsOnly||r.status!=='info'); if(!rows.length) return '';
+  const A=g.teams[g.away]||{},H=g.teams[g.home]||{}, as=+A.score,hs=+H.score;
+  const st=g.state==='in'?`<span class="pulse"></span>${esc(g.detail)}`:g.state==='post'?'FINAL':esc(fmtK(g.kickoff));
+  return `<div class="gc ${g.state}"><div class="gh"><div class="sb">
+      <span class="t">${esc(g.away)}</span><span class="s ${g.state!=='pre'&&as>hs?'lead':''}">${g.state==='pre'?'':as}</span>
+      <span class="x">${g.state==='pre'?'@':'–'}</span>
+      <span class="s ${g.state!=='pre'&&hs>as?'lead':''}">${g.state==='pre'?'':hs}</span><span class="t">${esc(g.home)}</span></div>
+      <div class="gst">${st}</div></div>
+    ${g.state==='in'?`<div class="gbar"><i style="width:${g.frac*100}%"></i></div>`:''}
+    ${rows.map(r=>pickRow(r,g)).join('')}</div>`;}
+function renderLive(){if(!LIVE) return;
+  const bo=$('live-bets').checked, act=LIVE.games.filter(g=>g.state!=='post'), fin=LIVE.games.filter(g=>g.state==='post');
+  $('live-games').innerHTML=act.map(g=>gameCard(g,bo)).join('')||'<div class="empty">No live or upcoming games with suggestions.</div>';
+  $('live-fin').innerHTML=fin.map(g=>gameCard(g,bo)).join('');
+  $('live-fin-wrap').style.display=fin.length?'':'none';
+  const fr=fin.flatMap(g=>g.rows).filter(r=>r.size_u);
+  const w=fr.filter(r=>r.state==='win').length,l=fr.filter(r=>r.state==='loss').length;
+  $('live-fin-sum').textContent=`Finished · ${fin.length} game${fin.length===1?'':'s'} · bets ${w}-${l}`;
+  const live=act.filter(g=>g.state==='in').flatMap(g=>g.rows).filter(r=>r.size_u);
+  const c=k=>live.filter(r=>r.state===k).length;
+  $('live-strip').innerHTML=live.length?['on','behind','hit','dead'].map(k=>`<span class="chip st-${k}"><span class="dot"></span>${c(k)} ${STXT[k]}</span>`).join(''):'';
+  const nIn=act.filter(g=>g.state==='in').length;
+  $('live-sub').textContent=`${nIn} in progress · ${act.length-nIn} upcoming · ESPN + Polymarket · updated ${new Date(liveAt).toLocaleTimeString([], {hour:'numeric',minute:'2-digit',second:'2-digit'})}${nIn?' · refreshes every 30s':''}`;}
+async function loadLive(){
+  try{const j=await api('/api/suggestions/live'); if(j.ok){LIVE=j;liveAt=Date.now();renderLive(); if(j.graded&&j.graded.length) await load();}}
+  catch(e){$('live-sub').textContent='live feed unavailable — '+e;}
+  clearTimeout(liveTimer);
+  const anyIn=LIVE&&LIVE.games.some(g=>g.state==='in');
+  const soon=LIVE&&LIVE.games.some(g=>g.state==='pre'&&new Date(g.kickoff)-Date.now()<20*60e3);
+  liveTimer=setTimeout(loadLive,(anyIn||soon)?30e3:120e3);}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-liveAt>25e3) loadLive();});
+loadLive();
+</script></body></html>
