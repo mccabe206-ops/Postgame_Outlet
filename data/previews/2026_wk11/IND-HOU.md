@@ -23,6 +23,8 @@ home_off: 0.7
 home_def: 0.1
 home_total: 2.6
 hfa: 2.0
+final_score: IND 3, HOU 26
+model_result: loss
 ---
 ## Why the number
 Our number is **HOU -9**, and the market is at **HOU -12.5**. That's a 3.5-point edge to Indianapolis.

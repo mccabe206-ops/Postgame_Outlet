@@ -53,3 +53,4 @@ We'll update once Baker's practice status is clear. This is the game most likely
 - **Road teams off a bye as underdogs**: TB off the bye (ATS). 2021+: 20-21 (48.8%) · 2010-19: 58-49-2 (54.2%) · pre-2010: 43-55-3 (43.9%)
 
 ## Updates
+- **Fri 11/20:** TB 1st string QB Baker Mayfield (foot/right thumb) upgraded to limited Thursday after missing Wednesday, and IR is "not a consideration." We keep him priced PLAYING (our line DET −2). If TB 2nd string QB Jalon Daniels starts instead, our line moves to DET −5, and TB +7 still holds a 2-point edge. Watch Friday's final designation and Sunday's inactives.

@@ -53,3 +53,4 @@ The 5.4-point gap plus 1.5 for home field gets us to 7. A Dallas defense this le
 - **Road underdogs of 7 to 9.5**: TEN as a road dog (dog ATS). 2021+: 80-70-3 (53.3%) · 2010-19: 153-151-12 (50.3%) · pre-2010: 191-192-10 (49.9%)
 
 ## Updates
+- **Fri 11/20:** TEN 1st string WR Wan'Dale Robinson stays on IR (placed Tuesday; minimum four games), so our PLAYING call was wrong. He's out. His swing is TEN −0.2, and our line stays DAL −7 after rounding. The ratings are unchanged until the Monday/Tuesday review.

@@ -54,3 +54,4 @@ The 13.9-point gap plus 2.0 for home field is 16. We agree with the market. The 
 - **Divisional games with totals 44-47**: the Under. 2021+: 65-70-1 (48.1%) · 2010-19: 155-128-3 (54.8%) · pre-2010: 119-112-6 (51.5%)
 
 ## Updates
+- **Fri 11/20:** BUF 1st string LB Dorian Williams (calf) is ruled out. We had priced him PLAYING. At about BUF Def −0.2, our line moves half a point to BUF −15.5, versus BUF −16.5 in the market. The ratings are unchanged until the Monday/Tuesday review.
