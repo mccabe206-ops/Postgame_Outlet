@@ -193,7 +193,7 @@ anchor, while the units around him are better than replacement-level and climbin
 
 ## Quarterback
 
-Cade Klubnik (−4.0) is priced as the starter. Geno Smith (−0.5) left the Buffalo game for ankle X-rays and was ruled out, and his status for the Chargers game will be decided during the week. Klubnik is a 4th-round rookie who hasn't started yet, so he gets the same price Kyle McCord had before his debut. Smith's −0.5 comes back if he plays.
+Geno Smith (−0.5) is back as the starter. He left the Buffalo game for ankle X-rays, but imaging showed no major injury, he was a full participant in Friday's practice, and he's confirmed to play against the Chargers. Rookie Cade Klubnik (−4.0), a 4th-round pick who relieved him against Buffalo, is the backup again. If Klubnik has to start, the Jets drop 3.5 points.
 
 ## What moved the number
 
