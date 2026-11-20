@@ -54,4 +54,5 @@ The ratings are nearly even, and home field makes up the difference. Both teams 
 - **Teams the week after an outright upset win (as a 3+ point dog)**: LAC after last week's upset (ATS). 2021+: 146-153-10 (48.8%) · 2010-19: 266-275-16 (49.2%) · pre-2010: 321-331-20 (49.2%)
 
 ## Updates
+- **Fri 11/20 (later): Confirmed. Geno Smith is playing.** Our number stays NYJ −1.5, so the edge is 4.5 points on NYJ +3 against LAC −3.
 - **Fri 11/20: Geno is back in our lineup.** NYJ 1st string QB Geno Smith (ankle) was a full participant Friday, imaging showed no major injury, and Aaron Glenn says he starts if he's cleared. We now expect him to play. How the line moves: on Tuesday we had rookie Cade Klubnik (−4.0) starting, which made the Jets −5.0 overall and our number **LAC −2**. Geno (−0.5) is worth 3.5 points more, so the Jets go to −1.5 and our number becomes **NYJ −1.5**. The market is still LAC −3, so our edge is now 4.5 points on NYJ +3, up from 1 point on LAC on Tuesday. If Klubnik starts after all (watch Sunday's inactives), we go back to LAC −2. The line and edge shown at the top of this card are the frozen Tuesday numbers we're graded on.
