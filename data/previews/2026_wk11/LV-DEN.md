@@ -55,3 +55,4 @@ The 5.1-point gap plus 2.0 for Denver's home field (altitude included) gets us t
 - **Divisional games with totals 39-42**: the Under. 2021+: 52-59-1 (46.8%) · 2010-19: 118-99-4 (54.4%) · pre-2010: 151-121-7 (55.5%)
 
 ## Updates
+- **Fri 11/20:** LV 1st string TE Brock Bowers (ankle/quad) returned to practice as limited Thursday, and Klint Kubiak says he'll be listed Questionable. Our number still prices him OUT. If he plays, LV gains 0.5 and our line goes to DEN −6.5. LV +10 is the edge either way.

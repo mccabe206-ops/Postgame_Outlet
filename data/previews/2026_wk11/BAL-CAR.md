@@ -49,3 +49,4 @@ The 1.4-point gap plus 1.5 for home field rounds to 3. There's no edge worth bet
 - **Road underdogs of PK to 2.5**: BAL as a road dog (dog ATS). 2021+: 90-82 (52.3%) · 2010-19: 154-143 (51.9%) · pre-2010: 117-135-2 (46.4%)
 
 ## Updates
+- **Fri 11/20:** BAL 1st string DT Nnamdi Madubuike (hamstring) is ruled out. We had priced him PLAYING. We'd value the absence at about BAL Def −0.2 to −0.3, which leaves our line at CAR −3 after rounding. The ratings are unchanged until the Monday/Tuesday review.

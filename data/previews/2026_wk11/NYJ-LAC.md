@@ -54,3 +54,4 @@ The ratings are nearly even, and home field makes up the difference. Both teams 
 - **Teams the week after an outright upset win (as a 3+ point dog)**: LAC after last week's upset (ATS). 2021+: 146-153-10 (48.8%) · 2010-19: 266-275-16 (49.2%) · pre-2010: 321-331-20 (49.2%)
 
 ## Updates
+- **Fri 11/20:** NYJ 1st string QB Geno Smith (ankle) was a full participant Friday, and Aaron Glenn says things "look promising" for Sunday. Our number still prices him OUT, with Klubnik starting. If Geno starts, NYJ gains 3.5 and our line moves to NYJ −1.5. That flips this game to a NYJ lean against the market's LAC −3. Watch Sunday's inactives.
