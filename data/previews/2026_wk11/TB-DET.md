@@ -53,4 +53,5 @@ We'll update once Baker's practice status is clear. This is the game most likely
 - **Road teams off a bye as underdogs**: TB off the bye (ATS). 2021+: 20-21 (48.8%) · 2010-19: 58-49-2 (54.2%) · pre-2010: 43-55-3 (43.9%)
 
 ## Updates
+- **Sun 11/22 (inactives):** TB 1st string QB Baker Mayfield (foot) is **active and starting**, as priced, so our number stays DET −2. TB 1st string DE Yaya Diaby is also active. We had him out, but TB's defense is rated on the games he missed, so any lift (about +0.2 to +0.3) still rounds to DET −2. The market has moved from DET −7 to DET −3.5 on the Baker news, so our edge on TB is now 1.5.
 - **Fri 11/20:** TB 1st string QB Baker Mayfield (foot/right thumb) upgraded to limited Thursday after missing Wednesday, and IR is "not a consideration." We keep him priced PLAYING (our line DET −2). If TB 2nd string QB Jalon Daniels starts instead, our line moves to DET −5, and TB +7 still holds a 2-point edge. Watch Friday's final designation and Sunday's inactives.
