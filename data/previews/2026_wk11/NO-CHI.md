@@ -51,4 +51,5 @@ The 7.7-point gap plus 1.5 for home field gets us to 9. At 11.5, the market is r
 - **Dome/warm-weather teams on the road in cold-weather outdoor stadiums (Nov-Jan)**: NO (ATS). 2021+: 80-72-6 (52.6%) · 2010-19: 135-137-8 (49.6%) · pre-2010: 148-164-13 (47.4%)
 
 ## Updates
+- **Sun 11/22 (inactives):** NO 1st string LB Pete Werner (hamstring) is **inactive**. We had priced him PLAYING. At about NO Def −0.2, our line moves half a point to CHI −9.5. C Erik McCoy and RT Taliese Fuaga are inactive, as priced. CHI 1st string CB Kyler Gordon is out (see Friday). The market is still CHI −11.5, so NO +11.5 keeps a 2-point edge.
 - **Fri 11/20:** CHI 1st string CB Kyler Gordon (shoulder) is ruled out after missing every practice this week. We had priced him PLAYING. At about CHI Def −0.2 to −0.3, our line stays CHI −9 after rounding, and NO +11.5 still holds the edge. The ratings are unchanged until the Monday/Tuesday review.

@@ -50,3 +50,4 @@ The gap is 11.3 plus 2.0 for home field, which gets us to 13.5. Two more points 
 - **Dome/warm-weather teams on the road in cold-weather outdoor stadiums (Nov-Jan)**: ARI (ATS). 2021+: 80-72-6 (52.6%) · 2010-19: 135-137-8 (49.6%) · pre-2010: 148-164-13 (47.4%)
 
 ## Updates
+- **Sun 11/22 (inactives):** ARI 1st string QB Carson Beck (back) is **inactive**, so veteran Josh Johnson starts. He has no ARI price yet. Our only number for him is a −5.0 placeholder, and if we use it, ARI drops 1.5 from Beck's −3.5 and our line moves from KC −13.5 to KC −15. The market is KC −15.5. KC 1st string RB Kenneth Walker III is inactive, as priced.

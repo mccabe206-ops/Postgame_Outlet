@@ -50,3 +50,4 @@ The 6.2-point gap minus 1.5 for Philadelphia's home field gets us to 4.5. The Ea
 - **Home underdogs of 3 to 6.5**: PHI as a home dog (dog ATS). 2021+: 130-152-10 (46.1%) · 2010-19: 218-221-18 (49.7%) · pre-2010: 234-255-19 (47.9%)
 
 ## Updates
+- **Sun 11/22 (inactives):** PHI 1st string LB Zack Baun (back) was placed on IR Saturday and is out. We had priced him PLAYING. PHI 1st string WR DeVonta Smith (hamstring) is **active**. We had him out, and his +0.2 return roughly offsets the Baun loss. PIT 1st string OLB Nick Herbig (rib/hip) is out and wasn't priced. At about PIT Def −0.2, our line stays PIT −4.5 after rounding. The market is PIT −3.5, so the edge is 1 point on PIT.
