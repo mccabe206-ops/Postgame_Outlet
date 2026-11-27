@@ -1,3 +1,13 @@
+## Week 11: at Houston (L 3–26)
+
+Daniel Jones went 12/27 for 144 yards with an interception (14.1 QBR), and the Colts were out-gained by 187 yards. On Nov. 27 Indianapolis released Jones and named **Anthony Richardson Sr.** the starter. 1st string CB **Sauce Gardner**, CB **Taylor-Britt** and 1st string LT **Bernhard Raimann** were all full participants this week and are expected back.
+
+**What changed:**
+- **QB Daniel Jones −2.0 → Anthony Richardson Sr. −2.0:** an even swap. (Jones, now a free agent, would be −2.5 if someone signs him.)
+- **Defense −2.2 → −2.0 (+0.2):** 1st string CB Sauce Gardner back.
+- **Offense held.**
+- **New total −4.5 → −4.3.**
+
 ## Week 10: vs Miami (W 24–22)
 
 Indianapolis won but didn't cover, which is about what the ratings expected. Daniel Jones was rough (11/22, 108 yards, 1 TD, 2 INT), but the game felt honest overall. CBs **Sauce Gardner (calf)** and **Charvarius Ward (leg)** and WR **Anthony Gould (toe)** are questionable for Thursday at Houston.

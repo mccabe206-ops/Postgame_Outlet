@@ -1,3 +1,13 @@
+## Week 11: vs Tampa Bay (W 31–21)
+
+Jared Goff was sharp (20/28, 279 yards, 2 TD, 91.0 QBR), and Detroit out-gained Tampa Bay by 112 yards. Before Thanksgiving, 1st string CB **Ennis Rakestraw Jr. (shoulder)** was ruled out.
+
+**What changed:**
+- **Offense +1.4 → +1.5 (+0.1).**
+- **Defense −1.9 → −2.0 (−0.1):** Rakestraw out.
+- **QB Goff held.**
+- **Total stays 2.0.**
+
 ## Week 10: vs New England, Munich (W 35–10)
 
 Detroit out-gained New England by 343 yards. Jared Goff threw for 303 yards and 3 TD (2 INT). Most of the game came against backup Tommy DeVito after Drake Maye went down on the opening drive, so the margin gets discounted. Even so, the defense has been better lately, even against easier competition. CB **D.J. Reed (hip)** is out.

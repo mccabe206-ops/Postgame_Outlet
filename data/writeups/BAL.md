@@ -1,3 +1,12 @@
+## Week 11: at Carolina (L 33–35)
+
+An unlucky loss. Baltimore out-gained Carolina by 43 yards but lost the turnover battle by three. Jacoby Brissett went 24/37 for 276 yards, 1 TD, 1 INT, and the offense scored 33.
+
+**What changed:**
+- **Offense +0.3 → +0.5 (+0.2):** the offense is better than the result.
+- **QB Brissett and defense held.**
+- **New total −1.7 → −1.5.**
+
 ## Week 10: vs L.A. Chargers (L 20–23)
 
 In his first week in the system, Jacoby Brissett threw for 340 yards (33/49, 1 INT), and Baltimore out-gained Los Angeles by 60 yards. That earns back part of the new-system discount. The defense looked terrible against a weak Chargers offense. The offense also gets a correction: its +0.8 was really Lamar Jackson's value, not the unit around him, and Lamar is out with the thumb injury. DT **Nnamdi Madubuike (hamstring)** is questionable.

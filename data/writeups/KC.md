@@ -1,3 +1,11 @@
+## Week 11: vs Arizona (W 34–7)
+
+Patrick Mahomes went 27/39 for 324 yards and 3 TD, and Kansas City out-gained Arizona by 230 yards. It was the result you'd expect against a 40-year-old backup QB. 1st string RB Kenneth Walker III (groin) sat again, as priced.
+
+**What changed:**
+- **Held.**
+- **Total stays 4.9.**
+
 ## Week 10: at Atlanta (W 35–13)
 
 Patrick Mahomes was surgical: 22/35, 348 yards, 5 TD, 0 INT, his second straight dominant game. Kansas City played without RB **Kenneth Walker III (groin)**, and the offense didn't take a step back. **Emmett Johnson** looks very capable as the lead back. TE **Travis Kelce (ankle)** is questionable.

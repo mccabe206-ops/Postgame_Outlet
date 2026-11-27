@@ -1,3 +1,11 @@
+## Week 11: vs Baltimore (W 35–33)
+
+A fortunate win. Carolina was out-gained by 43 yards and won the turnover battle by three. Bryce Young went 22/30 for 254 yards, 2 TD, 1 INT.
+
+**What changed:**
+- **Held:** the turnovers did the work.
+- **Total stays −0.3.**
+
 ## Week 10: at New Orleans (W 20–17)
 
 Carolina out-gained New Orleans by 61 yards and won the turnover battle by two. Bryce Young was steady (17/30, 200 yards, no turnovers). CB Will Lee (hamstring) was inactive.

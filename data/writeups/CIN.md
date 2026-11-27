@@ -1,3 +1,12 @@
+## Week 11: at Washington (L 20–22)
+
+Cincinnati out-gained Washington by 116 yards and still lost. Joe Burrow went 28/40 for 300 yards, 2 TD, 0 INT. 1st string LBs **Oren Burks (groin)** and **Jalen Davis (hamstring)** are both on IR.
+
+**What changed:**
+- **Defense −0.4 → −0.6 (−0.2):** two starting LBs out.
+- **QB Burrow and offense held.**
+- **New total 5.4 → 5.2.**
+
 ## Week 10: vs Pittsburgh (W 38–18)
 
 Joe Burrow was outstanding: 35/44, 409 yards, 4 TD, 0 INT. Cincinnati out-gained Pittsburgh by 262 yards, and the defense held the Steelers to 18.

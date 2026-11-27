@@ -1,3 +1,12 @@
+## Week 11: vs NY Jets (L 24–27)
+
+Justin Herbert went 15/21 for only 131 yards and took six sacks. He's now in the concussion protocol and doubtful against New England, with DJ Uiagalelei the likely starter. The Chargers are 1–9.
+
+**What changed:**
+- **QB Herbert −2.0 → −2.5 (−0.5).**
+- **Offense and defense held.**
+- **New total −4.5 → −5.0.**
+
 ## Week 10: at Baltimore (W 23–20)
 
 Los Angeles was out-gained by 60 yards and won on a plus-two turnover margin. Justin Herbert threw just 18 times for 129 yards, but the team looked okay. WR **Ladd McConkey (back spasms)** and DL **Justin Eboigbe (ankle)** are out. Two more offensive linemen went on IR, but both were backups.

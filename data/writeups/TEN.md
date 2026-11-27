@@ -1,3 +1,12 @@
+## Week 11: at Dallas (L 30–51)
+
+Cam Ward was efficient (21/30, 248 yards, 2 TD, 0 INT) and the offense scored 30, but the defense allowed 51. 1st string CB **Cor'Dale Flott (neck)** is out. 1st string WR **Carnell Tate** returned from his shoulder injury, which offsets 1st string WR Wan'Dale Robinson going to IR.
+
+**What changed:**
+- **Defense −1.8 → −2.0 (−0.2):** 51 allowed, plus Flott out.
+- **QB Ward and offense held.**
+- **New total −4.4 → −4.6.**
+
 ## Week 10: vs Jacksonville (L 23–40)
 
 Cam Ward made his share of mistakes but looked like a starting QB again: 28/39, 231 yards, 2 TD. Rookie WR **Carnell Tate (shoulder)** missed another game, and WR **Wan'Dale Robinson** hurt his **ankle** during it. Both are uncertain for Dallas.

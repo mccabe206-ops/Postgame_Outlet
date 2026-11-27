@@ -1,3 +1,12 @@
+## Week 11: vs Jacksonville (W 23–18)
+
+A fortunate win: New York was out-gained by 116 yards and won as a 6-point underdog. J.J. McCarthy went 18/38 for 173 yards and a TD with no turnovers. He still misses open throws, but his scrambling kept drives alive.
+
+**What changed:**
+- **QB McCarthy −2.0 → −1.7 (+0.3):** real scramble value.
+- **Offense and defense held.**
+- **New total −2.0 → −1.7.**
+
 ## Week 10: vs Washington (L 21–24)
 
 A coin-flip game. **J.J. McCarthy** played well (23/36, 293 yards, TD, plus 34 rushing yards), including a 66-yard touchdown to Isaiah Likely. But his final-minute interception ended it after Jayden Daniels's late go-ahead drive.

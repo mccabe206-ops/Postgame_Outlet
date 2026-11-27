@@ -1,3 +1,11 @@
+## Week 11: at Detroit (L 21–31)
+
+Baker Mayfield played through his foot injury (20/33, 187 yards, 2 TD, 0 INT), but Tampa Bay was out-gained by 112 yards. 1st string DE **Yaya Diaby** returned.
+
+**What changed:**
+- **Held.** About what we'd expect from a road game in Detroit with a banged-up QB.
+- **Total stays 1.3.**
+
 ## Week 10: bye
 
 No changes over the bye. Baker Mayfield is held at +0.5. His thumb is the thing to check on this week's injury report before the Detroit game.

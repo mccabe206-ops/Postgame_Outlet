@@ -1,3 +1,11 @@
+## Week 11: bye
+
+New England had a bye. Tommy DeVito remains the starter while Drake Maye recovers.
+
+**What changed:**
+- **Held.**
+- **Total stays −4.2.**
+
 ## Week 10: at Detroit, Munich (L 10–35)
 
 **Drake Maye (ankle)** was hurt on an Aidan Hutchinson sack on the opening drive and never returned. He's getting more tests, and the severity isn't known yet. **Tommy DeVito** took over and couldn't get anything going (12/24, 81 yards). Detroit out-gained New England by 343 yards. **A.J. Brown** was active but left early in the fourth quarter with a **hamstring** injury.

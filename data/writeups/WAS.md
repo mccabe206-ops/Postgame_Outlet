@@ -1,3 +1,12 @@
+## Week 11: vs Cincinnati (W 22–20)
+
+A lucky win on the scoreboard: Washington was out-gained by 116 yards and won as a 6.5-point underdog. Jayden Daniels went 23/35 for 289 yards. The defense has been playing better, and it held Joe Burrow to 20 points.
+
+**What changed:**
+- **Defense −1.3 → −1.1 (+0.2):** improving.
+- **QB Daniels and offense held.**
+- **New total −1.2 → −1.0.**
+
 ## Week 10: at N.Y. Giants (W 24–21)
 
 **Jayden Daniels** threw his first two interceptions of the season in the fourth quarter, then drove for the winning score in the final minute (23/33, 249 yards, 3 TD). The run defense gave up a big day on the ground.

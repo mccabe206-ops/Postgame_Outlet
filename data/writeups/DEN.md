@@ -1,3 +1,12 @@
+## Week 11: vs Las Vegas (W 38–24)
+
+Denver covered the 10 points even though the yardage was close to even. Bo Nix went 19/35 for 225 yards, 1 TD, 1 INT, and RB **Jonah Coleman** keeps earning a bigger role. Denver is 8–2 and has won six straight.
+
+**What changed:**
+- **Offense +0.3 → +0.5 (+0.2):** Coleman is a real player.
+- **QB Nix and defense held.**
+- **New total 1.0 → 1.2.**
+
 ## Week 10: bye
 
 Denver comes out of the bye with injury questions. WR **Jaylen Waddle (concussion)** is targeting a return Nov. 22 against Las Vegas. S **Talanoa Hufanga (ankle)** and CB **Riley Moss (concussion)** are still being monitored.

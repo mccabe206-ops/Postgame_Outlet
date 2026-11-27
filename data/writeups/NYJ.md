@@ -1,3 +1,13 @@
+## Week 11: at LA Chargers (W 27–24)
+
+**Geno Smith** came back from his ankle injury and was efficient: 17/21, 176 yards, 3 TD, 0 INT (90.8 QBR). The Jets won outright as 3-point underdogs despite being out-gained by 80 yards. 1st string DTs **T'Vondre Sweat (knee)** and **David Onyemata (groin)** have both gone on IR.
+
+**What changed:**
+- **Offense −0.9 → −0.8 (+0.1):** the offense played well.
+- **Defense −0.1 → −0.4 (−0.3):** two starting DTs on IR.
+- **QB Geno held.**
+- **New total −1.5 → −1.7.**
+
 ## Week 10: vs Buffalo (L 12–31)
 
 **Geno Smith** left late in the third quarter for X-rays on his **ankle** and was ruled out, so rookie **Cade Klubnik** finished the game. The yardage was nearly even, but Buffalo pulled away. WR **Omar Cooper Jr. (ankle)** also went down. Aaron Glenn says Smith's status for the Chargers game will be decided during the week; the rating assumes he's out.

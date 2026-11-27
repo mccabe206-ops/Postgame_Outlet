@@ -1,3 +1,13 @@
+## Week 11: vs Pittsburgh (W 19–16)
+
+Joe Milton managed the game (11/21, 141 yards), and Philadelphia won despite being out-gained by 41 yards. 1st string LB **Zack Baun (back)** went to IR, and 1st string WR **DeVonta Smith (hamstring)** returned. Before Thanksgiving, OLB **Arnold Ebiketie (oblique)** and CB **Jonathan Jones (ankle)** were ruled out.
+
+**What changed:**
+- **Offense −2.2 → −2.0 (+0.2):** Smith back (pre-set).
+- **Defense −1.2 → −1.6 (−0.4):** Baun on IR, Ebiketie and Jones out.
+- **QB Milton held.**
+- **New total −6.4 → −6.6.**
+
 ## Week 10: bye
 
 No changes over the bye. Joe Milton is held at −3.0 after a rough first start. Week 11 is home against Pittsburgh.

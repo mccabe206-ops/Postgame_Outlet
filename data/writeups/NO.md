@@ -1,3 +1,12 @@
+## Week 11: at Chicago (L 13–21)
+
+New Orleans played Chicago even on yardage and covered as an 11.5-point underdog. Tyler Shough went 25/42 for 222 yards, 1 TD, 1 INT. The defense held up without 1st string LB **Pete Werner (hamstring)**.
+
+**What changed:**
+- **Defense −1.1 → −1.0 (+0.1):** a solid road effort.
+- **QB Shough and offense held.**
+- **New total −2.4 → −2.3.**
+
 ## Week 10: vs Carolina (L 17–20)
 
 Mostly a hold. Tyler Shough threw for 187 yards with 1 TD and 1 INT. The offensive line keeps losing bodies: T **Asim Richards (knee)** joins C Erik McCoy and RT Taliese Fuaga on the sideline. LB **Pete Werner (hamstring)** is questionable.

@@ -1,3 +1,11 @@
+## Week 11: at Denver (L 24–38)
+
+Fernando Mendoza threw 3 TD (18/37, 267 yards, 1 INT), and Las Vegas played Denver close to even on yardage. 1st string TE **Brock Bowers (ankle/quad)** was questionable all week.
+
+**What changed:**
+- **Held.**
+- **Total stays −4.1.**
+
 ## Week 10: vs Seattle (L 13–21)
 
 Fernando Mendoza's debut was fine (17/29, 143 yards, no turnovers), but Seattle out-gained Las Vegas by 219 yards. The big loss is TE **Brock Bowers**, who hurt his **right ankle** in the first quarter and didn't return. Bowers is the offense here. DE **Kwity Paye (neck)** is questionable.

@@ -1,3 +1,12 @@
+## Week 11: vs New Orleans (W 21–13)
+
+A workmanlike win, but the yardage was dead even and New Orleans covered the 11.5. Caleb Williams went 15/23 for 181 yards, 2 TD, 1 INT. Before Thanksgiving, 1st string S **Elijah Hicks (concussion)** was ruled out, along with 1st string CB Kyler Gordon (already priced).
+
+**What changed:**
+- **Defense +0.6 → +0.5 (−0.1):** Hicks out.
+- **QB Williams and offense held.**
+- **New total 5.3 → 5.2.**
+
 ## Week 10: bye
 
 No changes over the bye. Caleb Williams is held at +3.5 after his four-interception game against Tampa Bay; that's still worth watching. Week 11 is home against New Orleans.

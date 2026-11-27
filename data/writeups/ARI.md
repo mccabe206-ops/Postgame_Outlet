@@ -1,3 +1,13 @@
+## Week 11: at Kansas City (L 7–34)
+
+With 1st string QB **Carson Beck (back)** inactive, 40-year-old **Josh Johnson** made his Cardinals debut: 18/31, 155 yards, 1 TD. Arizona was out-gained by 230 yards. Beck has been ruled out again for Week 12.
+
+**What changed:**
+- **QB Carson Beck −3.5 → Josh Johnson −5.0:** 3rd-string band. Beck's −3.5 comes back when he's healthy.
+- **Defense −1.1 → −1.3 (−0.2):** gave up 324 passing yards.
+- **Offense held.**
+- **New total −6.4 → −8.1.**
+
 ## Week 10: vs L.A. Rams (L 6–34)
 
 **Carson Beck**'s first NFL start was rough: 11/18, 108 yards, 2 INT. He was the third-string QB 11 days ago, and Gardner Minshew's torn UCL means he's the starter from here. The Rams out-gained Arizona by 313 yards. S **Andrew Wingard (wrist)** is out.

@@ -1,3 +1,11 @@
+## Week 11: bye
+
+Green Bay had a bye. Before their Week 12 game at the Rams, **Micah Parsons** was activated from PUP and made his 2026 debut. 1st string RB Josh Jacobs (finger) and 1st string LB Zaire Franklin (shin) were still out, as priced.
+
+**What changed:**
+- **Defense +0.4 → +0.8 (+0.4):** Parsons back (pre-set).
+- **New total 2.5 → 2.9.**
+
 ## Week 10: vs Minnesota (L 10–30)
 
 One week after an upgrade, Green Bay turned it over three times and was out-gained by 92 yards at home. Jordan Love went 17/27 for 220 yards with 1 TD and 1 INT. Josh Jacobs (finger surgery) sat again. LB **Zaire Franklin** has a **shin fracture**, and G **Kevin Zeitler (ankle)** is out. Green Bay is on bye in Week 11.

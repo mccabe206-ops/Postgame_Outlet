@@ -1,3 +1,11 @@
+## Week 11: bye
+
+Cleveland had a bye. No new injuries changed the rating.
+
+**What changed:**
+- **Held.**
+- **Total stays −1.7.**
+
 ## Week 10: vs Houston (W 27–24)
 
 **Deshaun Watson** was back as the starter and threw for 312 yards (25/40, 0 TD, 1 INT) in a win. Cleveland out-gained Houston by 89 yards. This also fixes the board: Watson has been the starter all along, and **Shedeur Sanders** only got the Week 9 start because Watson was in concussion protocol.

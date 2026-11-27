@@ -1,3 +1,11 @@
+## Week 11: bye
+
+Seattle had a bye. No new injuries changed the rating.
+
+**What changed:**
+- **Held.**
+- **Total stays 3.0.**
+
 ## Week 10: at Las Vegas (W 21–13)
 
 Seattle out-gained Las Vegas by 219 yards. The game stayed close only because the Raiders won the turnover battle by two. Drew Lock was sharp (14/17, 240 yards, 2 TD). DE **Leonard Williams** is out with a **shoulder stinger**. Seattle is on bye in Week 11, and Sam Darnold (quad) is expected back Nov. 29 at San Francisco.

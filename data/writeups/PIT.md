@@ -1,3 +1,13 @@
+## Week 11: at Philadelphia (L 16–19)
+
+Pittsburgh out-gained Philadelphia by 41 yards and lost by 3, with one more turnover. Aaron Rodgers went 30/44 for 227 yards (38.5 QBR). Two days later the Steelers benched him, and **Mason Rudolph** starts against Denver. 1st string OLB **Alex Highsmith (ankle)** is out. 1st string OLB Nick Herbig is back.
+
+**What changed:**
+- **QB Aaron Rodgers −1.0 → Mason Rudolph −2.5:** a coach's decision, not an injury.
+- **Defense +0.8 → +0.6 (−0.2):** Highsmith out.
+- **Offense held.** The market moved this game 3 points on the QB change; we have it at 1.5. That's a watch item.
+- **New total −0.2 → −1.9.**
+
 ## Week 10: at Cincinnati (L 18–38)
 
 Cincinnati out-gained Pittsburgh by 262 yards. Aaron Rodgers managed just 143 yards (15/29, 2 TD). S **DeShon Elliott (knee)** is out. WR Michael Pittman Jr. is now on IR with **plantar fasciitis**, but he was already priced out of the offense.

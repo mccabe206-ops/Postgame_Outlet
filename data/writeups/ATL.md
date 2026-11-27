@@ -1,3 +1,11 @@
+## Week 11: bye
+
+Atlanta had a bye. No new injuries changed the rating.
+
+**What changed:**
+- **Held.**
+- **Total stays −1.5.**
+
 ## Week 10: vs Kansas City (L 13–35)
 
 Kansas City out-gained Atlanta by 91 yards and won the turnover battle by two. Michael Penix Jr. threw 43 times for 286 yards with no touchdowns. WR **Drake London (head)** is questionable. Atlanta is on bye in Week 11.

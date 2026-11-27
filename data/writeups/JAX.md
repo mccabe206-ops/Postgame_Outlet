@@ -1,3 +1,12 @@
+## Week 11: at NY Giants (L 18–23)
+
+Trevor Lawrence struggled (25/47, 301 yards, 1 TD, 2 INT, 29.2 QBR), but Jacksonville out-gained New York by 116 yards and got the worse of the breaks. 1st string WR **Parker Washington** hurt his shoulder in practice and is out for Week 12.
+
+**What changed:**
+- **Offense +0.6 → +0.1 (−0.5):** Washington out.
+- **QB Lawrence and defense held.**
+- **New total 6.0 → 5.5.**
+
 ## Week 10: at Tennessee (W 40–23)
 
 Another blowout. Trevor Lawrence went 25/35 for 352 yards and 3 TD, and Jacksonville out-gained Tennessee by 132 yards. Newly acquired DT **Jordan Davis** and S **Jessie Bates** were rested in Week 10 (not hurt) and debut in Week 11.

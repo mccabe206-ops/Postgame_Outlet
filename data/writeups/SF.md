@@ -1,3 +1,12 @@
+## Week 11: vs Minnesota (W 35–10)
+
+Brock Purdy was excellent (21/26, 255 yards, 3 TD, 98.6 QBR), and San Francisco did it against the league's best defense. Some of the margin came from a +2 turnover edge, but this offense is playing at a high level. Purdy (ankle) has missed practice this week.
+
+**What changed:**
+- **Offense +0.6 → +1.0 (+0.4).**
+- **QB Purdy and defense held.**
+- **New total 7.0 → 7.4.**
+
 ## Week 10: at Dallas (W 46–40)
 
 Brock Purdy was nearly perfect (22/28, 389 yards, 3 TD, 0 INT), and San Francisco won the shootout. But giving up 40 points is never okay, even with about 14 of them in garbage time. Dak Prescott threw 5 TD. **Mike Evans (Achilles tendinitis)** missed his third straight game; Kyle Shanahan says he's progressing.

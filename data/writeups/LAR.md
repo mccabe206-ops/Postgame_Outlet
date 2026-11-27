@@ -1,3 +1,11 @@
+## Week 11: bye
+
+The Rams had a bye. Before their Week 12 game against Green Bay, OL **Coleman Shelton (hamstring)** and TE **Terrance Ferguson (ankle/hamstring)** were ruled out, joining 1st string C Steve Avila (already priced).
+
+**What changed:**
+- **Offense +0.8 → +0.6 (−0.2):** Shelton and Ferguson out.
+- **New total 4.8 → 4.6.**
+
 ## Week 10: at Arizona (W 34–6)
 
 The Rams blew out a much worse team, which is about what was expected. Matthew Stafford threw for 249 yards and 3 TD, and Los Angeles out-gained Arizona by 313 yards. Puka Nacua is on IR (knee, plus turf toe) and will miss at least four games. Davante Adams (hamstring) is targeting a return as soon as Nov. 25. The Rams are on bye in Week 11.

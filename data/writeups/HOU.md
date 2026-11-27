@@ -1,3 +1,12 @@
+## Week 11: vs Indianapolis (W 26–3)
+
+Houston controlled this one from start to finish, out-gaining Indianapolis by 187 yards. C.J. Stroud went 21/27 for 194 yards and 3 TD, and the defense held the Colts to a field goal. Indianapolis's QB play was historically bad (14.1 QBR), so the defense gets credit, but not too much.
+
+**What changed:**
+- **Defense +0.1 → +0.3 (+0.2):** held a bad offense to 3 points.
+- **QB Stroud and offense held** (offense was raised to +0.7 before the game).
+- **New total 2.6 → 2.8.**
+
 ## Week 10: at Cleveland (L 24–27)
 
 Houston was out-gained by 89 yards while missing DE **Danielle Hunter (hamstring)**, RB **David Montgomery (groin)** and LB **Azeez Al-Shaair**, who has since gone on IR (groin). C.J. Stroud threw 3 TD on 20/38 passing. RB **Woody Marks** is now in concussion protocol, which leaves the backfield empty for a Thursday game against Indianapolis. G Wyatt Teller (illness) is also out.

@@ -1,3 +1,12 @@
+## Week 11: at Buffalo (L 9–26)
+
+Kyle McCord had a rough day in Buffalo: 12/33 for 102 yards and an INT. Miami was out-gained by 220 yards. 1st string CB **JuJu Brents (neck)** is out.
+
+**What changed:**
+- **Defense −1.5 → −1.6 (−0.1):** Brents out.
+- **QB McCord held:** one bad game in Buffalo isn't enough to move him.
+- **New total −6.6 → −6.7.**
+
 ## Week 10: at Indianapolis (L 22–24)
 
 **Kyle McCord** made his first NFL start and held his own: 17/32, 209 yards, no turnovers, and a two-point road loss. He showed he belongs in the league as a backup, so he's no longer priced as the worst QB on the board. Willis (core muscle, IR) can't return before Dec. 13. DL **Zeek Biggers** is out after **meniscus surgery**.

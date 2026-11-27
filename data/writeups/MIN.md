@@ -1,3 +1,11 @@
+## Week 11: at San Francisco (L 10–35)
+
+Kirk Cousins went 26/38 for 235 yards with no TD and an INT. The yardage was close, but two turnovers made the score lopsided.
+
+**What changed:**
+- **Held:** a road loss to one of the league's best teams, with the turnovers inflating the margin.
+- **Total stays 1.7.**
+
 ## Week 10: at Green Bay (W 30–10)
 
 Minnesota out-gained Green Bay by 92 yards and won the turnover battle by three. Kirk Cousins was efficient (21/31, 207 yards, 2 TD) without WR **Jordan Addison (thumb)**, WR **Jauan Jennings (calf)** or TE **T.J. Hockenson (wrist)**. The defense held the Packers to 10 points without LB Blake Cashman.

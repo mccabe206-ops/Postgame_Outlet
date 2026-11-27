@@ -1,3 +1,12 @@
+## Week 11: vs Miami (W 26–9)
+
+A comfortable, expected win. Buffalo out-gained Miami by 220 yards even though Josh Allen threw 2 INT (27/45, 304 yards, 1 TD). Before Thanksgiving, 1st string CB **Christian Benford** (already priced) and OLB **Mike Danna** were ruled out.
+
+**What changed:**
+- **Defense −0.4 → −0.5 (−0.1):** Danna out.
+- **QB Allen and offense held.**
+- **New total 7.3 → 7.2.**
+
 ## Week 10: at N.Y. Jets (W 31–12)
 
 A comfortable win that was closer on the stat sheet than on the scoreboard: the yardage was nearly even. Josh Allen had a quiet line (11/21, 196 yards, 1 TD, 1 INT). Three defensive backs and a linebacker are banged up: CB **Christian Benford (groin)**, DB **Dee Alford (concussion)** and LB **Dorian Williams (calf)** are all questionable.

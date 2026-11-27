@@ -1,3 +1,12 @@
+## Week 11: vs Tennessee (W 51–30)
+
+Dak Prescott was nearly perfect: 28/33, 325 yards, 4 TD, 0 INT, a 96.7 QBR. Dallas out-gained Tennessee by 134 yards. The defense still gave up 30.
+
+**What changed:**
+- **Offense +1.0 → +1.3 (+0.3):** one of the best offensive games of the week.
+- **QB Prescott and defense held.**
+- **New total 1.0 → 1.3.**
+
 ## Week 10: vs San Francisco (L 40–46)
 
 Dak Prescott threw for 343 yards and 5 TD in a shootout loss. Dallas was out-gained by 145 yards and lost the turnover battle by two. The secondary is thinning out: CB **DaRon Bland** has an **ankle sprain**, joining P.J. Locke and Jalen Thompson. G **Tyler Booker** also has an **ankle sprain**.
