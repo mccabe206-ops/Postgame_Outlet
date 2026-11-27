@@ -150,7 +150,7 @@ Pittsburgh lands right at the waterline — a strong, veteran-laden defense bala
 
 ## Quarterback
 
-Aaron Rodgers (−1.0) ticks up slightly. He was steady and mistake-free at New Orleans (63.4 PFF, 0 INT) while the defense carried the game.
+Mason Rudolph (−2.5) starts after the Steelers benched Aaron Rodgers (−1.0) on Nov. 24. It was a coach's decision to spark the offense, not an injury. Rodgers was 30/44 for 227 yards (38.5 QBR) in the loss at Philadelphia. Rudolph is a veteran backup who hasn't started since late 2025, so PIT drops 1.5 points at the position.
 
 ## Quarterback: through Week 1 2026 (historical)
 

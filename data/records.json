@@ -1,70 +1,70 @@
 {
   "season_year": 2026,
-  "through_week": 10,
-  "generated": "2026-11-18T21:43Z",
+  "through_week": 11,
+  "generated": "2026-11-27T17:47Z",
   "season_record": {
     "mine": {
       "open": {
-        "win": 29,
-        "loss": 21,
+        "win": 31,
+        "loss": 24,
         "push": 0,
         "np": 0
       },
       "close": {
-        "win": 30,
-        "loss": 19,
+        "win": 31,
+        "loss": 23,
         "push": 1,
         "np": 0
       },
       "pick": {
-        "win": 5,
-        "loss": 0,
+        "win": 6,
+        "loss": 4,
         "push": 0,
         "np": 0
       }
     },
     "model": {
       "open": {
-        "win": 75,
-        "loss": 63,
+        "win": 84,
+        "loss": 67,
         "push": 0,
         "np": 12
       },
       "close": {
-        "win": 69,
-        "loss": 67,
+        "win": 73,
+        "loss": 76,
         "push": 4,
         "np": 10
       },
       "pick": {
-        "win": 0,
-        "loss": 0,
+        "win": 4,
+        "loss": 8,
         "push": 0,
-        "np": 0
+        "np": 1
       }
     },
     "top5": {
       "open": {
-        "win": 27,
-        "loss": 23,
+        "win": 31,
+        "loss": 24,
         "push": 0,
         "np": 0
       },
       "close": {
-        "win": 25,
-        "loss": 24,
+        "win": 27,
+        "loss": 27,
         "push": 1,
         "np": 0
       },
       "pick": {
-        "win": 0,
-        "loss": 0,
+        "win": 2,
+        "loss": 3,
         "push": 0,
         "np": 0
       }
     }
   },
-  "season_points": 88.5,
+  "season_points": 90.5,
   "weeks": [
     {
       "week": 1,
@@ -1693,6 +1693,169 @@
           "score": "12-31",
           "result": "loss",
           "edge": 1.5
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "mine": {
+        "open": {
+          "win": 2,
+          "loss": 3,
+          "push": 0,
+          "np": 0
+        },
+        "close": {
+          "win": 1,
+          "loss": 4,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 1,
+          "loss": 4,
+          "push": 0,
+          "np": 0
+        }
+      },
+      "model": {
+        "open": {
+          "win": 9,
+          "loss": 4,
+          "push": 0,
+          "np": 0
+        },
+        "close": {
+          "win": 4,
+          "loss": 9,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 4,
+          "loss": 8,
+          "push": 0,
+          "np": 1
+        }
+      },
+      "top5": {
+        "open": {
+          "win": 4,
+          "loss": 1,
+          "push": 0,
+          "np": 0
+        },
+        "close": {
+          "win": 2,
+          "loss": 3,
+          "push": 0,
+          "np": 0
+        },
+        "pick": {
+          "win": 2,
+          "loss": 3,
+          "push": 0,
+          "np": 0
+        }
+      },
+      "mine_points": 2,
+      "mine_picks": [
+        {
+          "team": "TB",
+          "opp": "DET",
+          "at": "at",
+          "line": 4.5,
+          "score": "21-31",
+          "result": "loss",
+          "confidence": 5,
+          "points": 0
+        },
+        {
+          "team": "LV",
+          "opp": "DEN",
+          "at": "at",
+          "line": 11.5,
+          "score": "24-38",
+          "result": "loss",
+          "confidence": 4,
+          "points": 0
+        },
+        {
+          "team": "TEN",
+          "opp": "DAL",
+          "at": "at",
+          "line": 7.5,
+          "score": "30-51",
+          "result": "loss",
+          "confidence": 3,
+          "points": 0
+        },
+        {
+          "team": "NYJ",
+          "opp": "LAC",
+          "at": "at",
+          "line": 3.0,
+          "score": "27-24",
+          "result": "win",
+          "confidence": 2,
+          "points": 2
+        },
+        {
+          "team": "CAR",
+          "opp": "BAL",
+          "at": "vs",
+          "line": -2.5,
+          "score": "35-33",
+          "result": "loss",
+          "confidence": 1,
+          "points": 0
+        }
+      ],
+      "top5_plays": [
+        {
+          "team": "NYJ",
+          "opp": "LAC",
+          "at": "at",
+          "line": 3.0,
+          "score": "27-24",
+          "result": "win",
+          "edge": 4.5
+        },
+        {
+          "team": "LV",
+          "opp": "DEN",
+          "at": "at",
+          "line": 11.5,
+          "score": "24-38",
+          "result": "loss",
+          "edge": 4.5
+        },
+        {
+          "team": "IND",
+          "opp": "HOU",
+          "at": "at",
+          "line": 12.5,
+          "score": "3-26",
+          "result": "loss",
+          "edge": 3.5
+        },
+        {
+          "team": "NO",
+          "opp": "CHI",
+          "at": "at",
+          "line": 12.5,
+          "score": "13-21",
+          "result": "win",
+          "edge": 3.5
+        },
+        {
+          "team": "TB",
+          "opp": "DET",
+          "at": "at",
+          "line": 4.5,
+          "score": "21-31",
+          "result": "loss",
+          "edge": 2.5
         }
       ]
     }

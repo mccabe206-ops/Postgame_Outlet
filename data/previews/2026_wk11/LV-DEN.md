@@ -23,6 +23,9 @@ home_off: 0.3
 home_def: 1.7
 home_total: 1.0
 hfa: 2.0
+final_score: LV 24, DEN 38
+bet_result: loss
+model_result: loss
 ---
 ## Why the number
 Our number is **DEN -7**, and the market is at **DEN -10**. That's a 3-point edge to Las Vegas.

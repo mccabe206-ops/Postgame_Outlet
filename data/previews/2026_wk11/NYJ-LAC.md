@@ -23,6 +23,9 @@ home_off: -1.6
 home_def: -0.9
 home_total: -4.5
 hfa: 1.5
+final_score: NYJ 27, LAC 24
+bet_result: win
+model_result: win
 ---
 ## Why the number
 Our number is **LAC -2**, and the market is at **LAC -3**. That's a 1-point lean to the Jets. It's also the most uncertain game on the slate.
@@ -55,4 +58,4 @@ The ratings are nearly even, and home field makes up the difference. Both teams 
 
 ## Updates
 - **Fri 11/20 (later): Confirmed. Geno Smith is playing.** Our number stays NYJ −1.5, so the edge is 4.5 points on NYJ +3 against LAC −3.
-- **Fri 11/20: Geno is back in our lineup.** NYJ 1st string QB Geno Smith (ankle) was a full participant Friday, imaging showed no major injury, and Aaron Glenn says he starts if he's cleared. We now expect him to play. How the line moves: on Tuesday we had rookie Cade Klubnik (−4.0) starting, which made the Jets −5.0 overall and our number **LAC −2**. Geno (−0.5) is worth 3.5 points more, so the Jets go to −1.5 and our number becomes **NYJ −1.5**. The market is still LAC −3, so our edge is now 4.5 points on NYJ +3, up from 1 point on LAC on Tuesday. If Klubnik starts after all (watch Sunday's inactives), we go back to LAC −2. The line and edge shown at the top of this card are the frozen Tuesday numbers we're graded on.
+- **Fri 11/20: Geno is back in our lineup.** NYJ 1st string QB Geno Smith (ankle) was a full participant Friday, imaging showed no major injury, and Aaron Glenn says he starts if he's cleared. We now expect him to play. How the line moves: on Tuesday we had rookie Cade Klubnik (−4.0) starting, which made the Jets −5.0 overall and our number **LAC −2**. Geno (−0.5) is worth 3.5 points more, so the Jets go to −1.5 and our number becomes **NYJ −1.5**. The market is still LAC −3, so our edge on NYJ +3 is now 4.5 points, up from 1 point on Tuesday. *(Corrected 11/27: an earlier version said Tuesday's 1-point edge was on LAC. It was on NYJ.)* If Klubnik starts after all (watch Sunday's inactives), we go back to LAC −2. The line and edge shown at the top of this card are the frozen Tuesday numbers we're graded on.

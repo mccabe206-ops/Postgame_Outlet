@@ -23,6 +23,8 @@ home_off: 1.2
 home_def: -0.4
 home_total: 7.3
 hfa: 2.0
+final_score: MIA 9, BUF 26
+model_result: loss
 ---
 ## Why the number
 Our number is **BUF -16**, and the market is at **BUF -16.5**. That's a half-point lean to Miami.

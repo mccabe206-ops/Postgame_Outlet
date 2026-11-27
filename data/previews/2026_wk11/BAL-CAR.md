@@ -23,6 +23,9 @@ home_off: -0.6
 home_def: -1.0
 home_total: -0.3
 hfa: 1.5
+final_score: BAL 33, CAR 35
+bet_result: loss
+model_result: loss
 ---
 ## Why the number
 Our number is **CAR -3**, and the market is at **CAR -2.5**. That's a half-point lean to Carolina, basically a match.

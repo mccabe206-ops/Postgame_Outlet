@@ -23,6 +23,9 @@ home_off: 1.4
 home_def: -1.9
 home_total: 2.0
 hfa: 1.5
+final_score: TB 21, DET 31
+bet_result: loss
+model_result: loss
 ---
 ## Why the number
 Our number is **DET -2**, and the market is at **DET -7**. That's a 5-point edge to Tampa Bay, the biggest on the board, and most of it is about one man.

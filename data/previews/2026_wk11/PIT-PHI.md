@@ -23,6 +23,8 @@ home_off: -2.2
 home_def: -1.2
 home_total: -6.4
 hfa: 1.5
+final_score: PIT 16, PHI 19
+model_result: no play
 ---
 ## Why the number
 Our number is **PIT -4.5**, and so is the market. There's no edge, so the model doesn't play this game.

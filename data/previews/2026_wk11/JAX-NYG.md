@@ -23,6 +23,8 @@ home_off: 0.2
 home_def: -0.2
 home_total: -2.0
 hfa: 1.5
+final_score: JAX 18, NYG 23
+model_result: loss
 ---
 ## Why the number
 Our number is **JAX -6.5**, and the market is at **JAX -6**. That's a half-point lean to Jacksonville, basically a match.

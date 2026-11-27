@@ -174,7 +174,7 @@ dangerous pass rush. Week 2 changed the quarterback component.
 
 ## Quarterback
 
-J.J. McCarthy (−2.0) moves up a full point after two straight good starts, including an 80.0 PFF grade in the win at Houston. He has played well enough to stay QB1 as the Giants head into their bye.
+J.J. McCarthy (−1.7) moves up 0.3. He still misses open throws, but his scrambling keeps drives alive, and the Giants won 23–18 over Jacksonville despite being out-gained. It was his third straight solid start.
 
 ## What moved the number
 

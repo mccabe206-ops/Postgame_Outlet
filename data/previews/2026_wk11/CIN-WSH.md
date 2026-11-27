@@ -23,6 +23,8 @@ home_off: -1.4
 home_def: -1.3
 home_total: -1.2
 hfa: 2.0
+final_score: CIN 20, WSH 22
+model_result: win
 ---
 ## Why the number
 Our number is **CIN -4.5**, and the market is at **CIN -6.5**. That's a 2-point edge to Washington at home on Monday night.

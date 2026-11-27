@@ -23,6 +23,8 @@ home_off: 0.3
 home_def: 0.3
 home_total: 4.9
 hfa: 2.0
+final_score: ARI 7, KC 34
+model_result: loss
 ---
 ## Why the number
 Our number is **KC -13.5**, and the market is at **KC -15.5**. That's a 2-point edge to Arizona.

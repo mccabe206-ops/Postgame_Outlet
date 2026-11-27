@@ -23,6 +23,9 @@ home_off: 1.0
 home_def: -2.0
 home_total: 1.0
 hfa: 1.5
+final_score: TEN 30, DAL 51
+bet_result: loss
+model_result: loss
 ---
 ## Why the number
 Our number is **DAL -7**, and the market is at **DAL -8.5**. That's a 1.5-point lean to Tennessee.
