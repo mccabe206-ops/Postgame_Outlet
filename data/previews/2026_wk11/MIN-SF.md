@@ -23,6 +23,8 @@ home_off: 0.6
 home_def: 1.4
 home_total: 7.0
 hfa: 0.0
+final_score: MIN 10, SF 35
+model_result: win
 ---
 ## Why the number
 Our number is **SF -5.5**, and the market is at **SF -3**. That's a 2.5-point edge to San Francisco at a neutral site.

@@ -23,6 +23,8 @@ home_off: 1.2
 home_def: 0.6
 home_total: 5.3
 hfa: 1.5
+final_score: NO 13, CHI 21
+model_result: win
 ---
 ## Why the number
 Our number is **CHI -9**, and the market is at **CHI -11.5**. That's a 2.5-point edge to New Orleans.
