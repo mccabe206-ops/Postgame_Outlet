@@ -197,8 +197,7 @@ skill group is above average, but Week 1 pulled the quarterback and defense belo
 
 ## Quarterback
 
-
-Daniel Jones (−2.0) is the starter. He ranks 30th among this week's starters in passer rating (68.7), with 5 TD/9 INT and a 39.6 QBR.
+Anthony Richardson Sr. (−2.0) is the starter after the Colts released Daniel Jones on Nov. 27. It's an even swap at the same price. Richardson hasn't started since 2024, and his accuracy is the question, but his arm and legs give the offense a ceiling Jones didn't (Jones had a 14.1 QBR in the 3–26 loss at Houston). Rookie Riley Leonard (−5.5) is the backup.
 
 ## Quarterback: through Week 1 2026 (historical)
 

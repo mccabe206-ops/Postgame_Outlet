@@ -182,7 +182,7 @@ but Week 1 pulled the offense back to the pack.
 
 ## Quarterback
 
-Justin Herbert (−2.0) is the starter. A 32.5 QBR and the most interceptions among this week's starters (10, with 5 TD). It's a hard-to-believe falloff for his track record, but it's seven games of evidence.
+Justin Herbert (−2.5) drops another half point. He was 15/21 for 131 yards and took six sacks in the loss to the Jets, and he's in the concussion protocol and doubtful for New England. If he sits, DJ Uiagalelei is the likely starter. Herbert's season-long 32.5 QBR and league-high 10 interceptions are a hard-to-believe falloff for his track record, but it's 10 games of evidence now.
 
 ## Quarterback: through Week 1 2026 (historical)
 

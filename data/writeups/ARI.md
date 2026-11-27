@@ -192,7 +192,7 @@ are better than a bottom-of-the-league read, even with a stopgap quarterback.
 
 ## Quarterback
 
-Carson Beck (−3.5) is the starter for the rest of the season. Gardner Minshew tore the UCL in his elbow and needs season-ending surgery. Beck's first NFL start was rough: 11/18, 108 yards, 2 INT against the Rams. He was the third-string QB 11 days earlier, so he sits near the bottom of the backup range.
+Josh Johnson (−5.0) starts again in Week 12 while Carson Beck (−3.5) is out with back spasms. Coach Mike LaFleur says Beck could return in Week 13. Johnson is a 40-year-old journeyman signed Nov. 20. He went 18/31 for 155 yards and a TD in a 7–34 loss at Kansas City, so he's priced in the 3rd-string band. Gardner Minshew (torn UCL) is out for the season.
 
 ## What moved the number
 
